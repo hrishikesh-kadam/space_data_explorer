@@ -1,0 +1,34 @@
+name: CI For Windows and macOS Runners
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 12:00 PM IST / 6:30 AM GMT every Sunday.
+    - cron: '30 6 * * 0'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  check-code:
+    name: Check code on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ windows-latest, macos-latest ]
+        ref: [ stable ]
+
+    steps:
+      - name: Setup Flutter
+        uses: hrishikesh-kadam/setup-flutter@v1
+        with:
+          ref: ${{ matrix.ref }}
+
+      - name: Setup LCOV
+        uses: hrishikesh-kadam/setup-lcov@v1
+
+      - uses: actions/checkout@v2
+
+      - run: ./tool/check-code.sh

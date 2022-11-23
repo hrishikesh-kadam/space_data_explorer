@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+  schedule:
+    # 12:00 PM IST / 6:30 AM GMT every Sunday and Wednesday.
+    # GitHub will remove any cache entries that have not been accessed in over 7 days.
+    - cron: '30 6 * * 0,3'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  check-code:
+    name: Check code on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ ubuntu-latest ]
+        ref: [ stable, beta ]
+
+    steps:
+      - name: Setup Flutter
+        uses: hrishikesh-kadam/setup-flutter@v1
+        with:
+          ref: ${{ matrix.ref }}
+
+      - name: Setup LCOV
+        uses: hrishikesh-kadam/setup-lcov@v1
+
+      - uses: actions/checkout@v2
+
+      - run: ./tool/check-code.sh
