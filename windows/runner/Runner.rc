@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "dev.hrishikesh_kadam.flutter" "\0"
+            VALUE "CompanyName", "hrishikesh-kadam.dev" "\0"
             VALUE "FileDescription", "space_data_explorer" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "space_data_explorer" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 dev.hrishikesh_kadam.flutter. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 hrishikesh-kadam.dev All rights reserved." "\0"
             VALUE "OriginalFilename", "space_data_explorer.exe" "\0"
             VALUE "ProductName", "space_data_explorer" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
