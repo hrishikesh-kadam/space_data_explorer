@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-abstract class BasePage<T> extends Page<T> {
+abstract class BasePage<T> extends MaterialPage<T> {
   const BasePage({
+    required super.child,
     super.key,
     super.name,
     super.arguments,

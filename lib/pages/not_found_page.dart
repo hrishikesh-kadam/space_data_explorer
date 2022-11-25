@@ -7,22 +7,13 @@ class NotFoundPage extends BasePage {
     invalidPath = pageName,
     super.previousPage,
   }) : super(
+          child: const NotFoundScreen(),
           key: ValueKey(invalidPath),
           name: invalidPath,
         );
 
   static const String pageName = '404';
   static const String invalidPath = 'invalid-path';
-
-  @override
-  Route createRoute(BuildContext context) {
-    return MaterialPageRoute(
-      settings: this,
-      builder: (BuildContext context) {
-        return const NotFoundScreen();
-      },
-    );
-  }
 }
 
 class NotFoundScreen extends StatefulWidget {

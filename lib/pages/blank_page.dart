@@ -4,21 +4,12 @@ import 'base_page.dart';
 
 class BlankPage extends BasePage {
   const BlankPage({
+    super.child = const BlankScreen(),
     super.key = const ValueKey(pageName),
     super.name = pageName,
   });
 
   static const String pageName = 'blank';
-
-  @override
-  Route createRoute(BuildContext context) {
-    return MaterialPageRoute(
-      settings: this,
-      builder: (BuildContext context) {
-        return const BlankScreen();
-      },
-    );
-  }
 }
 
 class BlankScreen extends StatefulWidget {

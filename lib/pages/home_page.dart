@@ -6,22 +6,13 @@ import 'nasa_source_page.dart';
 
 class HomePage extends BasePage {
   const HomePage({
+    super.child = const HomeScreen(),
     super.key = const ValueKey(path),
     super.name = path,
     super.previousPage,
   });
 
   static const String path = '/';
-
-  @override
-  Route createRoute(BuildContext context) {
-    return MaterialPageRoute(
-      settings: this,
-      builder: (BuildContext context) {
-        return const HomeScreen();
-      },
-    );
-  }
 }
 
 class HomeScreen extends StatefulWidget {

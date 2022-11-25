@@ -5,6 +5,7 @@ import 'nasa_source_page.dart';
 
 class NeowsPage extends BasePage {
   const NeowsPage({
+    super.child = const NeowsScreen(),
     super.key = const ValueKey(pageName),
     super.name = pageName,
     super.previousPage,
@@ -12,16 +13,6 @@ class NeowsPage extends BasePage {
 
   static const String pageName = 'neows';
   static const String path = '${NasaSourcePage.path}/$pageName';
-
-  @override
-  Route createRoute(BuildContext context) {
-    return MaterialPageRoute(
-      settings: this,
-      builder: (BuildContext context) {
-        return const NeowsScreen();
-      },
-    );
-  }
 }
 
 class NeowsScreen extends StatefulWidget {
