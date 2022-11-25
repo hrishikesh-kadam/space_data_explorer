@@ -3,5 +3,5 @@
 set -x
 
 flutter pub get
-flutter analyze
+dart analyze
 dart format --output none --set-exit-if-changed .
