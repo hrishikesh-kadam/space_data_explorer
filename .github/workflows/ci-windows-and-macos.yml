@@ -15,7 +15,6 @@ jobs:
     name: Check code on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
     runs-on: ${{ matrix.runner }}
     strategy:
-      fail-fast: false
       matrix:
         runner: [ windows-latest, macos-latest ]
         ref: [ stable ]
@@ -29,6 +28,13 @@ jobs:
       - name: Setup LCOV
         uses: hrishikesh-kadam/setup-lcov@v1
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - run: ./tool/check-code.sh
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          name: ${{ matrix.runner }}-${{ matrix.ref }}
