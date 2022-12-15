@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../config/configure_app.dart';
 import 'base_page.dart';
 
 class DummyPage extends BasePage {
@@ -50,7 +51,8 @@ class _DummyScreenState extends State<DummyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: getPlatformSpecificAppBar(
+        context: context,
         title: Text(widget.title),
       ),
     );

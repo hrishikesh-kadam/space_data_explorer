@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../config/configure_app.dart';
 import 'base_page.dart';
 import 'nasa_source_page.dart';
 
@@ -26,7 +27,8 @@ class _NeowsScreenState extends State<NeowsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: getPlatformSpecificAppBar(
+        context: context,
         title: const Text('NeoWs Screen'),
       ),
     );

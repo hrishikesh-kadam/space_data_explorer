@@ -1,10 +1,24 @@
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+
+import 'configure_non_web.dart' if (dart.library.html) 'configure_web.dart'
+    as platform;
 
 void configureApp() {
   setUrlStrategy(const HashUrlStrategy());
   configureLogging();
+}
+
+AppBar getPlatformSpecificAppBar({
+  required BuildContext context,
+  Widget? title,
+}) {
+  return platform.getPlatformSpecificAppBar(
+    context: context,
+    title: title,
+  );
 }
 
 void configureLogging() {
@@ -21,6 +35,7 @@ void configureLogging() {
     if (kDebugMode) {
       late final String color;
       late final String emoji;
+      late final String emojiSpacer;
       if (record.level == Level.SHOUT) {
         emoji = '😱';
         color = red;
@@ -39,10 +54,13 @@ void configureLogging() {
       } else {
         color = emoji = '';
       }
+      emojiSpacer = emoji.isNotEmpty ? ' ' : '';
       print(
         '${record.loggerName}: '
         '$color'
-        '$emoji ${record.level.name}: ${record.time}: ${record.message}'
+        '$emoji'
+        '$emojiSpacer'
+        '${record.level.name}: ${record.time}: ${record.message}'
         '$resetColor',
       );
     }

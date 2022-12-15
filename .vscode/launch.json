@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "space_data_explorer",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "space_data_explorer (profile mode)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "space_data_explorer (release mode)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "Flutter (Chrome)",
+      "program": "lib/main.dart",
+      "deviceId": "chrome",
+      "request": "launch",
+      "type": "dart"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../config/configure_app.dart';
 import 'base_page.dart';
 import 'home_page.dart';
 import 'neows_page.dart';
@@ -28,7 +29,8 @@ class _NasaSourceScreenState extends State<NasaSourceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: getPlatformSpecificAppBar(
+        context: context,
         title: const Text('NASA Source Screen'),
       ),
       body: TextButton(
