@@ -7,7 +7,7 @@ import 'configure_non_web.dart' if (dart.library.html) 'configure_web.dart'
     as platform;
 
 void configureApp() {
-  setUrlStrategy(const HashUrlStrategy());
+  configureUrlStrategy();
   configureLogging();
 }
 
@@ -19,6 +19,20 @@ AppBar getPlatformSpecificAppBar({
     context: context,
     title: title,
   );
+}
+
+void configureUrlStrategy() {
+  UrlStrategy urlStrategyToSet = const HashUrlStrategy();
+  // TODO(hrishikesh-kadam): File a request for idempotent calls for
+  // setUrlStrategy() method.
+  // TODO(hrishikesh-kadam): Remove this coverage ignore lines after finding a
+  // way to collect coverage for browser tests.
+  // coverage:ignore-start
+  if (urlStrategy != null &&
+      urlStrategy.runtimeType != urlStrategyToSet.runtimeType) {
+    setUrlStrategy(urlStrategyToSet);
+  }
+  // coverage:ignore-end
 }
 
 void configureLogging() {
