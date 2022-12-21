@@ -5,9 +5,14 @@ chromedriver --port=4444 &
 TARGET_PATHS=(
   "integration_test/web_platform_specific_app_bar_test.dart"
 )
+if [[ $CI ]] ; then
+  DEVICE="web-server"
+else
+  DEVICE="chrome"
+fi
 for TARGET_PATH in "${TARGET_PATHS[@]}"; do
   flutter drive \
     --driver test_driver/integration_test.dart \
     --target "$TARGET_PATH" \
-    -d chrome
+    -d $DEVICE
 done
