@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../config/configure_app.dart';
+import '../globals.dart';
 import 'base_page.dart';
 import 'home_page.dart';
 import 'neows_page.dart';
@@ -36,7 +37,7 @@ class _NasaSourceScreenState extends State<NasaSourceScreen> {
       body: TextButton(
         child: const Text(NeowsPage.pageName),
         onPressed: () async {
-          GoRouter.of(context).go(NeowsPage.path);
+          GoRouter.of(context).go(NeowsPage.path, extra: getExtra());
         },
       ),
     );

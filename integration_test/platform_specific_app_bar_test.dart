@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:logging/logging.dart';
 
@@ -17,6 +18,10 @@ import 'neows_page_test.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
+  platformSpecificAppBarTest();
+}
+
+void platformSpecificAppBarTest() {
   group('getPlatformSpecificAppBar() Integration Test for Web', () {
     testWidgets('3 pages down and 2 pages up', (tester) async {
       await neowsPageIntegrationTest(tester);
@@ -87,6 +92,49 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(NasaSourceScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
+      if (kIsWeb) {
+        test_utility.checkHistoryLengthAndSerialCount(2, 0);
+      }
+      Logger.root.clearListeners();
+    });
+
+    testWidgets(
+        '3 pages down and 1 page up but extra without the isNormalLink key',
+        (tester) async {
+      GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: 'appKey');
+      app.main(navigatorKey: navigatorKey);
+      await tester.pumpAndSettle();
+      GoRouter.of(navigatorKey.currentContext!).go(NeowsPage.path, extra: {});
+      await tester.pumpAndSettle();
+      final neowsPageBackButton = find.byType(BackButton);
+      await tester.tap(neowsPageBackButton);
+      await tester.pumpAndSettle();
+      expect(find.byType(NeowsScreen), findsNothing);
+      expect(find.byType(NasaSourceScreen), findsNothing);
+      expect(find.byType(HomeScreen), findsOneWidget);
+      // In case of web this would be normal navigation because
+      // there is no check for extra
+      if (kIsWeb) {
+        test_utility.checkHistoryLengthAndSerialCount(2, 0);
+      }
+      Logger.root.clearListeners();
+    });
+
+    testWidgets('3 pages down and 1 page up but when extra is not a Map',
+        (tester) async {
+      GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: 'appKey');
+      app.main(navigatorKey: navigatorKey);
+      await tester.pumpAndSettle();
+      GoRouter.of(navigatorKey.currentContext!).go(NeowsPage.path, extra: []);
+      await tester.pumpAndSettle();
+      final neowsPageBackButton = find.byType(BackButton);
+      await tester.tap(neowsPageBackButton);
+      await tester.pumpAndSettle();
+      expect(find.byType(NeowsScreen), findsNothing);
+      expect(find.byType(NasaSourceScreen), findsNothing);
+      expect(find.byType(HomeScreen), findsOneWidget);
+      // In case of web this would be normal navigation because
+      // there is no check for extra
       if (kIsWeb) {
         test_utility.checkHistoryLengthAndSerialCount(2, 0);
       }

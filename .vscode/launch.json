@@ -20,8 +20,13 @@
     },
     {
       "name": "Flutter (Chrome)",
-      "program": "lib/main.dart",
       "deviceId": "chrome",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "Flutter (Android)",
+      "deviceId": "emulator-5554",
       "request": "launch",
       "type": "dart"
     }

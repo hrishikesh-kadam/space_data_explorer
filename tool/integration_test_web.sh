@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+set -e
+
 chromedriver --port=4444 &
 # mapfile -t TARGET_PATHS < <(find integration_test -type f -name "*_test.dart")
 TARGET_PATHS=(
-  "integration_test/web_platform_specific_app_bar_test.dart"
+  "integration_test/platform_specific_app_bar_test.dart"
 )
 if [[ $CI ]] ; then
   DEVICE="web-server"

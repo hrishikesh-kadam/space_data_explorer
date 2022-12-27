@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../globals.dart';
 import 'base_page.dart';
 import 'nasa_source_page.dart';
 
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: TextButton(
         child: const Text(NasaSourcePage.pageName),
         onPressed: () async {
-          GoRouter.of(context).go(NasaSourcePage.path);
+          GoRouter.of(context).go(NasaSourcePage.path, extra: getExtra());
         },
       ),
     );

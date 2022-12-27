@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+set -e
+
 TARGET_PATHS=(
-  "integration_test/web_platform_specific_app_bar_test.dart"
+  "integration_test/platform_specific_app_bar_test.dart"
 )
 if [[ $CI ]] ; then
   DEVICE="web-server"

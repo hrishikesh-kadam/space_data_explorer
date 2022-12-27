@@ -8,9 +8,11 @@ import 'pages/neows_page.dart';
 class SpaceDataExplorerApp extends StatelessWidget {
   SpaceDataExplorerApp({
     super.key,
+    GlobalKey<NavigatorState>? navigatorKey,
     this.initialLocation = HomePage.path,
   }) {
     _router = GoRouter(
+      navigatorKey: navigatorKey,
       initialLocation: initialLocation,
       routes: [
         GoRoute(
