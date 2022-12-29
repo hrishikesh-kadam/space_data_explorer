@@ -8,6 +8,10 @@ import '../globals.dart';
 import '../pages/home_page.dart';
 import '../utility/utility.dart';
 
+void configureUrlStrategy() {
+  // No-op in non-web platforms.
+}
+
 AppBar getPlatformSpecificAppBar({
   required BuildContext context,
   Widget? title,
@@ -23,6 +27,7 @@ AppBar getPlatformSpecificAppBar({
         } else if (extraObject is Map) {
           Map extraMap = extraObject;
           if (extraMap.containsKey(isNormalLink)) {
+            // TODO(hrishikesh-kadam): Pop not animating
             GoRouter.of(context).pop();
           } else {
             log.log(logLevel, 'Unusual navigation observed');

@@ -2,10 +2,27 @@
 import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:go_router/go_router.dart';
 
 import '../globals.dart';
 import '../pages/home_page.dart';
+
+/// Notes -
+/// 1. When HashUrlStrategy is set, deep-link creates problems, because
+/// [setUrlStrategy] is No-op in non-web platforms.
+/// Platform provides correct path but it depends on the Router's implemented
+/// logic of [RouteInformationProvider.routerReportsNewRouteInformation], which
+/// at the moment is not considered in GoRouter.
+void configureUrlStrategy() {
+  UrlStrategy urlStrategyToSet = PathUrlStrategy();
+  // TODO(hrishikesh-kadam): File a request for idempotent calls for
+  // setUrlStrategy() method.
+  if (urlStrategy != null &&
+      urlStrategy.runtimeType != urlStrategyToSet.runtimeType) {
+    setUrlStrategy(urlStrategyToSet);
+  }
+}
 
 AppBar getPlatformSpecificAppBar({
   required BuildContext context,

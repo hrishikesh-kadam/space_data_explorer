@@ -109,7 +109,7 @@ packages:
       name: go_router
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.1.10"
+    version: "6.0.0"
   integration_test:
     dependency: "direct dev"
     description: flutter

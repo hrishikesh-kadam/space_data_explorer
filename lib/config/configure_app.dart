@@ -1,4 +1,3 @@
-import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
@@ -22,17 +21,7 @@ AppBar getPlatformSpecificAppBar({
 }
 
 void configureUrlStrategy() {
-  UrlStrategy urlStrategyToSet = const HashUrlStrategy();
-  // TODO(hrishikesh-kadam): File a request for idempotent calls for
-  // setUrlStrategy() method.
-  // TODO(hrishikesh-kadam): Remove this coverage ignore lines after finding a
-  // way to collect coverage for browser tests.
-  // coverage:ignore-start
-  if (urlStrategy != null &&
-      urlStrategy.runtimeType != urlStrategyToSet.runtimeType) {
-    setUrlStrategy(urlStrategyToSet);
-  }
-  // coverage:ignore-end
+  platform.configureUrlStrategy();
 }
 
 void configureLogging() {
