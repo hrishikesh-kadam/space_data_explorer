@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "space-data-explorer"
+    "default": "space-data-explorer-dev",
+    "dev": "space-data-explorer-dev",
+    "stag": "space-data-explorer-stag",
+    "prod": "space-data-explorer"
   }
 }

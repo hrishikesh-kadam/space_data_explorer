@@ -1,0 +1,38 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "dev.hrishikesh_kadam.flutter.space_data_explorer",
+      "sha256_cert_fingerprints": [
+        "B2:5E:BB:0D:47:9D:27:CA:31:4D:A6:AB:85:0C:5D:31:1C:34:9C:F8:36:A8:C1:FD:F7:3A:CC:F9:82:C2:A4:12"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "dev.hrishikesh_kadam.flutter.space_data_explorer.profile",
+      "sha256_cert_fingerprints": [
+        "D5:83:0D:4E:A3:47:62:37:B0:D7:07:E7:BE:EE:48:8A:58:0E:4A:6C:D4:2F:F9:6C:DA:57:D2:56:16:51:C9:73"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "dev.hrishikesh_kadam.flutter.space_data_explorer.debug",
+      "sha256_cert_fingerprints": [
+        "D5:83:0D:4E:A3:47:62:37:B0:D7:07:E7:BE:EE:48:8A:58:0E:4A:6C:D4:2F:F9:6C:DA:57:D2:56:16:51:C9:73"
+      ]
+    }
+  }
+]
