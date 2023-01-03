@@ -1,11 +1,11 @@
 {
-    "name": "space_data_explorer",
-    "short_name": "space_data_explorer",
+    "name": "Space Data Explorer",
+    "short_name": "Space Data Explorer",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "An app to explore space data from various sources.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
