@@ -1,0 +1,11 @@
+| applicationId                                                 | versionName        | signingConfig.keyAlias          |
+| ------------------------------------------------------------- | ------------------ | ------------------------------- |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.dev.debug    | 0.0.1-dev-debug    | space-data-explorer-non-release |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.stag.debug   | 0.0.1-stag-debug   | space-data-explorer-non-release |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.prod.debug   | 0.0.1-prod-debug   | space-data-explorer-non-release |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.dev.release  | 0.0.1-dev-release  | space-data-explorer-non-release |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.stag.release | 0.0.1-stag-release | space-data-explorer-non-release |
+| dev.hrishikesh_kadam.flutter.space_data_explorer              | 0.0.1              | space-data-explorer-release     |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.dev.profile  | 0.0.1-dev-profile  | space-data-explorer-non-release |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.stag.profile | 0.0.1-stag-profile | space-data-explorer-non-release |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.prod.profile | 0.0.1-prod-profile | space-data-explorer-non-release |

@@ -33,7 +33,7 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - run: tool/analyze-test-format.sh
+      - run: ./tool/ci.sh
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
@@ -47,7 +47,7 @@ jobs:
           FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_PROD: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER }}
           FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_STAG: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_STAG }}
           FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_DEV: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_DEV }}
-        run: tool/build-web-deploy.sh
+        run: ./tool/build-web-deploy.sh
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         if: ${{ matrix.ref == 'stable' }}

@@ -118,6 +118,9 @@ android {
     applicationVariants.all { variant ->
         if (variant.applicationId.contains("prod") && variant.applicationId.contains("release")) {
             variant.mergedFlavor.applicationId android.defaultConfig.applicationId
+            variant.outputs.each { output ->
+                 output.versionNameOverride android.defaultConfig.versionName
+            }
         }
     }
 }
@@ -131,7 +134,12 @@ dependencies {
 }
 
 task("printAllVariants") {
-    android.applicationVariants.all { variant ->
-        println variant.applicationId
+    doLast {
+        println "applicationId,versionName,signingConfig.keyAlias"
+        android.applicationVariants.all { variant ->
+            println variant.applicationId + "," \
+                + variant.versionName + "," \
+                + variant.signingConfig.keyAlias
+        }
     }
 }

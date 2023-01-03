@@ -30,7 +30,7 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - run: tool/analyze-test-format.sh
+      - run: ./tool/ci.sh
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
