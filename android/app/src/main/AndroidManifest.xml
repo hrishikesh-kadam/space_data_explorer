@@ -30,7 +30,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="space-data-explorer.web.app" />
+                <data android:scheme="http" android:host="${hostName}" />
                 <data android:scheme="https" />
             </intent-filter>
         </activity>

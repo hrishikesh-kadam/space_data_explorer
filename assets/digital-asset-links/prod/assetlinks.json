@@ -7,7 +7,7 @@
       "namespace": "android_app",
       "package_name": "dev.hrishikesh_kadam.flutter.space_data_explorer",
       "sha256_cert_fingerprints": [
-        "B2:5E:BB:0D:47:9D:27:CA:31:4D:A6:AB:85:0C:5D:31:1C:34:9C:F8:36:A8:C1:FD:F7:3A:CC:F9:82:C2:A4:12"
+        "C3:E8:27:A3:DB:9B:53:28:A6:F7:C9:44:0F:B2:DE:62:8F:80:94:9D:2F:69:4C:F1:6B:7C:ED:59:18:39:E9:F5"
       ]
     }
   },
@@ -17,9 +17,9 @@
     ],
     "target": {
       "namespace": "android_app",
-      "package_name": "dev.hrishikesh_kadam.flutter.space_data_explorer.profile",
+      "package_name": "dev.hrishikesh_kadam.flutter.space_data_explorer.prod.profile",
       "sha256_cert_fingerprints": [
-        "D5:83:0D:4E:A3:47:62:37:B0:D7:07:E7:BE:EE:48:8A:58:0E:4A:6C:D4:2F:F9:6C:DA:57:D2:56:16:51:C9:73"
+        "C4:E1:BC:5E:18:BE:18:7B:A5:DC:33:98:A8:6F:96:78:31:1D:90:96:E5:D0:80:5A:4F:BE:53:36:0F:C3:A3:43"
       ]
     }
   },
@@ -29,9 +29,9 @@
     ],
     "target": {
       "namespace": "android_app",
-      "package_name": "dev.hrishikesh_kadam.flutter.space_data_explorer.debug",
+      "package_name": "dev.hrishikesh_kadam.flutter.space_data_explorer.prod.debug",
       "sha256_cert_fingerprints": [
-        "D5:83:0D:4E:A3:47:62:37:B0:D7:07:E7:BE:EE:48:8A:58:0E:4A:6C:D4:2F:F9:6C:DA:57:D2:56:16:51:C9:73"
+        "C4:E1:BC:5E:18:BE:18:7B:A5:DC:33:98:A8:6F:96:78:31:1D:90:96:E5:D0:80:5A:4F:BE:53:36:0F:C3:A3:43"
       ]
     }
   }

@@ -6,6 +6,12 @@ if (localPropertiesFile.exists()) {
     }
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
@@ -43,7 +49,6 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "dev.hrishikesh_kadam.flutter.space_data_explorer"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
@@ -53,19 +58,35 @@ android {
         versionName flutterVersionName
     }
 
+    signingConfigs {
+        release {
+            storeFile file(keystoreProperties['releaseStoreFile'])
+            storePassword keystoreProperties['releaseStoreAndKeyPassword']
+            keyAlias keystoreProperties['releaseKeyAlias']
+            keyPassword keystoreProperties['releaseStoreAndKeyPassword']
+        }
+        nonRelease {
+            storeFile file(keystoreProperties['nonReleaseStoreFile'])
+            storePassword keystoreProperties['nonReleaseStoreAndKeyPassword']
+            keyAlias keystoreProperties['nonReleaseKeyAlias']
+            keyPassword keystoreProperties['nonReleaseStoreAndKeyPassword']
+        }
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
+            signingConfig signingConfigs.nonRelease
         }
         profile {
             applicationIdSuffix ".profile"
             versionNameSuffix "-profile"
+            signingConfig signingConfigs.nonRelease
         }
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            applicationIdSuffix ".release"
+            versionNameSuffix "-release"
         }
     }
 
@@ -73,16 +94,30 @@ android {
     productFlavors {
         dev {
             dimension "env"
+            manifestPlaceholders = [hostName:"space-data-explorer-dev.web.app"]
             applicationIdSuffix ".dev"
             versionNameSuffix "-dev"
+            signingConfig signingConfigs.nonRelease
         }
         stag {
             dimension "env"
+            manifestPlaceholders = [hostName:"space-data-explorer-stag.web.app"]
             applicationIdSuffix ".stag"
             versionNameSuffix "-stag"
+            signingConfig signingConfigs.nonRelease
         }
         prod {
             dimension "env"
+            manifestPlaceholders = [hostName:"space-data-explorer.web.app"]
+            applicationIdSuffix ".prod"
+            versionNameSuffix "-prod"
+            signingConfig signingConfigs.release
+        }
+    }
+
+    applicationVariants.all { variant ->
+        if (variant.applicationId.contains("prod") && variant.applicationId.contains("release")) {
+            variant.mergedFlavor.applicationId android.defaultConfig.applicationId
         }
     }
 }
@@ -93,4 +128,10 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+
+task("printAllVariants") {
+    android.applicationVariants.all { variant ->
+        println variant.applicationId
+    }
 }
