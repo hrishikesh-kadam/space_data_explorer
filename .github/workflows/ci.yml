@@ -2,6 +2,10 @@ name: CI
 
 on:
   push:
+    branches:
+      - prod
+      - stag
+      - dev
   pull_request:
   workflow_dispatch:
   schedule:
