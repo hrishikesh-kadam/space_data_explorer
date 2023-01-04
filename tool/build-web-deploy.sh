@@ -2,8 +2,11 @@
 
 set -e
 
+source "./tool/set-logs-env.sh"
+export PRINT_WARNING_LOG=1
+
 flutter build web --release
-mkdir -p build/web/.well-known
+mkdir -p ./build/web/.well-known
 
 BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
 if [[ $BRANCH_NAME == "prod" ]]; then
@@ -30,6 +33,13 @@ else
   else
     FIREBASE_CHANNEL_ID="$BRANCH_NAME"
   fi
+fi
+
+FLUTTER_CHANNEL_OUTPUT=$(flutter channel)
+echo "$FLUTTER_CHANNEL_OUTPUT"
+if ! echo "$FLUTTER_CHANNEL_OUTPUT" | grep --fixed-strings "* stable" &> /dev/null; then
+  warning_log "flutter channle not on stable"
+  exit 0
 fi
 
 if [[ $GITHUB_ACTIONS == true ]]; then

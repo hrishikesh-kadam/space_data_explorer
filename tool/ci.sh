@@ -4,6 +4,6 @@ set -e
 
 ./tool/analyze-test-format.sh
 
-if [[ ! $GITHUB_ACTIONS == true ]]; then
+if [[ ! $CI == true ]]; then
   ./tool/android-gradle-checkAllVariants.sh
 fi
