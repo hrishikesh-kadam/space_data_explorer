@@ -2,8 +2,17 @@
 
 set -e
 
+source "./tool/set-logs-env.sh"
+
+FLUTTER_CHANNEL_OUTPUT=$(flutter channel)
+echo "$FLUTTER_CHANNEL_OUTPUT"
+if ! echo "$FLUTTER_CHANNEL_OUTPUT" | grep --fixed-strings "* stable" &> /dev/null; then
+  error_log "flutter channle not on stable"
+  exit 1
+fi
+
 flutter build web --release
-mkdir -p build/web/.well-known
+mkdir -p ./build/web/.well-known
 
 BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
 if [[ $BRANCH_NAME == "prod" ]]; then
