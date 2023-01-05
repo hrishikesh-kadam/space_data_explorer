@@ -1,7 +1,7 @@
 name: space_data_explorer
 description: An app to explore space data from various sources.
 publish_to: 'none'
-version: 0.0.1+1
+version: 0.0.1
 
 environment:
   sdk: '>=2.18.4 <3.0.0'
