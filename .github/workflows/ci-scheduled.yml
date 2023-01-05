@@ -1,17 +1,24 @@
-name: CI
+name: Scheduled CI
 
 on:
-  push:
-    branches:
-      - prod
-      - stag
-      - dev
-  pull_request:
-    branches:
-      - prod
-      - stag
-      - dev
   workflow_dispatch:
+  schedule:
+    # 12:00 PM IST / 6:30 AM GMT every 6th day over the year with following conditions.
+    # GitHub will remove any cache entries that have not been accessed in over 7 days.
+    # 1. 1 day early in March on 5th for non leap year adjustment.
+    # 2. To not continue cache in next year remove 30 from December.
+    - cron: '30 6 5,11,17,23,29 1 *'
+    - cron: '30 6 4,10,16,22,28 2 *'
+    - cron: '30 6 5,11,17,23,29 3 *'
+    - cron: '30 6 4,10,16,22,28 4 *'
+    - cron: '30 6 4,10,16,22,28 5 *'
+    - cron: '30 6 3,9,15,21,27 6 *'
+    - cron: '30 6 3,9,15,21,27 7 *'
+    - cron: '30 6 2,8,14,20,26 8 *'
+    - cron: '30 6 1,7,13,19,25 9 *'
+    - cron: '30 6 1,7,13,19,25,31 10 *'
+    - cron: '30 6 6,12,18,24,30 11 *'
+    - cron: '30 6 6,12,18,24,30 12 *'
 
 defaults:
   run:
@@ -23,13 +30,16 @@ jobs:
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
-        runner: [ ubuntu-latest ]
-        ref: [ stable, beta ]
+        runner: [ ubuntu-latest, macos-latest, windows-latest ]
+        ref: [ stable ]
+        include:
+          - runner: ubuntu-latest
+            ref: beta
 
     steps:
       - run: brew install diffutils
         if: runner.os == 'macOS'
-
+    
       - name: Setup Flutter
         uses: hrishikesh-kadam/setup-flutter@v1
         with:
@@ -54,19 +64,3 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
           name: ${{ matrix.runner }}-${{ matrix.ref }}
-
-      - id: build-web-deploy
-        env:
-          FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_PROD: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER }}
-          FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_STAG: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_STAG }}
-          FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_DEV: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_DEV }}
-        run: ./tool/build-web-deploy.sh
-
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        if: matrix.ref == 'stable'
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ env.FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER }}
-          projectId: ${{ env.FIREBASE_PROJECT_ID }}
-          channelId: ${{ env.FIREBASE_CHANNEL_ID }}
-          expires: 30d
