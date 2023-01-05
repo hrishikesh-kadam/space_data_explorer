@@ -38,7 +38,7 @@ fi
 FLUTTER_CHANNEL_OUTPUT=$(flutter channel)
 echo "$FLUTTER_CHANNEL_OUTPUT"
 if ! echo "$FLUTTER_CHANNEL_OUTPUT" | grep --fixed-strings "* stable" &> /dev/null; then
-  warning_log "flutter channle not on stable"
+  warning_log "flutter channel not on stable"
   exit 0
 fi
 
