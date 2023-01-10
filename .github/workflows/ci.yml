@@ -73,3 +73,6 @@ jobs:
           projectId: ${{ env.FIREBASE_PROJECT_ID }}
           channelId: ${{ env.FIREBASE_CHANNEL_ID }}
           expires: 30d
+
+      - id: build-android
+        run: ./tool/android/build.sh

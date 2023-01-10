@@ -64,3 +64,9 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
           name: ${{ matrix.runner }}-${{ matrix.ref }}
+
+      - id: build-web
+        run: ./tool/web/build.sh
+
+      - id: build-android
+        run: ./tool/android/build.sh
