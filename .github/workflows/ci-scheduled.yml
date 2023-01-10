@@ -53,7 +53,7 @@ jobs:
         with:
           repository: 'hrishikesh-kadam/space_data_explorer_secrets'
           path: 'secrets'
-          token: ${{ secrets.SPACE_DATA_EXPLORER_SECRETS_REPO_TOKEN }}
+          token: ${{ secrets.SECRETS_REPO_TOKEN }}
       - run: git submodule update --init --recursive
 
       - run: ./tool/ci.sh

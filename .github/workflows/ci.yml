@@ -43,7 +43,7 @@ jobs:
         with:
           repository: 'hrishikesh-kadam/space_data_explorer_secrets'
           path: 'secrets'
-          token: ${{ secrets.SPACE_DATA_EXPLORER_SECRETS_REPO_TOKEN }}
+          token: ${{ secrets.SECRETS_REPO_TOKEN }}
       - run: git submodule update --init --recursive
 
       - run: ./tool/ci.sh
@@ -55,18 +55,21 @@ jobs:
           files: coverage/lcov.info
           name: ${{ matrix.runner }}-${{ matrix.ref }}
 
-      - id: build-web-deploy
+      - id: build-web
+        run: ./tool/web/build.sh
+
+      - id: deploy-web
         env:
-          FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_PROD: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER }}
-          FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_STAG: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_STAG }}
-          FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_DEV: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_DEV }}
-        run: ./tool/build-web-deploy.sh
+          FIREBASE_SERVICE_ACCOUNT_PROD: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
+          FIREBASE_SERVICE_ACCOUNT_STAG: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STAG }}
+          FIREBASE_SERVICE_ACCOUNT_DEV: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
+        run: ./tool/web/deploy.sh
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         if: matrix.ref == 'stable'
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ env.FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER }}
+          firebaseServiceAccount: ${{ env.FIREBASE_SERVICE_ACCOUNT }}
           projectId: ${{ env.FIREBASE_PROJECT_ID }}
           channelId: ${{ env.FIREBASE_CHANNEL_ID }}
           expires: 30d
