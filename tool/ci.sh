@@ -5,5 +5,5 @@ set -e
 ./tool/analyze-test-format.sh
 
 if [[ ! $CI == true ]]; then
-  ./tool/android-gradle-checkAllVariants.sh
+  ./tool/android/android-gradle-checkAllVariants.sh
 fi

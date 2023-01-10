@@ -3,23 +3,23 @@
 set -e
 
 source "./tool/set-logs-env.sh"
-export PRINT_WARNING_LOG=1
+PRINT_WARNING_LOG=1
 
 flutter build web --release
 mkdir -p ./build/web/.well-known
 
-BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
-if [[ $BRANCH_NAME == "prod" ]]; then
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+if [[ $BRANCH == "prod" ]]; then
   cp assets/digital-asset-links/prod/assetlinks.json build/web/.well-known/
   FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER="$FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_PROD"
   FIREBASE_PROJECT_ID="space-data-explorer"
   FIREBASE_CHANNEL_ID="live"
-elif [[ $BRANCH_NAME == "stag" ]]; then
+elif [[ $BRANCH == "stag" ]]; then
   cp assets/digital-asset-links/stag/assetlinks.json build/web/.well-known/
   FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER="$FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_STAG"
   FIREBASE_PROJECT_ID="space-data-explorer-stag"
   FIREBASE_CHANNEL_ID="live"
-elif [[ $BRANCH_NAME == "dev" ]]; then
+elif [[ $BRANCH == "dev" ]]; then
   cp assets/digital-asset-links/dev/assetlinks.json build/web/.well-known/
   FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER="$FIREBASE_SERVICE_ACCOUNT_SPACE_DATA_EXPLORER_DEV"
   FIREBASE_PROJECT_ID="space-data-explorer-dev"
@@ -31,7 +31,7 @@ else
   if [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then
     FIREBASE_CHANNEL_ID=""
   else
-    FIREBASE_CHANNEL_ID="$BRANCH_NAME"
+    FIREBASE_CHANNEL_ID="$BRANCH"
   fi
 fi
 

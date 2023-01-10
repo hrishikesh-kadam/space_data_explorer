@@ -1,6 +1,6 @@
 # shellcheck shell=sh
 
-# This shell script is mean to be sourced for printing colorful logs
+# This shell script is meant to be sourced for printing colorful logs
 
 export PRINT_WARNING_LOG=0
 export PRINT_INFO_LOG=0

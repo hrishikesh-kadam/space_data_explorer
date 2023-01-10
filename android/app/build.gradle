@@ -1,3 +1,8 @@
+plugins {
+    id 'com.github.ben-manes.versions' version '0.44.0'
+    id 'com.github.triplet.play' version '3.7.0' apply false
+}
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -6,10 +11,10 @@ if (localPropertiesFile.exists()) {
     }
 }
 
-def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('../secrets/android/key.properties')
-if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+def keyProperties = new Properties()
+def keyPropertiesFile = rootProject.file('../secrets/android/key.properties')
+if (keyPropertiesFile.exists()) {
+    keyProperties.load(new FileInputStream(keyPropertiesFile))
 }
 
 def flutterRoot = localProperties.getProperty('flutter.sdk')
@@ -60,16 +65,16 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(keystoreProperties['releaseStoreFile'])
-            storePassword keystoreProperties['releaseStoreAndKeyPassword']
-            keyAlias keystoreProperties['releaseKeyAlias']
-            keyPassword keystoreProperties['releaseStoreAndKeyPassword']
+            storeFile file(keyProperties['releaseStoreFile'])
+            storePassword keyProperties['releaseStoreAndKeyPassword']
+            keyAlias keyProperties['releaseKeyAlias']
+            keyPassword keyProperties['releaseStoreAndKeyPassword']
         }
         nonRelease {
-            storeFile file(keystoreProperties['nonReleaseStoreFile'])
-            storePassword keystoreProperties['nonReleaseStoreAndKeyPassword']
-            keyAlias keystoreProperties['nonReleaseKeyAlias']
-            keyPassword keystoreProperties['nonReleaseStoreAndKeyPassword']
+            storeFile file(keyProperties['nonReleaseStoreFile'])
+            storePassword keyProperties['nonReleaseStoreAndKeyPassword']
+            keyAlias keyProperties['nonReleaseKeyAlias']
+            keyPassword keyProperties['nonReleaseStoreAndKeyPassword']
         }
     }
 
@@ -114,12 +119,17 @@ android {
             signingConfig signingConfigs.release
         }
     }
+}
 
-    applicationVariants.all { variant ->
-        if (variant.applicationId.contains("prod") && variant.applicationId.contains("release")) {
-            variant.mergedFlavor.applicationId android.defaultConfig.applicationId
+androidComponents {
+    def all = selector().all()
+    onVariants(all) { variant -> 
+        if(variant.flavorName == "prod" && variant.buildType == "release") {
+            variant.applicationId.set(android.defaultConfig.applicationId)
             variant.outputs.each { output ->
-                 output.versionNameOverride android.defaultConfig.versionName
+                if (output.versionName.get() == android.defaultConfig.versionName + "-prod-release") {
+                    output.versionName.set(android.defaultConfig.versionName)
+                }
             }
         }
     }
@@ -140,6 +150,23 @@ task("printAllVariants") {
             println variant.applicationId + "," \
                 + variant.versionName + "," \
                 + variant.signingConfig.keyAlias
+        }
+    }
+}
+
+apply plugin: "com.github.triplet.play"
+import com.github.triplet.gradle.androidpublisher.ResolutionStrategy
+
+play {
+    serviceAccountCredentials.set(file(keyProperties['gppServiceAccountKeyFile']))
+    track.set("internal")
+    resolutionStrategy.set(ResolutionStrategy.AUTO)
+}
+
+android {
+    playConfigs {
+        devRelease {
+            enabled.set(false)
         }
     }
 }
