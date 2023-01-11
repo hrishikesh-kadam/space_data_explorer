@@ -55,9 +55,6 @@ jobs:
           files: coverage/lcov.info
           name: ${{ matrix.runner }}-${{ matrix.ref }}
 
-      - id: build-web
-        run: ./tool/web/build.sh
-
       - id: deploy-web
         env:
           FIREBASE_SERVICE_ACCOUNT_PROD: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
@@ -73,6 +70,3 @@ jobs:
           projectId: ${{ env.FIREBASE_PROJECT_ID }}
           channelId: ${{ env.FIREBASE_CHANNEL_ID }}
           expires: 30d
-
-      - id: build-android
-        run: ./tool/android/build.sh
