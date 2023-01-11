@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dev.hrishikesh_kadam.flutter.space_data_explorer">
    <application
-        android:label="space_data_explorer"
+        android:label="${applicationLabel}"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

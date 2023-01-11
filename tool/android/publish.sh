@@ -8,9 +8,9 @@ PRINT_DEBUG_LOG=1
 pushd android &> /dev/null
 
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-if [[ $BRANCH != "prod" && \
+if [[ $BRANCH != "dev" && \
   $BRANCH != "stag" && \
-  $BRANCH != "dev" ]]; then
+  $BRANCH != "prod" ]]; then
   FLAVOR="dev"
 else
   FLAVOR=$BRANCH

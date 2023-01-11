@@ -6,9 +6,9 @@ flutter build web --release
 mkdir -p ./build/web/.well-known
 
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-if [[ $BRANCH != "prod" && \
+if [[ $BRANCH != "dev" && \
   $BRANCH != "stag" && \
-  $BRANCH != "dev" ]]; then
+  $BRANCH != "prod" ]]; then
   APP_ENV="dev"
 else
   APP_ENV=$BRANCH

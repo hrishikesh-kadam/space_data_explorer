@@ -2,22 +2,24 @@
 
 set -e
 
+source "./tool/constants.sh"
+
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-if [[ $BRANCH == "prod" ]]; then
-  FIREBASE_SERVICE_ACCOUNT="$FIREBASE_SERVICE_ACCOUNT_PROD"
-  FIREBASE_PROJECT_ID="space-data-explorer"
+if [[ $BRANCH == "dev" ]]; then
+  FIREBASE_SERVICE_ACCOUNT="$FIREBASE_SERVICE_ACCOUNT_DEV"
+  FIREBASE_PROJECT_ID="${APP_NAME_KEBAB_CASE}-dev"
   FIREBASE_CHANNEL_ID="live"
 elif [[ $BRANCH == "stag" ]]; then
   FIREBASE_SERVICE_ACCOUNT="$FIREBASE_SERVICE_ACCOUNT_STAG"
-  FIREBASE_PROJECT_ID="space-data-explorer-stag"
+  FIREBASE_PROJECT_ID="${APP_NAME_KEBAB_CASE}-stag"
   FIREBASE_CHANNEL_ID="live"
-elif [[ $BRANCH == "dev" ]]; then
-  FIREBASE_SERVICE_ACCOUNT="$FIREBASE_SERVICE_ACCOUNT_DEV"
-  FIREBASE_PROJECT_ID="space-data-explorer-dev"
+elif [[ $BRANCH == "prod" ]]; then
+  FIREBASE_SERVICE_ACCOUNT="$FIREBASE_SERVICE_ACCOUNT_PROD"
+  FIREBASE_PROJECT_ID="${APP_NAME_KEBAB_CASE}"
   FIREBASE_CHANNEL_ID="live"
 else
   FIREBASE_SERVICE_ACCOUNT="$FIREBASE_SERVICE_ACCOUNT_DEV"
-  FIREBASE_PROJECT_ID="space-data-explorer-dev"
+  FIREBASE_PROJECT_ID="${APP_NAME_KEBAB_CASE}-dev"
   if [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then
     FIREBASE_CHANNEL_ID=""
   else

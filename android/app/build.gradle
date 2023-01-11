@@ -35,6 +35,7 @@ if (flutterVersionName == null) {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply from: '../constants.gradle'
 
 android {
     compileSdkVersion flutter.compileSdkVersion
@@ -54,13 +55,14 @@ android {
     }
 
     defaultConfig {
-        applicationId "dev.hrishikesh_kadam.flutter.space_data_explorer"
+        applicationId constants.applicationId
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        manifestPlaceholders += [ applicationLabel:constants.appNameSnakeCase ]
     }
 
     signingConfigs {
@@ -99,21 +101,21 @@ android {
     productFlavors {
         dev {
             dimension "env"
-            manifestPlaceholders = [hostName:"space-data-explorer-dev.web.app"]
+            manifestPlaceholders = [ hostName:constants.devHostName ]
             applicationIdSuffix ".dev"
             versionNameSuffix "-dev"
             signingConfig signingConfigs.nonRelease
         }
         stag {
             dimension "env"
-            manifestPlaceholders = [hostName:"space-data-explorer-stag.web.app"]
+            manifestPlaceholders = [ hostName:constants.stagHostName ]
             applicationIdSuffix ".stag"
             versionNameSuffix "-stag"
             signingConfig signingConfigs.nonRelease
         }
         prod {
             dimension "env"
-            manifestPlaceholders = [hostName:"space-data-explorer.web.app"]
+            manifestPlaceholders = [ hostName:constants.prodHostName ]
             applicationIdSuffix ".prod"
             versionNameSuffix "-prod"
             signingConfig signingConfigs.release

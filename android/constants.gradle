@@ -1,0 +1,12 @@
+def constants = [:]
+
+constants.appNameSnakeCase = "space_data_explorer"
+constants.appNameKebabCase = "space-data-explorer"
+
+constants.applicationId = "dev.hrishikesh_kadam.flutter.${constants.appNameSnakeCase}"
+
+constants.devHostName = "${constants.appNameKebabCase}-dev.web.app"
+constants.stagHostName = "${constants.appNameKebabCase}-stag.web.app"
+constants.prodHostName = "${constants.appNameKebabCase}.web.app"
+
+ext.constants = constants
