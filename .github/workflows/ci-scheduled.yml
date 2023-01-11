@@ -39,6 +39,17 @@ jobs:
     steps:
       - run: brew install diffutils
         if: runner.os == 'macOS'
+
+      # https://github.com/actions/cache/blob/main/examples.md#java---gradle
+      - name: Cache Gradle
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ matrix.runner }}-flutter-${{ matrix.ref }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            gradle-${{ matrix.runner }}-flutter-${{ matrix.ref }}-
     
       - name: Setup Flutter
         uses: hrishikesh-kadam/setup-flutter@v1
