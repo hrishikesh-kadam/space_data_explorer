@@ -15,7 +15,7 @@ void main() {
 }
 
 /*
- * TODO: Check if the following issue is resolved.
+ * TODO(hrishikesh-kadam): Check if the following issue is resolved.
  * https://github.com/flutter/flutter/issues/102469 
  */
 Future<void> landingPageIntegrationTest(WidgetTester tester) async {

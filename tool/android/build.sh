@@ -2,6 +2,10 @@
 
 set -e
 
+pushd android &> /dev/null
+./gradlew build
+popd &> /dev/null
+
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 if [[ $BRANCH != "dev" && \
   $BRANCH != "stag" && \
