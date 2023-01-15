@@ -2,7 +2,6 @@
 
 set -ex
 
-flutter pub get
 dart analyze
 
 flutter test test/unit_test \

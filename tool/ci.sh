@@ -2,6 +2,8 @@
 
 set -e
 
+./tool/create.sh
+
 ./tool/analyze-test-format.sh
 
 ./tool/web/build.sh
