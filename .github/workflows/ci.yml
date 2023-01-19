@@ -27,13 +27,11 @@ jobs:
         ref: [ stable, beta ]
 
     steps:
-      - name: Setup Flutter
-        uses: hrishikesh-kadam/setup-flutter@v1
+      - uses: hrishikesh-kadam/setup-flutter@v1
         with:
           ref: ${{ matrix.ref }}
 
-      - name: Setup LCOV
-        uses: hrishikesh-kadam/setup-lcov@v1
+      - uses: hrishikesh-kadam/setup-lcov@v1
 
       - uses: actions/checkout@v3
       - uses: actions/checkout@v3
@@ -43,8 +41,7 @@ jobs:
           token: ${{ secrets.SECRETS_REPO_TOKEN }}
       - run: git submodule update --init --recursive
 
-      - name: Prerequisite
-        run: ./tool/prerequisite.sh
+      - run: ./tool/prerequisite.sh
 
       # https://github.com/actions/cache/blob/main/examples.md#java---gradle
       - name: Cache Gradle
@@ -57,19 +54,17 @@ jobs:
 
       - run: ./tool/ci.sh
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
           name: ${{ matrix.runner }}-${{ matrix.ref }}
 
-      - name: deploy-web
+      - run: ./tool/web/deploy.sh
         env:
           FIREBASE_SERVICE_ACCOUNT_PROD: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
           FIREBASE_SERVICE_ACCOUNT_STAG: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STAG }}
           FIREBASE_SERVICE_ACCOUNT_DEV: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
-        run: ./tool/web/deploy.sh
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         if: matrix.ref == 'stable'
@@ -80,5 +75,4 @@ jobs:
           channelId: ${{ env.FIREBASE_CHANNEL_ID }}
           expires: 30d
 
-      - name: publish-android
-        run: ./tool/android/publish.sh
+      - run: ./tool/android/publish.sh

@@ -37,13 +37,11 @@ jobs:
             ref: beta
 
     steps:
-      - name: Setup Flutter
-        uses: hrishikesh-kadam/setup-flutter@v1
+      - uses: hrishikesh-kadam/setup-flutter@v1
         with:
           ref: ${{ matrix.ref }}
 
-      - name: Setup LCOV
-        uses: hrishikesh-kadam/setup-lcov@v1
+      - uses: hrishikesh-kadam/setup-lcov@v1
 
       - uses: actions/checkout@v3
       - uses: actions/checkout@v3
@@ -53,8 +51,7 @@ jobs:
           token: ${{ secrets.SECRETS_REPO_TOKEN }}
       - run: git submodule update --init --recursive
 
-      - name: Prerequisite
-        run: ./tool/prerequisite.sh
+      - run: ./tool/prerequisite.sh
 
       # https://github.com/actions/cache/blob/main/examples.md#java---gradle
       - name: Cache Gradle
@@ -67,8 +64,7 @@ jobs:
 
       - run: ./tool/ci.sh
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
