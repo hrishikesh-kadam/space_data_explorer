@@ -4,9 +4,9 @@ set -e
 
 if [[ $GITHUB_ACTIONS == "true" ]]; then
   if [[ $ANDROID_EMULATOR_ACTIONS_PREREQUISITE != "done" ]]; then
-    PATH="$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin"
-    PATH="$PATH:$ANDROID_SDK_ROOT/emulator"
-    PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools"
+    PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+    PATH="$PATH:$ANDROID_HOME/emulator"
+    PATH="$PATH:$ANDROID_HOME/platform-tools"
     if [[ $RUNNER_OS == "Linux" ]]; then
       sudo apt-get install -y libpulse0
     fi

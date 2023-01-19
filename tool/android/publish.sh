@@ -11,7 +11,7 @@ FLAVOR=$(../tool/android/get-flavor.sh)
 
 BUNDLE_FILE="../build/app/outputs/bundle/${FLAVOR}Release/app-${FLAVOR}-release.aab"
 
-BUNDLETOOL="java -jar $ANDROID_SDK_ROOT/bundletool-all.jar"
+BUNDLETOOL="java -jar $ANDROID_HOME/bundletool-all.jar"
 VERSION_CODE=$($BUNDLETOOL dump manifest --bundle "$BUNDLE_FILE" --xpath /manifest/@android:versionCode)
 debug_log "VERSION_CODE=$VERSION_CODE"
 VERSION_NAME=$($BUNDLETOOL dump manifest --bundle "$BUNDLE_FILE" --xpath /manifest/@android:versionName)
