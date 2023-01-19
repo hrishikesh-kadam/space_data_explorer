@@ -22,7 +22,7 @@ void main() {
 }
 
 void platformSpecificAppBarTest() {
-  group('getPlatformSpecificAppBar() Integration Test for Web', () {
+  group('getPlatformSpecificAppBar() Integration Test', () {
     testWidgets('3 pages down and 2 pages up', (tester) async {
       await neowsPageIntegrationTest(tester);
 

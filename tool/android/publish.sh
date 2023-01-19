@@ -7,14 +7,7 @@ PRINT_DEBUG_LOG=1
 
 pushd android &> /dev/null
 
-BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-if [[ $BRANCH != "dev" && \
-  $BRANCH != "stag" && \
-  $BRANCH != "prod" ]]; then
-  FLAVOR="dev"
-else
-  FLAVOR=$BRANCH
-fi
+FLAVOR=$(../tool/android/get-flavor.sh)
 
 BUNDLE_FILE="../build/app/outputs/bundle/${FLAVOR}Release/app-${FLAVOR}-release.aab"
 

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
@@ -21,7 +19,7 @@ AppBar getPlatformSpecificAppBar({
     leading: BackButton(
       onPressed: () {
         final extraObject = GoRouterState.of(context).extra;
-        Level logLevel = isFLutterTest() ? Level.FINE : Level.SEVERE;
+        Level logLevel = flutterTest ? Level.FINE : Level.SEVERE;
         if (extraObject == null) {
           GoRouter.of(context).go(HomePage.path);
         } else if (extraObject is Map) {
@@ -45,5 +43,3 @@ AppBar getPlatformSpecificAppBar({
     ),
   );
 }
-
-bool isFLutterTest() => Platform.environment.containsKey('FLUTTER_TEST');

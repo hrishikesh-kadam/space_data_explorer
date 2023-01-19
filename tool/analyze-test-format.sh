@@ -22,6 +22,6 @@ lcov --add-tracefile "coverage/unit_test_lcov.info" \
   --output-file "coverage/lcov.info"
 lcov --list coverage/lcov.info
 
-./tool/web/integration_test.sh
+./tool/web/integration-test.sh
 
 dart format --output none --set-exit-if-changed .

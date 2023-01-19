@@ -1,5 +1,7 @@
 import 'package:logging/logging.dart';
 
+import 'utility/utility.dart';
+
 final log = Logger('space-data-explorer');
 
 const isNormalLink = 'isNormalLink';
@@ -10,3 +12,5 @@ Map getExtra() {
   extra[isNormalLink] = true;
   return extra;
 }
+
+bool flutterTest = isFlutterTest();
