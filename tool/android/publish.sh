@@ -11,6 +11,9 @@ FLAVOR=$(../tool/android/get-flavor.sh)
 
 BUNDLE_FILE="../build/app/outputs/bundle/${FLAVOR}Release/app-${FLAVOR}-release.aab"
 
+if [[ ! -s $ANDROID_HOME/bundletool-all.jar ]]; then
+  ./tool/android/install-bundletool.sh
+fi
 BUNDLETOOL="java -jar $ANDROID_HOME/bundletool-all.jar"
 VERSION_CODE=$($BUNDLETOOL dump manifest --bundle "$BUNDLE_FILE" --xpath /manifest/@android:versionCode)
 debug_log "VERSION_CODE=$VERSION_CODE"
@@ -20,7 +23,7 @@ debug_log "VERSION_NAME=$VERSION_NAME"
 PUBLISH_TASK="publish${FLAVOR@u}ReleaseBundle"
 debug_log "PUBLISH_TASK=$PUBLISH_TASK"
 
-./gradlew "$PUBLISH_TASK" \
+: ./gradlew "$PUBLISH_TASK" \
   --artifact-dir "$BUNDLE_FILE" \
   --release-name "$VERSION_CODE ($VERSION_NAME)"
 

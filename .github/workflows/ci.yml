@@ -27,8 +27,8 @@ jobs:
         ref: [ stable, beta ]
 
     steps:
-      - run: brew install diffutils
-        if: runner.os == 'macOS'
+      - name: Prerequisite
+        run: ./tool/prerequisite.sh
 
       - name: Setup Flutter
         uses: hrishikesh-kadam/setup-flutter@v1
@@ -64,7 +64,7 @@ jobs:
           files: coverage/lcov.info
           name: ${{ matrix.runner }}-${{ matrix.ref }}
 
-      - id: deploy-web
+      - name: deploy-web
         env:
           FIREBASE_SERVICE_ACCOUNT_PROD: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
           FIREBASE_SERVICE_ACCOUNT_STAG: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STAG }}
@@ -79,3 +79,6 @@ jobs:
           projectId: ${{ env.FIREBASE_PROJECT_ID }}
           channelId: ${{ env.FIREBASE_CHANNEL_ID }}
           expires: 30d
+
+      - name: publish-android
+        run: ./tool/android/publish.sh

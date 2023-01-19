@@ -8,8 +8,4 @@ set -e
 
 ./tool/web/build.sh
 
-if [[ ! $CI == true ]]; then
-  ./tool/android/android-gradle-checkAllVariants.sh
-fi
-
 ./tool/android/build.sh
