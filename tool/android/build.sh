@@ -2,8 +2,6 @@
 
 set -e
 
-./tool/android/android-gradle-checkAllVariants.sh
-
 pushd android &> /dev/null
 ./gradlew build
 popd &> /dev/null
@@ -11,3 +9,5 @@ popd &> /dev/null
 FLAVOR=$(./tool/android/get-flavor.sh)
 
 flutter build appbundle --flavor "$FLAVOR"
+
+./tool/android/android-gradle-checkAllVariants.sh
