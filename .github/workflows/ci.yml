@@ -27,9 +27,6 @@ jobs:
         ref: [ stable, beta ]
 
     steps:
-      - name: Prerequisite
-        run: ./tool/prerequisite.sh
-
       - name: Setup Flutter
         uses: hrishikesh-kadam/setup-flutter@v1
         with:
@@ -45,6 +42,9 @@ jobs:
           path: 'secrets'
           token: ${{ secrets.SECRETS_REPO_TOKEN }}
       - run: git submodule update --init --recursive
+
+      - name: Prerequisite
+        run: ./tool/prerequisite.sh
 
       # https://github.com/actions/cache/blob/main/examples.md#java---gradle
       - name: Cache Gradle
