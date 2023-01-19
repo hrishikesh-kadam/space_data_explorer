@@ -4,16 +4,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:logging/logging.dart';
-
+import 'package:space_data_explorer/main.dart' as app;
 import 'package:space_data_explorer/pages/home_page.dart';
 import 'package:space_data_explorer/pages/nasa_source_page.dart';
 import 'package:space_data_explorer/pages/neows_page.dart';
-import 'package:space_data_explorer/main.dart' as app;
 
 import 'nasa_source_page_test.dart';
+import 'neows_page_test.dart';
 import 'test_utility_non_web.dart'
     if (dart.library.html) 'test_utility_web.dart' as test_utility;
-import 'neows_page_test.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
