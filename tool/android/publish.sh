@@ -5,11 +5,9 @@ set -e
 source "./tool/set-logs-env.sh"
 PRINT_DEBUG_LOG=1
 
-pushd android &> /dev/null
+FLAVOR=$(./tool/android/get-flavor.sh)
 
-FLAVOR=$(../tool/android/get-flavor.sh)
-
-BUNDLE_FILE="../build/app/outputs/bundle/${FLAVOR}Release/app-${FLAVOR}-release.aab"
+BUNDLE_FILE="./build/app/outputs/bundle/${FLAVOR}Release/app-${FLAVOR}-release.aab"
 
 if [[ ! -s $ANDROID_HOME/bundletool-all.jar ]]; then
   ./tool/android/install-bundletool.sh
@@ -22,6 +20,8 @@ debug_log "VERSION_NAME=$VERSION_NAME"
 
 PUBLISH_TASK="publish${FLAVOR@u}ReleaseBundle"
 debug_log "PUBLISH_TASK=$PUBLISH_TASK"
+
+pushd android &> /dev/null
 
 : ./gradlew "$PUBLISH_TASK" \
   --artifact-dir "$BUNDLE_FILE" \
