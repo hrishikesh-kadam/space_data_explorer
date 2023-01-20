@@ -2,7 +2,11 @@
 
 set -ex
 
-dart analyze
+flutter format --output none --set-exit-if-changed .
+
+flutter pub run import_sorter:main --no-comments --exit-if-changed
+
+flutter analyze
 
 flutter test test/unit_test \
   --coverage --coverage-path "coverage/unit_test_lcov.info"
@@ -23,5 +27,3 @@ lcov --add-tracefile "coverage/unit_test_lcov.info" \
 lcov --list coverage/lcov.info
 
 ./tool/web/integration-test.sh
-
-dart format --output none --set-exit-if-changed .

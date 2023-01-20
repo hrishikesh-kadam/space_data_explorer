@@ -4,7 +4,7 @@ set -e
 
 ./tool/create.sh
 
-./tool/analyze-test-format.sh
+./tool/format-analyze-test.sh
 
 ./tool/web/build.sh
 
