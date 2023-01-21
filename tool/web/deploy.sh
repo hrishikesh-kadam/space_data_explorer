@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-set -e
+source ./tool/constants.sh
 
-source "./tool/constants.sh"
+set -e
 
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 if [[ $BRANCH == "dev" ]]; then

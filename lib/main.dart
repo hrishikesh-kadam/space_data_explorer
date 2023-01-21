@@ -7,10 +7,12 @@ import 'space_data_explorer.dart';
 void main({
   GlobalKey<NavigatorState>? navigatorKey,
   String initialLocation = HomePage.path,
+  bool debugShowCheckedModeBanner = true,
 }) {
   configureApp();
   runApp(SpaceDataExplorerApp(
     navigatorKey: navigatorKey,
     initialLocation: initialLocation,
+    debugShowCheckedModeBanner: debugShowCheckedModeBanner,
   ));
 }

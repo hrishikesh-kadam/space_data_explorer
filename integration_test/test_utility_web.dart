@@ -2,6 +2,9 @@
 
 import 'dart:html' as html;
 
+import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
+
 import 'package:space_data_explorer/globals.dart';
 
 void checkHistoryLengthAndSerialCount(
@@ -26,4 +29,13 @@ void checkHistoryLengthAndSerialCount(
   if (state['serialCount'] != serialCount) {
     log.severe('state[\'serialCount\'] != serialCount');
   }
+}
+
+Future<void> takeScreenshot(
+  String name,
+  WidgetTester tester,
+  IntegrationTestWidgetsFlutterBinding binding,
+) async {
+  await tester.pumpAndSettle();
+  await binding.takeScreenshot(name);
 }

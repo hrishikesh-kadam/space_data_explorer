@@ -11,6 +11,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
     super.key,
     GlobalKey<NavigatorState>? navigatorKey,
     this.initialLocation = HomePage.path,
+    this.debugShowCheckedModeBanner = true,
   }) {
     _router = GoRouter(
       navigatorKey: navigatorKey,
@@ -38,6 +39,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
 
   final String initialLocation;
   late final GoRouter _router;
+  final bool debugShowCheckedModeBanner;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: debugShowCheckedModeBanner,
     );
   }
 }

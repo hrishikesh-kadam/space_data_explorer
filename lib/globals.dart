@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:logging/logging.dart';
 
 import 'utility/utility.dart';
@@ -14,3 +16,6 @@ Map getExtra() {
 }
 
 bool flutterTest = isFlutterTest();
+
+@visibleForTesting
+bool isSurfaceRendered = false;

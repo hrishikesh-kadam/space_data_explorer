@@ -2,7 +2,7 @@
 
 set -e
 
-source "./tool/set-logs-env.sh"
+source ./tool/set-logs-env.sh
 PRINT_DEBUG_LOG=1
 
 FLAVOR=$(./tool/android/get-flavor.sh)
