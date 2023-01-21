@@ -21,7 +21,10 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-  import_sorter: ^4.6.0
+  import_sorter:
+    git:
+      url: https://github.com/fluttercommunity/import_sorter.git
+      ref: f350497a11b1285c695595049e95a420068e7a9f
 
 flutter:
   uses-material-design: true

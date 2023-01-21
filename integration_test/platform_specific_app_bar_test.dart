@@ -1,18 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:logging/logging.dart';
+
 import 'package:space_data_explorer/main.dart' as app;
 import 'package:space_data_explorer/pages/home_page.dart';
 import 'package:space_data_explorer/pages/nasa_source_page.dart';
 import 'package:space_data_explorer/pages/neows_page.dart';
-
 import 'nasa_source_page_test.dart';
 import 'neows_page_test.dart';
-import 'test_utility_non_web.dart'
-    if (dart.library.html) 'test_utility_web.dart' as test_utility;
+import 'test_utility.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +32,7 @@ void platformSpecificAppBarTest() {
       expect(find.byType(NasaSourceScreen), findsOneWidget);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       if (kIsWeb) {
-        test_utility.checkHistoryLengthAndSerialCount(3, 1);
+        checkHistoryLengthAndSerialCount(3, 1);
       }
 
       final nasaSourcePageBackButton = find.byType(BackButton);
@@ -42,7 +42,7 @@ void platformSpecificAppBarTest() {
       expect(find.byType(NasaSourceScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
-        test_utility.checkHistoryLengthAndSerialCount(3, 0);
+        checkHistoryLengthAndSerialCount(3, 0);
       }
       Logger.root.clearListeners();
     });
@@ -56,7 +56,7 @@ void platformSpecificAppBarTest() {
       expect(find.byType(NasaSourceScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
-        test_utility.checkHistoryLengthAndSerialCount(2, 0);
+        checkHistoryLengthAndSerialCount(2, 0);
       }
       Logger.root.clearListeners();
     });
@@ -75,7 +75,7 @@ void platformSpecificAppBarTest() {
       expect(find.byType(NeowsScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
-        test_utility.checkHistoryLengthAndSerialCount(2, 0);
+        checkHistoryLengthAndSerialCount(2, 0);
       }
       Logger.root.clearListeners();
     });
@@ -92,7 +92,7 @@ void platformSpecificAppBarTest() {
       expect(find.byType(NasaSourceScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
-        test_utility.checkHistoryLengthAndSerialCount(2, 0);
+        checkHistoryLengthAndSerialCount(2, 0);
       }
       Logger.root.clearListeners();
     });
@@ -114,7 +114,7 @@ void platformSpecificAppBarTest() {
       // In case of web this would be normal navigation because
       // there is no check for extra
       if (kIsWeb) {
-        test_utility.checkHistoryLengthAndSerialCount(2, 0);
+        checkHistoryLengthAndSerialCount(2, 0);
       }
       Logger.root.clearListeners();
     });
@@ -135,7 +135,7 @@ void platformSpecificAppBarTest() {
       // In case of web this would be normal navigation because
       // there is no check for extra
       if (kIsWeb) {
-        test_utility.checkHistoryLengthAndSerialCount(2, 0);
+        checkHistoryLengthAndSerialCount(2, 0);
       }
       Logger.root.clearListeners();
     });

@@ -120,9 +120,11 @@ packages:
   import_sorter:
     dependency: "direct dev"
     description:
-      name: import_sorter
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: f350497a11b1285c695595049e95a420068e7a9f
+      resolved-ref: f350497a11b1285c695595049e95a420068e7a9f
+      url: "https://github.com/fluttercommunity/import_sorter.git"
+    source: git
     version: "4.6.0"
   integration_test:
     dependency: "direct dev"
