@@ -2,9 +2,10 @@ import 'package:flutter/foundation.dart';
 
 import 'package:logging/logging.dart';
 
+import 'constants.dart';
 import 'utility/utility.dart';
 
-final log = Logger('space-data-explorer');
+final log = Logger(appNameKebabCase);
 
 const isNormalLink = 'isNormalLink';
 

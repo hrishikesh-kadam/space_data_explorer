@@ -27,3 +27,7 @@ lcov --add-tracefile "coverage/unit_test_lcov.info" \
 lcov --list coverage/lcov.info
 
 ./tool/web/integration-test.sh
+
+if [[ ! $CI ]]; then
+  ./tool/android/test-golden-screenshots.sh
+fi

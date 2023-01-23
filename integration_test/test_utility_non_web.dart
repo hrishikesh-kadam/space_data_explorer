@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:path_provider/path_provider.dart';
@@ -13,7 +15,7 @@ void checkHistoryLengthAndSerialCount(
   throw UnimplementedError('Not required for non Web Platforms');
 }
 
-Future<void> takeScreenshot(
+Future<void> testScreenshot(
   String name,
   WidgetTester tester,
   IntegrationTestWidgetsFlutterBinding binding,
@@ -21,18 +23,33 @@ Future<void> takeScreenshot(
   if (Platform.isAndroid && !isSurfaceRendered) {
     await binding.convertFlutterSurfaceToImage();
     isSurfaceRendered = true;
+    const updateGoldens = bool.fromEnvironment('UPDATE_GOLDENS');
+    log.fine('-> testScreenshot -> UPDATE_GOLDENS=$updateGoldens');
   }
   await tester.pumpAndSettle();
   final List<int> bytes = await binding.takeScreenshot(name);
-  Directory directory;
+  Directory directory = await getApplicationDocumentsDirectory();
+  directory = Directory('${directory.path}/screenshots');
+  await directory.create(recursive: true);
+  final goldenFile = File('${directory.path}/$name');
   if (Platform.isAndroid) {
-    // https://github.com/flutter/plugins/blob/main/packages/path_provider/path_provider_android/android/src/main/java/io/flutter/plugins/pathprovider/PathProviderPlugin.java
-    // https://developer.android.com/reference/android/content/Context#getExternalFilesDir(java.lang.String)
-    directory = (await getExternalStorageDirectory())!;
+    if (const bool.fromEnvironment('UPDATE_GOLDENS')) {
+      log.fine('-> testScreenshot -> ${goldenFile.path}');
+      goldenFile.writeAsBytesSync(bytes);
+    } else {
+      // TODO(hrishikesh-kadam): Add support for flavor in package_plus_info
+      const flavor = String.fromEnvironment('FLAVOR');
+      const goldenDirectory =
+          'android/app/src/$flavor/play/listings/en-US/graphics/phone-screenshots';
+      final goldenByteData = await rootBundle.load('$goldenDirectory/$name');
+      final goldenByteBuffer = goldenByteData.buffer;
+      final goldenBytes = goldenByteBuffer.asUint8List(
+          goldenByteData.offsetInBytes, goldenByteBuffer.lengthInBytes);
+      goldenFile.writeAsBytesSync(goldenBytes);
+      await expectLater(bytes, matchesGoldenFile(goldenFile.uri));
+    }
   } else {
-    directory = await getApplicationDocumentsDirectory();
+    log.fine('-> testScreenshot -> ${goldenFile.path}');
+    await expectLater(bytes, matchesGoldenFile(goldenFile.uri));
   }
-  final file = File('${directory.path}/$name');
-  log.fine('-> takeScreenshot -> ${file.path}');
-  file.writeAsBytesSync(bytes);
 }

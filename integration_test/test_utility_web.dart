@@ -31,7 +31,7 @@ void checkHistoryLengthAndSerialCount(
   }
 }
 
-Future<void> takeScreenshot(
+Future<void> testScreenshot(
   String name,
   WidgetTester tester,
   IntegrationTestWidgetsFlutterBinding binding,

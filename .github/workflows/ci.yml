@@ -27,12 +27,6 @@ jobs:
         ref: [ stable, beta ]
 
     steps:
-      - uses: hrishikesh-kadam/setup-flutter@v1
-        with:
-          ref: ${{ matrix.ref }}
-
-      - uses: hrishikesh-kadam/setup-lcov@v1
-
       - uses: actions/checkout@v3
       - uses: actions/checkout@v3
         with:
@@ -40,6 +34,17 @@ jobs:
           path: 'secrets'
           token: ${{ secrets.SECRETS_REPO_TOKEN }}
       - run: git submodule update --init --recursive
+
+      - uses: hrishikesh-kadam/setup-flutter@v1
+        with:
+          ref: ${{ matrix.ref }}
+
+      - uses: hrishikesh-kadam/setup-lcov@v1
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
 
       - run: ./tool/prerequisite.sh
 
