@@ -1,25 +1,8 @@
 # Note: jobs of ci-scheduled.yml and ci-dispatched.yml should be in sync
-name: Scheduled CI
+name: Dispatched CI
 
 on:
   workflow_dispatch:
-  schedule:
-    # 12:00 PM IST / 6:30 AM GMT every 6th day over the year with following conditions.
-    # GitHub will remove any cache entries that have not been accessed in over 7 days.
-    # 1. 1 day early in March on 5th for non leap year adjustment.
-    # 2. To not continue cache in next year remove 30 from December.
-    - cron: '30 6 5,11,17,23,29 1 *'
-    - cron: '30 6 4,10,16,22,28 2 *'
-    - cron: '30 6 5,11,17,23,29 3 *'
-    - cron: '30 6 4,10,16,22,28 4 *'
-    - cron: '30 6 4,10,16,22,28 5 *'
-    - cron: '30 6 3,9,15,21,27 6 *'
-    - cron: '30 6 3,9,15,21,27 7 *'
-    - cron: '30 6 2,8,14,20,26 8 *'
-    - cron: '30 6 1,7,13,19,25 9 *'
-    - cron: '30 6 1,7,13,19,25,31 10 *'
-    - cron: '30 6 6,12,18,24,30 11 *'
-    - cron: '30 6 6,12,18,24,30 12 *'
 
 defaults:
   run:
@@ -31,11 +14,8 @@ jobs:
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
-        runner: [ ubuntu-latest, macos-latest, windows-latest ]
+        runner: [ macos-latest, windows-latest ]
         ref: [ stable ]
-        include:
-          - runner: ubuntu-latest
-            ref: beta
 
     steps:
       - uses: actions/checkout@v3
