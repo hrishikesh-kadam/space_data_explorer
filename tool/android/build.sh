@@ -3,7 +3,7 @@
 set -e
 
 pushd android &> /dev/null
-./gradlew build
+./gradlew app:build
 popd &> /dev/null
 
 FLAVOR=$(./tool/android/get-flavor.sh)
