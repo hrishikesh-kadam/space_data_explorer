@@ -4,14 +4,14 @@ set -e
 
 source ./tool/android/start-emulator.sh
 
-FLAVOR=$(./tool/android/get-flavor.sh)
+FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
 if (( $(git status -s pubspec.yaml | wc -l) > 0 )); then
   PUBSPEC_MODIFIED=true
 fi
 git stash push -m "pubspec.yaml at $(date +"%d/%m/%Y %r")" pubspec.yaml
 
-export GOLDEN_DIRECTORY="android/app/src/$FLAVOR/play/listings/en-US/graphics/phone-screenshots/"
+export GOLDEN_DIRECTORY="android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/phone-screenshots/"
 yq -i '.flutter.assets += [strenv(GOLDEN_DIRECTORY)]' pubspec.yaml
 
 flutter pub get
@@ -19,9 +19,9 @@ flutter pub get
 # Flaky Test
 set +e
 flutter test \
-  --flavor "$FLAVOR" \
+  --flavor "$FLAVOR_ENV" \
   --dart-define="FLUTTER_TEST=true" \
-  --dart-define="FLAVOR=$FLAVOR" \
+  --dart-define="FLAVOR_ENV=$FLAVOR_ENV" \
   integration_test/golden_screenshots_test.dart
 set -e
 

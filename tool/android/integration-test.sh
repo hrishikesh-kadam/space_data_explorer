@@ -4,7 +4,7 @@ set -e
 
 source ./tool/android/start-emulator.sh
 
-FLAVOR=$(./tool/android/get-flavor.sh)
+FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
 # mapfile -t TARGET_PATHS < <(find integration_test -type f -name "*_test.dart")
 TARGET_PATHS=(
@@ -12,7 +12,7 @@ TARGET_PATHS=(
 )
 for TARGET_PATH in "${TARGET_PATHS[@]}"; do
   flutter test \
-    --flavor "$FLAVOR" \
+    --flavor "$FLAVOR_ENV" \
     --dart-define="FLUTTER_TEST=true" \
     "$TARGET_PATH"
 done

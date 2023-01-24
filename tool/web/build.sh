@@ -3,15 +3,7 @@
 set -e
 
 flutter build web --release
+
 mkdir -p ./build/web/.well-known
-
-BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-if [[ $BRANCH != "dev" && \
-  $BRANCH != "stag" && \
-  $BRANCH != "prod" ]]; then
-  APP_ENV="dev"
-else
-  APP_ENV=$BRANCH
-fi
-
-cp "assets/digital-asset-links/$APP_ENV/assetlinks.json" "build/web/.well-known/"
+FLAVOR_ENV=$(./tool/get-flavor-env.sh)
+cp "assets/digital-asset-links/$FLAVOR_ENV/assetlinks.json" "build/web/.well-known/"

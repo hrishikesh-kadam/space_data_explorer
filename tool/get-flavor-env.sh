@@ -6,9 +6,9 @@ BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 if [[ $BRANCH != "dev" && \
   $BRANCH != "stag" && \
   $BRANCH != "prod" ]]; then
-  FLAVOR="dev"
+  FLAVOR_ENV="dev"
 else
-  FLAVOR=$BRANCH
+  FLAVOR_ENV=$BRANCH
 fi
 
-echo "$FLAVOR"
+echo "$FLAVOR_ENV"

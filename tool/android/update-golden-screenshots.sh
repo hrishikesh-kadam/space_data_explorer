@@ -4,10 +4,10 @@ set -e
 
 source ./tool/android/start-emulator.sh
 
-FLAVOR=$(./tool/android/get-flavor.sh)
+FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
 # flutter test \
-#   --flavor "$FLAVOR" \
+#   --flavor "$FLAVOR_ENV" \
 #   --dart-define="FLUTTER_TEST=true" \
 #   --dart-define="UPDATE_GOLDENS=true" \
 #   integration_test/golden_screenshots_test.dart
@@ -17,7 +17,7 @@ pushd android &> /dev/null
 # Reference https://github.com/flutter/flutter/issues/100292#issuecomment-1076927900
 FLUTTER_TEST_ARG=$(printf 'FLUTTER_TEST=true' | base64)
 UPDATE_GOLDENS_ARG=$(printf 'UPDATE_GOLDENS=true' | base64)
-CONNECTED_ANDROID_TEST="app:connected${FLAVOR@u}DebugAndroidTest"
+CONNECTED_ANDROID_TEST="app:connected${FLAVOR_ENV@u}DebugAndroidTest"
 
 ./gradlew "$CONNECTED_ANDROID_TEST" \
   -Pdart-defines="$FLUTTER_TEST_ARG" \
@@ -30,10 +30,10 @@ source ./tool/constants.sh
 
 set -e
 
-APP_PACKAGE="$APPLICATION_ID.$FLAVOR.debug"
+APP_PACKAGE="$APPLICATION_ID.$FLAVOR_ENV.debug"
 SCREENSHOT_DIR="app_flutter/screenshots"
 REMOTE_DIR="/data/user/0/$APP_PACKAGE/$SCREENSHOT_DIR"
-LOCALE_DIR="./android/app/src/$FLAVOR/play/listings/en-US/graphics/phone-screenshots"
+LOCALE_DIR="./android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/phone-screenshots"
 ACCESSIBLE_DIR="/storage/emulated/0/Download/$APP_NAME_KEBAB_CASE/screenshots"
 mkdir -p "$LOCALE_DIR"
 SCREENSHOTS=(
@@ -47,7 +47,7 @@ if adb root | grep "adbd cannot run as root in production builds"; then
   adb shell <<- EOF
 	rm -rf $ACCESSIBLE_DIR
 	mkdir -p $ACCESSIBLE_DIR
-	run-as "$APPLICATION_ID.$FLAVOR.debug"
+	run-as "$APPLICATION_ID.$FLAVOR_ENV.debug"
 	cp "./$SCREENSHOT_DIR/*" $ACCESSIBLE_DIR
 	exit
 	exit
