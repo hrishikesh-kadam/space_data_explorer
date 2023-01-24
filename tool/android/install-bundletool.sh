@@ -4,7 +4,10 @@ set -e
 
 VERSION=$( \
   curl -s "https://api.github.com/repos/google/bundletool/releases/latest" \
-    | jq .name -r
+    | jq -r .name
 )
-curl -o "$ANDROID_HOME/bundletool-all.jar" \
+BUNDLETOOL_PATH="$ANDROID_HOME/bundletool-all.jar"
+curl -o "$BUNDLETOOL_PATH" \
   -sL "https://github.com/google/bundletool/releases/download/$VERSION/bundletool-all-$VERSION.jar"
+printf "bundletool "
+java -jar "$BUNDLETOOL_PATH" version

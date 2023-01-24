@@ -9,10 +9,11 @@ FLAVOR=$(./tool/android/get-flavor.sh)
 
 BUNDLE_FILE="./build/app/outputs/bundle/${FLAVOR}Release/app-${FLAVOR}-release.aab"
 
-if [[ ! -s $ANDROID_HOME/bundletool-all.jar ]]; then
+BUNDLETOOL_PATH="$ANDROID_HOME/bundletool-all.jar"
+if [[ ! -s $BUNDLETOOL_PATH ]]; then
   ./tool/android/install-bundletool.sh
 fi
-BUNDLETOOL="java -jar $ANDROID_HOME/bundletool-all.jar"
+BUNDLETOOL="java -jar $BUNDLETOOL_PATH"
 VERSION_CODE=$($BUNDLETOOL dump manifest --bundle "$BUNDLE_FILE" --xpath /manifest/@android:versionCode)
 debug_log "VERSION_CODE=$VERSION_CODE"
 VERSION_NAME=$($BUNDLETOOL dump manifest --bundle "$BUNDLE_FILE" --xpath /manifest/@android:versionName)
