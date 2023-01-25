@@ -1,16 +1,7 @@
-name: ci
+# Note: jobs of ci-scheduled.yml and ci-dispatched-*.yml should be in sync
+name: ci-dispatched-windows
 
 on:
-  push:
-    branches:
-      - prod
-      - stag
-      - dev
-  pull_request:
-    branches:
-      - prod
-      - stag
-      - dev
   workflow_dispatch:
 
 defaults:
@@ -23,8 +14,8 @@ jobs:
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
-        runner: [ ubuntu-latest ]
-        ref: [ stable, beta ]
+        runner: [ windows-latest ]
+        ref: [ stable ]
 
     steps:
       - uses: actions/checkout@v3
@@ -66,20 +57,3 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
           name: ${{ matrix.runner }}-${{ matrix.ref }}
-
-      - run: ./tool/web/deploy.sh
-        env:
-          FIREBASE_SERVICE_ACCOUNT_PROD: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
-          FIREBASE_SERVICE_ACCOUNT_STAG: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STAG }}
-          FIREBASE_SERVICE_ACCOUNT_DEV: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
-
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        if: matrix.ref == 'stable'
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ env.FIREBASE_SERVICE_ACCOUNT }}
-          projectId: ${{ env.FIREBASE_PROJECT_ID }}
-          channelId: ${{ env.FIREBASE_CHANNEL_ID }}
-          expires: 30d
-
-      - run: ./tool/android/publish.sh

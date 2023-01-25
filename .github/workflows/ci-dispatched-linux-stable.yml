@@ -1,5 +1,5 @@
-# Note: jobs of ci-scheduled.yml and ci-dispatched.yml should be in sync
-name: Dispatched CI
+# Note: jobs of ci-scheduled.yml and ci-dispatched-*.yml should be in sync
+name: ci-dispatched-linux-stable
 
 on:
   workflow_dispatch:
@@ -14,7 +14,7 @@ jobs:
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
-        runner: [ macos-latest, windows-latest ]
+        runner: [ ubuntu-latest ]
         ref: [ stable ]
 
     steps:

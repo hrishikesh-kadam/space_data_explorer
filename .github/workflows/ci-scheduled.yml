@@ -1,5 +1,5 @@
-# Note: jobs of ci-scheduled.yml and ci-dispatched.yml should be in sync
-name: Scheduled CI
+# Note: jobs of ci-scheduled.yml and ci-dispatched-*.yml should be in sync
+name: ci-scheduled
 
 on:
   workflow_dispatch:

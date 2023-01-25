@@ -11,12 +11,15 @@ check_on_path() {
   fi
 }
 
+uname -a
+
 if [[ $(uname -s) =~ ^"Linux" ]]; then
   true
 elif [[ $(uname -s) =~ ^"Darwin" ]]; then
   check_on_path brew
 else
-  true
+  check_on_path choco
+  check_on_path winget
 fi
 
 check_on_path java
@@ -50,6 +53,12 @@ if [[ ! -x $(command -v lcov) ]]; then
     brew install lcov
   else
     choco install lcov
+    if [[ $GITHUB_ACTIONS ]]; then
+      # shellcheck disable=SC2028
+      echo "C:\ProgramData\chocolatey\lib\lcov\tools\bin" >> "$GITHUB_PATH"
+    else
+      export PATH="/c/ProgramData/chocolatey/lib/lcov/tools/bin:$PATH"
+    fi
   fi
   lcov --version
 fi
