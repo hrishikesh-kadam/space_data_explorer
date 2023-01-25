@@ -2,7 +2,7 @@
 
 set -ex
 
-flutter format --output none --set-exit-if-changed .
+dart format --output none --set-exit-if-changed .
 
 flutter pub run import_sorter:main --no-comments --exit-if-changed
 
