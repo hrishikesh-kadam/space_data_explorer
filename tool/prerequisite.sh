@@ -11,15 +11,13 @@ check_on_path() {
   fi
 }
 
-uname -a
-
-if [[ $(uname -s) =~ ^"Linux" ]]; then
-  true
-elif [[ $(uname -s) =~ ^"Darwin" ]]; then
+if [[ $(uname -s) =~ ^"Darwin" ]]; then
   check_on_path brew
-else
+elif [[ $(uname -s) =~ ^"MINGW" ]]; then
   check_on_path choco
-  check_on_path winget
+  if [[ ! $GITHUB_ACTIONS ]]; then
+    check_on_path winget
+  fi
 fi
 
 check_on_path java
@@ -51,7 +49,7 @@ if [[ ! -x $(command -v lcov) ]]; then
     sudo apt install lcov
   elif [[ $(uname -s) =~ ^"Darwin" ]]; then
     brew install lcov
-  else
+  elif [[ $(uname -s) =~ ^"MINGW" ]]; then
     choco install lcov
     if [[ $GITHUB_ACTIONS ]]; then
       # shellcheck disable=SC2028
@@ -73,8 +71,12 @@ if [[ ! -x $(command -v jq) ]]; then
     sudo apt install jq
   elif [[ $(uname -s) =~ ^"Darwin" ]]; then
     brew install jq
-  else
-    winget install jq
+  elif [[ $(uname -s) =~ ^"MINGW" ]]; then
+    if [[ $GITHUB_ACTIONS ]]; then
+      choco install jq
+    else
+      winget install jq
+    fi
   fi
   jq --version
 fi
@@ -86,8 +88,12 @@ if [[ ! -x $(command -v yq) ]]; then
     sudo chmod +x /usr/bin/yq
   elif [[ $(uname -s) =~ ^"Darwin" ]]; then
     brew install yq
-  else
-    winget install yq
+  elif [[ $(uname -s) =~ ^"MINGW" ]]; then
+    if [[ $GITHUB_ACTIONS ]]; then
+      choco install yq
+    else
+      winget install yq
+    fi
   fi
   yq --version
 fi
