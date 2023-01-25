@@ -2,8 +2,7 @@
 
 # This shell script is meant to be sourced for printing colorful logs
 
-. "$COMMON_SCRIPTS_ROOT/set-shell-env.sh"
-
+if [ -o errexit ]; then PARENT_ERREXIT=true; else PARENT_ERREXIT=false; fi
 set -e
 
 export PRINT_WARNING_LOG=0
@@ -75,4 +74,4 @@ error_log_with_help() {
   exit "$2"
 }
 
-set +e
+$PARENT_ERREXIT || set +e
