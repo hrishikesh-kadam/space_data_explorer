@@ -47,8 +47,10 @@ fi
 if [[ ! -x $(command -v lcov) ]]; then
   if [[ $(uname -s) =~ ^"Linux" ]]; then
     sudo apt install lcov
+    lcov --version
   elif [[ $(uname -s) =~ ^"Darwin" ]]; then
     brew install lcov
+    lcov --version
   elif [[ $(uname -s) =~ ^"MINGW" ]]; then
     choco install lcov
     if [[ $GITHUB_ACTIONS ]]; then
@@ -56,9 +58,9 @@ if [[ ! -x $(command -v lcov) ]]; then
       echo "C:\ProgramData\chocolatey\lib\lcov\tools\bin" >> "$GITHUB_PATH"
     else
       export PATH="/c/ProgramData/chocolatey/lib/lcov/tools/bin:$PATH"
+      lcov --version
     fi
   fi
-  lcov --version
 fi
 
 if [[ $(uname -s) =~ ^"Darwin" ]]; then
