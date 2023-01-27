@@ -27,6 +27,9 @@ jobs:
         ref: [ stable, beta ]
 
     steps:
+      - run: git config --global core.autocrlf false
+        if: runner.os == 'Windows'
+
       - uses: actions/checkout@v3
       - uses: actions/checkout@v3
         with:

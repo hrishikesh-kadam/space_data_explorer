@@ -25,3 +25,7 @@ flutter build apk \
 [Android - Adaptive icons]: https://developer.android.com/develop/ui/views/launch/icon_design_adaptive
 [Android - Create app icons with Image Asset Studio]: https://developer.android.com/studio/write/image-asset-studio
 [Android - Add multi-density vector graphics]: https://developer.android.com/studio/write/vector-asset-studio
+
+## README notes
+
+- Add `git clone --config core.autocrlf=false` for Windows
