@@ -20,6 +20,17 @@ elif [[ $(uname -s) =~ ^"MINGW" ]]; then
   fi
 fi
 
+if [[ ! -x $(command -v shellcheck) ]]; then
+  if [[ $(uname -s) =~ ^"Linux" ]]; then
+    sudo apt install shellcheck
+  elif [[ $(uname -s) =~ ^"Darwin" ]]; then
+    brew install shellcheck
+  elif [[ $(uname -s) =~ ^"MINGW" ]]; then
+    choco install shellcheck
+  fi
+  shellcheck --version
+fi
+
 check_on_path java
 JAVA_CLASS_MAJOR_VERSION=$( \
   javap -verbose java.lang.String \

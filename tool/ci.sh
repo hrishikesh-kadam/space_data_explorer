@@ -2,6 +2,8 @@
 
 set -e
 
+./tool/shellcheck.sh
+
 ./tool/create.sh
 
 ./tool/format-analyze-test.sh
