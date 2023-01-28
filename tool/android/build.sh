@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -e -o pipefail
 
 FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 

@@ -4,7 +4,7 @@
 # $2 SYSTEM_IMAGE_PACKAGE_PATH like "system-images;android-33;google_apis;x86_64"
 # $3 DEVICE_NAME like pixel_6
 
-set -e
+set -e -o pipefail
 
 ./tool/android/start-emulator-actions-prerequisite.sh
 

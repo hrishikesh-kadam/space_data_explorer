@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -e -o pipefail
 
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 if [[ $BRANCH != "dev" && \

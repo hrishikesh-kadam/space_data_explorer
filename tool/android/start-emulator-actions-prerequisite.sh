@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -e -o pipefail
 
 if [[ $GITHUB_ACTIONS == "true" ]]; then
   if [[ $ANDROID_EMULATOR_ACTIONS_PREREQUISITE != "done" ]]; then

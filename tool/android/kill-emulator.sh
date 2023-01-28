@@ -4,7 +4,7 @@
 
 # TODO(hrishikesh-kadam): Test this script on macOS and Windows
 
-set -e
+set -e -o pipefail
 
 AVD_NAME=${1-"Pixel_6_API_33"}
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-set -e
+set -e -o pipefail
 # TODO(hrishikesh-kadam): Check this on Windows
 if [[ $(uname -s) =~ ^"MINGW" ]]; then
-  set +e
+  set +e +o pipefail
 fi
 
 pushd android &> /dev/null

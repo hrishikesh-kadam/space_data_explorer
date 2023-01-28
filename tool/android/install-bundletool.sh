@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -e -o pipefail
 
 VERSION=$( \
   curl -s "https://api.github.com/repos/google/bundletool/releases/latest" \

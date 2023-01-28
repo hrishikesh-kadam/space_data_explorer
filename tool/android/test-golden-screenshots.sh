@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -e -o pipefail
 
 source ./tool/android/start-emulator.sh
 
@@ -17,13 +17,13 @@ yq -i '.flutter.assets += [strenv(GOLDEN_DIRECTORY)]' pubspec.yaml
 flutter pub get
 
 # Flaky Test
-set +e
+set +e +o pipefail
 flutter test \
   --flavor "$FLAVOR_ENV" \
   --dart-define="FLUTTER_TEST=true" \
   --dart-define="FLAVOR_ENV=$FLAVOR_ENV" \
   integration_test/golden_screenshots_test.dart
-set -e
+set -e -o pipefail
 
 git restore pubspec.yaml
 if [[ $PUBSPEC_MODIFIED == true ]]; then

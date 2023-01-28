@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
-set -e
+set -e -o pipefail
 
 source ./tool/android/start-emulator.sh
 source ./tool/constants.sh
-
-set -e
 
 FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 

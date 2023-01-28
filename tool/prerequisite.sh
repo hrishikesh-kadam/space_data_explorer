@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -e -o pipefail
 
 source ./tool/constants.sh
 source ./tool/set-logs-env.sh

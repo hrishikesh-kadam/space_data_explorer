@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -e -o pipefail
 
 source ./tool/android/start-emulator.sh
 
@@ -27,8 +27,6 @@ CONNECTED_ANDROID_TEST="app:connected${FLAVOR_ENV@u}DebugAndroidTest"
 popd &> /dev/null
 
 source ./tool/constants.sh
-
-set -e
 
 APP_PACKAGE="$APPLICATION_ID.$FLAVOR_ENV.debug"
 SCREENSHOT_DIR="app_flutter/screenshots"

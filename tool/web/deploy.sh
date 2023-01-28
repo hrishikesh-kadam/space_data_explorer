@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-source ./tool/constants.sh
+set -e -o pipefail
 
-set -e
+source ./tool/constants.sh
 
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 if [[ $BRANCH == "dev" ]]; then

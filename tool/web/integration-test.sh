@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -e -o pipefail
 
 chromedriver --port=4444 &
 # mapfile -t TARGET_PATHS < <(find integration_test -type f -name "*_test.dart")

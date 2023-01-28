@@ -4,7 +4,7 @@
 
 # $1 - AVD_NAME
 
-set -e
+set -e -o pipefail
 
 AVD_NAME=$1
 

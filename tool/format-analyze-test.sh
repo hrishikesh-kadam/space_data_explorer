@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ex
+set -ex -o pipefail
 
 dart format --output none --set-exit-if-changed .
 
