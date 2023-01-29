@@ -11,4 +11,4 @@ PRODUCT_NAME = space_data_explorer
 PRODUCT_BUNDLE_IDENTIFIER = dev.hrishikesh-kadam.flutter.space-data-explorer
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 hrishikesh-kadam.dev All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 hrishikesh-kadam.dev All rights reserved.

@@ -93,7 +93,7 @@ BEGIN
             VALUE "FileDescription", "space_data_explorer" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "space_data_explorer" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 hrishikesh-kadam.dev All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 hrishikesh-kadam.dev All rights reserved." "\0"
             VALUE "OriginalFilename", "space_data_explorer.exe" "\0"
             VALUE "ProductName", "space_data_explorer" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
