@@ -17,9 +17,9 @@ DEVICE_NAMES=(
   "Nexus 10"
 )
 LOCALE_DIRS=(
-  "./android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/phone-screenshots"
-  "./android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/tablet-screenshots"
-  "./android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/large-tablet-screenshots"
+  "android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/phone-screenshots"
+  "android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/tablet-screenshots"
+  "android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/large-tablet-screenshots"
 )
 
 # Reference https://github.com/flutter/flutter/issues/100292#issuecomment-1076927900

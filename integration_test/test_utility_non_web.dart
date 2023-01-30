@@ -37,10 +37,7 @@ Future<void> testScreenshot(
       log.fine('-> testScreenshot -> ${goldenFile.path}');
       goldenFile.writeAsBytesSync(bytes);
     } else {
-      // TODO(hrishikesh-kadam): Add support for flavor in package_plus_info
-      const flavorEnv = String.fromEnvironment('FLAVOR_ENV');
-      const goldenDirectory =
-          'android/app/src/$flavorEnv/play/listings/en-US/graphics/phone-screenshots';
+      const goldenDirectory = String.fromEnvironment('GOLDEN_DIRECTORY');
       final goldenByteData = await rootBundle.load('$goldenDirectory/$name');
       final goldenByteBuffer = goldenByteData.buffer;
       final goldenBytes = goldenByteBuffer.asUint8List(

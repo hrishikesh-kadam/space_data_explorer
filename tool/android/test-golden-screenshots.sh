@@ -2,32 +2,56 @@
 
 set -e -o pipefail
 
-source ./tool/android/start-emulator.sh
-
-FLAVOR_ENV=$(./tool/get-flavor-env.sh)
-
 if (( $(git status -s pubspec.yaml | wc -l) > 0 )); then
   PUBSPEC_MODIFIED=true
 fi
 git stash push -m "pubspec.yaml at $(date +"%d/%m/%Y %r")" pubspec.yaml
 
-export GOLDEN_DIRECTORY="android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/phone-screenshots/"
-yq -i '.flutter.assets += [strenv(GOLDEN_DIRECTORY)]' pubspec.yaml
+FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
-flutter pub get
+AVD_NAMES=(
+  "Pixel_6_API_33"
+  # "Nexus_7_API_33"
+  # "Nexus_10_API_33"
+)
+DEVICE_NAMES=(
+  "pixel_6"
+  # "Nexus 7 2013"
+  # "Nexus 10"
+)
+GOLDEN_DIRECTORIES=(
+  "android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/phone-screenshots"
+  # "android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/tablet-screenshots"
+  # "android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/large-tablet-screenshots"
+)
 
-# Flaky Test
-set +e +o pipefail
-flutter test \
-  --flavor "$FLAVOR_ENV" \
-  --dart-define="FLUTTER_TEST=true" \
-  --dart-define="FLAVOR_ENV=$FLAVOR_ENV" \
-  integration_test/golden_screenshots_test.dart
-set -e -o pipefail
+for i in {0..0}; do
 
-git restore pubspec.yaml
+  source ./tool/android/start-emulator.sh \
+    "${AVD_NAMES[i]}" \
+    "" \
+    "${DEVICE_NAMES[i]}"
+
+  export GOLDEN_DIRECTORY="${GOLDEN_DIRECTORIES[i]}/"
+  yq -i '.flutter.assets += [strenv(GOLDEN_DIRECTORY)]' pubspec.yaml
+
+  flutter pub get
+
+  # Flaky Test
+  set +e +o pipefail
+  flutter test \
+    --flavor "$FLAVOR_ENV" \
+    --dart-define="FLUTTER_TEST=true" \
+    --dart-define="GOLDEN_DIRECTORY=${GOLDEN_DIRECTORIES[i]}" \
+    integration_test/golden_screenshots_test.dart
+  set -e -o pipefail
+
+  git restore pubspec.yaml
+
+  ./tool/android/kill-emulator.sh "${AVD_NAMES[i]}"
+
+done
+
 if [[ $PUBSPEC_MODIFIED == true ]]; then
   git stash apply 0
 fi
-
-./tool/android/kill-emulator.sh
