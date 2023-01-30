@@ -86,3 +86,5 @@ jobs:
           expires: 30d
 
       - run: ./tool/android/publish.sh
+
+      - run: ./tool/android/stop-gradle.sh

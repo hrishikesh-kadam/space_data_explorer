@@ -8,9 +8,9 @@ set -e -o pipefail
 
 ./tool/android/start-emulator-actions-prerequisite.sh
 
-AVD_NAME=${1-"Pixel_6_API_33"}
-SYSTEM_IMAGE_PACKAGE_PATH=${2-"system-images;android-33;google_apis;x86_64"}
-DEVICE_NAME=${3-"pixel_6"}
+AVD_NAME=${1:-"Pixel_6_API_33"}
+SYSTEM_IMAGE_PACKAGE_PATH=${2:-"system-images;android-33;google_apis;x86_64"}
+DEVICE_NAME=${3:-"pixel_6"}
 
 if ! pgrep -f "$AVD_NAME"; then
   export AVD_ALREADY_RUNNING=false

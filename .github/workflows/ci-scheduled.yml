@@ -80,3 +80,5 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
           name: ${{ matrix.runner }}-${{ matrix.ref }}
+
+      - run: ./tool/android/stop-gradle.sh
