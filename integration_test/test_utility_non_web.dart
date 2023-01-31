@@ -37,6 +37,9 @@ Future<void> testScreenshot(
       log.fine('-> testScreenshot -> ${goldenFile.path}');
       goldenFile.writeAsBytesSync(bytes);
     } else {
+      // TODO(hrishikesh-kadam): Check if following code can be updated.
+      // https://www.youtube.com/watch?v=7nrhTdS7dHg&list=PLjxrf2q8roU3LvrdR8Hv_phLrTj0xmjnD&index=6
+      // At 12:00
       const goldenDirectory = String.fromEnvironment('GOLDEN_DIRECTORY');
       final goldenByteData = await rootBundle.load('$goldenDirectory/$name');
       final goldenByteBuffer = goldenByteData.buffer;
