@@ -1,3 +1,4 @@
+# TODO(hrishikesh-kadam): Make a pub package like very_good_analysis
 include: package:flutter_lints/flutter.yaml
 
 linter:

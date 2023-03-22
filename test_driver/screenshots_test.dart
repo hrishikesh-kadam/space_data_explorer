@@ -9,7 +9,8 @@ Future<void> main() async {
   log.fine('-> test_driver/screenshots_test.dart');
   try {
     await integrationDriver(
-      onScreenshot: (String name, List<int> bytes) async {
+      onScreenshot: (String name, List<int> bytes,
+          [Map<String, Object?>? args]) async {
         log.fine('-> onScreenshot');
         final imageFile =
             await File('screenshots/$name').create(recursive: true);
