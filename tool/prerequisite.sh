@@ -66,7 +66,9 @@ if [[ ! -x $(command -v lcov) ]]; then
     choco install lcov
     if [[ $GITHUB_ACTIONS ]]; then
       # shellcheck disable=SC2028
-      echo "C:\ProgramData\chocolatey\lib\lcov\tools\bin" >> "$GITHUB_PATH"
+      LCOV_ROOT="C:\ProgramData\chocolatey\lib\lcov\tools\bin"
+      echo "$LCOV_ROOT" >> "$GITHUB_PATH"
+      $LCOV_ROOT/lcov --version
     else
       export PATH="/c/ProgramData/chocolatey/lib/lcov/tools/bin:$PATH"
       lcov --version
