@@ -1,4 +1,4 @@
-name: ci
+name: cicd
 
 on:
   push:
@@ -18,8 +18,8 @@ defaults:
     shell: bash
 
 jobs:
-  ci:
-    name: ci on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
+  cicd:
+    name: CICD on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:

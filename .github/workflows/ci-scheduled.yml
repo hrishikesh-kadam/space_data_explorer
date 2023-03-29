@@ -27,7 +27,7 @@ defaults:
 
 jobs:
   ci:
-    name: ci on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
+    name: CI on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
