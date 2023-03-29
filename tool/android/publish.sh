@@ -24,8 +24,8 @@ debug_log "PUBLISH_TASK=$PUBLISH_TASK"
 
 pushd android &> /dev/null
 
-: ./gradlew "$PUBLISH_TASK" \
-  --artifact-dir "$BUNDLE_FILE" \
+./gradlew "$PUBLISH_TASK" \
+  --artifact-dir ".$BUNDLE_FILE" \
   --release-name "$VERSION_CODE ($VERSION_NAME)"
 
 popd &> /dev/null
