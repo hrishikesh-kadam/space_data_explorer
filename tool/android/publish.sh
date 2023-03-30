@@ -14,6 +14,7 @@ if [[ ! -s $BUNDLETOOL_PATH ]]; then
   ./tool/android/install-bundletool.sh
 fi
 BUNDLETOOL="java -jar $BUNDLETOOL_PATH"
+
 VERSION_CODE=$($BUNDLETOOL dump manifest --bundle "$BUNDLE_FILE" --xpath /manifest/@android:versionCode)
 debug_log "VERSION_CODE=$VERSION_CODE"
 VERSION_NAME=$($BUNDLETOOL dump manifest --bundle "$BUNDLE_FILE" --xpath /manifest/@android:versionName)
