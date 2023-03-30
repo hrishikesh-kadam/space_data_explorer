@@ -71,6 +71,7 @@ jobs:
           name: ${{ matrix.runner }}-${{ matrix.ref }}
 
       - run: ./tool/web/deploy.sh
+        if: matrix.ref == 'stable'
         env:
           FIREBASE_SERVICE_ACCOUNT_PROD: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
           FIREBASE_SERVICE_ACCOUNT_STAG: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STAG }}
@@ -86,5 +87,6 @@ jobs:
           expires: 30d
 
       - run: ./tool/android/publish.sh
+        if: matrix.ref == 'stable'
 
       - run: ./tool/android/stop-gradle.sh
