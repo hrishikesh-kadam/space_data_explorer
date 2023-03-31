@@ -14,10 +14,3 @@ updates:
       day: "wednesday"
       time: "12:00"
       timezone: "Asia/Kolkata"
-  - package-ecosystem: "gradle"
-    directory: "/android/app"
-    schedule:
-      interval: "weekly"
-      day: "wednesday"
-      time: "12:00"
-      timezone: "Asia/Kolkata"
