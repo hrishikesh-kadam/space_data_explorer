@@ -5,18 +5,24 @@ set -e -o pipefail
 source ./tool/constants.sh
 source ./tool/set-logs-env.sh
 
-check_on_path() {
+check_command_on_path() {
   if [[ ! -x $(command -v "$1") ]]; then
-    error_log_with_exit "$1 not found on PATH" 1
+    error_log_with_exit "$1 command not accessible from PATH" 1
+  fi
+}
+
+check_directory_on_path() {
+  if [[ ! "$PATH" =~ $1 ]]; then
+    error_log_with_exit "$1 directory not found on PATH" 1
   fi
 }
 
 if [[ $(uname -s) =~ ^"Darwin" ]]; then
-  check_on_path brew
+  check_command_on_path brew
 elif [[ $(uname -s) =~ ^"MINGW" ]]; then
-  check_on_path choco
+  check_command_on_path choco
   if [[ ! $GITHUB_ACTIONS ]]; then
-    check_on_path winget
+    check_command_on_path winget
   fi
 fi
 
@@ -31,7 +37,7 @@ if [[ ! -x $(command -v shellcheck) ]]; then
   shellcheck --version
 fi
 
-check_on_path java
+check_command_on_path java
 JAVA_CLASS_MAJOR_VERSION=$( \
   javap -verbose java.lang.String \
     | grep "major version" \
@@ -45,7 +51,7 @@ if (( "$JAVA_CLASS_MAJOR_VERSION" < 55 )); then
   exit 1
 fi
 
-check_on_path pip
+check_command_on_path pip
 PIP_INSTALL_OUTPUT=$(pip install -r requirements.txt)
 if [[ $CI ]]; then
   echo "$PIP_INSTALL_OUTPUT"
@@ -116,5 +122,15 @@ fi
 if [[ ! $CI ]]; then
   if [[ ! -s $BUNDLETOOL_PATH ]]; then
     ./tool/android/install-bundletool.sh
+  fi
+fi
+
+if [[ ! $GITHUB_ACTIONS ]]; then
+  check_command_on_path node
+  check_command_on_path npm
+  check_directory_on_path "$(npm config get prefix)/bin"
+  if [[ ! -x $(command -v firebase) ]]; then
+    npm install -g firebase-tools
+    firebase --version
   fi
 fi

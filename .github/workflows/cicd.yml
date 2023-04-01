@@ -71,7 +71,7 @@ jobs:
           files: coverage/lcov.info
           name: ${{ matrix.runner }}-${{ matrix.ref }}
 
-      - run: ./tool/web/deploy.sh
+      - run: ./tool/cd.sh
         if: matrix.ref == 'stable'
         env:
           FIREBASE_SERVICE_ACCOUNT_PROD: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
@@ -86,8 +86,5 @@ jobs:
           projectId: ${{ env.FIREBASE_PROJECT_ID }}
           channelId: ${{ env.FIREBASE_CHANNEL_ID }}
           expires: 30d
-
-      - run: ./tool/android/publish.sh
-        if: matrix.ref == 'stable'
 
       - run: ./tool/android/stop-gradle.sh
