@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../globals.dart';
 import 'base_page.dart';
-import 'nasa_source_page.dart';
+import 'nasa_source/nasa_source_page.dart';
 
 class HomePage extends BasePage {
   const HomePage({

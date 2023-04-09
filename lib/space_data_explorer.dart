@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'pages/home_page.dart';
-import 'pages/nasa_source_page.dart';
-import 'pages/neows_page.dart';
+import 'pages/nasa_source/nasa_source_page.dart';
+import 'pages/nasa_source/neows_page.dart';
 
 class SpaceDataExplorerApp extends StatelessWidget {
   SpaceDataExplorerApp({
@@ -23,11 +23,11 @@ class SpaceDataExplorerApp extends StatelessWidget {
           routes: [
             GoRoute(
               path: NasaSourcePage.pageName,
-              pageBuilder: (context, state) => const NasaSourcePage(),
+              pageBuilder: (context, state) => nasaSourcePage,
               routes: [
                 GoRoute(
                   path: NeowsPage.pageName,
-                  pageBuilder: (context, state) => const NeowsPage(),
+                  pageBuilder: (context, state) => neowsPage,
                 ),
               ],
             ),

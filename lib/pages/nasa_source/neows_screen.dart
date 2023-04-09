@@ -1,20 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../config/configure_app.dart';
-import 'base_page.dart';
-import 'nasa_source_page.dart';
-
-class NeowsPage extends BasePage {
-  const NeowsPage({
-    super.child = const NeowsScreen(),
-    super.key = const ValueKey(pageName),
-    super.name = pageName,
-    super.previousPage,
-  });
-
-  static const String pageName = 'neows';
-  static const String path = '${NasaSourcePage.path}/$pageName';
-}
+import '../../config/configure_app.dart';
 
 class NeowsScreen extends StatefulWidget {
   const NeowsScreen({super.key});
