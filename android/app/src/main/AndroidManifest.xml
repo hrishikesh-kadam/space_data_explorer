@@ -2,7 +2,7 @@
     package="dev.hrishikesh_kadam.flutter.space_data_explorer">
    <application
         android:label="${applicationLabel}"
-        android:name="${applicationName}"
+        android:name="io.flutter.embedding.android.FlutterPlayStoreSplitApplication"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -39,5 +39,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+            android:name="io.flutter.embedding.engine.deferredcomponents.DeferredComponentManager.loadingUnitMapping"
+            android:value="2:nasaSourceComponent,3:neowsComponent" />
     </application>
 </manifest>

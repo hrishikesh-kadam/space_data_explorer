@@ -29,3 +29,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  deferred-components:
+    - name: nasaSourceComponent
+      libraries:
+      - package:space_data_explorer/pages/nasa_source/nasa_source_screen.dart
+    - name: neowsComponent
+      libraries:
+      - package:space_data_explorer/pages/nasa_source/neows_screen.dart

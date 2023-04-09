@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="dev.hrishikesh_kadam.flutter.space_data_explorer.nasa_source">
+    <dist:module
+        dist:instant="false"
+        dist:title="@string/nasaSourceComponentName">
+        <dist:delivery>
+            <dist:on-demand />
+        </dist:delivery>
+        <dist:fusing dist:include="true" />
+    </dist:module>
+</manifest>

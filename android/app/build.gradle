@@ -145,6 +145,9 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    // Deferred Components / Play Feature Delivery
+    implementation "com.google.android.play:core:1.8.0"
+
     // Source - https://github.com/flutter/flutter/tree/main/packages/integration_test#android-device-testing
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
