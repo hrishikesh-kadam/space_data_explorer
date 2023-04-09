@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/main.dart' as app;
-import 'package:space_data_explorer/pages/nasa_source_page.dart';
-import 'package:space_data_explorer/pages/neows_page.dart';
+import 'package:space_data_explorer/pages/nasa_source/nasa_source_page.dart';
+import 'package:space_data_explorer/pages/nasa_source/neows_page.dart';
 import 'test_utility.dart';
 
 void main() {

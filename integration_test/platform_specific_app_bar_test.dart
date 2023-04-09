@@ -8,8 +8,10 @@ import 'package:logging/logging.dart';
 
 import 'package:space_data_explorer/main.dart' as app;
 import 'package:space_data_explorer/pages/home_page.dart';
-import 'package:space_data_explorer/pages/nasa_source_page.dart';
-import 'package:space_data_explorer/pages/neows_page.dart';
+import 'package:space_data_explorer/pages/nasa_source/nasa_source_page.dart';
+import 'package:space_data_explorer/pages/nasa_source/nasa_source_screen.dart';
+import 'package:space_data_explorer/pages/nasa_source/neows_page.dart';
+import 'package:space_data_explorer/pages/nasa_source/neows_screen.dart';
 import 'nasa_source_page_test.dart';
 import 'neows_page_test.dart';
 import 'test_utility.dart';
