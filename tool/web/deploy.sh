@@ -8,8 +8,8 @@ BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
 if [[ ! -s ./secrets/.git ]]; then
   if [[ -n $FIREBASE_SERVICE_ACCOUNT_CONTRI ]]; then
-    echo "$FIREBASE_SERVICE_ACCOUNT_CONTRI" > /tmp/firebase-service-account-contri.json
-    GOOGLE_APPLICATION_CREDENTIALS="/tmp/firebase-service-account-contri.json"
+    echo "$FIREBASE_SERVICE_ACCOUNT_CONTRI" > "/$RUNNER_TEMP/firebase-service-account-contri.json"
+    GOOGLE_APPLICATION_CREDENTIALS="/$RUNNER_TEMP/firebase-service-account-contri.json"
   fi
   FIREBASE_PROJECT_ID="${APP_NAME_KEBAB_CASE}-contri"
 elif [[ $BRANCH == "stag" ]]; then
@@ -33,7 +33,7 @@ else
   FIREBASE_CHANNEL_ID="live"
 fi
 
-if [[ $GITHUB_ACTION ]]; then
+if [[ $GITHUB_ACTIONS == "true" ]]; then
   FIREBASE="GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS firebase"
 else
   FIREBASE="firebase"
@@ -47,4 +47,4 @@ else
     --expires 30d
 fi
 
-rm -f /tmp/firebase-service-account-contri.json
+rm -f "/$RUNNER_TEMP/firebase-service-account-contri.json"

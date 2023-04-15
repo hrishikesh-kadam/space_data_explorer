@@ -28,6 +28,6 @@ lcov --list coverage/lcov.info
 
 ./tool/web/integration-test.sh
 
-if [[ ! $CI ]]; then
+if [[ ! $GITHUB_ACTIONS ]]; then
   ./tool/android/test-golden-screenshots.sh
 fi

@@ -7,7 +7,7 @@ chromedriver --port=4444 &
 TARGET_PATHS=(
   "integration_test/get_screenshots_test.dart"
 )
-if [[ $CI ]] ; then
+if [[ $GITHUB_ACTIONS == "true" ]] ; then
   DEVICE="web-server"
 else
   DEVICE="chrome"
