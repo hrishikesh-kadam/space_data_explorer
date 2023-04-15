@@ -25,6 +25,7 @@ fi
 
 if [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then
   FIREBASE_CHANNEL_ID="pr-$GITHUB_EVENT_PULL_REQUEST_NUMBER"
+  # TODO(hrishikesh-kadam): Check this log
   if [[ $GITHUB_EVENT ]]; then
     echo "GITHUB_EVENT=$GITHUB_EVENT"
   fi
