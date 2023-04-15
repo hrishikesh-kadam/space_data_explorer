@@ -62,6 +62,5 @@ jobs:
         if: matrix.ref == 'stable'
         env:
           FIREBASE_SERVICE_ACCOUNT_CONTRI: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CONTRI }}
-          GOOGLE_APPLICATION_CREDENTIALS: '/tmp/firebase-service-account-contri.json'
 
       - run: ./tool/android/stop-gradle.sh
