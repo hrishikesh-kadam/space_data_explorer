@@ -1,3 +1,4 @@
 [submodule "secrets"]
 	path = secrets
 	url = git@github.com:hrishikesh-kadam/space_data_explorer_secrets.git
+	branch = main
