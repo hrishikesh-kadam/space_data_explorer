@@ -136,5 +136,6 @@ fi
 
 if [[ ! -x $(command -v firebase) ]]; then
   npm install -g firebase-tools
+  printf "firebase "
   firebase --version
 fi

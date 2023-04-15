@@ -32,6 +32,10 @@ if [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then
   if [[ $GITHUB_EVENT_NUMBER ]]; then
     echo "GITHUB_EVENT_NUMBER=$GITHUB_EVENT_NUMBER"
   fi
+  if [[ $GITHUB_EVENT_PATH ]]; then
+    echo "GITHUB_EVENT_PATH -> "
+    cat "$GITHUB_EVENT_PATH"
+  fi
 elif [[ ! -d ./secrets ]]; then
   FIREBASE_CHANNEL_ID="$BRANCH"
 elif [[ $BRANCH != "dev" && $BRANCH != "stag" && $BRANCH != "prod" ]]; then
