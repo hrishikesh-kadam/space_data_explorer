@@ -9,7 +9,6 @@ BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 if [[ ! -d ./secrets ]]; then
   if [[ -n $FIREBASE_SERVICE_ACCOUNT_CONTRI ]]; then
     echo "$FIREBASE_SERVICE_ACCOUNT_CONTRI" > /tmp/firebase-service-account-contri.json
-    export GOOGLE_APPLICATION_CREDENTIALS="/tmp/firebase-service-account-contri.json"
   fi
   FIREBASE_PROJECT_ID="${APP_NAME_KEBAB_CASE}-contri"
 elif [[ $BRANCH == "stag" ]]; then
@@ -24,18 +23,7 @@ else
 fi
 
 if [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then
-  FIREBASE_CHANNEL_ID="pr-$GITHUB_EVENT_PULL_REQUEST_NUMBER"
-  # TODO(hrishikesh-kadam): Check this log
-  if [[ $GITHUB_EVENT ]]; then
-    echo "GITHUB_EVENT=$GITHUB_EVENT"
-  fi
-  if [[ $GITHUB_EVENT_NUMBER ]]; then
-    echo "GITHUB_EVENT_NUMBER=$GITHUB_EVENT_NUMBER"
-  fi
-  if [[ $GITHUB_EVENT_PATH ]]; then
-    echo "GITHUB_EVENT_PATH -> "
-    cat "$GITHUB_EVENT_PATH"
-  fi
+  FIREBASE_CHANNEL_ID="pr-$(jq .number "$GITHUB_EVENT_PATH")"
 elif [[ ! -d ./secrets ]]; then
   FIREBASE_CHANNEL_ID="$BRANCH"
 elif [[ $BRANCH != "dev" && $BRANCH != "stag" && $BRANCH != "prod" ]]; then
