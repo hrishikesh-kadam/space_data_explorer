@@ -125,13 +125,16 @@ if [[ ! $CI ]]; then
   fi
 fi
 
-# TODO(hrishikesh-kadam): Add chromedriver
-if [[ ! $GITHUB_ACTIONS ]]; then
-  check_command_on_path node
-  check_command_on_path npm
-  check_directory_on_path "$(npm config get prefix)/bin"
-  if [[ ! -x $(command -v firebase) ]]; then
-    npm install -g firebase-tools
-    firebase --version
-  fi
+check_command_on_path node
+check_command_on_path npm
+check_directory_on_path "$(npm config get prefix)/bin"
+
+if [[ ! -x $(command -v chromedriver) ]]; then
+  npm install -g chromedriver --detect_chromedriver_version
+  chromedriver --version
+fi
+
+if [[ ! -x $(command -v firebase) ]]; then
+  npm install -g firebase-tools
+  firebase --version
 fi

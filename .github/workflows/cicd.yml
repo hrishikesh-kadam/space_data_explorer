@@ -71,7 +71,7 @@ jobs:
           name: ${{ matrix.runner }}-${{ matrix.ref }}
 
       - run: echo "GITHUB_EVENT_PULL_REQUEST_NUMBER=${{ github.event.number }}" >> $GITHUB_ENV
-        if: github.event_name == 'pull_request'
+        if: matrix.ref == 'stable' && github.event_name == 'pull_request'
 
       - run: ./tool/cd.sh
         if: matrix.ref == 'stable'
