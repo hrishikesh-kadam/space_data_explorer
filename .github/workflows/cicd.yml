@@ -19,10 +19,7 @@ defaults:
 jobs:
   cicd:
     name: CICD on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
-    if: |
-      github.triggering_actor != 'dependabot[bot]'
-        # && (github.event_name == 'pull_request' \
-        #   && github.event.pull_request.head.repo.full_name == github.repository)
+    if: github.triggering_actor != 'dependabot[bot]'
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
