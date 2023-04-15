@@ -6,7 +6,7 @@ source ./tool/constants.sh
 
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
-if [[ ! -d ./secrets ]]; then
+if [[ ! -s ./secrets/.git ]]; then
   if [[ -n $FIREBASE_SERVICE_ACCOUNT_CONTRI ]]; then
     echo "$FIREBASE_SERVICE_ACCOUNT_CONTRI" > /tmp/firebase-service-account-contri.json
     GOOGLE_APPLICATION_CREDENTIALS="/tmp/firebase-service-account-contri.json"
@@ -25,7 +25,7 @@ fi
 
 if [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then
   FIREBASE_CHANNEL_ID="pr-$(jq .number "$GITHUB_EVENT_PATH")"
-elif [[ ! -d ./secrets ]]; then
+elif [[ ! -s ./secrets/.git ]]; then
   FIREBASE_CHANNEL_ID="$BRANCH"
 elif [[ $BRANCH != "dev" && $BRANCH != "stag" && $BRANCH != "prod" ]]; then
   FIREBASE_CHANNEL_ID="$BRANCH"

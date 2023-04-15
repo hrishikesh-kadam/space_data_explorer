@@ -10,4 +10,5 @@ set -e -o pipefail
 
 ./tool/web/build.sh
 
-./tool/android/build.sh
+# TODO(hrishikesh-kadam): Uncomment this LABEL:contri
+# ./tool/android/build.sh

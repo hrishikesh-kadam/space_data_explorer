@@ -24,7 +24,6 @@ debug_log "VERSION_NAME=$VERSION_NAME"
 
 ./tool/android/check-all-variants.sh
 
-# TODO(hrishikesh-kadam): Uncomment this LABEL:contri
-# pushd android &> /dev/null
-# ./gradlew app:build
-# popd &> /dev/null
+pushd android &> /dev/null
+./gradlew app:build
+popd &> /dev/null
