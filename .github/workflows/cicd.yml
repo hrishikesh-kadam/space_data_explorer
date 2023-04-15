@@ -10,7 +10,6 @@ on:
     branches:
       - prod
       - stag
-      - dev
   workflow_dispatch:
 
 defaults:
@@ -20,7 +19,10 @@ defaults:
 jobs:
   cicd:
     name: CICD on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
-    if: github.triggering_actor != 'dependabot[bot]'
+    if: |
+      github.triggering_actor != 'dependabot[bot]'
+        # && (github.event_name == 'pull_request' \
+        #   && github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
@@ -71,20 +73,10 @@ jobs:
           files: coverage/lcov.info
           name: ${{ matrix.runner }}-${{ matrix.ref }}
 
+      - run: echo "GITHUB_EVENT_PULL_REQUEST_NUMBER=${{ github.event.number }}" >> $GITHUB_ENV
+        if: github.event_name == 'pull_request'
+
       - run: ./tool/cd.sh
         if: matrix.ref == 'stable'
-        env:
-          FIREBASE_SERVICE_ACCOUNT_PROD: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
-          FIREBASE_SERVICE_ACCOUNT_STAG: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STAG }}
-          FIREBASE_SERVICE_ACCOUNT_DEV: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
-
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        if: matrix.ref == 'stable'
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ env.FIREBASE_SERVICE_ACCOUNT }}
-          projectId: ${{ env.FIREBASE_PROJECT_ID }}
-          channelId: ${{ env.FIREBASE_CHANNEL_ID }}
-          expires: 30d
 
       - run: ./tool/android/stop-gradle.sh

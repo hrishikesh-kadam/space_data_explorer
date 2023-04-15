@@ -8,5 +8,10 @@ fi
 
 pushd android &> /dev/null
 CURRENT_VARIANTS=$(./gradlew -q printAllVariants | csv2md)
-diff --unified --color all-variants.md <(echo "$CURRENT_VARIANTS")
+if [[ -s ../secrets/android/key.properties ]]; then
+  CHECKED_VARIANTS=../secrets/android/all-variants-members.md
+else
+  CHECKED_VARIANTS=all-variants-contributors.md
+fi
+diff --unified --color $CHECKED_VARIANTS <(echo "$CURRENT_VARIANTS")
 popd &> /dev/null

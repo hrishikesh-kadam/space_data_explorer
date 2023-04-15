@@ -1,7 +1,10 @@
 # Note: jobs of ci-contributors.yml, ci-scheduled.yml and ci-dispatched-*.yml should be in sync
-name: ci-dispatched-macos
+name: ci-contributors
 
 on:
+  pull_request:
+    branches:
+      - dev
   workflow_dispatch:
 
 defaults:
@@ -14,8 +17,8 @@ jobs:
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
-        runner: [ macos-latest ]
-        ref: [ stable ]
+        runner: [ ubuntu-latest ]
+        ref: [ stable, beta ]
 
     steps:
       - run: git config --global core.autocrlf false
@@ -54,5 +57,12 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
           name: ${{ matrix.runner }}-${{ matrix.ref }}
+
+      - run: echo "GITHUB_EVENT_PULL_REQUEST_NUMBER=${{ github.event.number }}" >> $GITHUB_ENV
+        if: github.event_name == 'pull_request'
+
+      - run: ./tool/web/deploy.sh
+        env:
+          FIREBASE_SERVICE_ACCOUNT_CONTRI: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CONTRI }}
 
       - run: ./tool/android/stop-gradle.sh

@@ -125,6 +125,7 @@ if [[ ! $CI ]]; then
   fi
 fi
 
+# TODO(hrishikesh-kadam): Add chromedriver
 if [[ ! $GITHUB_ACTIONS ]]; then
   check_command_on_path node
   check_command_on_path npm

@@ -1,4 +1,4 @@
-# Note: jobs of ci-scheduled.yml and ci-dispatched-*.yml should be in sync
+# Note: jobs of ci-contributors.yml, ci-scheduled.yml and ci-dispatched-*.yml should be in sync
 name: ci-dispatched-linux-beta
 
 on:
@@ -22,12 +22,6 @@ jobs:
         if: runner.os == 'Windows'
 
       - uses: actions/checkout@v3
-      - uses: actions/checkout@v3
-        with:
-          repository: 'hrishikesh-kadam/space_data_explorer_secrets'
-          path: 'secrets'
-          token: ${{ secrets.SECRETS_REPO_TOKEN }}
-      - run: git submodule update --init --recursive
 
       - uses: hrishikesh-kadam/setup-flutter@v1
         with:
