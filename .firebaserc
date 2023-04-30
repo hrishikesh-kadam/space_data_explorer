@@ -3,6 +3,7 @@
     "default": "space-data-explorer-dev",
     "dev": "space-data-explorer-dev",
     "stag": "space-data-explorer-stag",
-    "prod": "space-data-explorer"
+    "prod": "space-data-explorer",
+    "contri": "space-data-explorer-contri"
   }
 }

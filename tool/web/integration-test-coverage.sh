@@ -8,7 +8,7 @@ TARGET_PATHS=(
 REQUIRED_TIMES=(
   40
 )
-if [[ $CI ]] ; then
+if [[ $GITHUB_ACTIONS == "true" ]] ; then
   DEVICE="web-server"
 else
   DEVICE="chrome"

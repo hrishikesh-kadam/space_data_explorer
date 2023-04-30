@@ -1,0 +1,11 @@
+| applicationId                                                 | versionName        | signingConfig.keyAlias |
+| ------------------------------------------------------------- | ------------------ | ---------------------- |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.dev.debug    | 0.1.0-dev-debug    | AndroidDebugKey        |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.stag.debug   | 0.1.0-stag-debug   | AndroidDebugKey        |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.prod.debug   | 0.1.0-prod-debug   | AndroidDebugKey        |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.dev.release  | 0.1.0-dev-release  | AndroidDebugKey        |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.stag.release | 0.1.0-stag-release | AndroidDebugKey        |
+| dev.hrishikesh_kadam.flutter.space_data_explorer              | 0.1.0              | AndroidDebugKey        |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.dev.profile  | 0.1.0-dev-profile  | AndroidDebugKey        |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.stag.profile | 0.1.0-stag-profile | AndroidDebugKey        |
+| dev.hrishikesh_kadam.flutter.space_data_explorer.prod.profile | 0.1.0-prod-profile | AndroidDebugKey        |

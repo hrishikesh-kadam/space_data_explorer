@@ -53,7 +53,7 @@ fi
 
 check_command_on_path pip
 PIP_INSTALL_OUTPUT=$(pip install -r requirements.txt)
-if [[ $CI ]]; then
+if [[ $GITHUB_ACTIONS == "true" ]]; then
   echo "$PIP_INSTALL_OUTPUT"
 elif [[ ! $PIP_INSTALL_OUTPUT =~ "Requirement already satisfied" ]]; then
   echo "$PIP_INSTALL_OUTPUT"
@@ -70,7 +70,7 @@ if [[ ! -x $(command -v lcov) ]]; then
     lcov --version
   elif [[ $(uname -s) =~ ^"MINGW" ]]; then
     choco install lcov
-    if [[ $GITHUB_ACTIONS ]]; then
+    if [[ $GITHUB_ACTIONS == "true" ]]; then
       # shellcheck disable=SC2028
       LCOV_ROOT="C:\ProgramData\chocolatey\lib\lcov\tools\bin"
       echo "$LCOV_ROOT" >> "$GITHUB_PATH"
@@ -93,7 +93,7 @@ if [[ ! -x $(command -v jq) ]]; then
   elif [[ $(uname -s) =~ ^"Darwin" ]]; then
     brew install jq
   elif [[ $(uname -s) =~ ^"MINGW" ]]; then
-    if [[ $GITHUB_ACTIONS ]]; then
+    if [[ $GITHUB_ACTIONS == "true" ]]; then
       choco install jq
     else
       winget install jq
@@ -110,7 +110,7 @@ if [[ ! -x $(command -v yq) ]]; then
   elif [[ $(uname -s) =~ ^"Darwin" ]]; then
     brew install yq
   elif [[ $(uname -s) =~ ^"MINGW" ]]; then
-    if [[ $GITHUB_ACTIONS ]]; then
+    if [[ $GITHUB_ACTIONS == "true" ]]; then
       choco install yq
     else
       winget install yq
@@ -119,18 +119,27 @@ if [[ ! -x $(command -v yq) ]]; then
   yq --version
 fi
 
-if [[ ! $CI ]]; then
+if [[ ! $GITHUB_ACTIONS ]]; then
   if [[ ! -s $BUNDLETOOL_PATH ]]; then
     ./tool/android/install-bundletool.sh
   fi
 fi
 
-if [[ ! $GITHUB_ACTIONS ]]; then
-  check_command_on_path node
-  check_command_on_path npm
-  check_directory_on_path "$(npm config get prefix)/bin"
-  if [[ ! -x $(command -v firebase) ]]; then
-    npm install -g firebase-tools
-    firebase --version
-  fi
+check_command_on_path node
+check_command_on_path npm
+NPM_GLOBAL_PREFIX="$(npm config get prefix)"
+if [[ $(uname -s) =~ ^"MINGW" ]]; then
+  NPM_GLOBAL_PREFIX="$(cygpath "$NPM_GLOBAL_PREFIX")"
+fi
+check_directory_on_path "$NPM_GLOBAL_PREFIX/bin"
+
+if [[ ! -x $(command -v chromedriver) ]]; then
+  npm install -g chromedriver --detect_chromedriver_version
+  chromedriver --version
+fi
+
+if [[ ! -x $(command -v firebase) ]]; then
+  npm install -g firebase-tools
+  printf "firebase "
+  firebase --version
 fi

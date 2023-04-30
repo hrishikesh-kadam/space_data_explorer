@@ -1,5 +1,5 @@
-# Note: jobs of ci-scheduled.yml and ci-dispatched-*.yml should be in sync
-name: ci-dispatched-linux-beta
+# Note: jobs of ci-contributors.yml, ci-schedule.yml and ci-dispatch-*.yml should be in sync
+name: ci-dispatch-macos
 
 on:
   workflow_dispatch:
@@ -14,20 +14,14 @@ jobs:
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
-        runner: [ ubuntu-latest ]
-        ref: [ beta ]
+        runner: [ macos-latest ]
+        ref: [ stable ]
 
     steps:
       - run: git config --global core.autocrlf false
         if: runner.os == 'Windows'
 
       - uses: actions/checkout@v3
-      - uses: actions/checkout@v3
-        with:
-          repository: 'hrishikesh-kadam/space_data_explorer_secrets'
-          path: 'secrets'
-          token: ${{ secrets.SECRETS_REPO_TOKEN }}
-      - run: git submodule update --init --recursive
 
       - uses: hrishikesh-kadam/setup-flutter@v1
         with:
