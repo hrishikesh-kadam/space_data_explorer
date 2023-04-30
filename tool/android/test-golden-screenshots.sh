@@ -4,8 +4,8 @@ set -e -o pipefail
 
 if (( $(git status -s pubspec.yaml | wc -l) > 0 )); then
   PUBSPEC_MODIFIED=true
+  git stash push -m "pubspec.yaml at $(date +"%d/%m/%Y %r")" pubspec.yaml
 fi
-git stash push -m "pubspec.yaml at $(date +"%d/%m/%Y %r")" pubspec.yaml
 
 FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
@@ -18,6 +18,11 @@ DEVICE_NAMES=(
   "pixel_6"
   # "Nexus 7 2013"
   # "Nexus 10"
+)
+DEVICE_IDS=(
+  "sdk gphone x86 64"
+  # "sdk gphone x86 64"
+  # "sdk gphone x86 64"
 )
 GOLDEN_DIRECTORIES=(
   "android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/phone-screenshots"
@@ -40,6 +45,7 @@ for i in {0..0}; do
   # Flaky Test
   set +e +o pipefail
   flutter test \
+    --device-id "${DEVICE_IDS[i]}" \
     --flavor "$FLAVOR_ENV" \
     --dart-define="FLUTTER_TEST=true" \
     --dart-define="GOLDEN_DIRECTORY=${GOLDEN_DIRECTORIES[i]}" \
