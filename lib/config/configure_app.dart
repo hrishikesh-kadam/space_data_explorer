@@ -14,10 +14,12 @@ void configureApp() {
 AppBar getPlatformSpecificAppBar({
   required BuildContext context,
   Widget? title,
+  PreferredSizeWidget? bottom,
 }) {
   return platform.getPlatformSpecificAppBar(
     context: context,
     title: title,
+    bottom: bottom,
   );
 }
 

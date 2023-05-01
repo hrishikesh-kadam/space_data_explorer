@@ -2,33 +2,64 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "space_data_explorer",
-      "request": "launch",
-      "type": "dart"
-    },
-    {
-      "name": "space_data_explorer (profile mode)",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "profile"
-    },
-    {
-      "name": "space_data_explorer (release mode)",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "release"
-    },
-    {
-      "name": "Flutter (Chrome)",
+      "name": "flutter run -d chrome",
       "deviceId": "chrome",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "Flutter (Android)",
+      "name": "flutter run -d chrome --profile",
+      "deviceId": "chrome",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "flutter run -d chrome --release",
+      "deviceId": "chrome",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "flutter run -d linux",
+      "deviceId": "linux",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "flutter run -d linux --profile",
+      "deviceId": "linux",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "flutter run -d linux --release",
+      "deviceId": "linux",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "flutter run -d emulator-5554",
       "deviceId": "emulator-5554",
       "request": "launch",
       "type": "dart"
+    },
+    {
+      "name": "flutter run -d emulator-5554 --profile",
+      "deviceId": "emulator-5554",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "flutter run -d emulator-5554 --release",
+      "deviceId": "emulator-5554",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
     }
   ]
 }

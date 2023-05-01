@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../config/configure_app.dart';
 import '../../globals.dart';
+import 'nasa_source_page.dart';
 import 'neows_page.dart';
 
 class NasaSourceScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _NasaSourceScreenState extends State<NasaSourceScreen> {
     return Scaffold(
       appBar: getPlatformSpecificAppBar(
         context: context,
-        title: const Text('NASA Source Screen'),
+        title: const Text(NasaSourcePage.displayName),
       ),
       body: TextButton(
         child: const Text(NeowsPage.pageName),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../config/configure_app.dart';
+import 'neows_page.dart';
 
 class NeowsScreen extends StatefulWidget {
   const NeowsScreen({super.key});
@@ -15,7 +16,7 @@ class _NeowsScreenState extends State<NeowsScreen> {
     return Scaffold(
       appBar: getPlatformSpecificAppBar(
         context: context,
-        title: const Text('NeoWs Screen'),
+        title: const Text(NeowsPage.displayName),
       ),
     );
   }

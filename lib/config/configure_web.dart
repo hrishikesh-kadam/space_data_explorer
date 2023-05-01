@@ -29,6 +29,7 @@ void configureUrlStrategy() {
 AppBar getPlatformSpecificAppBar({
   required BuildContext context,
   Widget? title,
+  PreferredSizeWidget? bottom,
 }) {
   return AppBar(
     title: title,
@@ -54,5 +55,6 @@ AppBar getPlatformSpecificAppBar({
         }
       },
     ),
+    bottom: bottom,
   );
 }
