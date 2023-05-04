@@ -13,18 +13,19 @@ void main() {
 
   testWidgets('Golden Screenshots Integration Test',
       (WidgetTester tester) async {
+    const imageNameSuffix = String.fromEnvironment('IMAGE_NAME_SUFFIX');
     app.main(
       debugShowCheckedModeBanner: false,
     );
-    await testScreenshot('1.png', tester, binding);
+    await testScreenshot('1$imageNameSuffix.png', tester, binding);
 
     final nasaSourceTextButton =
         find.widgetWithText(TextButton, NasaSourcePage.pageName);
     await tester.tap(nasaSourceTextButton);
-    await testScreenshot('2.png', tester, binding);
+    await testScreenshot('2$imageNameSuffix.png', tester, binding);
 
     final neowsTextButton = find.widgetWithText(TextButton, NeowsPage.pageName);
     await tester.tap(neowsTextButton);
-    await testScreenshot('3.png', tester, binding);
+    await testScreenshot('3$imageNameSuffix.png', tester, binding);
   });
 }

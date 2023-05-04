@@ -11,3 +11,7 @@ GeneratedPluginRegistrant.java
 key.properties
 **/*.keystore
 **/*.jks
+
+fastlane/report.xml
+fastlane/dev/metadata/android/en-US/changelogs/default.txt
+fastlane/stag/metadata/android/en-US/changelogs/default.txt

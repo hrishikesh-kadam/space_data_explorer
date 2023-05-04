@@ -9,7 +9,7 @@ FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
 pushd android &> /dev/null
 
-FLUTTER_TEST_ARG=$(printf 'FLUTTER_TEST=true' | base64)
+FLUTTER_TEST_ARG=$(printf "FLUTTER_TEST=true" | base64)
 INSTALL_APP="app:install${FLAVOR_ENV@u}Debug"
 INSTALL_ANDROID_TEST="app:install${FLAVOR_ENV@u}DebugAndroidTest"
 
@@ -27,12 +27,13 @@ popd &> /dev/null
 APP_PACKAGE="$APPLICATION_ID.$FLAVOR_ENV.debug"
 SCREENSHOT_DIR="app_flutter/screenshots"
 REMOTE_DIR="/data/user/0/$APP_PACKAGE/$SCREENSHOT_DIR"
-LOCALE_DIR="./android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/phone-screenshots"
+LOCAL_DIR="./android/fastlane/$FLAVOR_ENV/metadata/android/en-US/images/phoneScreenshots"
 ACCESSIBLE_DIR="/storage/emulated/0/Download/$APP_NAME_KEBAB_CASE/screenshots"
+IMAGE_NAME_SUFFIX="_en-US"
 SCREENSHOTS=(
-  "1.png"
-  "2.png"
-  "3.png"
+  "1"
+  "2"
+  "3"
 )
 
 if adb root | grep "adbd cannot run as root in production builds"; then
@@ -50,7 +51,8 @@ else
 fi
 
 for SCREENSHOT in "${SCREENSHOTS[@]}"; do
-  adb push "$LOCALE_DIR/$SCREENSHOT" "$REMOTE_DIR"
+  SCREENSHOT_FILE="${LOCAL_DIR}/${SCREENSHOT}${IMAGE_NAME_SUFFIX}.png"
+  adb push "$SCREENSHOT_FILE" "$REMOTE_DIR"
 done
 
 if adb root | grep "adbd cannot run as root in production builds"; then

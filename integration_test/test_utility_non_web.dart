@@ -24,7 +24,7 @@ Future<void> testScreenshot(
     await binding.convertFlutterSurfaceToImage();
     isSurfaceRendered = true;
     const updateGoldens = bool.fromEnvironment('UPDATE_GOLDENS');
-    log.fine('-> testScreenshot -> UPDATE_GOLDENS=$updateGoldens');
+    log.info('-> testScreenshot -> UPDATE_GOLDENS=$updateGoldens');
   }
   await tester.pumpAndSettle();
   final List<int> bytes = await binding.takeScreenshot(name);
@@ -34,12 +34,15 @@ Future<void> testScreenshot(
   final goldenFile = File('${directory.path}/$name');
   if (Platform.isAndroid) {
     if (const bool.fromEnvironment('UPDATE_GOLDENS')) {
-      log.fine('-> testScreenshot -> ${goldenFile.path}');
+      log.info('-> testScreenshot -> ${goldenFile.path}');
       goldenFile.writeAsBytesSync(bytes);
     } else {
       // TODO(hrishikesh-kadam): Check if following code can be updated.
       // https://www.youtube.com/watch?v=7nrhTdS7dHg&list=PLjxrf2q8roU3LvrdR8Hv_phLrTj0xmjnD&index=6
       // At 12:00
+      if (!const bool.hasEnvironment('GOLDEN_DIRECTORY')) {
+        throw Exception('Dart Environment variable GOLDEN_DIRECTORY missing');
+      }
       const goldenDirectory = String.fromEnvironment('GOLDEN_DIRECTORY');
       final goldenByteData = await rootBundle.load('$goldenDirectory/$name');
       final goldenByteBuffer = goldenByteData.buffer;
@@ -49,7 +52,7 @@ Future<void> testScreenshot(
       await expectLater(bytes, matchesGoldenFile(goldenFile.uri));
     }
   } else {
-    log.fine('-> testScreenshot -> ${goldenFile.path}');
+    log.info('-> testScreenshot -> ${goldenFile.path}');
     await expectLater(bytes, matchesGoldenFile(goldenFile.uri));
   }
 }

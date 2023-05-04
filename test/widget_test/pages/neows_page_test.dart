@@ -15,7 +15,7 @@ void main() {
     ));
     final int count = await tester.pumpAndSettle();
     configureLogging();
-    log.fine('${NeowsPage.path} pumped for $count');
+    log.info('${NeowsPage.path} pumped for $count');
     expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
     expect(find.byType(NasaSourceScreen, skipOffstage: false), findsOneWidget);
     expect(find.byType(NeowsScreen), findsOneWidget);

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# $1 ROLE (--minimal / --contributor / --member), defaults to --member
+
 set -e -o pipefail
 
 source ./tool/constants.sh
@@ -16,6 +18,9 @@ check_directory_on_path() {
     error_log_with_exit "$1 directory not found on PATH" 1
   fi
 }
+
+ROLE=${1//--}
+: "${ROLE:=member}"
 
 if [[ $(uname -s) =~ ^"Darwin" ]]; then
   check_command_on_path brew
@@ -130,16 +135,37 @@ check_command_on_path npm
 NPM_GLOBAL_PREFIX="$(npm config get prefix)"
 if [[ $(uname -s) =~ ^"MINGW" ]]; then
   NPM_GLOBAL_PREFIX="$(cygpath "$NPM_GLOBAL_PREFIX")"
+  # TODO(hrishikesh-kadam): Check this on Windows
+else
+  check_directory_on_path "$NPM_GLOBAL_PREFIX/bin"
 fi
-check_directory_on_path "$NPM_GLOBAL_PREFIX/bin"
 
 if [[ ! -x $(command -v chromedriver) ]]; then
   npm install -g chromedriver --detect_chromedriver_version
   chromedriver --version
 fi
 
-if [[ ! -x $(command -v firebase) ]]; then
-  npm install -g firebase-tools
-  printf "firebase "
-  firebase --version
+if [[ $ROLE == "contributor" || $ROLE == "member" ]]; then
+  if [[ ! -x $(command -v firebase) ]]; then
+    npm install -g firebase-tools
+    printf "firebase "
+    firebase --version
+  fi
+fi
+
+if [[ $ROLE == "member" ]]; then
+  check_command_on_path ruby
+  check_command_on_path gem
+  check_command_on_path bundle
+  
+  pushd android &> /dev/null
+  BUNDLE_CHECK_OUTPUT=$(bundle check) || true
+  if [[ $BUNDLE_CHECK_OUTPUT != "The Gemfile's dependencies are satisfied" ]]; then
+    bundle install
+  else
+    if [[ $GITHUB_ACTIONS == "true" ]]; then
+      echo "$BUNDLE_CHECK_OUTPUT"
+    fi
+  fi
+  popd &> /dev/null
 fi

@@ -1,0 +1,1 @@
+json_key_file("../secrets/android/service-account-credentials/fastlane-key.json")

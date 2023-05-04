@@ -24,10 +24,15 @@ DEVICE_IDS=(
   # "sdk gphone x86 64"
   # "sdk gphone x86 64"
 )
+IMAGE_NAME_SUFFIXES=(
+  "_en-US"
+  # "_en-US"
+  # "_en-US"
+)
 GOLDEN_DIRECTORIES=(
-  "android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/phone-screenshots"
-  # "android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/tablet-screenshots"
-  # "android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/large-tablet-screenshots"
+  "android/fastlane/$FLAVOR_ENV/metadata/android/en-US/images/phoneScreenshots"
+  # "android/fastlane/$FLAVOR_ENV/metadata/android/en-US/images/sevenInchScreenshots"
+  # "android/fastlane/$FLAVOR_ENV/metadata/android/en-US/images/tenInchScreenshots"
 )
 
 for i in {0..0}; do
@@ -48,6 +53,7 @@ for i in {0..0}; do
     --device-id "${DEVICE_IDS[i]}" \
     --flavor "$FLAVOR_ENV" \
     --dart-define="FLUTTER_TEST=true" \
+    --dart-define="IMAGE_NAME_SUFFIX=${IMAGE_NAME_SUFFIXES[i]}" \
     --dart-define="GOLDEN_DIRECTORY=${GOLDEN_DIRECTORIES[i]}" \
     integration_test/golden_screenshots_test.dart
   set -e -o pipefail

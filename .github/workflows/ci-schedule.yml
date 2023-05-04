@@ -1,4 +1,4 @@
-# Note: jobs of ci-contributors.yml, ci-schedule.yml and ci-dispatch-*.yml should be in sync
+# Note: jobs of ci-contributors.yml, ci-schedule.yml and ci-dispatch.yml should be in sync
 name: ci-schedule
 
 on:
@@ -56,7 +56,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - run: ./tool/prerequisite.sh
+      - run: ./tool/prerequisite.sh --minimal
 
       # https://github.com/actions/cache/blob/main/examples.md#java---gradle
       - name: Cache Gradle

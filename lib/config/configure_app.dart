@@ -28,6 +28,8 @@ void configureUrlStrategy() {
 }
 
 void configureLogging() {
+  // TODO(hrishikesh-kadam): Make this idempotent
+
   // Source - https://github.com/flutter/flutter/blob/master/packages/flutter_tools/lib/src/base/terminal.dart
   const String red = '\u001b[31m';
   const String green = '\u001b[32m';

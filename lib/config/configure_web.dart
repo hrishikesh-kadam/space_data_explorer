@@ -36,14 +36,14 @@ AppBar getPlatformSpecificAppBar({
     leading: BackButton(
       onPressed: () {
         final html.History history = html.window.history;
-        log.fine('history.length = ${history.length}');
+        log.info('history.length = ${history.length}');
         if (history.length <= 1) {
           GoRouter.of(context).go(HomePage.path);
         } else {
           Map state = history.state;
           if (state.containsKey('serialCount')) {
             final int serialCount = state['serialCount'];
-            log.fine('serialCount = $serialCount');
+            log.info('serialCount = $serialCount');
             if (serialCount == 0) {
               GoRouter.of(context).go(HomePage.path);
             } else {

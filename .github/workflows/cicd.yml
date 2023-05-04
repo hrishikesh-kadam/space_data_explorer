@@ -62,6 +62,13 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Setup Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+          working-directory: android
+
       - run: ./tool/prerequisite.sh
 
       # https://github.com/actions/cache/blob/main/examples.md#java---gradle

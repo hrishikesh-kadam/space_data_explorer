@@ -14,10 +14,10 @@ void checkHistoryLengthAndSerialCount(
   final html.History history = html.window.history;
   Map state = history.state;
 
-  log.fine('-> history.length = ${history.length}');
-  log.fine('-> state[\'serialCount\'] = ${state['serialCount']}');
-  log.fine('-> historyLength = $historyLength');
-  log.fine('-> serialCount = $serialCount');
+  log.info('-> history.length = ${history.length}');
+  log.info('-> state[\'serialCount\'] = ${state['serialCount']}');
+  log.info('-> historyLength = $historyLength');
+  log.info('-> serialCount = $serialCount');
 
   // TODO(hrishikesh-kadam): Fails after `All tests passed!`
   // expect(history.length, historyLength);

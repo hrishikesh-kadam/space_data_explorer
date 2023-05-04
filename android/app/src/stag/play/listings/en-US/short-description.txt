@@ -1,1 +1,0 @@
-An app to explore space data from various sources.

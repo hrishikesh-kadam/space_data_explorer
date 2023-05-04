@@ -1,11 +1,28 @@
 # Note: jobs of ci-contributors.yml, ci-schedule.yml and ci-dispatch.yml should be in sync
-name: ci-contributors
+name: ci-dispatch
 
 on:
-  pull_request:
-    branches:
-      - dev
   workflow_dispatch:
+    inputs:
+      runner:
+        description: 'Runner OS'
+        required: true
+        default: 'ubuntu-latest'
+        type: choice
+        options:
+          - 'ubuntu-latest'
+          - 'macos-latest'
+          - 'windows-latest'
+          - 'macOS-13'
+      ref:
+        description: 'Flutter channel, version or git reference'
+        required: true
+        default: 'stable'
+        type: choice
+        options:
+          - 'stable'
+          - 'beta'
+          - 'master'
 
 defaults:
   run:
@@ -13,13 +30,8 @@ defaults:
 
 jobs:
   ci:
-    name: CI on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
-    if: github.triggering_actor != 'dependabot[bot]'
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      matrix:
-        runner: [ ubuntu-latest ]
-        ref: [ stable, beta ]
+    name: CI on ${{ inputs.runner }} using Flutter ${{ inputs.ref }}
+    runs-on: ${{ inputs.runner }}
 
     steps:
       - run: git config --global core.autocrlf false
@@ -29,7 +41,7 @@ jobs:
 
       - uses: hrishikesh-kadam/setup-flutter@v1
         with:
-          ref: ${{ matrix.ref }}
+          ref: ${{ inputs.ref }}
 
       - uses: actions/setup-java@v3
         with:
@@ -40,7 +52,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - run: ./tool/prerequisite.sh --contributor
+      - run: ./tool/prerequisite.sh --minimal
 
       # https://github.com/actions/cache/blob/main/examples.md#java---gradle
       - name: Cache Gradle
@@ -49,7 +61,7 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: gradle-${{ matrix.runner }}-flutter-${{ matrix.ref }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          key: gradle-${{ inputs.runner }}-flutter-${{ inputs.ref }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
 
       - run: ./tool/ci.sh
 
@@ -57,11 +69,6 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
-          name: ${{ matrix.runner }}-${{ matrix.ref }}
-
-      - run: ./tool/web/deploy.sh
-        if: matrix.ref == 'stable'
-        env:
-          FIREBASE_SERVICE_ACCOUNT_CONTRI: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CONTRI }}
+          name: ${{ inputs.runner }}-${{ inputs.ref }}
 
       - run: ./tool/android/stop-gradle.sh

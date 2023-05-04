@@ -21,7 +21,7 @@ AppBar getPlatformSpecificAppBar({
     leading: BackButton(
       onPressed: () {
         final extraObject = GoRouterState.of(context).extra;
-        Level logLevel = flutterTest ? Level.FINE : Level.SEVERE;
+        Level logLevel = flutterTest ? Level.INFO : Level.SEVERE;
         if (extraObject == null) {
           GoRouter.of(context).go(HomePage.path);
         } else if (extraObject is Map) {

@@ -16,15 +16,22 @@ DEVICE_NAMES=(
   "Nexus 7 2013"
   "Nexus 10"
 )
-LOCALE_DIRS=(
-  "android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/phone-screenshots"
-  "android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/tablet-screenshots"
-  "android/app/src/$FLAVOR_ENV/play/listings/en-US/graphics/large-tablet-screenshots"
+IMAGE_NAME_SUFFIXES=(
+  "_en-US"
+  "_en-US"
+  "_en-US"
+)
+GOLDEN_DIRECTORIES=(
+  "android/fastlane/$FLAVOR_ENV/metadata/android/en-US/images/phoneScreenshots"
+  "android/fastlane/$FLAVOR_ENV/metadata/android/en-US/images/sevenInchScreenshots"
+  "android/fastlane/$FLAVOR_ENV/metadata/android/en-US/images/tenInchScreenshots"
 )
 
-# Reference https://github.com/flutter/flutter/issues/100292#issuecomment-1076927900
-FLUTTER_TEST_ARG=$(printf 'FLUTTER_TEST=true' | base64)
-UPDATE_GOLDENS_ARG=$(printf 'UPDATE_GOLDENS=true' | base64)
+# Reference - 
+# https://docs.flutter.dev/testing/integration-tests
+# https://github.com/flutter/flutter/issues/100292#issuecomment-1076927900
+FLUTTER_TEST_ARG=$(printf "FLUTTER_TEST=true" | base64)
+UPDATE_GOLDENS_ARG=$(printf "UPDATE_GOLDENS=true" | base64)
 CONNECTED_ANDROID_TEST="app:connected${FLAVOR_ENV@u}DebugAndroidTest"
 
 APP_PACKAGE="$APPLICATION_ID.$FLAVOR_ENV.debug"
@@ -32,9 +39,9 @@ SCREENSHOT_DIR="app_flutter/screenshots"
 REMOTE_DIR="/data/user/0/$APP_PACKAGE/$SCREENSHOT_DIR"
 ACCESSIBLE_DIR="/storage/emulated/0/Download/$APP_NAME_KEBAB_CASE/screenshots"
 SCREENSHOTS=(
-  "1.png"
-  "2.png"
-  "3.png"
+  "1"
+  "2"
+  "3"
 )
 
 for i in {0..2}; do
@@ -48,19 +55,21 @@ for i in {0..2}; do
   #   --flavor "$FLAVOR_ENV" \
   #   --dart-define="FLUTTER_TEST=true" \
   #   --dart-define="UPDATE_GOLDENS=true" \
+  #   --dart-define="IMAGE_NAME_SUFFIX=${IMAGE_NAME_SUFFIXES[i]}" \
   #   integration_test/golden_screenshots_test.dart
 
   pushd android &> /dev/null
 
+  IMAGE_NAME_SUFFIX_ARG=$(printf "IMAGE_NAME_SUFFIX=%s" "${IMAGE_NAME_SUFFIXES[i]}" | base64)
+
   ./gradlew "$CONNECTED_ANDROID_TEST" \
-    -Pdart-defines="$FLUTTER_TEST_ARG" \
-    -Pdart-defines="$UPDATE_GOLDENS_ARG" \
+    -Pdart-defines="$FLUTTER_TEST_ARG,$UPDATE_GOLDENS_ARG,$IMAGE_NAME_SUFFIX_ARG" \
     -Ptarget="$(pwd)/../integration_test/golden_screenshots_test.dart"
 
   popd &> /dev/null
 
-  LOCALE_DIR=${LOCALE_DIRS[i]}
-  mkdir -p "$LOCALE_DIR"
+  LOCAL_DIR=${GOLDEN_DIRECTORIES[i]}
+  mkdir -p "$LOCAL_DIR"
 
   if adb root | grep "adbd cannot run as root in production builds"; then
     # Tested on Samsung Galaxy S20 FE 5G API 33
@@ -79,7 +88,8 @@ for i in {0..2}; do
   fi
 
   for SCREENSHOT in "${SCREENSHOTS[@]}"; do
-    adb pull "$REMOTE_DIR/$SCREENSHOT" "$LOCALE_DIR"
+    SCREENSHOT_FILE="${REMOTE_DIR}/${SCREENSHOT}${IMAGE_NAME_SUFFIXES[i]}.png"
+    adb pull "$SCREENSHOT_FILE" "$LOCAL_DIR"
   done
 
   ./tool/android/kill-emulator.sh "${AVD_NAMES[i]}"
