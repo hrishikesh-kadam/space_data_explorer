@@ -16,6 +16,9 @@ defaults:
   run:
     shell: bash
 
+# TODO(hrishikesh-kadam): Try to use read-all in all workflows
+# permissions: read-all
+
 jobs:
   check-allow-cicd:
     name: Check if CICD job is to be allowed
@@ -42,6 +45,8 @@ jobs:
         if: runner.os == 'Windows'
 
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: '10'
       - uses: actions/checkout@v3
         with:
           repository: 'hrishikesh-kadam/space_data_explorer_secrets'
