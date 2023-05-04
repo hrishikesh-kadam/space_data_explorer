@@ -36,7 +36,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - run: ./tool/prerequisite.sh
+      - run: ./tool/prerequisite.sh --minimal
 
       # https://github.com/actions/cache/blob/main/examples.md#java---gradle
       - name: Cache Gradle

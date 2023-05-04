@@ -1,6 +1,5 @@
 plugins {
     id 'com.github.ben-manes.versions' version '0.46.0'
-    id 'com.github.triplet.play' version '3.8.1' apply false
 }
 
 def localProperties = new Properties()
@@ -184,12 +183,14 @@ task("printAllVariants") {
     }
 }
 
-if (keyPropertiesFile.exists()) {
-    apply plugin: "com.github.triplet.play"
-    play {
-        serviceAccountCredentials.set(file(keyProperties['gppServiceAccountKeyFile']))
-        track.set("internal")
-        resolutionStrategy.set(com.github.triplet.gradle.androidpublisher.ResolutionStrategy.AUTO)
+task("getApplicationId") {
+    doLast {
+        android.applicationVariants.all { variant ->
+            if (variant.name == variantName) {
+                print variant.applicationId
+                return
+            }
+        }
     }
 }
 
