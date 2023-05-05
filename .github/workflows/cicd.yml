@@ -16,9 +16,6 @@ defaults:
   run:
     shell: bash
 
-# TODO(hrishikesh-kadam): Try to use read-all in all workflows
-# permissions: read-all
-
 jobs:
   check-allow-cicd:
     name: Check if CICD job is to be allowed
