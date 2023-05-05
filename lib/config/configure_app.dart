@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -27,8 +29,14 @@ void configureUrlStrategy() {
   platform.configureUrlStrategy();
 }
 
+// To maintain idempotency of the configureLogging()
+// Otherwise if called twice or more, log are printed that many times
+StreamSubscription<LogRecord>? rootLoggerSubscription;
+
 void configureLogging() {
-  // TODO(hrishikesh-kadam): Make this idempotent
+  if (rootLoggerSubscription != null) {
+    return;
+  }
 
   // Source - https://github.com/flutter/flutter/blob/master/packages/flutter_tools/lib/src/base/terminal.dart
   const String red = '\u001b[31m';
@@ -39,7 +47,7 @@ void configureLogging() {
 
   // Mandatory steps - https://pub.dev/packages/logging
   Logger.root.level = Level.ALL;
-  Logger.root.onRecord.listen((record) {
+  rootLoggerSubscription = Logger.root.onRecord.listen((record) {
     if (kDebugMode) {
       late final String color;
       late final String emoji;
