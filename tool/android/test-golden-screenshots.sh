@@ -5,6 +5,7 @@ set -e -o pipefail
 if (( $(git status -s pubspec.yaml | wc -l) > 0 )); then
   PUBSPEC_MODIFIED=true
   git stash push -m "pubspec.yaml at $(date +"%d/%m/%Y %r")" pubspec.yaml
+  git stash apply 0
 fi
 
 FLAVOR_ENV=$(./tool/get-flavor-env.sh)
@@ -59,11 +60,10 @@ for i in {0..0}; do
   set -e -o pipefail
 
   git restore pubspec.yaml
+  if [[ $PUBSPEC_MODIFIED == true ]]; then
+    git stash apply 0
+  fi
 
   ./tool/android/kill-emulator.sh "${AVD_NAMES[i]}"
 
 done
-
-if [[ $PUBSPEC_MODIFIED == true ]]; then
-  git stash apply 0
-fi
