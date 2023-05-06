@@ -33,6 +33,7 @@ if (flutterVersionName == null) {
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+// https://github.com/flutter/flutter/blob/stable/packages/flutter_tools/gradle/flutter.gradle
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply from: '../constants.gradle'
 
@@ -145,17 +146,25 @@ android {
     }
 }
 
+// https://developer.android.com/build/extend-agp#variant-api-artifacts-tasks
+// https://developer.android.com/build/build-variants#filter-variants
+// https://developer.android.com/reference/tools/gradle-api/7.4/com/android/build/api/variant/AndroidComponentsExtension
 androidComponents {
     def all = selector().all()
-    onVariants(all) { variant -> 
+    onVariants(all) { variant ->
         if(variant.flavorName == "prod" && variant.buildType == "release") {
+            // https://android.googlesource.com/platform/tools/base/+/studio-main/build-system/gradle-core/src/main/java/com/android/build/api/component/analytics/AnalyticsEnabledApplicationVariant.kt
             variant.applicationId.set(android.defaultConfig.applicationId)
             variant.outputs.each { output ->
+                // https://android.googlesource.com/platform/tools/base/+/studio-master-dev/build-system/gradle-core/src/main/java/com/android/build/api/variant/impl/VariantOutputImpl.kt
                 if (output.versionName.get() == android.defaultConfig.versionName + "-prod-release") {
                     output.versionName.set(android.defaultConfig.versionName)
                 }
             }
         }
+        // variant.outputs.each { output ->
+        //     output.outputFileName.set(constants.appNameSnakeCase + "-" + output.versionName.get() + ".apk")
+        // }
     }
 }
 
@@ -175,6 +184,7 @@ dependencies {
 task("printAllVariants") {
     doLast {
         println "applicationId,versionName,signingConfig.keyAlias"
+        // https://developer.android.com/build/gradle-tips#create-different-versions-of-your-app
         android.applicationVariants.all { variant ->
             println variant.applicationId + "," \
                 + variant.versionName + "," \
