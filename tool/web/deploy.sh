@@ -24,7 +24,7 @@ else
 fi
 
 if [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then
-  FIREBASE_CHANNEL_ID="pr-$(jq .number "$GITHUB_EVENT_PATH")"
+  FIREBASE_CHANNEL_ID="pr-$(jq -r .number "$GITHUB_EVENT_PATH")"
 elif [[ ! -s ./secrets/.git ]]; then
   FIREBASE_CHANNEL_ID="$BRANCH"
 elif [[ $BRANCH != "dev" && $BRANCH != "stag" && $BRANCH != "prod" ]]; then
