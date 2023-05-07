@@ -41,7 +41,20 @@ jobs:
       - run: git config --global core.autocrlf false
         if: runner.os == 'Windows'
 
+      - run: echo '${{ toJSON(github) }}'
+
+      - id: get-checkout-ref
+        run: |
+          if [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then
+            CHECKOUT_REF="$(jq -r .pull_request.head.ref "$GITHUB_EVENT_PATH")"
+          else
+            CHECKOUT_REF="$GITHUB_REF_NAME"
+          fi
+          echo "CHECKOUT_REF=$CHECKOUT_REF" >> "$GITHUB_OUTPUT"
+
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ steps.get-checkout-ref.outputs.CHECKOUT_REF }}
 
       - uses: hrishikesh-kadam/setup-flutter@v1
         with:
