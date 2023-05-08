@@ -2,12 +2,6 @@
 
 set -ex -o pipefail
 
-dart format --output none --set-exit-if-changed .
-
-flutter pub run import_sorter:main --exit-if-changed
-
-flutter analyze
-
 flutter test test/unit_test \
   --coverage --coverage-path "coverage/unit_test_lcov.info"
 lcov --list coverage/unit_test_lcov.info

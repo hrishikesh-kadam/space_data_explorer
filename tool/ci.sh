@@ -6,7 +6,9 @@ set -e -o pipefail
 
 ./tool/create.sh
 
-./tool/format-analyze-test.sh
+./tool/format-analyze.sh
+
+./tool/test.sh
 
 ./tool/web/build.sh
 
