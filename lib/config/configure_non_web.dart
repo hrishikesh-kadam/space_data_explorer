@@ -32,13 +32,16 @@ AppBar getPlatformSpecificAppBar({
           } else {
             log.log(logLevel, 'Unusual navigation observed');
             log.log(logLevel, 'extra doesn\'t contains isNormalLink key');
-            log.log(logLevel, getLitsOfRouteMatch(context));
+            final routeMatchList = getLitsOfRouteMatch(context);
+            log.log(
+                logLevel, 'routeMatchList.length = ${routeMatchList.length}');
             GoRouter.of(context).go(HomePage.path);
           }
         } else {
           log.log(logLevel, 'Unusual navigation observed');
           log.log(logLevel, 'extra is not a Map');
-          log.log(logLevel, getLitsOfRouteMatch(context));
+          final routeMatchList = getLitsOfRouteMatch(context);
+          log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
           GoRouter.of(context).go(HomePage.path);
         }
       },

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:logging/logging.dart';
 
 import 'package:space_data_explorer/main.dart' as app;
 import 'package:space_data_explorer/pages/home_page.dart';
@@ -46,7 +45,6 @@ void platformSpecificAppBarTest() {
       if (kIsWeb) {
         checkHistoryLengthAndSerialCount(3, 0);
       }
-      Logger.root.clearListeners();
     });
 
     testWidgets('2 pages down and 1 page up', (tester) async {
@@ -60,7 +58,6 @@ void platformSpecificAppBarTest() {
       if (kIsWeb) {
         checkHistoryLengthAndSerialCount(2, 0);
       }
-      Logger.root.clearListeners();
     });
 
     testWidgets('deep-link to 3rd level and press back', (tester) async {
@@ -79,7 +76,6 @@ void platformSpecificAppBarTest() {
       if (kIsWeb) {
         checkHistoryLengthAndSerialCount(2, 0);
       }
-      Logger.root.clearListeners();
     });
 
     testWidgets('deep-link to 2nd level and press back', (tester) async {
@@ -96,7 +92,6 @@ void platformSpecificAppBarTest() {
       if (kIsWeb) {
         checkHistoryLengthAndSerialCount(2, 0);
       }
-      Logger.root.clearListeners();
     });
 
     testWidgets(
@@ -118,7 +113,6 @@ void platformSpecificAppBarTest() {
       if (kIsWeb) {
         checkHistoryLengthAndSerialCount(2, 0);
       }
-      Logger.root.clearListeners();
     });
 
     testWidgets('3 pages down and 1 page up but when extra is not a Map',
@@ -139,7 +133,6 @@ void platformSpecificAppBarTest() {
       if (kIsWeb) {
         checkHistoryLengthAndSerialCount(2, 0);
       }
-      Logger.root.clearListeners();
     });
   });
 }
