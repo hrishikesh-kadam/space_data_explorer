@@ -75,6 +75,6 @@ jobs:
       - run: ./tool/web/deploy.sh
         if: matrix.ref == 'stable'
         env:
-          FIREBASE_SERVICE_ACCOUNT_CONTRI: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CONTRI }}
+          FIREBASE_CONTRI_KEY: ${{ secrets.FIREBASE_CONTRI_KEY }}
 
       - run: ./tool/android/stop-gradle.sh

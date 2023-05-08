@@ -7,19 +7,19 @@ source ./tool/constants.sh
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
 if [[ ! -s ./secrets/.git ]]; then
-  if [[ -n $FIREBASE_SERVICE_ACCOUNT_CONTRI ]]; then
-    echo "$FIREBASE_SERVICE_ACCOUNT_CONTRI" > "/tmp/firebase-service-account-contri.json"
-    GOOGLE_APPLICATION_CREDENTIALS="/tmp/firebase-service-account-contri.json"
+  if [[ -n $FIREBASE_CONTRI_KEY ]]; then
+    echo "$FIREBASE_CONTRI_KEY" > "/tmp/firebase-contri-key.json"
+    GOOGLE_APPLICATION_CREDENTIALS="/tmp/firebase-contri-key.json"
   fi
   FIREBASE_PROJECT_ID="${APP_NAME_KEBAB_CASE}-contri"
 elif [[ $BRANCH == "stag" ]]; then
-  GOOGLE_APPLICATION_CREDENTIALS="./secrets/web/firebase-service-account-stag.json"
+  GOOGLE_APPLICATION_CREDENTIALS="./secrets/web/service-accounts/firebase-stag-key.json"
   FIREBASE_PROJECT_ID="${APP_NAME_KEBAB_CASE}-stag"
 elif [[ $BRANCH == "prod" ]]; then
-  GOOGLE_APPLICATION_CREDENTIALS="./secrets/web/firebase-service-account-prod.json"
+  GOOGLE_APPLICATION_CREDENTIALS="./secrets/web/service-accounts/firebase-prod-key.json"
   FIREBASE_PROJECT_ID="${APP_NAME_KEBAB_CASE}"
 else
-  GOOGLE_APPLICATION_CREDENTIALS="./secrets/web/firebase-service-account-dev.json"
+  GOOGLE_APPLICATION_CREDENTIALS="./secrets/web/service-accounts/firebase-dev-key.json"
   FIREBASE_PROJECT_ID="${APP_NAME_KEBAB_CASE}-dev"
 fi
 
@@ -49,4 +49,4 @@ else
     --expires 30d
 fi
 
-rm -f "/tmp/firebase-service-account-contri.json"
+rm -f "/tmp/firebase-contri-key.json"
