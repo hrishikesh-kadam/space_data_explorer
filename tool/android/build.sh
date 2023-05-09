@@ -23,12 +23,6 @@ flutter build appbundle \
 
 BUNDLE_FILE="./build/app/outputs/bundle/${FLAVOR_ENV}Release/app-${FLAVOR_ENV}-release.aab"
 
-BUNDLETOOL_PATH="$ANDROID_HOME/bundletool-all.jar"
-if [[ ! -s $BUNDLETOOL_PATH ]]; then
-  ./tool/android/install-bundletool.sh
-fi
-BUNDLETOOL="java -jar $BUNDLETOOL_PATH"
-
 VERSION_CODE=$( \
   $BUNDLETOOL dump manifest \
     --bundle "$BUNDLE_FILE" \

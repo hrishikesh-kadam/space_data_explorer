@@ -124,10 +124,8 @@ if [[ ! -x $(command -v yq) ]]; then
   yq --version
 fi
 
-if [[ ! $GITHUB_ACTIONS ]]; then
-  if [[ ! -s $BUNDLETOOL_PATH ]]; then
-    ./tool/android/install-bundletool.sh
-  fi
+if [[ ! -s $BUNDLETOOL_PATH ]]; then
+  ./tool/android/install-bundletool.sh
 fi
 
 check_command_on_path node
