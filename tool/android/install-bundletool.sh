@@ -9,5 +9,6 @@ VERSION=$( \
 BUNDLETOOL_PATH="$ANDROID_HOME/bundletool-all.jar"
 curl -o "$BUNDLETOOL_PATH" \
   -sL "https://github.com/google/bundletool/releases/download/$VERSION/bundletool-all-$VERSION.jar"
+openssl sha256 "$BUNDLETOOL_PATH"
 printf "bundletool "
 java -jar "$BUNDLETOOL_PATH" version
