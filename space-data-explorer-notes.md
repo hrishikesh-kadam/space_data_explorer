@@ -29,3 +29,10 @@ flutter build apk \
 ## README notes
 
 - Add `git clone --config core.autocrlf=false` for Windows
+
+## Future Tasks
+
+### iOS
+
+- Add flavors
+- Add Universal Links
