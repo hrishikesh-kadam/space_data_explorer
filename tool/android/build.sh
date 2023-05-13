@@ -39,5 +39,5 @@ info_log "VERSION_NAME=$VERSION_NAME"
 ./tool/android/check-all-variants.sh
 
 pushd android &> /dev/null
-./gradlew app:build
+./gradlew :app:build
 popd &> /dev/null

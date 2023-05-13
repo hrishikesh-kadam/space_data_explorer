@@ -10,8 +10,8 @@ FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 pushd android &> /dev/null
 
 FLUTTER_TEST_ARG=$(printf "FLUTTER_TEST=true" | base64)
-INSTALL_APP="app:install${FLAVOR_ENV@u}Debug"
-INSTALL_ANDROID_TEST="app:install${FLAVOR_ENV@u}DebugAndroidTest"
+INSTALL_APP=":app:install${FLAVOR_ENV@u}Debug"
+INSTALL_ANDROID_TEST=":app:install${FLAVOR_ENV@u}DebugAndroidTest"
 
 flutter build apk --flavor "$FLAVOR_ENV" --debug
 

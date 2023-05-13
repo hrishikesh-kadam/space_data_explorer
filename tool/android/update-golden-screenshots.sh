@@ -32,7 +32,7 @@ GOLDEN_DIRECTORIES=(
 # https://github.com/flutter/flutter/issues/100292#issuecomment-1076927900
 FLUTTER_TEST_ARG=$(printf "FLUTTER_TEST=true" | base64)
 UPDATE_GOLDENS_ARG=$(printf "UPDATE_GOLDENS=true" | base64)
-CONNECTED_ANDROID_TEST="app:connected${FLAVOR_ENV@u}DebugAndroidTest"
+CONNECTED_ANDROID_TEST=":app:connected${FLAVOR_ENV@u}DebugAndroidTest"
 
 APP_PACKAGE="$APPLICATION_ID.$FLAVOR_ENV.debug"
 SCREENSHOT_DIR="app_flutter/screenshots"

@@ -7,7 +7,7 @@ if [[ $(uname -s) =~ ^"MINGW" ]]; then
 fi
 
 pushd android &> /dev/null
-CURRENT_VARIANTS=$(./gradlew -q printAllVariants | csv2md)
+CURRENT_VARIANTS=$(./gradlew -q :app:printAllVariants | csv2md)
 if [[ -s ../secrets/android/key.properties ]]; then
   CHECKED_VARIANTS=../secrets/android/all-variants-members.md
 else
