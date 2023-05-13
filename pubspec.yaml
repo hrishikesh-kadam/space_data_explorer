@@ -25,7 +25,7 @@ dev_dependencies:
     git:
       url: https://github.com/fluttercommunity/import_sorter.git
       ref: f350497a11b1285c695595049e95a420068e7a9f
-  path_provider: ^2.0.11
+  path_provider: ^2.0.15
 
 flutter:
   uses-material-design: true
