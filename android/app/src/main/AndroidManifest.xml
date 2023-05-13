@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.hrishikesh_kadam.flutter.space_data_explorer">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
    <application
         android:label="${applicationLabel}"
         android:name="${applicationName}"

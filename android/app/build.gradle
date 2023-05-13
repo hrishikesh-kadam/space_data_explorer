@@ -38,6 +38,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply from: '../constants.gradle'
 
 android {
+    namespace "dev.hrishikesh_kadam.flutter.space_data_explorer"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
