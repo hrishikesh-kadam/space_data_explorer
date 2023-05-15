@@ -94,7 +94,7 @@ jobs:
           name: ${{ inputs.runner || matrix.runner }}-${{ inputs.ref || matrix.ref }}
 
       - run: ./tool/web/deploy.sh
-        if: ${{ inputs.ref || matrix.ref }} == 'stable'
+        if: inputs.ref == 'stable' || matrix.ref == 'stable'
         env:
           FIREBASE_CONTRI_KEY: ${{ secrets.FIREBASE_CONTRI_KEY }}
 
