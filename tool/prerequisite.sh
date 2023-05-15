@@ -6,6 +6,7 @@ set -e -o pipefail
 
 source ./tool/constants.sh
 source ./tool/set-logs-env.sh
+PRINT_DEBUG_LOG=1
 
 check_command_on_path() {
   if [[ ! -x $(command -v "$1") ]]; then
@@ -134,8 +135,10 @@ check_command_on_path node
 check_command_on_path npm
 NPM_GLOBAL_PREFIX="$(npm config get prefix)"
 if [[ $(uname -s) =~ ^"MINGW" ]]; then
-  NPM_GLOBAL_PREFIX="$(cygpath "$NPM_GLOBAL_PREFIX")"
   # TODO(hrishikesh-kadam): Check this on Windows
+  debug_log "NPM_GLOBAL_PREFIX=$NPM_GLOBAL_PREFIX"
+  NPM_GLOBAL_PREFIX="$(cygpath "$NPM_GLOBAL_PREFIX")"
+  debug_log "NPM_GLOBAL_PREFIX=$NPM_GLOBAL_PREFIX"
 else
   check_directory_on_path "$NPM_GLOBAL_PREFIX/bin"
 fi

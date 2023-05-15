@@ -11,19 +11,19 @@ export PRINT_INFO_LOG=0
 export PRINT_DEBUG_LOG=0
 
 print_in_red() {
-  printf "%b\n" "\033[31m$*\033[0m"
+  printf "%b%s%b\n" "\033[31m" "$*" "\033[0m"
 }
 
 print_in_yellow() {
-  printf "%b\n" "\033[33m$*\033[0m"
+  printf "%b%s%b\n" "\033[33m" "$*" "\033[0m"
 }
 
 print_in_green() {
-  printf "%b\n" "\033[32m$*\033[0m"
+  printf "%b%s%b\n" "\033[32m" "$*" "\033[0m"
 }
 
 print_in_cyan() {
-  printf "%b\n" "\033[36m$*\033[0m"
+  printf "%b%s%b\n" "\033[36m" "$*" "\033[0m"
 }
 
 error_log() {
@@ -75,4 +75,4 @@ error_log_with_help() {
   exit "$2"
 }
 
-if [ $PARENT_ERREXIT ]; then set -e; else set +e; fi
+if [ $PARENT_ERREXIT = "true" ]; then set -e; else set +e; fi

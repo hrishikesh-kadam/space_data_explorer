@@ -1,8 +1,7 @@
-# Note: jobs of ci-contributors.yml, ci-schedule.yml and ci-dispatch.yml should be in sync
+# Note: jobs of ci-contributors.yml and ci-schedule.yml should be in sync
 name: ci-schedule
 
 on:
-  workflow_dispatch:
   schedule:
     # 12:00 PM IST / 6:30 AM GMT every 6th day over the year with following conditions.
     # GitHub will remove any cache entries that have not been accessed in over 7 days.
@@ -20,6 +19,28 @@ on:
     - cron: '30 6 1,7,13,19,25,31 10 *'
     - cron: '30 6 6,12,18,24,30 11 *'
     - cron: '30 6 6,12,18,24,30 12 *'
+  workflow_dispatch:
+    inputs:
+      runner:
+        description: 'Runner OS'
+        required: true
+        default: 'ubuntu-latest'
+        type: choice
+        options:
+          - 'ubuntu-latest'
+          - 'macos-latest'
+          - 'windows-latest'
+          - 'macos-13'
+      ref:
+        description: 'Flutter channel, version or git reference'
+        required: true
+        default: 'stable'
+        type: choice
+        options:
+          - 'stable'
+          - 'beta'
+          - 'main'
+          - 'master'
 
 defaults:
   run:
@@ -27,8 +48,8 @@ defaults:
 
 jobs:
   ci:
-    name: CI on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
-    runs-on: ${{ matrix.runner }}
+    name: CI on ${{ inputs.runner || matrix.runner }} using Flutter ${{ inputs.ref || matrix.ref }}
+    runs-on: ${{ inputs.runner || matrix.runner }}
     strategy:
       matrix:
         runner: [ ubuntu-latest, macos-latest, windows-latest ]
@@ -58,7 +79,7 @@ jobs:
 
       - uses: hrishikesh-kadam/setup-flutter@v1
         with:
-          ref: ${{ matrix.ref }}
+          ref: ${{ inputs.ref || matrix.ref }}
 
       - uses: actions/setup-java@v3
         with:
@@ -78,7 +99,7 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: gradle-${{ matrix.runner }}-flutter-${{ matrix.ref }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          key: gradle-${{ inputs.runner || matrix.runner }}-flutter-${{ inputs.ref || matrix.ref }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
 
       - run: ./tool/ci.sh
 
@@ -86,6 +107,6 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
-          name: ${{ matrix.runner }}-${{ matrix.ref }}
+          name: ${{ inputs.runner || matrix.runner }}-${{ inputs.ref || matrix.ref }}
 
       - run: ./tool/android/stop-gradle.sh
