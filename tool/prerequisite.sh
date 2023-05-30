@@ -89,8 +89,10 @@ if [[ ! -x $(command -v lcov) ]]; then
 fi
 
 if [[ $(uname -s) =~ ^"Darwin" ]]; then
-  brew install diffutils
-  diff --version
+  if ! diff --version | grep "diff (GNU diffutils) 3" &> /dev/null; then
+    brew install diffutils
+    diff --version
+  fi
 fi
 
 if [[ ! -x $(command -v jq) ]]; then
