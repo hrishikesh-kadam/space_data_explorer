@@ -13,3 +13,5 @@ set -e -o pipefail
 ./tool/web/build.sh
 
 ./tool/android/build.sh
+
+git status -s
