@@ -11,27 +11,6 @@ on:
       - prod
       - stag
   workflow_dispatch:
-    inputs:
-      runner:
-        description: 'Runner OS'
-        required: true
-        default: 'ubuntu-latest'
-        type: choice
-        options:
-          - 'ubuntu-latest'
-          - 'macos-latest'
-          - 'windows-latest'
-          - 'macos-13'
-      ref:
-        description: 'Flutter channel, version or git reference'
-        required: true
-        default: 'stable'
-        type: choice
-        options:
-          - 'stable'
-          - 'beta'
-          - 'main'
-          - 'master'
 
 defaults:
   run:
@@ -49,10 +28,10 @@ jobs:
         run: ./tool/github/check-allow-cicd.sh
 
   cicd:
-    name: CICD on ${{ inputs.runner || matrix.runner }} using Flutter ${{ inputs.ref || matrix.ref }}
+    name: CICD on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
     needs: check-allow-cicd
     if: needs.check-allow-cicd.outputs.ALLOW_CICD == 'true'
-    runs-on: ${{ inputs.runner || matrix.runner }}
+    runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
         runner: [ ubuntu-latest ]
@@ -86,7 +65,7 @@ jobs:
 
       - uses: hrishikesh-kadam/setup-flutter@v1
         with:
-          ref: ${{ inputs.ref || matrix.ref }}
+          ref: ${{ matrix.ref }}
 
       - uses: actions/setup-java@v3
         with:
@@ -113,7 +92,7 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: gradle-${{ inputs.runner || matrix.runner }}-flutter-${{ inputs.ref || matrix.ref }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          key: gradle-${{ matrix.runner }}-flutter-${{ matrix.ref }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
 
       - run: ./tool/ci.sh
 
@@ -121,9 +100,9 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
-          name: ${{ inputs.runner || matrix.runner }}-${{ inputs.ref || matrix.ref }}
+          name: ${{ matrix.runner }}-${{ matrix.ref }}
 
       - run: ./tool/cd.sh
-        if: inputs.ref == 'stable' || matrix.ref == 'stable'
+        if: matrix.ref == 'stable'
 
       - run: ./tool/android/stop-gradle.sh
