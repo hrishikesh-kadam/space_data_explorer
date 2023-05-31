@@ -6,10 +6,11 @@
 
 set -e -o pipefail
 
-AVD_NAME=${1:-"Pixel_6_API_33"}
+readonly AVD_NAME=${1:-"Pixel_6_API_33"}
 
 if [[ $AVD_ALREADY_RUNNING == "false" ]]; then
   AVD_PID=$(pgrep -f "$AVD_NAME" | head -n1)
+  readonly AVD_PID
   if [[ $AVD_PID ]]; then
     kill "$AVD_PID"
     while kill -0 "$AVD_PID" 2> /dev/null; do
