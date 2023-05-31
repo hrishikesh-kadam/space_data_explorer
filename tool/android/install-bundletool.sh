@@ -2,10 +2,11 @@
 
 set -e -o pipefail
 
-VERSION=$( \
-  curl -sL "https://api.github.com/repos/google/bundletool/releases/latest" \
-    | jq -r .name
+LATEST_JSON=$( \
+  curl -sL "https://api.github.com/repos/google/bundletool/releases/latest"
 )
+echo "LATEST_JSON=$LATEST_JSON"
+VERSION=$(echo "$LATEST_JSON" | jq -r .name)
 echo "VERSION=$VERSION"
 BUNDLETOOL_PATH="$ANDROID_HOME/bundletool-all.jar"
 curl -o "$BUNDLETOOL_PATH" \
