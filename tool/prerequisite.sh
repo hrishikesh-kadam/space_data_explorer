@@ -57,15 +57,23 @@ if (( "$JAVA_CLASS_MAJOR_VERSION" < 55 )); then
   exit 1
 fi
 
-check_command_on_path pip
-PIP_INSTALL_OUTPUT=$(pip install -r requirements.txt)
-if [[ $GITHUB_ACTIONS == "true" ]]; then
-  echo "$PIP_INSTALL_OUTPUT"
-elif [[ ! $PIP_INSTALL_OUTPUT =~ "Requirement already satisfied" ]]; then
-  echo "$PIP_INSTALL_OUTPUT"
+if [[ ! -x $(command -v pipx) ]]; then
+  if [[ $(uname -s) =~ ^"Linux" ]]; then
+    sudo apt install pipx
+    pipx --version
+    pipx ensurepath
+  elif [[ $(uname -s) =~ ^"Darwin" ]]; then
+    brew install pipx
+    pipx --version
+    pipx ensurepath
+  elif [[ $(uname -s) =~ ^"MINGW" ]]; then
+    error_log_with_exit "pipx command not accessible from PATH" 1
+  fi
 fi
-[[ -x $(command -v csv2md) ]] \
-  || error_log_with_exit "pip installed packages not found on PATH" 1
+
+if [[ ! -x $(command -v csv2md) ]]; then
+  pipx install csv2md
+fi
 
 if [[ ! -x $(command -v lcov) ]]; then
   if [[ $(uname -s) =~ ^"Linux" ]]; then
