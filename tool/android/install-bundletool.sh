@@ -2,15 +2,25 @@
 
 set -e -o pipefail
 
-LATEST_JSON=$( \
-  curl -sL "https://api.github.com/repos/google/bundletool/releases/latest"
-)
-echo "LATEST_JSON=$LATEST_JSON"
-VERSION=$(echo "$LATEST_JSON" | jq -r .name)
-echo "VERSION=$VERSION"
+if [[ $GITHUB_ACTIONS == "true" ]]; then
+  # To avoid GitHub API rate limiting
+  VERSION=$( \
+    curl --silent --show-error --location --fail \
+      --output /dev/null \
+      --write-out "%{url_effective}" \
+      https://github.com/google/bundletool/releases/latest \
+      | xargs basename
+  )
+else
+  VERSION=$( \
+    curl --silent --show-error --location --fail \
+      "https://api.github.com/repos/google/bundletool/releases/latest" \
+      | jq -r .name
+  )
+fi
 BUNDLETOOL_PATH="$ANDROID_HOME/bundletool-all.jar"
-curl -o "$BUNDLETOOL_PATH" \
-  -sL "https://github.com/google/bundletool/releases/download/$VERSION/bundletool-all-$VERSION.jar"
-openssl sha256 "$BUNDLETOOL_PATH"
+curl --silent --show-error --location --fail \
+  --output "$BUNDLETOOL_PATH" \
+  "https://github.com/google/bundletool/releases/download/$VERSION/bundletool-all-$VERSION.jar"
 printf "bundletool "
 java -jar "$BUNDLETOOL_PATH" version
