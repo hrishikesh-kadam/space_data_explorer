@@ -135,8 +135,6 @@ if [[ ! -x $(command -v yq) ]]; then
   yq --version
 fi
 
-# TODO(hrishikesh-kadam): Check openssl on local macOS and Windows
-
 if [[ ! -s $BUNDLETOOL_PATH ]]; then
   ./tool/android/install-bundletool.sh
 fi
