@@ -4,6 +4,9 @@
 # $2 SYSTEM_IMAGE_PACKAGE_PATH like "system-images;android-33;google_apis;x86_64"
 # $3 DEVICE_NAME like pixel_6
 
+if [ -z ${-%*e*} ]; then PARENT_ERREXIT=true; else PARENT_ERREXIT=false; fi
+if shopt -qo pipefail; then PARENT_PIPEFAIL=true; else PARENT_PIPEFAIL=false; fi
+
 set -e -o pipefail
 
 ./tool/android/start-emulator-actions-prerequisite.sh
@@ -42,3 +45,6 @@ echo "AVD_ALREADY_RUNNING=$AVD_ALREADY_RUNNING"
 
 # shellcheck disable=SC2016
 adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
+
+if [ $PARENT_ERREXIT = "true" ]; then set -e; else set +e; fi
+if [ $PARENT_PIPEFAIL = "true" ]; then set -o pipefail; else set +o pipefail; fi
