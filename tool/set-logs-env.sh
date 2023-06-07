@@ -27,24 +27,24 @@ print_in_cyan() {
 }
 
 error_log() {
-  print_in_red "ERROR: $*" >&2
+  print_in_red "Error: $*" >&2
 }
 
 warning_log() {
   if [ $PRINT_WARNING_LOG -eq 1 ]; then
-    print_in_yellow "WARNING: $*"
+    print_in_yellow "Warning: $*"
   fi
 }
 
 info_log() {
   if [ $PRINT_INFO_LOG -eq 1 ]; then
-    print_in_green "INFO: $*"
+    print_in_green "Info: $*"
   fi
 }
 
 debug_log() {
   if [ $PRINT_DEBUG_LOG -eq 1 ]; then
-    print_in_cyan "DEBUG: $*"
+    print_in_cyan "Debug: $*"
   fi
 }
 

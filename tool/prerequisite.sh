@@ -15,7 +15,11 @@ check_command_on_path() {
 }
 
 check_directory_on_path() {
-  if [[ ! "$PATH" =~ $1 ]]; then
+  local directory=$1
+  if [[ $(uname -s) =~ ^"MINGW" ]]; then
+    directory=$(cygpath "$directory")
+  fi
+  if [[ ! $PATH =~ $directory ]]; then
     error_log_with_exit "$1 directory not found on PATH" 1
   fi
 }
@@ -26,10 +30,23 @@ ROLE=${1//--}
 if [[ $(uname -s) =~ ^"Darwin" ]]; then
   check_command_on_path brew
 elif [[ $(uname -s) =~ ^"MINGW" ]]; then
-  check_command_on_path choco
-  if [[ ! $GITHUB_ACTIONS ]]; then
-    check_command_on_path winget
+  check_command_on_path pwsh
+  if ! pwsh -NoProfile ./tool/is-admin.ps1; then
+    error_log_with_exit "Please run this script from Elevated Session" 1
   fi
+  check_command_on_path winget
+  WINGET_LINKS_PATH_WIN="$LOCALAPPDATA\Microsoft\WinGet\Links"
+  WINGET_LINKS_PATH_NIX=$(cygpath "$WINGET_LINKS_PATH_WIN")
+  if [[ ! $PATH =~ $WINGET_LINKS_PATH_NIX ]]; then
+    if [[ $GITHUB_ACTIONS == "true" ]]; then
+      echo "$WINGET_LINKS_PATH_WIN" >> "$GITHUB_PATH"
+      PATH="$WINGET_LINKS_PATH_NIX:$PATH"
+    else
+      # Deliberately avoiding to set PATH by setx command
+      error_log_with_exit "$WINGET_LINKS_PATH_NIX directory not found on PATH" 1
+    fi
+  fi
+  check_command_on_path choco
 fi
 
 if [[ ! -x $(command -v shellcheck) ]]; then
@@ -38,7 +55,7 @@ if [[ ! -x $(command -v shellcheck) ]]; then
   elif [[ $(uname -s) =~ ^"Darwin" ]]; then
     brew install shellcheck
   elif [[ $(uname -s) =~ ^"MINGW" ]]; then
-    choco install shellcheck
+    winget install koalaman.shellcheck
   fi
   shellcheck --version
 fi
@@ -78,22 +95,26 @@ fi
 if [[ ! -x $(command -v lcov) ]]; then
   if [[ $(uname -s) =~ ^"Linux" ]]; then
     sudo apt install lcov
-    lcov --version
   elif [[ $(uname -s) =~ ^"Darwin" ]]; then
     brew install lcov
-    lcov --version
   elif [[ $(uname -s) =~ ^"MINGW" ]]; then
     choco install lcov
-    if [[ $GITHUB_ACTIONS == "true" ]]; then
-      # shellcheck disable=SC2028
-      LCOV_ROOT="C:\ProgramData\chocolatey\lib\lcov\tools\bin"
-      echo "$LCOV_ROOT" >> "$GITHUB_PATH"
-      $LCOV_ROOT/lcov --version
-    else
-      export PATH="/c/ProgramData/chocolatey/lib/lcov/tools/bin:$PATH"
-      lcov --version
+    # TODO(hrishikesh-kadam): Replace raw link if ChocolateyInstall available in GITHUB_ACTIONS
+    # shellcheck disable=SC2154
+    echo "ChocolateyInstall=$ChocolateyInstall"
+    LCOV_ROOT_WIN="C:\ProgramData\chocolatey\lib\lcov\tools\bin"
+    LCOV_ROOT_NIX=$(cygpath "$LCOV_ROOT_WIN")
+    if [[ ! $PATH =~ $LCOV_ROOT_NIX ]]; then
+      if [[ $GITHUB_ACTIONS == "true" ]]; then
+        echo "$LCOV_ROOT_WIN" >> "$GITHUB_PATH"
+        PATH="$LCOV_ROOT_NIX:$PATH"
+      else
+        # Deliberately avoiding to set PATH by setx command
+        error_log_with_exit "$LCOV_ROOT_NIX directory not found on PATH" 1
+      fi
     fi
   fi
+  lcov --version
 fi
 
 if [[ $(uname -s) =~ ^"Darwin" ]]; then
@@ -109,11 +130,7 @@ if [[ ! -x $(command -v jq) ]]; then
   elif [[ $(uname -s) =~ ^"Darwin" ]]; then
     brew install jq
   elif [[ $(uname -s) =~ ^"MINGW" ]]; then
-    if [[ $GITHUB_ACTIONS == "true" ]]; then
-      choco install jq
-    else
-      winget install jq
-    fi
+    winget install jqlang.jq
   fi
   jq --version
 fi
@@ -126,13 +143,13 @@ if [[ ! -x $(command -v yq) ]]; then
   elif [[ $(uname -s) =~ ^"Darwin" ]]; then
     brew install yq
   elif [[ $(uname -s) =~ ^"MINGW" ]]; then
-    if [[ $GITHUB_ACTIONS == "true" ]]; then
-      choco install yq
-    else
-      winget install yq
-    fi
+    winget install MikeFarah.yq
   fi
   yq --version
+fi
+
+if ! export -p | grep "declare -x ANDROID_HOME=" &> /dev/null; then
+  error_log_with_exit "ANDROID_HOME exported variable not found" 1
 fi
 
 if [[ ! -s $BUNDLETOOL_PATH ]]; then
@@ -141,14 +158,11 @@ fi
 
 check_command_on_path node
 check_command_on_path npm
-NPM_GLOBAL_PREFIX="$(npm config get prefix)"
+NPM_CONFIG_PREFIX="$(npm config get prefix)"
 if [[ $(uname -s) =~ ^"MINGW" ]]; then
-  # TODO(hrishikesh-kadam): Check this on Windows
-  debug_log "NPM_GLOBAL_PREFIX=$NPM_GLOBAL_PREFIX"
-  NPM_GLOBAL_PREFIX="$(cygpath "$NPM_GLOBAL_PREFIX")"
-  debug_log "NPM_GLOBAL_PREFIX=$NPM_GLOBAL_PREFIX"
+  check_directory_on_path "$NPM_CONFIG_PREFIX"
 else
-  check_directory_on_path "$NPM_GLOBAL_PREFIX/bin"
+  check_directory_on_path "$NPM_CONFIG_PREFIX/bin"
 fi
 
 if [[ ! -x $(command -v chromedriver) ]]; then
