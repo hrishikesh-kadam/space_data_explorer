@@ -21,13 +21,21 @@ AVD_NAME=${1:-"Pixel_6_API_33"}
 SYSTEM_IMAGE_PACKAGE_PATH=${2:-"system-images;android-33;google_apis;$SYSTEM_IMAGE_ARCH"}
 DEVICE_NAME=${3:-"pixel_6"}
 
+if [[ $(uname -s) =~ ^"MINGW" ]]; then
+  SdkManager="sdkmanager.bat"
+  AvdManager="avdmanager.bat"
+else
+  SdkManager="sdkmanager"
+  AvdManager="avdmanager"
+fi
+
 if ! pgrep -f "$AVD_NAME"; then
   export AVD_ALREADY_RUNNING=false
   if ! ls "$HOME/.android/avd/${AVD_NAME}.ini"; then
     if [[ ! -d "$ANDROID_HOME/${SYSTEM_IMAGE_PACKAGE_PATH//;//}" ]]; then
-      sdkmanager --install "$SYSTEM_IMAGE_PACKAGE_PATH"
+      $SdkManager --install "$SYSTEM_IMAGE_PACKAGE_PATH"
     fi
-    avdmanager create avd --name "$AVD_NAME" \
+    $AvdManager create avd --name "$AVD_NAME" \
       --package "$SYSTEM_IMAGE_PACKAGE_PATH" \
       --device "$DEVICE_NAME"
   fi
