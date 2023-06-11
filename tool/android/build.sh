@@ -41,3 +41,7 @@ info_log "VERSION_NAME=$VERSION_NAME"
 pushd android &> /dev/null
 ./gradlew :app:build
 popd &> /dev/null
+
+if [[ $(uname -s) =~ ^"MINGW" ]]; then
+  dos2unix ./android/fastlane/README.md
+fi
