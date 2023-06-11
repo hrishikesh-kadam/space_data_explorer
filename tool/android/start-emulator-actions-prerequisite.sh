@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Not in use, Needs to be updated
+
 set -e -o pipefail
 
 if [[ $GITHUB_ACTIONS == "true" ]]; then

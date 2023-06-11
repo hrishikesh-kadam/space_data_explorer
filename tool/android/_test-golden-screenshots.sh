@@ -2,7 +2,7 @@
 
 set -e -o pipefail
 
-source ./tool/android/start-emulator.sh
+./tool/android/start-emulator.sh
 source ./tool/constants.sh
 
 FLAVOR_ENV=$(./tool/get-flavor-env.sh)
@@ -69,4 +69,4 @@ fi
 adb shell am instrument \
   -w "$APPLICATION_ID.$FLAVOR_ENV.debug.test/androidx.test.runner.AndroidJUnitRunner"
 
-./tool/android/kill-emulator.sh
+./tool/android/kill-emulator.sh || true

@@ -46,7 +46,7 @@ SCREENSHOTS=(
 
 for i in {0..2}; do
 
-  source ./tool/android/start-emulator.sh \
+  ./tool/android/start-emulator.sh \
     "${AVD_NAMES[i]}" \
     "" \
     "${DEVICE_NAMES[i]}"
@@ -92,6 +92,6 @@ for i in {0..2}; do
     adb pull "$SCREENSHOT_FILE" "$LOCAL_DIR"
   done
 
-  ./tool/android/kill-emulator.sh "${AVD_NAMES[i]}"
+  ./tool/android/kill-emulator.sh "${AVD_NAMES[i]}" || true
 
 done

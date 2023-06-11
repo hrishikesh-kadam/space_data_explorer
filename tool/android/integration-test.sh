@@ -2,7 +2,7 @@
 
 set -e -o pipefail
 
-source ./tool/android/start-emulator.sh
+./tool/android/start-emulator.sh
 
 FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
@@ -17,4 +17,4 @@ for TARGET_PATH in "${TARGET_PATHS[@]}"; do
     "$TARGET_PATH"
 done
 
-./tool/android/kill-emulator.sh
+./tool/android/kill-emulator.sh || true

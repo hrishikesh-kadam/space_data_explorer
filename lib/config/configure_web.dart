@@ -17,11 +17,13 @@ import '../pages/home_page.dart';
 /// logic of [RouteInformationProvider.routerReportsNewRouteInformation], which
 /// at the moment is not considered in GoRouter.
 void configureUrlStrategy() {
+  // TODO(hrishikesh-kadam): File a bug for flutter beta
+  // Observed in Flutter 3.12.0 beta
+  // ignore: prefer_const_constructors
   UrlStrategy urlStrategyToSet = PathUrlStrategy();
   // TODO(hrishikesh-kadam): File a request for idempotent calls for
   // setUrlStrategy() method.
-  if (urlStrategy != null &&
-      urlStrategy.runtimeType != urlStrategyToSet.runtimeType) {
+  if (urlStrategy?.runtimeType != urlStrategyToSet.runtimeType) {
     setUrlStrategy(urlStrategyToSet);
   }
 }

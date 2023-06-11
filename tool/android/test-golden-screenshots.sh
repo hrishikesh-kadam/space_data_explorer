@@ -33,7 +33,7 @@ GOLDEN_DIRECTORIES=(
 
 for i in {0..0}; do
 
-  source ./tool/android/start-emulator.sh \
+  ./tool/android/start-emulator.sh \
     "${AVD_NAMES[i]}" \
     "" \
     "${DEVICE_NAMES[i]}"
@@ -58,6 +58,6 @@ for i in {0..0}; do
     git stash apply 0
   fi
 
-  ./tool/android/kill-emulator.sh "${AVD_NAMES[i]}"
+  ./tool/android/kill-emulator.sh "${AVD_NAMES[i]}" || true
 
 done
