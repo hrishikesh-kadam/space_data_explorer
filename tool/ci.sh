@@ -4,7 +4,9 @@ set -e -o pipefail
 
 source ./tool/shell/logs-env.sh
 
-./tool/check-line-endings.sh
+if [[ $(uname -s) =~ ^"MINGW" ]]; then
+  ./tool/check-line-endings.sh
+fi
 
 ./tool/shell/analyze.sh
 
