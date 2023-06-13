@@ -2,9 +2,6 @@
 
 set -e -o pipefail
 
-source ./tool/set-logs-env.sh
-PRINT_DEBUG_LOG=1
-
 if [[ $GITHUB_EVENT_NAME == "push" ]]; then
   ALLOW_CICD=true
 elif [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then

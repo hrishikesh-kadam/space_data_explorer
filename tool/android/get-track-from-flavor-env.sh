@@ -4,8 +4,6 @@
 
 set -e -o pipefail
 
-source ./tool/set-logs-env.sh
-
 FLAVOR_ENV=$1
 
 if [[ $FLAVOR_ENV == "dev" || $FLAVOR_ENV == "stag" ]]; then

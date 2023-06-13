@@ -5,7 +5,8 @@
 set -e -o pipefail
 
 source ./tool/constants.sh
-source ./tool/set-logs-env.sh
+source ./tool/shell/set-logs-env.sh
+source ./tool/shell/set-logs-env-bash.sh
 PRINT_DEBUG_LOG=1
 
 check_command_on_path() {
@@ -31,7 +32,7 @@ if [[ $(uname -s) =~ ^"Darwin" ]]; then
   check_command_on_path brew
 elif [[ $(uname -s) =~ ^"MINGW" ]]; then
   check_command_on_path pwsh
-  if ! pwsh -NoProfile ./tool/is-admin.ps1; then
+  if ! pwsh -NoProfile ./tool/shell/is-admin.ps1; then
     error_log_with_exit "Please run this script from Elevated Session" 1
   fi
   if [[ ! $GITHUB_ACTIONS ]]; then

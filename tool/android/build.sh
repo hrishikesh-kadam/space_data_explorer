@@ -2,8 +2,6 @@
 
 set -e -o pipefail
 
-source ./tool/set-logs-env.sh
-PRINT_INFO_LOG=1
 source ./tool/constants.sh
 
 FLAVOR_ENV=$(./tool/get-flavor-env.sh)
