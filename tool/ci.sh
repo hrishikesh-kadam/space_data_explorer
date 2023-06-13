@@ -6,7 +6,7 @@ source ./tool/shell/logs-env.sh
 
 ./tool/check-line-endings.sh
 
-./tool/shell/shellcheck.sh
+./tool/shell/analyze.sh
 
 ./tool/create.sh
 

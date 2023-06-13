@@ -51,6 +51,10 @@ elif [[ $(uname -s) =~ ^"MINGW" ]]; then
   check_command_on_path choco
 fi
 
+if [[ $(uname -s) =~ ^"MINGW" ]]; then
+  pwsh -NoProfile ./tool/prerequisite.ps1
+fi
+
 if [[ ! -x $(command -v shellcheck) ]]; then
   if [[ $(uname -s) =~ ^"Linux" ]]; then
     sudo apt install shellcheck

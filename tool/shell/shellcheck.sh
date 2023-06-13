@@ -2,6 +2,8 @@
 
 set -e -o pipefail
 
+echo "ShellCheck in process"
+
 if [[ $(uname -s) =~ ^"MINGW" ]]; then
   shellcheck="shellcheck.exe"
 else
@@ -10,3 +12,5 @@ fi
 
 find ./tool -name "*.sh" \
   -exec $shellcheck {} +
+
+print_in_green "ShellCheck completed"
