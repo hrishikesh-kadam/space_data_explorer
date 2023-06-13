@@ -3,10 +3,10 @@
 set -e -o pipefail
 
 if [[ $(uname -s) =~ ^"MINGW" ]]; then
-  Shellcheck="shellcheck.exe"
+  shellcheck="shellcheck.exe"
 else
-  Shellcheck="shellcheck"
+  shellcheck="shellcheck"
 fi
 
 find ./tool -name "*.sh" \
-  -exec $Shellcheck {} +
+  -exec $shellcheck {} +

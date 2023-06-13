@@ -2,14 +2,11 @@
 
 set -e -o pipefail
 
-source ./tool/shell/set-logs-env.sh
-source ./tool/shell/set-logs-env-bash.sh
-PRINT_DEBUG_LOG=1
-PRINT_INFO_LOG=1
+source ./tool/shell/logs-env.sh
 
 ./tool/check-line-endings.sh
 
-./tool/shellcheck.sh
+./tool/shell/shellcheck.sh
 
 ./tool/create.sh
 

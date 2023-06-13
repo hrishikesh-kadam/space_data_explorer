@@ -5,9 +5,7 @@
 set -e -o pipefail
 
 source ./tool/constants.sh
-source ./tool/shell/set-logs-env.sh
-source ./tool/shell/set-logs-env-bash.sh
-PRINT_DEBUG_LOG=1
+source ./tool/shell/logs-env.sh
 
 check_command_on_path() {
   if [[ ! -x $(command -v "$1") ]]; then
