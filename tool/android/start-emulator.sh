@@ -26,7 +26,8 @@ else
   AvdManager="avdmanager"
 fi
 
-if ! ./tool/android/avd-already-running.sh "$AVD_NAME" &> /dev/null; then
+AVD_PID=$(./tool/android/avd-already-running.sh "$AVD_NAME")
+if [[ -z $AVD_PID ]]; then
   AVD_ALREADY_RUNNING=false
   if ! ls "$HOME/.android/avd/${AVD_NAME}.ini"; then
     if [[ ! -d "$ANDROID_HOME/${SYSTEM_IMAGE_PACKAGE_PATH//;//}" ]]; then

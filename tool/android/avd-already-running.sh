@@ -8,24 +8,31 @@ AVD_NAME=${1:-"Pixel_6_API_33"}
 
 if [[ $(uname -s) =~ ^"MINGW" ]]; then
   output=$(tasklist \
-      //fi "STATUS eq running" \
-      //fi "WINDOWTITLE eq Android Emulator - $AVD_NAME*" \
-      //fo list \
-  )
+    //fi "STATUS eq running" \
+    //fi "WINDOWTITLE eq Android Emulator - $AVD_NAME*" \
+    //fo list)
   if [[ $output =~ "No tasks are running" ]]; then
-    exit 1
+    exit 0
   fi
-  AVD_PID=$(echo "$output" \
-    | grep PID \
-    | awk '{print $2}' \
-  )
+  output_lines=$(echo "$output" | grep --count PID)
 else
-  AVD_PID=$(pgrep -f "$AVD_NAME" \
-    | awk '{print $1}' \
-  )
-  if [[ -z $AVD_PID ]]; then
-    exit 1
+  output=$(pgrep --list-full --full "emulator/qemu.*$AVD_NAME") || true
+  if [[ -z $output ]]; then
+    exit 0
   fi
+  output_lines=$(echo "$output" | wc --lines)
+fi
+
+if (( output_lines > 1 )); then
+  error="Multiple instances of the $AVD_NAME are running"
+  printf "%b%s%b\n" "\033[31m" "$error" "\033[0m" >&2
+  exit 1
+fi
+
+if [[ $(uname -s) =~ ^"MINGW" ]]; then
+  AVD_PID=$(echo "$output" | grep PID | awk 'NR == 1 { print $2 }')
+else
+  AVD_PID=$(echo "$output" | awk 'NR == 1 { print $1 }')
 fi
 
 echo "$AVD_PID"
