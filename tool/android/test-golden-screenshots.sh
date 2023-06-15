@@ -33,10 +33,7 @@ GOLDEN_DIRECTORIES=(
 
 for i in {0..0}; do
 
-  ./tool/android/start-emulator.sh \
-    "${AVD_NAMES[i]}" \
-    "" \
-    "${DEVICE_NAMES[i]}"
+  ./tool/android/start-emulator.sh "${AVD_NAMES[i]}" "" "${DEVICE_NAMES[i]}"
 
   export GOLDEN_DIRECTORY="${GOLDEN_DIRECTORIES[i]}/"
   yq -i '.flutter.assets += [strenv(GOLDEN_DIRECTORY)]' pubspec.yaml
