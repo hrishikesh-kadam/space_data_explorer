@@ -10,7 +10,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
   SpaceDataExplorerApp({
     super.key,
     GlobalKey<NavigatorState>? navigatorKey,
-    this.initialLocation = HomePage.path,
+    this.initialLocation,
     this.debugShowCheckedModeBanner = true,
   }) {
     _router = GoRouter(
@@ -37,7 +37,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
     );
   }
 
-  final String initialLocation;
+  final String? initialLocation;
   late final GoRouter _router;
   final bool debugShowCheckedModeBanner;
 

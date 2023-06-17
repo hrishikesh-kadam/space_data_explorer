@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:integration_test/integration_test.dart';
 
+import 'package:space_data_explorer/config/configure_app.dart';
 import 'package:space_data_explorer/main.dart' as app;
 import 'package:space_data_explorer/pages/home_page.dart';
 import 'package:space_data_explorer/pages/nasa_source/nasa_source_page.dart';
@@ -22,7 +23,22 @@ void main() {
 }
 
 void platformSpecificAppBarTest() {
+  // TODO(hrishikesh-kadam): Test stucks even after passing all tests.
+  // Skipping deep-link tests for Web Integration Test.
+  // File an issue someday.
+  bool skipDeepLinkTests = kIsWeb;
+
   group('getPlatformSpecificAppBar() Integration Test', () {
+    setUpAll(() {
+      configureLogging();
+    });
+
+    setUp(() {
+      if (kIsWeb) {
+        resetNavigationHistoryState();
+      }
+    });
+
     testWidgets('3 pages down and 2 pages up', (tester) async {
       await neowsPageIntegrationTest(tester);
 
@@ -35,7 +51,6 @@ void platformSpecificAppBarTest() {
       if (kIsWeb) {
         checkHistoryLengthAndSerialCount(3, 1);
       }
-
       final nasaSourcePageBackButton = find.byType(BackButton);
       await tester.tap(nasaSourcePageBackButton);
       await tester.pumpAndSettle();
@@ -49,7 +64,6 @@ void platformSpecificAppBarTest() {
 
     testWidgets('2 pages down and 1 page up', (tester) async {
       await nasaSourcePageIntegrationTest(tester);
-
       final nasaSourcePageBackButton = find.byType(BackButton);
       await tester.tap(nasaSourcePageBackButton);
       await tester.pumpAndSettle();
@@ -60,37 +74,41 @@ void platformSpecificAppBarTest() {
       }
     });
 
-    testWidgets('deep-link to 3rd level and press back', (tester) async {
-      app.main(initialLocation: NeowsPage.path);
+    testWidgets('deep-link to 3rd level and press back',
+        skip: skipDeepLinkTests, (tester) async {
+      tester.platformDispatcher.defaultRouteNameTestValue = NeowsPage.path;
+      app.main();
       await tester.pumpAndSettle();
+      tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(
           find.byType(NasaSourceScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NeowsScreen), findsOneWidget);
-
       final neowsPageBackButton = find.byType(BackButton);
       await tester.tap(neowsPageBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(NeowsScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
-        checkHistoryLengthAndSerialCount(2, 0);
+        checkHistoryLengthAndSerialCount(2, 1);
       }
     });
 
-    testWidgets('deep-link to 2nd level and press back', (tester) async {
-      app.main(initialLocation: NasaSourcePage.path);
+    testWidgets('deep-link to 2nd level and press back',
+        skip: skipDeepLinkTests, (tester) async {
+      tester.platformDispatcher.defaultRouteNameTestValue = NasaSourcePage.path;
+      app.main();
       await tester.pumpAndSettle();
+      tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NasaSourceScreen), findsOneWidget);
-
       final nasaSourcePageBackButton = find.byType(BackButton);
       await tester.tap(nasaSourcePageBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(NasaSourceScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
-        checkHistoryLengthAndSerialCount(2, 0);
+        checkHistoryLengthAndSerialCount(2, 1);
       }
     });
 

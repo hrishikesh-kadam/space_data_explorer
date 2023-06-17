@@ -42,11 +42,13 @@ AppBar getPlatformSpecificAppBar({
         if (history.length <= 1) {
           GoRouter.of(context).go(HomePage.path);
         } else {
-          Map state = history.state;
-          if (state.containsKey('serialCount')) {
+          Map? state = history.state;
+          if (state == null) {
+            GoRouter.of(context).go(HomePage.path);
+          } else if (state.containsKey('serialCount')) {
             final int serialCount = state['serialCount'];
             log.info('serialCount = $serialCount');
-            if (serialCount == 0) {
+            if (serialCount <= 0) {
               GoRouter.of(context).go(HomePage.path);
             } else {
               history.back();

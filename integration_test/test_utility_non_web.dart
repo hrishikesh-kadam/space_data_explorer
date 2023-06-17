@@ -8,6 +8,14 @@ import 'package:path_provider/path_provider.dart';
 
 import 'package:space_data_explorer/globals.dart';
 
+void resetNavigationHistoryState() {
+  throw UnimplementedError('Not evaluated for non Web Platforms yet');
+}
+
+void logNavigationHistoryState() {
+  throw UnimplementedError('Not evaluated for non Web Platforms yet');
+}
+
 void checkHistoryLengthAndSerialCount(
   int historyLength,
   int serialCount,

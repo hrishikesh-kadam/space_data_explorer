@@ -7,6 +7,22 @@ import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/globals.dart';
 
+void resetNavigationHistoryState() {
+  final html.History history = html.window.history;
+  Map? state = history.state;
+  if (state != null) {
+    history.go(-(history.length - 1));
+  }
+  // history.replaceState(null, '', null);
+}
+
+void logNavigationHistoryState() {
+  final html.History history = html.window.history;
+  log.fine('history.length = ${history.length}');
+  Map? state = history.state;
+  log.fine('history.state = $state');
+}
+
 void checkHistoryLengthAndSerialCount(
   int historyLength,
   int serialCount,
