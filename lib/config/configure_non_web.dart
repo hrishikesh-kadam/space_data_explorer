@@ -23,11 +23,11 @@ AppBar getPlatformSpecificAppBar({
         final extraObject = GoRouterState.of(context).extra;
         Level logLevel = flutterTest ? Level.INFO : Level.SEVERE;
         if (extraObject == null) {
+          // TODO(hrishikesh-kadam): Try for pop like animation
           GoRouter.of(context).go(HomePage.path);
         } else if (extraObject is Map) {
           Map extraMap = extraObject;
           if (extraMap.containsKey(isNormalLink)) {
-            // TODO(hrishikesh-kadam): Pop not animating
             GoRouter.of(context).pop();
           } else {
             log.log(logLevel, 'Unusual navigation observed');

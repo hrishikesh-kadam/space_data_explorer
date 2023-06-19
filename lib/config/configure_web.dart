@@ -40,6 +40,7 @@ AppBar getPlatformSpecificAppBar({
         final html.History history = html.window.history;
         log.info('history.length = ${history.length}');
         if (history.length <= 1) {
+          // TODO(hrishikesh-kadam): Try for pop like animation
           GoRouter.of(context).go(HomePage.path);
         } else {
           Map? state = history.state;
