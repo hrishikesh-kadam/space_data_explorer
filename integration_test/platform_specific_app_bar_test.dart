@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/config/configure_app.dart';
-import 'package:space_data_explorer/main.dart' as app;
 import 'package:space_data_explorer/pages/home_page.dart';
 import 'package:space_data_explorer/pages/nasa_source/nasa_source_page.dart';
 import 'package:space_data_explorer/pages/nasa_source/nasa_source_screen.dart';
@@ -14,6 +13,7 @@ import 'package:space_data_explorer/pages/nasa_source/neows_page.dart';
 import 'package:space_data_explorer/pages/nasa_source/neows_screen.dart';
 import 'nasa_source_page_test.dart';
 import 'neows_page_test.dart';
+import 'space_data_explorer_app_test.dart';
 import 'test_utility.dart';
 
 void main() {
@@ -30,7 +30,7 @@ void platformSpecificAppBarTest() {
 
   group('getPlatformSpecificAppBar() Integration Test', () {
     setUpAll(() {
-      configureLogging();
+      configureApp();
     });
 
     setUp(() {
@@ -40,8 +40,7 @@ void platformSpecificAppBarTest() {
     });
 
     testWidgets('3 pages down and 2 pages up', (tester) async {
-      await neowsPageIntegrationTest(tester);
-
+      await pumpNeowsPageAsNormalLink(tester);
       final neowsPageBackButton = find.byType(BackButton);
       await tester.tap(neowsPageBackButton);
       await tester.pumpAndSettle();
@@ -63,7 +62,7 @@ void platformSpecificAppBarTest() {
     });
 
     testWidgets('2 pages down and 1 page up', (tester) async {
-      await nasaSourcePageIntegrationTest(tester);
+      await pumpNasaSourcePageAsNormalLink(tester);
       final nasaSourcePageBackButton = find.byType(BackButton);
       await tester.tap(nasaSourcePageBackButton);
       await tester.pumpAndSettle();
@@ -77,8 +76,7 @@ void platformSpecificAppBarTest() {
     testWidgets('deep-link to 3rd level and press back',
         skip: skipDeepLinkTests, (tester) async {
       tester.platformDispatcher.defaultRouteNameTestValue = NeowsPage.path;
-      app.main();
-      await tester.pumpAndSettle();
+      await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(
@@ -97,8 +95,7 @@ void platformSpecificAppBarTest() {
     testWidgets('deep-link to 2nd level and press back',
         skip: skipDeepLinkTests, (tester) async {
       tester.platformDispatcher.defaultRouteNameTestValue = NasaSourcePage.path;
-      app.main();
-      await tester.pumpAndSettle();
+      await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NasaSourceScreen), findsOneWidget);
@@ -116,8 +113,11 @@ void platformSpecificAppBarTest() {
         '3 pages down and 1 page up but extra without the isNormalLink key',
         (tester) async {
       GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: 'appKey');
-      app.main(navigatorKey: navigatorKey);
-      await tester.pumpAndSettle();
+      await pumpApp(
+        tester,
+        navigatorKey: navigatorKey,
+      );
+      expect(find.byType(HomeScreen), findsOneWidget);
       GoRouter.of(navigatorKey.currentContext!).go(NeowsPage.path, extra: {});
       await tester.pumpAndSettle();
       final neowsPageBackButton = find.byType(BackButton);
@@ -136,8 +136,11 @@ void platformSpecificAppBarTest() {
     testWidgets('3 pages down and 1 page up but when extra is not a Map',
         (tester) async {
       GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: 'appKey');
-      app.main(navigatorKey: navigatorKey);
-      await tester.pumpAndSettle();
+      await pumpApp(
+        tester,
+        navigatorKey: navigatorKey,
+      );
+      expect(find.byType(HomeScreen), findsOneWidget);
       GoRouter.of(navigatorKey.currentContext!).go(NeowsPage.path, extra: []);
       await tester.pumpAndSettle();
       final neowsPageBackButton = find.byType(BackButton);

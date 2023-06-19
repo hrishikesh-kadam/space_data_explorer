@@ -1,21 +1,44 @@
+import 'package:flutter/material.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:space_data_explorer/config/configure_app.dart';
-import 'package:space_data_explorer/globals.dart';
 import 'package:space_data_explorer/pages/home_page.dart';
-import 'package:space_data_explorer/pages/nasa_source/nasa_source_page.dart';
 import 'package:space_data_explorer/pages/nasa_source/nasa_source_screen.dart';
-import 'package:space_data_explorer/space_data_explorer.dart';
+import 'package:space_data_explorer/pages/nasa_source/neows_page.dart';
+import 'package:space_data_explorer/pages/nasa_source/neows_screen.dart';
+import '../../../integration_test/nasa_source_page_test.dart';
 
 void main() {
-  testWidgets('NasaSourcePage Widget Test', (WidgetTester tester) async {
-    await tester.pumpWidget(SpaceDataExplorerApp(
-      initialLocation: NasaSourcePage.path,
-    ));
-    final int count = await tester.pumpAndSettle();
-    configureLogging();
-    log.info('${NasaSourcePage.path} pumped for $count');
-    expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
-    expect(find.byType(NasaSourceScreen), findsOneWidget);
+  group('NasaSourcePage Widget Test', () {
+    testWidgets('Navigate NasaSourcePage to NeowsPage to NasaSourcePage',
+        (WidgetTester tester) async {
+      await pumpNasaSourcePageAsInitialLocation(tester);
+      final neowsTextButton =
+          find.widgetWithText(TextButton, NeowsPage.pageName);
+      await tester.tap(neowsTextButton);
+      await tester.pumpAndSettle();
+      expect(
+          find.byType(NasaSourceScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(NeowsScreen), findsOneWidget);
+      final neowsPageBackButton = find.byType(BackButton);
+      await tester.tap(neowsPageBackButton);
+      await tester.pumpAndSettle();
+      expect(find.byType(NeowsScreen), findsNothing);
+      expect(find.byType(NasaSourceScreen), findsOneWidget);
+    });
+
+    testWidgets('NasaSourcePage', (WidgetTester tester) async {
+      await pumpNasaSourcePageAsInitialLocation(tester);
+    });
+
+    testWidgets('Navigate back from NasaSourcePage',
+        (WidgetTester tester) async {
+      await pumpNasaSourcePageAsNormalLink(tester);
+      final nasaSourcePageBackButton = find.byType(BackButton);
+      await tester.tap(nasaSourcePageBackButton);
+      await tester.pumpAndSettle();
+      expect(find.byType(NasaSourceScreen), findsNothing);
+      expect(find.byType(HomeScreen), findsOneWidget);
+    });
   });
 }

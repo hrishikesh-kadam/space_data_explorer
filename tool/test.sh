@@ -16,7 +16,6 @@ lcov --list coverage/e2e_test_lcov.info
 
 lcov --add-tracefile "coverage/unit_test_lcov.info" \
   --add-tracefile "coverage/widget_test_lcov.info" \
-  --add-tracefile "coverage/e2e_test_lcov.info" \
   --output-file "coverage/lcov.info"
 lcov --list coverage/lcov.info
 
