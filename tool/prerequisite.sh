@@ -109,10 +109,8 @@ if [[ ! -x $(command -v lcov) ]]; then
     brew install lcov
   elif [[ $(uname -s) =~ ^"MINGW" ]]; then
     choco install lcov
-    # TODO(hrishikesh-kadam): Replace raw link if ChocolateyInstall available in GITHUB_ACTIONS
-    # shellcheck disable=SC2154
-    echo "ChocolateyInstall=$ChocolateyInstall"
-    LCOV_ROOT_WIN="C:\ProgramData\chocolatey\lib\lcov\tools\bin"
+    : "${ChocolateyInstall:=C:\ProgramData\chocolatey}"
+    LCOV_ROOT_WIN="$ChocolateyInstall\lib\lcov\tools\bin"
     LCOV_ROOT_NIX=$(cygpath "$LCOV_ROOT_WIN")
     if [[ ! $PATH =~ $LCOV_ROOT_NIX ]]; then
       if [[ $GITHUB_ACTIONS == "true" ]]; then
