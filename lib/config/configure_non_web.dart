@@ -23,8 +23,9 @@ AppBar getPlatformSpecificAppBar({
         final extraObject = GoRouterState.of(context).extra;
         Level logLevel = flutterTest ? Level.INFO : Level.SEVERE;
         if (extraObject == null) {
-          // TODO(hrishikesh-kadam): Try for pop like animation
-          GoRouter.of(context).go(HomePage.path);
+          while (GoRouter.of(context).canPop()) {
+            GoRouter.of(context).pop();
+          }
         } else if (extraObject is Map) {
           Map extraMap = extraObject;
           if (extraMap.containsKey(isNormalLink)) {
@@ -32,7 +33,7 @@ AppBar getPlatformSpecificAppBar({
           } else {
             log.log(logLevel, 'Unusual navigation observed');
             log.log(logLevel, 'extra doesn\'t contains isNormalLink key');
-            final routeMatchList = getLitsOfRouteMatch(context);
+            final routeMatchList = getListOfRouteMatch(context);
             log.log(
                 logLevel, 'routeMatchList.length = ${routeMatchList.length}');
             GoRouter.of(context).go(HomePage.path);
@@ -40,7 +41,7 @@ AppBar getPlatformSpecificAppBar({
         } else {
           log.log(logLevel, 'Unusual navigation observed');
           log.log(logLevel, 'extra is not a Map');
-          final routeMatchList = getLitsOfRouteMatch(context);
+          final routeMatchList = getListOfRouteMatch(context);
           log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
           GoRouter.of(context).go(HomePage.path);
         }

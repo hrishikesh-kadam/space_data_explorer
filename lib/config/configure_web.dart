@@ -8,7 +8,6 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:go_router/go_router.dart';
 
 import '../globals.dart';
-import '../pages/home_page.dart';
 
 /// Notes -
 /// 1. When HashUrlStrategy is set, deep-link creates problems, because
@@ -40,17 +39,22 @@ AppBar getPlatformSpecificAppBar({
         final html.History history = html.window.history;
         log.info('history.length = ${history.length}');
         if (history.length <= 1) {
-          // TODO(hrishikesh-kadam): Try for pop like animation
-          GoRouter.of(context).go(HomePage.path);
+          while (GoRouter.of(context).canPop()) {
+            GoRouter.of(context).pop();
+          }
         } else {
           Map? state = history.state;
           if (state == null) {
-            GoRouter.of(context).go(HomePage.path);
+            while (GoRouter.of(context).canPop()) {
+              GoRouter.of(context).pop();
+            }
           } else if (state.containsKey('serialCount')) {
             final int serialCount = state['serialCount'];
             log.info('serialCount = $serialCount');
             if (serialCount <= 0) {
-              GoRouter.of(context).go(HomePage.path);
+              while (GoRouter.of(context).canPop()) {
+                GoRouter.of(context).pop();
+              }
             } else {
               history.back();
             }

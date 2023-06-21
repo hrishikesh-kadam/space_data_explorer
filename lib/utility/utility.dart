@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'utility_non_web.dart' if (dart.library.html) 'utility_web.dart'
     as platform;
 
-List getLitsOfRouteMatch(BuildContext context) {
+List getListOfRouteMatch(BuildContext context) {
   return GoRouter.of(context).routerDelegate.currentConfiguration.matches;
 }
 
