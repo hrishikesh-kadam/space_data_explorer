@@ -158,7 +158,8 @@ androidComponents {
             variant.applicationId.set(android.defaultConfig.applicationId)
             variant.outputs.each { output ->
                 // https://android.googlesource.com/platform/tools/base/+/studio-master-dev/build-system/gradle-core/src/main/java/com/android/build/api/variant/impl/VariantOutputImpl.kt
-                if (output.versionName.get() == android.defaultConfig.versionName + "-prod-release") {
+                def defaultVersionName = android.defaultConfig.versionName
+                if (output.versionName.get() == defaultVersionName + "-prod-release") {
                     output.versionName.set(android.defaultConfig.versionName)
                 }
             }
@@ -184,11 +185,13 @@ dependencies {
 
 task("printAllVariants") {
     doLast {
-        println "applicationId,versionName,signingConfig.keyAlias"
+        println "applicationId,versionNameSuffix,signingConfig.keyAlias"
         // https://developer.android.com/build/gradle-tips#create-different-versions-of-your-app
         android.applicationVariants.all { variant ->
+            def defaultVersionName = android.defaultConfig.versionName
+            def versionNameSuffix = variant.versionName.replaceFirst("^$defaultVersionName", "")
             println variant.applicationId + "," \
-                + variant.versionName + "," \
+                + versionNameSuffix + "," \
                 + variant.signingConfig.keyAlias
         }
     }
