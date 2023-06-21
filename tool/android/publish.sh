@@ -20,7 +20,9 @@ VERSION_NAME=$( \
 )
 
 pushd android &> /dev/null
-APPLICATION_ID=$(./gradlew -q :app:getApplicationId -PvariantName="${FLAVOR_ENV}Release")
+APPLICATION_ID=$(./gradlew \
+  -q :app:getApplicationId \
+  -PvariantName="${FLAVOR_ENV}Release")
 popd &> /dev/null
 
 TRACK=$(./tool/android/get-track-from-flavor-env.sh "$FLAVOR_ENV")

@@ -20,7 +20,7 @@ AppBar getPlatformSpecificAppBar({
     title: title,
     leading: BackButton(
       onPressed: () {
-        final extraObject = GoRouterState.of(context).extra;
+        final Object? extraObject = GoRouterState.of(context).extra;
         Level logLevel = flutterTest ? Level.INFO : Level.SEVERE;
         if (extraObject == null) {
           while (GoRouter.of(context).canPop()) {

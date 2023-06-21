@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
+import 'config/app_back_button_dispatcher.dart';
 import 'pages/home_page.dart';
 import 'pages/nasa_source/nasa_source_page.dart';
 import 'pages/nasa_source/neows_page.dart';
@@ -10,12 +11,13 @@ class SpaceDataExplorerApp extends StatelessWidget {
   SpaceDataExplorerApp({
     super.key,
     GlobalKey<NavigatorState>? navigatorKey,
-    this.initialLocation,
-    this.debugShowCheckedModeBanner = true,
-  }) {
-    _router = GoRouter(
+    String? initialLocation,
+    bool debugShowCheckedModeBanner = true,
+  })  : _debugShowCheckedModeBanner = debugShowCheckedModeBanner,
+        _initialLocation = initialLocation {
+    _goRouter = GoRouter(
       navigatorKey: navigatorKey,
-      initialLocation: initialLocation,
+      initialLocation: _initialLocation,
       routes: [
         GoRoute(
           path: '/',
@@ -37,18 +39,21 @@ class SpaceDataExplorerApp extends StatelessWidget {
     );
   }
 
-  final String? initialLocation;
-  late final GoRouter _router;
-  final bool debugShowCheckedModeBanner;
+  final String? _initialLocation;
+  late final GoRouter _goRouter;
+  final bool _debugShowCheckedModeBanner;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: _router,
+      routeInformationProvider: _goRouter.routeInformationProvider,
+      routeInformationParser: _goRouter.routeInformationParser,
+      routerDelegate: _goRouter.routerDelegate,
+      backButtonDispatcher: AppBackButtonDispatcher(goRouter: _goRouter),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+      debugShowCheckedModeBanner: _debugShowCheckedModeBanner,
     );
   }
 }

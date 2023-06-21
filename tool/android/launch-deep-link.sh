@@ -2,7 +2,17 @@
 
 set -e -o pipefail
 
+FLAVOR_ENV=$(./tool/get-flavor-env.sh)
+
+APP_URL=$(./tool/constants/app-url.sh)
+
+pushd android &> /dev/null
+APPLICATION_ID=$(./gradlew \
+  -q :app:getApplicationId \
+  -PvariantName="${FLAVOR_ENV}Debug")
+popd &> /dev/null
+
 adb shell am start -a android.intent.action.VIEW \
   -c android.intent.category.BROWSABLE \
-  -d "https://space-data-explorer.web.app/nasa-source/neows" \
-  dev.hrishikesh_kadam.flutter.space_data_explorer
+  -d "$APP_URL/nasa-source/neows" \
+  "$APPLICATION_ID"
