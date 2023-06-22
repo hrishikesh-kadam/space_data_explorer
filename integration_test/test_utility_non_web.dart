@@ -33,7 +33,7 @@ Future<void> testScreenshot(
     await binding.convertFlutterSurfaceToImage();
     isSurfaceRendered = true;
     const updateGoldens = bool.fromEnvironment('UPDATE_GOLDENS');
-    log.info('-> testScreenshot -> UPDATE_GOLDENS=$updateGoldens');
+    testLog.info('-> testScreenshot -> UPDATE_GOLDENS=$updateGoldens');
   }
   await tester.pumpAndSettle();
   final List<int> bytes = await binding.takeScreenshot(name);
@@ -43,7 +43,7 @@ Future<void> testScreenshot(
   final goldenFile = File('${directory.path}/$name');
   if (Platform.isAndroid) {
     if (const bool.fromEnvironment('UPDATE_GOLDENS')) {
-      log.info('-> testScreenshot -> ${goldenFile.path}');
+      testLog.finer('-> testScreenshot -> ${goldenFile.path}');
       goldenFile.writeAsBytesSync(bytes);
     } else {
       // TODO(hrishikesh-kadam): Check if following code can be updated.
@@ -61,7 +61,7 @@ Future<void> testScreenshot(
       await expectLater(bytes, matchesGoldenFile(goldenFile.uri));
     }
   } else {
-    log.info('-> testScreenshot -> ${goldenFile.path}');
+    testLog.finer('-> testScreenshot -> ${goldenFile.path}');
     await expectLater(bytes, matchesGoldenFile(goldenFile.uri));
   }
 }

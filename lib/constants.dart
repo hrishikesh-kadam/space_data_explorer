@@ -1,1 +1,1 @@
-const appNameKebabCase = 'space-data-explorer';
+const appNamePascalCase = 'SpaceDataExplorer';

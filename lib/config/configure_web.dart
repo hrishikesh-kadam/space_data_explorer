@@ -37,7 +37,7 @@ AppBar getPlatformSpecificAppBar({
     leading: BackButton(
       onPressed: () {
         final html.History history = html.window.history;
-        log.info('history.length = ${history.length}');
+        log.finer('history.length = ${history.length}');
         if (history.length <= 1) {
           while (GoRouter.of(context).canPop()) {
             GoRouter.of(context).pop();
@@ -50,7 +50,7 @@ AppBar getPlatformSpecificAppBar({
             }
           } else if (state.containsKey('serialCount')) {
             final int serialCount = state['serialCount'];
-            log.info('serialCount = $serialCount');
+            log.finer('serialCount = $serialCount');
             if (serialCount <= 0) {
               while (GoRouter.of(context).canPop()) {
                 GoRouter.of(context).pop();

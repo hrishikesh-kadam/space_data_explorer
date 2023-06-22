@@ -5,7 +5,10 @@ import 'package:logging/logging.dart';
 import 'constants.dart';
 import 'utility/utility.dart';
 
-final log = Logger(appNameKebabCase);
+bool flutterTest = isFlutterTest();
+
+final log = Logger(appNamePascalCase)
+  ..level = flutterTest ? Level.OFF : Level.FINER;
 
 const isNormalLink = 'isNormalLink';
 
@@ -15,8 +18,6 @@ Map getExtra() {
   extra[isNormalLink] = true;
   return extra;
 }
-
-bool flutterTest = isFlutterTest();
 
 @visibleForTesting
 bool isSurfaceRendered = false;

@@ -2,16 +2,16 @@
 
 set -ex -o pipefail
 
-flutter test test/unit_test \
-  --coverage --coverage-path "coverage/unit_test_lcov.info"
+flutter test test/unit_test --coverage \
+  --coverage-path "coverage/unit_test_lcov.info"
 lcov --list coverage/unit_test_lcov.info
 
-flutter test test/widget_test \
-  --coverage --coverage-path "coverage/widget_test_lcov.info"
+flutter test test/widget_test --coverage \
+  --coverage-path "coverage/widget_test_lcov.info"
 lcov --list coverage/widget_test_lcov.info
 
-flutter test test/e2e_test \
-  --coverage --coverage-path "coverage/e2e_test_lcov.info"
+flutter test test/e2e_test --coverage \
+  --coverage-path "coverage/e2e_test_lcov.info"
 lcov --list coverage/e2e_test_lcov.info
 
 lcov --add-tracefile "coverage/unit_test_lcov.info" \
@@ -19,7 +19,7 @@ lcov --add-tracefile "coverage/unit_test_lcov.info" \
   --output-file "coverage/lcov.info"
 lcov --list coverage/lcov.info
 
-git grep --extended-regexp "coverage:ignore-(line|start|file)" || true
+./tool/coverage/check-coverage-ignored.sh
 
 ./tool/web/integration-test.sh
 

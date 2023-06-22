@@ -32,9 +32,6 @@ void platformSpecificAppBarTest() {
   group('getPlatformSpecificAppBar() $testType Test', () {
     setUpAll(() {
       configureApp();
-      if (kIsWeb) {
-        configureLogging();
-      }
     });
 
     setUp(() {

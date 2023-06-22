@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 
+import '../constants.dart';
 import '../globals.dart';
 import '../pages/home_page.dart';
+import '../utility/utility.dart';
 
 class AppBackButtonDispatcher extends RootBackButtonDispatcher {
   AppBackButtonDispatcher({
@@ -15,13 +17,16 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
 
   final GoRouter _goRouter;
   late final RouterDelegate _goRouterDelegate;
+  final _log = Logger('$appNamePascalCase.AppBackButtonDispatcher');
 
   @override
   Future<bool> didPopRoute() async {
-    log.fine('-> Back button pressed');
+    _log.log(isAndroid ? Level.FINEST : Level.WARNING,
+        '-> AppBackButtonDispatcher -> didPopRoute()');
     final Object? extraObject = _goRouterDelegate.currentConfiguration.extra;
-    log.fine('-> Back button pressed -> extraObject = $extraObject');
-    Level logLevel = flutterTest ? Level.INFO : Level.SEVERE;
+    _log.finer(
+        '-> AppBackButtonDispatcher -> didPopRoute() -> extraObject = $extraObject');
+    Level logLevel = flutterTest ? Level.FINER : Level.SEVERE;
     if (extraObject == null) {
       final String fullPath = _goRouterDelegate.currentConfiguration.fullPath;
       if (fullPath == HomePage.path) {
@@ -36,19 +41,19 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
       if (extraMap.containsKey(isNormalLink)) {
         return _goRouterDelegate.popRoute();
       } else {
-        log.log(logLevel, 'Unusual navigation observed');
-        log.log(logLevel, 'extra doesn\'t contains isNormalLink key');
+        _log.log(logLevel, 'Unusual navigation observed');
+        _log.log(logLevel, 'extra doesn\'t contains isNormalLink key');
         final List routeMatchList =
             _goRouter.routerDelegate.currentConfiguration.matches;
-        log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
+        _log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
         _goRouter.go(HomePage.path);
       }
     } else {
-      log.log(logLevel, 'Unusual navigation observed');
-      log.log(logLevel, 'extra is not a Map');
+      _log.log(logLevel, 'Unusual navigation observed');
+      _log.log(logLevel, 'extra is not a Map');
       final List routeMatchList =
           _goRouter.routerDelegate.currentConfiguration.matches;
-      log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
+      _log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
       _goRouter.go(HomePage.path);
     }
     return true;

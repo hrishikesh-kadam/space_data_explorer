@@ -13,6 +13,7 @@ else
 fi
 for TARGET_PATH in "${TARGET_PATHS[@]}"; do
   flutter drive \
+    --dart-define="FLUTTER_TEST=true" \
     --driver test_driver/integration_test.dart \
     --target "$TARGET_PATH" \
     -d $DEVICE

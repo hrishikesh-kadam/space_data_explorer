@@ -12,9 +12,7 @@ import 'configure_non_web.dart' if (dart.library.html) 'configure_web.dart'
 
 void configureApp() {
   configureUrlStrategy();
-  if (!flutterTest) {
-    configureLogging(); // coverage:ignore-line
-  }
+  configureLogging();
 }
 
 AppBar getPlatformSpecificAppBar({
@@ -50,7 +48,8 @@ void configureLogging() {
   const String resetColor = '\u001B[39m';
 
   // Mandatory steps - https://pub.dev/packages/logging
-  Logger.root.level = Level.ALL;
+  hierarchicalLoggingEnabled = true;
+  Logger.root.level = flutterTest ? Level.OFF : Level.ALL;
   rootLoggerSubscription = Logger.root.onRecord.listen((record) {
     if (kDebugMode) {
       late final String color;

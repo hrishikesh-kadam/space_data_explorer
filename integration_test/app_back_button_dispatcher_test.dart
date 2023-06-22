@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -26,7 +27,12 @@ void appBackButtonDispatcherTest() {
   group('AppBackButtonDispatcher $testType Test', () {
     setUpAll(() {
       configureApp();
-      configureLogging();
+    });
+
+    setUp(() {
+      if (kIsWeb) {
+        resetNavigationHistoryState();
+      }
     });
 
     testWidgets('3 pages down and 2 pages up', (tester) async {
@@ -112,7 +118,7 @@ void appBackButtonDispatcherTest() {
       expect(find.byType(HomeScreen), findsOneWidget);
     });
 
-    testWidgets('1 page down and 1 page up', (tester) async {
+    testWidgets('Pump app and press back', (tester) async {
       await pumpApp(tester);
       await verifySystemNavigatorPop(tester);
     });

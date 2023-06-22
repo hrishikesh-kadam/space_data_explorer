@@ -18,9 +18,9 @@ void resetNavigationHistoryState() {
 
 void logNavigationHistoryState() {
   final html.History history = html.window.history;
-  log.fine('history.length = ${history.length}');
+  testLog.fine('history.length = ${history.length}');
   Map? state = history.state;
-  log.fine('history.state = $state');
+  testLog.fine('history.state = $state');
 }
 
 void checkHistoryLengthAndSerialCount(
@@ -30,20 +30,20 @@ void checkHistoryLengthAndSerialCount(
   final html.History history = html.window.history;
   Map state = history.state;
 
-  log.info('-> history.length = ${history.length}');
-  log.info('-> state[\'serialCount\'] = ${state['serialCount']}');
-  log.info('-> historyLength = $historyLength');
-  log.info('-> serialCount = $serialCount');
+  testLog.finer('-> history.length = ${history.length}');
+  testLog.finer('-> state[\'serialCount\'] = ${state['serialCount']}');
+  testLog.finer('-> historyLength = $historyLength');
+  testLog.finer('-> serialCount = $serialCount');
 
   // TODO(hrishikesh-kadam): Fails after `All tests passed!`
   // expect(history.length, historyLength);
   // expect(state['serialCount'], serialCount);
 
   if (history.length != historyLength) {
-    log.severe('history.length != historyLength');
+    driveLog.severe('history.length != historyLength');
   }
   if (state['serialCount'] != serialCount) {
-    log.severe('state[\'serialCount\'] != serialCount');
+    driveLog.severe('state[\'serialCount\'] != serialCount');
   }
 }
 

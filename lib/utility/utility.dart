@@ -7,6 +7,8 @@ import 'utility_non_web.dart' if (dart.library.html) 'utility_web.dart'
 
 // TODO(hrishikesh-kadam): Separate out helpers and utility
 
+bool isAndroid = platform.isAndroid;
+
 List getListOfRouteMatch(BuildContext context) {
   return GoRouter.of(context).routerDelegate.currentConfiguration.matches;
 }
