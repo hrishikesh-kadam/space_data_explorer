@@ -5,12 +5,16 @@ import 'package:flutter/material.dart';
 
 import 'package:logging/logging.dart';
 
+import '../globals.dart';
+
 import 'configure_non_web.dart' if (dart.library.html) 'configure_web.dart'
     as platform;
 
 void configureApp() {
   configureUrlStrategy();
-  configureLogging();
+  if (!flutterTest) {
+    configureLogging(); // coverage:ignore-line
+  }
 }
 
 AppBar getPlatformSpecificAppBar({

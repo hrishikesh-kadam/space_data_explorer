@@ -5,7 +5,7 @@ import 'dart:html' as html;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import 'package:space_data_explorer/globals.dart';
+import 'globals.dart';
 
 void resetNavigationHistoryState() {
   final html.History history = html.window.history;

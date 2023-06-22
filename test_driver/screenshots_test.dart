@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:integration_test/integration_test_driver_extended.dart';
 
-import 'package:space_data_explorer/globals.dart';
+import '../integration_test/globals.dart';
 
 // TODO(hrishikesh-kadam): onScreenshot() not working
 Future<void> main() async {

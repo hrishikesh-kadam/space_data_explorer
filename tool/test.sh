@@ -19,6 +19,8 @@ lcov --add-tracefile "coverage/unit_test_lcov.info" \
   --output-file "coverage/lcov.info"
 lcov --list coverage/lcov.info
 
+git grep --extended-regexp "coverage:ignore-(line|start|file)" || true
+
 ./tool/web/integration-test.sh
 
 if [[ ! $GITHUB_ACTIONS ]]; then
