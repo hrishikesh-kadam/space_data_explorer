@@ -23,7 +23,7 @@ void logNavigationHistoryState() {
   testLog.fine('history.state = $state');
 }
 
-void checkHistoryLengthAndSerialCount(
+bool verifyHistoryLengthAndSerialCount(
   int historyLength,
   int serialCount,
 ) {
@@ -39,11 +39,18 @@ void checkHistoryLengthAndSerialCount(
   // expect(history.length, historyLength);
   // expect(state['serialCount'], serialCount);
 
-  if (history.length != historyLength) {
+  bool historyLengthNotEqual = false;
+  bool serialCountNotEqual = false;
+  if (historyLengthNotEqual = history.length != historyLength) {
     driveLog.severe('history.length != historyLength');
   }
-  if (state['serialCount'] != serialCount) {
+  if (serialCountNotEqual = state['serialCount'] != serialCount) {
     driveLog.severe('state[\'serialCount\'] != serialCount');
+  }
+  if (historyLengthNotEqual || serialCountNotEqual) {
+    return false;
+  } else {
+    return true;
   }
 }
 

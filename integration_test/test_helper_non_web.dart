@@ -17,7 +17,7 @@ void logNavigationHistoryState() {
   throw UnimplementedError('Not evaluated for non Web Platforms yet');
 }
 
-void checkHistoryLengthAndSerialCount(
+bool verifyHistoryLengthAndSerialCount(
   int historyLength,
   int serialCount,
 ) {

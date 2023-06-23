@@ -49,7 +49,7 @@ void platformSpecificAppBarTest() {
       expect(find.byType(NasaSourceScreen), findsOneWidget);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       if (kIsWeb) {
-        checkHistoryLengthAndSerialCount(3, 1);
+        verifyHistoryLengthAndSerialCount(3, 1);
       }
       final nasaSourcePageBackButton = find.byType(BackButton);
       await tester.tap(nasaSourcePageBackButton);
@@ -58,7 +58,7 @@ void platformSpecificAppBarTest() {
       expect(find.byType(NasaSourceScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
-        checkHistoryLengthAndSerialCount(3, 0);
+        verifyHistoryLengthAndSerialCount(3, 0);
       }
     });
 
@@ -70,7 +70,7 @@ void platformSpecificAppBarTest() {
       expect(find.byType(NasaSourceScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
-        checkHistoryLengthAndSerialCount(2, 0);
+        verifyHistoryLengthAndSerialCount(2, 0);
       }
     });
 
@@ -89,7 +89,7 @@ void platformSpecificAppBarTest() {
       expect(find.byType(NeowsScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
-        checkHistoryLengthAndSerialCount(2, 1);
+        verifyHistoryLengthAndSerialCount(2, 1);
       }
     });
 
@@ -106,7 +106,7 @@ void platformSpecificAppBarTest() {
       expect(find.byType(NasaSourceScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
-        checkHistoryLengthAndSerialCount(2, 1);
+        verifyHistoryLengthAndSerialCount(2, 1);
       }
     });
 
@@ -130,7 +130,7 @@ void platformSpecificAppBarTest() {
       // In case of web this would be normal navigation because
       // there is no check for extra
       if (kIsWeb) {
-        checkHistoryLengthAndSerialCount(2, 0);
+        verifyHistoryLengthAndSerialCount(2, 0);
       }
     });
 
@@ -153,7 +153,7 @@ void platformSpecificAppBarTest() {
       // In case of web this would be normal navigation because
       // there is no check for extra
       if (kIsWeb) {
-        checkHistoryLengthAndSerialCount(2, 0);
+        verifyHistoryLengthAndSerialCount(2, 0);
       }
     });
   });
