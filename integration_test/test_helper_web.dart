@@ -42,10 +42,10 @@ bool verifyHistoryLengthAndSerialCount(
   bool historyLengthNotEqual = false;
   bool serialCountNotEqual = false;
   if (historyLengthNotEqual = history.length != historyLength) {
-    driveLog.severe('history.length != historyLength');
+    printLog.severe('history.length != historyLength');
   }
   if (serialCountNotEqual = state['serialCount'] != serialCount) {
-    driveLog.severe('state[\'serialCount\'] != serialCount');
+    printLog.severe('state[\'serialCount\'] != serialCount');
   }
   if (historyLengthNotEqual || serialCountNotEqual) {
     return false;

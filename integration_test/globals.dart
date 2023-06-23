@@ -4,7 +4,7 @@ import 'package:space_data_explorer/constants.dart';
 import 'test_helper.dart';
 
 final testLog = Logger('$appNamePascalCase.Test');
-final driveLog = Logger('${testLog.fullName}.Drive')..level = Level.ALL;
+final printLog = Logger('${testLog.fullName}.Print')..level = Level.ALL;
 
 String testType = _testType ??= getTestType();
 String? _testType;

@@ -7,8 +7,7 @@ import 'helper/helper.dart';
 
 bool flutterTest = isFlutterTest();
 
-final log = Logger(appNamePascalCase)
-  ..level = flutterTest ? Level.OFF : Level.FINER;
+final log = Logger(appNamePascalCase);
 
 const isNormalLink = 'isNormalLink';
 
