@@ -5,8 +5,8 @@ import 'package:logging/logging.dart';
 
 import '../constants.dart';
 import '../globals.dart';
+import '../helper/helper.dart';
 import '../pages/home_page.dart';
-import '../utility/utility.dart';
 
 class AppBackButtonDispatcher extends RootBackButtonDispatcher {
   AppBackButtonDispatcher({

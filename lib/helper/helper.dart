@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
-import 'utility_non_web.dart' if (dart.library.html) 'utility_web.dart'
+import 'helper_non_web.dart' if (dart.library.html) 'helper_web.dart'
     as platform;
-
-// TODO(hrishikesh-kadam): Separate out helpers and utility
 
 bool isAndroid = platform.isAndroid;
 

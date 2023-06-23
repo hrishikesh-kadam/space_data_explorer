@@ -15,7 +15,7 @@ import 'globals.dart';
 import 'nasa_source_page_test.dart';
 import 'neows_page_test.dart';
 import 'space_data_explorer_app_test.dart';
-import 'test_utility.dart';
+import 'test_helper.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

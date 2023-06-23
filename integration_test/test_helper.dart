@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import 'test_utility_non_web.dart'
-    if (dart.library.html) 'test_utility_web.dart' as platform;
+import 'test_helper_non_web.dart'
+    if (dart.library.html) 'test_helper_web.dart' as platform;
 
 String getTestType() {
   try {

@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 
 import '../globals.dart';
+import '../helper/helper.dart';
 import '../pages/home_page.dart';
-import '../utility/utility.dart';
 
 void configureUrlStrategy() {
   // No-op in non-web platforms.

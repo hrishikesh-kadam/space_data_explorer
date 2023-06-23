@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 
 import 'constants.dart';
-import 'utility/utility.dart';
+import 'helper/helper.dart';
 
 bool flutterTest = isFlutterTest();
 

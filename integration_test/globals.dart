@@ -1,7 +1,7 @@
 import 'package:logging/logging.dart';
 
 import 'package:space_data_explorer/constants.dart';
-import 'test_utility.dart';
+import 'test_helper.dart';
 
 final testLog = Logger('$appNamePascalCase.Test');
 final driveLog = Logger('${testLog.fullName}.Drive')..level = Level.ALL;
