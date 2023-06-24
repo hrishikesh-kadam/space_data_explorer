@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logging/logging.dart';
 
-import 'package:space_data_explorer/config/config.dart';
+import 'package:space_data_explorer/config/logging.dart';
 import 'package:space_data_explorer/extensions/string.dart';
 
 // TODO(hrishikesh-kadam): Keep an eye on Checks package.
