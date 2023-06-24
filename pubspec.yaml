@@ -12,8 +12,9 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  hrk_logging: 
+    path: packages/hrk_logging
   go_router: ^8.0.5
-  logging: ^1.1.0
 
 dev_dependencies:
   flutter_test:

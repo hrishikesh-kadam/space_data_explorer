@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
-import 'package:logging/logging.dart';
+import 'package:hrk_logging/hrk_logging.dart';
 
 import '../globals.dart';
 import '../helper/helper.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'logging.dart';
+import 'package:hrk_logging/hrk_logging.dart';
 
 // ignore: directives_ordering
 import 'config_non_web.dart' if (dart.library.html) 'config_web.dart'
@@ -8,7 +8,7 @@ import 'config_non_web.dart' if (dart.library.html) 'config_web.dart'
 
 void configureApp() {
   configureUrlStrategy();
-  configureLogging();
+  configureHrkLogging();
 }
 
 AppBar getPlatformSpecificAppBar({

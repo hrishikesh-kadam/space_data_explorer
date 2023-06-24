@@ -1,0 +1,13 @@
+name: hrk_logging
+description: Colorful logs by HRK
+version: 0.1.0
+
+environment:
+  sdk: ^3.0.0
+
+dependencies:
+  logging: ^1.1.0
+
+dev_dependencies:
+  lints: ^2.0.0
+  test: ^1.21.0

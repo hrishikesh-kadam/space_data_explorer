@@ -1,20 +1,18 @@
 import 'dart:async';
 
-import 'package:flutter_test/flutter_test.dart';
-import 'package:logging/logging.dart';
-
-import 'package:space_data_explorer/config/logging.dart';
-import 'package:space_data_explorer/extensions/string.dart';
-
-// TODO(hrishikesh-kadam): Keep an eye on Checks package.
-// https://pub.dev/packages/checks
+import 'package:hrk_logging/hrk_logging.dart';
+import 'package:test/test.dart';
 
 void main() {
-  String name = 'TestLogger';
+  final String name = 'HrkLogger';
 
-  group('Logger Unit Test', () {
-    test('Print', () {
-      configureLogging();
+  group('HrkLogging Test', () {
+    test('Assert HrkLevel', () {
+      HrkLevel.LEVELS.contains(HrkLevel.DEBUG);
+    });
+
+    test('Print log', () {
+      configureHrkLogging();
       final log = Logger(name)..level = Level.ALL;
       log.shout('sample shout');
       log.severe('sample severe');
@@ -28,7 +26,7 @@ void main() {
       Logger.root.clearListeners();
     });
 
-    test('Assert', () async {
+    test('Assert log', () async {
       Level level = Level.SHOUT;
       String message = 'sample ${level.toString().toLowerCase()}';
       RegExp pattern = RegExp('^$name: '
@@ -72,7 +70,7 @@ void main() {
           '$message\$');
       await verifyLog(name, level, message, pattern);
 
-      level = DEBUG;
+      level = HrkLevel.DEBUG;
       message = 'sample ${level.toString().toLowerCase()}';
       pattern = RegExp('^$name: '
           '${RegExp.escape('${AnsiColor.blue}${Emoji.debug}')} '
@@ -113,7 +111,7 @@ Future<void> verifyLog(
 ) async {
   await runZoned(
     () async {
-      configureLogging();
+      configureHrkLogging();
       final log = Logger(name)..level = level;
       log.log(level, message);
       Logger.root.clearListeners();
