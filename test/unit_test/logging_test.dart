@@ -13,7 +13,7 @@ void main() {
   String name = 'TestLogger';
 
   group('Logger Unit Test', () {
-    test('Print', skip: true, () {
+    test('Print', () {
       configureLogging();
       final log = Logger(name)..level = Level.ALL;
       log.shout('sample shout');
@@ -32,37 +32,37 @@ void main() {
       Level level = Level.SHOUT;
       String message = 'sample ${level.toString().toLowerCase()}';
       RegExp pattern = RegExp('^$name: '
-          '${RegExp.escape('$redAnsiColor$shoutEmoji')} '
+          '${RegExp.escape('${AnsiColor.red}${Emoji.shout}')} '
           '${level.toString().capitalize()}: .*'
           '$message'
-          '${RegExp.escape(resetAnsiColor)}\$');
+          '${RegExp.escape(AnsiColor.reset)}\$');
       await verifyLog(name, level, message, pattern);
 
       level = Level.SEVERE;
       message = 'sample ${level.toString().toLowerCase()}';
       pattern = RegExp('^$name: '
-          '${RegExp.escape('$redAnsiColor$severeEmoji')} '
+          '${RegExp.escape('${AnsiColor.red}${Emoji.severe}')} '
           '${level.toString().capitalize()}: .*'
           '$message'
-          '${RegExp.escape(resetAnsiColor)}\$');
+          '${RegExp.escape(AnsiColor.reset)}\$');
       await verifyLog(name, level, message, pattern);
 
       level = Level.WARNING;
       message = 'sample ${level.toString().toLowerCase()}';
       pattern = RegExp('^$name: '
-          '${RegExp.escape('$yellowAnsiColor$warningEmoji')} '
+          '${RegExp.escape('${AnsiColor.yellow}${Emoji.warning}')} '
           '${level.toString().capitalize()}: .*'
           '$message'
-          '${RegExp.escape(resetAnsiColor)}\$');
+          '${RegExp.escape(AnsiColor.reset)}\$');
       await verifyLog(name, level, message, pattern);
 
       level = Level.INFO;
       message = 'sample ${level.toString().toLowerCase()}';
       pattern = RegExp('^$name: '
-          '${RegExp.escape('$greenAnsiColor$infoEmoji')} '
+          '${RegExp.escape('${AnsiColor.green}${Emoji.info}')} '
           '${level.toString().capitalize()}: .*'
           '$message'
-          '${RegExp.escape(resetAnsiColor)}\$');
+          '${RegExp.escape(AnsiColor.reset)}\$');
       await verifyLog(name, level, message, pattern);
 
       level = Level.CONFIG;
@@ -75,10 +75,10 @@ void main() {
       level = DEBUG;
       message = 'sample ${level.toString().toLowerCase()}';
       pattern = RegExp('^$name: '
-          '${RegExp.escape('$blueAnsiColor$debugEmoji')} '
+          '${RegExp.escape('${AnsiColor.blue}${Emoji.debug}')} '
           '${level.toString().capitalize()}: .*'
           '$message'
-          '${RegExp.escape(resetAnsiColor)}\$');
+          '${RegExp.escape(AnsiColor.reset)}\$');
       await verifyLog(name, level, message, pattern);
 
       level = Level.FINE;

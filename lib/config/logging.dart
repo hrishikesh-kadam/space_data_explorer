@@ -19,18 +19,22 @@ extension HrkLogger on Logger {
 // Otherwise if called twice or more, log are printed that many times
 StreamSubscription<LogRecord>? rootLoggerSubscription;
 
-const String shoutEmoji = '😱';
-const String severeEmoji = '🚫';
-const String warningEmoji = '🚧';
-const String infoEmoji = '📗';
-const String debugEmoji = '🐛';
+class Emoji {
+  static const String shout = '😱';
+  static const String severe = '🚫';
+  static const String warning = '🚧';
+  static const String info = '📗';
+  static const String debug = '🐛';
+}
 
 // Source - https://github.com/flutter/flutter/blob/master/packages/flutter_tools/lib/src/base/terminal.dart
-const String redAnsiColor = '\u001b[31m';
-const String greenAnsiColor = '\u001b[32m';
-const String yellowAnsiColor = '\u001b[33m';
-const String blueAnsiColor = '\u001b[34m';
-const String resetAnsiColor = '\u001B[39m';
+class AnsiColor {
+  static const String red = '\u001b[31m';
+  static const String green = '\u001b[32m';
+  static const String yellow = '\u001b[33m';
+  static const String blue = '\u001b[34m';
+  static const String reset = '\u001B[39m';
+}
 
 void configureLogging() {
   if (rootLoggerSubscription != null) {
@@ -47,25 +51,25 @@ void configureLogging() {
     late final String emojiSpacer;
     late final String resetColor;
     if (record.level == Level.SHOUT) {
-      emoji = shoutEmoji;
-      color = redAnsiColor;
+      emoji = Emoji.shout;
+      color = AnsiColor.red;
     } else if (record.level == Level.SEVERE) {
-      emoji = severeEmoji;
-      color = redAnsiColor;
+      emoji = Emoji.severe;
+      color = AnsiColor.red;
     } else if (record.level == Level.WARNING) {
-      emoji = warningEmoji;
-      color = yellowAnsiColor;
+      emoji = Emoji.warning;
+      color = AnsiColor.yellow;
     } else if (record.level == Level.INFO) {
-      emoji = infoEmoji;
-      color = greenAnsiColor;
+      emoji = Emoji.info;
+      color = AnsiColor.green;
     } else if (record.level == DEBUG) {
-      emoji = debugEmoji;
-      color = blueAnsiColor;
+      emoji = Emoji.debug;
+      color = AnsiColor.blue;
     } else {
       color = emoji = '';
     }
     emojiSpacer = emoji.isEmpty ? '' : ' ';
-    resetColor = color.isEmpty ? '' : resetAnsiColor;
+    resetColor = color.isEmpty ? '' : AnsiColor.reset;
     // ignore: avoid_print
     print(
       '${record.loggerName}: '

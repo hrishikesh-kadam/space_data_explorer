@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'logging.dart';
 
 // ignore: directives_ordering
-import 'config_non_web.dart' if (dart.library.html) 'configure_web.dart'
+import 'config_non_web.dart' if (dart.library.html) 'config_web.dart'
     as platform;
 
 void configureApp() {
