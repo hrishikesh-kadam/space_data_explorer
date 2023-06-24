@@ -4,176 +4,124 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:logging/logging.dart';
 
 import 'package:space_data_explorer/config/configure_app.dart';
-import 'package:space_data_explorer/globals.dart';
+import 'package:space_data_explorer/extensions/string.dart';
 
 // TODO(hrishikesh-kadam): Keep an eye on Checks package.
 // https://pub.dev/packages/checks
 
 void main() {
+  String name = 'TestLogger';
+
   group('Logger Unit Test', () {
-    test('Print', skip: true, () async {
+    test('Print', skip: true, () {
       configureLogging();
-      log.level = Level.ALL;
+      final log = Logger(name)..level = Level.ALL;
       log.shout('sample shout');
       log.severe('sample severe');
       log.warning('sample warning');
       log.info('sample info');
+      log.config('sample config');
       log.debug('sample debug');
       log.fine('sample fine');
       log.finer('sample finer');
       log.finest('sample finest');
+      Logger.root.clearListeners();
     });
 
     test('Assert', () async {
-      String name = 'TestLogger';
-      String message = 'sample shout';
+      Level level = Level.SHOUT;
+      String message = 'sample ${level.toString().toLowerCase()}';
       RegExp pattern = RegExp('^$name: '
-          '${RegExp.escape('\x1B[31m$shoutEmoji')} Shout: .*'
+          '${RegExp.escape('$redAnsiColor$shoutEmoji')} '
+          '${level.toString().capitalize()}: .*'
           '$message'
-          '${RegExp.escape('\x1B[39m')}'
-          r'$');
-      await runZoned(
-        () async {
-          configureLogging();
-          final log = Logger(name)..level = Level.SHOUT;
-          log.shout(message);
-        },
-        zoneSpecification: ZoneSpecification(
-          print: (self, parent, zone, line) {
-            expect(true, pattern.hasMatch(line));
-          },
-        ),
-      );
+          '${RegExp.escape(resetAnsiColor)}\$');
+      await verifyLog(name, level, message, pattern);
 
-      message = 'sample severe';
+      level = Level.SEVERE;
+      message = 'sample ${level.toString().toLowerCase()}';
       pattern = RegExp('^$name: '
-          '${RegExp.escape('\x1B[31m$severeEmoji')} Severe: .*'
+          '${RegExp.escape('$redAnsiColor$severeEmoji')} '
+          '${level.toString().capitalize()}: .*'
           '$message'
-          '${RegExp.escape('\x1B[39m')}'
-          r'$');
-      await runZoned(
-        () async {
-          configureLogging();
-          final log = Logger(name)..level = Level.SEVERE;
-          log.severe(message);
-        },
-        zoneSpecification: ZoneSpecification(
-          print: (self, parent, zone, line) {
-            expect(true, pattern.hasMatch(line));
-          },
-        ),
-      );
+          '${RegExp.escape(resetAnsiColor)}\$');
+      await verifyLog(name, level, message, pattern);
 
-      message = 'sample warning';
+      level = Level.WARNING;
+      message = 'sample ${level.toString().toLowerCase()}';
       pattern = RegExp('^$name: '
-          '${RegExp.escape('\x1B[33m$warningEmoji')} Warning: .*'
+          '${RegExp.escape('$yellowAnsiColor$warningEmoji')} '
+          '${level.toString().capitalize()}: .*'
           '$message'
-          '${RegExp.escape('\x1B[39m')}'
-          r'$');
-      await runZoned(
-        () async {
-          configureLogging();
-          final log = Logger(name)..level = Level.WARNING;
-          log.warning(message);
-        },
-        zoneSpecification: ZoneSpecification(
-          print: (self, parent, zone, line) {
-            expect(true, pattern.hasMatch(line));
-          },
-        ),
-      );
+          '${RegExp.escape(resetAnsiColor)}\$');
+      await verifyLog(name, level, message, pattern);
 
-      message = 'sample info';
+      level = Level.INFO;
+      message = 'sample ${level.toString().toLowerCase()}';
       pattern = RegExp('^$name: '
-          '${RegExp.escape('\x1B[32m$infoEmoji')} Info: .*'
+          '${RegExp.escape('$greenAnsiColor$infoEmoji')} '
+          '${level.toString().capitalize()}: .*'
           '$message'
-          '${RegExp.escape('\x1B[39m')}'
-          r'$');
-      await runZoned(
-        () async {
-          configureLogging();
-          final log = Logger(name)..level = Level.INFO;
-          log.info(message);
-        },
-        zoneSpecification: ZoneSpecification(
-          print: (self, parent, zone, line) {
-            expect(true, pattern.hasMatch(line));
-          },
-        ),
-      );
+          '${RegExp.escape(resetAnsiColor)}\$');
+      await verifyLog(name, level, message, pattern);
 
-      message = 'sample debug';
+      level = Level.CONFIG;
+      message = 'sample ${level.toString().toLowerCase()}';
       pattern = RegExp('^$name: '
-          '${RegExp.escape('\x1B[34m$debugEmoji')} Debug: .*'
-          '$message'
-          '${RegExp.escape('\x1B[39m')}'
-          r'$');
-      await runZoned(
-        () async {
-          configureLogging();
-          final log = Logger(name)..level = DEBUG;
-          log.debug(message);
-        },
-        zoneSpecification: ZoneSpecification(
-          print: (self, parent, zone, line) {
-            expect(true, pattern.hasMatch(line));
-          },
-        ),
-      );
+          '${level.toString().capitalize()}: .*'
+          '$message\$');
+      await verifyLog(name, level, message, pattern);
 
-      message = 'sample fine';
+      level = DEBUG;
+      message = 'sample ${level.toString().toLowerCase()}';
       pattern = RegExp('^$name: '
-          'Fine: .*'
+          '${RegExp.escape('$blueAnsiColor$debugEmoji')} '
+          '${level.toString().capitalize()}: .*'
           '$message'
-          r'$');
-      await runZoned(
-        () async {
-          configureLogging();
-          final log = Logger(name)..level = Level.FINE;
-          log.fine(message);
-        },
-        zoneSpecification: ZoneSpecification(
-          print: (self, parent, zone, line) {
-            expect(true, pattern.hasMatch(line));
-          },
-        ),
-      );
+          '${RegExp.escape(resetAnsiColor)}\$');
+      await verifyLog(name, level, message, pattern);
 
-      message = 'sample finer';
+      level = Level.FINE;
+      message = 'sample ${level.toString().toLowerCase()}';
       pattern = RegExp('^$name: '
-          'Finer: .*'
-          '$message'
-          r'$');
-      await runZoned(
-        () async {
-          configureLogging();
-          final log = Logger(name)..level = Level.FINER;
-          log.finer(message);
-        },
-        zoneSpecification: ZoneSpecification(
-          print: (self, parent, zone, line) {
-            expect(true, pattern.hasMatch(line));
-          },
-        ),
-      );
+          '${level.toString().capitalize()}: .*'
+          '$message\$');
+      await verifyLog(name, level, message, pattern);
 
-      message = 'sample finest';
+      level = Level.FINER;
+      message = 'sample ${level.toString().toLowerCase()}';
       pattern = RegExp('^$name: '
-          'Finest: .*'
-          '$message'
-          r'$');
-      await runZoned(
-        () async {
-          configureLogging();
-          final log = Logger(name)..level = Level.FINEST;
-          log.finest(message);
-        },
-        zoneSpecification: ZoneSpecification(
-          print: (self, parent, zone, line) {
-            expect(true, pattern.hasMatch(line));
-          },
-        ),
-      );
+          '${level.toString().capitalize()}: .*'
+          '$message\$');
+      await verifyLog(name, level, message, pattern);
+
+      level = Level.FINEST;
+      message = 'sample ${level.toString().toLowerCase()}';
+      pattern = RegExp('^$name: '
+          '${level.toString().capitalize()}: .*'
+          '$message\$');
+      await verifyLog(name, level, message, pattern);
     });
   });
+}
+
+Future<void> verifyLog(
+  String name,
+  Level level,
+  String message,
+  RegExp pattern,
+) async {
+  await runZoned(
+    () async {
+      configureLogging();
+      final log = Logger(name)..level = level;
+      log.log(level, message);
+      Logger.root.clearListeners();
+    },
+    zoneSpecification: ZoneSpecification(
+      print: (self, parent, zone, line) {
+        expect(true, pattern.hasMatch(line));
+      },
+    ),
+  );
 }

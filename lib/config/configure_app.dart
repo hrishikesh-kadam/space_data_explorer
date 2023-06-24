@@ -50,17 +50,17 @@ const String warningEmoji = '🚧';
 const String infoEmoji = '📗';
 const String debugEmoji = '🐛';
 
+// Source - https://github.com/flutter/flutter/blob/master/packages/flutter_tools/lib/src/base/terminal.dart
+const String redAnsiColor = '\u001b[31m';
+const String greenAnsiColor = '\u001b[32m';
+const String yellowAnsiColor = '\u001b[33m';
+const String blueAnsiColor = '\u001b[34m';
+const String resetAnsiColor = '\u001B[39m';
+
 void configureLogging() {
   if (rootLoggerSubscription != null) {
     return;
   }
-
-  // Source - https://github.com/flutter/flutter/blob/master/packages/flutter_tools/lib/src/base/terminal.dart
-  const String red = '\u001b[31m';
-  const String green = '\u001b[32m';
-  const String yellow = '\u001b[33m';
-  const String blue = '\u001b[34m';
-  const String kResetColor = '\u001B[39m';
 
   // Mandatory steps - https://pub.dev/packages/logging
   hierarchicalLoggingEnabled = true;
@@ -73,24 +73,24 @@ void configureLogging() {
     late final String resetColor;
     if (record.level == Level.SHOUT) {
       emoji = shoutEmoji;
-      color = red;
+      color = redAnsiColor;
     } else if (record.level == Level.SEVERE) {
       emoji = severeEmoji;
-      color = red;
+      color = redAnsiColor;
     } else if (record.level == Level.WARNING) {
       emoji = warningEmoji;
-      color = yellow;
+      color = yellowAnsiColor;
     } else if (record.level == Level.INFO) {
       emoji = infoEmoji;
-      color = green;
+      color = greenAnsiColor;
     } else if (record.level == DEBUG) {
       emoji = debugEmoji;
-      color = blue;
+      color = blueAnsiColor;
     } else {
       color = emoji = '';
     }
     emojiSpacer = emoji.isEmpty ? '' : ' ';
-    resetColor = color.isEmpty ? '' : kResetColor;
+    resetColor = color.isEmpty ? '' : resetAnsiColor;
     // ignore: avoid_print
     print(
       '${record.loggerName}: '
