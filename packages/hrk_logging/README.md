@@ -24,8 +24,9 @@ Colorful logs by HRK
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```console
+flutter pub add 'hrk_logging:{"git":{"url":"git@github.com:hrishikesh-kadam/space_data_explorer","ref":"dev","path":"packages/hrk_logging"}}'
+```
 
 ## Usage
 
