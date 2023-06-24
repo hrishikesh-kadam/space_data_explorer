@@ -27,6 +27,10 @@ dev_dependencies:
       url: https://github.com/fluttercommunity/import_sorter.git
       ref: f350497a11b1285c695595049e95a420068e7a9f
   path_provider: ^2.0.11
+  # TODO(hrishikesh-kadam): Remove this once hrk_logging package is published.
+  # flutter analyze was failing only in GitHub Actions CI
+  # Observed in 3.12.0-1.1.pre beta
+  test: ^1.24.1
 
 flutter:
   uses-material-design: true
