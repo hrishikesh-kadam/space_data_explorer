@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'config/configure_app.dart';
+import 'config/config.dart';
 import 'space_data_explorer.dart';
 
 void main({

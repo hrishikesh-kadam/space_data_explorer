@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../config/configure_app.dart';
+import '../config/config.dart';
 import 'base_page.dart';
 
 class DummyPage extends BasePage {

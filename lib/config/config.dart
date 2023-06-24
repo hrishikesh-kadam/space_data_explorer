@@ -8,7 +8,7 @@ import 'package:logging/logging.dart';
 import '../extensions/string.dart';
 import '../globals.dart';
 
-import 'configure_non_web.dart' if (dart.library.html) 'configure_web.dart'
+import 'config_non_web.dart' if (dart.library.html) 'configure_web.dart'
     as platform;
 
 void configureApp() {

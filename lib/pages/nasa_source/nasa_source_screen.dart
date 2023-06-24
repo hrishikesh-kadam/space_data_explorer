@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
-import '../../config/configure_app.dart';
+import '../../config/config.dart';
 import '../../globals.dart';
 import 'nasa_source_page.dart';
 import 'neows_page.dart';

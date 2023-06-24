@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../config/configure_app.dart';
+import '../../config/config.dart';
 import 'neows_page.dart';
 
 class NeowsScreen extends StatefulWidget {

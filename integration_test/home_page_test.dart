@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import 'package:space_data_explorer/config/configure_app.dart';
+import 'package:space_data_explorer/config/config.dart';
 import 'package:space_data_explorer/pages/home_page.dart';
 import 'package:space_data_explorer/space_data_explorer.dart';
 
