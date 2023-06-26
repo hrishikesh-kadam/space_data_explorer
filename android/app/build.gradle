@@ -63,7 +63,7 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        manifestPlaceholders += [ applicationLabel:constants.appNameSnakeCase ]
+        manifestPlaceholders += [ applicationLabel:constants.appName ]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
