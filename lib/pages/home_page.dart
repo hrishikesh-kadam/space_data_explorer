@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../globals.dart';
+import '../nasa/nasa_page.dart';
 import 'base_page.dart';
-import 'nasa_source/nasa_source_page.dart';
 
 class HomePage extends BasePage {
   const HomePage({
@@ -32,9 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Home Page'),
       ),
       body: TextButton(
-        child: const Text(NasaSourcePage.pageName),
+        child: const Text(NasaPage.pageName),
         onPressed: () async {
-          GoRouter.of(context).go(NasaSourcePage.path, extra: getExtra());
+          GoRouter.of(context).go(NasaPage.path, extra: getExtra());
         },
       ),
     );

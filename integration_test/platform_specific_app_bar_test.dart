@@ -6,11 +6,11 @@ import 'package:go_router/go_router.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/config/config.dart';
+import 'package:space_data_explorer/nasa/nasa_page.dart';
+import 'package:space_data_explorer/nasa/nasa_screen.dart';
+import 'package:space_data_explorer/nasa/neows_page.dart';
+import 'package:space_data_explorer/nasa/neows_screen.dart';
 import 'package:space_data_explorer/pages/home_page.dart';
-import 'package:space_data_explorer/pages/nasa_source/nasa_source_page.dart';
-import 'package:space_data_explorer/pages/nasa_source/nasa_source_screen.dart';
-import 'package:space_data_explorer/pages/nasa_source/neows_page.dart';
-import 'package:space_data_explorer/pages/nasa_source/neows_screen.dart';
 import 'globals.dart';
 import 'nasa_source_page_test.dart';
 import 'neows_page_test.dart';
@@ -46,7 +46,7 @@ void platformSpecificAppBarTest() {
       await tester.tap(neowsPageBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(NeowsScreen), findsNothing);
-      expect(find.byType(NasaSourceScreen), findsOneWidget);
+      expect(find.byType(NasaScreen), findsOneWidget);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       if (kIsWeb) {
         verifyHistoryLengthAndSerialCount(3, 1);
@@ -55,7 +55,7 @@ void platformSpecificAppBarTest() {
       await tester.tap(nasaSourcePageBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(NeowsScreen), findsNothing);
-      expect(find.byType(NasaSourceScreen), findsNothing);
+      expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
         verifyHistoryLengthAndSerialCount(3, 0);
@@ -67,7 +67,7 @@ void platformSpecificAppBarTest() {
       final nasaSourcePageBackButton = find.byType(BackButton);
       await tester.tap(nasaSourcePageBackButton);
       await tester.pumpAndSettle();
-      expect(find.byType(NasaSourceScreen), findsNothing);
+      expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
         verifyHistoryLengthAndSerialCount(2, 0);
@@ -80,8 +80,7 @@ void platformSpecificAppBarTest() {
       await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
-      expect(
-          find.byType(NasaSourceScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NeowsScreen), findsOneWidget);
       final neowsPageBackButton = find.byType(BackButton);
       await tester.tap(neowsPageBackButton);
@@ -95,15 +94,15 @@ void platformSpecificAppBarTest() {
 
     testWidgets('deep-link to 2nd level and press back',
         skip: skipDeepLinkTests, (tester) async {
-      tester.platformDispatcher.defaultRouteNameTestValue = NasaSourcePage.path;
+      tester.platformDispatcher.defaultRouteNameTestValue = NasaPage.path;
       await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
-      expect(find.byType(NasaSourceScreen), findsOneWidget);
+      expect(find.byType(NasaScreen), findsOneWidget);
       final nasaSourcePageBackButton = find.byType(BackButton);
       await tester.tap(nasaSourcePageBackButton);
       await tester.pumpAndSettle();
-      expect(find.byType(NasaSourceScreen), findsNothing);
+      expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
         verifyHistoryLengthAndSerialCount(2, 1);
@@ -125,7 +124,7 @@ void platformSpecificAppBarTest() {
       await tester.tap(neowsPageBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(NeowsScreen), findsNothing);
-      expect(find.byType(NasaSourceScreen), findsNothing);
+      expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       // In case of web this would be normal navigation because
       // there is no check for extra
@@ -148,7 +147,7 @@ void platformSpecificAppBarTest() {
       await tester.tap(neowsPageBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(NeowsScreen), findsNothing);
-      expect(find.byType(NasaSourceScreen), findsNothing);
+      expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       // In case of web this would be normal navigation because
       // there is no check for extra

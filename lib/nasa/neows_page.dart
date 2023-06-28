@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../deferred_loading.dart';
-import '../base_page.dart';
-import 'nasa_source_page.dart';
+import '../pages/base_page.dart';
+import 'nasa_page.dart';
 import 'neows_screen.dart' deferred as neows_screen;
 
 class NeowsPage extends BasePage {
@@ -14,8 +14,8 @@ class NeowsPage extends BasePage {
   });
 
   static const String pageName = 'neows';
-  static const String displayName = 'NeoWs Screen';
-  static const String path = '${NasaSourcePage.path}/$pageName';
+  static const String displayName = 'NeoWs';
+  static const String path = '${NasaPage.path}/$pageName';
 }
 
 final neowsPage = NeowsPage(

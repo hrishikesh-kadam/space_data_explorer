@@ -6,11 +6,11 @@ import 'package:go_router/go_router.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/config/config.dart';
+import 'package:space_data_explorer/nasa/nasa_page.dart';
+import 'package:space_data_explorer/nasa/nasa_screen.dart';
+import 'package:space_data_explorer/nasa/neows_page.dart';
+import 'package:space_data_explorer/nasa/neows_screen.dart';
 import 'package:space_data_explorer/pages/home_page.dart';
-import 'package:space_data_explorer/pages/nasa_source/nasa_source_page.dart';
-import 'package:space_data_explorer/pages/nasa_source/nasa_source_screen.dart';
-import 'package:space_data_explorer/pages/nasa_source/neows_page.dart';
-import 'package:space_data_explorer/pages/nasa_source/neows_screen.dart';
 import 'globals.dart';
 import 'nasa_source_page_test.dart';
 import 'neows_page_test.dart';
@@ -40,12 +40,12 @@ void appBackButtonDispatcherTest() {
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
       expect(find.byType(NeowsScreen), findsNothing);
-      expect(find.byType(NasaSourceScreen), findsOneWidget);
+      expect(find.byType(NasaScreen), findsOneWidget);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
       expect(find.byType(NeowsScreen), findsNothing);
-      expect(find.byType(NasaSourceScreen), findsNothing);
+      expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });
 
@@ -53,7 +53,7 @@ void appBackButtonDispatcherTest() {
       await pumpNasaSourcePageAsNormalLink(tester);
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
-      expect(find.byType(NasaSourceScreen), findsNothing);
+      expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });
 
@@ -62,8 +62,7 @@ void appBackButtonDispatcherTest() {
       await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
-      expect(
-          find.byType(NasaSourceScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NeowsScreen), findsOneWidget);
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
@@ -72,14 +71,14 @@ void appBackButtonDispatcherTest() {
     });
 
     testWidgets('deep-link to 2nd level and press back', (tester) async {
-      tester.platformDispatcher.defaultRouteNameTestValue = NasaSourcePage.path;
+      tester.platformDispatcher.defaultRouteNameTestValue = NasaPage.path;
       await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
-      expect(find.byType(NasaSourceScreen), findsOneWidget);
+      expect(find.byType(NasaScreen), findsOneWidget);
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
-      expect(find.byType(NasaSourceScreen), findsNothing);
+      expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });
 
@@ -97,7 +96,7 @@ void appBackButtonDispatcherTest() {
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
       expect(find.byType(NeowsScreen), findsNothing);
-      expect(find.byType(NasaSourceScreen), findsNothing);
+      expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });
 
@@ -114,7 +113,7 @@ void appBackButtonDispatcherTest() {
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
       expect(find.byType(NeowsScreen), findsNothing);
-      expect(find.byType(NasaSourceScreen), findsNothing);
+      expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });
 

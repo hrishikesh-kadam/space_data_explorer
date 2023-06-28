@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:space_data_explorer/nasa/nasa_screen.dart';
+import 'package:space_data_explorer/nasa/neows_page.dart';
+import 'package:space_data_explorer/nasa/neows_screen.dart';
 import 'package:space_data_explorer/pages/home_page.dart';
-import 'package:space_data_explorer/pages/nasa_source/nasa_source_screen.dart';
-import 'package:space_data_explorer/pages/nasa_source/neows_page.dart';
-import 'package:space_data_explorer/pages/nasa_source/neows_screen.dart';
 import '../../../integration_test/nasa_source_page_test.dart';
 
 void main() {
@@ -17,14 +17,13 @@ void main() {
           find.widgetWithText(TextButton, NeowsPage.pageName);
       await tester.tap(neowsTextButton);
       await tester.pumpAndSettle();
-      expect(
-          find.byType(NasaSourceScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NeowsScreen), findsOneWidget);
       final neowsPageBackButton = find.byType(BackButton);
       await tester.tap(neowsPageBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(NeowsScreen), findsNothing);
-      expect(find.byType(NasaSourceScreen), findsOneWidget);
+      expect(find.byType(NasaScreen), findsOneWidget);
     });
 
     testWidgets('NasaSourcePage', (WidgetTester tester) async {
@@ -37,7 +36,7 @@ void main() {
       final nasaSourcePageBackButton = find.byType(BackButton);
       await tester.tap(nasaSourcePageBackButton);
       await tester.pumpAndSettle();
-      expect(find.byType(NasaSourceScreen), findsNothing);
+      expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });
   });

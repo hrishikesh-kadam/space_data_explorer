@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import 'package:space_data_explorer/pages/nasa_source/nasa_source_screen.dart';
-import 'package:space_data_explorer/pages/nasa_source/neows_page.dart';
-import 'package:space_data_explorer/pages/nasa_source/neows_screen.dart';
+import 'package:space_data_explorer/nasa/nasa_screen.dart';
+import 'package:space_data_explorer/nasa/neows_page.dart';
+import 'package:space_data_explorer/nasa/neows_screen.dart';
 import 'package:space_data_explorer/space_data_explorer.dart';
 import 'nasa_source_page_test.dart';
 
@@ -30,6 +30,6 @@ Future<void> pumpNeowsPageAsNormalLink(WidgetTester tester) async {
   final neowsTextButton = find.widgetWithText(TextButton, NeowsPage.pageName);
   await tester.tap(neowsTextButton);
   await tester.pumpAndSettle();
-  expect(find.byType(NasaSourceScreen, skipOffstage: false), findsOneWidget);
+  expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
   expect(find.byType(NeowsScreen), findsOneWidget);
 }
