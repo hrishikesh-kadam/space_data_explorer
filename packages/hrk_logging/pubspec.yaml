@@ -1,5 +1,6 @@
 name: hrk_logging
 description: Colorful logs by HRK
+publish_to: 'none'
 version: 0.1.0
 
 environment:
