@@ -18,14 +18,15 @@ Colorful logs by HRK
 - Colorful Logs
 - Emojis
 - Support for log.debug()
+- Hierarchical logging is enabled
+- Root Logger is set to `Level.ALL` in kDebugMode, else set to `Level.INFO`
 - Root Logger is set to `Level.OFF` in Dart and Flutter Test  
   See [lib/src/helper/helper_non_web.dart][]
-- Hierarchical logging is enabled
 
 ## Getting started
 
 ```console
-flutter pub add 'hrk_logging:{"git":{"url":"git@github.com:hrishikesh-kadam/space_data_explorer","ref":"dev","path":"packages/hrk_logging"}}'
+flutter pub add 'hrk_logging:{"git":{"url":"https://github.com/hrishikesh-kadam/space_data_explorer","ref":"dev","path":"packages/hrk_logging"}}'
 ```
 
 ## Usage
