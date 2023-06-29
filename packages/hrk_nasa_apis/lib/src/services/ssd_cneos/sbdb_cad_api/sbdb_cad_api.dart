@@ -13,9 +13,10 @@ class SbdbCadApi {
         );
   }
 
+  static final String path = 'cad.api';
   late final Dio _dio;
 
-  Future<void> get() async {
-    await _dio.get('');
+  Future<Response> get() async {
+    return await _dio.get('/$path');
   }
 }
