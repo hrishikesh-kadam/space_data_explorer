@@ -1,34 +1,34 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sbdb_cad_data.dart';
+part of 'sbdb_cad_body.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SbdbCad200Data _$$SbdbCad200DataFromJson(Map<String, dynamic> json) =>
-    _$SbdbCad200Data(
+_$SbdbCad200Body _$$SbdbCad200BodyFromJson(Map<String, dynamic> json) =>
+    _$SbdbCad200Body(
       Signature.fromJson(json['signature'] as Map<String, dynamic>),
       json['count'] as int,
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$SbdbCad200DataToJson(_$SbdbCad200Data instance) =>
+Map<String, dynamic> _$$SbdbCad200BodyToJson(_$SbdbCad200Body instance) =>
     <String, dynamic>{
       'signature': instance.signature,
       'count': instance.count,
       'runtimeType': instance.$type,
     };
 
-_$SbdbCad400Data _$$SbdbCad400DataFromJson(Map<String, dynamic> json) =>
-    _$SbdbCad400Data(
+_$SbdbCad400Body _$$SbdbCad400BodyFromJson(Map<String, dynamic> json) =>
+    _$SbdbCad400Body(
       json['message'] as String,
       json['moreInfo'] as String,
       json['code'] as String,
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$SbdbCad400DataToJson(_$SbdbCad400Data instance) =>
+Map<String, dynamic> _$$SbdbCad400BodyToJson(_$SbdbCad400Body instance) =>
     <String, dynamic>{
       'message': instance.message,
       'moreInfo': instance.moreInfo,
