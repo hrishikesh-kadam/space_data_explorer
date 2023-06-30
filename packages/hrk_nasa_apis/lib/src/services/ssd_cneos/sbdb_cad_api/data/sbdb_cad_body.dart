@@ -1,8 +1,8 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hrk_nasa_apis/src/services/ssd_cneos/data/signature.dart';
-import 'package:hrk_nasa_apis/src/services/ssd_cneos/sbdb_cad_api/data/sbdb_cad_data.dart';
+import '../../data/signature.dart';
+import 'sbdb_cad_data.dart';
 
 part 'sbdb_cad_body.freezed.dart';
 part 'sbdb_cad_body.g.dart';

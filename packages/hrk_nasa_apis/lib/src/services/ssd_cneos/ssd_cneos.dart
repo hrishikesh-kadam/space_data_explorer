@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:hrk_nasa_apis/src/jpl_nasa.dart';
+import '../../jpl_nasa.dart';
 
 class SsdCneos {
   static final Uri baseUrl = Uri(

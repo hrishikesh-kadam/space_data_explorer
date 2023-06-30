@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hrk_nasa_apis/src/services/ssd_cneos/sbdb_cad_api/data/sbdb_cad_body.dart';
-import 'package:hrk_nasa_apis/src/services/ssd_cneos/sbdb_cad_api/sbdb_cad_transformer.dart';
-import 'package:hrk_nasa_apis/src/services/ssd_cneos/ssd_cneos.dart';
-import 'package:hrk_nasa_apis/src/utility/utility.dart';
+
+import '../../../utility/utility.dart';
+import '../ssd_cneos.dart';
+import 'data/sbdb_cad_body.dart';
+import 'sbdb_cad_transformer.dart';
 
 class SbdbCadApi {
   SbdbCadApi({
