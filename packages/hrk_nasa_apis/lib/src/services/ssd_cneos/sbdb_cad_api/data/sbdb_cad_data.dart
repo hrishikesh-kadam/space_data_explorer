@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hrk_nasa_apis/src/services/ssd_cneos/signature.dart';
+import 'package:hrk_nasa_apis/src/services/ssd_cneos/data/signature.dart';
 
 part 'sbdb_cad_data.freezed.dart';
 part 'sbdb_cad_data.g.dart';
