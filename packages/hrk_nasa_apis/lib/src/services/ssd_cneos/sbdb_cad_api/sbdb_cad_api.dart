@@ -1,35 +1,52 @@
 import 'package:dio/dio.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hrk_nasa_apis/src/services/ssd_cneos/sbdb_cad_api/sbdb_cad_response.dart';
 import 'package:hrk_nasa_apis/src/services/ssd_cneos/sbdb_cad_api/sbdb_cad_transformer.dart';
 import 'package:hrk_nasa_apis/src/services/ssd_cneos/ssd_cneos.dart';
+import 'package:hrk_nasa_apis/src/utility/utility.dart';
 
 class SbdbCadApi {
   SbdbCadApi({
     Dio? dio,
   }) {
-    _dio = dio ?? Dio();
-    _dio.options.baseUrl = SsdCneos.baseUrl.toString();
-    _dio.transformer = SbdbCadTransformer();
-    _dio.options.validateStatus = _validateStatus;
+    _dio = dio ?? getDefaultDio();
   }
 
-  static final String path = 'cad.api';
+  static Dio getDefaultDio() {
+    return Dio()
+      ..options = SsdCneos.dioBaseOptions
+      ..options.validateStatus = _validateStatus
+      ..transformer = SbdbCadTransformer();
+  }
+
+  static const String path = 'cad.api';
   late final Dio _dio;
+  // TODO(hrishikesh-kadam): File a feature request
+  static const Map<int, FromJsonFunction> serializableMap = {
+    200: SbdbCad200Response.fromJson,
+    400: SbdbCad400Response.fromJson,
+  };
 
-  bool _validateStatus(int? status) => status != null;
-
-  Future<SbdbCadResponse> getDefault() async {
-    final response = await _dio.get('/$path');
-    return response.data;
+  static bool _validateStatus(int? status) {
+    return serializableMap.keys.contains(status);
   }
 
-  Future<SbdbCadResponse> get({
+  Future<Response<SbdbCadResponse>> get({
     Map<String, dynamic>? queryParameters,
   }) async {
-    final response = await _dio.get(
+    return await _dio.get(
       '/$path',
       queryParameters: queryParameters,
     );
-    return response.data;
+  }
+
+  @visibleForTesting
+  Future<Response<SbdbCadResponse>> four04({
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    return await _dio.get(
+      '/cad.ap',
+      queryParameters: queryParameters,
+    );
   }
 }

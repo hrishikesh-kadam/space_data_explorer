@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:hrk_nasa_apis/src/services/ssd_cneos/sbdb_cad_api/sbdb_cad_api.dart';
 import 'package:hrk_nasa_apis/src/services/ssd_cneos/sbdb_cad_api/sbdb_cad_response.dart';
 import 'package:test/expect.dart';
@@ -12,22 +13,31 @@ void main() {
     });
 
     group('get', () {
-      test('default', () async {
-        SbdbCadResponse response = await api.getDefault();
-        expect(response, isA<SbdbCad2xxResponse>());
-        response = response as SbdbCad2xxResponse;
-        expect('1.5', response.signature.version);
+      test('200', () async {
+        Response<SbdbCadResponse> response = await api.get();
+        expect(response.data, isA<SbdbCad200Response>());
+        final sbdbCad200Response = response.data as SbdbCad200Response;
+        expect(sbdbCad200Response.signature.version, '1.5');
       });
 
-      test('body=check', () async {
-        Map<String, dynamic> queryParameters = {
-          'body': 'check',
-        };
-        SbdbCadResponse response =
-            await api.get(queryParameters: queryParameters);
-        expect(response, isA<SbdbCad4xxResponse>());
-        response = response as SbdbCad4xxResponse;
-        expect('400', response.code);
+      test('400', () async {
+        Response<SbdbCadResponse> response = await api.get(
+          queryParameters: {
+            'body': 'Pandora',
+          },
+        );
+        expect(response.data, isA<SbdbCad400Response>());
+        final sbdbCad400Response = response.data as SbdbCad400Response;
+        expect(sbdbCad400Response.code, '400');
+      });
+
+      test('404', () async {
+        try {
+          // ignore: unused_local_variable
+          Response<SbdbCadResponse> response = await api.four04();
+        } on DioException catch (e) {
+          expect(e.response!.statusCode, 404);
+        }
       });
     });
   });

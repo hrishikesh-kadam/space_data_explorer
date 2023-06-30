@@ -6,16 +6,16 @@ part 'sbdb_cad_response.g.dart';
 
 @freezed
 class SbdbCadResponse with _$SbdbCadResponse {
-  factory SbdbCadResponse.twoxx(
+  factory SbdbCadResponse.two00(
     Signature signature,
     int count,
-  ) = SbdbCad2xxResponse;
+  ) = SbdbCad200Response;
 
-  factory SbdbCadResponse.fourxx(
+  factory SbdbCadResponse.four00(
     String message,
     String moreInfo,
     String code,
-  ) = SbdbCad4xxResponse;
+  ) = SbdbCad400Response;
 
   factory SbdbCadResponse.fromJson(Map<String, dynamic> json) =>
       _$SbdbCadResponseFromJson(json);
