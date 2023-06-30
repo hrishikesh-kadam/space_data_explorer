@@ -91,11 +91,11 @@ class __$$_SignatureCopyWithImpl<$Res>
     Object? source = null,
   }) {
     return _then(_$_Signature(
-      null == version
+      version: null == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
               as String,
-      null == source
+      source: null == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
               as String,
@@ -106,7 +106,7 @@ class __$$_SignatureCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Signature implements _Signature {
-  _$_Signature(this.version, this.source);
+  _$_Signature({required this.version, required this.source});
 
   factory _$_Signature.fromJson(Map<String, dynamic> json) =>
       _$$_SignatureFromJson(json);
@@ -149,7 +149,9 @@ class _$_Signature implements _Signature {
 }
 
 abstract class _Signature implements Signature {
-  factory _Signature(final String version, final String source) = _$_Signature;
+  factory _Signature(
+      {required final String version,
+      required final String source}) = _$_Signature;
 
   factory _Signature.fromJson(Map<String, dynamic> json) =
       _$_Signature.fromJson;

@@ -115,11 +115,11 @@ class __$$SbdbCad200BodyCopyWithImpl<$Res>
     Object? count = null,
   }) {
     return _then(_$SbdbCad200Body(
-      null == signature
+      signature: null == signature
           ? _value.signature
           : signature // ignore: cast_nullable_to_non_nullable
               as Signature,
-      null == count
+      count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int,
@@ -138,7 +138,8 @@ class __$$SbdbCad200BodyCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SbdbCad200Body implements SbdbCad200Body {
-  _$SbdbCad200Body(this.signature, this.count, {final String? $type})
+  _$SbdbCad200Body(
+      {required this.signature, required this.count, final String? $type})
       : $type = $type ?? 'two00';
 
   factory _$SbdbCad200Body.fromJson(Map<String, dynamic> json) =>
@@ -249,8 +250,9 @@ class _$SbdbCad200Body implements SbdbCad200Body {
 }
 
 abstract class SbdbCad200Body implements SbdbCadBody {
-  factory SbdbCad200Body(final Signature signature, final int count) =
-      _$SbdbCad200Body;
+  factory SbdbCad200Body(
+      {required final Signature signature,
+      required final int count}) = _$SbdbCad200Body;
 
   factory SbdbCad200Body.fromJson(Map<String, dynamic> json) =
       _$SbdbCad200Body.fromJson;
@@ -287,15 +289,15 @@ class __$$SbdbCad400BodyCopyWithImpl<$Res>
     Object? code = null,
   }) {
     return _then(_$SbdbCad400Body(
-      null == message
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      null == moreInfo
+      moreInfo: null == moreInfo
           ? _value.moreInfo
           : moreInfo // ignore: cast_nullable_to_non_nullable
               as String,
-      null == code
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
@@ -306,8 +308,11 @@ class __$$SbdbCad400BodyCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SbdbCad400Body implements SbdbCad400Body {
-  _$SbdbCad400Body(this.message, this.moreInfo, this.code,
-      {final String? $type})
+  _$SbdbCad400Body(
+      {required this.message,
+      required this.moreInfo,
+      required this.code,
+      final String? $type})
       : $type = $type ?? 'four00';
 
   factory _$SbdbCad400Body.fromJson(Map<String, dynamic> json) =>
@@ -422,8 +427,9 @@ class _$SbdbCad400Body implements SbdbCad400Body {
 
 abstract class SbdbCad400Body implements SbdbCadBody {
   factory SbdbCad400Body(
-          final String message, final String moreInfo, final String code) =
-      _$SbdbCad400Body;
+      {required final String message,
+      required final String moreInfo,
+      required final String code}) = _$SbdbCad400Body;
 
   factory SbdbCad400Body.fromJson(Map<String, dynamic> json) =
       _$SbdbCad400Body.fromJson;

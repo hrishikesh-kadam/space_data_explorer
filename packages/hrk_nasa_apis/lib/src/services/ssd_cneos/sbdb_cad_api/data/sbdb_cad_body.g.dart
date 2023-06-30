@@ -8,8 +8,8 @@ part of 'sbdb_cad_body.dart';
 
 _$SbdbCad200Body _$$SbdbCad200BodyFromJson(Map<String, dynamic> json) =>
     _$SbdbCad200Body(
-      Signature.fromJson(json['signature'] as Map<String, dynamic>),
-      json['count'] as int,
+      signature: Signature.fromJson(json['signature'] as Map<String, dynamic>),
+      count: json['count'] as int,
       $type: json['runtimeType'] as String?,
     );
 
@@ -22,9 +22,9 @@ Map<String, dynamic> _$$SbdbCad200BodyToJson(_$SbdbCad200Body instance) =>
 
 _$SbdbCad400Body _$$SbdbCad400BodyFromJson(Map<String, dynamic> json) =>
     _$SbdbCad400Body(
-      json['message'] as String,
-      json['moreInfo'] as String,
-      json['code'] as String,
+      message: json['message'] as String,
+      moreInfo: json['moreInfo'] as String,
+      code: json['code'] as String,
       $type: json['runtimeType'] as String?,
     );
 

@@ -7,8 +7,8 @@ part of 'signature.dart';
 // **************************************************************************
 
 _$_Signature _$$_SignatureFromJson(Map<String, dynamic> json) => _$_Signature(
-      json['version'] as String,
-      json['source'] as String,
+      version: json['version'] as String,
+      source: json['source'] as String,
     );
 
 Map<String, dynamic> _$$_SignatureToJson(_$_Signature instance) =>

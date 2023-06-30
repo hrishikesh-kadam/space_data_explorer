@@ -6,16 +6,16 @@ part 'sbdb_cad_body.g.dart';
 
 @freezed
 class SbdbCadBody with _$SbdbCadBody {
-  factory SbdbCadBody.two00(
-    Signature signature,
-    int count,
-  ) = SbdbCad200Body;
+  factory SbdbCadBody.two00({
+    required Signature signature,
+    required int count,
+  }) = SbdbCad200Body;
 
-  factory SbdbCadBody.four00(
-    String message,
-    String moreInfo,
-    String code,
-  ) = SbdbCad400Body;
+  factory SbdbCadBody.four00({
+    required String message,
+    required String moreInfo,
+    required String code,
+  }) = SbdbCad400Body;
 
   factory SbdbCadBody.fromJson(Map<String, dynamic> json) =>
       _$SbdbCadBodyFromJson(json);
