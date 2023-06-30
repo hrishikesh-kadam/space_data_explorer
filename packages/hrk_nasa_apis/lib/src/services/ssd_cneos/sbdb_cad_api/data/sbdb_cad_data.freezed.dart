@@ -21,7 +21,8 @@ SbdbCadData _$SbdbCadDataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SbdbCadData {
   String get des => throw _privateConstructorUsedError;
-  String? get fullname => throw _privateConstructorUsedError;
+  String get orbitId => throw _privateConstructorUsedError;
+  String get jd => throw _privateConstructorUsedError;
   String get cd => throw _privateConstructorUsedError;
   String get dist => throw _privateConstructorUsedError;
   String get distMin => throw _privateConstructorUsedError;
@@ -33,6 +34,7 @@ mixin _$SbdbCadData {
   String? get h => throw _privateConstructorUsedError;
   String? get diameter => throw _privateConstructorUsedError;
   String? get diameterSigma => throw _privateConstructorUsedError;
+  String? get fullname => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,7 +50,8 @@ abstract class $SbdbCadDataCopyWith<$Res> {
   @useResult
   $Res call(
       {String des,
-      String? fullname,
+      String orbitId,
+      String jd,
       String cd,
       String dist,
       String distMin,
@@ -59,7 +62,8 @@ abstract class $SbdbCadDataCopyWith<$Res> {
       String? body,
       String? h,
       String? diameter,
-      String? diameterSigma});
+      String? diameterSigma,
+      String? fullname});
 }
 
 /// @nodoc
@@ -76,7 +80,8 @@ class _$SbdbCadDataCopyWithImpl<$Res, $Val extends SbdbCadData>
   @override
   $Res call({
     Object? des = null,
-    Object? fullname = freezed,
+    Object? orbitId = null,
+    Object? jd = null,
     Object? cd = null,
     Object? dist = null,
     Object? distMin = null,
@@ -88,16 +93,21 @@ class _$SbdbCadDataCopyWithImpl<$Res, $Val extends SbdbCadData>
     Object? h = freezed,
     Object? diameter = freezed,
     Object? diameterSigma = freezed,
+    Object? fullname = freezed,
   }) {
     return _then(_value.copyWith(
       des: null == des
           ? _value.des
           : des // ignore: cast_nullable_to_non_nullable
               as String,
-      fullname: freezed == fullname
-          ? _value.fullname
-          : fullname // ignore: cast_nullable_to_non_nullable
-              as String?,
+      orbitId: null == orbitId
+          ? _value.orbitId
+          : orbitId // ignore: cast_nullable_to_non_nullable
+              as String,
+      jd: null == jd
+          ? _value.jd
+          : jd // ignore: cast_nullable_to_non_nullable
+              as String,
       cd: null == cd
           ? _value.cd
           : cd // ignore: cast_nullable_to_non_nullable
@@ -141,6 +151,10 @@ class _$SbdbCadDataCopyWithImpl<$Res, $Val extends SbdbCadData>
       diameterSigma: freezed == diameterSigma
           ? _value.diameterSigma
           : diameterSigma // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fullname: freezed == fullname
+          ? _value.fullname
+          : fullname // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -156,7 +170,8 @@ abstract class _$$_SbdbCadDataCopyWith<$Res>
   @useResult
   $Res call(
       {String des,
-      String? fullname,
+      String orbitId,
+      String jd,
       String cd,
       String dist,
       String distMin,
@@ -167,7 +182,8 @@ abstract class _$$_SbdbCadDataCopyWith<$Res>
       String? body,
       String? h,
       String? diameter,
-      String? diameterSigma});
+      String? diameterSigma,
+      String? fullname});
 }
 
 /// @nodoc
@@ -182,7 +198,8 @@ class __$$_SbdbCadDataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? des = null,
-    Object? fullname = freezed,
+    Object? orbitId = null,
+    Object? jd = null,
     Object? cd = null,
     Object? dist = null,
     Object? distMin = null,
@@ -194,16 +211,21 @@ class __$$_SbdbCadDataCopyWithImpl<$Res>
     Object? h = freezed,
     Object? diameter = freezed,
     Object? diameterSigma = freezed,
+    Object? fullname = freezed,
   }) {
     return _then(_$_SbdbCadData(
       des: null == des
           ? _value.des
           : des // ignore: cast_nullable_to_non_nullable
               as String,
-      fullname: freezed == fullname
-          ? _value.fullname
-          : fullname // ignore: cast_nullable_to_non_nullable
-              as String?,
+      orbitId: null == orbitId
+          ? _value.orbitId
+          : orbitId // ignore: cast_nullable_to_non_nullable
+              as String,
+      jd: null == jd
+          ? _value.jd
+          : jd // ignore: cast_nullable_to_non_nullable
+              as String,
       cd: null == cd
           ? _value.cd
           : cd // ignore: cast_nullable_to_non_nullable
@@ -248,6 +270,10 @@ class __$$_SbdbCadDataCopyWithImpl<$Res>
           ? _value.diameterSigma
           : diameterSigma // ignore: cast_nullable_to_non_nullable
               as String?,
+      fullname: freezed == fullname
+          ? _value.fullname
+          : fullname // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -257,7 +283,8 @@ class __$$_SbdbCadDataCopyWithImpl<$Res>
 class _$_SbdbCadData implements _SbdbCadData {
   _$_SbdbCadData(
       {required this.des,
-      this.fullname,
+      required this.orbitId,
+      required this.jd,
       required this.cd,
       required this.dist,
       required this.distMin,
@@ -268,7 +295,8 @@ class _$_SbdbCadData implements _SbdbCadData {
       this.body,
       this.h,
       this.diameter,
-      this.diameterSigma});
+      this.diameterSigma,
+      this.fullname});
 
   factory _$_SbdbCadData.fromJson(Map<String, dynamic> json) =>
       _$$_SbdbCadDataFromJson(json);
@@ -276,7 +304,9 @@ class _$_SbdbCadData implements _SbdbCadData {
   @override
   final String des;
   @override
-  final String? fullname;
+  final String orbitId;
+  @override
+  final String jd;
   @override
   final String cd;
   @override
@@ -299,10 +329,12 @@ class _$_SbdbCadData implements _SbdbCadData {
   final String? diameter;
   @override
   final String? diameterSigma;
+  @override
+  final String? fullname;
 
   @override
   String toString() {
-    return 'SbdbCadData(des: $des, fullname: $fullname, cd: $cd, dist: $dist, distMin: $distMin, distMax: $distMax, vRel: $vRel, vInf: $vInf, tSigmaF: $tSigmaF, body: $body, h: $h, diameter: $diameter, diameterSigma: $diameterSigma)';
+    return 'SbdbCadData(des: $des, orbitId: $orbitId, jd: $jd, cd: $cd, dist: $dist, distMin: $distMin, distMax: $distMax, vRel: $vRel, vInf: $vInf, tSigmaF: $tSigmaF, body: $body, h: $h, diameter: $diameter, diameterSigma: $diameterSigma, fullname: $fullname)';
   }
 
   @override
@@ -311,8 +343,8 @@ class _$_SbdbCadData implements _SbdbCadData {
         (other.runtimeType == runtimeType &&
             other is _$_SbdbCadData &&
             (identical(other.des, des) || other.des == des) &&
-            (identical(other.fullname, fullname) ||
-                other.fullname == fullname) &&
+            (identical(other.orbitId, orbitId) || other.orbitId == orbitId) &&
+            (identical(other.jd, jd) || other.jd == jd) &&
             (identical(other.cd, cd) || other.cd == cd) &&
             (identical(other.dist, dist) || other.dist == dist) &&
             (identical(other.distMin, distMin) || other.distMin == distMin) &&
@@ -325,13 +357,30 @@ class _$_SbdbCadData implements _SbdbCadData {
             (identical(other.diameter, diameter) ||
                 other.diameter == diameter) &&
             (identical(other.diameterSigma, diameterSigma) ||
-                other.diameterSigma == diameterSigma));
+                other.diameterSigma == diameterSigma) &&
+            (identical(other.fullname, fullname) ||
+                other.fullname == fullname));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, des, fullname, cd, dist, distMin,
-      distMax, vRel, vInf, tSigmaF, body, h, diameter, diameterSigma);
+  int get hashCode => Object.hash(
+      runtimeType,
+      des,
+      orbitId,
+      jd,
+      cd,
+      dist,
+      distMin,
+      distMax,
+      vRel,
+      vInf,
+      tSigmaF,
+      body,
+      h,
+      diameter,
+      diameterSigma,
+      fullname);
 
   @JsonKey(ignore: true)
   @override
@@ -350,7 +399,8 @@ class _$_SbdbCadData implements _SbdbCadData {
 abstract class _SbdbCadData implements SbdbCadData {
   factory _SbdbCadData(
       {required final String des,
-      final String? fullname,
+      required final String orbitId,
+      required final String jd,
       required final String cd,
       required final String dist,
       required final String distMin,
@@ -361,7 +411,8 @@ abstract class _SbdbCadData implements SbdbCadData {
       final String? body,
       final String? h,
       final String? diameter,
-      final String? diameterSigma}) = _$_SbdbCadData;
+      final String? diameterSigma,
+      final String? fullname}) = _$_SbdbCadData;
 
   factory _SbdbCadData.fromJson(Map<String, dynamic> json) =
       _$_SbdbCadData.fromJson;
@@ -369,7 +420,9 @@ abstract class _SbdbCadData implements SbdbCadData {
   @override
   String get des;
   @override
-  String? get fullname;
+  String get orbitId;
+  @override
+  String get jd;
   @override
   String get cd;
   @override
@@ -392,6 +445,8 @@ abstract class _SbdbCadData implements SbdbCadData {
   String? get diameter;
   @override
   String? get diameterSigma;
+  @override
+  String? get fullname;
   @override
   @JsonKey(ignore: true)
   _$$_SbdbCadDataCopyWith<_$_SbdbCadData> get copyWith =>

@@ -9,7 +9,8 @@ part of 'sbdb_cad_data.dart';
 _$_SbdbCadData _$$_SbdbCadDataFromJson(Map<String, dynamic> json) =>
     _$_SbdbCadData(
       des: json['des'] as String,
-      fullname: json['fullname'] as String?,
+      orbitId: json['orbit_id'] as String,
+      jd: json['jd'] as String,
       cd: json['cd'] as String,
       dist: json['dist'] as String,
       distMin: json['dist_min'] as String,
@@ -21,12 +22,14 @@ _$_SbdbCadData _$$_SbdbCadDataFromJson(Map<String, dynamic> json) =>
       h: json['h'] as String?,
       diameter: json['diameter'] as String?,
       diameterSigma: json['diameter_sigma'] as String?,
+      fullname: json['fullname'] as String?,
     );
 
 Map<String, dynamic> _$$_SbdbCadDataToJson(_$_SbdbCadData instance) =>
     <String, dynamic>{
       'des': instance.des,
-      'fullname': instance.fullname,
+      'orbit_id': instance.orbitId,
+      'jd': instance.jd,
       'cd': instance.cd,
       'dist': instance.dist,
       'dist_min': instance.distMin,
@@ -38,4 +41,5 @@ Map<String, dynamic> _$$_SbdbCadDataToJson(_$_SbdbCadData instance) =>
       'h': instance.h,
       'diameter': instance.diameter,
       'diameter_sigma': instance.diameterSigma,
+      'fullname': instance.fullname,
     };

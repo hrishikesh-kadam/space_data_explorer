@@ -36,6 +36,10 @@ void main() {
             expect(sbdbCad200Body.data, isNull);
           } else {
             expect(sbdbCad200Body.data, isNotNull);
+            expect(sbdbCad200Body.data!.first.fullname, isNull);
+            expect(sbdbCad200Body.data!.first.body, isNull);
+            expect(sbdbCad200Body.data!.first.diameter, isNull);
+            expect(sbdbCad200Body.data!.first.diameterSigma, isNull);
           }
         });
 
@@ -49,6 +53,19 @@ void main() {
           final sbdbCad200Body = response.data as SbdbCad200Body;
           if (sbdbCad200Body.count > 0) {
             expect(sbdbCad200Body.data!.first.fullname, isNotNull);
+          }
+        });
+
+        test('body', () async {
+          Response<SbdbCadBody> response = await api.get(
+            queryParameters: {
+              'body': 'ALL',
+            },
+          );
+          expect(response.data, isA<SbdbCad200Body>());
+          final sbdbCad200Body = response.data as SbdbCad200Body;
+          if (sbdbCad200Body.count > 0) {
+            expect(sbdbCad200Body.data!.first.body, isNotNull);
           }
         });
       });

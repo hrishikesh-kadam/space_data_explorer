@@ -7,7 +7,8 @@ part 'sbdb_cad_data.g.dart';
 class SbdbCadData with _$SbdbCadData {
   factory SbdbCadData({
     required String des,
-    String? fullname,
+    required String orbitId,
+    required String jd,
     required String cd,
     required String dist,
     required String distMin,
@@ -19,6 +20,7 @@ class SbdbCadData with _$SbdbCadData {
     String? h,
     String? diameter,
     String? diameterSigma,
+    String? fullname,
   }) = _SbdbCadData;
 
   factory SbdbCadData.fromJson(Map<String, dynamic> json) =>
