@@ -19,7 +19,18 @@ class SbdbCadApi {
       ..transformer = SbdbCadTransformer();
   }
 
-  static const String path = 'cad.api';
+  static final Uri url = Uri(
+    scheme: SsdCneos.baseUrl.scheme,
+    host: SsdCneos.baseUrl.host,
+    path: 'cad.api',
+  );
+  static final Uri docUrl = Uri(
+    scheme: SsdCneos.baseUrl.scheme,
+    host: SsdCneos.baseUrl.host,
+    path: 'doc/cad.html',
+  );
+  static const String displayName = 'SBDB Close-Approach Data API';
+  static const String version = '1.5';
   late final Dio _dio;
   // TODO(hrishikesh-kadam): File a feature request
   static const Map<int, FromJsonFunction> serializableMap = {
@@ -35,7 +46,7 @@ class SbdbCadApi {
     Map<String, dynamic>? queryParameters,
   }) async {
     return await _dio.get(
-      '/$path',
+      '/${url.path}',
       queryParameters: queryParameters,
     );
   }

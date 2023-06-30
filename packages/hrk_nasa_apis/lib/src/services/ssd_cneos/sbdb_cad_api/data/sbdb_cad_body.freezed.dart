@@ -31,21 +31,30 @@ SbdbCadBody _$SbdbCadBodyFromJson(Map<String, dynamic> json) {
 mixin _$SbdbCadBody {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Signature signature, int count) two00,
-    required TResult Function(String message, String moreInfo, String code)
+    required TResult Function(
+            Signature signature, int count, List<SbdbCadData>? data)
+        two00,
+    required TResult Function(String message,
+            @JsonKey(name: 'moreInfo') String moreInfo, String code)
         four00,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Signature signature, int count)? two00,
-    TResult? Function(String message, String moreInfo, String code)? four00,
+    TResult? Function(Signature signature, int count, List<SbdbCadData>? data)?
+        two00,
+    TResult? Function(String message,
+            @JsonKey(name: 'moreInfo') String moreInfo, String code)?
+        four00,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Signature signature, int count)? two00,
-    TResult Function(String message, String moreInfo, String code)? four00,
+    TResult Function(Signature signature, int count, List<SbdbCadData>? data)?
+        two00,
+    TResult Function(String message, @JsonKey(name: 'moreInfo') String moreInfo,
+            String code)?
+        four00,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -95,7 +104,7 @@ abstract class _$$SbdbCad200BodyCopyWith<$Res> {
           _$SbdbCad200Body value, $Res Function(_$SbdbCad200Body) then) =
       __$$SbdbCad200BodyCopyWithImpl<$Res>;
   @useResult
-  $Res call({Signature signature, int count});
+  $Res call({Signature signature, int count, List<SbdbCadData>? data});
 
   $SignatureCopyWith<$Res> get signature;
 }
@@ -113,6 +122,7 @@ class __$$SbdbCad200BodyCopyWithImpl<$Res>
   $Res call({
     Object? signature = null,
     Object? count = null,
+    Object? data = freezed,
   }) {
     return _then(_$SbdbCad200Body(
       signature: null == signature
@@ -123,6 +133,10 @@ class __$$SbdbCad200BodyCopyWithImpl<$Res>
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int,
+      data: freezed == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<SbdbCadData>?,
     ));
   }
 
@@ -139,8 +153,12 @@ class __$$SbdbCad200BodyCopyWithImpl<$Res>
 @JsonSerializable()
 class _$SbdbCad200Body implements SbdbCad200Body {
   _$SbdbCad200Body(
-      {required this.signature, required this.count, final String? $type})
-      : $type = $type ?? 'two00';
+      {required this.signature,
+      required this.count,
+      required final List<SbdbCadData>? data,
+      final String? $type})
+      : _data = data,
+        $type = $type ?? 'two00';
 
   factory _$SbdbCad200Body.fromJson(Map<String, dynamic> json) =>
       _$$SbdbCad200BodyFromJson(json);
@@ -149,13 +167,22 @@ class _$SbdbCad200Body implements SbdbCad200Body {
   final Signature signature;
   @override
   final int count;
+  final List<SbdbCadData>? _data;
+  @override
+  List<SbdbCadData>? get data {
+    final value = _data;
+    if (value == null) return null;
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'SbdbCadBody.two00(signature: $signature, count: $count)';
+    return 'SbdbCadBody.two00(signature: $signature, count: $count, data: $data)';
   }
 
   @override
@@ -165,12 +192,14 @@ class _$SbdbCad200Body implements SbdbCad200Body {
             other is _$SbdbCad200Body &&
             (identical(other.signature, signature) ||
                 other.signature == signature) &&
-            (identical(other.count, count) || other.count == count));
+            (identical(other.count, count) || other.count == count) &&
+            const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, signature, count);
+  int get hashCode => Object.hash(runtimeType, signature, count,
+      const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
   @override
@@ -181,31 +210,40 @@ class _$SbdbCad200Body implements SbdbCad200Body {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Signature signature, int count) two00,
-    required TResult Function(String message, String moreInfo, String code)
+    required TResult Function(
+            Signature signature, int count, List<SbdbCadData>? data)
+        two00,
+    required TResult Function(String message,
+            @JsonKey(name: 'moreInfo') String moreInfo, String code)
         four00,
   }) {
-    return two00(signature, count);
+    return two00(signature, count, data);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Signature signature, int count)? two00,
-    TResult? Function(String message, String moreInfo, String code)? four00,
+    TResult? Function(Signature signature, int count, List<SbdbCadData>? data)?
+        two00,
+    TResult? Function(String message,
+            @JsonKey(name: 'moreInfo') String moreInfo, String code)?
+        four00,
   }) {
-    return two00?.call(signature, count);
+    return two00?.call(signature, count, data);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Signature signature, int count)? two00,
-    TResult Function(String message, String moreInfo, String code)? four00,
+    TResult Function(Signature signature, int count, List<SbdbCadData>? data)?
+        two00,
+    TResult Function(String message, @JsonKey(name: 'moreInfo') String moreInfo,
+            String code)?
+        four00,
     required TResult orElse(),
   }) {
     if (two00 != null) {
-      return two00(signature, count);
+      return two00(signature, count, data);
     }
     return orElse();
   }
@@ -252,13 +290,15 @@ class _$SbdbCad200Body implements SbdbCad200Body {
 abstract class SbdbCad200Body implements SbdbCadBody {
   factory SbdbCad200Body(
       {required final Signature signature,
-      required final int count}) = _$SbdbCad200Body;
+      required final int count,
+      required final List<SbdbCadData>? data}) = _$SbdbCad200Body;
 
   factory SbdbCad200Body.fromJson(Map<String, dynamic> json) =
       _$SbdbCad200Body.fromJson;
 
   Signature get signature;
   int get count;
+  List<SbdbCadData>? get data;
   @JsonKey(ignore: true)
   _$$SbdbCad200BodyCopyWith<_$SbdbCad200Body> get copyWith =>
       throw _privateConstructorUsedError;
@@ -270,7 +310,10 @@ abstract class _$$SbdbCad400BodyCopyWith<$Res> {
           _$SbdbCad400Body value, $Res Function(_$SbdbCad400Body) then) =
       __$$SbdbCad400BodyCopyWithImpl<$Res>;
   @useResult
-  $Res call({String message, String moreInfo, String code});
+  $Res call(
+      {String message,
+      @JsonKey(name: 'moreInfo') String moreInfo,
+      String code});
 }
 
 /// @nodoc
@@ -310,7 +353,7 @@ class __$$SbdbCad400BodyCopyWithImpl<$Res>
 class _$SbdbCad400Body implements SbdbCad400Body {
   _$SbdbCad400Body(
       {required this.message,
-      required this.moreInfo,
+      @JsonKey(name: 'moreInfo') required this.moreInfo,
       required this.code,
       final String? $type})
       : $type = $type ?? 'four00';
@@ -321,6 +364,7 @@ class _$SbdbCad400Body implements SbdbCad400Body {
   @override
   final String message;
   @override
+  @JsonKey(name: 'moreInfo')
   final String moreInfo;
   @override
   final String code;
@@ -357,8 +401,11 @@ class _$SbdbCad400Body implements SbdbCad400Body {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Signature signature, int count) two00,
-    required TResult Function(String message, String moreInfo, String code)
+    required TResult Function(
+            Signature signature, int count, List<SbdbCadData>? data)
+        two00,
+    required TResult Function(String message,
+            @JsonKey(name: 'moreInfo') String moreInfo, String code)
         four00,
   }) {
     return four00(message, moreInfo, code);
@@ -367,8 +414,11 @@ class _$SbdbCad400Body implements SbdbCad400Body {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Signature signature, int count)? two00,
-    TResult? Function(String message, String moreInfo, String code)? four00,
+    TResult? Function(Signature signature, int count, List<SbdbCadData>? data)?
+        two00,
+    TResult? Function(String message,
+            @JsonKey(name: 'moreInfo') String moreInfo, String code)?
+        four00,
   }) {
     return four00?.call(message, moreInfo, code);
   }
@@ -376,8 +426,11 @@ class _$SbdbCad400Body implements SbdbCad400Body {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Signature signature, int count)? two00,
-    TResult Function(String message, String moreInfo, String code)? four00,
+    TResult Function(Signature signature, int count, List<SbdbCadData>? data)?
+        two00,
+    TResult Function(String message, @JsonKey(name: 'moreInfo') String moreInfo,
+            String code)?
+        four00,
     required TResult orElse(),
   }) {
     if (four00 != null) {
@@ -428,13 +481,14 @@ class _$SbdbCad400Body implements SbdbCad400Body {
 abstract class SbdbCad400Body implements SbdbCadBody {
   factory SbdbCad400Body(
       {required final String message,
-      required final String moreInfo,
+      @JsonKey(name: 'moreInfo') required final String moreInfo,
       required final String code}) = _$SbdbCad400Body;
 
   factory SbdbCad400Body.fromJson(Map<String, dynamic> json) =
       _$SbdbCad400Body.fromJson;
 
   String get message;
+  @JsonKey(name: 'moreInfo')
   String get moreInfo;
   String get code;
   @JsonKey(ignore: true)

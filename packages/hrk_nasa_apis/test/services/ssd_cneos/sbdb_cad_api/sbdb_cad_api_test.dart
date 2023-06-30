@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/src/services/ssd_cneos/sbdb_cad_api/sbdb_cad_api.dart';
 import 'package:hrk_nasa_apis/src/services/ssd_cneos/sbdb_cad_api/data/sbdb_cad_body.dart';
 import 'package:test/expect.dart';
@@ -7,6 +8,12 @@ import 'package:test/scaffolding.dart';
 void main() {
   group('SbdbCadApi', () {
     late SbdbCadApi api;
+    late Logger log;
+
+    setUpAll(() {
+      configureHrkLogging();
+      log = Logger('$SbdbCadApi.Test')..level = Level.ALL;
+    });
 
     setUp(() {
       api = SbdbCadApi();
@@ -17,7 +24,18 @@ void main() {
         Response<SbdbCadBody> response = await api.get();
         expect(response.data, isA<SbdbCad200Body>());
         final sbdbCad200Body = response.data as SbdbCad200Body;
-        expect(sbdbCad200Body.signature.version, '1.5');
+        if (sbdbCad200Body.signature.version != SbdbCadApi.version) {
+          String message =
+              '${SbdbCadApi.displayName} version is now ${sbdbCad200Body.signature.version}'
+              ', tested on ${SbdbCadApi.version}'
+              ', See ${SbdbCadApi.docUrl}';
+          log.warning(message);
+        }
+        if (sbdbCad200Body.count <= 0) {
+          expect(sbdbCad200Body.data, isNull);
+        } else {
+          expect(sbdbCad200Body.data, isNotNull);
+        }
       });
 
       test('400', () async {

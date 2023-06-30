@@ -10,6 +10,9 @@ _$SbdbCad200Body _$$SbdbCad200BodyFromJson(Map<String, dynamic> json) =>
     _$SbdbCad200Body(
       signature: Signature.fromJson(json['signature'] as Map<String, dynamic>),
       count: json['count'] as int,
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => SbdbCadData.fromJson(e as Map<String, dynamic>))
+          .toList(),
       $type: json['runtimeType'] as String?,
     );
 
@@ -17,6 +20,7 @@ Map<String, dynamic> _$$SbdbCad200BodyToJson(_$SbdbCad200Body instance) =>
     <String, dynamic>{
       'signature': instance.signature,
       'count': instance.count,
+      'data': instance.data,
       'runtimeType': instance.$type,
     };
 
