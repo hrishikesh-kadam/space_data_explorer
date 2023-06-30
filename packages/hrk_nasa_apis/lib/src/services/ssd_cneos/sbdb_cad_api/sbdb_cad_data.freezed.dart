@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'sbdb_cad_response.dart';
+part of 'sbdb_cad_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,21 +14,21 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-SbdbCadResponse _$SbdbCadResponseFromJson(Map<String, dynamic> json) {
+SbdbCadData _$SbdbCadDataFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'two00':
-      return SbdbCad200Response.fromJson(json);
+      return SbdbCad200Data.fromJson(json);
     case 'four00':
-      return SbdbCad400Response.fromJson(json);
+      return SbdbCad400Data.fromJson(json);
 
     default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'SbdbCadResponse',
+      throw CheckedFromJsonException(json, 'runtimeType', 'SbdbCadData',
           'Invalid union type "${json['runtimeType']}"!');
   }
 }
 
 /// @nodoc
-mixin _$SbdbCadResponse {
+mixin _$SbdbCadData {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Signature signature, int count) two00,
@@ -51,20 +51,20 @@ mixin _$SbdbCadResponse {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SbdbCad200Response value) two00,
-    required TResult Function(SbdbCad400Response value) four00,
+    required TResult Function(SbdbCad200Data value) two00,
+    required TResult Function(SbdbCad400Data value) four00,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SbdbCad200Response value)? two00,
-    TResult? Function(SbdbCad400Response value)? four00,
+    TResult? Function(SbdbCad200Data value)? two00,
+    TResult? Function(SbdbCad400Data value)? four00,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SbdbCad200Response value)? two00,
-    TResult Function(SbdbCad400Response value)? four00,
+    TResult Function(SbdbCad200Data value)? two00,
+    TResult Function(SbdbCad400Data value)? four00,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -72,16 +72,16 @@ mixin _$SbdbCadResponse {
 }
 
 /// @nodoc
-abstract class $SbdbCadResponseCopyWith<$Res> {
-  factory $SbdbCadResponseCopyWith(
-          SbdbCadResponse value, $Res Function(SbdbCadResponse) then) =
-      _$SbdbCadResponseCopyWithImpl<$Res, SbdbCadResponse>;
+abstract class $SbdbCadDataCopyWith<$Res> {
+  factory $SbdbCadDataCopyWith(
+          SbdbCadData value, $Res Function(SbdbCadData) then) =
+      _$SbdbCadDataCopyWithImpl<$Res, SbdbCadData>;
 }
 
 /// @nodoc
-class _$SbdbCadResponseCopyWithImpl<$Res, $Val extends SbdbCadResponse>
-    implements $SbdbCadResponseCopyWith<$Res> {
-  _$SbdbCadResponseCopyWithImpl(this._value, this._then);
+class _$SbdbCadDataCopyWithImpl<$Res, $Val extends SbdbCadData>
+    implements $SbdbCadDataCopyWith<$Res> {
+  _$SbdbCadDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -90,10 +90,10 @@ class _$SbdbCadResponseCopyWithImpl<$Res, $Val extends SbdbCadResponse>
 }
 
 /// @nodoc
-abstract class _$$SbdbCad200ResponseCopyWith<$Res> {
-  factory _$$SbdbCad200ResponseCopyWith(_$SbdbCad200Response value,
-          $Res Function(_$SbdbCad200Response) then) =
-      __$$SbdbCad200ResponseCopyWithImpl<$Res>;
+abstract class _$$SbdbCad200DataCopyWith<$Res> {
+  factory _$$SbdbCad200DataCopyWith(
+          _$SbdbCad200Data value, $Res Function(_$SbdbCad200Data) then) =
+      __$$SbdbCad200DataCopyWithImpl<$Res>;
   @useResult
   $Res call({Signature signature, int count});
 
@@ -101,11 +101,11 @@ abstract class _$$SbdbCad200ResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$SbdbCad200ResponseCopyWithImpl<$Res>
-    extends _$SbdbCadResponseCopyWithImpl<$Res, _$SbdbCad200Response>
-    implements _$$SbdbCad200ResponseCopyWith<$Res> {
-  __$$SbdbCad200ResponseCopyWithImpl(
-      _$SbdbCad200Response _value, $Res Function(_$SbdbCad200Response) _then)
+class __$$SbdbCad200DataCopyWithImpl<$Res>
+    extends _$SbdbCadDataCopyWithImpl<$Res, _$SbdbCad200Data>
+    implements _$$SbdbCad200DataCopyWith<$Res> {
+  __$$SbdbCad200DataCopyWithImpl(
+      _$SbdbCad200Data _value, $Res Function(_$SbdbCad200Data) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,7 +114,7 @@ class __$$SbdbCad200ResponseCopyWithImpl<$Res>
     Object? signature = null,
     Object? count = null,
   }) {
-    return _then(_$SbdbCad200Response(
+    return _then(_$SbdbCad200Data(
       null == signature
           ? _value.signature
           : signature // ignore: cast_nullable_to_non_nullable
@@ -137,12 +137,12 @@ class __$$SbdbCad200ResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SbdbCad200Response implements SbdbCad200Response {
-  _$SbdbCad200Response(this.signature, this.count, {final String? $type})
+class _$SbdbCad200Data implements SbdbCad200Data {
+  _$SbdbCad200Data(this.signature, this.count, {final String? $type})
       : $type = $type ?? 'two00';
 
-  factory _$SbdbCad200Response.fromJson(Map<String, dynamic> json) =>
-      _$$SbdbCad200ResponseFromJson(json);
+  factory _$SbdbCad200Data.fromJson(Map<String, dynamic> json) =>
+      _$$SbdbCad200DataFromJson(json);
 
   @override
   final Signature signature;
@@ -154,14 +154,14 @@ class _$SbdbCad200Response implements SbdbCad200Response {
 
   @override
   String toString() {
-    return 'SbdbCadResponse.two00(signature: $signature, count: $count)';
+    return 'SbdbCadData.two00(signature: $signature, count: $count)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SbdbCad200Response &&
+            other is _$SbdbCad200Data &&
             (identical(other.signature, signature) ||
                 other.signature == signature) &&
             (identical(other.count, count) || other.count == count));
@@ -174,9 +174,8 @@ class _$SbdbCad200Response implements SbdbCad200Response {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SbdbCad200ResponseCopyWith<_$SbdbCad200Response> get copyWith =>
-      __$$SbdbCad200ResponseCopyWithImpl<_$SbdbCad200Response>(
-          this, _$identity);
+  _$$SbdbCad200DataCopyWith<_$SbdbCad200Data> get copyWith =>
+      __$$SbdbCad200DataCopyWithImpl<_$SbdbCad200Data>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -213,8 +212,8 @@ class _$SbdbCad200Response implements SbdbCad200Response {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SbdbCad200Response value) two00,
-    required TResult Function(SbdbCad400Response value) four00,
+    required TResult Function(SbdbCad200Data value) two00,
+    required TResult Function(SbdbCad400Data value) four00,
   }) {
     return two00(this);
   }
@@ -222,8 +221,8 @@ class _$SbdbCad200Response implements SbdbCad200Response {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SbdbCad200Response value)? two00,
-    TResult? Function(SbdbCad400Response value)? four00,
+    TResult? Function(SbdbCad200Data value)? two00,
+    TResult? Function(SbdbCad400Data value)? four00,
   }) {
     return two00?.call(this);
   }
@@ -231,8 +230,8 @@ class _$SbdbCad200Response implements SbdbCad200Response {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SbdbCad200Response value)? two00,
-    TResult Function(SbdbCad400Response value)? four00,
+    TResult Function(SbdbCad200Data value)? two00,
+    TResult Function(SbdbCad400Data value)? four00,
     required TResult orElse(),
   }) {
     if (two00 != null) {
@@ -243,41 +242,41 @@ class _$SbdbCad200Response implements SbdbCad200Response {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SbdbCad200ResponseToJson(
+    return _$$SbdbCad200DataToJson(
       this,
     );
   }
 }
 
-abstract class SbdbCad200Response implements SbdbCadResponse {
-  factory SbdbCad200Response(final Signature signature, final int count) =
-      _$SbdbCad200Response;
+abstract class SbdbCad200Data implements SbdbCadData {
+  factory SbdbCad200Data(final Signature signature, final int count) =
+      _$SbdbCad200Data;
 
-  factory SbdbCad200Response.fromJson(Map<String, dynamic> json) =
-      _$SbdbCad200Response.fromJson;
+  factory SbdbCad200Data.fromJson(Map<String, dynamic> json) =
+      _$SbdbCad200Data.fromJson;
 
   Signature get signature;
   int get count;
   @JsonKey(ignore: true)
-  _$$SbdbCad200ResponseCopyWith<_$SbdbCad200Response> get copyWith =>
+  _$$SbdbCad200DataCopyWith<_$SbdbCad200Data> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SbdbCad400ResponseCopyWith<$Res> {
-  factory _$$SbdbCad400ResponseCopyWith(_$SbdbCad400Response value,
-          $Res Function(_$SbdbCad400Response) then) =
-      __$$SbdbCad400ResponseCopyWithImpl<$Res>;
+abstract class _$$SbdbCad400DataCopyWith<$Res> {
+  factory _$$SbdbCad400DataCopyWith(
+          _$SbdbCad400Data value, $Res Function(_$SbdbCad400Data) then) =
+      __$$SbdbCad400DataCopyWithImpl<$Res>;
   @useResult
   $Res call({String message, String moreInfo, String code});
 }
 
 /// @nodoc
-class __$$SbdbCad400ResponseCopyWithImpl<$Res>
-    extends _$SbdbCadResponseCopyWithImpl<$Res, _$SbdbCad400Response>
-    implements _$$SbdbCad400ResponseCopyWith<$Res> {
-  __$$SbdbCad400ResponseCopyWithImpl(
-      _$SbdbCad400Response _value, $Res Function(_$SbdbCad400Response) _then)
+class __$$SbdbCad400DataCopyWithImpl<$Res>
+    extends _$SbdbCadDataCopyWithImpl<$Res, _$SbdbCad400Data>
+    implements _$$SbdbCad400DataCopyWith<$Res> {
+  __$$SbdbCad400DataCopyWithImpl(
+      _$SbdbCad400Data _value, $Res Function(_$SbdbCad400Data) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -287,7 +286,7 @@ class __$$SbdbCad400ResponseCopyWithImpl<$Res>
     Object? moreInfo = null,
     Object? code = null,
   }) {
-    return _then(_$SbdbCad400Response(
+    return _then(_$SbdbCad400Data(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -306,13 +305,13 @@ class __$$SbdbCad400ResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SbdbCad400Response implements SbdbCad400Response {
-  _$SbdbCad400Response(this.message, this.moreInfo, this.code,
+class _$SbdbCad400Data implements SbdbCad400Data {
+  _$SbdbCad400Data(this.message, this.moreInfo, this.code,
       {final String? $type})
       : $type = $type ?? 'four00';
 
-  factory _$SbdbCad400Response.fromJson(Map<String, dynamic> json) =>
-      _$$SbdbCad400ResponseFromJson(json);
+  factory _$SbdbCad400Data.fromJson(Map<String, dynamic> json) =>
+      _$$SbdbCad400DataFromJson(json);
 
   @override
   final String message;
@@ -326,14 +325,14 @@ class _$SbdbCad400Response implements SbdbCad400Response {
 
   @override
   String toString() {
-    return 'SbdbCadResponse.four00(message: $message, moreInfo: $moreInfo, code: $code)';
+    return 'SbdbCadData.four00(message: $message, moreInfo: $moreInfo, code: $code)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SbdbCad400Response &&
+            other is _$SbdbCad400Data &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.moreInfo, moreInfo) ||
                 other.moreInfo == moreInfo) &&
@@ -347,9 +346,8 @@ class _$SbdbCad400Response implements SbdbCad400Response {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SbdbCad400ResponseCopyWith<_$SbdbCad400Response> get copyWith =>
-      __$$SbdbCad400ResponseCopyWithImpl<_$SbdbCad400Response>(
-          this, _$identity);
+  _$$SbdbCad400DataCopyWith<_$SbdbCad400Data> get copyWith =>
+      __$$SbdbCad400DataCopyWithImpl<_$SbdbCad400Data>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -386,8 +384,8 @@ class _$SbdbCad400Response implements SbdbCad400Response {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SbdbCad200Response value) two00,
-    required TResult Function(SbdbCad400Response value) four00,
+    required TResult Function(SbdbCad200Data value) two00,
+    required TResult Function(SbdbCad400Data value) four00,
   }) {
     return four00(this);
   }
@@ -395,8 +393,8 @@ class _$SbdbCad400Response implements SbdbCad400Response {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SbdbCad200Response value)? two00,
-    TResult? Function(SbdbCad400Response value)? four00,
+    TResult? Function(SbdbCad200Data value)? two00,
+    TResult? Function(SbdbCad400Data value)? four00,
   }) {
     return four00?.call(this);
   }
@@ -404,8 +402,8 @@ class _$SbdbCad400Response implements SbdbCad400Response {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SbdbCad200Response value)? two00,
-    TResult Function(SbdbCad400Response value)? four00,
+    TResult Function(SbdbCad200Data value)? two00,
+    TResult Function(SbdbCad400Data value)? four00,
     required TResult orElse(),
   }) {
     if (four00 != null) {
@@ -416,24 +414,24 @@ class _$SbdbCad400Response implements SbdbCad400Response {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SbdbCad400ResponseToJson(
+    return _$$SbdbCad400DataToJson(
       this,
     );
   }
 }
 
-abstract class SbdbCad400Response implements SbdbCadResponse {
-  factory SbdbCad400Response(
+abstract class SbdbCad400Data implements SbdbCadData {
+  factory SbdbCad400Data(
           final String message, final String moreInfo, final String code) =
-      _$SbdbCad400Response;
+      _$SbdbCad400Data;
 
-  factory SbdbCad400Response.fromJson(Map<String, dynamic> json) =
-      _$SbdbCad400Response.fromJson;
+  factory SbdbCad400Data.fromJson(Map<String, dynamic> json) =
+      _$SbdbCad400Data.fromJson;
 
   String get message;
   String get moreInfo;
   String get code;
   @JsonKey(ignore: true)
-  _$$SbdbCad400ResponseCopyWith<_$SbdbCad400Response> get copyWith =>
+  _$$SbdbCad400DataCopyWith<_$SbdbCad400Data> get copyWith =>
       throw _privateConstructorUsedError;
 }
