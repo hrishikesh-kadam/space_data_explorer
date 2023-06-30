@@ -20,22 +20,37 @@ void main() {
     });
 
     group('get', () {
-      test('200', () async {
-        Response<SbdbCadBody> response = await api.get();
-        expect(response.data, isA<SbdbCad200Body>());
-        final sbdbCad200Body = response.data as SbdbCad200Body;
-        if (sbdbCad200Body.signature.version != SbdbCadApi.version) {
-          String message =
-              '${SbdbCadApi.displayName} version is now ${sbdbCad200Body.signature.version}'
-              ', tested on ${SbdbCadApi.version}'
-              ', See ${SbdbCadApi.docUrl}';
-          log.warning(message);
-        }
-        if (sbdbCad200Body.count <= 0) {
-          expect(sbdbCad200Body.data, isNull);
-        } else {
-          expect(sbdbCad200Body.data, isNotNull);
-        }
+      group('200', () {
+        test('default', () async {
+          Response<SbdbCadBody> response = await api.get();
+          expect(response.data, isA<SbdbCad200Body>());
+          final sbdbCad200Body = response.data as SbdbCad200Body;
+          if (sbdbCad200Body.signature.version != SbdbCadApi.version) {
+            String message =
+                '${SbdbCadApi.displayName} version is now ${sbdbCad200Body.signature.version}'
+                ', tested on ${SbdbCadApi.version}'
+                ', See ${SbdbCadApi.docUrl}';
+            log.warning(message);
+          }
+          if (sbdbCad200Body.count <= 0) {
+            expect(sbdbCad200Body.data, isNull);
+          } else {
+            expect(sbdbCad200Body.data, isNotNull);
+          }
+        });
+
+        test('fullname', () async {
+          Response<SbdbCadBody> response = await api.get(
+            queryParameters: {
+              'fullname': true,
+            },
+          );
+          expect(response.data, isA<SbdbCad200Body>());
+          final sbdbCad200Body = response.data as SbdbCad200Body;
+          if (sbdbCad200Body.count > 0) {
+            expect(sbdbCad200Body.data!.first.fullname, isNotNull);
+          }
+        });
       });
 
       test('400', () async {
