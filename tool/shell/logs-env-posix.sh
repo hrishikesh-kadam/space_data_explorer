@@ -1,5 +1,7 @@
 # shellcheck shell=sh
 
+# TODO(hrishikesh-kadam): Sync this it with common-scripts
+
 # This shell script is meant to be sourced for printing colorful logs
 
 if [ -z ${-%*e*} ]; then PARENT_ERREXIT=true; else PARENT_ERREXIT=false; fi
