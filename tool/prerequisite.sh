@@ -26,6 +26,8 @@ check_directory_on_path() {
 ROLE=${1//--}
 : "${ROLE:=member}"
 
+check_command_on_path flutter
+
 if [[ $(uname -s) =~ ^"Darwin" ]]; then
   check_command_on_path brew
 elif [[ $(uname -s) =~ ^"MINGW" ]]; then
