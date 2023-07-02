@@ -12,9 +12,11 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  hrk_logging: 
-    path: packages/hrk_logging
   go_router: ^8.0.5
+  hrk_logging:
+    git: https://github.com/hrishikesh-kadam/hrk_logging.dart
+  hrk_nasa_apis:
+    git: https://github.com/hrishikesh-kadam/hrk_nasa_apis.dart
 
 dev_dependencies:
   flutter_test:

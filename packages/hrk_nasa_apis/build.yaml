@@ -1,7 +1,0 @@
-targets:
-  $default:
-    builders:
-      # https://github.com/google/json_serializable.dart/tree/master/json_serializable#build-configuration
-      json_serializable:
-        options:
-          field_rename: snake

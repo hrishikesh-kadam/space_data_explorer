@@ -97,6 +97,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  dio:
+    dependency: transitive
+    description:
+      name: dio
+      sha256: a9d76e72985d7087eb7c5e7903224ae52b337131518d127c554b9405936752b8
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.1+1"
   fake_async:
     dependency: transitive
     description:
@@ -149,6 +157,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  freezed_annotation:
+    dependency: transitive
+    description:
+      name: freezed_annotation
+      sha256: aeac15850ef1b38ee368d4c53ba9a847e900bb2c53a4db3f6881cbb3cb684338
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   frontend_server_client:
     dependency: transitive
     description:
@@ -181,9 +197,20 @@ packages:
   hrk_logging:
     dependency: "direct main"
     description:
-      path: "packages/hrk_logging"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "238a344c99d07beaaa440f0efb4bce0748b5a492"
+      url: "https://github.com/hrishikesh-kadam/hrk_logging.dart"
+    source: git
+    version: "0.1.0"
+  hrk_nasa_apis:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "5132a7c03eda87a972544234e14ca602acac5862"
+      url: "https://github.com/hrishikesh-kadam/hrk_nasa_apis.dart"
+    source: git
     version: "0.1.0"
   http_multi_server:
     dependency: transitive
@@ -231,6 +258,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      sha256: b10a7b2ff83d83c777edba3c6a0f97045ddadd56c944e1a23a3fdf43a1bf4467
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.8.1"
   lints:
     dependency: transitive
     description:
