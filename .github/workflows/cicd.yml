@@ -98,9 +98,8 @@ jobs:
 
       - uses: codecov/codecov-action@v3
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
-          name: ${{ matrix.runner }}-${{ matrix.ref }}
+          name: cicd-${{ matrix.runner }}-${{ matrix.ref }}
 
       - run: ./tool/cd.sh
         if: matrix.ref == 'stable'

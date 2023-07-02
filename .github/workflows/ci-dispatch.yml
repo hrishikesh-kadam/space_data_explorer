@@ -29,8 +29,8 @@ defaults:
     shell: bash
 
 jobs:
-  ci:
-    name: CI on ${{ inputs.runner }} using Flutter ${{ inputs.ref }}
+  ci-dispatch:
+    name: CI Dispatched on ${{ inputs.runner }} using Flutter ${{ inputs.ref }}
     runs-on: ${{ inputs.runner }}
 
     steps:
@@ -80,8 +80,7 @@ jobs:
 
       - uses: codecov/codecov-action@v3
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
-          name: ${{ inputs.runner }}-${{ inputs.ref }}
+          name: ci-dispatch-${{ inputs.runner }}-${{ inputs.ref }}
 
       - run: ./tool/android/stop-gradle.sh

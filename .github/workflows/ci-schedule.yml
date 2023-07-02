@@ -26,8 +26,8 @@ defaults:
     shell: bash
 
 jobs:
-  ci:
-    name: CI on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
+  ci-schedule:
+    name: CI Scheduled on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
@@ -84,8 +84,7 @@ jobs:
 
       - uses: codecov/codecov-action@v3
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
-          name: ${{ matrix.runner }}-${{ matrix.ref }}
+          name: ci-schedule-${{ matrix.runner }}-${{ matrix.ref }}
 
       - run: ./tool/android/stop-gradle.sh
