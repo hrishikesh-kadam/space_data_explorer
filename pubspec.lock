@@ -197,21 +197,19 @@ packages:
   hrk_logging:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "238a344c99d07beaaa440f0efb4bce0748b5a492"
-      url: "https://github.com/hrishikesh-kadam/hrk_logging.dart"
-    source: git
-    version: "0.1.0"
+      name: hrk_logging
+      sha256: edb4f4ff7078f293ee3153fb0002d1501f37e70943d1955c8282001d2bcc0b25
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0-pre.1"
   hrk_nasa_apis:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "5132a7c03eda87a972544234e14ca602acac5862"
-      url: "https://github.com/hrishikesh-kadam/hrk_nasa_apis.dart"
-    source: git
-    version: "0.1.0"
+      name: hrk_nasa_apis
+      sha256: "2fee5ae1b06c56b29b519bd4699e28e7081be9e5d6bdee443bf89376a120d81f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0-pre.1"
   http_multi_server:
     dependency: transitive
     description:
