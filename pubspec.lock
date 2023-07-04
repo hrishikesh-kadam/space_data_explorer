@@ -198,26 +198,26 @@ packages:
     dependency: "direct main"
     description:
       name: hrk_batteries
-      sha256: a6d984a9e5c207184f8308c9ce537eddd76dd03388824a1b31d15acb9d1f9943
+      sha256: "43dfeae362c9b254d6c46e9ab82bae881e56d6752827d3e8aa90e9694c04a685"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0-dev.3"
+    version: "0.1.0-pre.5"
   hrk_logging:
     dependency: "direct main"
     description:
       name: hrk_logging
-      sha256: edb4f4ff7078f293ee3153fb0002d1501f37e70943d1955c8282001d2bcc0b25
+      sha256: cf121b853d8f608254f64fcd50dc5b35fed2959ffefab00e11b2b6c6c4338ff8
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0-pre.1"
+    version: "0.1.0-pre.2"
   hrk_nasa_apis:
     dependency: "direct main"
     description:
       name: hrk_nasa_apis
-      sha256: "2fee5ae1b06c56b29b519bd4699e28e7081be9e5d6bdee443bf89376a120d81f"
+      sha256: "41dafdcdce64a4dcb2dae8ed705b41ccec7614beb1cd1e73cb77017c038d0cff"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0-pre.1"
+    version: "0.1.0-pre.3"
   http_multi_server:
     dependency: transitive
     description:
