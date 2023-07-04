@@ -15,6 +15,7 @@ dependencies:
   go_router: ^8.0.5
   hrk_logging: ^0.1.0-pre.1
   hrk_nasa_apis: ^0.1.0-pre.1
+  hrk_batteries: ^0.1.0-dev.3
 
 dev_dependencies:
   flutter_test:

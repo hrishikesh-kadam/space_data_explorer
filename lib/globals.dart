@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 
+import 'package:hrk_batteries/hrk_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 
 import 'constants.dart';
-import 'helper/helper.dart';
 
 bool flutterTest = isFlutterTest();
 
