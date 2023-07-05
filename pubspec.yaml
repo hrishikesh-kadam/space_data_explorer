@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 0.3.0
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '^3.0.0'
 
 dependencies:
   flutter:
@@ -22,17 +22,13 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  hrk_analysis: ^0.1.0-pre.1
   hrk_flutter_test_batteries: ^0.1.0-pre.1
   import_sorter:
     git:
       url: https://github.com/fluttercommunity/import_sorter.git
       ref: f350497a11b1285c695595049e95a420068e7a9f
   path_provider: ^2.0.11
-  # TODO(hrishikesh-kadam): Remove this once hrk_logging package is published.
-  # flutter analyze was failing only in GitHub Actions CI
-  # Observed in 3.12.0-1.1.pre beta
-  test: ^1.24.1
 
 flutter:
   uses-material-design: true

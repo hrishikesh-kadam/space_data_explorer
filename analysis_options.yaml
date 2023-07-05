@@ -1,13 +1,1 @@
-# TODO(hrishikesh-kadam): Make a pub package like very_good_analysis
-include: package:flutter_lints/flutter.yaml
-
-linter:
-  rules:
-    prefer_single_quotes: true
-    use_super_parameters: true
-    prefer_relative_imports: true
-    directives_ordering: true
-
-analyzer:
-  errors:
-    todo: ignore
+include: package:hrk_analysis/analysis_options.yaml
