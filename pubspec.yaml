@@ -13,6 +13,7 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  meta: ^1.9.1
   hrk_logging: ^0.1.0-pre.2
   hrk_nasa_apis: ^0.1.0-pre.3
   hrk_batteries: ^0.1.0-pre.5

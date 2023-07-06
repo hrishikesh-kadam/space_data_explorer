@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../config/config.dart';
+import '../constants/dimensions.dart';
+import '../constants/localisation.dart';
+import '../constants/theme.dart';
 
 class DeferredLoadingPlaceholder extends StatelessWidget {
   const DeferredLoadingPlaceholder({
     super.key,
-    this.name = defaultName,
+    this.name = AppLocalisations.deferredTitle,
   });
 
   final String name;
-  // TODO(hrishikesh-kadam): LABEL:string-constant
-  static const String defaultName = 'Loading... Please Wait!';
-  static const double indicatorHeight = 6;
+  static const double indicatorHeight =
+      Dimensions.linearProgressIndicatorHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +25,7 @@ class DeferredLoadingPlaceholder extends StatelessWidget {
             preferredSize: const Size.fromHeight(indicatorHeight),
             child: LinearProgressIndicator(
               value: null,
-              // TODO(hrishikesh-kadam): LABEL:theme-constant
-              color: Colors.blue[900],
+              color: AppTheme.progressIndicatorColor,
               minHeight: indicatorHeight,
             ),
           )),

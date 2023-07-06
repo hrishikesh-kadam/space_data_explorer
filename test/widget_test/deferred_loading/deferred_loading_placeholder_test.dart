@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:space_data_explorer/constants/localisation.dart';
 
 import 'package:space_data_explorer/deferred_loading.dart';
 
@@ -11,7 +12,7 @@ void main() {
       home: DeferredLoadingPlaceholder(),
     ));
     expect(find.byType(AppBar), findsOneWidget);
-    expect(find.text(DeferredLoadingPlaceholder.defaultName), findsOneWidget);
+    expect(find.text(AppLocalisations.deferredTitle), findsOneWidget);
     expect(find.byType(LinearProgressIndicator), findsOneWidget);
   });
 }

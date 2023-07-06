@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hrk_batteries/hrk_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 
-import '../constants.dart';
+import '../constants/constants.dart';
 import '../globals.dart';
 import '../pages/home_page.dart';
 
