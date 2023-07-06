@@ -12,7 +12,7 @@ import 'nasa_source_page_test.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('CadPage Integration Test', (WidgetTester tester) async {
+  testWidgets('$CadPage Integration Test', (WidgetTester tester) async {
     await pumpCadPageAsNormalLink(tester);
   });
 }

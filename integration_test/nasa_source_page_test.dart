@@ -12,7 +12,7 @@ import 'home_page_test.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('NasaSourcePage Integration Test', (WidgetTester tester) async {
+  testWidgets('$NasaPage Integration Test', (WidgetTester tester) async {
     await pumpNasaSourcePageAsNormalLink(tester);
   });
 }

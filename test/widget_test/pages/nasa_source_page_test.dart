@@ -4,13 +4,14 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:space_data_explorer/nasa/cad_page.dart';
 import 'package:space_data_explorer/nasa/cad_screen.dart';
+import 'package:space_data_explorer/nasa/nasa_page.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/pages/home_page.dart';
 import '../../../integration_test/nasa_source_page_test.dart';
 
 void main() {
-  group('NasaSourcePage Widget Test', () {
-    testWidgets('Navigate NasaSourcePage to CadPage to NasaSourcePage',
+  group('$NasaPage Widget Test', () {
+    testWidgets('Navigate $NasaPage to $CadPage to $NasaPage',
         (WidgetTester tester) async {
       await pumpNasaSourcePageAsInitialLocation(tester);
       final cadTextButton = find.widgetWithText(TextButton, CadPage.pageName);
@@ -25,11 +26,11 @@ void main() {
       expect(find.byType(NasaScreen), findsOneWidget);
     });
 
-    testWidgets('NasaSourcePage', (WidgetTester tester) async {
+    testWidgets('$NasaPage', (WidgetTester tester) async {
       await pumpNasaSourcePageAsInitialLocation(tester);
     });
 
-    testWidgets('Navigate back from NasaSourcePage',
+    testWidgets('Navigate back from $NasaPage',
         (WidgetTester tester) async {
       await pumpNasaSourcePageAsNormalLink(tester);
       final nasaSourcePageBackButton = find.byType(BackButton);

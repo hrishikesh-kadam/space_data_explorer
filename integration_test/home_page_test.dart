@@ -8,7 +8,7 @@ import 'package:space_data_explorer/space_data_explorer.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('HomePage Integration Test', (WidgetTester tester) async {
+  testWidgets('$HomePage Integration Test', (WidgetTester tester) async {
     await pumpHomePageIntegrationTest(tester);
   });
 }

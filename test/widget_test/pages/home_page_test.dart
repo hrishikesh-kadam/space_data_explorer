@@ -8,12 +8,12 @@ import 'package:space_data_explorer/pages/home_page.dart';
 import '../../../integration_test/home_page_test.dart';
 
 void main() {
-  group('HomePage Widget Test', () {
-    testWidgets('HomePage', (WidgetTester tester) async {
+  group('$HomePage Widget Test', () {
+    testWidgets('$HomePage', (WidgetTester tester) async {
       await pumpHomePage(tester);
     });
 
-    testWidgets('Navigate HomePage to NasaSourcePage to HomePage',
+    testWidgets('Navigate $HomePage to $NasaPage to $HomePage',
         (WidgetTester tester) async {
       await pumpHomePage(tester);
       final nasaSourceTextButton =
