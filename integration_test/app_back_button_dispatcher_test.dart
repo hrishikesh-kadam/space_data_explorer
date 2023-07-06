@@ -7,14 +7,14 @@ import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/config/config.dart';
+import 'package:space_data_explorer/nasa/cad_page.dart';
+import 'package:space_data_explorer/nasa/cad_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_page.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
-import 'package:space_data_explorer/nasa/neows_page.dart';
-import 'package:space_data_explorer/nasa/neows_screen.dart';
 import 'package:space_data_explorer/pages/home_page.dart';
+import 'cad_page_test.dart';
 import 'globals.dart';
 import 'nasa_source_page_test.dart';
-import 'neows_page_test.dart';
 import 'space_data_explorer_app_test.dart';
 import 'test_helper.dart';
 
@@ -37,15 +37,15 @@ void appBackButtonDispatcherTest() {
     });
 
     testWidgets('3 pages down and 2 pages up', (tester) async {
-      await pumpNeowsPageAsNormalLink(tester);
+      await pumpCadPageAsNormalLink(tester);
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
-      expect(find.byType(NeowsScreen), findsNothing);
+      expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsOneWidget);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
-      expect(find.byType(NeowsScreen), findsNothing);
+      expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });
@@ -59,15 +59,15 @@ void appBackButtonDispatcherTest() {
     });
 
     testWidgets('deep-link to 3rd level and press back', (tester) async {
-      tester.platformDispatcher.defaultRouteNameTestValue = NeowsPage.path;
+      tester.platformDispatcher.defaultRouteNameTestValue = CadPage.path;
       await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
-      expect(find.byType(NeowsScreen), findsOneWidget);
+      expect(find.byType(CadScreen), findsOneWidget);
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
-      expect(find.byType(NeowsScreen), findsNothing);
+      expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });
 
@@ -92,11 +92,11 @@ void appBackButtonDispatcherTest() {
         navigatorKey: navigatorKey,
       );
       expect(find.byType(HomeScreen), findsOneWidget);
-      GoRouter.of(navigatorKey.currentContext!).go(NeowsPage.path, extra: {});
+      GoRouter.of(navigatorKey.currentContext!).go(CadPage.path, extra: {});
       await tester.pumpAndSettle();
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
-      expect(find.byType(NeowsScreen), findsNothing);
+      expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });
@@ -109,11 +109,11 @@ void appBackButtonDispatcherTest() {
         navigatorKey: navigatorKey,
       );
       expect(find.byType(HomeScreen), findsOneWidget);
-      GoRouter.of(navigatorKey.currentContext!).go(NeowsPage.path, extra: []);
+      GoRouter.of(navigatorKey.currentContext!).go(CadPage.path, extra: []);
       await tester.pumpAndSettle();
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
-      expect(find.byType(NeowsScreen), findsNothing);
+      expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });

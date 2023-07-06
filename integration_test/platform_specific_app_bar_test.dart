@@ -6,14 +6,14 @@ import 'package:go_router/go_router.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/config/config.dart';
+import 'package:space_data_explorer/nasa/cad_page.dart';
+import 'package:space_data_explorer/nasa/cad_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_page.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
-import 'package:space_data_explorer/nasa/neows_page.dart';
-import 'package:space_data_explorer/nasa/neows_screen.dart';
 import 'package:space_data_explorer/pages/home_page.dart';
+import 'cad_page_test.dart';
 import 'globals.dart';
 import 'nasa_source_page_test.dart';
-import 'neows_page_test.dart';
 import 'space_data_explorer_app_test.dart';
 import 'test_helper.dart';
 
@@ -41,11 +41,11 @@ void platformSpecificAppBarTest() {
     });
 
     testWidgets('3 pages down and 2 pages up', (tester) async {
-      await pumpNeowsPageAsNormalLink(tester);
-      final neowsPageBackButton = find.byType(BackButton);
-      await tester.tap(neowsPageBackButton);
+      await pumpCadPageAsNormalLink(tester);
+      final cadPageBackButton = find.byType(BackButton);
+      await tester.tap(cadPageBackButton);
       await tester.pumpAndSettle();
-      expect(find.byType(NeowsScreen), findsNothing);
+      expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsOneWidget);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       if (kIsWeb) {
@@ -54,7 +54,7 @@ void platformSpecificAppBarTest() {
       final nasaSourcePageBackButton = find.byType(BackButton);
       await tester.tap(nasaSourcePageBackButton);
       await tester.pumpAndSettle();
-      expect(find.byType(NeowsScreen), findsNothing);
+      expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
@@ -76,16 +76,16 @@ void platformSpecificAppBarTest() {
 
     testWidgets('deep-link to 3rd level and press back',
         skip: skipDeepLinkTests, (tester) async {
-      tester.platformDispatcher.defaultRouteNameTestValue = NeowsPage.path;
+      tester.platformDispatcher.defaultRouteNameTestValue = CadPage.path;
       await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
-      expect(find.byType(NeowsScreen), findsOneWidget);
-      final neowsPageBackButton = find.byType(BackButton);
-      await tester.tap(neowsPageBackButton);
+      expect(find.byType(CadScreen), findsOneWidget);
+      final cadPageBackButton = find.byType(BackButton);
+      await tester.tap(cadPageBackButton);
       await tester.pumpAndSettle();
-      expect(find.byType(NeowsScreen), findsNothing);
+      expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
         verifyHistoryLengthAndSerialCount(2, 1);
@@ -118,12 +118,12 @@ void platformSpecificAppBarTest() {
         navigatorKey: navigatorKey,
       );
       expect(find.byType(HomeScreen), findsOneWidget);
-      GoRouter.of(navigatorKey.currentContext!).go(NeowsPage.path, extra: {});
+      GoRouter.of(navigatorKey.currentContext!).go(CadPage.path, extra: {});
       await tester.pumpAndSettle();
-      final neowsPageBackButton = find.byType(BackButton);
-      await tester.tap(neowsPageBackButton);
+      final cadPageBackButton = find.byType(BackButton);
+      await tester.tap(cadPageBackButton);
       await tester.pumpAndSettle();
-      expect(find.byType(NeowsScreen), findsNothing);
+      expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       // In case of web this would be normal navigation because
@@ -141,12 +141,12 @@ void platformSpecificAppBarTest() {
         navigatorKey: navigatorKey,
       );
       expect(find.byType(HomeScreen), findsOneWidget);
-      GoRouter.of(navigatorKey.currentContext!).go(NeowsPage.path, extra: []);
+      GoRouter.of(navigatorKey.currentContext!).go(CadPage.path, extra: []);
       await tester.pumpAndSettle();
-      final neowsPageBackButton = find.byType(BackButton);
-      await tester.tap(neowsPageBackButton);
+      final cadPageBackButton = find.byType(BackButton);
+      await tester.tap(cadPageBackButton);
       await tester.pumpAndSettle();
-      expect(find.byType(NeowsScreen), findsNothing);
+      expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       // In case of web this would be normal navigation because

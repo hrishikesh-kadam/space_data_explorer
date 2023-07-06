@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/main.dart' as app;
+import 'package:space_data_explorer/nasa/cad_page.dart';
 import 'package:space_data_explorer/nasa/nasa_page.dart';
-import 'package:space_data_explorer/nasa/neows_page.dart';
 import 'test_helper.dart';
 
 void main() {
@@ -24,8 +24,8 @@ void main() {
     await tester.tap(nasaSourceTextButton);
     await testScreenshot('2$imageNameSuffix.png', tester, binding);
 
-    final neowsTextButton = find.widgetWithText(TextButton, NeowsPage.pageName);
-    await tester.tap(neowsTextButton);
+    final cadTextButton = find.widgetWithText(TextButton, CadPage.pageName);
+    await tester.tap(cadTextButton);
     await testScreenshot('3$imageNameSuffix.png', tester, binding);
   });
 }

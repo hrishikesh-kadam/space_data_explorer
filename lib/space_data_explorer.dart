@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'config/app_back_button_dispatcher.dart';
+import 'nasa/cad_page.dart';
 import 'nasa/nasa_page.dart';
-import 'nasa/neows_page.dart';
 import 'pages/home_page.dart';
 
 class SpaceDataExplorerApp extends StatelessWidget {
@@ -28,8 +28,8 @@ class SpaceDataExplorerApp extends StatelessWidget {
               pageBuilder: (context, state) => nasaSourcePage,
               routes: [
                 GoRoute(
-                  path: NeowsPage.pageName,
-                  pageBuilder: (context, state) => neowsPage,
+                  path: CadPage.pageName,
+                  pageBuilder: (context, state) => cadPage,
                 ),
               ],
             ),

@@ -2,27 +2,26 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:space_data_explorer/nasa/cad_page.dart';
+import 'package:space_data_explorer/nasa/cad_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
-import 'package:space_data_explorer/nasa/neows_page.dart';
-import 'package:space_data_explorer/nasa/neows_screen.dart';
 import 'package:space_data_explorer/pages/home_page.dart';
 import '../../../integration_test/nasa_source_page_test.dart';
 
 void main() {
   group('NasaSourcePage Widget Test', () {
-    testWidgets('Navigate NasaSourcePage to NeowsPage to NasaSourcePage',
+    testWidgets('Navigate NasaSourcePage to CadPage to NasaSourcePage',
         (WidgetTester tester) async {
       await pumpNasaSourcePageAsInitialLocation(tester);
-      final neowsTextButton =
-          find.widgetWithText(TextButton, NeowsPage.pageName);
-      await tester.tap(neowsTextButton);
+      final cadTextButton = find.widgetWithText(TextButton, CadPage.pageName);
+      await tester.tap(cadTextButton);
       await tester.pumpAndSettle();
       expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
-      expect(find.byType(NeowsScreen), findsOneWidget);
-      final neowsPageBackButton = find.byType(BackButton);
-      await tester.tap(neowsPageBackButton);
+      expect(find.byType(CadScreen), findsOneWidget);
+      final cadPageBackButton = find.byType(BackButton);
+      await tester.tap(cadPageBackButton);
       await tester.pumpAndSettle();
-      expect(find.byType(NeowsScreen), findsNothing);
+      expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsOneWidget);
     });
 

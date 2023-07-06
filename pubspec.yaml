@@ -1,5 +1,5 @@
 name: space_data_explorer
-version: 0.3.0
+version: 0.4.0
 
 description: An app to explore space data from various sources.
 publish_to: none
@@ -13,10 +13,11 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  go_router: ^8.0.5
   hrk_logging: ^0.1.0-pre.2
   hrk_nasa_apis: ^0.1.0-pre.3
   hrk_batteries: ^0.1.0-pre.5
+  go_router: ^8.0.5
+  flutter_bloc: ^8.1.3
 
 dev_dependencies:
   flutter_test:
