@@ -8,9 +8,9 @@ FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
 if [[ -s ./secrets/.git ]]; then
   PLAY_VERSION_CODE=$(./tool/android/get-play-version-code.sh "$FLAVOR_ENV")
-  info_log "PLAY_VERSION_CODE=$PLAY_VERSION_CODE"
+  log_info "PLAY_VERSION_CODE=$PLAY_VERSION_CODE"
   INCREMENTED_VERSION_CODE=$(( PLAY_VERSION_CODE+1 ))
-  info_log "INCREMENTED_VERSION_CODE=$INCREMENTED_VERSION_CODE"
+  log_info "INCREMENTED_VERSION_CODE=$INCREMENTED_VERSION_CODE"
 else
   INCREMENTED_VERSION_CODE=1
 fi
@@ -26,13 +26,13 @@ VERSION_CODE=$( \
     --bundle "$BUNDLE_FILE" \
     --xpath /manifest/@android:versionCode
 )
-info_log "VERSION_CODE=$VERSION_CODE"
+log_info "VERSION_CODE=$VERSION_CODE"
 VERSION_NAME=$( \
   $BUNDLETOOL dump manifest \
     --bundle "$BUNDLE_FILE" \
     --xpath /manifest/@android:versionName
 )
-info_log "VERSION_NAME=$VERSION_NAME"
+log_info "VERSION_NAME=$VERSION_NAME"
 
 ./tool/android/check-all-variants.sh
 

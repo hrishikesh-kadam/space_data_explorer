@@ -13,7 +13,7 @@ output=$( \
           --info=chdumbt \
 )
 if [[ $output ]]; then
-  error_log "Found CR line ending File(s)"
+  log_error "Found CR line ending File(s)"
   print_in_red "$output"
   exit 1
 else
@@ -31,7 +31,7 @@ output=$( \
           --info=chdumbt \
 )
 if [[ $output ]]; then
-  error_log "Found CRLF line ending File(s)"
+  log_error "Found CRLF line ending File(s)"
   print_in_red "$output"
   exit 1
 else

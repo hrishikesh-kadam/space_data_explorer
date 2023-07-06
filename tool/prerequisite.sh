@@ -9,7 +9,7 @@ source ./tool/shell/logs-env.sh
 
 check_command_on_path() {
   if [[ ! -x $(command -v "$1") ]]; then
-    error_log_with_exit "$1 command not accessible from PATH" 1
+    log_error_with_exit "$1 command not accessible from PATH" 1
   fi
 }
 
@@ -19,7 +19,7 @@ check_directory_on_path() {
     directory=$(cygpath "$directory")
   fi
   if [[ ! $PATH =~ $directory ]]; then
-    error_log_with_exit "$1 directory not found on PATH" 1
+    log_error_with_exit "$1 directory not found on PATH" 1
   fi
 }
 
@@ -33,7 +33,7 @@ if [[ $(uname -s) =~ ^"Darwin" ]]; then
 elif [[ $(uname -s) =~ ^"MINGW" ]]; then
   check_command_on_path pwsh
   if ! pwsh -NoProfile ./tool/shell/is-admin.ps1; then
-    error_log_with_exit "Please run this script from Elevated Session" 1
+    log_error_with_exit "Please run this script from Elevated Session" 1
   fi
   if [[ ! $GITHUB_ACTIONS ]]; then
     # winget is not yet available in GitHub Actions
@@ -46,7 +46,7 @@ elif [[ $(uname -s) =~ ^"MINGW" ]]; then
         PATH="$WINGET_LINKS_PATH_NIX:$PATH"
       else
         # Deliberately avoiding to set PATH by setx command
-        error_log_with_exit "$WINGET_LINKS_PATH_NIX directory not found on PATH" 1
+        log_error_with_exit "$WINGET_LINKS_PATH_NIX directory not found on PATH" 1
       fi
     fi
   fi
@@ -80,7 +80,7 @@ JAVA_CLASS_MAJOR_VERSION=$( \
 )
 : "${JAVA_CLASS_MAJOR_VERSION:=-1}"
 if (( "$JAVA_CLASS_MAJOR_VERSION" < 55 )); then
-  error_log "JDK 11 not found on PATH"
+  log_error "JDK 11 not found on PATH"
   JAVA_VERSION_OUTPUT="$(java --version)"
   print_in_red "$JAVA_VERSION_OUTPUT"
   exit 1
@@ -96,7 +96,7 @@ if [[ ! -x $(command -v pipx) ]]; then
     pipx --version
     pipx ensurepath
   elif [[ $(uname -s) =~ ^"MINGW" ]]; then
-    error_log_with_exit "pipx command not accessible from PATH" 1
+    log_error_with_exit "pipx command not accessible from PATH" 1
   fi
 fi
 
@@ -120,7 +120,7 @@ if [[ ! -x $(command -v lcov) ]]; then
         PATH="$LCOV_ROOT_NIX:$PATH"
       else
         # Deliberately avoiding to set PATH by setx command
-        error_log_with_exit "$LCOV_ROOT_NIX directory not found on PATH" 1
+        log_error_with_exit "$LCOV_ROOT_NIX directory not found on PATH" 1
       fi
     fi
   fi
@@ -167,7 +167,7 @@ if [[ ! -x $(command -v yq) ]]; then
 fi
 
 if ! export -p | grep "declare -x ANDROID_HOME=" &> /dev/null; then
-  error_log_with_exit "ANDROID_HOME exported variable not found" 1
+  log_error_with_exit "ANDROID_HOME exported variable not found" 1
 fi
 
 if [[ ! -s $BUNDLETOOL_PATH ]]; then

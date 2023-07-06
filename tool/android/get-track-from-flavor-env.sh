@@ -11,7 +11,7 @@ if [[ $FLAVOR_ENV == "dev" || $FLAVOR_ENV == "stag" ]]; then
 elif [[ $FLAVOR_ENV == "prod" ]]; then
   TRACK="production"
 else
-  error_log_with_exit "Unknown FLAVOR_ENV=$FLAVOR_ENV" 1
+  log_error_with_exit "Unknown FLAVOR_ENV=$FLAVOR_ENV" 1
 fi
 
 echo "$TRACK"
