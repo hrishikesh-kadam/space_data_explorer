@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:space_data_explorer/nasa/cad_page.dart';
 
-import 'package:space_data_explorer/nasa/cad_screen.dart';
+import 'package:space_data_explorer/nasa/cad/cad_page.dart';
+import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import '../../../integration_test/cad_page_test.dart';
 

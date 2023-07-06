@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../deferred_loading.dart';
-import '../pages/base_page.dart';
+import '../../pages/base_page.dart';
+import '../nasa_page.dart';
 import 'cad_screen.dart' deferred as cad_screen;
-import 'nasa_page.dart';
 
 class CadPage extends BasePage {
   const CadPage({

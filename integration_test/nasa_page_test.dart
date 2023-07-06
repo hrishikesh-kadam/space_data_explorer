@@ -27,8 +27,7 @@ Future<void> pumpNasaPageAsInitialLocation(WidgetTester tester) async {
 
 Future<void> pumpNasaPageAsNormalLink(WidgetTester tester) async {
   await pumpHomePage(tester);
-  final nasaTextButton =
-      find.widgetWithText(TextButton, NasaPage.pageName);
+  final nasaTextButton = find.widgetWithText(TextButton, NasaPage.pageName);
   await tester.tap(nasaTextButton);
   await tester.pumpAndSettle();
   expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);

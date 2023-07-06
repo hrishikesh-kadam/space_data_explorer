@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../config/config.dart';
 import '../../globals.dart';
-import 'cad_page.dart';
+import 'cad/cad_page.dart';
 import 'nasa_page.dart';
 
 class NasaScreen extends StatefulWidget {

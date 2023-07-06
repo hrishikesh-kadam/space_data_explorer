@@ -16,8 +16,7 @@ void main() {
     testWidgets('Navigate $HomePage to $NasaPage to $HomePage',
         (WidgetTester tester) async {
       await pumpHomePage(tester);
-      final nasaTextButton =
-          find.widgetWithText(TextButton, NasaPage.pageName);
+      final nasaTextButton = find.widgetWithText(TextButton, NasaPage.pageName);
       await tester.tap(nasaTextButton);
       await tester.pumpAndSettle();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);

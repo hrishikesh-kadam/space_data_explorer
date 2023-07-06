@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:space_data_explorer/nasa/cad_page.dart';
-import 'package:space_data_explorer/nasa/cad_screen.dart';
+import 'package:space_data_explorer/nasa/cad/cad_page.dart';
+import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_page.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/pages/home_page.dart';
@@ -30,8 +30,7 @@ void main() {
       await pumpNasaPageAsInitialLocation(tester);
     });
 
-    testWidgets('Navigate back from $NasaPage',
-        (WidgetTester tester) async {
+    testWidgets('Navigate back from $NasaPage', (WidgetTester tester) async {
       await pumpNasaPageAsNormalLink(tester);
       final nasaPageBackButton = find.byType(BackButton);
       await tester.tap(nasaPageBackButton);

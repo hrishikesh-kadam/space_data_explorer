@@ -6,8 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/config/config.dart';
-import 'package:space_data_explorer/nasa/cad_page.dart';
-import 'package:space_data_explorer/nasa/cad_screen.dart';
+import 'package:space_data_explorer/nasa/cad/cad_page.dart';
+import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_page.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/pages/home_page.dart';
