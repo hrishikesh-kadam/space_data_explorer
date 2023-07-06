@@ -14,7 +14,7 @@ import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/pages/home_page.dart';
 import 'cad_page_test.dart';
 import 'globals.dart';
-import 'nasa_source_page_test.dart';
+import 'nasa_page_test.dart';
 import 'space_data_explorer_app_test.dart';
 import 'test_helper.dart';
 
@@ -51,7 +51,7 @@ void appBackButtonDispatcherTest() {
     });
 
     testWidgets('2 pages down and 1 page up', (tester) async {
-      await pumpNasaSourcePageAsNormalLink(tester);
+      await pumpNasaPageAsNormalLink(tester);
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
       expect(find.byType(NasaScreen), findsNothing);

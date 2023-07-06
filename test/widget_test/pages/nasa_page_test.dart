@@ -7,13 +7,13 @@ import 'package:space_data_explorer/nasa/cad_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_page.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/pages/home_page.dart';
-import '../../../integration_test/nasa_source_page_test.dart';
+import '../../../integration_test/nasa_page_test.dart';
 
 void main() {
   group('$NasaPage Widget Test', () {
     testWidgets('Navigate $NasaPage to $CadPage to $NasaPage',
         (WidgetTester tester) async {
-      await pumpNasaSourcePageAsInitialLocation(tester);
+      await pumpNasaPageAsInitialLocation(tester);
       final cadTextButton = find.widgetWithText(TextButton, CadPage.pageName);
       await tester.tap(cadTextButton);
       await tester.pumpAndSettle();
@@ -27,14 +27,14 @@ void main() {
     });
 
     testWidgets('$NasaPage', (WidgetTester tester) async {
-      await pumpNasaSourcePageAsInitialLocation(tester);
+      await pumpNasaPageAsInitialLocation(tester);
     });
 
     testWidgets('Navigate back from $NasaPage',
         (WidgetTester tester) async {
-      await pumpNasaSourcePageAsNormalLink(tester);
-      final nasaSourcePageBackButton = find.byType(BackButton);
-      await tester.tap(nasaSourcePageBackButton);
+      await pumpNasaPageAsNormalLink(tester);
+      final nasaPageBackButton = find.byType(BackButton);
+      await tester.tap(nasaPageBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);

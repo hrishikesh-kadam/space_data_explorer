@@ -19,9 +19,9 @@ void main() {
     );
     await testScreenshot('1$imageNameSuffix.png', tester, binding);
 
-    final nasaSourceTextButton =
+    final nasaTextButton =
         find.widgetWithText(TextButton, NasaPage.pageName);
-    await tester.tap(nasaSourceTextButton);
+    await tester.tap(nasaTextButton);
     await testScreenshot('2$imageNameSuffix.png', tester, binding);
 
     final cadTextButton = find.widgetWithText(TextButton, CadPage.pageName);

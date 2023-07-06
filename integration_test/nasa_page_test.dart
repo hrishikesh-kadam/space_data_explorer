@@ -13,11 +13,11 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('$NasaPage Integration Test', (WidgetTester tester) async {
-    await pumpNasaSourcePageAsNormalLink(tester);
+    await pumpNasaPageAsNormalLink(tester);
   });
 }
 
-Future<void> pumpNasaSourcePageAsInitialLocation(WidgetTester tester) async {
+Future<void> pumpNasaPageAsInitialLocation(WidgetTester tester) async {
   await tester.pumpWidget(SpaceDataExplorerApp(
     initialLocation: NasaPage.path,
   ));
@@ -25,11 +25,11 @@ Future<void> pumpNasaSourcePageAsInitialLocation(WidgetTester tester) async {
   expect(find.byType(NasaScreen), findsOneWidget);
 }
 
-Future<void> pumpNasaSourcePageAsNormalLink(WidgetTester tester) async {
+Future<void> pumpNasaPageAsNormalLink(WidgetTester tester) async {
   await pumpHomePage(tester);
-  final nasaSourceTextButton =
+  final nasaTextButton =
       find.widgetWithText(TextButton, NasaPage.pageName);
-  await tester.tap(nasaSourceTextButton);
+  await tester.tap(nasaTextButton);
   await tester.pumpAndSettle();
   expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
   expect(find.byType(NasaScreen), findsOneWidget);

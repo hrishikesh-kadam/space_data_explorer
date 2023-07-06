@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../deferred_loading.dart';
 import '../pages/base_page.dart';
 import '../pages/home_page.dart';
-import 'nasa_screen.dart' deferred as nasa_source_screen;
+import 'nasa_screen.dart' deferred as nasa_screen;
 
 class NasaPage extends BasePage {
   const NasaPage({
@@ -18,10 +18,10 @@ class NasaPage extends BasePage {
   static const String path = '${HomePage.path}$pageName';
 }
 
-final nasaSourcePage = NasaPage(
+final nasaPage = NasaPage(
   child: DeferredWidget(
-    nasa_source_screen.loadLibrary,
-    () => nasa_source_screen.NasaScreen(),
+    nasa_screen.loadLibrary,
+    () => nasa_screen.NasaScreen(),
     placeholder: const DeferredLoadingPlaceholder(name: NasaPage.displayName),
   ),
 );

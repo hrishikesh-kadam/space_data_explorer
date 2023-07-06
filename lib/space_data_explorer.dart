@@ -25,7 +25,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
           routes: [
             GoRoute(
               path: NasaPage.pageName,
-              pageBuilder: (context, state) => nasaSourcePage,
+              pageBuilder: (context, state) => nasaPage,
               routes: [
                 GoRoute(
                   path: CadPage.pageName,

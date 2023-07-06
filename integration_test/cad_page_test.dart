@@ -7,7 +7,7 @@ import 'package:space_data_explorer/nasa/cad_page.dart';
 import 'package:space_data_explorer/nasa/cad_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/space_data_explorer.dart';
-import 'nasa_source_page_test.dart';
+import 'nasa_page_test.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +26,7 @@ Future<void> pumpCadPageAsInitialLocation(WidgetTester tester) async {
 }
 
 Future<void> pumpCadPageAsNormalLink(WidgetTester tester) async {
-  await pumpNasaSourcePageAsNormalLink(tester);
+  await pumpNasaPageAsNormalLink(tester);
   final cadTextButton = find.widgetWithText(TextButton, CadPage.pageName);
   await tester.tap(cadTextButton);
   await tester.pumpAndSettle();

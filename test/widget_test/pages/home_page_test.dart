@@ -16,14 +16,14 @@ void main() {
     testWidgets('Navigate $HomePage to $NasaPage to $HomePage',
         (WidgetTester tester) async {
       await pumpHomePage(tester);
-      final nasaSourceTextButton =
+      final nasaTextButton =
           find.widgetWithText(TextButton, NasaPage.pageName);
-      await tester.tap(nasaSourceTextButton);
+      await tester.tap(nasaTextButton);
       await tester.pumpAndSettle();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NasaScreen), findsOneWidget);
-      final nasaSourcePageBackButton = find.byType(BackButton);
-      await tester.tap(nasaSourcePageBackButton);
+      final nasaPageBackButton = find.byType(BackButton);
+      await tester.tap(nasaPageBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
