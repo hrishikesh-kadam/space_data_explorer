@@ -3,6 +3,7 @@
 import 'dart:html' as html;
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hrk_logging/hrk_logging.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'globals.dart';
@@ -42,10 +43,10 @@ bool verifyHistoryLengthAndSerialCount(
   bool historyLengthNotEqual = false;
   bool serialCountNotEqual = false;
   if (historyLengthNotEqual = history.length != historyLength) {
-    printLog.severe('history.length != historyLength');
+    printLog.error('history.length != historyLength');
   }
   if (serialCountNotEqual = state['serialCount'] != serialCount) {
-    printLog.severe('state[\'serialCount\'] != serialCount');
+    printLog.error('state[\'serialCount\'] != serialCount');
   }
   if (historyLengthNotEqual || serialCountNotEqual) {
     return false;

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:hrk_logging/hrk_logging.dart';
 import 'package:integration_test/integration_test_driver_extended.dart';
 
 import '../integration_test/globals.dart';
@@ -19,6 +20,6 @@ Future<void> main() async {
       },
     );
   } catch (e) {
-    testLog.severe('-> test_driver/screenshots_test.dart -> Error occured: $e');
+    testLog.error('-> test_driver/screenshots_test.dart -> Error occured: $e');
   }
 }

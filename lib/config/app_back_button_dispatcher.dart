@@ -25,7 +25,7 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
     _log.log(isAndroid ? Level.FINEST : Level.WARNING, '-> didPopRoute()');
     final Object? extraObject = _goRouterDelegate.currentConfiguration.extra;
     _log.finer('-> didPopRoute() -> extraObject = $extraObject');
-    Level logLevel = flutterTest ? Level.FINER : Level.SEVERE;
+    Level logLevel = flutterTest ? Level.FINER : Level.SHOUT;
     if (extraObject == null) {
       final String fullPath = _goRouterDelegate.currentConfiguration.fullPath;
       if (fullPath == HomeRoute.path) {
