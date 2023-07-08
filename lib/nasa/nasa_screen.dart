@@ -25,7 +25,7 @@ class _NasaScreenState extends State<NasaScreen> {
       body: TextButton(
         child: const Text(CadPage.pageName),
         onPressed: () async {
-          GoRouter.of(context).go(CadPage.path, extra: getExtra());
+          GoRouter.of(context).go(CadPage.path, extra: getPageExtra());
         },
       ),
     );

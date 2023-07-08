@@ -11,6 +11,7 @@ import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_page.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/pages/home_page.dart';
+import 'package:space_data_explorer/typedef/typedef.dart';
 import 'cad_page_test.dart';
 import 'globals.dart';
 import 'nasa_page_test.dart';
@@ -118,7 +119,9 @@ void platformSpecificAppBarTest() {
         navigatorKey: navigatorKey,
       );
       expect(find.byType(HomeScreen), findsOneWidget);
-      GoRouter.of(navigatorKey.currentContext!).go(CadPage.path, extra: {});
+      PageExtraMap pageExtraMap = {};
+      GoRouter.of(navigatorKey.currentContext!)
+          .go(CadPage.path, extra: pageExtraMap);
       await tester.pumpAndSettle();
       final cadPageBackButton = find.byType(BackButton);
       await tester.tap(cadPageBackButton);

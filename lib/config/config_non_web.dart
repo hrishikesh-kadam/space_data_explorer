@@ -6,6 +6,7 @@ import 'package:hrk_logging/hrk_logging.dart';
 import '../globals.dart';
 import '../helper/helper.dart';
 import '../pages/home_page.dart';
+import '../typedef/typedef.dart';
 
 void configureUrlStrategy() {
   // No-op in non-web platforms.
@@ -26,9 +27,9 @@ AppBar getPlatformSpecificAppBar({
           while (GoRouter.of(context).canPop()) {
             GoRouter.of(context).pop();
           }
-        } else if (extraObject is Map) {
-          Map extraMap = extraObject;
-          if (extraMap.containsKey(isNormalLink)) {
+        } else if (extraObject is PageExtraMap) {
+          PageExtraMap pageExtraMap = extraObject;
+          if (pageExtraMap.containsKey(isNormalLink)) {
             GoRouter.of(context).pop();
           } else {
             log.log(logLevel, 'Unusual navigation observed');

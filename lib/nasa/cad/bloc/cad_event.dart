@@ -1,4 +1,17 @@
 part of 'cad_bloc.dart';
 
 @immutable
-abstract class CadEvent {}
+sealed class CadEvent extends Equatable {
+  const CadEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
+class CadRequested extends CadEvent {
+  const CadRequested({
+    this.queryParameters,
+  });
+
+  final JsonMap? queryParameters;
+}

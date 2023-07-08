@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import 'config/app_back_button_dispatcher.dart';
 import 'nasa/cad/cad_page.dart';
+import 'nasa/cad/result/cad_result_page.dart';
 import 'nasa/nasa_page.dart';
 import 'pages/home_page.dart';
 
@@ -30,6 +31,12 @@ class SpaceDataExplorerApp extends StatelessWidget {
                 GoRoute(
                   path: CadPage.pageName,
                   pageBuilder: (context, state) => cadPage,
+                  routes: [
+                    GoRoute(
+                      path: CadResultPage.pageName,
+                      pageBuilder: (context, state) => cadResultPage,
+                    ),
+                  ],
                 ),
               ],
             ),

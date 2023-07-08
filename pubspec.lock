@@ -73,6 +73,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.2.1+1"
+  equatable:
+    dependency: "direct main"
+    description:
+      name: equatable
+      sha256: c2b87cb7756efdf69892005af546c56c0b5037f54d2a88269b4f347a505e3ca2
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -158,42 +166,42 @@ packages:
     dependency: "direct dev"
     description:
       name: hrk_analysis
-      sha256: "1d38b047ba9b22b187a05a3d7799d2015db3835eb7ff5b372fb5051fdfc89285"
+      sha256: "62fc40527e0a27f0d231d9b3e93854fe139cce87cbb9b42533e025cb5ba6376a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0-pre.1"
+    version: "0.1.0"
   hrk_batteries:
     dependency: "direct main"
     description:
       name: hrk_batteries
-      sha256: be441f85863617307b6aad34452eea8c94674b63a1fa4ab69ed573ec60cf53d1
+      sha256: bd03a7c28d38708d18aa17bf2966239739ffc2bf6c16c1975e5f271019aeaaa4
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0-pre.7"
+    version: "0.1.0"
   hrk_flutter_test_batteries:
     dependency: "direct dev"
     description:
       name: hrk_flutter_test_batteries
-      sha256: d4b6faf337a7385119aecbca8a35e79b39511c3f34c3438cae151230c82201f6
+      sha256: "9d95d597660dbb64c901b6fef33d33ca4630c2cd66c0ef78d6b29a75776c7d7a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0-pre.3"
+    version: "0.1.0"
   hrk_logging:
     dependency: "direct main"
     description:
       name: hrk_logging
-      sha256: "713c0166aec283e4f507e80b8ba9f812f3b58b0cdf08555b8a8f6d6151032bdc"
+      sha256: ebc112e91f5119a4b5035a2290a839eeaf35c9da45aad45c853dbb5b6d47018b
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0-pre.3"
+    version: "0.1.2"
   hrk_nasa_apis:
     dependency: "direct main"
     description:
       name: hrk_nasa_apis
-      sha256: "3ed4ac1cd3fbe8972b69f7e1ca4f0c39e3a1bb957dd51679625e6bf1629c7d95"
+      sha256: eff2bfb4aafb98893b83ab9c85ac843eaf52c3bd412a39b7eba98090a852d088
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0-pre.4"
+    version: "0.1.0"
   http_parser:
     dependency: transitive
     description:

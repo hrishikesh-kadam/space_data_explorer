@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: TextButton(
         child: const Text(NasaPage.pageName),
         onPressed: () async {
-          GoRouter.of(context).go(NasaPage.path, extra: getExtra());
+          GoRouter.of(context).go(NasaPage.path, extra: getPageExtra());
         },
       ),
     );
