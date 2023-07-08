@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import '../../config/config.dart';
 import '../../constants/localisation.dart';
 import '../../globals.dart';
+import '../../typedef/typedef.dart';
 import 'bloc/cad_bloc.dart';
 import 'cad_route.dart';
 import 'result/cad_result_route.dart';
@@ -25,8 +26,9 @@ class CadScreen extends StatelessWidget {
         body: BlocConsumer<CadBloc, CadState>(
           listener: (context, state) {
             if (state is CadRequestSuccess) {
-              GoRouter.of(context)
-                  .go(CadResultRoute.path, extra: getRouteExtra());
+              RouteExtraMap routeExtraMap = getRouteExtra();
+              routeExtraMap['$SbdbCadBody'] = state.sbdbCadBody;
+              CadResultRoute($extra: routeExtraMap).go(context);
             }
           },
           builder: (context, state) {

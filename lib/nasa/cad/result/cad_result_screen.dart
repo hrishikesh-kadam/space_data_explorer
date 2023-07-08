@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
+
 import '../../../config/config.dart';
 import 'cad_result_route.dart';
 
-class CadResultScreen extends StatefulWidget {
-  const CadResultScreen({super.key});
+class CadResultScreen extends StatelessWidget {
+  const CadResultScreen({
+    super.key,
+    required this.sbdbCadBody,
+  });
 
-  @override
-  State<CadResultScreen> createState() => _CadResultScreenState();
-}
+  final SbdbCadBody sbdbCadBody;
 
-class _CadResultScreenState extends State<CadResultScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +20,7 @@ class _CadResultScreenState extends State<CadResultScreen> {
         context: context,
         title: const Text(CadResultRoute.displayName),
       ),
+      body: Text(sbdbCadBody.count.toString()),
     );
   }
 }
