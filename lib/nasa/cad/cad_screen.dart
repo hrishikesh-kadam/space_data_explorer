@@ -7,8 +7,8 @@ import '../../config/config.dart';
 import '../../constants/localisation.dart';
 import '../../globals.dart';
 import 'bloc/cad_bloc.dart';
-import 'cad_page.dart';
-import 'result/cad_result_page.dart';
+import 'cad_route.dart';
+import 'result/cad_result_route.dart';
 
 class CadScreen extends StatelessWidget {
   const CadScreen({super.key});
@@ -20,13 +20,13 @@ class CadScreen extends StatelessWidget {
       child: Scaffold(
         appBar: getPlatformSpecificAppBar(
           context: context,
-          title: const Text(CadPage.displayName),
+          title: const Text(CadRoute.displayName),
         ),
         body: BlocConsumer<CadBloc, CadState>(
           listener: (context, state) {
             if (state is CadRequestSuccess) {
               GoRouter.of(context)
-                  .go(CadResultPage.path, extra: getPageExtra());
+                  .go(CadResultRoute.path, extra: getRouteExtra());
             }
           },
           builder: (context, state) {

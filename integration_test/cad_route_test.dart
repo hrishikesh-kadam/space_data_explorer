@@ -3,31 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import 'package:space_data_explorer/nasa/cad/cad_page.dart';
+import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/space_data_explorer.dart';
-import 'nasa_page_test.dart';
+import 'nasa_route_test.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('$CadPage Integration Test', (WidgetTester tester) async {
-    await pumpCadPageAsNormalLink(tester);
+  testWidgets('$CadRoute Integration Test', (WidgetTester tester) async {
+    await pumpCadRouteAsNormalLink(tester);
   });
 }
 
-Future<void> pumpCadPageAsInitialLocation(WidgetTester tester) async {
+Future<void> pumpCadRouteAsInitialLocation(WidgetTester tester) async {
   await tester.pumpWidget(SpaceDataExplorerApp(
-    initialLocation: CadPage.path,
+    initialLocation: CadRoute.path,
   ));
   await tester.pumpAndSettle();
   expect(find.byType(CadScreen), findsOneWidget);
 }
 
-Future<void> pumpCadPageAsNormalLink(WidgetTester tester) async {
-  await pumpNasaPageAsNormalLink(tester);
-  final cadTextButton = find.widgetWithText(TextButton, CadPage.pageName);
+Future<void> pumpCadRouteAsNormalLink(WidgetTester tester) async {
+  await pumpNasaRouteAsNormalLink(tester);
+  final cadTextButton = find.widgetWithText(TextButton, CadRoute.relativePath);
   await tester.tap(cadTextButton);
   await tester.pumpAndSettle();
   expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);

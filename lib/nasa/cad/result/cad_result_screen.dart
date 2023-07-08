@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../config/config.dart';
-import 'cad_result_page.dart';
+import 'cad_result_route.dart';
 
 class CadResultScreen extends StatefulWidget {
   const CadResultScreen({super.key});
@@ -16,7 +16,7 @@ class _CadResultScreenState extends State<CadResultScreen> {
     return Scaffold(
       appBar: getPlatformSpecificAppBar(
         context: context,
-        title: const Text(CadResultPage.displayName),
+        title: const Text(CadResultRoute.displayName),
       ),
     );
   }

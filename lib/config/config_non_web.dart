@@ -5,7 +5,7 @@ import 'package:hrk_logging/hrk_logging.dart';
 
 import '../globals.dart';
 import '../helper/helper.dart';
-import '../pages/home_page.dart';
+import '../route/home_route.dart';
 import '../typedef/typedef.dart';
 
 void configureUrlStrategy() {
@@ -27,8 +27,8 @@ AppBar getPlatformSpecificAppBar({
           while (GoRouter.of(context).canPop()) {
             GoRouter.of(context).pop();
           }
-        } else if (extraObject is PageExtraMap) {
-          PageExtraMap pageExtraMap = extraObject;
+        } else if (extraObject is RouteExtraMap) {
+          RouteExtraMap pageExtraMap = extraObject;
           if (pageExtraMap.containsKey(isNormalLink)) {
             GoRouter.of(context).pop();
           } else {
@@ -37,14 +37,14 @@ AppBar getPlatformSpecificAppBar({
             final routeMatchList = getListOfRouteMatch(context);
             log.log(
                 logLevel, 'routeMatchList.length = ${routeMatchList.length}');
-            GoRouter.of(context).go(HomePage.path);
+            GoRouter.of(context).go(HomeRoute.path);
           }
         } else {
           log.log(logLevel, 'Unusual navigation observed');
           log.log(logLevel, 'extra is not a Map');
           final routeMatchList = getListOfRouteMatch(context);
           log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
-          GoRouter.of(context).go(HomePage.path);
+          GoRouter.of(context).go(HomeRoute.path);
         }
       },
     ),

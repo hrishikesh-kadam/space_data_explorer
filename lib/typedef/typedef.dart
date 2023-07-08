@@ -1,1 +1,1 @@
-typedef PageExtraMap = Map<String, dynamic>;
+typedef RouteExtraMap = Map<String, dynamic>;

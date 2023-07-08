@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../config/config.dart';
 import '../../globals.dart';
-import 'cad/cad_page.dart';
-import 'nasa_page.dart';
+import 'cad/cad_route.dart';
+import 'nasa_route.dart';
 
 class NasaScreen extends StatefulWidget {
   const NasaScreen({super.key});
@@ -20,12 +20,12 @@ class _NasaScreenState extends State<NasaScreen> {
     return Scaffold(
       appBar: getPlatformSpecificAppBar(
         context: context,
-        title: const Text(NasaPage.displayName),
+        title: const Text(NasaRoute.displayName),
       ),
       body: TextButton(
-        child: const Text(CadPage.pageName),
+        child: const Text(CadRoute.relativePath),
         onPressed: () async {
-          GoRouter.of(context).go(CadPage.path, extra: getPageExtra());
+          GoRouter.of(context).go(CadRoute.path, extra: getRouteExtra());
         },
       ),
     );

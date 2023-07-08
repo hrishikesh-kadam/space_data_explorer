@@ -7,15 +7,15 @@ import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/config/config.dart';
-import 'package:space_data_explorer/nasa/cad/cad_page.dart';
+import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
-import 'package:space_data_explorer/nasa/nasa_page.dart';
+import 'package:space_data_explorer/nasa/nasa_route.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
-import 'package:space_data_explorer/pages/home_page.dart';
+import 'package:space_data_explorer/route/home_route.dart';
 import 'package:space_data_explorer/typedef/typedef.dart';
-import 'cad_page_test.dart';
+import 'cad_route_test.dart';
 import 'globals.dart';
-import 'nasa_page_test.dart';
+import 'nasa_route_test.dart';
 import 'space_data_explorer_app_test.dart';
 import 'test_helper.dart';
 
@@ -37,8 +37,8 @@ void appBackButtonDispatcherTest() {
       }
     });
 
-    testWidgets('3 pages down and 2 pages up', (tester) async {
-      await pumpCadPageAsNormalLink(tester);
+    testWidgets('3 routes down and 2 routes up', (tester) async {
+      await pumpCadRouteAsNormalLink(tester);
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
       expect(find.byType(CadScreen), findsNothing);
@@ -51,8 +51,8 @@ void appBackButtonDispatcherTest() {
       expect(find.byType(HomeScreen), findsOneWidget);
     });
 
-    testWidgets('2 pages down and 1 page up', (tester) async {
-      await pumpNasaPageAsNormalLink(tester);
+    testWidgets('2 routes down and 1 route up', (tester) async {
+      await pumpNasaRouteAsNormalLink(tester);
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
       expect(find.byType(NasaScreen), findsNothing);
@@ -60,7 +60,7 @@ void appBackButtonDispatcherTest() {
     });
 
     testWidgets('deep-link to 3rd level and press back', (tester) async {
-      tester.platformDispatcher.defaultRouteNameTestValue = CadPage.path;
+      tester.platformDispatcher.defaultRouteNameTestValue = CadRoute.path;
       await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
@@ -73,7 +73,7 @@ void appBackButtonDispatcherTest() {
     });
 
     testWidgets('deep-link to 2nd level and press back', (tester) async {
-      tester.platformDispatcher.defaultRouteNameTestValue = NasaPage.path;
+      tester.platformDispatcher.defaultRouteNameTestValue = NasaRoute.path;
       await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
@@ -85,7 +85,7 @@ void appBackButtonDispatcherTest() {
     });
 
     testWidgets(
-        '3 pages down and 1 page up but extra without the isNormalLink key',
+        '3 routes down and 1 route up but extra without the isNormalLink key',
         (tester) async {
       GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: 'appKey');
       await pumpApp(
@@ -93,9 +93,9 @@ void appBackButtonDispatcherTest() {
         navigatorKey: navigatorKey,
       );
       expect(find.byType(HomeScreen), findsOneWidget);
-      PageExtraMap pageExtraMap = {};
+      RouteExtraMap pageExtraMap = {};
       GoRouter.of(navigatorKey.currentContext!)
-          .go(CadPage.path, extra: pageExtraMap);
+          .go(CadRoute.path, extra: pageExtraMap);
       await tester.pumpAndSettle();
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
@@ -104,7 +104,7 @@ void appBackButtonDispatcherTest() {
       expect(find.byType(HomeScreen), findsOneWidget);
     });
 
-    testWidgets('3 pages down and 1 page up but when extra is not a Map',
+    testWidgets('3 routes down and 1 route up but when extra is not a Map',
         (tester) async {
       GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: 'appKey');
       await pumpApp(
@@ -112,7 +112,7 @@ void appBackButtonDispatcherTest() {
         navigatorKey: navigatorKey,
       );
       expect(find.byType(HomeScreen), findsOneWidget);
-      GoRouter.of(navigatorKey.currentContext!).go(CadPage.path, extra: []);
+      GoRouter.of(navigatorKey.currentContext!).go(CadRoute.path, extra: []);
       await tester.pumpAndSettle();
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();

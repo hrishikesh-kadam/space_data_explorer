@@ -6,7 +6,7 @@ import 'package:hrk_logging/hrk_logging.dart';
 
 import '../constants/constants.dart';
 import '../globals.dart';
-import '../pages/home_page.dart';
+import '../route/home_route.dart';
 import '../typedef/typedef.dart';
 
 class AppBackButtonDispatcher extends RootBackButtonDispatcher {
@@ -28,15 +28,15 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
     Level logLevel = flutterTest ? Level.FINER : Level.SEVERE;
     if (extraObject == null) {
       final String fullPath = _goRouterDelegate.currentConfiguration.fullPath;
-      if (fullPath == HomePage.path) {
+      if (fullPath == HomeRoute.path) {
         return _goRouterDelegate.popRoute();
       } else {
         while (_goRouter.canPop()) {
           _goRouter.pop();
         }
       }
-    } else if (extraObject is PageExtraMap) {
-      PageExtraMap pageExtraMap = extraObject;
+    } else if (extraObject is RouteExtraMap) {
+      RouteExtraMap pageExtraMap = extraObject;
       if (pageExtraMap.containsKey(isNormalLink)) {
         return _goRouterDelegate.popRoute();
       } else {
@@ -45,7 +45,7 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
         final List routeMatchList =
             _goRouter.routerDelegate.currentConfiguration.matches;
         _log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
-        _goRouter.go(HomePage.path);
+        _goRouter.go(HomeRoute.path);
       }
     } else {
       _log.log(logLevel, 'Unusual navigation observed');
@@ -53,7 +53,7 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
       final List routeMatchList =
           _goRouter.routerDelegate.currentConfiguration.matches;
       _log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
-      _goRouter.go(HomePage.path);
+      _goRouter.go(HomeRoute.path);
     }
     return true;
   }

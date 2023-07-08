@@ -6,15 +6,15 @@ import 'package:go_router/go_router.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/config/config.dart';
-import 'package:space_data_explorer/nasa/cad/cad_page.dart';
+import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
-import 'package:space_data_explorer/nasa/nasa_page.dart';
+import 'package:space_data_explorer/nasa/nasa_route.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
-import 'package:space_data_explorer/pages/home_page.dart';
+import 'package:space_data_explorer/route/home_route.dart';
 import 'package:space_data_explorer/typedef/typedef.dart';
-import 'cad_page_test.dart';
+import 'cad_route_test.dart';
 import 'globals.dart';
-import 'nasa_page_test.dart';
+import 'nasa_route_test.dart';
 import 'space_data_explorer_app_test.dart';
 import 'test_helper.dart';
 
@@ -41,10 +41,10 @@ void platformSpecificAppBarTest() {
       }
     });
 
-    testWidgets('3 pages down and 2 pages up', (tester) async {
-      await pumpCadPageAsNormalLink(tester);
-      final cadPageBackButton = find.byType(BackButton);
-      await tester.tap(cadPageBackButton);
+    testWidgets('3 routes down and 2 routes up', (tester) async {
+      await pumpCadRouteAsNormalLink(tester);
+      final cadScreenBackButton = find.byType(BackButton);
+      await tester.tap(cadScreenBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsOneWidget);
@@ -52,8 +52,8 @@ void platformSpecificAppBarTest() {
       if (kIsWeb) {
         verifyHistoryLengthAndSerialCount(3, 1);
       }
-      final nasaPageBackButton = find.byType(BackButton);
-      await tester.tap(nasaPageBackButton);
+      final nasaScreenBackButton = find.byType(BackButton);
+      await tester.tap(nasaScreenBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
@@ -63,10 +63,10 @@ void platformSpecificAppBarTest() {
       }
     });
 
-    testWidgets('2 pages down and 1 page up', (tester) async {
-      await pumpNasaPageAsNormalLink(tester);
-      final nasaPageBackButton = find.byType(BackButton);
-      await tester.tap(nasaPageBackButton);
+    testWidgets('2 routes down and 1 route up', (tester) async {
+      await pumpNasaRouteAsNormalLink(tester);
+      final nasaScreenBackButton = find.byType(BackButton);
+      await tester.tap(nasaScreenBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
@@ -77,14 +77,14 @@ void platformSpecificAppBarTest() {
 
     testWidgets('deep-link to 3rd level and press back',
         skip: skipDeepLinkTests, (tester) async {
-      tester.platformDispatcher.defaultRouteNameTestValue = CadPage.path;
+      tester.platformDispatcher.defaultRouteNameTestValue = CadRoute.path;
       await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(CadScreen), findsOneWidget);
-      final cadPageBackButton = find.byType(BackButton);
-      await tester.tap(cadPageBackButton);
+      final cadScreenBackButton = find.byType(BackButton);
+      await tester.tap(cadScreenBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
@@ -95,13 +95,13 @@ void platformSpecificAppBarTest() {
 
     testWidgets('deep-link to 2nd level and press back',
         skip: skipDeepLinkTests, (tester) async {
-      tester.platformDispatcher.defaultRouteNameTestValue = NasaPage.path;
+      tester.platformDispatcher.defaultRouteNameTestValue = NasaRoute.path;
       await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NasaScreen), findsOneWidget);
-      final nasaPageBackButton = find.byType(BackButton);
-      await tester.tap(nasaPageBackButton);
+      final nasaScreenBackButton = find.byType(BackButton);
+      await tester.tap(nasaScreenBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
@@ -111,7 +111,7 @@ void platformSpecificAppBarTest() {
     });
 
     testWidgets(
-        '3 pages down and 1 page up but extra without the isNormalLink key',
+        '3 routes down and 1 route up but extra without the isNormalLink key',
         (tester) async {
       GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: 'appKey');
       await pumpApp(
@@ -119,12 +119,12 @@ void platformSpecificAppBarTest() {
         navigatorKey: navigatorKey,
       );
       expect(find.byType(HomeScreen), findsOneWidget);
-      PageExtraMap pageExtraMap = {};
+      RouteExtraMap pageExtraMap = {};
       GoRouter.of(navigatorKey.currentContext!)
-          .go(CadPage.path, extra: pageExtraMap);
+          .go(CadRoute.path, extra: pageExtraMap);
       await tester.pumpAndSettle();
-      final cadPageBackButton = find.byType(BackButton);
-      await tester.tap(cadPageBackButton);
+      final cadScreenBackButton = find.byType(BackButton);
+      await tester.tap(cadScreenBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
@@ -136,7 +136,7 @@ void platformSpecificAppBarTest() {
       }
     });
 
-    testWidgets('3 pages down and 1 page up but when extra is not a Map',
+    testWidgets('3 routes down and 1 route up but when extra is not a Map',
         (tester) async {
       GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: 'appKey');
       await pumpApp(
@@ -144,10 +144,10 @@ void platformSpecificAppBarTest() {
         navigatorKey: navigatorKey,
       );
       expect(find.byType(HomeScreen), findsOneWidget);
-      GoRouter.of(navigatorKey.currentContext!).go(CadPage.path, extra: []);
+      GoRouter.of(navigatorKey.currentContext!).go(CadRoute.path, extra: []);
       await tester.pumpAndSettle();
-      final cadPageBackButton = find.byType(BackButton);
-      await tester.tap(cadPageBackButton);
+      final cadScreenBackButton = find.byType(BackButton);
+      await tester.tap(cadScreenBackButton);
       await tester.pumpAndSettle();
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);

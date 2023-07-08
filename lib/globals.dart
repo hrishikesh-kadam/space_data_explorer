@@ -12,10 +12,10 @@ final log = Logger(appNamePascalCase);
 
 const isNormalLink = 'isNormalLink';
 
-/// isNormalLink is used to check if the page was opened by normal-link or
+/// isNormalLink is used to check if the route was opened by normal-link or
 /// deep-link.
-PageExtraMap getPageExtra() {
-  PageExtraMap extra = {};
+RouteExtraMap getRouteExtra() {
+  RouteExtraMap extra = {};
   extra[isNormalLink] = true;
   return extra;
 }
