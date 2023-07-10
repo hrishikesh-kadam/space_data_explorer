@@ -8,7 +8,7 @@ FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
 # mapfile -t TARGET_PATHS < <(find integration_test -type f -name "*_test.dart")
 TARGET_PATHS=(
-  "integration_test/platform_specific_app_bar_test.dart"
+  "integration_test/app_bar_back_button_test.dart"
 )
 for TARGET_PATH in "${TARGET_PATHS[@]}"; do
   flutter test \

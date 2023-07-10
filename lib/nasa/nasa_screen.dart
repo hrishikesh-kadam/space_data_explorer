@@ -18,9 +18,10 @@ class _NasaScreenState extends State<NasaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getPlatformSpecificAppBar(
-        context: context,
+      appBar: AppBar(
+        leading: getAppBarBackButton(context: context),
         title: const Text(NasaRoute.displayName),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: TextButton(
         child: const Text(CadRoute.relativePath),

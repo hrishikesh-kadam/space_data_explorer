@@ -51,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(HomeRoute.displayName),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: TextButton(
         child: const Text(NasaRoute.relativePath),

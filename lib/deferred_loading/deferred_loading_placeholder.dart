@@ -18,17 +18,19 @@ class DeferredPlaceholderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getPlatformSpecificAppBar(
-          context: context,
-          title: Text(name),
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(indicatorHeight),
-            child: LinearProgressIndicator(
-              value: null,
-              color: AppTheme.progressIndicatorColor,
-              minHeight: indicatorHeight,
-            ),
-          )),
+      appBar: AppBar(
+        leading: getAppBarBackButton(context: context),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(name),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(indicatorHeight),
+          child: LinearProgressIndicator(
+            value: null,
+            color: AppTheme.progressIndicatorColor,
+            minHeight: indicatorHeight,
+          ),
+        ),
+      ),
     );
   }
 }

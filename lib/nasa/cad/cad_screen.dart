@@ -7,6 +7,7 @@ import '../../config/config.dart';
 import '../../constants/localisation.dart';
 import '../../globals.dart';
 import '../../typedef/typedef.dart';
+import '../../widgets/date_filter_widget.dart';
 import 'bloc/cad_bloc.dart';
 import 'cad_route.dart';
 import 'result/cad_result_route.dart';
@@ -19,9 +20,10 @@ class CadScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => CadBloc(),
       child: Scaffold(
-        appBar: getPlatformSpecificAppBar(
-          context: context,
+        appBar: AppBar(
+          leading: getAppBarBackButton(context: context),
           title: const Text(CadRoute.displayName),
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
         body: BlocConsumer<CadBloc, CadState>(
           listener: (context, state) {
@@ -32,17 +34,38 @@ class CadScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            return TextButton(
-              onPressed: state is CadRequestSent
-                  ? null
-                  : () async {
-                      context.read<CadBloc>().add(const CadRequested());
-                    },
-              child: const Text(AppLocalisations.search),
+            return Column(
+              children: [
+                SearchButton(cadState: state),
+                const DateFilterWidget(),
+              ],
             );
           },
         ),
       ),
     );
+  }
+}
+
+class SearchButton extends StatelessWidget {
+  SearchButton({
+    super.key,
+    required CadState cadState,
+  }) {
+    _cadState = cadState;
+  }
+
+  late final CadState _cadState;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+        onPressed: _cadState is CadRequestSent
+            ? null
+            : () async {
+                context.read<CadBloc>().add(const CadRequested());
+              },
+        // style: ButtonStyle(),
+        child: const Text(AppLocalisations.search));
   }
 }

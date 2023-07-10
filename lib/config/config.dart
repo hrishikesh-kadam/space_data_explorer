@@ -11,16 +11,10 @@ void configureApp() {
   configureHrkLogging();
 }
 
-AppBar getPlatformSpecificAppBar({
+BackButton getAppBarBackButton({
   required BuildContext context,
-  Widget? title,
-  PreferredSizeWidget? bottom,
 }) {
-  return platform.getPlatformSpecificAppBar(
-    context: context,
-    title: title,
-    bottom: bottom,
-  );
+  return platform.getAppBarBackButton(context: context);
 }
 
 void configureUrlStrategy() {

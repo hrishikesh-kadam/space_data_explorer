@@ -21,16 +21,16 @@ import 'test_helper.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  platformSpecificAppBarTest();
+  appBarBackButtonTest();
 }
 
-void platformSpecificAppBarTest() {
+void appBarBackButtonTest() {
   // TODO(hrishikesh-kadam): Test stucks even after passing all tests.
   // Skipping deep-link tests for Web Integration Test.
   // File an issue someday.
   bool skipDeepLinkTests = kIsWeb;
 
-  group('getPlatformSpecificAppBar() $testType Test', () {
+  group('getAppBarBackButtonTest() $testType Test', () {
     setUpAll(() {
       configureApp();
     });

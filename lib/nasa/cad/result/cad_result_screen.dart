@@ -16,9 +16,10 @@ class CadResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getPlatformSpecificAppBar(
-        context: context,
+      appBar: AppBar(
+        leading: getAppBarBackButton(context: context),
         title: const Text(CadResultRoute.displayName),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Text(sbdbCadBody.count.toString()),
     );

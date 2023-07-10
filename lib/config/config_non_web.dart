@@ -12,42 +12,35 @@ void configureUrlStrategy() {
   // No-op in non-web platforms.
 }
 
-AppBar getPlatformSpecificAppBar({
+BackButton getAppBarBackButton({
   required BuildContext context,
-  Widget? title,
-  PreferredSizeWidget? bottom,
 }) {
-  return AppBar(
-    title: title,
-    leading: BackButton(
-      onPressed: () {
-        final Object? extraObject = GoRouterState.of(context).extra;
-        Level logLevel = flutterTest ? Level.FINER : Level.SHOUT;
-        if (extraObject == null) {
-          while (GoRouter.of(context).canPop()) {
-            GoRouter.of(context).pop();
-          }
-        } else if (extraObject is RouteExtraMap) {
-          RouteExtraMap pageExtraMap = extraObject;
-          if (pageExtraMap.containsKey(isNormalLink)) {
-            GoRouter.of(context).pop();
-          } else {
-            log.log(logLevel, 'Unusual navigation observed');
-            log.log(logLevel, 'extra doesn\'t contains isNormalLink key');
-            final routeMatchList = getListOfRouteMatch(context);
-            log.log(
-                logLevel, 'routeMatchList.length = ${routeMatchList.length}');
-            GoRouter.of(context).go(HomeRoute.path);
-          }
+  return BackButton(
+    onPressed: () {
+      final Object? extraObject = GoRouterState.of(context).extra;
+      Level logLevel = flutterTest ? Level.FINER : Level.SHOUT;
+      if (extraObject == null) {
+        while (GoRouter.of(context).canPop()) {
+          GoRouter.of(context).pop();
+        }
+      } else if (extraObject is RouteExtraMap) {
+        RouteExtraMap pageExtraMap = extraObject;
+        if (pageExtraMap.containsKey(isNormalLink)) {
+          GoRouter.of(context).pop();
         } else {
           log.log(logLevel, 'Unusual navigation observed');
-          log.log(logLevel, 'extra is not a Map');
+          log.log(logLevel, 'extra doesn\'t contains isNormalLink key');
           final routeMatchList = getListOfRouteMatch(context);
           log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
           GoRouter.of(context).go(HomeRoute.path);
         }
-      },
-    ),
-    bottom: bottom,
+      } else {
+        log.log(logLevel, 'Unusual navigation observed');
+        log.log(logLevel, 'extra is not a Map');
+        final routeMatchList = getListOfRouteMatch(context);
+        log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
+        GoRouter.of(context).go(HomeRoute.path);
+      }
+    },
   );
 }

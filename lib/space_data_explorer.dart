@@ -28,13 +28,15 @@ class SpaceDataExplorerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO(hrishikesh-kadam): Is it necessary here to provide _goRouter configs sepearately
     return MaterialApp.router(
       routeInformationProvider: _goRouter.routeInformationProvider,
       routeInformationParser: _goRouter.routeInformationParser,
       routerDelegate: _goRouter.routerDelegate,
       backButtonDispatcher: AppBackButtonDispatcher(goRouter: _goRouter),
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorSchemeSeed: const Color(0xff6750a4),
+        useMaterial3: true,
       ),
       debugShowCheckedModeBanner: _debugShowCheckedModeBanner,
     );

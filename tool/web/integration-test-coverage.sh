@@ -3,7 +3,7 @@
 set -e -o pipefail
 
 TARGET_PATHS=(
-  "integration_test/platform_specific_app_bar_test.dart"
+  "integration_test/app_bar_back_button_test.dart"
 )
 REQUIRED_TIMES=(
   40
