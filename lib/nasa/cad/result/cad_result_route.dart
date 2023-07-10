@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
-import '../../../deferred_loading/deferred_widget.dart';
+import '../../../deferred_loading/deferred_loading.dart';
 import '../../../typedef/typedef.dart';
 import '../cad_route.dart';
 import 'cad_result_screen.dart' deferred as cad_result_screen;
@@ -46,7 +46,7 @@ class CadResultRoute extends GoRouteData {
       () => cad_result_screen.CadResultScreen(
         sbdbCadBody: $extra!['$SbdbCadBody'],
       ),
-      placeholder: const DeferredLoadingPlaceholder(
+      placeholder: const DeferredPlaceholderWidget(
         name: CadResultRoute.displayName,
       ),
     );

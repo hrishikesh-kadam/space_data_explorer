@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
-import '../../deferred_loading.dart';
+import '../../deferred_loading/deferred_loading.dart';
 import '../nasa_route.dart';
 import 'cad_screen.dart' deferred as cad_screen;
 
@@ -24,7 +24,7 @@ class CadRoute extends GoRouteData {
     return DeferredWidget(
       cad_screen.loadLibrary,
       () => cad_screen.CadScreen(),
-      placeholder: const DeferredLoadingPlaceholder(
+      placeholder: const DeferredPlaceholderWidget(
         name: CadRoute.displayName,
       ),
     );

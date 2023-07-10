@@ -5,8 +5,8 @@ import '../constants/dimensions.dart';
 import '../constants/localisation.dart';
 import '../constants/theme.dart';
 
-class DeferredLoadingPlaceholder extends StatelessWidget {
-  const DeferredLoadingPlaceholder({
+class DeferredPlaceholderWidget extends StatelessWidget {
+  const DeferredPlaceholderWidget({
     super.key,
     this.name = AppLocalisations.deferredTitle,
   });

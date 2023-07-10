@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
-import '../../deferred_loading.dart';
+import '../deferred_loading/deferred_loading.dart';
 import '../route/home_route.dart';
 import 'nasa_screen.dart' deferred as nasa_screen;
 
@@ -24,7 +24,7 @@ class NasaRoute extends GoRouteData {
     return DeferredWidget(
       nasa_screen.loadLibrary,
       () => nasa_screen.NasaScreen(),
-      placeholder: const DeferredLoadingPlaceholder(
+      placeholder: const DeferredPlaceholderWidget(
         name: displayName,
       ),
     );
