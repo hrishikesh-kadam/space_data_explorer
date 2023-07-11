@@ -34,38 +34,50 @@ class CadScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            return Column(
-              children: [
-                SearchButton(cadState: state),
-                const DateFilterWidget(),
-              ],
-            );
+            return _getCadScreen(context: context, cadState: state);
           },
         ),
       ),
     );
   }
-}
 
-class SearchButton extends StatelessWidget {
-  SearchButton({
-    super.key,
+  Widget _getCadScreen({
+    required BuildContext context,
     required CadState cadState,
   }) {
-    _cadState = cadState;
+    return Column(
+      children: [
+        _getSearchButton(context: context, cadState: cadState),
+        _getDateFilterWidget(context: context),
+      ],
+    );
   }
 
-  late final CadState _cadState;
-
-  @override
-  Widget build(BuildContext context) {
+  OutlinedButton _getSearchButton({
+    required BuildContext context,
+    required CadState cadState,
+  }) {
     return OutlinedButton(
-        onPressed: _cadState is CadRequestSent
-            ? null
-            : () async {
-                context.read<CadBloc>().add(const CadRequested());
-              },
-        // style: ButtonStyle(),
-        child: const Text(AppLocalisations.search));
+      onPressed: cadState is CadRequestSent
+          ? null
+          : () async {
+              context.read<CadBloc>().add(const CadRequested());
+            },
+      child: const Text(AppLocalisations.search),
+    );
+  }
+
+  DateFilterWidget _getDateFilterWidget({
+    required BuildContext context,
+  }) {
+    return DateFilterWidget(
+      firstDate: DateTime(1900, 1, 1),
+      lastDate: DateTime(2200, 12, 31),
+      onDateRangeSelected: (dateRange) {
+        context.read<CadBloc>().add(CadDateRangeSelected(
+              dateRange: dateRange,
+            ));
+      },
+    );
   }
 }
