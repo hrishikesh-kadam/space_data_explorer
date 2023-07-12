@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 typedef DateTimeRangeCallback = void Function(DateTimeRange?);
 
@@ -62,8 +63,8 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
     setState(() {
       this.dateRange = dateRange;
       if (dateRange != null) {
-        dateMin = dateRange.start.toString();
-        dateMax = dateRange.end.toString();
+        dateMin = DateFormat.yMd().format(dateRange.start);
+        dateMax = DateFormat.yMd().format(dateRange.end);
       } else {
         dateMin = dateMax = notSelected;
       }

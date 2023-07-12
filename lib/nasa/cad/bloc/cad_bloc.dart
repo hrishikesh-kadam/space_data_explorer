@@ -27,8 +27,8 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     try {
       final queryParameters = SbdbCadQueryParameters();
       if (_dateRange != null) {
-        queryParameters.dateMin = _dateRange!.start.toString();
-        queryParameters.dateMax = _dateRange!.end.toString();
+        queryParameters.dateMin = dateFormatter.format(_dateRange!.start);
+        queryParameters.dateMax = dateFormatter.format(_dateRange!.end);
       }
       Response<SbdbCadBody> response = await _sbdbCadApi.get(
         queryParameters: queryParameters.toJson(),
