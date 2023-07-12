@@ -34,7 +34,7 @@ dev_dependencies:
       ref: f350497a11b1285c695595049e95a420068e7a9f
   path_provider: ^2.0.11
   build_runner: ^2.4.6
-  go_router_builder: ^2.2.0
+  go_router_builder: ^2.2.1
 
 flutter:
   uses-material-design: true
