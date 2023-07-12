@@ -35,7 +35,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
       routerDelegate: _goRouter.routerDelegate,
       backButtonDispatcher: AppBackButtonDispatcher(goRouter: _goRouter),
       theme: ThemeData(
-        colorSchemeSeed: const Color(0xff6750a4),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: _debugShowCheckedModeBanner,

@@ -25,13 +25,13 @@ class CadBloc extends Bloc<CadEvent, CadState> {
   ) async {
     emit(CadRequestSent());
     try {
-      JsonMap? queryParameters = {};
+      final queryParameters = SbdbCadQueryParameters();
       if (_dateRange != null) {
-        queryParameters['date-min'] = _dateRange!.start.toString();
-        queryParameters['date-max'] = _dateRange!.end.toString();
+        queryParameters.dateMin = _dateRange!.start.toString();
+        queryParameters.dateMax = _dateRange!.end.toString();
       }
       Response<SbdbCadBody> response = await _sbdbCadApi.get(
-        queryParameters: queryParameters,
+        queryParameters: queryParameters.toJson(),
       );
       _log.debug('_onCadRequested success');
       emit(CadRequestSuccess(sbdbCadBody: response.data!));
