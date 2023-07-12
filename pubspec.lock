@@ -358,10 +358,10 @@ packages:
     dependency: "direct main"
     description:
       name: hrk_nasa_apis
-      sha256: eff2bfb4aafb98893b83ab9c85ac843eaf52c3bd412a39b7eba98090a852d088
+      sha256: f965bbcdbe735ea9d31de3c7524744e24508788a5d953e75ece30600d9d686a9
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0"
+    version: "0.3.0"
   http_multi_server:
     dependency: transitive
     description:
