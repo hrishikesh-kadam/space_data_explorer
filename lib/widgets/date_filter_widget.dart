@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../constants/localisation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 typedef DateTimeRangeCallback = void Function(DateTimeRange?);
 
@@ -10,11 +9,13 @@ class DateFilterWidget extends StatefulWidget {
     required this.firstDate,
     required this.lastDate,
     this.onDateRangeSelected,
+    required this.l10n,
   });
 
   final DateTime firstDate;
   final DateTime lastDate;
   final DateTimeRangeCallback? onDateRangeSelected;
+  final AppLocalizations l10n;
 
   @override
   State<DateFilterWidget> createState() => _DateFilterWidgetState();
@@ -31,18 +32,18 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(AppLocalisations.dateFilters),
+        Text(widget.l10n.dateFilters),
         Row(
           children: [
-            const Text(AppLocalisations.dateMin),
+            Text(widget.l10n.dateMin),
             Text(dateMin),
-            const Text(AppLocalisations.dateMax),
+            Text(widget.l10n.dateMax),
             Text(dateMax),
             OutlinedButton(
               onPressed: () {
                 _dateRangePickerOnPressed(context: context);
               },
-              child: const Text(AppLocalisations.selectDateRange),
+              child: Text(widget.l10n.selectDateRange),
             ),
           ],
         )

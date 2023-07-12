@@ -12,8 +12,11 @@ dependencies:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
-  cupertino_icons: ^1.0.2
+  flutter_localizations:
+    sdk: flutter
+  intl: any
   meta: ^1.9.1
+  cupertino_icons: ^1.0.2
   hrk_logging: '>=0.1.0 <1.0.0'
   hrk_nasa_apis: '>=0.3.0 <1.0.0'
   hrk_batteries: '>=0.1.0 <1.0.0'
@@ -42,6 +45,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true
 
 import_sorter:
   comments: false

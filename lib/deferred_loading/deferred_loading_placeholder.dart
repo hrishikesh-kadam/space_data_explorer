@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../config/config.dart';
 import '../constants/dimensions.dart';
-import '../constants/localisation.dart';
 import '../constants/theme.dart';
 
 class DeferredPlaceholderWidget extends StatelessWidget {
   const DeferredPlaceholderWidget({
     super.key,
-    this.name = AppLocalisations.deferredTitle,
+    required this.name,
   });
 
   final String name;

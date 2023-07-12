@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import 'config/app_back_button_dispatcher.dart';
@@ -28,7 +28,6 @@ class SpaceDataExplorerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO(hrishikesh-kadam): Is it necessary here to provide _goRouter configs sepearately
     return MaterialApp.router(
       routeInformationProvider: _goRouter.routeInformationProvider,
       routeInformationParser: _goRouter.routeInformationParser,
@@ -38,6 +37,8 @@ class SpaceDataExplorerApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: _debugShowCheckedModeBanner,
     );
   }

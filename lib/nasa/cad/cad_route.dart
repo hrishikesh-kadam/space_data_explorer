@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:go_router/go_router.dart';
 
@@ -23,7 +24,9 @@ class CadRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) {
     return DeferredWidget(
       cad_screen.loadLibrary,
-      () => cad_screen.CadScreen(),
+      () => cad_screen.CadScreen(
+        l10n: AppLocalizations.of(context),
+      ),
       placeholder: const DeferredPlaceholderWidget(
         name: CadRoute.displayName,
       ),

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import '../../config/config.dart';
-import '../../constants/localisation.dart';
 import '../../globals.dart';
 import '../../typedef/typedef.dart';
 import '../../widgets/date_filter_widget.dart';
@@ -13,7 +12,12 @@ import 'cad_route.dart';
 import 'result/cad_result_route.dart';
 
 class CadScreen extends StatelessWidget {
-  const CadScreen({super.key});
+  const CadScreen({
+    super.key,
+    required this.l10n,
+  });
+
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +67,7 @@ class CadScreen extends StatelessWidget {
           : () async {
               context.read<CadBloc>().add(const CadRequested());
             },
-      child: const Text(AppLocalisations.search),
+      child: Text(l10n.search),
     );
   }
 
@@ -78,6 +82,7 @@ class CadScreen extends StatelessWidget {
               dateRange: dateRange,
             ));
       },
+      l10n: l10n,
     );
   }
 }
