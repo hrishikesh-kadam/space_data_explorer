@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# TODO(hrishikesh-kadam): Make android-34 as default
+
 # $1 AVD_NAME like Pixel_6_API_33
 # $2 SYSTEM_IMAGE_PACKAGE_PATH like "system-images;android-33;google_apis;x86_64"
 # $3 DEVICE_NAME like pixel_6

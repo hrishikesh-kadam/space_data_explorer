@@ -63,8 +63,9 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
     setState(() {
       this.dateRange = dateRange;
       if (dateRange != null) {
-        dateMin = DateFormat.yMd().format(dateRange.start);
-        dateMax = DateFormat.yMd().format(dateRange.end);
+        final locale = Localizations.localeOf(context).toLanguageTag();
+        dateMin = DateFormat.yMd(locale).format(dateRange.start);
+        dateMax = DateFormat.yMd(locale).format(dateRange.end);
       } else {
         dateMin = dateMax = notSelected;
       }
