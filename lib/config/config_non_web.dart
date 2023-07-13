@@ -36,7 +36,7 @@ BackButton getAppBarBackButton({
         }
       } else {
         log.log(logLevel, 'Unusual navigation observed');
-        log.log(logLevel, 'extra is not a Map');
+        log.log(logLevel, 'extra is not a RouteExtraMap');
         final routeMatchList = getListOfRouteMatch(context);
         log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
         GoRouter.of(context).go(HomeRoute.path);

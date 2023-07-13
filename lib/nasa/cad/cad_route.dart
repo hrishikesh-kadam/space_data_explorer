@@ -17,8 +17,8 @@ class CadRoute extends GoRouteData {
   const CadRoute();
 
   static const String relativePath = 'cad';
-  static const String displayName = 'SBDB Close-Approach Data';
   static const String path = '${NasaRoute.path}/$relativePath';
+  static const String displayName = 'SBDB Close-Approach Data';
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

@@ -16,8 +16,8 @@ class NasaRoute extends GoRouteData {
   const NasaRoute();
 
   static const String relativePath = 'nasa';
-  static const String displayName = 'NASA';
   static const String path = '${HomeRoute.path}$relativePath';
+  static const String displayName = 'NASA';
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

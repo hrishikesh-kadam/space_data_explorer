@@ -49,7 +49,7 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
       }
     } else {
       _log.log(logLevel, 'Unusual navigation observed');
-      _log.log(logLevel, 'extra is not a Map');
+      _log.log(logLevel, 'extra is not a RouteExtraMap');
       final List routeMatchList =
           _goRouter.routerDelegate.currentConfiguration.matches;
       _log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');

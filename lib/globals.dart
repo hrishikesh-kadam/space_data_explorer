@@ -10,10 +10,10 @@ bool flutterTest = isFlutterTest();
 
 final log = Logger(appNamePascalCase);
 
-const isNormalLink = 'isNormalLink';
-
 /// isNormalLink is used to check if the route was opened by normal-link or
 /// deep-link.
+const isNormalLink = 'isNormalLink';
+
 RouteExtraMap getRouteExtra() {
   RouteExtraMap extra = {};
   extra[isNormalLink] = true;

@@ -24,8 +24,8 @@ class CadResultRoute extends GoRouteData {
   final RouteExtraMap? $extra;
 
   static const String relativePath = 'result';
-  static const String displayName = 'SBDB Close-Approach Data Result';
   static const String path = '${CadRoute.path}/$relativePath';
+  static const String displayName = 'SBDB Close-Approach Data Result';
 
   @override
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) {

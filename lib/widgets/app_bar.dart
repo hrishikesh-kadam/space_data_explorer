@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../config/config.dart';
-import '../route/home_route.dart';
+import '../globals.dart';
+import '../route/home_route.dart' hide $SettingsRouteExtension;
+import '../route/settings/settings_route.dart';
 
 AppBar getAppBar({
   Key? key,
   required BuildContext context,
   Widget? leading,
   Widget? title,
+  List<Widget>? actions,
   Color? backgroundColor,
 }) {
   if (leading == null) {
@@ -23,11 +26,27 @@ AppBar getAppBar({
     }
   }
 
+  actions ??= getDefaultActions(context: context);
+
   return AppBar(
     key: key,
     leading: leading,
     title: title,
+    actions: actions,
     backgroundColor:
         backgroundColor ?? Theme.of(context).colorScheme.inversePrimary,
   );
+}
+
+List<Widget> getDefaultActions({
+  required BuildContext context,
+}) {
+  return <Widget>[
+    IconButton(
+      icon: const Icon(Icons.settings),
+      onPressed: () {
+        GoRouter.of(context).push(SettingsRoute.path, extra: getRouteExtra());
+      },
+    ),
+  ];
 }

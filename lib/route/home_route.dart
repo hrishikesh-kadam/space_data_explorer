@@ -7,9 +7,11 @@ import '../nasa/cad/cad_route.dart';
 import '../nasa/cad/result/cad_result_route.dart';
 import '../nasa/nasa_route.dart';
 import '../widgets/app_bar.dart';
+import 'settings/settings_route.dart';
 
 part 'home_route.g.dart';
 
+// TODO(hrishikesh-kadam): Add name to other routes?
 @TypedGoRoute<HomeRoute>(
   path: HomeRoute.path,
   name: HomeRoute.path,
@@ -26,6 +28,9 @@ part 'home_route.g.dart';
           ],
         ),
       ],
+    ),
+    TypedGoRoute<SettingsRoute>(
+      path: SettingsRoute.relativePath,
     ),
   ],
 )
