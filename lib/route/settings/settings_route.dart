@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
-import '../../widgets/app_bar.dart';
 import '../home/home_route.dart';
+import 'settings_screen.dart';
 
 part 'settings_route.g.dart';
 
@@ -20,18 +20,4 @@ class SettingsRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const SettingsScreen();
-}
-
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: getAppBar(
-        context: context,
-        title: const Text(SettingsRoute.displayName),
-      ),
-    );
-  }
 }
