@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:go_router/go_router.dart';
 
 import '../../widgets/app_bar.dart';
-import '../home_route.dart';
+import '../home/home_route.dart';
 
 part 'settings_route.g.dart';
 

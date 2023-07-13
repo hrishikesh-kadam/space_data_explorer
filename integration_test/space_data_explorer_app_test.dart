@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/config/config.dart';
-import 'package:space_data_explorer/route/home_route.dart';
+import 'package:space_data_explorer/route/home/home_screen.dart';
 import 'package:space_data_explorer/space_data_explorer.dart';
 
 void main() {

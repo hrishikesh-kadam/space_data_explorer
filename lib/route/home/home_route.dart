@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
-import '../globals.dart';
-import '../nasa/cad/cad_route.dart';
-import '../nasa/cad/result/cad_result_route.dart';
-import '../nasa/nasa_route.dart';
-import '../widgets/app_bar.dart';
-import 'settings/settings_route.dart';
+import '../../nasa/cad/cad_route.dart';
+import '../../nasa/cad/result/cad_result_route.dart';
+import '../../nasa/nasa_route.dart';
+import '../settings/settings_route.dart';
+import 'home_screen.dart';
 
 part 'home_route.g.dart';
 
@@ -43,29 +42,4 @@ class HomeRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) => const HomeScreen();
-}
-
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: getAppBar(
-        context: context,
-        title: const Text(HomeRoute.displayName),
-      ),
-      body: TextButton(
-        child: const Text(NasaRoute.relativePath),
-        onPressed: () async {
-          GoRouter.of(context).go(NasaRoute.path, extra: getRouteExtra());
-        },
-      ),
-    );
-  }
 }

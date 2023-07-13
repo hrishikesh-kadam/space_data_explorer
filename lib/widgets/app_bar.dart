@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../config/config.dart';
 import '../globals.dart';
-import '../route/home_route.dart' hide $SettingsRouteExtension;
+import '../route/home/home_route.dart' hide $SettingsRouteExtension;
 import '../route/settings/settings_route.dart';
 
 AppBar getAppBar({

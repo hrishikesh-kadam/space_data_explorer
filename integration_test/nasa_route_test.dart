@@ -5,7 +5,7 @@ import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/nasa/nasa_route.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
-import 'package:space_data_explorer/route/home_route.dart';
+import 'package:space_data_explorer/route/home/home_screen.dart';
 import 'package:space_data_explorer/space_data_explorer.dart';
 import 'home_route_test.dart';
 

@@ -5,7 +5,7 @@ import 'package:hrk_logging/hrk_logging.dart';
 
 import '../globals.dart';
 import '../helper/helper.dart';
-import '../route/home_route.dart';
+import '../route/home/home_route.dart';
 import '../typedef/typedef.dart';
 
 void configureUrlStrategy() {

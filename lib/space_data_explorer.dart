@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import 'config/app_back_button_dispatcher.dart';
-import 'route/home_route.dart';
+import 'route/home/home_route.dart';
 
 class SpaceDataExplorerApp extends StatelessWidget {
   SpaceDataExplorerApp({
