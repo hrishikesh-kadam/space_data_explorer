@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hrk_logging/hrk_logging.dart';
 import 'package:intl/intl.dart';
+
+import '../constants/constants.dart';
 
 typedef DateTimeRangeCallback = void Function(DateTimeRange?);
 
@@ -79,7 +82,7 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
 }
 
 class FormattedDateRangeText extends StatelessWidget {
-  const FormattedDateRangeText({
+  FormattedDateRangeText({
     super.key,
     this.dateRange,
     required this.dateFilter,
@@ -89,17 +92,20 @@ class FormattedDateRangeText extends StatelessWidget {
   final DateTimeRange? dateRange;
   final DateFilter dateFilter;
   final String notSelectedText;
+  final _log = Logger('$appNamePascalCase.FormattedDateRangeText');
 
   @override
   Widget build(BuildContext context) {
     String formattedDate;
     if (dateRange != null) {
       final locale = Localizations.localeOf(context).toLanguageTag();
+      _log.debug(locale);
+      final dateFormat = DateFormat.yMd(locale);
       switch (dateFilter) {
         case DateFilter.dateMin:
-          formattedDate = DateFormat.yMd(locale).format(dateRange!.start);
+          formattedDate = dateFormat.format(dateRange!.start);
         case DateFilter.dateMax:
-          formattedDate = DateFormat.yMd(locale).format(dateRange!.end);
+          formattedDate = dateFormat.format(dateRange!.end);
       }
     } else {
       formattedDate = notSelectedText;
