@@ -5,6 +5,11 @@ import 'package:intl/intl.dart';
 
 typedef DateTimeRangeCallback = void Function(DateTimeRange?);
 
+enum DateFilter {
+  dateMin,
+  dateMax,
+}
+
 class DateFilterWidget extends StatefulWidget {
   const DateFilterWidget({
     super.key,
@@ -25,9 +30,6 @@ class DateFilterWidget extends StatefulWidget {
 
 class _DateFilterWidgetState extends State<DateFilterWidget> {
   DateTimeRange? dateRange;
-  String dateMin = notSelected;
-  String dateMax = notSelected;
-  static String notSelected = '-';
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +40,15 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
         Row(
           children: [
             Text(widget.l10n.dateMin),
-            Text(dateMin),
+            FormattedDateRangeText(
+              dateRange: dateRange,
+              dateFilter: DateFilter.dateMin,
+            ),
             Text(widget.l10n.dateMax),
-            Text(dateMax),
+            FormattedDateRangeText(
+              dateRange: dateRange,
+              dateFilter: DateFilter.dateMax,
+            ),
             OutlinedButton(
               onPressed: () {
                 _dateRangePickerOnPressed(context: context);
@@ -63,16 +71,39 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
     );
     setState(() {
       this.dateRange = dateRange;
-      if (dateRange != null) {
-        final locale = Localizations.localeOf(context).toLanguageTag();
-        dateMin = DateFormat.yMd(locale).format(dateRange.start);
-        dateMax = DateFormat.yMd(locale).format(dateRange.end);
-      } else {
-        dateMin = dateMax = notSelected;
-      }
     });
     if (widget.onDateRangeSelected != null) {
       widget.onDateRangeSelected!(dateRange);
     }
+  }
+}
+
+class FormattedDateRangeText extends StatelessWidget {
+  const FormattedDateRangeText({
+    super.key,
+    this.dateRange,
+    required this.dateFilter,
+    this.notSelectedText = '-',
+  });
+
+  final DateTimeRange? dateRange;
+  final DateFilter dateFilter;
+  final String notSelectedText;
+
+  @override
+  Widget build(BuildContext context) {
+    String formattedDate;
+    if (dateRange != null) {
+      final locale = Localizations.localeOf(context).toLanguageTag();
+      switch (dateFilter) {
+        case DateFilter.dateMin:
+          formattedDate = DateFormat.yMd(locale).format(dateRange!.start);
+        case DateFilter.dateMax:
+          formattedDate = DateFormat.yMd(locale).format(dateRange!.end);
+      }
+    } else {
+      formattedDate = notSelectedText;
+    }
+    return Text(formattedDate);
   }
 }
