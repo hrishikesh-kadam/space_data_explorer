@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
-import '../../config/config.dart';
 import '../../globals.dart';
 import '../../typedef/typedef.dart';
+import '../../widgets/app_bar.dart';
 import '../../widgets/date_filter_widget.dart';
 import 'bloc/cad_bloc.dart';
 import 'cad_route.dart';
@@ -25,10 +25,9 @@ class CadScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => CadBloc(),
       child: Scaffold(
-        appBar: AppBar(
-          leading: getAppBarBackButton(context: context),
+        appBar: getAppBar(
+          context: context,
           title: const Text(CadRoute.displayName),
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
         body: BlocConsumer<CadBloc, CadState>(
           listener: (context, state) {

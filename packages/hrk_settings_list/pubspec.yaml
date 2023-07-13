@@ -1,0 +1,13 @@
+name: hrk_settings_list
+version: 0.1.0-pre.1
+
+description: >-
+  A list to configure settings tiles.
+publish_to: none
+
+environment:
+  sdk: ^3.0.0
+
+dependencies:
+  flutter:
+    sdk: flutter

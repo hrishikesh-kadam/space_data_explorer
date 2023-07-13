@@ -6,6 +6,7 @@ import '../globals.dart';
 import '../nasa/cad/cad_route.dart';
 import '../nasa/cad/result/cad_result_route.dart';
 import '../nasa/nasa_route.dart';
+import '../widgets/app_bar.dart';
 
 part 'home_route.g.dart';
 
@@ -32,6 +33,7 @@ class HomeRoute extends GoRouteData {
   const HomeRoute();
 
   static const String path = '/';
+  static const String relativePath = path;
   static const String displayName = 'Home Page';
 
   @override
@@ -49,9 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: getAppBar(
+        context: context,
         title: const Text(HomeRoute.displayName),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: TextButton(
         child: const Text(NasaRoute.relativePath),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
-import '../../../config/config.dart';
+import '../../../widgets/app_bar.dart';
 import 'cad_result_route.dart';
 
 class CadResultScreen extends StatelessWidget {
@@ -16,10 +16,9 @@ class CadResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: getAppBarBackButton(context: context),
+      appBar: getAppBar(
+        context: context,
         title: const Text(CadResultRoute.displayName),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Text(sbdbCadBody.count.toString()),
     );
