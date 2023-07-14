@@ -18,7 +18,7 @@ AppBar getAppBar({
   if (leading == null) {
     String location = GoRouterState.of(context).matchedLocation;
     switch (location) {
-      // Route which doesn't need leading BackButton
+      // Routes which doesn't need leading BackButton
       case HomeRoute.relativePath:
         break;
       default:
@@ -26,7 +26,7 @@ AppBar getAppBar({
     }
   }
 
-  actions ??= getDefaultActions(context: context);
+  actions ??= getDefaultAppBarActions(context: context);
 
   return AppBar(
     key: key,
@@ -38,7 +38,7 @@ AppBar getAppBar({
   );
 }
 
-List<Widget> getDefaultActions({
+List<Widget> getDefaultAppBarActions({
   required BuildContext context,
 }) {
   return <Widget>[

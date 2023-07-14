@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import 'config/app_back_button_dispatcher.dart';
+import 'language/language.dart';
 import 'route/home/home_route.dart';
 
 class SpaceDataExplorerApp extends StatelessWidget {
@@ -39,7 +40,11 @@ class SpaceDataExplorerApp extends StatelessWidget {
         useMaterial3: true,
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+      supportedLocales: <Locale>[
+        Locale(Language.english.code),
+        Locale(Language.hindi.code),
+        Locale(Language.marathi.code),
+      ],
       debugShowCheckedModeBanner: _debugShowCheckedModeBanner,
     );
   }
