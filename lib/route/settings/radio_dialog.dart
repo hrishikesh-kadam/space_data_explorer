@@ -4,15 +4,15 @@ class RadioDialog<T> extends StatelessWidget {
   const RadioDialog({
     super.key,
     required this.title,
-    required this.valueList,
-    required this.titleStringList,
+    required this.values,
+    required this.valueTitles,
     this.groupValue,
     this.onChanged,
   });
 
   final String title;
-  final List<T> valueList;
-  final List<String> titleStringList;
+  final List<T> values;
+  final List<String> valueTitles;
   final T? groupValue;
   final ValueChanged<T?>? onChanged;
 
@@ -24,11 +24,11 @@ class RadioDialog<T> extends StatelessWidget {
         width: double.minPositive,
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount: valueList.length,
+          itemCount: values.length,
           itemBuilder: (context, index) {
             return RadioListTile<T>(
-              value: valueList[index],
-              title: Text(titleStringList[index]),
+              value: values[index],
+              title: Text(valueTitles[index]),
               groupValue: groupValue,
               onChanged: onChanged,
               toggleable: true,

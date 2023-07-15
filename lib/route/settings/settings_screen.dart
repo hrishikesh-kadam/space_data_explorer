@@ -65,13 +65,13 @@ class SettingsScreen extends StatelessWidget {
   Widget getLanguageTile({
     required BuildContext context,
   }) {
-    const valueList = <Language>[
+    const values = <Language>[
       Language.english,
       Language.hindi,
       Language.marathi,
     ];
-    final List<String> titleStringList =
-        valueList.map((e) => e.displayName).toList(growable: false);
+    final List<String> valueTitles =
+        values.map((e) => e.displayName).toList(growable: false);
 
     return BlocBuilder<SettingsBloc, SettingsState>(
       buildWhen: (previous, current) {
@@ -79,11 +79,11 @@ class SettingsScreen extends StatelessWidget {
       },
       builder: (context, state) {
         final Language language = state.language;
-        return RadioSettingsTile(
+        return RadioSettingsTile<Language>(
           title: l10n.language,
           subTitle: language.displayName,
-          valueList: valueList,
-          titleStringList: titleStringList,
+          values: values,
+          valueTitles: valueTitles,
           groupValue: language,
           onChanged: (selectedLanguage) {
             if (selectedLanguage != null) {

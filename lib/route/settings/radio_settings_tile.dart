@@ -7,16 +7,16 @@ class RadioSettingsTile<T> extends StatelessWidget {
     super.key,
     required this.title,
     required this.subTitle,
-    required this.valueList,
-    required this.titleStringList,
+    required this.values,
+    required this.valueTitles,
     this.groupValue,
     this.onChanged,
   });
 
   final String title;
   final String subTitle;
-  final List<T> valueList;
-  final List<String> titleStringList;
+  final List<T> values;
+  final List<String> valueTitles;
   final T? groupValue;
   final ValueChanged<T?>? onChanged;
 
@@ -31,8 +31,8 @@ class RadioSettingsTile<T> extends StatelessWidget {
           builder: (context) {
             return RadioDialog<T>(
               title: title,
-              valueList: valueList,
-              titleStringList: titleStringList,
+              values: values,
+              valueTitles: valueTitles,
               groupValue: groupValue,
               onChanged: onChanged,
             );

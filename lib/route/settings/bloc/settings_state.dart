@@ -1,6 +1,6 @@
 part of 'settings_bloc.dart';
 
-abstract class SettingsState extends Equatable {
+sealed class SettingsState extends Equatable {
   const SettingsState();
 
   get language => null;
