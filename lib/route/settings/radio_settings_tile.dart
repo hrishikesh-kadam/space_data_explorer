@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:hrk_logging/hrk_logging.dart';
+
+import '../../constants/constants.dart';
 import 'radio_dialog.dart';
 
 class RadioSettingsTile<T> extends StatelessWidget {
-  const RadioSettingsTile({
+  RadioSettingsTile({
     super.key,
     required this.title,
     required this.subTitle,
@@ -19,14 +22,16 @@ class RadioSettingsTile<T> extends StatelessWidget {
   final List<String> valueTitles;
   final T? groupValue;
   final ValueChanged<T?>? onChanged;
+  final _log = Logger('$appNamePascalCase.RadioSettingsTile');
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(title),
       subtitle: Text(subTitle),
-      onTap: () {
-        showDialog(
+      onTap: () async {
+        _log.debug('-> before showDialog');
+        await showDialog(
           context: context,
           builder: (context) {
             return RadioDialog<T>(
@@ -38,6 +43,7 @@ class RadioSettingsTile<T> extends StatelessWidget {
             );
           },
         );
+        _log.debug('-> after showDialog');
       },
     );
   }

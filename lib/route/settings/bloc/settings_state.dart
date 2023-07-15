@@ -10,6 +10,7 @@ class SettingsState with _$SettingsState {
   const factory SettingsState({
     required Language language,
     required String dateFormatPattern,
+    bool? isAnyDialogOpen,
   }) = _SettingsState;
 
   factory SettingsState.fromJson(Map<String, dynamic> json) =>
