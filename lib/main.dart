@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'config/config.dart';
 import 'space_data_explorer.dart';
 
-void main({
+Future<void> main({
   GlobalKey<NavigatorState>? navigatorKey,
   String? initialLocation,
   bool debugShowCheckedModeBanner = true,
-}) {
-  configureApp();
+}) async {
+  await configureApp();
   runApp(SpaceDataExplorerApp(
     navigatorKey: navigatorKey,
     initialLocation: initialLocation,

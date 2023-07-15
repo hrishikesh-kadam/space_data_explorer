@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrk_logging/hrk_logging.dart';
+import 'package:intl/intl.dart';
 
 import '../../constants/constants.dart';
 import '../../language/language.dart';
 import '../../widgets/app_bar.dart';
 import 'bloc/settings_bloc.dart';
+import 'bloc/settings_state.dart';
 import 'radio_settings_tile.dart';
 import 'settings_route.dart';
 
@@ -51,7 +53,11 @@ class SettingsScreen extends StatelessWidget {
   }) {
     final locale = Localizations.localeOf(context);
     final currentLanguage = Language.fromCode(locale.languageCode);
-    return SettingsBloc(language: currentLanguage);
+    final dateFormat = DateFormat.yMd(locale.toString());
+    return SettingsBloc(
+      language: currentLanguage,
+      dateFormat: dateFormat,
+    );
   }
 
   List<Widget> getSettingsTiles({
@@ -73,12 +79,9 @@ class SettingsScreen extends StatelessWidget {
     final List<String> valueTitles =
         values.map((e) => e.displayName).toList(growable: false);
 
-    return BlocBuilder<SettingsBloc, SettingsState>(
-      buildWhen: (previous, current) {
-        return current is SettingsInitial || current is SettingsLanguageChange;
-      },
-      builder: (context, state) {
-        final Language language = state.language;
+    return BlocSelector<SettingsBloc, SettingsState, Language>(
+      selector: (state) => state.language,
+      builder: (context, language) {
         return RadioSettingsTile<Language>(
           title: l10n.language,
           subTitle: language.displayName,

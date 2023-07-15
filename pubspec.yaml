@@ -22,9 +22,13 @@ dependencies:
   hrk_nasa_apis: '>=0.4.1 <1.0.0'
   hrk_settings_list:
     path: 'packages/hrk_settings_list'
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
   go_router: ^9.0.3
   flutter_bloc: ^8.1.3
+  hydrated_bloc: ^9.1.2
   equatable: ^2.0.5
+  path_provider: ^2.0.11
 
 # dependency_overrides:
 #   hrk_nasa_apis:
@@ -41,8 +45,9 @@ dev_dependencies:
     git:
       url: https://github.com/fluttercommunity/import_sorter.git
       ref: f350497a11b1285c695595049e95a420068e7a9f
-  path_provider: ^2.0.11
   build_runner: ^2.4.6
+  freezed: ^2.4.1
+  json_serializable: ^6.7.1
   go_router_builder: ^2.2.0
 
 flutter:

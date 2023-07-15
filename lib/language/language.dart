@@ -1,6 +1,11 @@
+import 'package:json_annotation/json_annotation.dart';
+
 enum Language {
+  @JsonValue('en')
   english('en', 'English'),
+  @JsonValue('hi')
   hindi('hi', 'हिंदी'),
+  @JsonValue('mr')
   marathi('mr', 'मराठी');
 
   const Language(this.code, this.displayName);

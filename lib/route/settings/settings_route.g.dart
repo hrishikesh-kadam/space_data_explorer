@@ -14,6 +14,7 @@ List<RouteBase> get $appRoutes => [
 
 RouteBase get $settingsRoute => GoRouteData.$route(
       path: '/settings',
+      name: 'Settings Page',
       factory: $SettingsRouteExtension._fromState,
     );
 

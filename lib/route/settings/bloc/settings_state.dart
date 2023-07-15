@@ -1,33 +1,20 @@
-part of 'settings_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 
-sealed class SettingsState extends Equatable {
-  const SettingsState();
+import '../../../helper/helper.dart';
+import '../../../language/language.dart';
 
-  get language => null;
-  get dateFormat => null;
+part 'settings_state.freezed.dart';
+part 'settings_state.g.dart';
 
-  @override
-  List<Object> get props => [];
-}
+@freezed
+class SettingsState with _$SettingsState {
+  const factory SettingsState({
+    required Language language,
+    @DateFormatJsonConverter()
+    required DateFormat dateFormat,
+  }) = _SettingsState;
 
-class SettingsInitial extends SettingsState {
-  const SettingsInitial({
-    required this.language,
-  });
-
-  @override
-  final Language language;
-
-  @override
-  List<Object> get props => [language];
-}
-
-class SettingsLanguageChange extends SettingsState {
-  const SettingsLanguageChange({required this.language});
-
-  @override
-  final Language language;
-
-  @override
-  List<Object> get props => [language];
+  factory SettingsState.fromJson(Map<String, dynamic> json) =>
+      _$SettingsStateFromJson(json);
 }

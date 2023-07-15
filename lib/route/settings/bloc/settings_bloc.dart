@@ -1,27 +1,34 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../../language/language.dart';
+import 'settings_state.dart';
 
 part 'settings_event.dart';
-part 'settings_state.dart';
 
-class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
+class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   SettingsBloc({
-    required this.language,
-  }) : super(SettingsInitial(
+    required Language language,
+    required DateFormat dateFormat,
+  }) : super(SettingsState(
           language: language,
+          dateFormat: dateFormat,
         )) {
     on<SettingsLaguageSelected>(_onLanguageSettingsChanged);
   }
-
-  Language language;
 
   void _onLanguageSettingsChanged(
     SettingsLaguageSelected event,
     Emitter<SettingsState> emit,
   ) {
-    language = event.language;
-    emit(SettingsLanguageChange(language: language));
+    emit(state.copyWith(language: event.language));
   }
+
+  @override
+  SettingsState? fromJson(Map<String, dynamic> json) =>
+      SettingsState.fromJson(json);
+
+  @override
+  Map<String, dynamic>? toJson(SettingsState state) => state.toJson();
 }
