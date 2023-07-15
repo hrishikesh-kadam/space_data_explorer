@@ -4,5 +4,7 @@
   "dateMin": "Min: ",
   "dateMax": "Max: ",
   "selectDateRange": "Select Date Range",
-  "language": "Language"
+  "language": "Language",
+  "dateFormat": "Date Format",
+  "systemDateFormat": "System Locale Format"
 }

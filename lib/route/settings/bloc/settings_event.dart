@@ -15,3 +15,12 @@ class SettingsLaguageSelected extends SettingsEvent {
   @override
   List<Object> get props => [language];
 }
+
+class SettingsDateFormatSelected extends SettingsEvent {
+  const SettingsDateFormatSelected({required this.dateFormatPattern});
+
+  final String dateFormatPattern;
+
+  @override
+  List<Object> get props => [dateFormatPattern];
+}

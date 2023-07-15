@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrk_logging/hrk_logging.dart';
-import 'package:intl/intl.dart';
 
 import '../../constants/constants.dart';
 import '../../language/language.dart';
@@ -21,6 +20,7 @@ class SettingsScreen extends StatelessWidget {
 
   final AppLocalizations l10n;
   final _log = Logger('$appNamePascalCase.SettingsScreen');
+  static const String system = 'system';
 
   @override
   Widget build(BuildContext context) {
@@ -48,36 +48,29 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  SettingsBloc createSettingsBloc({
-    required BuildContext context,
-  }) {
+  SettingsBloc createSettingsBloc({required BuildContext context}) {
     final locale = Localizations.localeOf(context);
     final currentLanguage = Language.fromCode(locale.languageCode);
-    final dateFormat = DateFormat.yMd(locale.toString());
     return SettingsBloc(
       language: currentLanguage,
-      dateFormat: dateFormat,
+      dateFormatPattern: system,
     );
   }
 
-  List<Widget> getSettingsTiles({
-    required BuildContext context,
-  }) {
+  List<Widget> getSettingsTiles({required BuildContext context}) {
     return [
       getLanguageTile(context: context),
+      getDateFormatTile(context: context),
     ];
   }
 
-  Widget getLanguageTile({
-    required BuildContext context,
-  }) {
+  Widget getLanguageTile({required BuildContext context}) {
     const values = <Language>[
       Language.english,
       Language.hindi,
       Language.marathi,
     ];
-    final List<String> valueTitles =
-        values.map((e) => e.displayName).toList(growable: false);
+    final List<String> valueTitles = values.map((e) => e.displayName).toList();
 
     return BlocSelector<SettingsBloc, SettingsState, Language>(
       selector: (state) => state.language,
@@ -94,6 +87,45 @@ class SettingsScreen extends StatelessWidget {
               final settingsBloc = context.read<SettingsBloc>();
               settingsBloc.add(SettingsLaguageSelected(
                 language: selectedLanguage,
+              ));
+            }
+            Navigator.pop(context);
+          },
+        );
+      },
+    );
+  }
+
+  Widget getDateFormatTile({required BuildContext context}) {
+    final values = <String>[
+      system,
+      'dd/MM/yyyy',
+      'MM/dd/yyyy',
+      'yyyy/MM/dd',
+    ];
+    List<String> valueTitles = [
+      l10n.systemDateFormat,
+      ...values.sublist(1),
+    ];
+
+    return BlocSelector<SettingsBloc, SettingsState, String>(
+      selector: (state) => state.dateFormatPattern,
+      builder: (context, dateFormatPattern) {
+        return RadioSettingsTile<String>(
+          title: l10n.dateFormat,
+          subTitle: dateFormatPattern == system
+              ? l10n.systemDateFormat
+              : dateFormatPattern,
+          values: values,
+          valueTitles: valueTitles,
+          groupValue: dateFormatPattern,
+          onChanged: (selectedDateFormatPattern) {
+            if (selectedDateFormatPattern != null) {
+              _log.debug(
+                  'selectedDateFormatPattern -> $selectedDateFormatPattern');
+              final settingsBloc = context.read<SettingsBloc>();
+              settingsBloc.add(SettingsDateFormatSelected(
+                dateFormatPattern: selectedDateFormatPattern,
               ));
             }
             Navigator.pop(context);

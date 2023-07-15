@@ -21,8 +21,7 @@ SettingsState _$SettingsStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SettingsState {
   Language get language => throw _privateConstructorUsedError;
-  @DateFormatJsonConverter()
-  DateFormat get dateFormat => throw _privateConstructorUsedError;
+  String get dateFormatPattern => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,8 +35,7 @@ abstract class $SettingsStateCopyWith<$Res> {
           SettingsState value, $Res Function(SettingsState) then) =
       _$SettingsStateCopyWithImpl<$Res, SettingsState>;
   @useResult
-  $Res call(
-      {Language language, @DateFormatJsonConverter() DateFormat dateFormat});
+  $Res call({Language language, String dateFormatPattern});
 }
 
 /// @nodoc
@@ -54,17 +52,17 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   @override
   $Res call({
     Object? language = null,
-    Object? dateFormat = null,
+    Object? dateFormatPattern = null,
   }) {
     return _then(_value.copyWith(
       language: null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as Language,
-      dateFormat: null == dateFormat
-          ? _value.dateFormat
-          : dateFormat // ignore: cast_nullable_to_non_nullable
-              as DateFormat,
+      dateFormatPattern: null == dateFormatPattern
+          ? _value.dateFormatPattern
+          : dateFormatPattern // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -77,8 +75,7 @@ abstract class _$$_SettingsStateCopyWith<$Res>
       __$$_SettingsStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {Language language, @DateFormatJsonConverter() DateFormat dateFormat});
+  $Res call({Language language, String dateFormatPattern});
 }
 
 /// @nodoc
@@ -93,17 +90,17 @@ class __$$_SettingsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? language = null,
-    Object? dateFormat = null,
+    Object? dateFormatPattern = null,
   }) {
     return _then(_$_SettingsState(
       language: null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as Language,
-      dateFormat: null == dateFormat
-          ? _value.dateFormat
-          : dateFormat // ignore: cast_nullable_to_non_nullable
-              as DateFormat,
+      dateFormatPattern: null == dateFormatPattern
+          ? _value.dateFormatPattern
+          : dateFormatPattern // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -112,8 +109,7 @@ class __$$_SettingsStateCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SettingsState implements _SettingsState {
   const _$_SettingsState(
-      {required this.language,
-      @DateFormatJsonConverter() required this.dateFormat});
+      {required this.language, required this.dateFormatPattern});
 
   factory _$_SettingsState.fromJson(Map<String, dynamic> json) =>
       _$$_SettingsStateFromJson(json);
@@ -121,12 +117,11 @@ class _$_SettingsState implements _SettingsState {
   @override
   final Language language;
   @override
-  @DateFormatJsonConverter()
-  final DateFormat dateFormat;
+  final String dateFormatPattern;
 
   @override
   String toString() {
-    return 'SettingsState(language: $language, dateFormat: $dateFormat)';
+    return 'SettingsState(language: $language, dateFormatPattern: $dateFormatPattern)';
   }
 
   @override
@@ -136,13 +131,13 @@ class _$_SettingsState implements _SettingsState {
             other is _$_SettingsState &&
             (identical(other.language, language) ||
                 other.language == language) &&
-            (identical(other.dateFormat, dateFormat) ||
-                other.dateFormat == dateFormat));
+            (identical(other.dateFormatPattern, dateFormatPattern) ||
+                other.dateFormatPattern == dateFormatPattern));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, language, dateFormat);
+  int get hashCode => Object.hash(runtimeType, language, dateFormatPattern);
 
   @JsonKey(ignore: true)
   @override
@@ -160,9 +155,8 @@ class _$_SettingsState implements _SettingsState {
 
 abstract class _SettingsState implements SettingsState {
   const factory _SettingsState(
-          {required final Language language,
-          @DateFormatJsonConverter() required final DateFormat dateFormat}) =
-      _$_SettingsState;
+      {required final Language language,
+      required final String dateFormatPattern}) = _$_SettingsState;
 
   factory _SettingsState.fromJson(Map<String, dynamic> json) =
       _$_SettingsState.fromJson;
@@ -170,8 +164,7 @@ abstract class _SettingsState implements SettingsState {
   @override
   Language get language;
   @override
-  @DateFormatJsonConverter()
-  DateFormat get dateFormat;
+  String get dateFormatPattern;
   @override
   @JsonKey(ignore: true)
   _$$_SettingsStateCopyWith<_$_SettingsState> get copyWith =>

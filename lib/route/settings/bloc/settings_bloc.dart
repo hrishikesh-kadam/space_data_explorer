@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:intl/intl.dart';
 
 import '../../../language/language.dart';
 import 'settings_state.dart';
@@ -10,12 +9,13 @@ part 'settings_event.dart';
 class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   SettingsBloc({
     required Language language,
-    required DateFormat dateFormat,
+    required String dateFormatPattern,
   }) : super(SettingsState(
           language: language,
-          dateFormat: dateFormat,
+          dateFormatPattern: dateFormatPattern,
         )) {
     on<SettingsLaguageSelected>(_onLanguageSettingsChanged);
+    on<SettingsDateFormatSelected>(_onSettingsDateFormatSelected);
   }
 
   void _onLanguageSettingsChanged(
@@ -23,6 +23,13 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) {
     emit(state.copyWith(language: event.language));
+  }
+
+  void _onSettingsDateFormatSelected(
+    SettingsDateFormatSelected event,
+    Emitter<SettingsState> emit,
+  ) {
+    emit(state.copyWith(dateFormatPattern: event.dateFormatPattern));
   }
 
   @override

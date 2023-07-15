@@ -1,5 +1,7 @@
 {
   "search": "खोजें",
   "selectDateRange": "Date Filter चुनें",
-  "language": "भाषा"
+  "language": "भाषा",
+  "dateFormat": "दिनांक प्रारूप",
+  "systemDateFormat": "सिस्टम स्थानीय प्रारूप"
 }
