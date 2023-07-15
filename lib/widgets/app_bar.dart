@@ -38,15 +38,18 @@ AppBar getAppBar({
   );
 }
 
-List<Widget> getDefaultAppBarActions({
-  required BuildContext context,
-}) {
+List<Widget> getDefaultAppBarActions({required BuildContext context}) {
+  String location = GoRouterState.of(context).matchedLocation;
   return <Widget>[
-    IconButton(
-      icon: const Icon(Icons.settings),
-      onPressed: () {
-        GoRouter.of(context).push(SettingsRoute.path, extra: getRouteExtra());
-      },
-    ),
+    if (location != SettingsRoute.path) getSettingsAction(context: context)
   ];
+}
+
+Widget getSettingsAction({required BuildContext context}) {
+  return IconButton(
+    icon: const Icon(Icons.settings),
+    onPressed: () {
+      GoRouter.of(context).push(SettingsRoute.path, extra: getRouteExtra());
+    },
+  );
 }

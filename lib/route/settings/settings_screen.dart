@@ -1,39 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hrk_logging/hrk_logging.dart';
 
+import '../../constants/constants.dart';
 import '../../language/language.dart';
 import '../../widgets/app_bar.dart';
+import 'bloc/settings_bloc.dart';
+import 'radio_settings_tile.dart';
 import 'settings_route.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({
+  SettingsScreen({
     super.key,
     required this.l10n,
   });
 
   final AppLocalizations l10n;
+  final _log = Logger('$appNamePascalCase.SettingsScreen');
 
   @override
   Widget build(BuildContext context) {
-    final settingsTiles = getSettingsTiles(context: context);
-
-    return Scaffold(
-      appBar: getAppBar(
-        context: context,
-        title: const Text(SettingsRoute.displayName),
-        actions: null,
-      ),
-      body: ListView.separated(
-        itemCount: settingsTiles.length,
-        itemBuilder: (BuildContext context, int index) {
-          return settingsTiles[index];
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const Divider();
-        },
+    return BlocProvider(
+      lazy: false,
+      create: (_) => createSettingsBloc(context: context),
+      child: Scaffold(
+        appBar: getAppBar(
+          context: context,
+          title: const Text(SettingsRoute.displayName),
+        ),
+        body: Builder(builder: (context) {
+          final settingsTiles = getSettingsTiles(context: context);
+          return ListView.separated(
+            itemCount: settingsTiles.length,
+            itemBuilder: (context, index) {
+              return settingsTiles[index];
+            },
+            separatorBuilder: (context, index) {
+              return const Divider();
+            },
+          );
+        }),
       ),
     );
+  }
+
+  SettingsBloc createSettingsBloc({
+    required BuildContext context,
+  }) {
+    final locale = Localizations.localeOf(context);
+    final currentLanguage = Language.fromCode(locale.languageCode);
+    return SettingsBloc(language: currentLanguage);
   }
 
   List<Widget> getSettingsTiles({
@@ -47,17 +65,38 @@ class SettingsScreen extends StatelessWidget {
   Widget getLanguageTile({
     required BuildContext context,
   }) {
-    return ListTile(
-      title: Text(l10n.language),
-      subtitle: Text(getLanguageDisplayName(context: context)),
-    );
-  }
+    const valueList = <Language>[
+      Language.english,
+      Language.hindi,
+      Language.marathi,
+    ];
+    final List<String> titleStringList =
+        valueList.map((e) => e.displayName).toList(growable: false);
 
-  String getLanguageDisplayName({
-    required BuildContext context,
-  }) {
-    final Locale locale = Localizations.localeOf(context);
-    final Language language = Language.fromCode(locale.languageCode);
-    return language.displayName;
+    return BlocBuilder<SettingsBloc, SettingsState>(
+      buildWhen: (previous, current) {
+        return current is SettingsInitial || current is SettingsLanguageChange;
+      },
+      builder: (context, state) {
+        final Language language = state.language;
+        return RadioSettingsTile(
+          title: l10n.language,
+          subTitle: language.displayName,
+          valueList: valueList,
+          titleStringList: titleStringList,
+          groupValue: language,
+          onChanged: (selectedLanguage) {
+            if (selectedLanguage != null) {
+              _log.debug('selectedLanguage -> $selectedLanguage');
+              final settingsBloc = context.read<SettingsBloc>();
+              settingsBloc.add(SettingsLaguageSelected(
+                language: selectedLanguage,
+              ));
+            }
+            Navigator.pop(context);
+          },
+        );
+      },
+    );
   }
 }

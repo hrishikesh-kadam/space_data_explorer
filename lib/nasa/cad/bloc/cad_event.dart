@@ -9,17 +9,13 @@ sealed class CadEvent extends Equatable {
 }
 
 class CadRequested extends CadEvent {
-  const CadRequested({
-    this.queryParameters,
-  });
+  const CadRequested({this.queryParameters});
 
   final JsonMap? queryParameters;
 }
 
 class CadDateRangeSelected extends CadEvent {
-  const CadDateRangeSelected({
-    this.dateRange,
-  });
+  const CadDateRangeSelected({this.dateRange});
 
   final DateTimeRange? dateRange;
 }
