@@ -22,7 +22,8 @@ SettingsState _$SettingsStateFromJson(Map<String, dynamic> json) {
 mixin _$SettingsState {
   Language get language => throw _privateConstructorUsedError;
   String get dateFormatPattern => throw _privateConstructorUsedError;
-  bool? get isAnyDialogOpen => throw _privateConstructorUsedError;
+  bool? get isAnyDialogShown => throw _privateConstructorUsedError;
+  set isAnyDialogShown(bool? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,7 @@ abstract class $SettingsStateCopyWith<$Res> {
       _$SettingsStateCopyWithImpl<$Res, SettingsState>;
   @useResult
   $Res call(
-      {Language language, String dateFormatPattern, bool? isAnyDialogOpen});
+      {Language language, String dateFormatPattern, bool? isAnyDialogShown});
 }
 
 /// @nodoc
@@ -55,7 +56,7 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   $Res call({
     Object? language = null,
     Object? dateFormatPattern = null,
-    Object? isAnyDialogOpen = freezed,
+    Object? isAnyDialogShown = freezed,
   }) {
     return _then(_value.copyWith(
       language: null == language
@@ -66,9 +67,9 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
           ? _value.dateFormatPattern
           : dateFormatPattern // ignore: cast_nullable_to_non_nullable
               as String,
-      isAnyDialogOpen: freezed == isAnyDialogOpen
-          ? _value.isAnyDialogOpen
-          : isAnyDialogOpen // ignore: cast_nullable_to_non_nullable
+      isAnyDialogShown: freezed == isAnyDialogShown
+          ? _value.isAnyDialogShown
+          : isAnyDialogShown // ignore: cast_nullable_to_non_nullable
               as bool?,
     ) as $Val);
   }
@@ -83,7 +84,7 @@ abstract class _$$_SettingsStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Language language, String dateFormatPattern, bool? isAnyDialogOpen});
+      {Language language, String dateFormatPattern, bool? isAnyDialogShown});
 }
 
 /// @nodoc
@@ -99,7 +100,7 @@ class __$$_SettingsStateCopyWithImpl<$Res>
   $Res call({
     Object? language = null,
     Object? dateFormatPattern = null,
-    Object? isAnyDialogOpen = freezed,
+    Object? isAnyDialogShown = freezed,
   }) {
     return _then(_$_SettingsState(
       language: null == language
@@ -110,9 +111,9 @@ class __$$_SettingsStateCopyWithImpl<$Res>
           ? _value.dateFormatPattern
           : dateFormatPattern // ignore: cast_nullable_to_non_nullable
               as String,
-      isAnyDialogOpen: freezed == isAnyDialogOpen
-          ? _value.isAnyDialogOpen
-          : isAnyDialogOpen // ignore: cast_nullable_to_non_nullable
+      isAnyDialogShown: freezed == isAnyDialogShown
+          ? _value.isAnyDialogShown
+          : isAnyDialogShown // ignore: cast_nullable_to_non_nullable
               as bool?,
     ));
   }
@@ -121,10 +122,10 @@ class __$$_SettingsStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_SettingsState implements _SettingsState {
-  const _$_SettingsState(
+  _$_SettingsState(
       {required this.language,
       required this.dateFormatPattern,
-      this.isAnyDialogOpen});
+      this.isAnyDialogShown});
 
   factory _$_SettingsState.fromJson(Map<String, dynamic> json) =>
       _$$_SettingsStateFromJson(json);
@@ -134,30 +135,12 @@ class _$_SettingsState implements _SettingsState {
   @override
   final String dateFormatPattern;
   @override
-  final bool? isAnyDialogOpen;
+  bool? isAnyDialogShown;
 
   @override
   String toString() {
-    return 'SettingsState(language: $language, dateFormatPattern: $dateFormatPattern, isAnyDialogOpen: $isAnyDialogOpen)';
+    return 'SettingsState(language: $language, dateFormatPattern: $dateFormatPattern, isAnyDialogShown: $isAnyDialogShown)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SettingsState &&
-            (identical(other.language, language) ||
-                other.language == language) &&
-            (identical(other.dateFormatPattern, dateFormatPattern) ||
-                other.dateFormatPattern == dateFormatPattern) &&
-            (identical(other.isAnyDialogOpen, isAnyDialogOpen) ||
-                other.isAnyDialogOpen == isAnyDialogOpen));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, language, dateFormatPattern, isAnyDialogOpen);
 
   @JsonKey(ignore: true)
   @override
@@ -174,10 +157,10 @@ class _$_SettingsState implements _SettingsState {
 }
 
 abstract class _SettingsState implements SettingsState {
-  const factory _SettingsState(
+  factory _SettingsState(
       {required final Language language,
       required final String dateFormatPattern,
-      final bool? isAnyDialogOpen}) = _$_SettingsState;
+      bool? isAnyDialogShown}) = _$_SettingsState;
 
   factory _SettingsState.fromJson(Map<String, dynamic> json) =
       _$_SettingsState.fromJson;
@@ -187,7 +170,8 @@ abstract class _SettingsState implements SettingsState {
   @override
   String get dateFormatPattern;
   @override
-  bool? get isAnyDialogOpen;
+  bool? get isAnyDialogShown;
+  set isAnyDialogShown(bool? value);
   @override
   @JsonKey(ignore: true)
   _$$_SettingsStateCopyWith<_$_SettingsState> get copyWith =>

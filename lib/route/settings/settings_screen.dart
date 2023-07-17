@@ -25,25 +25,30 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      lazy: false,
       create: (_) => createSettingsBloc(context: context),
       child: Scaffold(
         appBar: getAppBar(
           context: context,
           title: const Text(SettingsRoute.displayName),
         ),
-        body: Builder(builder: (context) {
-          final settingsTiles = getSettingsTiles(context: context);
-          return ListView.separated(
-            itemCount: settingsTiles.length,
-            itemBuilder: (context, index) {
-              return settingsTiles[index];
-            },
-            separatorBuilder: (context, index) {
-              return const Divider();
-            },
-          );
-        }),
+        body: BlocBuilder<SettingsBloc, SettingsState>(
+          builder: (context, state) {
+            final isAnyDialogOpen = state.isAnyDialogShown;
+            if (isAnyDialogOpen != null && isAnyDialogOpen) {
+              Navigator.pop(context);
+            }
+            final settingsTiles = getSettingsTiles(context: context);
+            return ListView.separated(
+              itemCount: settingsTiles.length,
+              itemBuilder: (context, index) {
+                return settingsTiles[index];
+              },
+              separatorBuilder: (context, index) {
+                return const Divider();
+              },
+            );
+          },
+        ),
       ),
     );
   }
@@ -111,6 +116,7 @@ class SettingsScreen extends StatelessWidget {
     return BlocSelector<SettingsBloc, SettingsState, String>(
       selector: (state) => state.dateFormatPattern,
       builder: (context, dateFormatPattern) {
+        final settingsBloc = context.read<SettingsBloc>();
         return RadioSettingsTile<String>(
           title: l10n.dateFormat,
           subTitle: dateFormatPattern == system
@@ -122,13 +128,20 @@ class SettingsScreen extends StatelessWidget {
           onChanged: (selectedDateFormatPattern) {
             if (selectedDateFormatPattern != null) {
               _log.debug(
-                  'selectedDateFormatPattern -> $selectedDateFormatPattern');
-              final settingsBloc = context.read<SettingsBloc>();
+                  'getDateFormatTile -> selectedDateFormatPattern -> $selectedDateFormatPattern');
               settingsBloc.add(SettingsDateFormatSelected(
                 dateFormatPattern: selectedDateFormatPattern,
               ));
             }
             Navigator.pop(context);
+          },
+          beforeShowDialog: () {
+            _log.debug('getDateFormatTile -> before showDialog');
+            settingsBloc.state.isAnyDialogShown = true;
+          },
+          afterShowDialog: () {
+            _log.debug('getDateFormatTile -> after showDialog');
+            settingsBloc.state.isAnyDialogShown = false;
           },
         );
       },
