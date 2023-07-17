@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
@@ -39,7 +39,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
         selector: (state) => state.language,
         builder: (context, language) {
           return getApp(
-            locale: Locale(language.code),
+            locale: language != Language.system ? Locale(language.code) : null,
           );
         },
       ),

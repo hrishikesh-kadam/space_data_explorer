@@ -6,7 +6,7 @@ class RadioSettingsTile<T> extends StatelessWidget {
   const RadioSettingsTile({
     super.key,
     required this.title,
-    required this.subTitle,
+    this.subTitle,
     required this.values,
     required this.valueTitles,
     this.groupValue,
@@ -16,7 +16,7 @@ class RadioSettingsTile<T> extends StatelessWidget {
   });
 
   final String title;
-  final String subTitle;
+  final String? subTitle;
   final List<T> values;
   final List<String> valueTitles;
   final T? groupValue;
@@ -28,7 +28,7 @@ class RadioSettingsTile<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(title),
-      subtitle: Text(subTitle),
+      subtitle: subTitle != null ? Text(subTitle!) : null,
       onTap: () async {
         if (beforeShowDialog != null) beforeShowDialog!();
         await showDialog(

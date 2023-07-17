@@ -58,11 +58,15 @@ class SettingsScreen extends StatelessWidget {
 
   Widget getLanguageTile() {
     const values = <Language>[
+      Language.system,
       Language.english,
       Language.hindi,
       Language.marathi,
     ];
-    final List<String> valueTitles = values.map((e) => e.displayName).toList();
+    List<String> valueTitles = [
+      l10n.system,
+      ...values.sublist(1).map((e) => e.displayName!).toList(),
+    ];
 
     return BlocSelector<SettingsBloc, SettingsState, Language>(
       selector: (state) => state.language,
@@ -70,7 +74,8 @@ class SettingsScreen extends StatelessWidget {
         final settingsBloc = context.read<SettingsBloc>();
         return RadioSettingsTile<Language>(
           title: l10n.language,
-          subTitle: language.displayName,
+          subTitle:
+              language == Language.system ? l10n.system : language.displayName,
           values: values,
           valueTitles: valueTitles,
           groupValue: language,
@@ -110,7 +115,7 @@ class SettingsScreen extends StatelessWidget {
       'yyyy/MM/dd',
     ];
     List<String> valueTitles = [
-      l10n.systemDateFormat,
+      l10n.system,
       ...values.sublist(1),
     ];
 
@@ -121,7 +126,7 @@ class SettingsScreen extends StatelessWidget {
         return RadioSettingsTile<String>(
           title: l10n.dateFormat,
           subTitle: dateFormatPattern == SettingsBloc.dateSkeleton
-              ? l10n.systemDateFormat
+              ? l10n.system
               : dateFormatPattern,
           values: values,
           valueTitles: valueTitles,

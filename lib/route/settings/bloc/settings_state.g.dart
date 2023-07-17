@@ -25,6 +25,7 @@ Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) =>
     };
 
 const _$LanguageEnumMap = {
+  Language.system: 'system',
   Language.english: 'en',
   Language.hindi: 'hi',
   Language.marathi: 'mr',

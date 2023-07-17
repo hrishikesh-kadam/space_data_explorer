@@ -1,17 +1,24 @@
 import 'package:json_annotation/json_annotation.dart';
 
 enum Language {
+  @JsonValue('system')
+  system(code: 'system'),
   @JsonValue('en')
-  english('en', 'English'),
+  english(code: 'en', displayName: 'English'),
   @JsonValue('hi')
-  hindi('hi', 'हिंदी (Hindi)'),
+  hindi(code: 'hi', displayName: 'हिंदी (Hindi)'),
   @JsonValue('mr')
-  marathi('mr', 'मराठी (Marathi)');
+  marathi(code: 'mr', displayName: 'मराठी (Marathi)');
 
-  const Language(this.code, this.displayName);
+  const Language({
+    required this.code,
+    this.displayName,
+  });
 
   factory Language.fromCode(String code) {
     switch (code) {
+      case 'system':
+        return system;
       case 'en':
         return english;
       case 'hi':
@@ -24,5 +31,5 @@ enum Language {
   }
 
   final String code;
-  final String displayName;
+  final String? displayName;
 }

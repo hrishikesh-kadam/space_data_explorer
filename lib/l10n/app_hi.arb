@@ -3,5 +3,5 @@
   "selectDateRange": "Date Filter चुनें",
   "language": "भाषा",
   "dateFormat": "दिनांक प्रारूप",
-  "systemDateFormat": "सिस्टम स्थानीय प्रारूप"
+  "system": "सिस्टम"
 }

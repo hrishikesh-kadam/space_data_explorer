@@ -23,7 +23,7 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
 
   static SettingsBloc getInitialSettings() {
     return SettingsBloc(
-      language: Language.english,
+      language: Language.system,
       dateFormatPattern: dateSkeleton,
     );
   }
