@@ -4,9 +4,9 @@ enum Language {
   @JsonValue('en')
   english('en', 'English'),
   @JsonValue('hi')
-  hindi('hi', 'हिंदी'),
+  hindi('hi', 'हिंदी (Hindi)'),
   @JsonValue('mr')
-  marathi('mr', 'मराठी');
+  marathi('mr', 'मराठी (Marathi)');
 
   const Language(this.code, this.displayName);
 

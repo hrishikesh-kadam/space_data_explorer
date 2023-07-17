@@ -24,3 +24,9 @@ class SettingsDateFormatSelected extends SettingsEvent {
   @override
   List<Object> get props => [dateFormatPattern];
 }
+
+class SettingsDialogEvent extends SettingsEvent {
+  const SettingsDialogEvent({this.isAnyDialogShown});
+
+  final bool? isAnyDialogShown;
+}

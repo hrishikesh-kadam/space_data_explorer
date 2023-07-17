@@ -20,56 +20,43 @@ class SettingsScreen extends StatelessWidget {
 
   final AppLocalizations l10n;
   final _log = Logger('$appNamePascalCase.SettingsScreen');
-  static const String system = 'system';
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => createSettingsBloc(context: context),
-      child: Scaffold(
-        appBar: getAppBar(
-          context: context,
-          title: const Text(SettingsRoute.displayName),
-        ),
-        body: BlocBuilder<SettingsBloc, SettingsState>(
-          builder: (context, state) {
-            final isAnyDialogOpen = state.isAnyDialogShown;
-            if (isAnyDialogOpen != null && isAnyDialogOpen) {
-              Navigator.pop(context);
-            }
-            final settingsTiles = getSettingsTiles(context: context);
-            return ListView.separated(
-              itemCount: settingsTiles.length,
-              itemBuilder: (context, index) {
-                return settingsTiles[index];
-              },
-              separatorBuilder: (context, index) {
-                return const Divider();
-              },
-            );
-          },
-        ),
+    return Scaffold(
+      appBar: getAppBar(
+        context: context,
+        title: const Text(SettingsRoute.displayName),
+      ),
+      body: BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (context, state) {
+          final isAnyDialogOpen = state.isAnyDialogShown;
+          if (isAnyDialogOpen != null && isAnyDialogOpen) {
+            Navigator.pop(context);
+          }
+          final settingsTiles = getSettingsTiles();
+          return ListView.separated(
+            itemCount: settingsTiles.length,
+            itemBuilder: (context, index) {
+              return settingsTiles[index];
+            },
+            separatorBuilder: (context, index) {
+              return const Divider();
+            },
+          );
+        },
       ),
     );
   }
 
-  SettingsBloc createSettingsBloc({required BuildContext context}) {
-    final locale = Localizations.localeOf(context);
-    final currentLanguage = Language.fromCode(locale.languageCode);
-    return SettingsBloc(
-      language: currentLanguage,
-      dateFormatPattern: system,
-    );
-  }
-
-  List<Widget> getSettingsTiles({required BuildContext context}) {
+  List<Widget> getSettingsTiles() {
     return [
-      getLanguageTile(context: context),
-      getDateFormatTile(context: context),
+      getLanguageTile(),
+      getDateFormatTile(),
     ];
   }
 
-  Widget getLanguageTile({required BuildContext context}) {
+  Widget getLanguageTile() {
     const values = <Language>[
       Language.english,
       Language.hindi,
@@ -80,6 +67,7 @@ class SettingsScreen extends StatelessWidget {
     return BlocSelector<SettingsBloc, SettingsState, Language>(
       selector: (state) => state.language,
       builder: (context, language) {
+        final settingsBloc = context.read<SettingsBloc>();
         return RadioSettingsTile<Language>(
           title: l10n.language,
           subTitle: language.displayName,
@@ -89,21 +77,34 @@ class SettingsScreen extends StatelessWidget {
           onChanged: (selectedLanguage) {
             if (selectedLanguage != null) {
               _log.debug('selectedLanguage -> $selectedLanguage');
-              final settingsBloc = context.read<SettingsBloc>();
               settingsBloc.add(SettingsLaguageSelected(
                 language: selectedLanguage,
               ));
             }
             Navigator.pop(context);
           },
+          beforeShowDialog: () {
+            onEventShowDialog(
+              settingsBloc: settingsBloc,
+              isAnyDialogShown: true,
+              tileTrace: 'getLanguageTile',
+            );
+          },
+          afterShowDialog: () {
+            onEventShowDialog(
+              settingsBloc: settingsBloc,
+              isAnyDialogShown: false,
+              tileTrace: 'getLanguageTile',
+            );
+          },
         );
       },
     );
   }
 
-  Widget getDateFormatTile({required BuildContext context}) {
+  Widget getDateFormatTile() {
     final values = <String>[
-      system,
+      SettingsBloc.dateSkeleton,
       'dd/MM/yyyy',
       'MM/dd/yyyy',
       'yyyy/MM/dd',
@@ -119,7 +120,7 @@ class SettingsScreen extends StatelessWidget {
         final settingsBloc = context.read<SettingsBloc>();
         return RadioSettingsTile<String>(
           title: l10n.dateFormat,
-          subTitle: dateFormatPattern == system
+          subTitle: dateFormatPattern == SettingsBloc.dateSkeleton
               ? l10n.systemDateFormat
               : dateFormatPattern,
           values: values,
@@ -136,15 +137,36 @@ class SettingsScreen extends StatelessWidget {
             Navigator.pop(context);
           },
           beforeShowDialog: () {
-            _log.debug('getDateFormatTile -> before showDialog');
-            settingsBloc.state.isAnyDialogShown = true;
+            onEventShowDialog(
+              settingsBloc: settingsBloc,
+              isAnyDialogShown: true,
+              tileTrace: 'getDateFormatTile',
+            );
           },
           afterShowDialog: () {
-            _log.debug('getDateFormatTile -> after showDialog');
-            settingsBloc.state.isAnyDialogShown = false;
+            onEventShowDialog(
+              settingsBloc: settingsBloc,
+              isAnyDialogShown: false,
+              tileTrace: 'getDateFormatTile',
+            );
           },
         );
       },
     );
+  }
+
+  void onEventShowDialog({
+    required SettingsBloc settingsBloc,
+    bool? isAnyDialogShown,
+    String? tileTrace,
+  }) {
+    if (isAnyDialogShown == true) {
+      _log.debug('$tileTrace -> before showDialog');
+    } else if (isAnyDialogShown == false) {
+      _log.debug('$tileTrace -> after showDialog');
+    }
+    settingsBloc.add(SettingsDialogEvent(
+      isAnyDialogShown: isAnyDialogShown,
+    ));
   }
 }

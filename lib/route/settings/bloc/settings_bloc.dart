@@ -16,6 +16,16 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
         )) {
     on<SettingsLaguageSelected>(_onLanguageSettingsChanged);
     on<SettingsDateFormatSelected>(_onSettingsDateFormatSelected);
+    on<SettingsDialogEvent>(_onSettingsDialogEvent);
+  }
+
+  static const String dateSkeleton = 'yMd';
+
+  static SettingsBloc getInitialSettings() {
+    return SettingsBloc(
+      language: Language.english,
+      dateFormatPattern: dateSkeleton,
+    );
   }
 
   void _onLanguageSettingsChanged(
@@ -38,4 +48,11 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
 
   @override
   Map<String, dynamic>? toJson(SettingsState state) => state.toJson();
+
+  void _onSettingsDialogEvent(
+    SettingsDialogEvent event,
+    Emitter<SettingsState> emit,
+  ) {
+    state.isAnyDialogShown = event.isAnyDialogShown;
+  }
 }
