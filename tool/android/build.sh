@@ -2,6 +2,10 @@
 
 set -e -o pipefail
 
+if [[ $LOGS_ENV_SOURCED != "true" ]]; then
+  source ./tool/shell/logs-env.sh
+fi
+
 source ./tool/constants.sh
 
 FLAVOR_ENV=$(./tool/get-flavor-env.sh)

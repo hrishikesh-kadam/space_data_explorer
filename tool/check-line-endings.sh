@@ -2,6 +2,10 @@
 
 set -e -o pipefail
 
+if [[ $LOGS_ENV_SOURCED != "true" ]]; then
+  source ./tool/shell/logs-env.sh
+fi
+
 echo "Checking CR line endings in git tracked files"
 output=$( \
   git ls-files \

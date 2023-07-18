@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
-set -ex -o pipefail
+set -e -o pipefail
+
+if [[ $LOGS_ENV_SOURCED != "true" ]]; then
+  source ./tool/shell/logs-env.sh
+fi
+
+set -x
 
 dart format --output none --set-exit-if-changed .
 

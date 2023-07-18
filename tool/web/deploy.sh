@@ -2,6 +2,10 @@
 
 set -e -o pipefail
 
+if [[ $LOGS_ENV_SOURCED != "true" ]]; then
+  source ./tool/shell/logs-env.sh
+fi
+
 source ./tool/constants.sh
 
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"

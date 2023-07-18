@@ -2,6 +2,10 @@
 
 set -e -o pipefail
 
+if [[ $LOGS_ENV_SOURCED != "true" ]]; then
+  source ./tool/shell/logs-env.sh
+fi
+
 flutter build web --release
 
 mkdir -p ./build/web/.well-known
