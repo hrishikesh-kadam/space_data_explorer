@@ -1,6 +1,9 @@
 {
   "search": "खोजें",
-  "selectDateRange": "Date Filter चुनें",
+  "dateFilters": "दिनांक फ़िल्टर",
+  "dateMin": "न्यूनतम:",
+  "dateMax": "अधिकतम:",
+  "selectDateRange": "दिनांक फ़िल्टर चुनें",
   "language": "भाषा",
   "dateFormat": "दिनांक प्रारूप",
   "system": "सिस्टम"

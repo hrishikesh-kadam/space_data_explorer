@@ -1,7 +1,10 @@
 {
   "search": "शोधा",
-  "selectDateRange": "Date Filter निवडा",
+  "dateFilters": "तारीख फिल्टर",
+  "dateMin": "किमान:",
+  "dateMax": "कमाल:",
+  "selectDateRange": "तारीख फिल्टर निवडा",
   "language": "भाषा",
-  "dateFormat": "दिनांक स्वरूप",
+  "dateFormat": "तारीख स्वरूप",
   "system": "सिस्टम"
 }

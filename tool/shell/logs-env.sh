@@ -11,5 +11,7 @@ set -e -o pipefail
 PRINT_DEBUG_LOG=1
 PRINT_INFO_LOG=1
 
+export LOGS_ENV_SOURCED="true"
+
 if [ $PARENT_ERREXIT = "true" ]; then set -e; else set +e; fi
 if [ $PARENT_PIPEFAIL = "true" ]; then set -o pipefail; else set +o pipefail; fi

@@ -1,8 +1,8 @@
 {
   "search": "Search",
   "dateFilters": "Date Filters",
-  "dateMin": "Min: ",
-  "dateMax": "Max: ",
+  "dateMin": "Min:",
+  "dateMax": "Max:",
   "selectDateRange": "Select Date Range",
   "language": "Language",
   "dateFormat": "Date Format",
