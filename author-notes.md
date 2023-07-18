@@ -2,6 +2,7 @@
 
 ## TODOs
 
+- Untranslated messages warning
 - Add LICENSE
 
 ## iOS TODOs

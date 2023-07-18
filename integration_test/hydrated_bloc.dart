@@ -7,7 +7,7 @@ import 'hydrated_bloc.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<Storage>()])
 void mockHydratedBloc() {
-  var storage = MockStorage();
+  MockStorage storage = MockStorage();
   when(storage.write(any, any)).thenAnswer((_) async {});
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = storage;

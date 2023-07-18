@@ -34,4 +34,5 @@ Future<void> pumpApp(
     initialLocation: initialLocation,
     debugShowCheckedModeBanner: debugShowCheckedModeBanner,
   ));
+  await tester.pumpAndSettle();
 }

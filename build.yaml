@@ -1,8 +1,21 @@
 targets:
   $default:
+    # https://stackoverflow.com/a/76713790/3302026
+    sources:
+      include:
+        - $package$
+        - lib/$lib$
+        - lib/**
+        - test/**
+        - integration_test/**
     builders:
       source_gen|combining_builder:
         options:
           ignore_for_file:
             - non_constant_identifier_names
           preamble: // coverage:ignore-file
+      mockito|mockBuilder:
+        generate_for:
+          include:
+            - test/**
+            - integration_test/**
