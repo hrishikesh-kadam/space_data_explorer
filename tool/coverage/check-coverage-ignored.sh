@@ -6,7 +6,9 @@ CURRENT_IGNORED=$(
   git grep \
     --line-number \
     --extended-regexp "coverage:ignore-(line|start|file)" \
-    -- *.dart ':(exclude)*.g.dart' \
+    -- ':(glob)lib/**/*.dart' \
+    ':(exclude)*.g.dart' \
+    ':(exclude)*.freezed.dart' \
     | awk -F: '{ print $1":"$2 }' \
     || true
 )
