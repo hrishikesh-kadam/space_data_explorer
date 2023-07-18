@@ -6,8 +6,8 @@ import 'package:integration_test/integration_test.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
-import 'package:space_data_explorer/space_data_explorer.dart';
 import 'nasa_route_test.dart';
+import 'space_data_explorer_app_test.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -18,10 +18,7 @@ void main() {
 }
 
 Future<void> pumpCadRouteAsInitialLocation(WidgetTester tester) async {
-  await tester.pumpWidget(SpaceDataExplorerApp(
-    initialLocation: CadRoute.path,
-  ));
-  await tester.pumpAndSettle();
+  await pumpApp(tester, initialLocation: CadRoute.path);
   expect(find.byType(CadScreen), findsOneWidget);
 }
 

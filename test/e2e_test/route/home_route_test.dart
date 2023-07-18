@@ -5,6 +5,6 @@ import '../../../integration_test/home_route_test.dart';
 
 void main() {
   testWidgets('$HomeRoute E2E Test', (WidgetTester tester) async {
-    await pumpHomeRouteIntegrationTest(tester);
+    await pumpHomeRoute(tester);
   });
 }

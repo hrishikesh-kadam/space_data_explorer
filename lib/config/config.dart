@@ -12,7 +12,7 @@ import 'config_non_web.dart' if (dart.library.html) 'config_web.dart'
 Future<void> configureApp() async {
   configureUrlStrategy();
   configureHrkLogging();
-  await configureHydratedBlock();
+  await configureHydratedBloc();
 }
 
 BackButton getAppBarBackButton({
@@ -25,7 +25,7 @@ void configureUrlStrategy() {
   platform.configureUrlStrategy();
 }
 
-Future<void> configureHydratedBlock() async {
+Future<void> configureHydratedBloc() async {
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: kIsWeb

@@ -6,8 +6,8 @@ import 'package:integration_test/integration_test.dart';
 import 'package:space_data_explorer/nasa/nasa_route.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
-import 'package:space_data_explorer/space_data_explorer.dart';
 import 'home_route_test.dart';
+import 'space_data_explorer_app_test.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -18,10 +18,7 @@ void main() {
 }
 
 Future<void> pumpNasaRouteAsInitialLocation(WidgetTester tester) async {
-  await tester.pumpWidget(SpaceDataExplorerApp(
-    initialLocation: NasaRoute.path,
-  ));
-  await tester.pumpAndSettle();
+  await pumpApp(tester, initialLocation: NasaRoute.path);
   expect(find.byType(NasaScreen), findsOneWidget);
 }
 

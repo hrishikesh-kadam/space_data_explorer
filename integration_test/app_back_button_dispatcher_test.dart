@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:integration_test/integration_test.dart';
 
-import 'package:space_data_explorer/config/config.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_route.dart';
@@ -14,6 +13,7 @@ import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
 import 'package:space_data_explorer/typedef/typedef.dart';
 import 'cad_route_test.dart';
+import 'config.dart';
 import 'globals.dart';
 import 'nasa_route_test.dart';
 import 'space_data_explorer_app_test.dart';
