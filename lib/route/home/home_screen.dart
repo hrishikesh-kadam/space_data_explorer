@@ -7,14 +7,11 @@ import '../../nasa/nasa_route.dart';
 import '../../widgets/app_bar.dart';
 import 'home_route.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
+  static const Key nasaButtonKey = Key('home_screen_nasa_button');
 
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text(HomeRoute.displayName),
       ),
       body: TextButton(
+        key: nasaButtonKey,
         child: const Text(NasaRoute.relativePath),
         onPressed: () async {
           GoRouter.of(context).go(NasaRoute.path, extra: getRouteExtra());

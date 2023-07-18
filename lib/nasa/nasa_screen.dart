@@ -7,14 +7,11 @@ import '../widgets/app_bar.dart';
 import 'cad/cad_route.dart';
 import 'nasa_route.dart';
 
-class NasaScreen extends StatefulWidget {
+class NasaScreen extends StatelessWidget {
   const NasaScreen({super.key});
 
-  @override
-  State<NasaScreen> createState() => _NasaScreenState();
-}
+  static const Key cadButtonKey = Key('nasa_screen_cad_button');
 
-class _NasaScreenState extends State<NasaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +20,7 @@ class _NasaScreenState extends State<NasaScreen> {
         title: const Text(NasaRoute.displayName),
       ),
       body: TextButton(
+        key: cadButtonKey,
         child: const Text(CadRoute.relativePath),
         onPressed: () async {
           GoRouter.of(context).go(CadRoute.path, extra: getRouteExtra());

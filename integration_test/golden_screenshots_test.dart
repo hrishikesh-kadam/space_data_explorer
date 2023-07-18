@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/main.dart' as app;
-import 'package:space_data_explorer/nasa/cad/cad_route.dart';
-import 'package:space_data_explorer/nasa/nasa_route.dart';
+import 'package:space_data_explorer/nasa/nasa_screen.dart';
+import 'package:space_data_explorer/route/home/home_screen.dart';
 import 'test_helper.dart';
 
 void main() {
@@ -19,14 +17,10 @@ void main() {
     );
     await testScreenshot('1$imageNameSuffix.png', tester, binding);
 
-    final nasaTextButton =
-        find.widgetWithText(TextButton, NasaRoute.relativePath);
-    await tester.tap(nasaTextButton);
+    await tester.tap(find.byKey(HomeScreen.nasaButtonKey));
     await testScreenshot('2$imageNameSuffix.png', tester, binding);
 
-    final cadTextButton =
-        find.widgetWithText(TextButton, CadRoute.relativePath);
-    await tester.tap(cadTextButton);
+    await tester.tap(find.byKey(NasaScreen.cadButtonKey));
     await testScreenshot('3$imageNameSuffix.png', tester, binding);
   });
 }

@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
@@ -14,15 +13,11 @@ void main() {
     testWidgets('Navigate $NasaRoute to $CadRoute to $NasaRoute',
         (WidgetTester tester) async {
       await pumpNasaRouteAsInitialLocation(tester);
-      final cadTextButton =
-          find.widgetWithText(TextButton, CadRoute.relativePath);
-      await tester.tap(cadTextButton);
+      await tester.tap(find.byKey(NasaScreen.cadButtonKey));
       await tester.pumpAndSettle();
       expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(CadScreen), findsOneWidget);
-      final cadScreenBackButton = find.byType(BackButton);
-      await tester.tap(cadScreenBackButton);
-      await tester.pumpAndSettle();
+      await tapBackButton(tester);
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsOneWidget);
     });
@@ -33,9 +28,7 @@ void main() {
 
     testWidgets('Navigate back from $NasaRoute', (WidgetTester tester) async {
       await pumpNasaRouteAsNormalLink(tester);
-      final nasaScreenBackButton = find.byType(BackButton);
-      await tester.tap(nasaScreenBackButton);
-      await tester.pumpAndSettle();
+      await tapBackButton(tester);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });

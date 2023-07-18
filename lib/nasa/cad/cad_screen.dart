@@ -19,6 +19,7 @@ class CadScreen extends StatelessWidget {
   });
 
   final AppLocalizations l10n;
+  static const Key searchButtonKey = Key('cad_screen_search_button');
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +63,7 @@ class CadScreen extends StatelessWidget {
     required CadState cadState,
   }) {
     return OutlinedButton(
+      key: searchButtonKey,
       onPressed: cadState is CadRequestSent
           ? null
           : () async {

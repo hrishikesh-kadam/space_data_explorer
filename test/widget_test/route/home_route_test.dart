@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
 import 'package:space_data_explorer/nasa/nasa_route.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
@@ -17,15 +16,11 @@ void main() {
     testWidgets('Navigate $HomeRoute to $NasaRoute to $HomeRoute',
         (WidgetTester tester) async {
       await pumpHomeRoute(tester);
-      final nasaTextButton =
-          find.widgetWithText(TextButton, NasaRoute.relativePath);
-      await tester.tap(nasaTextButton);
+      await tester.tap(find.byKey(HomeScreen.nasaButtonKey));
       await tester.pumpAndSettle();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NasaScreen), findsOneWidget);
-      final nasaScreenBackButton = find.byType(BackButton);
-      await tester.tap(nasaScreenBackButton);
-      await tester.pumpAndSettle();
+      await tapBackButton(tester);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });

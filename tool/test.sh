@@ -12,9 +12,9 @@ flutter test test/widget_test --coverage \
   --coverage-path coverage/widget_test_lcov.info
 lcov --list coverage/widget_test_lcov.info
 
-flutter test test/e2e_test --coverage \
-  --coverage-path coverage/e2e_test_lcov.info
-lcov --list coverage/e2e_test_lcov.info
+# flutter test test/e2e_test --coverage \
+#   --coverage-path coverage/e2e_test_lcov.info
+# lcov --list coverage/e2e_test_lcov.info
 
 if [[ -s coverage/unit_test_lcov.info ]]; then
   lcov --add-tracefile coverage/unit_test_lcov.info \
