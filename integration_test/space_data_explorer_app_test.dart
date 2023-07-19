@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/route/home/home_screen.dart';
 import 'package:space_data_explorer/space_data_explorer.dart';
 import 'config.dart';
+import 'globals.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +22,6 @@ void main() {
  */
 Future<void> pumpApp(
   WidgetTester tester, {
-  GlobalKey<NavigatorState>? navigatorKey,
   String? initialLocation,
   bool debugShowCheckedModeBanner = true,
 }) async {

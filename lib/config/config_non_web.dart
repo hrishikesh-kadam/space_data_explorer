@@ -24,8 +24,8 @@ BackButton getAppBarBackButton({
           GoRouter.of(context).pop();
         }
       } else if (extraObject is RouteExtraMap) {
-        RouteExtraMap pageExtraMap = extraObject;
-        if (pageExtraMap.containsKey(isNormalLink)) {
+        RouteExtraMap routeExtraMap = extraObject;
+        if (routeExtraMap.containsKey(isNormalLink)) {
           GoRouter.of(context).pop();
         } else {
           log.log(logLevel, 'Unusual navigation observed');

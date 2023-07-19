@@ -36,8 +36,8 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
         }
       }
     } else if (extraObject is RouteExtraMap) {
-      RouteExtraMap pageExtraMap = extraObject;
-      if (pageExtraMap.containsKey(isNormalLink)) {
+      RouteExtraMap routeExtraMap = extraObject;
+      if (routeExtraMap.containsKey(isNormalLink)) {
         return _goRouterDelegate.popRoute();
       } else {
         _log.log(logLevel, 'Unusual navigation observed');

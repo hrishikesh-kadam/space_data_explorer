@@ -26,7 +26,7 @@ class CadScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CadBloc>(
-      create: routeExtraMap?['$CadBloc'] ?? CadBloc(),
+      create: (_) => routeExtraMap?['$CadBloc'] ?? CadBloc(),
       child: Scaffold(
         appBar: getAppBar(
           context: context,

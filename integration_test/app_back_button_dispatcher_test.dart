@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
@@ -11,7 +10,7 @@ import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_route.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
-import 'package:space_data_explorer/typedef/typedef.dart';
+import 'app_bar_back_button_test.dart';
 import 'cad_route_test.dart';
 import 'config.dart';
 import 'globals.dart';
@@ -87,15 +86,9 @@ void appBackButtonDispatcherTest() {
     testWidgets(
         '3 routes down and 1 route up but extra without the isNormalLink key',
         (tester) async {
-      GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: 'appKey');
-      await pumpApp(
-        tester,
-        navigatorKey: navigatorKey,
-      );
+      await pumpApp(tester);
       expect(find.byType(HomeScreen), findsOneWidget);
-      RouteExtraMap pageExtraMap = {};
-      GoRouter.of(navigatorKey.currentContext!)
-          .go(CadRoute.path, extra: pageExtraMap);
+      const CadRoute($extra: {}).go(navigatorKey.currentContext!);
       await tester.pumpAndSettle();
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
@@ -105,12 +98,8 @@ void appBackButtonDispatcherTest() {
     });
 
     testWidgets('3 routes down and 1 route up but when extra is not a Map',
-        (tester) async {
-      GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: 'appKey');
-      await pumpApp(
-        tester,
-        navigatorKey: navigatorKey,
-      );
+        skip: skipExtraNotMapTests, (tester) async {
+      await pumpApp(tester);
       expect(find.byType(HomeScreen), findsOneWidget);
       GoRouter.of(navigatorKey.currentContext!).go(CadRoute.path, extra: []);
       await tester.pumpAndSettle();
