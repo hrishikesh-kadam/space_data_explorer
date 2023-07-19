@@ -30,3 +30,9 @@ class SettingsDialogEvent extends SettingsEvent {
 
   final bool? isAnyDialogShown;
 }
+
+class SettingsSystemLocalesChanged extends SettingsEvent {
+  const SettingsSystemLocalesChanged({required this.systemLocales});
+
+  final List<Locale>? systemLocales;
+}

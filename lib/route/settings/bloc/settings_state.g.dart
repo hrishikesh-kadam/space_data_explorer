@@ -13,6 +13,8 @@ part of 'settings_state.dart';
 _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
     _$_SettingsState(
       language: $enumDecode(_$LanguageEnumMap, json['language']),
+      systemLocales: const LocaleListJsonConverter()
+          .fromJson(json['systemLocales'] as List<Map<String, dynamic>>?),
       dateFormatPattern: json['dateFormatPattern'] as String,
       isAnyDialogShown: json['isAnyDialogShown'] as bool?,
     );
@@ -20,6 +22,8 @@ _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) =>
     <String, dynamic>{
       'language': _$LanguageEnumMap[instance.language]!,
+      'systemLocales':
+          const LocaleListJsonConverter().toJson(instance.systemLocales),
       'dateFormatPattern': instance.dateFormatPattern,
       'isAnyDialogShown': instance.isAnyDialogShown,
     };

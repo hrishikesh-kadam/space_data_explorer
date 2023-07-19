@@ -28,23 +28,31 @@ class SettingsScreen extends StatelessWidget {
         context: context,
         title: const Text(SettingsRoute.displayName),
       ),
-      body: BlocBuilder<SettingsBloc, SettingsState>(
-        builder: (context, state) {
+      body: BlocListener<SettingsBloc, SettingsState>(
+        listenWhen: (previous, current) =>
+            previous.systemLocales != current.systemLocales,
+        listener: (context, state) {
+          _log.debug('systemLocales listener');
           final isAnyDialogOpen = state.isAnyDialogShown;
+          _log.debug('listener -> isAnyDialogOpen = $isAnyDialogOpen');
           if (isAnyDialogOpen != null && isAnyDialogOpen) {
             Navigator.pop(context);
           }
-          final settingsTiles = getSettingsTiles();
-          return ListView.separated(
-            itemCount: settingsTiles.length,
-            itemBuilder: (context, index) {
-              return settingsTiles[index];
-            },
-            separatorBuilder: (context, index) {
-              return const Divider();
-            },
-          );
         },
+        child: Builder(
+          builder: (context) {
+            final settingsTiles = getSettingsTiles();
+            return ListView.separated(
+              itemCount: settingsTiles.length,
+              itemBuilder: (context, index) {
+                return settingsTiles[index];
+              },
+              separatorBuilder: (context, index) {
+                return const Divider();
+              },
+            );
+          },
+        ),
       ),
     );
   }
@@ -89,18 +97,10 @@ class SettingsScreen extends StatelessWidget {
             Navigator.pop(context);
           },
           beforeShowDialog: () {
-            onEventShowDialog(
-              settingsBloc: settingsBloc,
+            _log.debug('selectedLanguage -> beforeShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: true,
-              tileTrace: 'getLanguageTile',
-            );
-          },
-          afterShowDialog: () {
-            onEventShowDialog(
-              settingsBloc: settingsBloc,
-              isAnyDialogShown: false,
-              tileTrace: 'getLanguageTile',
-            );
+            ));
           },
         );
       },
@@ -132,6 +132,7 @@ class SettingsScreen extends StatelessWidget {
           valueTitles: valueTitles,
           groupValue: dateFormatPattern,
           onChanged: (selectedDateFormatPattern) {
+            Navigator.pop(context);
             if (selectedDateFormatPattern != null) {
               _log.debug(
                   'getDateFormatTile -> selectedDateFormatPattern -> $selectedDateFormatPattern');
@@ -139,39 +140,15 @@ class SettingsScreen extends StatelessWidget {
                 dateFormatPattern: selectedDateFormatPattern,
               ));
             }
-            Navigator.pop(context);
           },
           beforeShowDialog: () {
-            onEventShowDialog(
-              settingsBloc: settingsBloc,
+            _log.debug('getDateFormatTile -> beforeShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: true,
-              tileTrace: 'getDateFormatTile',
-            );
-          },
-          afterShowDialog: () {
-            onEventShowDialog(
-              settingsBloc: settingsBloc,
-              isAnyDialogShown: false,
-              tileTrace: 'getDateFormatTile',
-            );
+            ));
           },
         );
       },
     );
-  }
-
-  void onEventShowDialog({
-    required SettingsBloc settingsBloc,
-    bool? isAnyDialogShown,
-    String? tileTrace,
-  }) {
-    if (isAnyDialogShown == true) {
-      _log.debug('$tileTrace -> before showDialog');
-    } else if (isAnyDialogShown == false) {
-      _log.debug('$tileTrace -> after showDialog');
-    }
-    settingsBloc.add(SettingsDialogEvent(
-      isAnyDialogShown: isAnyDialogShown,
-    ));
   }
 }

@@ -1,3 +1,7 @@
+// ignore_for_file: directives_ordering
+
+import 'package:flutter/material.dart';
+
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
@@ -17,6 +21,7 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
     on<SettingsLaguageSelected>(_onLanguageSettingsChanged);
     on<SettingsDateFormatSelected>(_onSettingsDateFormatSelected);
     on<SettingsDialogEvent>(_onSettingsDialogEvent);
+    on<SettingsSystemLocalesChanged>(_onSettingsSystemLocalesChanged);
   }
 
   static const String dateSkeleton = 'yMd';
@@ -32,14 +37,20 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
     SettingsLaguageSelected event,
     Emitter<SettingsState> emit,
   ) {
-    emit(state.copyWith(language: event.language));
+    emit(state.copyWith(
+      language: event.language,
+      isAnyDialogShown: false,
+    ));
   }
 
   void _onSettingsDateFormatSelected(
     SettingsDateFormatSelected event,
     Emitter<SettingsState> emit,
   ) {
-    emit(state.copyWith(dateFormatPattern: event.dateFormatPattern));
+    emit(state.copyWith(
+      dateFormatPattern: event.dateFormatPattern,
+      isAnyDialogShown: false,
+    ));
   }
 
   @override
@@ -54,5 +65,14 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) {
     state.isAnyDialogShown = event.isAnyDialogShown;
+  }
+
+  void _onSettingsSystemLocalesChanged(
+    SettingsSystemLocalesChanged event,
+    Emitter<SettingsState> emit,
+  ) {
+    emit(state.copyWith(
+      systemLocales: event.systemLocales,
+    ));
   }
 }
