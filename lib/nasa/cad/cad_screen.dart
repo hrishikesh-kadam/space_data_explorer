@@ -16,15 +16,17 @@ class CadScreen extends StatelessWidget {
   const CadScreen({
     super.key,
     required this.l10n,
+    this.routeExtraMap,
   });
 
   final AppLocalizations l10n;
   static const Key searchButtonKey = Key('cad_screen_search_button');
+  final RouteExtraMap? routeExtraMap;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CadBloc(),
+    return BlocProvider<CadBloc>(
+      create: routeExtraMap?['$CadBloc'] ?? CadBloc(),
       child: Scaffold(
         appBar: getAppBar(
           context: context,

@@ -13,13 +13,16 @@ part 'cad_event.dart';
 part 'cad_state.dart';
 
 class CadBloc extends Bloc<CadEvent, CadState> {
-  CadBloc() : super(CadInitial()) {
+  CadBloc({
+    SbdbCadApi? sbdbCadApi,
+  }) : super(CadInitial()) {
+    _sbdbCadApi = sbdbCadApi ?? SbdbCadApi();
     on<CadRequested>(_onCadRequested);
     on<CadDateRangeSelected>(_onCadDateRangeSelected);
   }
 
   final _log = Logger('$appNamePascalCase.CadBloc');
-  final _sbdbCadApi = SbdbCadApi();
+  late final SbdbCadApi _sbdbCadApi;
   DateTimeRange? _dateRange;
 
   Future<void> _onCadRequested(

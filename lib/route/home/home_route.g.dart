@@ -77,20 +77,24 @@ extension $NasaRouteExtension on NasaRoute {
 }
 
 extension $CadRouteExtension on CadRoute {
-  static CadRoute _fromState(GoRouterState state) => const CadRoute();
+  static CadRoute _fromState(GoRouterState state) => CadRoute(
+        $extra: state.extra as Map<String, dynamic>?,
+      );
 
   String get location => GoRouteData.$location(
         '/nasa/cad',
       );
 
-  void go(BuildContext context) => context.go(location);
+  void go(BuildContext context) => context.go(location, extra: $extra);
 
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
+      context.pushReplacement(location, extra: $extra);
 
-  void replace(BuildContext context) => context.replace(location);
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
 }
 
 extension $CadResultRouteExtension on CadResultRoute {

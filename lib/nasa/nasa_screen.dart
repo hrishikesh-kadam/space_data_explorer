@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:go_router/go_router.dart';
-
 import '../../globals.dart';
 import '../widgets/app_bar.dart';
 import 'cad/cad_route.dart';
@@ -23,7 +21,7 @@ class NasaScreen extends StatelessWidget {
         key: cadButtonKey,
         child: const Text(CadRoute.relativePath),
         onPressed: () async {
-          GoRouter.of(context).go(CadRoute.path, extra: getRouteExtra());
+          CadRoute($extra: getRouteExtra()).go(context);
         },
       ),
     );
