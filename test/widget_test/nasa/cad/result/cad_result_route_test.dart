@@ -4,7 +4,7 @@ import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/cad/result/cad_result_route.dart';
 import 'package:space_data_explorer/nasa/cad/result/cad_result_screen.dart';
-import '../../../integration_test/cad_result_route_test.dart';
+import '../../../../../integration_test/cad_result_route_test.dart';
 
 void main() {
   group('$CadResultRoute Widget Test', () {
