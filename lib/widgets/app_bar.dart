@@ -7,6 +7,8 @@ import '../globals.dart';
 import '../route/home/home_route.dart' hide $SettingsRouteExtension;
 import '../route/settings/settings_route.dart';
 
+const Key settingsButtonKey = Key('settings_button');
+
 AppBar getAppBar({
   Key? key,
   required BuildContext context,
@@ -47,6 +49,7 @@ List<Widget> getDefaultAppBarActions({required BuildContext context}) {
 
 Widget getSettingsAction({required BuildContext context}) {
   return IconButton(
+    key: settingsButtonKey,
     icon: const Icon(Icons.settings),
     onPressed: () {
       GoRouter.of(context).push(SettingsRoute.path, extra: getRouteExtra());
