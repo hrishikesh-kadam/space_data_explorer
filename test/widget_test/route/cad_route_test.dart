@@ -22,7 +22,7 @@ void main() {
       expect(find.byType(CadScreen), findsOneWidget);
     });
 
-    testWidgets('$CadRoute', (WidgetTester tester) async {
+    testWidgets('Basic', (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
     });
 

@@ -22,7 +22,7 @@ void main() {
       expect(find.byType(NasaScreen), findsOneWidget);
     });
 
-    testWidgets('$NasaRoute', (WidgetTester tester) async {
+    testWidgets('Basic', (WidgetTester tester) async {
       await pumpNasaRouteAsInitialLocation(tester);
     });
 

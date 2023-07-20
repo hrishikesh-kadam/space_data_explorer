@@ -9,7 +9,7 @@ import '../../../integration_test/home_route_test.dart';
 
 void main() {
   group('$HomeRoute Widget Test', () {
-    testWidgets('$HomeRoute', (WidgetTester tester) async {
+    testWidgets('Basic', (WidgetTester tester) async {
       await pumpHomeRoute(tester);
     });
 
