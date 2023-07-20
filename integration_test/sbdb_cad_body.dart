@@ -1,5 +1,6 @@
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
+// LABEL: eligible for hrk_nasa_apis_test
 SbdbCadBody getSbdbCadBodyCountZero() {
   final json = {
     'signature': {
