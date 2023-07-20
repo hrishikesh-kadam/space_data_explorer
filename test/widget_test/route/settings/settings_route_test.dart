@@ -26,8 +26,7 @@ void main() {
       await pumpSettingsRouteAsInitialLocation(tester);
     });
 
-    testWidgets('Navigate back from $SettingsRoute',
-        (WidgetTester tester) async {
+    testWidgets('Navigate back', (WidgetTester tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
       await tapBackButton(tester);
       expect(find.byType(SettingsScreen), findsNothing);

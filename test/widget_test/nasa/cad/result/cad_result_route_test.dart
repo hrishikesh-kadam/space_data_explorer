@@ -8,8 +8,7 @@ import '../../../../../integration_test/cad_result_route_helper.dart';
 
 void main() {
   group('$CadResultRoute Widget Test', () {
-    testWidgets('Navigate back from $CadResultRoute',
-        (WidgetTester tester) async {
+    testWidgets('Navigate back', (WidgetTester tester) async {
       await pumpCadResultRouteAsNormalLink(tester);
       await tapBackButton(tester);
       expect(find.byType(CadResultScreen), findsNothing);

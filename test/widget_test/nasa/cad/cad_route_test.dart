@@ -10,7 +10,7 @@ import '../../../../integration_test/cad_route_helper.dart';
 
 void main() {
   group('$CadRoute Widget Test', () {
-    testWidgets('Navigate $CadRoute to $CadResultRoute to $CadRoute',
+    testWidgets('Navigate to and from $CadResultRoute',
         (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       await tester.tap(find.byKey(CadScreen.searchButtonKey));
@@ -26,7 +26,7 @@ void main() {
       await pumpCadRouteAsInitialLocation(tester);
     });
 
-    testWidgets('Navigate back from $CadRoute', (WidgetTester tester) async {
+    testWidgets('Navigate back', (WidgetTester tester) async {
       await pumpCadRouteAsNormalLink(tester);
       await tapBackButton(tester);
       expect(find.byType(CadScreen), findsNothing);

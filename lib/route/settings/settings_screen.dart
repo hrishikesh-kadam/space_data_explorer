@@ -20,6 +20,8 @@ class SettingsScreen extends StatelessWidget {
 
   final AppLocalizations l10n;
   final _log = Logger('$appNamePascalCase.SettingsScreen');
+  static const Key languageTileKey = Key('settings_screen_language_tile');
+  static const Key languageDialogKey = Key('settings_screen_language_dialog');
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +83,8 @@ class SettingsScreen extends StatelessWidget {
       builder: (context, language) {
         final settingsBloc = context.read<SettingsBloc>();
         return RadioSettingsTile<Language>(
+          key: languageTileKey,
+          dialogKey: languageDialogKey,
           title: l10n.language,
           subTitle:
               language == Language.system ? l10n.system : language.displayName,

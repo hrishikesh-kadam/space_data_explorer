@@ -13,8 +13,7 @@ void main() {
       await pumpHomeRoute(tester);
     });
 
-    testWidgets('Navigate $HomeRoute to $NasaRoute to $HomeRoute',
-        (WidgetTester tester) async {
+    testWidgets('Navigate to and from $NasaRoute', (WidgetTester tester) async {
       await pumpHomeRoute(tester);
       await tester.tap(find.byKey(HomeScreen.nasaButtonKey));
       await tester.pumpAndSettle();

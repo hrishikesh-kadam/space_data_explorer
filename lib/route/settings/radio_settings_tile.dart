@@ -5,6 +5,7 @@ import 'radio_dialog.dart';
 class RadioSettingsTile<T> extends StatelessWidget {
   const RadioSettingsTile({
     super.key,
+    this.dialogKey,
     required this.title,
     this.subTitle,
     required this.values,
@@ -15,6 +16,7 @@ class RadioSettingsTile<T> extends StatelessWidget {
     this.afterShowDialog,
   });
 
+  final Key? dialogKey;
   final String title;
   final String? subTitle;
   final List<T> values;
@@ -35,6 +37,7 @@ class RadioSettingsTile<T> extends StatelessWidget {
           context: context,
           builder: (context) {
             return RadioDialog<T>(
+              key: dialogKey,
               title: title,
               values: values,
               valueTitles: valueTitles,

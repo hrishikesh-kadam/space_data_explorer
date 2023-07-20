@@ -10,6 +10,7 @@ import 'space_data_explorer_app_test.dart';
 Future<void> pumpSettingsRouteAsInitialLocation(WidgetTester tester) async {
   await pumpApp(tester, initialLocation: SettingsRoute.path);
   expect(find.byType(SettingsScreen), findsOneWidget);
+  expect(find.byKey(settingsButtonKey), findsNothing);
 }
 
 Future<void> pumpSettingsRouteAsNormalLink(WidgetTester tester) async {
@@ -17,6 +18,7 @@ Future<void> pumpSettingsRouteAsNormalLink(WidgetTester tester) async {
   await tapSettingsButton(tester);
   expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
   expect(find.byType(SettingsScreen), findsOneWidget);
+  expect(find.byKey(settingsButtonKey), findsNothing);
 }
 
 Future<void> tapSettingsButton(WidgetTester tester) async {

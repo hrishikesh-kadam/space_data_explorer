@@ -10,8 +10,7 @@ import '../../../integration_test/nasa_route_helper.dart';
 
 void main() {
   group('$NasaRoute Widget Test', () {
-    testWidgets('Navigate $NasaRoute to $CadRoute to $NasaRoute',
-        (WidgetTester tester) async {
+    testWidgets('Navigate to and from $CadRoute', (WidgetTester tester) async {
       await pumpNasaRouteAsInitialLocation(tester);
       await tester.tap(find.byKey(NasaScreen.cadButtonKey));
       await tester.pumpAndSettle();
@@ -26,7 +25,7 @@ void main() {
       await pumpNasaRouteAsInitialLocation(tester);
     });
 
-    testWidgets('Navigate back from $NasaRoute', (WidgetTester tester) async {
+    testWidgets('Navigate back', (WidgetTester tester) async {
       await pumpNasaRouteAsNormalLink(tester);
       await tapBackButton(tester);
       expect(find.byType(NasaScreen), findsNothing);

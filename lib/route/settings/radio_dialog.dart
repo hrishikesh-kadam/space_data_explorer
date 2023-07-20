@@ -27,6 +27,7 @@ class RadioDialog<T> extends StatelessWidget {
           itemCount: values.length,
           itemBuilder: (context, index) {
             return RadioListTile<T>(
+              key: Key(valueTitles[index]),
               value: values[index],
               title: Text(valueTitles[index]),
               groupValue: groupValue,
