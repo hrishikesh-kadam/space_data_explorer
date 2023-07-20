@@ -11,10 +11,10 @@ import 'package:space_data_explorer/nasa/nasa_route.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
 import 'app_bar_back_button_test.dart';
-import 'cad_route_test.dart';
+import 'cad_route_helper.dart';
 import 'config.dart';
 import 'globals.dart';
-import 'nasa_route_test.dart';
+import 'nasa_route_helper.dart';
 import 'space_data_explorer_app_test.dart';
 import 'test_helper.dart';
 
