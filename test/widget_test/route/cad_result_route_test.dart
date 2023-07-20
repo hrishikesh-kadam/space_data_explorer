@@ -14,7 +14,7 @@ void main() {
       await tapBackButton(tester);
       expect(find.byType(CadResultScreen), findsNothing);
       expect(find.byType(CadScreen), findsOneWidget);
-    }, skip: true);
+    });
 
     testWidgets('$CadResultRoute', (WidgetTester tester) async {
       await pumpCadResultRouteAsInitialLocation(tester);
