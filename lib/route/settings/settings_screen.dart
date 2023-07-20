@@ -32,9 +32,8 @@ class SettingsScreen extends StatelessWidget {
         listenWhen: (previous, current) =>
             previous.systemLocales != current.systemLocales,
         listener: (context, state) {
-          _log.debug('systemLocales listener');
           final isAnyDialogOpen = state.isAnyDialogShown;
-          _log.debug('listener -> isAnyDialogOpen = $isAnyDialogOpen');
+          _log.debug('systemLocales listener -> isAnyDialogOpen = $isAnyDialogOpen');
           if (isAnyDialogOpen != null && isAnyDialogOpen) {
             Navigator.pop(context);
           }
@@ -102,6 +101,12 @@ class SettingsScreen extends StatelessWidget {
               isAnyDialogShown: true,
             ));
           },
+          afterShowDialog: () {
+            _log.debug('selectedLanguage -> afterShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
+              isAnyDialogShown: false,
+            ));
+          },
         );
       },
     );
@@ -145,6 +150,12 @@ class SettingsScreen extends StatelessWidget {
             _log.debug('getDateFormatTile -> beforeShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: true,
+            ));
+          },
+          afterShowDialog: () {
+            _log.debug('getDateFormatTile -> afterShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
+              isAnyDialogShown: false,
             ));
           },
         );
