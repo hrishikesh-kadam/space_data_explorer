@@ -33,7 +33,8 @@ class SettingsScreen extends StatelessWidget {
             previous.systemLocales != current.systemLocales,
         listener: (context, state) {
           final isAnyDialogOpen = state.isAnyDialogShown;
-          _log.debug('systemLocales listener -> isAnyDialogOpen = $isAnyDialogOpen');
+          _log.debug(
+              'systemLocales listener -> isAnyDialogOpen = $isAnyDialogOpen');
           if (isAnyDialogOpen != null && isAnyDialogOpen) {
             Navigator.pop(context);
           }

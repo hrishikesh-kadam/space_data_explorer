@@ -22,11 +22,14 @@ class CadScreen extends StatelessWidget {
   final AppLocalizations l10n;
   static const Key searchButtonKey = Key('cad_screen_search_button');
   final RouteExtraMap? routeExtraMap;
+  // To inject during deep-link, see pumpCadRouteAsInitialLocation()
+  @visibleForTesting
+  static CadBloc? cadBloc;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CadBloc>(
-      create: (_) => routeExtraMap?['$CadBloc'] ?? CadBloc(),
+      create: (_) => cadBloc ?? routeExtraMap?['$CadBloc'] ?? CadBloc(),
       child: Scaffold(
         appBar: getAppBar(
           context: context,

@@ -12,6 +12,7 @@ import 'sbdb_cad_api.dart';
 import 'space_data_explorer_app_test.dart';
 
 Future<void> pumpCadRouteAsInitialLocation(WidgetTester tester) async {
+  CadScreen.cadBloc = getCadBloc();
   await pumpApp(tester, initialLocation: CadRoute.path);
   expect(find.byType(CadScreen), findsOneWidget);
 }
@@ -19,9 +20,13 @@ Future<void> pumpCadRouteAsInitialLocation(WidgetTester tester) async {
 Future<void> pumpCadRouteAsNormalLink(WidgetTester tester) async {
   await pumpNasaRouteAsNormalLink(tester);
   final RouteExtraMap routeExtraMap = getRouteExtra();
-  routeExtraMap['$CadBloc'] = CadBloc(sbdbCadApi: getMockedSbdbCadApi());
+  routeExtraMap['$CadBloc'] = getCadBloc();
   CadRoute($extra: routeExtraMap).go(navigatorKey.currentContext!);
   await tester.pumpAndSettle();
   expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
   expect(find.byType(CadScreen), findsOneWidget);
+}
+
+CadBloc getCadBloc() {
+  return CadBloc(sbdbCadApi: getMockedSbdbCadApi());
 }
