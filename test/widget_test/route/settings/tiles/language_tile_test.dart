@@ -30,6 +30,7 @@ void main() {
       await tester.tap(find.byKey(Key(language.displayName!)));
       await tester.pumpAndSettle();
       expect(dialogFinder, findsNothing);
+      // LABEL: eligible-hrk_flutter_test_batteries subTitleTextFinder()
       final subTitleFinder = find.descendant(
         of: tileFinder,
         matching: find.text(language.displayName!),
