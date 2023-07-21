@@ -58,7 +58,7 @@ flutter:
 import_sorter:
   comments: false
   ignored_files:
-    - '.*.mocks.dart'
-    - integration_test/hydrated_bloc.dart
-    - integration_test/dio_response.dart
-    - integration_test/sbdb_cad_api.dart
+    - '.*\.mocks\.dart'
+    - integration_test[/\\]hydrated_bloc\.dart
+    - integration_test[/\\]dio_response\.dart
+    - integration_test[/\\]sbdb_cad_api\.dart
