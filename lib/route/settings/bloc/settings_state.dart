@@ -8,7 +8,7 @@ import '../../../language/language.dart';
 part 'settings_state.freezed.dart';
 part 'settings_state.g.dart';
 
-@unfreezed
+@freezed
 class SettingsState with _$SettingsState {
   factory SettingsState({
     required final Language language,

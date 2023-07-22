@@ -64,7 +64,9 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
     SettingsDialogEvent event,
     Emitter<SettingsState> emit,
   ) {
-    state.isAnyDialogShown = event.isAnyDialogShown;
+    emit(state.copyWith(
+      isAnyDialogShown: event.isAnyDialogShown,
+    ));
   }
 
   void _onSettingsSystemLocalesChanged(

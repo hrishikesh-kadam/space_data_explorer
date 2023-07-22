@@ -23,11 +23,8 @@ mixin _$SettingsState {
   Language get language => throw _privateConstructorUsedError;
   @LocaleListJsonConverter()
   List<Locale>? get systemLocales => throw _privateConstructorUsedError;
-  @LocaleListJsonConverter()
-  set systemLocales(List<Locale>? value) => throw _privateConstructorUsedError;
   String get dateFormatPattern => throw _privateConstructorUsedError;
   bool? get isAnyDialogShown => throw _privateConstructorUsedError;
-  set isAnyDialogShown(bool? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -124,7 +121,7 @@ class __$$_SettingsStateCopyWithImpl<$Res>
           : language // ignore: cast_nullable_to_non_nullable
               as Language,
       systemLocales: freezed == systemLocales
-          ? _value.systemLocales
+          ? _value._systemLocales
           : systemLocales // ignore: cast_nullable_to_non_nullable
               as List<Locale>?,
       dateFormatPattern: null == dateFormatPattern
@@ -144,27 +141,60 @@ class __$$_SettingsStateCopyWithImpl<$Res>
 class _$_SettingsState implements _SettingsState {
   _$_SettingsState(
       {required this.language,
-      @LocaleListJsonConverter() this.systemLocales,
+      @LocaleListJsonConverter() final List<Locale>? systemLocales,
       required this.dateFormatPattern,
-      this.isAnyDialogShown});
+      this.isAnyDialogShown})
+      : _systemLocales = systemLocales;
 
   factory _$_SettingsState.fromJson(Map<String, dynamic> json) =>
       _$$_SettingsStateFromJson(json);
 
   @override
   final Language language;
+  final List<Locale>? _systemLocales;
   @override
   @LocaleListJsonConverter()
-  List<Locale>? systemLocales;
+  List<Locale>? get systemLocales {
+    final value = _systemLocales;
+    if (value == null) return null;
+    if (_systemLocales is EqualUnmodifiableListView) return _systemLocales;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final String dateFormatPattern;
   @override
-  bool? isAnyDialogShown;
+  final bool? isAnyDialogShown;
 
   @override
   String toString() {
     return 'SettingsState(language: $language, systemLocales: $systemLocales, dateFormatPattern: $dateFormatPattern, isAnyDialogShown: $isAnyDialogShown)';
   }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SettingsState &&
+            (identical(other.language, language) ||
+                other.language == language) &&
+            const DeepCollectionEquality()
+                .equals(other._systemLocales, _systemLocales) &&
+            (identical(other.dateFormatPattern, dateFormatPattern) ||
+                other.dateFormatPattern == dateFormatPattern) &&
+            (identical(other.isAnyDialogShown, isAnyDialogShown) ||
+                other.isAnyDialogShown == isAnyDialogShown));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      language,
+      const DeepCollectionEquality().hash(_systemLocales),
+      dateFormatPattern,
+      isAnyDialogShown);
 
   @JsonKey(ignore: true)
   @override
@@ -183,9 +213,9 @@ class _$_SettingsState implements _SettingsState {
 abstract class _SettingsState implements SettingsState {
   factory _SettingsState(
       {required final Language language,
-      @LocaleListJsonConverter() List<Locale>? systemLocales,
+      @LocaleListJsonConverter() final List<Locale>? systemLocales,
       required final String dateFormatPattern,
-      bool? isAnyDialogShown}) = _$_SettingsState;
+      final bool? isAnyDialogShown}) = _$_SettingsState;
 
   factory _SettingsState.fromJson(Map<String, dynamic> json) =
       _$_SettingsState.fromJson;
@@ -195,13 +225,10 @@ abstract class _SettingsState implements SettingsState {
   @override
   @LocaleListJsonConverter()
   List<Locale>? get systemLocales;
-  @LocaleListJsonConverter()
-  set systemLocales(List<Locale>? value);
   @override
   String get dateFormatPattern;
   @override
   bool? get isAnyDialogShown;
-  set isAnyDialogShown(bool? value);
   @override
   @JsonKey(ignore: true)
   _$$_SettingsStateCopyWith<_$_SettingsState> get copyWith =>
