@@ -6,8 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:space_data_explorer/language/language.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
-import '../../../../../integration_test/globals.dart';
-import '../../../../../integration_test/settings_route_helper.dart';
+import '../../../../globals.dart';
+import '../../../../route/settings/settings_route.dart';
 
 void main() {
   group('$SettingsScreen ${l10n.language} Tile Widget Test', () {

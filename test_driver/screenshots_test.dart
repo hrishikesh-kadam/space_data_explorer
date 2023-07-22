@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:integration_test/integration_test_driver_extended.dart';
 
-import '../integration_test/globals.dart';
+import '../test/globals.dart';
 
 // TODO(hrishikesh-kadam): onScreenshot() not working
 Future<void> main() async {

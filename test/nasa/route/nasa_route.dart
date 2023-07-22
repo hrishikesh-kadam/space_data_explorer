@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:space_data_explorer/nasa/nasa_route.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
-import 'home_route_helper.dart';
-import 'space_data_explorer_app_test.dart';
+import '../../route/home/home_route.dart';
+import '../../space_data_explorer_app.dart';
 
 Future<void> pumpNasaRouteAsInitialLocation(WidgetTester tester) async {
   await pumpApp(tester, initialLocation: NasaRoute.path);

@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:integration_test/integration_test.dart';
 
-import 'globals.dart';
+import '../globals.dart';
 
 void resetNavigationHistoryState() {
   final html.History history = html.window.history;

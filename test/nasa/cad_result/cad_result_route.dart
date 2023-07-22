@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/cad/result/cad_result_route.dart';
 import 'package:space_data_explorer/nasa/cad/result/cad_result_screen.dart';
-import 'cad_route_helper.dart';
-import 'space_data_explorer_app_test.dart';
+import '../../space_data_explorer_app.dart';
+import '../cad/cad_route.dart';
 
 Future<void> pumpCadResultRouteAsInitialLocation(WidgetTester tester) async {
   await pumpApp(tester, initialLocation: CadResultRoute.path);

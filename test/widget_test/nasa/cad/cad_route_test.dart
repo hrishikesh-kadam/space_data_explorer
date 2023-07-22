@@ -6,7 +6,7 @@ import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/cad/result/cad_result_route.dart';
 import 'package:space_data_explorer/nasa/cad/result/cad_result_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
-import '../../../../integration_test/cad_route_helper.dart';
+import '../../../nasa/cad/cad_route.dart';
 
 void main() {
   group('$CadRoute Widget Test', () {

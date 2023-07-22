@@ -4,10 +4,8 @@ import 'package:space_data_explorer/route/home/home_screen.dart';
 import 'package:space_data_explorer/route/settings/settings_route.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import 'package:space_data_explorer/widgets/app_bar.dart';
-import 'home_route_helper.dart';
-import 'space_data_explorer_app_test.dart';
-
-// TODO(hrishikesh-kadam): Try moving this to test folder
+import '../../space_data_explorer_app.dart';
+import '../home/home_route.dart';
 
 Future<void> pumpSettingsRouteAsInitialLocation(WidgetTester tester) async {
   await pumpApp(tester, initialLocation: SettingsRoute.path);

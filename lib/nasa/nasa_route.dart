@@ -8,6 +8,8 @@ import 'nasa_screen.dart' deferred as nasa_screen;
 
 part 'nasa_route.g.dart';
 
+// TODO(hrishikesh-kadam): Move to nasa/route folder
+
 @TypedGoRoute<NasaRoute>(
   path: NasaRoute.path,
   name: NasaRoute.displayName,

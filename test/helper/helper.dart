@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import 'test_helper_non_web.dart' if (dart.library.html) 'test_helper_web.dart'
+import 'helper_non_web.dart' if (dart.library.html) 'helper_web.dart'
     as platform;
 
 void resetNavigationHistoryState() {

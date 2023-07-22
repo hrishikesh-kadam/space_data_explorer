@@ -5,7 +5,8 @@ import 'package:space_data_explorer/nasa/nasa_route.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_route.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
-import '../../../../integration_test/home_route_helper.dart';
+
+import '../../../route/home/home_route.dart';
 
 void main() {
   group('$HomeRoute Widget Test', () {

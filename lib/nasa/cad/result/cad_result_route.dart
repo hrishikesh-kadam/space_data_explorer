@@ -12,6 +12,8 @@ import 'cad_result_screen.dart' deferred as cad_result_screen;
 
 part 'cad_result_route.g.dart';
 
+// TODO(hrishikesh-kadam): Move to nasa/cad_result folder
+
 @TypedGoRoute<CadResultRoute>(
   path: CadResultRoute.path,
   name: CadResultRoute.displayName,

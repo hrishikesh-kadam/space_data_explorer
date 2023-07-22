@@ -4,7 +4,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:space_data_explorer/main.dart' as app;
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
-import 'test_helper.dart';
+import '../test/helper/helper.dart';
 
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();

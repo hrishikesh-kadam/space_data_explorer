@@ -2,7 +2,7 @@ import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'dio_response.dart';
+import '../../config/dio_response.dart';
 // LABEL: eligible-hrk_nasa_apis_test
 @GenerateNiceMocks([MockSpec<SbdbCadApi>()])
 import 'sbdb_cad_api.mocks.dart';

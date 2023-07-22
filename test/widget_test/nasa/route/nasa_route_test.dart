@@ -6,7 +6,7 @@ import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_route.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
-import '../../../integration_test/nasa_route_helper.dart';
+import '../../../nasa/route/nasa_route.dart';
 
 void main() {
   group('$NasaRoute Widget Test', () {
