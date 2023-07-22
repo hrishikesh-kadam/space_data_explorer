@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:space_data_explorer/space_data_explorer.dart';
 
+import 'package:space_data_explorer/space_data_explorer.dart';
 import 'config/config.dart';
 import 'globals.dart';
 

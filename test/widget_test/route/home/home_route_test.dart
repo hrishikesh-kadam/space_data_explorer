@@ -5,7 +5,6 @@ import 'package:space_data_explorer/nasa/nasa_route.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_route.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
-
 import '../../../src/route/home/home_route.dart';
 
 void main() {
