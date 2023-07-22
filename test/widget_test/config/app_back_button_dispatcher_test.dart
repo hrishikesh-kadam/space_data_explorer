@@ -9,12 +9,12 @@ import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/nasa_route.dart';
 import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
-import '../../config/config.dart';
-import '../../globals.dart';
-import '../../helper/helper.dart';
-import '../../nasa/cad/cad_route.dart';
-import '../../nasa/route/nasa_route.dart';
-import '../../space_data_explorer_app.dart';
+import '../../src/config/config.dart';
+import '../../src/globals.dart';
+import '../../src/helper/helper.dart';
+import '../../src/nasa/cad/cad_route.dart';
+import '../../src/nasa/route/nasa_route.dart';
+import '../../src/space_data_explorer_app.dart';
 import 'app_bar_back_button_test.dart';
 
 void main() {

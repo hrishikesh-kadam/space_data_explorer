@@ -6,8 +6,8 @@ import 'package:space_data_explorer/nasa/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
 import 'package:space_data_explorer/route/settings/settings_route.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
-import '../../../nasa/route/nasa_route.dart';
-import '../../../route/settings/settings_route.dart';
+import '../../../src/nasa/route/nasa_route.dart';
+import '../../../src/route/settings/settings_route.dart';
 
 void main() {
   group('$SettingsRoute Widget Test', () {
