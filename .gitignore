@@ -44,3 +44,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# See test/src/space_data_explorer_app.dart
+/integration_test/test
