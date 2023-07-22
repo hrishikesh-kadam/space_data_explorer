@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../globals.dart';
-import '../widgets/app_bar.dart';
-import 'cad/cad_route.dart';
+import '../../widgets/app_bar.dart';
+import '../cad/cad_route.dart';
 import 'nasa_route.dart';
 
 class NasaScreen extends StatelessWidget {

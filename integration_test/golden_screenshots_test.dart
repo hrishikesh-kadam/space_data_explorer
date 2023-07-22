@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/main.dart' as app;
-import 'package:space_data_explorer/nasa/nasa_screen.dart';
+import 'package:space_data_explorer/nasa/route/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
 import '../test/src/helper/helper.dart';
 

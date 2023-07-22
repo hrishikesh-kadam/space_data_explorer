@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../globals.dart';
-import '../../nasa/nasa_route.dart';
+import '../../nasa/route/nasa_route.dart';
 import '../../widgets/app_bar.dart';
 import 'home_route.dart';
 

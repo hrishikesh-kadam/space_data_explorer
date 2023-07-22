@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../deferred_loading/deferred_loading.dart';
 import '../../typedef/typedef.dart';
-import '../nasa_route.dart';
+import '../route/nasa_route.dart';
 import 'cad_screen.dart' deferred as cad_screen;
 
 part 'cad_route.g.dart';

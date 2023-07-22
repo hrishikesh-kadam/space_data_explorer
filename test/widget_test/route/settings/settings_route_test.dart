@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
-import 'package:space_data_explorer/nasa/nasa_route.dart';
-import 'package:space_data_explorer/nasa/nasa_screen.dart';
+import 'package:space_data_explorer/nasa/route/nasa_route.dart';
+import 'package:space_data_explorer/nasa/route/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
 import 'package:space_data_explorer/route/settings/settings_route.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';

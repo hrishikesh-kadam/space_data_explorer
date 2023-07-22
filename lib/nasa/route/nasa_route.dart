@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
-import '../deferred_loading/deferred_loading.dart';
-import '../route/home/home_route.dart';
+import '../../deferred_loading/deferred_loading.dart';
+import '../../route/home/home_route.dart';
 import 'nasa_screen.dart' deferred as nasa_screen;
 
 part 'nasa_route.g.dart';
-
-// TODO(hrishikesh-kadam): Move to nasa/route folder
 
 @TypedGoRoute<NasaRoute>(
   path: NasaRoute.path,
