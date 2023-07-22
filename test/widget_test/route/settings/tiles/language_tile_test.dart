@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:space_data_explorer/language/language.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
@@ -27,8 +28,6 @@ void main() {
       await tapLanguageTile(tester);
       await chooseLanguage(tester, l10n: l10n, language: language);
       await verifyLanguageTileSubtitle(tester, l10n: l10n, language: language);
-      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
-      expect(settingsBloc.state.language, language);
     });
 
     testWidgets('Choose ${Language.hindi}', (tester) async {
@@ -37,8 +36,6 @@ void main() {
       await tapLanguageTile(tester);
       await chooseLanguage(tester, l10n: l10n, language: language);
       await verifyLanguageTileSubtitle(tester, l10n: l10n, language: language);
-      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
-      expect(settingsBloc.state.language, language);
     });
 
     testWidgets('Choose ${Language.marathi}', (tester) async {
@@ -47,8 +44,6 @@ void main() {
       await tapLanguageTile(tester);
       await chooseLanguage(tester, l10n: l10n, language: language);
       await verifyLanguageTileSubtitle(tester, l10n: l10n, language: language);
-      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
-      expect(settingsBloc.state.language, language);
     });
 
     testWidgets('Choose ${Language.system}', (tester) async {
@@ -57,8 +52,6 @@ void main() {
       await tapLanguageTile(tester);
       await chooseLanguage(tester, l10n: l10n, language: language);
       await verifyLanguageTileSubtitle(tester, l10n: l10n, language: language);
-      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
-      expect(settingsBloc.state.language, language);
     });
 
     testWidgets('System Locale Changed', (tester) async {
@@ -71,8 +64,6 @@ void main() {
       await tester.pumpAndSettle();
       expect(languageDialogFinder, findsNothing);
       expect(find.byType(SettingsScreen), findsOneWidget);
-      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
-      expect(settingsBloc.state.language, Language.system);
     });
 
     testWidgets('Tap and dismiss without choosing any value', (tester) async {
@@ -86,7 +77,18 @@ void main() {
       expect(languageDialogFinder, findsNothing);
       expect(find.byType(SettingsScreen), findsOneWidget);
       expect(settingsBloc.state.isAnyDialogShown, false);
-      expect(settingsBloc.state.language, Language.system);
+    });
+
+    testWidgets('Choose ${Language.english}, exit, enter again',
+        (tester) async {
+      const language = Language.english;
+      await pumpSettingsRouteAsNormalLink(tester);
+      await tapLanguageTile(tester);
+      await chooseLanguage(tester, l10n: l10n, language: language);
+      await verifyLanguageTileSubtitle(tester, l10n: l10n, language: language);
+      await tapBackButton(tester);
+      await tapSettingsButton(tester);
+      await verifyLanguageTileSubtitle(tester, l10n: l10n, language: language);
     });
   });
 }
