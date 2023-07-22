@@ -41,3 +41,10 @@ flutter build apk \
 ## README Notes
 
 - Add `git clone --config core.autocrlf=false` for Windows
+
+## Test Notes
+
+- [How to write effective Flutter and Dart tests | Flutter Forward][]
+
+
+[How to write effective Flutter and Dart tests | Flutter Forward]: https://www.youtube.com/watch?v=bHLrSliaL1Q&list=PLjxrf2q8roU3LvrdR8Hv_phLrTj0xmjnD&index=25
