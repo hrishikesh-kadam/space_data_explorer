@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-# $1 AVD_NAME like Pixel_6_API_33
+# $1 AVD_NAME like Pixel_6_API_34
 
 set -e -o pipefail
 
-AVD_NAME=${1:-"Pixel_6_API_33"}
+AVD_NAME=${1:-"Pixel_6_API_34"}
 
 if [[ $(uname -s) =~ ^"MINGW" ]]; then
   output=$(tasklist \
