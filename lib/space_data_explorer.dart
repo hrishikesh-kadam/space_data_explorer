@@ -37,7 +37,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SettingsBloc>(
-      create: (context) => SettingsBloc.getInitialSettings(),
+      create: (_) => SettingsBloc.getInitialSettings(),
       child: BlocSelector<SettingsBloc, SettingsState, Language>(
         selector: (state) => state.language,
         builder: (context, language) {

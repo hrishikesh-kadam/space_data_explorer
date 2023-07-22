@@ -59,5 +59,14 @@ void main() {
       final Locale? actualLocale = converter.fromJson(actualJson);
       expect(actualLocale, locale);
     });
+
+    test('dynamic', () {
+      const dynamic json = {
+        'languageCode': 'en',
+        'scriptCode': null,
+        'countryCode': null,
+      };
+      converter.fromJson(json);
+    });
   });
 }

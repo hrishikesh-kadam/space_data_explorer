@@ -55,5 +55,16 @@ void main() {
       final List<Locale>? actualLocales = converter.fromJson(actualJson);
       expect(actualLocales, locales);
     });
+
+    test('List<dynamic>', () {
+      const List<dynamic> json = [
+        {
+          'languageCode': 'en',
+          'scriptCode': null,
+          'countryCode': null,
+        }
+      ];
+      converter.fromJson(json as List<Map<String, dynamic>>);
+    });
   });
 }

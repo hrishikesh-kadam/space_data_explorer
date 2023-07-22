@@ -2,60 +2,65 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "flutter run -d chrome",
+      "name": "Flutter: Attach to Device",
+      "type": "dart",
+      "request": "attach"
+    },
+    {
+      "name": "flutter run --flavor dev -d chrome",
       "deviceId": "chrome",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "flutter run -d chrome --profile",
+      "name": "flutter run --flavor dev -d chrome --profile",
       "deviceId": "chrome",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "flutter run -d chrome --release",
+      "name": "flutter run --flavor dev -d chrome --release",
       "deviceId": "chrome",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"
     },
     {
-      "name": "flutter run -d linux",
+      "name": "flutter run --flavor dev -d linux",
       "deviceId": "linux",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "flutter run -d linux --profile",
+      "name": "flutter run --flavor dev -d linux --profile",
       "deviceId": "linux",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "flutter run -d linux --release",
+      "name": "flutter run --flavor dev -d linux --release",
       "deviceId": "linux",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"
     },
     {
-      "name": "flutter run -d emulator-5554",
+      "name": "flutter run --flavor dev -d emulator-5554",
       "deviceId": "emulator-5554",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "flutter run -d emulator-5554 --profile",
+      "name": "flutter run --flavor dev -d emulator-5554 --profile",
       "deviceId": "emulator-5554",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "flutter run -d emulator-5554 --release",
+      "name": "flutter run --flavor dev -d emulator-5554 --release",
       "deviceId": "emulator-5554",
       "request": "launch",
       "type": "dart",
