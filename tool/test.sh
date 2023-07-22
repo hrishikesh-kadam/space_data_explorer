@@ -4,9 +4,9 @@ set -ex -o pipefail
 
 rm -rf coverage
 
-# flutter test test/unit_test --coverage \
-#   --coverage-path coverage/unit_test_lcov.info
-# lcov --list coverage/unit_test_lcov.info
+flutter test test/unit_test --coverage \
+  --coverage-path coverage/unit_test_lcov.info
+lcov --list coverage/unit_test_lcov.info
 
 flutter test test/widget_test --coverage \
   --coverage-path coverage/widget_test_lcov.info
