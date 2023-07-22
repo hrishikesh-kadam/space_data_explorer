@@ -3,8 +3,8 @@ import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
-import 'package:space_data_explorer/nasa/cad/result/cad_result_route.dart';
-import 'package:space_data_explorer/nasa/cad/result/cad_result_screen.dart';
+import 'package:space_data_explorer/nasa/cad_result/cad_result_route.dart';
+import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
 import 'package:space_data_explorer/nasa/route/nasa_screen.dart';
 import '../../../src/nasa/cad/cad_route.dart';
 

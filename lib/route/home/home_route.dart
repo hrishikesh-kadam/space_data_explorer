@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../nasa/cad/cad_route.dart';
-import '../../nasa/cad/result/cad_result_route.dart';
+import '../../nasa/cad_result/cad_result_route.dart';
 import '../../nasa/route/nasa_route.dart';
 import '../settings/settings_route.dart';
 import 'home_screen.dart';

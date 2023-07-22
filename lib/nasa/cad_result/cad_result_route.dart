@@ -7,12 +7,10 @@ import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import '../../../deferred_loading/deferred_loading.dart';
 import '../../../typedef/typedef.dart';
-import '../cad_route.dart';
+import '../cad/cad_route.dart';
 import 'cad_result_screen.dart' deferred as cad_result_screen;
 
 part 'cad_result_route.g.dart';
-
-// TODO(hrishikesh-kadam): Move to nasa/cad_result folder
 
 @TypedGoRoute<CadResultRoute>(
   path: CadResultRoute.path,

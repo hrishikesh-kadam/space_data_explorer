@@ -8,9 +8,9 @@ import '../../globals.dart';
 import '../../typedef/typedef.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/date_filter_widget.dart';
+import '../cad_result/cad_result_route.dart';
 import 'bloc/cad_bloc.dart';
 import 'cad_route.dart';
-import 'result/cad_result_route.dart';
 
 class CadScreen extends StatelessWidget {
   const CadScreen({
