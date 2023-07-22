@@ -79,7 +79,7 @@ void main() {
       expect(settingsBloc.state.isAnyDialogShown, false);
     });
 
-    testWidgets('Choose ${Language.english}, exit, enter again',
+    testWidgets('Choose ${Language.english}, exit screen, enter again',
         (tester) async {
       const language = Language.english;
       await pumpSettingsRouteAsNormalLink(tester);
@@ -90,6 +90,21 @@ void main() {
       await tapSettingsButton(tester);
       await verifyLanguageTileSubtitle(tester, l10n: l10n, language: language);
     });
+
+    testWidgets('Choose ${Language.english}, exit app, enter again',
+        (tester) async {
+      const language = Language.english;
+      await pumpSettingsRouteAsNormalLink(tester);
+      await tapLanguageTile(tester);
+      await chooseLanguage(tester, l10n: l10n, language: language);
+      await verifyLanguageTileSubtitle(tester, l10n: l10n, language: language);
+      await tapBackButton(tester);
+      await simulateAndroidBackButton(tester);
+      await tester.pumpAndSettle();
+      // TODO(hrishikesh-kadam): FInd some way to close and reopen the app
+      // await pumpSettingsRouteAsNormalLink(tester);
+      await verifyLanguageTileSubtitle(tester, l10n: l10n, language: language);
+    }, skip: true);
   });
 }
 

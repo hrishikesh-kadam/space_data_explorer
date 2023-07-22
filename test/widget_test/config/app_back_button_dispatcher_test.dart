@@ -40,6 +40,8 @@ void appBackButtonDispatcherTest() {
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsOneWidget);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
+      // TODO(hrishikesh-kadam): Add tester.pumpAndSettle() to simulateAndroidBackButton()
+      // LABEL: hrk_flutter_test_batteries
       await simulateAndroidBackButton(tester);
       await tester.pumpAndSettle();
       expect(find.byType(CadScreen), findsNothing);
