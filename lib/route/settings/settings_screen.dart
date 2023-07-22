@@ -66,6 +66,16 @@ class SettingsScreen extends StatelessWidget {
     ];
   }
 
+  static String getLanguageValueTitle({
+    required AppLocalizations l10n,
+    required Language language,
+  }) {
+    return switch (language) {
+      Language.system => l10n.system,
+      _ => language.displayName!,
+    };
+  }
+
   Widget getLanguageTile() {
     const values = <Language>[
       Language.system,
@@ -73,10 +83,9 @@ class SettingsScreen extends StatelessWidget {
       Language.hindi,
       Language.marathi,
     ];
-    List<String> valueTitles = [
-      l10n.system,
-      ...values.sublist(1).map((e) => e.displayName!).toList(),
-    ];
+    List<String> valueTitles = values
+        .map((e) => getLanguageValueTitle(l10n: l10n, language: e))
+        .toList();
 
     return BlocSelector<SettingsBloc, SettingsState, Language>(
       selector: (state) => state.language,
@@ -86,8 +95,7 @@ class SettingsScreen extends StatelessWidget {
           key: languageTileKey,
           dialogKey: languageDialogKey,
           title: l10n.language,
-          subTitle:
-              language == Language.system ? l10n.system : language.displayName,
+          subTitle: getLanguageValueTitle(l10n: l10n, language: language),
           values: values,
           valueTitles: valueTitles,
           groupValue: language,
