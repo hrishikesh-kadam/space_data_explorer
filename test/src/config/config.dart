@@ -6,5 +6,6 @@ import 'hydrated_bloc.dart';
 void configureApp() {
   configureUrlStrategy();
   configureHrkLogging();
+  configureBloc();
   mockHydratedBloc();
 }

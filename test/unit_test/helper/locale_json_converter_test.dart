@@ -2,36 +2,34 @@ import 'dart:ui';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_batteries/hrk_batteries.dart';
+
 import 'package:space_data_explorer/helper/helper.dart';
 
 void main() {
   group('$LocaleJsonConverter Unit Test', () {
     const converter = LocaleJsonConverter();
 
+    void testConverter(Locale? locale, JsonMap? json) {
+      final JsonMap? convertedJson = converter.toJson(locale);
+      expect(convertedJson, json);
+      final Locale? roundTripLocale = converter.fromJson(convertedJson);
+      expect(roundTripLocale, locale);
+      final Locale? convertedLocale = converter.fromJson(json);
+      expect(convertedLocale, locale);
+      final JsonMap? roundTripJson = converter.toJson(convertedLocale);
+      expect(roundTripJson, json);
+    }
+
     test('en', () {
       const locale = Locale('en');
-      const JsonMap json = {
-        'languageCode': 'en',
-        'scriptCode': null,
-        'countryCode': null,
-      };
-      final JsonMap? actualJson = converter.toJson(locale);
-      expect(actualJson, json);
-      final Locale? actualLocale = converter.fromJson(actualJson);
-      expect(actualLocale, locale);
+      const JsonMap json = {'languageCode': 'en'};
+      testConverter(locale, json);
     });
 
     test('mr_IN', () {
       const locale = Locale('mr', 'IN');
-      const JsonMap json = {
-        'languageCode': 'mr',
-        'scriptCode': null,
-        'countryCode': 'IN',
-      };
-      final JsonMap? actualJson = converter.toJson(locale);
-      expect(actualJson, json);
-      final Locale? actualLocale = converter.fromJson(actualJson);
-      expect(actualLocale, locale);
+      const JsonMap json = {'languageCode': 'mr', 'countryCode': 'IN'};
+      testConverter(locale, json);
     });
 
     test('hi-Deva-IN', () {
@@ -45,28 +43,27 @@ void main() {
         'scriptCode': 'Deva',
         'countryCode': 'IN',
       };
-      final JsonMap? actualJson = converter.toJson(locale);
-      expect(actualJson, json);
-      final Locale? actualLocale = converter.fromJson(actualJson);
-      expect(actualLocale, locale);
+      testConverter(locale, json);
     });
 
     test('null', () {
       const Locale? locale = null;
-      const JsonMap? localeJson = null;
-      final JsonMap? actualJson = converter.toJson(locale);
-      expect(actualJson, localeJson);
-      final Locale? actualLocale = converter.fromJson(actualJson);
-      expect(actualLocale, locale);
+      const JsonMap? json = null;
+      testConverter(locale, json);
     });
 
     test('dynamic', () {
+      const locale = Locale.fromSubtags(
+        languageCode: 'hi',
+        scriptCode: 'Deva',
+        countryCode: 'IN',
+      );
       const dynamic json = {
-        'languageCode': 'en',
-        'scriptCode': null,
-        'countryCode': null,
+        'languageCode': 'hi',
+        'scriptCode': 'Deva',
+        'countryCode': 'IN',
       };
-      converter.fromJson(json);
+      testConverter(locale, json);
     });
   });
 }

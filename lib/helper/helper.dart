@@ -29,21 +29,25 @@ class LocaleJsonConverter implements JsonConverter<Locale?, JsonMap?> {
     if (object == null) {
       return null;
     } else {
-      return {
-        'languageCode': object.languageCode,
-        'scriptCode': object.scriptCode,
-        'countryCode': object.countryCode,
-      };
+      JsonMap json = {};
+      json['languageCode'] = object.languageCode;
+      if (object.scriptCode != null) {
+        json['scriptCode'] = object.scriptCode;
+      }
+      if (object.countryCode != null) {
+        json['countryCode'] = object.countryCode;
+      }
+      return json;
     }
   }
 }
 
 class LocaleListJsonConverter
-    implements JsonConverter<List<Locale>?, List<JsonMap>?> {
+    implements JsonConverter<List<Locale>?, List<dynamic>?> {
   const LocaleListJsonConverter();
 
   @override
-  List<Locale>? fromJson(List<JsonMap>? jsonList) {
+  List<Locale>? fromJson(List<dynamic>? jsonList) {
     if (jsonList == null || jsonList.isEmpty) {
       return null;
     } else {

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
+
 import 'package:space_data_explorer/language/language.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
-
 import '../../../../src/globals.dart';
 import '../../../../src/route/settings/settings_route.dart';
 

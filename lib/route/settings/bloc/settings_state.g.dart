@@ -14,7 +14,7 @@ _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
     _$_SettingsState(
       language: $enumDecode(_$LanguageEnumMap, json['language']),
       systemLocales: const LocaleListJsonConverter()
-          .fromJson(json['systemLocales'] as List<Map<String, dynamic>>?),
+          .fromJson(json['systemLocales'] as List?),
       dateFormatPattern: json['dateFormatPattern'] as String,
       isAnyDialogShown: json['isAnyDialogShown'] as bool?,
     );
