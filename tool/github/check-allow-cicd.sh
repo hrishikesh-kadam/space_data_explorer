@@ -2,7 +2,8 @@
 
 set -e -o pipefail
 
-if [[ $GITHUB_EVENT_NAME == "push" ]]; then
+if [[ $GITHUB_EVENT_NAME == "push" \
+  || $GITHUB_EVENT_NAME == "workflow_dispatch" ]]; then
   ALLOW_CICD=true
 elif [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then
   # https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads?actionType=opened#pull_request
