@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:space_data_explorer/route/home/home_screen.dart';
@@ -13,8 +15,11 @@ Future<void> pumpSettingsRouteAsInitialLocation(WidgetTester tester) async {
   expect(find.byKey(settingsButtonKey), findsNothing);
 }
 
-Future<void> pumpSettingsRouteAsNormalLink(WidgetTester tester) async {
-  await pumpHomeRoute(tester);
+Future<void> pumpSettingsRouteAsNormalLink(
+  WidgetTester tester, {
+  GlobalKey<NavigatorState>? navigatorKey,
+}) async {
+  await pumpHomeRoute(tester, navigatorKey: navigatorKey);
   await tapSettingsButton(tester);
   expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
   expect(find.byType(SettingsScreen), findsOneWidget);

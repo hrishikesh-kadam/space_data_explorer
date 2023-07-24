@@ -3,11 +3,11 @@ import 'dart:ui';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_logging/hrk_logging.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'package:space_data_explorer/config/config.dart';
 import 'package:space_data_explorer/language/language.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
+import '../../../../src/config/hydrated_bloc.dart';
 
 Future<void> sleep() => Future<void>.delayed(const Duration(milliseconds: 100));
 
@@ -22,24 +22,16 @@ void main() {
     });
 
     group('Hydration', () {
-      late Storage storage;
       final storageDirectory = Directory(
         'build/test/unit_test/route/settings/bloc/storage',
       );
 
       setUp(() async {
-        storage = await HydratedStorage.build(
-          storageDirectory: storageDirectory,
-        );
-        HydratedBloc.storage = storage;
+        await setUpHydratedBloc(storageDirectory);
       });
 
       tearDown(() async {
-        await storage.clear();
-        try {
-          await HydratedStorage.hive.deleteFromDisk();
-          storageDirectory.deleteSync(recursive: true);
-        } catch (_) {}
+        await tearDownHydratedBloc(storageDirectory);
       });
 
       test('InitialSettings', () async {

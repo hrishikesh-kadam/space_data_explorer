@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,8 +8,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
 import 'package:space_data_explorer/language/language.dart';
+import 'package:space_data_explorer/route/home/home_screen.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
+import '../../../../src/config/hydrated_bloc.dart';
 import '../../../../src/globals.dart';
 import '../../../../src/route/settings/settings_route.dart';
 
@@ -16,6 +20,10 @@ final languageDialogFinder = find.byKey(SettingsScreen.languageDialogKey);
 
 void main() {
   group('$SettingsScreen ${l10n.language} Tile Widget Test', () {
+    final storageDirectory = Directory(
+      'build/test/widget_test/route/settings/tiles/storage',
+    );
+
     testWidgets('Basic', (tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
       expect(languageTileFinder, findsOneWidget);
@@ -92,8 +100,11 @@ void main() {
       await verifyLanguageTileSubtitle(tester, l10n: l10n, language: language);
     });
 
-    testWidgets('Choose ${Language.english}, exit app, enter again',
+    testWidgets(
+        'With Hydration, Choose ${Language.english}, exit app, enter again',
         (tester) async {
+      // Stucks in setUpHydratedBloc()
+      await setUpHydratedBloc(storageDirectory);
       const language = Language.english;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapLanguageTile(tester);
@@ -101,9 +112,12 @@ void main() {
       await verifyLanguageTileSubtitle(tester, l10n: l10n, language: language);
       await tapBackButton(tester);
       await simulateAndroidBackButton(tester);
-      // TODO(hrishikesh-kadam): FInd some way to close and reopen the app
-      // await pumpSettingsRouteAsNormalLink(tester);
+      expect(find.byType(HomeScreen), findsOneWidget);
+      runApp(Container(key: UniqueKey()));
+      await tester.pump();
+      await pumpSettingsRouteAsNormalLink(tester, navigatorKey: GlobalKey());
       await verifyLanguageTileSubtitle(tester, l10n: l10n, language: language);
+      await tearDownHydratedBloc(storageDirectory);
     }, skip: true);
   });
 }

@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:space_data_explorer/space_data_explorer.dart';
 import 'config/config.dart';
-import 'globals.dart';
+import 'globals.dart' as globals;
 
 /*
  * TODO(hrishikesh-kadam): Check if the following issue is resolved.
@@ -11,12 +13,13 @@ import 'globals.dart';
  */
 Future<void> pumpApp(
   WidgetTester tester, {
+  GlobalKey<NavigatorState>? navigatorKey,
   String? initialLocation,
   bool debugShowCheckedModeBanner = true,
 }) async {
   configureApp();
   await tester.pumpWidget(SpaceDataExplorerApp(
-    navigatorKey: navigatorKey,
+    navigatorKey: navigatorKey ?? globals.navigatorKey,
     initialLocation: initialLocation,
     debugShowCheckedModeBanner: debugShowCheckedModeBanner,
   ));
