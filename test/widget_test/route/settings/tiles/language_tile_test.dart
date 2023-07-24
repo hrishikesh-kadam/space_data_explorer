@@ -20,10 +20,6 @@ final languageDialogFinder = find.byKey(SettingsScreen.languageDialogKey);
 
 void main() {
   group('$SettingsScreen ${l10n.language} Tile Widget Test', () {
-    final storageDirectory = Directory(
-      'build/test/widget_test/route/settings/tiles/storage',
-    );
-
     testWidgets('Basic', (tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
       expect(languageTileFinder, findsOneWidget);
@@ -81,7 +77,7 @@ void main() {
       expect(settingsBloc.state.isAnyDialogShown, null);
       await tapLanguageTile(tester);
       expect(settingsBloc.state.isAnyDialogShown, true);
-      await tester.tap(languageTileFinder, warnIfMissed: false);
+      await tester.tap(find.byType(AppBar), warnIfMissed: false);
       await tester.pumpAndSettle();
       expect(languageDialogFinder, findsNothing);
       expect(find.byType(SettingsScreen), findsOneWidget);
@@ -103,6 +99,9 @@ void main() {
     testWidgets(
         'With Hydration, Choose ${Language.english}, exit app, enter again',
         (tester) async {
+      final storageDirectory = Directory(
+        'build/test/widget_test/route/settings/tiles/storage',
+      );
       // Stucks in setUpHydratedBloc()
       await setUpHydratedBloc(storageDirectory);
       const language = Language.english;

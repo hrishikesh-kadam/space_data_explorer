@@ -22,6 +22,9 @@ class SettingsScreen extends StatelessWidget {
   final _log = Logger('$appNamePascalCase.SettingsScreen');
   static const Key languageTileKey = Key('settings_screen_language_tile');
   static const Key languageDialogKey = Key('settings_screen_language_dialog');
+  static const Key dateFormatTileKey = Key('settings_screen_date_format_tile');
+  static const Key dateFormatDialogKey =
+      Key('settings_screen_date_format_dialog');
 
   @override
   Widget build(BuildContext context) {
@@ -109,13 +112,13 @@ class SettingsScreen extends StatelessWidget {
             Navigator.pop(context);
           },
           beforeShowDialog: () {
-            _log.debug('selectedLanguage -> beforeShowDialog');
+            _log.debug('getLanguageTile() -> beforeShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: true,
             ));
           },
           afterShowDialog: () {
-            _log.debug('selectedLanguage -> afterShowDialog');
+            _log.debug('getLanguageTile() -> afterShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: false,
             ));
@@ -125,6 +128,16 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
+  static String getDateFormatValueTitle({
+    required AppLocalizations l10n,
+    required String dateFormatPattern,
+  }) {
+    return switch (dateFormatPattern) {
+      SettingsBloc.dateSkeleton => l10n.system,
+      _ => dateFormatPattern,
+    };
+  }
+
   Widget getDateFormatTile() {
     final values = <String>[
       SettingsBloc.dateSkeleton,
@@ -132,41 +145,41 @@ class SettingsScreen extends StatelessWidget {
       'MM/dd/yyyy',
       'yyyy/MM/dd',
     ];
-    List<String> valueTitles = [
-      l10n.system,
-      ...values.sublist(1),
-    ];
+    List<String> valueTitles = values
+        .map((e) => getDateFormatValueTitle(l10n: l10n, dateFormatPattern: e))
+        .toList();
 
     return BlocSelector<SettingsBloc, SettingsState, String>(
       selector: (state) => state.dateFormatPattern,
       builder: (context, dateFormatPattern) {
         final settingsBloc = context.read<SettingsBloc>();
         return RadioSettingsTile<String>(
+          key: dateFormatTileKey,
+          dialogKey: dateFormatDialogKey,
           title: l10n.dateFormat,
-          subTitle: dateFormatPattern == SettingsBloc.dateSkeleton
-              ? l10n.system
-              : dateFormatPattern,
+          subTitle: getDateFormatValueTitle(
+              l10n: l10n, dateFormatPattern: dateFormatPattern),
           values: values,
           valueTitles: valueTitles,
           groupValue: dateFormatPattern,
           onChanged: (selectedDateFormatPattern) {
-            Navigator.pop(context);
             if (selectedDateFormatPattern != null) {
               _log.debug(
-                  'getDateFormatTile -> selectedDateFormatPattern -> $selectedDateFormatPattern');
+                  'getDateFormatTile() -> selectedDateFormatPattern -> $selectedDateFormatPattern');
               settingsBloc.add(SettingsDateFormatSelected(
                 dateFormatPattern: selectedDateFormatPattern,
               ));
             }
+            Navigator.pop(context);
           },
           beforeShowDialog: () {
-            _log.debug('getDateFormatTile -> beforeShowDialog');
+            _log.debug('getDateFormatTile() -> beforeShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: true,
             ));
           },
           afterShowDialog: () {
-            _log.debug('getDateFormatTile -> afterShowDialog');
+            _log.debug('getDateFormatTile() -> afterShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: false,
             ));
