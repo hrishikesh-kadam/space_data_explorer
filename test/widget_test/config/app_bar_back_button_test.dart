@@ -107,6 +107,9 @@ void appBarBackButtonTest() {
       expect(find.byType(HomeScreen), findsOneWidget);
       const CadRoute($extra: {}).go(navigatorKey.currentContext!);
       await tester.pumpAndSettle();
+      expect(find.byType(CadScreen), findsOneWidget);
+      expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       await tapBackButton(tester);
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
@@ -124,6 +127,9 @@ void appBarBackButtonTest() {
       expect(find.byType(HomeScreen), findsOneWidget);
       GoRouter.of(navigatorKey.currentContext!).go(CadRoute.path, extra: []);
       await tester.pumpAndSettle();
+      expect(find.byType(CadScreen), findsOneWidget);
+      expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       await tapBackButton(tester);
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
@@ -133,6 +139,19 @@ void appBarBackButtonTest() {
       if (kIsWeb) {
         verifyHistoryLengthAndSerialCount(2, 0);
       }
+    });
+
+    testWidgets('2 routes down and 1 route up but when extra is not a Map',
+        (tester) async {
+      await pumpApp(tester);
+      expect(find.byType(HomeScreen), findsOneWidget);
+      GoRouter.of(navigatorKey.currentContext!).go(NasaRoute.path, extra: []);
+      await tester.pumpAndSettle();
+      expect(find.byType(NasaScreen), findsOneWidget);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
+      await tapBackButton(tester);
+      expect(find.byType(NasaScreen), findsNothing);
+      expect(find.byType(HomeScreen), findsOneWidget);
     });
   });
 }

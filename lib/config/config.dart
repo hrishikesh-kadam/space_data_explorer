@@ -11,12 +11,14 @@ import 'app_bloc_observer.dart';
 import 'config_non_web.dart' if (dart.library.html) 'config_web.dart'
     as platform;
 
+// coverage:ignore-start
 Future<void> configureApp() async {
   configureUrlStrategy();
   configureHrkLogging();
   configureBloc();
   await configureHydratedBloc();
 }
+// coverage:ignore-end
 
 BackButton getAppBarBackButton({
   required BuildContext context,
@@ -32,6 +34,7 @@ void configureBloc() {
   Bloc.observer = const AppBlocObserver();
 }
 
+// coverage:ignore-start
 Future<void> configureHydratedBloc() async {
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build(
@@ -40,3 +43,4 @@ Future<void> configureHydratedBloc() async {
         : await getApplicationDocumentsDirectory(),
   );
 }
+// coverage:ignore-end
