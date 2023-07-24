@@ -1,6 +1,9 @@
 part of 'cad_result_bloc.dart';
 
 @immutable
-abstract class CadResultState {}
+sealed class CadResultState extends Equatable {
+  @override
+  List<Object?> get props => [];
+}
 
 class CadResultInitial extends CadResultState {}

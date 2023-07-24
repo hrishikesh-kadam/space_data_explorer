@@ -1,11 +1,8 @@
 part of 'cad_bloc.dart';
 
 @immutable
-sealed class CadEvent extends Equatable {
+sealed class CadEvent {
   const CadEvent();
-
-  @override
-  List<Object> get props => [];
 }
 
 class CadRequested extends CadEvent {
