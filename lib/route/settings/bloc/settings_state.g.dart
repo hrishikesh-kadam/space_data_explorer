@@ -19,14 +19,23 @@ _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
       isAnyDialogShown: json['isAnyDialogShown'] as bool?,
     );
 
-Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) =>
-    <String, dynamic>{
-      'language': _$LanguageEnumMap[instance.language]!,
-      'systemLocales':
-          const LocaleListJsonConverter().toJson(instance.systemLocales),
-      'dateFormatPattern': instance.dateFormatPattern,
-      'isAnyDialogShown': instance.isAnyDialogShown,
-    };
+Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) {
+  final val = <String, dynamic>{
+    'language': _$LanguageEnumMap[instance.language]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('systemLocales',
+      const LocaleListJsonConverter().toJson(instance.systemLocales));
+  val['dateFormatPattern'] = instance.dateFormatPattern;
+  writeNotNull('isAnyDialogShown', instance.isAnyDialogShown);
+  return val;
+}
 
 const _$LanguageEnumMap = {
   Language.system: 'system',
