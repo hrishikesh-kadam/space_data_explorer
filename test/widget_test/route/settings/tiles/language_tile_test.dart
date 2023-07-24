@@ -101,7 +101,6 @@ void main() {
       await verifyLanguageTileSubtitle(tester, l10n: l10n, language: language);
       await tapBackButton(tester);
       await simulateAndroidBackButton(tester);
-      await tester.pumpAndSettle();
       // TODO(hrishikesh-kadam): FInd some way to close and reopen the app
       // await pumpSettingsRouteAsNormalLink(tester);
       await verifyLanguageTileSubtitle(tester, l10n: l10n, language: language);

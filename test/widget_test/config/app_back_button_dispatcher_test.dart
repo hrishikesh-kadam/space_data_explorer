@@ -36,14 +36,10 @@ void appBackButtonDispatcherTest() {
     testWidgets('3 routes down and 2 routes up', (tester) async {
       await pumpCadRouteAsNormalLink(tester);
       await simulateAndroidBackButton(tester);
-      await tester.pumpAndSettle();
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsOneWidget);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
-      // TODO(hrishikesh-kadam): Add tester.pumpAndSettle() to simulateAndroidBackButton()
-      // LABEL: hrk_flutter_test_batteries
       await simulateAndroidBackButton(tester);
-      await tester.pumpAndSettle();
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
@@ -52,7 +48,6 @@ void appBackButtonDispatcherTest() {
     testWidgets('2 routes down and 1 route up', (tester) async {
       await pumpNasaRouteAsNormalLink(tester);
       await simulateAndroidBackButton(tester);
-      await tester.pumpAndSettle();
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });
@@ -65,7 +60,6 @@ void appBackButtonDispatcherTest() {
       expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(CadScreen), findsOneWidget);
       await simulateAndroidBackButton(tester);
-      await tester.pumpAndSettle();
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });
@@ -77,7 +71,6 @@ void appBackButtonDispatcherTest() {
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NasaScreen), findsOneWidget);
       await simulateAndroidBackButton(tester);
-      await tester.pumpAndSettle();
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });
@@ -90,7 +83,6 @@ void appBackButtonDispatcherTest() {
       const CadRoute($extra: {}).go(navigatorKey.currentContext!);
       await tester.pumpAndSettle();
       await simulateAndroidBackButton(tester);
-      await tester.pumpAndSettle();
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
@@ -103,7 +95,6 @@ void appBackButtonDispatcherTest() {
       GoRouter.of(navigatorKey.currentContext!).go(CadRoute.path, extra: []);
       await tester.pumpAndSettle();
       await simulateAndroidBackButton(tester);
-      await tester.pumpAndSettle();
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);

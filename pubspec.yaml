@@ -41,7 +41,7 @@ dev_dependencies:
     sdk: flutter
   mockito: ^5.4.2
   hrk_analysis: '>=0.1.0 <1.0.0'
-  hrk_flutter_test_batteries: '>=0.1.0 <1.0.0'
+  hrk_flutter_test_batteries: '>=0.3.0 <1.0.0'
   import_sorter:
     git:
       url: https://github.com/fluttercommunity/import_sorter.git
