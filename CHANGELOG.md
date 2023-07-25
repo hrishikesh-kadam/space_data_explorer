@@ -1,3 +1,7 @@
+# 0.4.0
+
+- Start with `SettingsScreen`
+
 # 0.3.0
 
 - Integrate hrk_* packages
