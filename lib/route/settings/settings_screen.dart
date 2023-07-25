@@ -134,7 +134,7 @@ class SettingsScreen extends StatelessWidget {
     required DateFormatPattern dateFormatPattern,
   }) {
     return switch (dateFormatPattern) {
-      DateFormatPattern.yMd => l10n.system,
+      DateFormatPattern.yMd => l10n.languageDefault,
       _ => dateFormatPattern.pattern,
     };
   }

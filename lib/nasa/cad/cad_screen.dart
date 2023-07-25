@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
+import '../../constants/constants.dart';
 import '../../globals.dart';
 import '../../typedef/typedef.dart';
 import '../../widgets/app_bar.dart';
@@ -13,7 +15,7 @@ import 'bloc/cad_bloc.dart';
 import 'cad_route.dart';
 
 class CadScreen extends StatelessWidget {
-  const CadScreen({
+  CadScreen({
     super.key,
     required this.l10n,
     this.routeExtraMap,
@@ -22,6 +24,8 @@ class CadScreen extends StatelessWidget {
   final AppLocalizations l10n;
   static const Key searchButtonKey = Key('cad_screen_search_button');
   final RouteExtraMap? routeExtraMap;
+  // ignore: unused_field
+  final _log = Logger('$appNamePascalCase.CadScreen');
   // To inject during deep-link, see pumpCadRouteAsInitialLocation()
   @visibleForTesting
   static CadBloc? cadBloc;

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:intl/intl.dart';
 
 import '../constants/constants.dart';
+import '../route/settings/bloc/settings_bloc.dart';
+import '../route/settings/bloc/settings_state.dart';
 
 typedef DateTimeRangeCallback = void Function(DateTimeRange?);
 
@@ -98,15 +101,27 @@ class FormattedDateRangeText extends StatelessWidget {
   Widget build(BuildContext context) {
     String formattedDate;
     if (dateRange != null) {
-      final locale = Localizations.localeOf(context).toLanguageTag();
-      _log.debug(locale);
-      final dateFormat = DateFormat.yMd(locale);
-      switch (dateFilter) {
-        case DateFilter.dateMin:
-          formattedDate = dateFormat.format(dateRange!.start);
-        case DateFilter.dateMax:
-          formattedDate = dateFormat.format(dateRange!.end);
-      }
+      return BlocBuilder<SettingsBloc, SettingsState>(
+        buildWhen: (previous, current) {
+          return previous.dateFormatPattern != current.dateFormatPattern ||
+              previous.language != current.language ||
+              previous.systemLocales != current.systemLocales;
+        },
+        builder: (context, state) {
+          final languageTag = Localizations.localeOf(context).toLanguageTag();
+          final dateFormatPattern = state.dateFormatPattern;
+          final dateFormat = DateFormat(dateFormatPattern.pattern, languageTag);
+          _log.debug('languageTag = $languageTag');
+          _log.debug('dateFormat.pattern = ${dateFormat.pattern}');
+          switch (dateFilter) {
+            case DateFilter.dateMin:
+              formattedDate = dateFormat.format(dateRange!.start);
+            case DateFilter.dateMax:
+              formattedDate = dateFormat.format(dateRange!.end);
+          }
+          return Text(formattedDate);
+        },
+      );
     } else {
       formattedDate = notSelectedText;
     }

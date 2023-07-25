@@ -6,5 +6,6 @@
   "selectDateRange": "दिनांक फ़िल्टर चुनें",
   "language": "भाषा",
   "dateFormat": "दिनांक प्रारूप",
-  "system": "सिस्टम"
+  "system": "सिस्टम",
+  "languageDefault": "भाषा चयनित"
 }

@@ -6,5 +6,6 @@
   "selectDateRange": "Select Date Range",
   "language": "Language",
   "dateFormat": "Date Format",
-  "system": "System"
+  "system": "System",
+  "languageDefault": "Language Default"
 }

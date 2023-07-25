@@ -72,11 +72,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
           supportedLocales: supportedLocales,
         );
       },
-      supportedLocales: <Locale>[
-        Locale(Language.english.code),
-        Locale(Language.hindi.code),
-        Locale(Language.marathi.code),
-      ],
+      supportedLocales: getSupportedLocales(),
       debugShowCheckedModeBanner: _debugShowCheckedModeBanner,
     );
   }
@@ -90,5 +86,24 @@ class SpaceDataExplorerApp extends StatelessWidget {
     final settingsBloc = context.read<SettingsBloc>();
     settingsBloc.add(SettingsSystemLocalesChanged(systemLocales: locales));
     return null;
+  }
+
+  List<Locale> getSupportedLocales() {
+    return [
+      Locale(Language.english.code),
+      Locale(Language.hindi.code),
+      Locale(Language.marathi.code),
+      // Below locales are included for formatting differences like date
+      // See test/unit_test/route/settings/date_format_test.dart
+      Locale(Language.english.code, 'AU'),
+      Locale(Language.english.code, 'CA'),
+      Locale(Language.english.code, 'GB'),
+      Locale(Language.english.code, 'IE'),
+      Locale(Language.english.code, 'IN'),
+      Locale(Language.english.code, 'MY'),
+      Locale(Language.english.code, 'NZ'),
+      Locale(Language.english.code, 'SG'),
+      Locale(Language.english.code, 'ZA'),
+    ];
   }
 }
