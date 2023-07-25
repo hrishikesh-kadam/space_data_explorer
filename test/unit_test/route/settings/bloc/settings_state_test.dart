@@ -5,11 +5,22 @@ import 'package:hrk_batteries/hrk_batteries.dart';
 
 import 'package:space_data_explorer/helper/helper.dart';
 import 'package:space_data_explorer/language/language.dart';
-import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
+import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
 
 void main() {
   group('$SettingsState Unit Test', () {
+    const Language language = Language.english;
+    const DateFormatPattern dateFormatPattern = DateFormatPattern.yMd;
+    final SettingsState initialState = SettingsState(
+      language: language,
+      dateFormatPattern: dateFormatPattern,
+    );
+    final JsonMap initialJson = {
+      'language': language.code,
+      'dateFormatPattern': dateFormatPattern.pattern,
+    };
+    late JsonMap json;
     const localeListJsonConverter = LocaleListJsonConverter();
 
     void testConverter(SettingsState state, JsonMap json) {
@@ -24,55 +35,34 @@ void main() {
       expect(roundTripJson, json);
     }
 
+    setUp(() {
+      json = JsonMap.of(initialJson);
+    });
+
     test('Basic', () {
-      const Language language = Language.english;
-      const String dateFormatPattern = SettingsBloc.dateSkeleton;
-      final SettingsState state = SettingsState(
-        language: language,
-        dateFormatPattern: dateFormatPattern,
-      );
-      final JsonMap json = {
-        'language': language.code,
-        'dateFormatPattern': dateFormatPattern,
-      };
+      final SettingsState state = initialState.copyWith();
       testConverter(state, json);
     });
 
     test('systemLocales', () {
-      const Language language = Language.english;
       const List<Locale> systemLocales = [
         Locale('en'),
       ];
       final List<JsonMap>? systemLocalesJson =
           localeListJsonConverter.toJson(systemLocales);
-      const String dateFormatPattern = SettingsBloc.dateSkeleton;
-      final SettingsState state = SettingsState(
-        language: language,
+      final SettingsState state = initialState.copyWith(
         systemLocales: systemLocales,
-        dateFormatPattern: dateFormatPattern,
       );
-      final JsonMap json = {
-        'language': language.code,
-        'systemLocales': systemLocalesJson,
-        'dateFormatPattern': dateFormatPattern,
-      };
+      json['systemLocales'] = systemLocalesJson;
       testConverter(state, json);
     });
 
     test('isAnyDialogShown', () {
-      const Language language = Language.english;
-      const String dateFormatPattern = SettingsBloc.dateSkeleton;
       const isAnyDialogShown = true;
-      final SettingsState state = SettingsState(
-        language: language,
-        dateFormatPattern: dateFormatPattern,
+      final SettingsState state = initialState.copyWith(
         isAnyDialogShown: isAnyDialogShown,
       );
-      final JsonMap json = {
-        'language': language.code,
-        'dateFormatPattern': dateFormatPattern,
-        'isAnyDialogShown': isAnyDialogShown,
-      };
+      json['isAnyDialogShown'] = isAnyDialogShown;
       testConverter(state, json);
     });
   });

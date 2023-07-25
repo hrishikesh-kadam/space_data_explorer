@@ -7,6 +7,7 @@ import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
 import 'package:space_data_explorer/language/language.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
+import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import '../../../../src/globals.dart';
 import '../../../../src/route/settings/settings_route.dart';
@@ -16,20 +17,15 @@ final dateFormatDialogFinder = find.byKey(SettingsScreen.dateFormatDialogKey);
 
 void main() {
   group('$SettingsScreen ${l10n.dateFormat} Tile Widget Test', () {
-    const String ddMMyyyy = 'dd/MM/yyyy';
-    // ignore: constant_identifier_names
-    const String MMddyyyy = 'MM/dd/yyyy';
-    const String yyyyMMdd = 'yyyy/MM/dd';
-
     testWidgets('Basic', (tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
       expect(dateFormatTileFinder, findsOneWidget);
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
-      expect(settingsBloc.state.dateFormatPattern, SettingsBloc.dateSkeleton);
+      expect(settingsBloc.state.dateFormatPattern, DateFormatPattern.yMd);
     });
 
-    testWidgets('Choose $ddMMyyyy', (tester) async {
-      const dateFormatPattern = ddMMyyyy;
+    testWidgets('Choose ${DateFormatPattern.ddMMyyyy}', (tester) async {
+      const dateFormatPattern = DateFormatPattern.ddMMyyyy;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapDateFormatTile(tester);
       await chooseDateFormat(tester,
@@ -38,8 +34,8 @@ void main() {
           l10n: l10n, dateFormatPattern: dateFormatPattern);
     });
 
-    testWidgets('Choose $MMddyyyy', (tester) async {
-      const dateFormatPattern = MMddyyyy;
+    testWidgets('Choose ${DateFormatPattern.MMddyyyy}', (tester) async {
+      const dateFormatPattern = DateFormatPattern.MMddyyyy;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapDateFormatTile(tester);
       await chooseDateFormat(tester,
@@ -48,8 +44,8 @@ void main() {
           l10n: l10n, dateFormatPattern: dateFormatPattern);
     });
 
-    testWidgets('Choose $yyyyMMdd', (tester) async {
-      const dateFormatPattern = yyyyMMdd;
+    testWidgets('Choose ${DateFormatPattern.yyyyMMdd}', (tester) async {
+      const dateFormatPattern = DateFormatPattern.yyyyMMdd;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapDateFormatTile(tester);
       await chooseDateFormat(tester,
@@ -58,8 +54,8 @@ void main() {
           l10n: l10n, dateFormatPattern: dateFormatPattern);
     });
 
-    testWidgets('Choose ${SettingsBloc.dateSkeleton}', (tester) async {
-      const dateFormatPattern = SettingsBloc.dateSkeleton;
+    testWidgets('Choose ${DateFormatPattern.yMd}', (tester) async {
+      const dateFormatPattern = DateFormatPattern.yMd;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapDateFormatTile(tester);
       await chooseDateFormat(tester,
@@ -93,8 +89,10 @@ void main() {
       expect(settingsBloc.state.isAnyDialogShown, false);
     });
 
-    testWidgets('Choose $ddMMyyyy, exit screen, enter again', (tester) async {
-      const dateFormatPattern = ddMMyyyy;
+    testWidgets(
+        'Choose ${DateFormatPattern.ddMMyyyy}, exit screen, enter again',
+        (tester) async {
+      const dateFormatPattern = DateFormatPattern.ddMMyyyy;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapDateFormatTile(tester);
       await chooseDateFormat(tester,
@@ -118,7 +116,7 @@ Future<void> tapDateFormatTile(WidgetTester tester) async {
 Future<void> chooseDateFormat(
   WidgetTester tester, {
   required AppLocalizations l10n,
-  required String dateFormatPattern,
+  required DateFormatPattern dateFormatPattern,
 }) async {
   await tester.tap(find.byKey(Key(SettingsScreen.getDateFormatValueTitle(
     l10n: l10n,
@@ -131,7 +129,7 @@ Future<void> chooseDateFormat(
 Future<void> verifyDateFormatTileSubtitle(
   WidgetTester tester, {
   required AppLocalizations l10n,
-  required String dateFormatPattern,
+  required DateFormatPattern dateFormatPattern,
 }) async {
   final subTitleFinder = find.descendant(
     of: dateFormatTileFinder,

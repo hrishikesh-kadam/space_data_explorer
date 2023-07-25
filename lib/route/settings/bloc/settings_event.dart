@@ -13,7 +13,7 @@ class SettingsLaguageSelected extends SettingsEvent {
 class SettingsDateFormatSelected extends SettingsEvent {
   const SettingsDateFormatSelected({required this.dateFormatPattern});
 
-  final String dateFormatPattern;
+  final DateFormatPattern dateFormatPattern;
 }
 
 class SettingsDialogEvent extends SettingsEvent {

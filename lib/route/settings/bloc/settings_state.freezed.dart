@@ -23,7 +23,7 @@ mixin _$SettingsState {
   Language get language => throw _privateConstructorUsedError;
   @LocaleListJsonConverter()
   List<Locale>? get systemLocales => throw _privateConstructorUsedError;
-  String get dateFormatPattern => throw _privateConstructorUsedError;
+  DateFormatPattern get dateFormatPattern => throw _privateConstructorUsedError;
   bool? get isAnyDialogShown => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $SettingsStateCopyWith<$Res> {
   $Res call(
       {Language language,
       @LocaleListJsonConverter() List<Locale>? systemLocales,
-      String dateFormatPattern,
+      DateFormatPattern dateFormatPattern,
       bool? isAnyDialogShown});
 }
 
@@ -75,7 +75,7 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
       dateFormatPattern: null == dateFormatPattern
           ? _value.dateFormatPattern
           : dateFormatPattern // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateFormatPattern,
       isAnyDialogShown: freezed == isAnyDialogShown
           ? _value.isAnyDialogShown
           : isAnyDialogShown // ignore: cast_nullable_to_non_nullable
@@ -95,7 +95,7 @@ abstract class _$$_SettingsStateCopyWith<$Res>
   $Res call(
       {Language language,
       @LocaleListJsonConverter() List<Locale>? systemLocales,
-      String dateFormatPattern,
+      DateFormatPattern dateFormatPattern,
       bool? isAnyDialogShown});
 }
 
@@ -127,7 +127,7 @@ class __$$_SettingsStateCopyWithImpl<$Res>
       dateFormatPattern: null == dateFormatPattern
           ? _value.dateFormatPattern
           : dateFormatPattern // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateFormatPattern,
       isAnyDialogShown: freezed == isAnyDialogShown
           ? _value.isAnyDialogShown
           : isAnyDialogShown // ignore: cast_nullable_to_non_nullable
@@ -163,7 +163,7 @@ class _$_SettingsState implements _SettingsState {
   }
 
   @override
-  final String dateFormatPattern;
+  final DateFormatPattern dateFormatPattern;
   @override
   final bool? isAnyDialogShown;
 
@@ -214,7 +214,7 @@ abstract class _SettingsState implements SettingsState {
   factory _SettingsState(
       {required final Language language,
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
-      required final String dateFormatPattern,
+      required final DateFormatPattern dateFormatPattern,
       final bool? isAnyDialogShown}) = _$_SettingsState;
 
   factory _SettingsState.fromJson(Map<String, dynamic> json) =
@@ -226,7 +226,7 @@ abstract class _SettingsState implements SettingsState {
   @LocaleListJsonConverter()
   List<Locale>? get systemLocales;
   @override
-  String get dateFormatPattern;
+  DateFormatPattern get dateFormatPattern;
   @override
   bool? get isAnyDialogShown;
   @override

@@ -9,6 +9,7 @@ import '../../language/language.dart';
 import '../../widgets/app_bar.dart';
 import 'bloc/settings_bloc.dart';
 import 'bloc/settings_state.dart';
+import 'date_format_pattern.dart';
 import 'radio_settings_tile.dart';
 import 'settings_route.dart';
 
@@ -130,30 +131,30 @@ class SettingsScreen extends StatelessWidget {
 
   static String getDateFormatValueTitle({
     required AppLocalizations l10n,
-    required String dateFormatPattern,
+    required DateFormatPattern dateFormatPattern,
   }) {
     return switch (dateFormatPattern) {
-      SettingsBloc.dateSkeleton => l10n.system,
-      _ => dateFormatPattern,
+      DateFormatPattern.yMd => l10n.system,
+      _ => dateFormatPattern.pattern,
     };
   }
 
   Widget getDateFormatTile() {
-    final values = <String>[
-      SettingsBloc.dateSkeleton,
-      'dd/MM/yyyy',
-      'MM/dd/yyyy',
-      'yyyy/MM/dd',
+    final values = <DateFormatPattern>[
+      DateFormatPattern.yMd,
+      DateFormatPattern.ddMMyyyy,
+      DateFormatPattern.MMddyyyy,
+      DateFormatPattern.yyyyMMdd,
     ];
     List<String> valueTitles = values
         .map((e) => getDateFormatValueTitle(l10n: l10n, dateFormatPattern: e))
         .toList();
 
-    return BlocSelector<SettingsBloc, SettingsState, String>(
+    return BlocSelector<SettingsBloc, SettingsState, DateFormatPattern>(
       selector: (state) => state.dateFormatPattern,
       builder: (context, dateFormatPattern) {
         final settingsBloc = context.read<SettingsBloc>();
-        return RadioSettingsTile<String>(
+        return RadioSettingsTile<DateFormatPattern>(
           key: dateFormatTileKey,
           dialogKey: dateFormatDialogKey,
           title: l10n.dateFormat,

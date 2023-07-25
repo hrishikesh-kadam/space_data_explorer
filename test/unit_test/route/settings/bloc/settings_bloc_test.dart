@@ -7,6 +7,7 @@ import 'package:hrk_logging/hrk_logging.dart';
 import 'package:space_data_explorer/config/config.dart';
 import 'package:space_data_explorer/language/language.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
+import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
 import '../../../../src/config/hydrated_bloc.dart';
 
 Future<void> sleep() => Future<void>.delayed(const Duration(milliseconds: 100));
@@ -34,7 +35,7 @@ void main() {
         await tearDownHydratedBloc(storageDirectory);
       });
 
-      test('InitialSettings', () async {
+      test('$SettingsLaguageSelected', () async {
         final SettingsBloc hydratedBloc = SettingsBloc.getInitialSettings();
         hydratedBloc.add(
           const SettingsLaguageSelected(
@@ -46,13 +47,32 @@ void main() {
         expect(reHydratedBloc.state, hydratedBloc.state);
       });
 
-      test('systemLocales', () async {
+      test('$SettingsDateFormatSelected', () async {
         final SettingsBloc hydratedBloc = SettingsBloc.getInitialSettings();
         hydratedBloc.add(
-          const SettingsLaguageSelected(
-            language: Language.english,
+          const SettingsDateFormatSelected(
+            dateFormatPattern: DateFormatPattern.ddMMyyyy,
           ),
         );
+        await sleep();
+        final SettingsBloc reHydratedBloc = SettingsBloc.getInitialSettings();
+        expect(reHydratedBloc.state, hydratedBloc.state);
+      });
+
+      test('$SettingsDialogEvent', () async {
+        final SettingsBloc hydratedBloc = SettingsBloc.getInitialSettings();
+        hydratedBloc.add(
+          const SettingsDialogEvent(
+            isAnyDialogShown: false,
+          ),
+        );
+        await sleep();
+        final SettingsBloc reHydratedBloc = SettingsBloc.getInitialSettings();
+        expect(reHydratedBloc.state, hydratedBloc.state);
+      });
+
+      test('$SettingsSystemLocalesChanged', () async {
+        final SettingsBloc hydratedBloc = SettingsBloc.getInitialSettings();
         hydratedBloc.add(
           const SettingsSystemLocalesChanged(systemLocales: [
             Locale('mr'),
