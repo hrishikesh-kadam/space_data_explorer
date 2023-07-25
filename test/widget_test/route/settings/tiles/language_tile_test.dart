@@ -7,9 +7,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
-import 'package:space_data_explorer/language/language.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
+import 'package:space_data_explorer/route/settings/language.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import '../../../../src/config/hydrated_bloc.dart';
 import '../../../../src/globals.dart';

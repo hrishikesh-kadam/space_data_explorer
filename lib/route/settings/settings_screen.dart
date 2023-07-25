@@ -5,12 +5,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 
 import '../../constants/constants.dart';
-import '../../language/language.dart';
 import '../../widgets/app_bar.dart';
+import '../../widgets/radio_settings_tile.dart';
 import 'bloc/settings_bloc.dart';
 import 'bloc/settings_state.dart';
 import 'date_format_pattern.dart';
-import 'radio_settings_tile.dart';
+import 'language.dart';
 import 'settings_route.dart';
 
 class SettingsScreen extends StatelessWidget {

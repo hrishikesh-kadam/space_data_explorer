@@ -5,9 +5,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 
 import 'package:space_data_explorer/config/config.dart';
-import 'package:space_data_explorer/language/language.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
 import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
+import 'package:space_data_explorer/route/settings/language.dart';
 import '../../../../src/config/hydrated_bloc.dart';
 
 Future<void> sleep() => Future<void>.delayed(const Duration(milliseconds: 100));

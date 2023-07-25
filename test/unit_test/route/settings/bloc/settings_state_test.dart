@@ -4,9 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_batteries/hrk_batteries.dart';
 
 import 'package:space_data_explorer/helper/helper.dart';
-import 'package:space_data_explorer/language/language.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
 import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
+import 'package:space_data_explorer/route/settings/language.dart';
 
 void main() {
   group('$SettingsState Unit Test', () {

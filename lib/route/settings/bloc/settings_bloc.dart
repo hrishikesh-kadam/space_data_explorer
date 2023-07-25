@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-import '../../../language/language.dart';
 import '../date_format_pattern.dart';
+import '../language.dart';
 import 'settings_state.dart';
 
 part 'settings_event.dart';

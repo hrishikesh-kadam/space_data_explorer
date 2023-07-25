@@ -7,10 +7,10 @@ import 'package:hrk_logging/hrk_logging.dart';
 
 import 'config/app_back_button_dispatcher.dart';
 import 'constants/constants.dart';
-import 'language/language.dart';
 import 'route/home/home_route.dart';
 import 'route/settings/bloc/settings_bloc.dart';
 import 'route/settings/bloc/settings_state.dart';
+import 'route/settings/language.dart';
 
 class SpaceDataExplorerApp extends StatelessWidget {
   SpaceDataExplorerApp({
