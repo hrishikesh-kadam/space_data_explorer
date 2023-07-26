@@ -121,11 +121,11 @@ class FormattedDateRangeText extends StatelessWidget {
           final languageTag = Localizations.localeOf(context).toLanguageTag();
           final dateFormatPattern = state.dateFormatPattern;
           final dateFormat = DateFormat(dateFormatPattern.pattern, languageTag);
-          _log.debug('languageTag = $languageTag');
-          _log.debug('dateFormat.pattern = ${dateFormat.pattern}');
           switch (dateFilter) {
             case DateFilter.min:
               formattedDate = dateFormat.format(dateRange!.start);
+              _log.fine('languageTag = $languageTag');
+              _log.fine('dateFormat.pattern = ${dateFormat.pattern}');
             case DateFilter.max:
               formattedDate = dateFormat.format(dateRange!.end);
           }

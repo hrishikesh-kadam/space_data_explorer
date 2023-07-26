@@ -82,7 +82,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
     List<Locale>? locales,
     required Iterable<Locale> supportedLocales,
   }) {
-    _log.debug('localeListResolutionCallback -> $locales');
+    _log.fine('localeListResolutionCallback -> $locales');
     final settingsBloc = context.read<SettingsBloc>();
     settingsBloc.add(SettingsSystemLocalesChanged(systemLocales: locales));
     return null;

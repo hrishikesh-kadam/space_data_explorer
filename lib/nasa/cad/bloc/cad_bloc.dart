@@ -35,13 +35,13 @@ class CadBloc extends Bloc<CadEvent, CadState> {
       Response<SbdbCadBody> response = await _sbdbCadApi.get(
         queryParameters: queryParameters.toJson(),
       );
-      _log.debug('_onCadRequested success');
+      _log.fine('_onCadRequested success');
       emit(state.copyWith(
         networkState: NetworkState.success,
         sbdbCadBody: response.data,
       ));
     } on Exception catch (e, s) {
-      _log.error('_onCadRequested failed', e, s);
+      _log.error('_onCadRequested failure', e, s);
       emit(state.copyWith(networkState: NetworkState.failure));
     }
   }
