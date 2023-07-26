@@ -16,3 +16,4 @@ String? _testType;
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: 'appKey');
 
 final AppLocalizations l10n = AppLocalizationsEn();
+const MaterialLocalizations ml10n = DefaultMaterialLocalizations();
