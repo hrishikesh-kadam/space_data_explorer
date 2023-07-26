@@ -7,60 +7,60 @@
       "request": "attach"
     },
     {
-      "name": "flutter run --flavor dev -d chrome",
+      "name": "flutter run -d chrome",
       "deviceId": "chrome",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "flutter run --flavor dev -d chrome --profile",
+      "name": "flutter run -d chrome --profile",
       "deviceId": "chrome",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "flutter run --flavor dev -d chrome --release",
+      "name": "flutter run -d chrome --release",
       "deviceId": "chrome",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"
     },
     {
-      "name": "flutter run --flavor dev -d linux",
+      "name": "flutter run -d linux",
       "deviceId": "linux",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "flutter run --flavor dev -d linux --profile",
+      "name": "flutter run -d linux --profile",
       "deviceId": "linux",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "flutter run --flavor dev -d linux --release",
+      "name": "flutter run -d linux --release",
       "deviceId": "linux",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"
     },
     {
-      "name": "flutter run --flavor dev -d emulator-5554",
+      "name": "flutter run -d emulator-5554",
       "deviceId": "emulator-5554",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "flutter run --flavor dev -d emulator-5554 --profile",
+      "name": "flutter run -d emulator-5554 --profile",
       "deviceId": "emulator-5554",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "flutter run --flavor dev -d emulator-5554 --release",
+      "name": "flutter run -d emulator-5554 --release",
       "deviceId": "emulator-5554",
       "request": "launch",
       "type": "dart",
