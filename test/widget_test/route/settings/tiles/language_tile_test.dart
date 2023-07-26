@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
@@ -14,9 +13,7 @@ import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import '../../../../src/config/hydrated_bloc.dart';
 import '../../../../src/globals.dart';
 import '../../../../src/route/settings/settings_route.dart';
-
-final languageTileFinder = find.byKey(SettingsScreen.languageTileKey);
-final languageDialogFinder = find.byKey(SettingsScreen.languageDialogKey);
+import '../../../../src/route/settings/tiles/language_tile.dart';
 
 void main() {
   group('$SettingsScreen ${l10n.language} Tile Widget Test', () {
@@ -31,7 +28,9 @@ void main() {
       const language = Language.english;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapLanguageTile(tester);
+      expect(languageDialogFinder, findsOneWidget);
       await chooseLanguage(tester, l10n: l10n, language: language);
+      expect(languageDialogFinder, findsNothing);
       await verifyLanguageTileSubtitle(tester, l10n: l10n, language: language);
     });
 
@@ -119,46 +118,4 @@ void main() {
       await tearDownHydratedBloc(storageDirectory);
     }, skip: true);
   });
-}
-
-// TODO(hrishikesh-kadam): Move this to source
-Future<void> tapLanguageTile(WidgetTester tester) async {
-  await tester.tap(languageTileFinder);
-  await tester.pumpAndSettle();
-  // TODO(hrishikesh-kadam): Move this expect
-  expect(languageDialogFinder, findsOneWidget);
-}
-
-// TODO(hrishikesh-kadam): Move this to source
-Future<void> chooseLanguage(
-  WidgetTester tester, {
-  required AppLocalizations l10n,
-  required Language language,
-}) async {
-  await tester.tap(find.byKey(Key(SettingsScreen.getLanguageValueTitle(
-    l10n: l10n,
-    language: language,
-  ))));
-  await tester.pumpAndSettle();
-  // TODO(hrishikesh-kadam): Move this expect
-  expect(languageDialogFinder, findsNothing);
-}
-
-// TODO(hrishikesh-kadam): Move this to source
-Future<void> verifyLanguageTileSubtitle(
-  WidgetTester tester, {
-  required AppLocalizations l10n,
-  required Language language,
-}) async {
-  final subTitleFinder = find.descendant(
-    of: languageTileFinder,
-    matching: find.text(
-      SettingsScreen.getLanguageValueTitle(
-        l10n: l10n,
-        language: language,
-      ),
-    ),
-  );
-  // TODO(hrishikesh-kadam): Move this expect
-  expect(subTitleFinder, findsOneWidget);
 }

@@ -10,7 +10,7 @@ import '../../../../src/globals.dart';
 import '../../../../src/nasa/cad/cad_route.dart';
 import '../../../../src/nasa/cad/filter/date_filter_widget.dart';
 import '../../../../src/route/settings/settings_route.dart';
-import '../../../route/settings/tiles/date_format_tile_test.dart';
+import '../../../../src/route/settings/tiles/date_format_tile.dart';
 
 void main() {
   group('$CadRoute $DateFilterWidget Interaction Test', () {
@@ -86,6 +86,6 @@ void main() {
       expect(maxDateAfterString != notSelectedDefaultText, isTrue);
       expect(minDateBeforeString != minDateAfterString, isTrue);
       expect(maxDateBeforeString != maxDateAfterString, isTrue);
-    }, tags: 'check');
+    });
   });
 }

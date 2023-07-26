@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
@@ -11,9 +10,7 @@ import 'package:space_data_explorer/route/settings/language.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import '../../../../src/globals.dart';
 import '../../../../src/route/settings/settings_route.dart';
-
-final dateFormatTileFinder = find.byKey(SettingsScreen.dateFormatTileKey);
-final dateFormatDialogFinder = find.byKey(SettingsScreen.dateFormatDialogKey);
+import '../../../../src/route/settings/tiles/date_format_tile.dart';
 
 void main() {
   group('$SettingsScreen ${l10n.dateFormat} Tile Widget Test', () {
@@ -28,8 +25,10 @@ void main() {
       const dateFormatPattern = DateFormatPattern.ddMMyyyy;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapDateFormatTile(tester);
+      expect(dateFormatDialogFinder, findsOneWidget);
       await chooseDateFormat(tester,
           l10n: l10n, dateFormatPattern: dateFormatPattern);
+      expect(dateFormatDialogFinder, findsNothing);
       await verifyDateFormatTileSubtitle(tester,
           l10n: l10n, dateFormatPattern: dateFormatPattern);
     });
@@ -105,46 +104,4 @@ void main() {
           l10n: l10n, dateFormatPattern: dateFormatPattern);
     });
   });
-}
-
-// TODO(hrishikesh-kadam): Move this to source
-Future<void> tapDateFormatTile(WidgetTester tester) async {
-  await tester.tap(dateFormatTileFinder);
-  await tester.pumpAndSettle();
-  // TODO(hrishikesh-kadam): Move this expect
-  expect(dateFormatDialogFinder, findsOneWidget);
-}
-
-// TODO(hrishikesh-kadam): Move this to source
-Future<void> chooseDateFormat(
-  WidgetTester tester, {
-  required AppLocalizations l10n,
-  required DateFormatPattern dateFormatPattern,
-}) async {
-  await tester.tap(find.byKey(Key(SettingsScreen.getDateFormatValueTitle(
-    l10n: l10n,
-    dateFormatPattern: dateFormatPattern,
-  ))));
-  await tester.pumpAndSettle();
-  // TODO(hrishikesh-kadam): Move this expect
-  expect(dateFormatDialogFinder, findsNothing);
-}
-
-// TODO(hrishikesh-kadam): Move this to source
-Future<void> verifyDateFormatTileSubtitle(
-  WidgetTester tester, {
-  required AppLocalizations l10n,
-  required DateFormatPattern dateFormatPattern,
-}) async {
-  final subTitleFinder = find.descendant(
-    of: dateFormatTileFinder,
-    matching: find.text(
-      SettingsScreen.getDateFormatValueTitle(
-        l10n: l10n,
-        dateFormatPattern: dateFormatPattern,
-      ),
-    ),
-  );
-  // TODO(hrishikesh-kadam): Move this expect
-  expect(subTitleFinder, findsOneWidget);
 }
