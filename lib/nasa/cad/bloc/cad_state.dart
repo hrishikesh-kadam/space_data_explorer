@@ -1,24 +1,17 @@
-part of 'cad_bloc.dart';
+import 'package:flutter/material.dart';
 
-@immutable
-sealed class CadState extends Equatable {
-  const CadState();
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
-  @override
-  List<Object> get props => [];
+part 'cad_state.freezed.dart';
+
+enum NetworkState { initial, sent, success, failure }
+
+@freezed
+class CadState with _$CadState {
+  factory CadState({
+    DateTimeRange? dateRange,
+    @Default(NetworkState.initial) NetworkState networkState,
+    SbdbCadBody? sbdbCadBody,
+  }) = _CadState;
 }
-
-class CadInitial extends CadState {}
-
-class CadRequestSent extends CadState {}
-
-class CadRequestSuccess extends CadState {
-  const CadRequestSuccess({required this.sbdbCadBody});
-
-  final SbdbCadBody sbdbCadBody;
-
-  @override
-  List<Object> get props => [sbdbCadBody];
-}
-
-class CadRequestFailure extends CadState {}

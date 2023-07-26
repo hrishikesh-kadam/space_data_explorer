@@ -121,12 +121,15 @@ void main() {
   });
 }
 
+// TODO(hrishikesh-kadam): Move this to source
 Future<void> tapLanguageTile(WidgetTester tester) async {
   await tester.tap(languageTileFinder);
   await tester.pumpAndSettle();
+  // TODO(hrishikesh-kadam): Move this expect
   expect(languageDialogFinder, findsOneWidget);
 }
 
+// TODO(hrishikesh-kadam): Move this to source
 Future<void> chooseLanguage(
   WidgetTester tester, {
   required AppLocalizations l10n,
@@ -137,9 +140,11 @@ Future<void> chooseLanguage(
     language: language,
   ))));
   await tester.pumpAndSettle();
+  // TODO(hrishikesh-kadam): Move this expect
   expect(languageDialogFinder, findsNothing);
 }
 
+// TODO(hrishikesh-kadam): Move this to source
 Future<void> verifyLanguageTileSubtitle(
   WidgetTester tester, {
   required AppLocalizations l10n,
@@ -154,5 +159,6 @@ Future<void> verifyLanguageTileSubtitle(
       ),
     ),
   );
+  // TODO(hrishikesh-kadam): Move this expect
   expect(subTitleFinder, findsOneWidget);
 }

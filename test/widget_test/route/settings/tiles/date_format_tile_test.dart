@@ -107,12 +107,15 @@ void main() {
   });
 }
 
+// TODO(hrishikesh-kadam): Move this to source
 Future<void> tapDateFormatTile(WidgetTester tester) async {
   await tester.tap(dateFormatTileFinder);
   await tester.pumpAndSettle();
+  // TODO(hrishikesh-kadam): Move this expect
   expect(dateFormatDialogFinder, findsOneWidget);
 }
 
+// TODO(hrishikesh-kadam): Move this to source
 Future<void> chooseDateFormat(
   WidgetTester tester, {
   required AppLocalizations l10n,
@@ -123,9 +126,11 @@ Future<void> chooseDateFormat(
     dateFormatPattern: dateFormatPattern,
   ))));
   await tester.pumpAndSettle();
+  // TODO(hrishikesh-kadam): Move this expect
   expect(dateFormatDialogFinder, findsNothing);
 }
 
+// TODO(hrishikesh-kadam): Move this to source
 Future<void> verifyDateFormatTileSubtitle(
   WidgetTester tester, {
   required AppLocalizations l10n,
@@ -140,5 +145,6 @@ Future<void> verifyDateFormatTileSubtitle(
       ),
     ),
   );
+  // TODO(hrishikesh-kadam): Move this expect
   expect(subTitleFinder, findsOneWidget);
 }

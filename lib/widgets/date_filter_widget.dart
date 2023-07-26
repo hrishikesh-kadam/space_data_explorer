@@ -12,23 +12,28 @@ import '../route/settings/bloc/settings_state.dart';
 typedef DateTimeRangeCallback = void Function(DateTimeRange?);
 
 enum DateFilter {
-  dateMin,
-  dateMax,
+  min,
+  max,
 }
 
 class DateFilterWidget extends StatefulWidget {
   const DateFilterWidget({
     super.key,
+    this.keyPrefix,
     required this.firstDate,
     required this.lastDate,
     this.onDateRangeSelected,
     required this.l10n,
   });
 
+  final String? keyPrefix;
   final DateTime firstDate;
   final DateTime lastDate;
   final DateTimeRangeCallback? onDateRangeSelected;
   final AppLocalizations l10n;
+  static const String minDateKey = 'min_date_key';
+  static const String maxDateKey = 'max_date_key';
+  static const String selectDateRangeButtonKey = 'select_date_range_button_key';
 
   @override
   State<DateFilterWidget> createState() => _DateFilterWidgetState();
@@ -47,15 +52,19 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
           children: [
             Text(widget.l10n.dateMin),
             FormattedDateRangeText(
+              key: Key('${widget.keyPrefix}${DateFilterWidget.minDateKey}'),
               dateRange: dateRange,
-              dateFilter: DateFilter.dateMin,
+              dateFilter: DateFilter.min,
             ),
             Text(widget.l10n.dateMax),
             FormattedDateRangeText(
+              key: Key('${widget.keyPrefix}${DateFilterWidget.maxDateKey}'),
               dateRange: dateRange,
-              dateFilter: DateFilter.dateMax,
+              dateFilter: DateFilter.max,
             ),
             OutlinedButton(
+              key: Key(
+                  '${widget.keyPrefix}${DateFilterWidget.selectDateRangeButtonKey}'),
               onPressed: () {
                 _dateRangePickerOnPressed(context: context);
               },
@@ -89,13 +98,14 @@ class FormattedDateRangeText extends StatelessWidget {
     super.key,
     this.dateRange,
     required this.dateFilter,
-    this.notSelectedText = '-',
+    this.notSelectedText = notSelectedDefaultText,
   });
 
   final DateTimeRange? dateRange;
   final DateFilter dateFilter;
   final String notSelectedText;
   final _log = Logger('$appNamePascalCase.FormattedDateRangeText');
+  static const String notSelectedDefaultText = '-';
 
   @override
   Widget build(BuildContext context) {
@@ -114,9 +124,9 @@ class FormattedDateRangeText extends StatelessWidget {
           _log.debug('languageTag = $languageTag');
           _log.debug('dateFormat.pattern = ${dateFormat.pattern}');
           switch (dateFilter) {
-            case DateFilter.dateMin:
+            case DateFilter.min:
               formattedDate = dateFormat.format(dateRange!.start);
-            case DateFilter.dateMax:
+            case DateFilter.max:
               formattedDate = dateFormat.format(dateRange!.end);
           }
           return Text(formattedDate);

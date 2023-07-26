@@ -9,7 +9,7 @@ import 'package:space_data_explorer/nasa/route/nasa_screen.dart';
 import '../../../src/nasa/cad/cad_route.dart';
 
 void main() {
-  group('$CadRoute Widget Test', () {
+  group('$CadRoute Widget Navigation Test', () {
     testWidgets('Navigate to and from $CadResultRoute',
         (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
