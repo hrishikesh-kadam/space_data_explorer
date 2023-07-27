@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import '../../../deferred_loading/deferred_loading.dart';
 import '../../../typedef/typedef.dart';
+import '../../constants/constants.dart';
 import '../cad/cad_route.dart';
 import 'cad_result_screen.dart' deferred as cad_result_screen;
 
@@ -17,11 +19,12 @@ part 'cad_result_route.g.dart';
   name: CadResultRoute.displayName,
 )
 class CadResultRoute extends GoRouteData {
-  const CadResultRoute({
+  CadResultRoute({
     this.$extra,
   });
 
   final RouteExtraMap? $extra;
+  final _log = Logger('$appNamePascalCase.CadResultRoute');
 
   static const String relativePath = 'result';
   static const String path = '${CadRoute.path}/$relativePath';
@@ -29,11 +32,18 @@ class CadResultRoute extends GoRouteData {
 
   @override
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
-    if (state.extra is RouteExtraMap) {
-      final RouteExtraMap extra = state.extra as RouteExtraMap;
-      if (extra.containsKey('$SbdbCadBody') &&
-          extra['$SbdbCadBody'] is SbdbCadBody) {
-        return null;
+    _log.debug('redirect');
+    if ($extra != null) {
+      final RouteExtraMap extra = $extra!;
+      if (extra.containsKey('$SbdbCadBody')) {
+        if (extra['$SbdbCadBody'] is SbdbCadBody) {
+          _log.debug('redirect -> extra[SbdbCadBody] is SbdbCadBody');
+          return null;
+        } else if (extra['$SbdbCadBody'] is JsonMap) {
+          _log.debug('redirect -> extra[SbdbCadBody] is JsonMap');
+          extra['$SbdbCadBody'] = SbdbCadBody.fromJson(extra['$SbdbCadBody']);
+          return null;
+        }
       }
     }
     return CadRoute.path;

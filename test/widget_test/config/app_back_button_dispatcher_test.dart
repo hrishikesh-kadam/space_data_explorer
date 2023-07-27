@@ -61,6 +61,7 @@ void appBackButtonDispatcherTest() {
       expect(find.byType(CadScreen), findsOneWidget);
       await simulateAndroidBackButton(tester);
       expect(find.byType(CadScreen), findsNothing);
+      expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
     });
 

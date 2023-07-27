@@ -6,6 +6,7 @@ import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
+import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
 import 'package:space_data_explorer/nasa/route/nasa_route.dart';
 import 'package:space_data_explorer/nasa/route/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
@@ -15,6 +16,10 @@ import '../../src/helper/helper.dart';
 import '../../src/nasa/cad/cad_route.dart';
 import '../../src/nasa/route/nasa_route.dart';
 import '../../src/space_data_explorer_app.dart';
+
+// ignore: directives_ordering
+import '../../src/helper/helper_non_web.dart'
+    if (dart.library.html) '../../src/helper/helper_web.dart' as platform;
 
 void main() {
   appBarBackButtonTest();
@@ -79,6 +84,7 @@ void appBarBackButtonTest() {
       expect(find.byType(CadScreen), findsOneWidget);
       await tapBackButton(tester);
       expect(find.byType(CadScreen), findsNothing);
+      expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
         verifyHistoryLengthAndSerialCount(2, 1);
@@ -152,6 +158,24 @@ void appBarBackButtonTest() {
       await tapBackButton(tester);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
+    });
+
+    testWidgets('Browser forward on Route with extra and redirect',
+        skip: !kIsWeb, (tester) async {
+      await pumpCadRouteAsNormalLink(tester);
+      await tester.tap(find.byKey(CadScreen.searchButtonKey));
+      await tester.pumpAndSettle();
+      await tapBackButton(tester);
+      platform.historyForward();
+      await tester.pumpAndSettle();
+      expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(CadResultScreen), findsOneWidget);
+      await tapBackButton(tester);
+      expect(find.byType(CadScreen), findsOneWidget);
+      expect(find.byType(CadResultScreen), findsNothing);
+      await tapBackButton(tester);
+      expect(find.byType(NasaScreen), findsOneWidget);
+      expect(find.byType(CadScreen), findsNothing);
     });
   });
 }

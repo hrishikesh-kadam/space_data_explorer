@@ -18,18 +18,16 @@ class SpaceDataExplorerApp extends StatelessWidget {
     GlobalKey<NavigatorState>? navigatorKey,
     String? initialLocation,
     bool debugShowCheckedModeBanner = true,
-  })  : _debugShowCheckedModeBanner = debugShowCheckedModeBanner,
-        _initialLocation = initialLocation {
+  }) : _debugShowCheckedModeBanner = debugShowCheckedModeBanner {
     _goRouter = GoRouter(
       navigatorKey: navigatorKey,
-      initialLocation: _initialLocation,
+      initialLocation: initialLocation,
       routes: [
         $homeRoute,
       ],
     );
   }
 
-  final String? _initialLocation;
   late final GoRouter _goRouter;
   final bool _debugShowCheckedModeBanner;
   final _log = Logger('$appNamePascalCase.App');

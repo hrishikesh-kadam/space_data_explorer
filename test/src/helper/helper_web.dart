@@ -8,6 +8,10 @@ import 'package:integration_test/integration_test.dart';
 
 import '../globals.dart';
 
+void historyForward() {
+  html.window.history.forward();
+}
+
 void resetNavigationHistoryState() {
   final html.History history = html.window.history;
   Map? state = history.state;

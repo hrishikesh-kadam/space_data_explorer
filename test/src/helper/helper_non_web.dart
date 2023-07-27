@@ -9,12 +9,16 @@ import 'package:path_provider/path_provider.dart';
 import 'package:space_data_explorer/globals.dart';
 import '../globals.dart';
 
+void historyForward() {
+  throw UnimplementedError('Not required for non Web Platforms');
+}
+
 void resetNavigationHistoryState() {
-  throw UnimplementedError('Not evaluated for non Web Platforms yet');
+  throw UnimplementedError('Not required for non Web Platforms');
 }
 
 void logNavigationHistoryState() {
-  throw UnimplementedError('Not evaluated for non Web Platforms yet');
+  throw UnimplementedError('Not required for non Web Platforms');
 }
 
 bool verifyHistoryLengthAndSerialCount(

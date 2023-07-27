@@ -28,14 +28,15 @@ BackButton getAppBarBackButton({
         if (routeExtraMap.containsKey(isNormalLink)) {
           GoRouter.of(context).pop();
         } else {
-          log.log(logLevel, 'Unusual navigation observed');
+          log.log(
+              logLevel, 'getAppBarBackButton -> Unusual navigation observed');
           log.log(logLevel, 'extra doesn\'t contains isNormalLink key');
           final routeMatchList = getListOfRouteMatch(context);
           log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
           GoRouter.of(context).go(HomeRoute.path);
         }
       } else {
-        log.log(logLevel, 'Unusual navigation observed');
+        log.log(logLevel, 'getAppBarBackButton -> Unusual navigation observed');
         log.log(logLevel, 'extra is not a RouteExtraMap');
         final routeMatchList = getListOfRouteMatch(context);
         log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
