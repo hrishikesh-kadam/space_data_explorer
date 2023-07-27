@@ -7,12 +7,12 @@ import '../test/src/globals.dart';
 
 // TODO(hrishikesh-kadam): onScreenshot() not working
 Future<void> main() async {
-  testLog.finest('-> test_driver/screenshots_test.dart');
+  testLog.finest('test_driver/screenshots_test.dart');
   try {
     await integrationDriver(
       onScreenshot: (String name, List<int> bytes,
           [Map<String, Object?>? args]) async {
-        testLog.finest('-> onScreenshot');
+        testLog.finest('onScreenshot');
         final imageFile =
             await File('screenshots/$name').create(recursive: true);
         imageFile.writeAsBytesSync(bytes);
@@ -20,6 +20,6 @@ Future<void> main() async {
       },
     );
   } catch (e) {
-    testLog.error('-> test_driver/screenshots_test.dart -> Error occured: $e');
+    testLog.error('test_driver/screenshots_test.dart -> Error occured: $e');
   }
 }

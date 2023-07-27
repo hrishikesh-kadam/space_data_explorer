@@ -35,10 +35,10 @@ bool verifyHistoryLengthAndSerialCount(
   final html.History history = html.window.history;
   Map state = history.state;
 
-  testLog.finer('-> history.length = ${history.length}');
-  testLog.finer('-> state[\'serialCount\'] = ${state['serialCount']}');
-  testLog.finer('-> historyLength = $historyLength');
-  testLog.finer('-> serialCount = $serialCount');
+  testLog.finer('history.length = ${history.length}');
+  testLog.finer('state[\'serialCount\'] = ${state['serialCount']}');
+  testLog.finer('historyLength = $historyLength');
+  testLog.finer('serialCount = $serialCount');
 
   // TODO(hrishikesh-kadam): Fails after `All tests passed!`
   // expect(history.length, historyLength);
