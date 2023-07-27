@@ -6,6 +6,8 @@ import 'package:hrk_logging/hrk_logging.dart';
 import 'package:intl/intl.dart';
 
 import '../constants/constants.dart';
+import '../constants/dimensions.dart';
+import '../constants/theme.dart';
 import '../route/settings/bloc/settings_bloc.dart';
 import '../route/settings/bloc/settings_state.dart';
 
@@ -44,34 +46,98 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
 
   @override
   Widget build(BuildContext context) {
+    return Container(
+      width: Dimensions.cadQueryFilterWidth,
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: 1,
+          color: AppTheme.filterContainerBorderColor,
+        ),
+        borderRadius: const BorderRadius.all(Radius.circular(
+          Dimensions.cadQueryFilterRadius,
+        )),
+        color: AppTheme.filterContainerColor,
+      ),
+      padding: const EdgeInsets.all(Dimensions.cadQueryFilterPadding),
+      margin: const EdgeInsets.all(Dimensions.cadQueryFilterMargin),
+      child: _getColumn(context: context),
+    );
+  }
+
+  Widget _getColumn({
+    required BuildContext context,
+  }) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.l10n.dateFilters),
+        Text(
+          widget.l10n.dateFilters,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(height: Dimensions.cadQueryFilterSpacing),
+        _getMinMaxWrap(context: context),
+        const SizedBox(height: Dimensions.cadQueryFilterSpacing),
         Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Text(widget.l10n.dateMin),
+            OutlinedButton(
+              key: Key(
+                '${widget.keyPrefix}'
+                '${DateFilterWidget.selectDateRangeButtonKey}',
+              ),
+              onPressed: () {
+                _dateRangePickerOnPressed(context: context);
+              },
+              child: Text(
+                widget.l10n.selectDateRange,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget _getMinMaxWrap({
+    required BuildContext context,
+  }) {
+    return Wrap(
+      spacing: 16,
+      runSpacing: Dimensions.cadQueryFilterSpacing,
+      alignment: WrapAlignment.center,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              widget.l10n.dateMin,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(width: 8),
             FormattedDateRangeText(
               key: Key('${widget.keyPrefix}${DateFilterWidget.minDateKey}'),
               dateRange: dateRange,
               dateFilter: DateFilter.min,
             ),
-            Text(widget.l10n.dateMax),
+          ],
+        ),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              widget.l10n.dateMax,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(width: 8),
             FormattedDateRangeText(
               key: Key('${widget.keyPrefix}${DateFilterWidget.maxDateKey}'),
               dateRange: dateRange,
               dateFilter: DateFilter.max,
             ),
-            OutlinedButton(
-              key: Key(
-                  '${widget.keyPrefix}${DateFilterWidget.selectDateRangeButtonKey}'),
-              onPressed: () {
-                _dateRangePickerOnPressed(context: context);
-              },
-              child: Text(widget.l10n.selectDateRange),
-            ),
           ],
-        )
+        ),
       ],
     );
   }
@@ -129,12 +195,18 @@ class FormattedDateRangeText extends StatelessWidget {
             case DateFilter.max:
               formattedDate = dateFormat.format(dateRange!.end);
           }
-          return Text(formattedDate);
+          return Text(
+            formattedDate,
+            style: Theme.of(context).textTheme.bodyMedium,
+          );
         },
       );
     } else {
       formattedDate = notSelectedText;
     }
-    return Text(formattedDate);
+    return Text(
+      formattedDate,
+      style: Theme.of(context).textTheme.bodyMedium,
+    );
   }
 }

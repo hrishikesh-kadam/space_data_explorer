@@ -6,6 +6,7 @@ import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import '../../constants/constants.dart';
+import '../../constants/theme.dart';
 import '../../globals.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/date_filter_widget.dart';
@@ -67,11 +68,15 @@ class CadScreen extends StatelessWidget {
   Widget _getCadScreen({
     required BuildContext context,
   }) {
-    return Column(
-      children: [
-        _getSearchButton(context: context),
-        _getDateFilterWidget(context: context),
-      ],
+    return Container(
+      color: AppTheme.pageBackgroundColor,
+      alignment: Alignment.topCenter,
+      child: Column(
+        children: [
+          _getSearchButton(context: context),
+          _getDateFilterWidget(context: context),
+        ],
+      ),
     );
   }
 
