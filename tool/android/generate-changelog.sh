@@ -6,6 +6,11 @@
 
 set -e -o pipefail
 
+if [[ $LOGS_ENV_SOURCED != "true" ]]; then
+  source ./tool/shell/logs-env.sh
+fi
+PRINT_WARNING_LOG=1
+
 FLAVOR_ENV=$1
 VERSION_CODE=$2
 VERSION_NAME=$3
@@ -28,4 +33,5 @@ if (( $(wc -c < "$CHANGELOG_FILE") > 500 )); then
   head -c 497 "$CHANGELOG_FILE" > "$TRUNCATED_CHANGELOG_FILE"
   printf "..." >> "$TRUNCATED_CHANGELOG_FILE"
   mv "$TRUNCATED_CHANGELOG_FILE" "$CHANGELOG_FILE"
+  log_warning "$CHANGELOG_FILE truncated to 500 length"
 fi
