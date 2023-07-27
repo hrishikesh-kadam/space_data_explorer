@@ -7,7 +7,6 @@ import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import '../../../deferred_loading/deferred_loading.dart';
-import '../../../typedef/typedef.dart';
 import '../../constants/constants.dart';
 import '../cad/cad_route.dart';
 import 'cad_result_screen.dart' deferred as cad_result_screen;
@@ -23,7 +22,7 @@ class CadResultRoute extends GoRouteData {
     this.$extra,
   });
 
-  final RouteExtraMap? $extra;
+  final JsonMap? $extra;
   final _log = Logger('$appNamePascalCase.CadResultRoute');
 
   static const String relativePath = 'result';
@@ -34,7 +33,7 @@ class CadResultRoute extends GoRouteData {
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
     _log.debug('redirect');
     if ($extra != null) {
-      final RouteExtraMap extra = $extra!;
+      final JsonMap extra = $extra!;
       if (extra.containsKey('$SbdbCadBody')) {
         if (extra['$SbdbCadBody'] is SbdbCadBody) {
           _log.debug('redirect -> extra[SbdbCadBody] is SbdbCadBody');

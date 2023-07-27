@@ -7,7 +7,6 @@ import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import '../../constants/constants.dart';
 import '../../globals.dart';
-import '../../typedef/typedef.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/date_filter_widget.dart';
 import '../cad_result/cad_result_route.dart';
@@ -23,7 +22,7 @@ class CadScreen extends StatelessWidget {
   });
 
   final AppLocalizations l10n;
-  final RouteExtraMap? routeExtraMap;
+  final JsonMap? routeExtraMap;
   static const String keyPrefix = 'cad_screen_';
   static const Key searchButtonKey = Key('${keyPrefix}search_button');
   static const Key minDateKey = Key('$keyPrefix${DateFilterWidget.minDateKey}');
@@ -51,7 +50,7 @@ class CadScreen extends StatelessWidget {
                 current.networkState == NetworkState.success;
           },
           listener: (context, state) {
-            RouteExtraMap routeExtraMap = getRouteExtra();
+            JsonMap routeExtraMap = getRouteExtraMap();
             routeExtraMap['$SbdbCadBody'] = state.sbdbCadBody!;
             CadResultRoute($extra: routeExtraMap).go(context);
           },

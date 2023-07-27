@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hrk_batteries/hrk_batteries.dart';
 
 import '../../deferred_loading/deferred_loading.dart';
-import '../../typedef/typedef.dart';
 import '../route/nasa_route.dart';
 import 'cad_screen.dart' deferred as cad_screen;
 
@@ -19,7 +19,7 @@ class CadRoute extends GoRouteData {
     this.$extra,
   });
 
-  final RouteExtraMap? $extra;
+  final JsonMap? $extra;
 
   static const String relativePath = 'cad';
   static const String path = '${NasaRoute.path}/$relativePath';

@@ -4,7 +4,6 @@ import 'package:hrk_batteries/hrk_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 
 import 'constants/constants.dart';
-import 'typedef/typedef.dart';
 
 bool flutterTest = isFlutterTest();
 
@@ -14,8 +13,8 @@ final log = Logger(appNamePascalCase);
 /// deep-link.
 const isNormalLink = 'isNormalLink';
 
-RouteExtraMap getRouteExtra() {
-  RouteExtraMap extra = {};
+JsonMap getRouteExtraMap() {
+  JsonMap extra = {};
   extra[isNormalLink] = true;
   return extra;
 }

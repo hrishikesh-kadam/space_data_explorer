@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
         key: nasaButtonKey,
         child: const Text(NasaRoute.relativePath),
         onPressed: () async {
-          GoRouter.of(context).go(NasaRoute.path, extra: getRouteExtra());
+          GoRouter.of(context).go(NasaRoute.path, extra: getRouteExtraMap());
         },
       ),
     );

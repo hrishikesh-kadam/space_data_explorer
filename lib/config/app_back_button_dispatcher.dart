@@ -7,7 +7,6 @@ import 'package:hrk_logging/hrk_logging.dart';
 import '../constants/constants.dart';
 import '../globals.dart';
 import '../route/home/home_route.dart';
-import '../typedef/typedef.dart';
 
 class AppBackButtonDispatcher extends RootBackButtonDispatcher {
   AppBackButtonDispatcher({
@@ -35,9 +34,9 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
           _goRouter.pop();
         }
       }
-    } else if (extraObject is RouteExtraMap) {
-      RouteExtraMap routeExtraMap = extraObject;
-      if (routeExtraMap.containsKey(isNormalLink)) {
+    } else if (extraObject is JsonMap) {
+      JsonMap extraMap = extraObject;
+      if (extraMap.containsKey(isNormalLink)) {
         return _goRouterDelegate.popRoute();
       } else {
         _log.log(logLevel, 'Unusual navigation observed');
@@ -49,7 +48,7 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
       }
     } else {
       _log.log(logLevel, 'Unusual navigation observed');
-      _log.log(logLevel, 'extra is not a RouteExtraMap');
+      _log.log(logLevel, 'extra is not a JsonMap');
       final List routeMatchList =
           _goRouter.routerDelegate.currentConfiguration.matches;
       _log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');

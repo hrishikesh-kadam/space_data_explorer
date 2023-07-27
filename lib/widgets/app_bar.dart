@@ -52,7 +52,7 @@ Widget getSettingsAction({required BuildContext context}) {
     key: settingsButtonKey,
     icon: const Icon(Icons.settings),
     onPressed: () {
-      GoRouter.of(context).push(SettingsRoute.path, extra: getRouteExtra());
+      GoRouter.of(context).push(SettingsRoute.path, extra: getRouteExtraMap());
     },
   );
 }

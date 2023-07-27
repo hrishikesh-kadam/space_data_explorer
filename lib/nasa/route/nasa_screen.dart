@@ -26,7 +26,7 @@ class NasaScreen extends StatelessWidget {
         key: cadButtonKey,
         child: const Text(CadRoute.relativePath),
         onPressed: () async {
-          CadRoute($extra: getRouteExtra()).go(context);
+          CadRoute($extra: getRouteExtraMap()).go(context);
         },
       ),
     );

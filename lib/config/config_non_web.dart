@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:hrk_batteries/hrk_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 
 import '../globals.dart';
 import '../helper/helper.dart';
 import '../route/home/home_route.dart';
-import '../typedef/typedef.dart';
 
 void configureUrlStrategy() {
   // No-op in non-web platforms.
@@ -23,9 +23,9 @@ BackButton getAppBarBackButton({
         while (GoRouter.of(context).canPop()) {
           GoRouter.of(context).pop();
         }
-      } else if (extraObject is RouteExtraMap) {
-        RouteExtraMap routeExtraMap = extraObject;
-        if (routeExtraMap.containsKey(isNormalLink)) {
+      } else if (extraObject is JsonMap) {
+        JsonMap extraMap = extraObject;
+        if (extraMap.containsKey(isNormalLink)) {
           GoRouter.of(context).pop();
         } else {
           log.log(
@@ -37,7 +37,7 @@ BackButton getAppBarBackButton({
         }
       } else {
         log.log(logLevel, 'getAppBarBackButton -> Unusual navigation observed');
-        log.log(logLevel, 'extra is not a RouteExtraMap');
+        log.log(logLevel, 'extra is not a JsonMap');
         final routeMatchList = getListOfRouteMatch(context);
         log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
         GoRouter.of(context).go(HomeRoute.path);
