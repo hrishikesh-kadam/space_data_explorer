@@ -7,6 +7,7 @@ import 'package:space_data_explorer/widgets/date_filter_widget.dart';
 import '../../../extension/common_finders.dart';
 import '../../../globals.dart';
 
+final dateFilterWidgetFinder = find.byKey(CadScreen.dateFilterWidgetKey);
 final minDateFinder = find.byKey(CadScreen.minDateKey);
 final maxDateFinder = find.byKey(CadScreen.maxDateKey);
 final selectDateRangeButtonFinder =
@@ -27,7 +28,10 @@ Future<void> selectDateRange(
   await tester.tap(find.text(dateRange.start.day.toString()).first);
   await tester.tap(find.text(dateRange.end.day.toString()).first);
   await tester.pumpAndSettle();
-  await tester.tap(find.widgetWithText(TextButton, ml10n.saveButtonLabel));
+  await tester.tap(
+    find.widgetWithText(TextButton, ml10n.saveButtonLabel),
+    warnIfMissed: false,
+  );
   await tester.pumpAndSettle();
 }
 

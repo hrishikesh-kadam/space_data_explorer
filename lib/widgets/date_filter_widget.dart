@@ -19,20 +19,20 @@ enum DateFilter {
 }
 
 class DateFilterWidget extends StatefulWidget {
-  const DateFilterWidget({
-    super.key,
-    this.keyPrefix,
+  DateFilterWidget({
+    this.keyPrefix = '',
     required this.firstDate,
     required this.lastDate,
     this.onDateRangeSelected,
     required this.l10n,
-  });
+  }) : super(key: Key('$keyPrefix$defaultKey'));
 
-  final String? keyPrefix;
+  final String keyPrefix;
   final DateTime firstDate;
   final DateTime lastDate;
   final DateTimeRangeCallback? onDateRangeSelected;
   final AppLocalizations l10n;
+  static const String defaultKey = 'date_filter_widget_key';
   static const String minDateKey = 'min_date_key';
   static const String maxDateKey = 'max_date_key';
   static const String selectDateRangeButtonKey = 'select_date_range_button_key';
@@ -76,23 +76,18 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
         const SizedBox(height: Dimensions.cadQueryFilterSpacing),
         _getMinMaxWrap(context: context),
         const SizedBox(height: Dimensions.cadQueryFilterSpacing),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            OutlinedButton(
-              key: Key(
-                '${widget.keyPrefix}'
-                '${DateFilterWidget.selectDateRangeButtonKey}',
-              ),
-              onPressed: () {
-                _dateRangePickerOnPressed(context: context);
-              },
-              child: Text(
-                widget.l10n.selectDateRange,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ),
-          ],
+        OutlinedButton(
+          key: Key(
+            '${widget.keyPrefix}'
+            '${DateFilterWidget.selectDateRangeButtonKey}',
+          ),
+          onPressed: () {
+            _dateRangePickerOnPressed(context: context);
+          },
+          child: Text(
+            widget.l10n.selectDateRange,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
         )
       ],
     );

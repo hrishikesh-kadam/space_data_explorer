@@ -26,6 +26,8 @@ class CadScreen extends StatelessWidget {
   final JsonMap? routeExtraMap;
   static const String keyPrefix = 'cad_screen_';
   static const Key searchButtonKey = Key('${keyPrefix}search_button');
+  static const Key dateFilterWidgetKey =
+      Key('$keyPrefix${DateFilterWidget.defaultKey}');
   static const Key minDateKey = Key('$keyPrefix${DateFilterWidget.minDateKey}');
   static const Key maxDateKey = Key('$keyPrefix${DateFilterWidget.maxDateKey}');
   static const Key selectDateRangeButtonKey =
