@@ -85,8 +85,13 @@ class CadScreen extends StatelessWidget {
       child: Column(
         children: [
           _getSearchButton(context: context),
-          _getDateFilterWidget(context: context),
-          _getSmallBodyFilterWidget(context: context),
+          Wrap(
+            alignment: WrapAlignment.center,
+            children: [
+              _getDateFilterWidget(context: context),
+              _getSmallBodyFilterWidget(context: context),
+            ],
+          ),
         ],
       ),
     );
