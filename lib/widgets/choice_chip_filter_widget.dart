@@ -12,6 +12,7 @@ class ChoiceChipFilterWidget<T> extends StatefulWidget {
     required this.title,
     required this.values,
     required this.labels,
+    this.keys,
     this.onChipSelected,
     required this.l10n,
     this.spacing = 8,
@@ -21,6 +22,7 @@ class ChoiceChipFilterWidget<T> extends StatefulWidget {
   final String title;
   final List<T> values;
   final List<String> labels;
+  final List<String>? keys;
   final ChipSelected<T>? onChipSelected;
   final AppLocalizations l10n;
   final double spacing;
@@ -59,6 +61,9 @@ class _ChoiceChipFilterWidgetState<T> extends State<ChoiceChipFilterWidget<T>> {
             widget.labels.length,
             (index) {
               return ChoiceChip(
+                key: widget.keys != null
+                    ? Key('${widget.keyPrefix}${widget.keys![index]}')
+                    : null,
                 label: Text(
                   widget.labels[index],
                   style: Theme.of(context).textTheme.bodyMedium,

@@ -26,6 +26,8 @@ class CadScreen extends StatelessWidget {
 
   final AppLocalizations l10n;
   final JsonMap? routeExtraMap;
+  // ignore: unused_field
+  final _log = Logger('$appNamePascalCase.CadScreen');
   static const String keyPrefix = 'cad_screen_';
   static const Key searchButtonKey = Key('${keyPrefix}search_button');
   static const Key dateFilterWidgetKey =
@@ -34,8 +36,13 @@ class CadScreen extends StatelessWidget {
   static const Key maxDateKey = Key('$keyPrefix${DateFilterWidget.maxDateKey}');
   static const Key selectDateRangeButtonKey =
       Key('$keyPrefix${DateFilterWidget.selectDateRangeButtonKey}');
-  // ignore: unused_field
-  final _log = Logger('$appNamePascalCase.CadScreen');
+  static final List<SmallBody> smallBodyList = [
+    SmallBody.pha,
+    SmallBody.nea,
+    SmallBody.comet,
+    SmallBody.neaComet,
+    SmallBody.neo,
+  ];
   // To inject during deep-link, see pumpCadRouteAsInitialLocation()
   @visibleForTesting
   static CadBloc? cadBloc;
@@ -126,13 +133,6 @@ class CadScreen extends StatelessWidget {
   ChoiceChipFilterWidget _getSmallBodyFilterWidget({
     required BuildContext context,
   }) {
-    final List<SmallBody> smallBodies = [
-      SmallBody.pha,
-      SmallBody.nea,
-      SmallBody.comet,
-      SmallBody.neaComet,
-      SmallBody.neo,
-    ];
     final List<String> chipLabels = [
       SmallBody.pha.displayName,
       SmallBody.nea.displayName,
@@ -140,11 +140,13 @@ class CadScreen extends StatelessWidget {
       l10n.neaComet,
       SmallBody.neo.displayName,
     ];
+    final List<String> keys = smallBodyList.map((e) => e.toString()).toList();
     return ChoiceChipFilterWidget<SmallBody>(
       keyPrefix: keyPrefix,
       title: l10n.smallBodyFilter,
-      values: smallBodies,
+      values: smallBodyList,
       labels: chipLabels,
+      keys: keys,
       onChipSelected: (smallBody) {
         context.read<CadBloc>().add(CadSmallBodySelected(
               smallBody: smallBody,
