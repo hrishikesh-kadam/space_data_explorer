@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
@@ -12,6 +13,7 @@ import '../../globals.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/choice_chip_filter_widget.dart';
 import '../../widgets/date_filter_widget.dart';
+import '../../widgets/filter_container.dart';
 import '../cad_result/cad_result_route.dart';
 import 'bloc/cad_bloc.dart';
 import 'bloc/cad_state.dart';
@@ -79,20 +81,40 @@ class CadScreen extends StatelessWidget {
   Widget _getCadScreen({
     required BuildContext context,
   }) {
-    return Container(
-      color: AppTheme.pageBackgroundColor,
-      alignment: Alignment.topCenter,
-      child: Column(
-        children: [
-          _getSearchButton(context: context),
-          Wrap(
-            alignment: WrapAlignment.center,
-            children: [
-              _getDateFilterWidget(context: context),
-              _getSmallBodyFilterWidget(context: context),
-            ],
-          ),
-        ],
+    List<Widget> filterWidgetList = [
+      _getDateFilterWidget(context: context),
+      _getSmallBodyFilterWidget(context: context),
+      const QueryFilterContainer(child: SizedBox(height: 150)),
+      const QueryFilterContainer(child: SizedBox(height: 100)),
+    ];
+    return SingleChildScrollView(
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: Dimensions.pagePaddingHorizontal,
+        ),
+        color: AppTheme.pageBackgroundColor,
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            _getSearchButton(context: context),
+            SizedBox(
+              width: MediaQuery.of(context).size.width <
+                      2 * Dimensions.cadQueryFilterExtent +
+                          2 * Dimensions.pagePaddingHorizontal
+                  ? Dimensions.cadQueryFilterExtent
+                  : 2 * Dimensions.cadQueryFilterExtent,
+              child: MasonryGridView.extent(
+                physics: const NeverScrollableScrollPhysics(),
+                maxCrossAxisExtent: Dimensions.cadQueryFilterExtent,
+                shrinkWrap: true,
+                itemCount: filterWidgetList.length,
+                itemBuilder: (context, index) {
+                  return filterWidgetList[index];
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
