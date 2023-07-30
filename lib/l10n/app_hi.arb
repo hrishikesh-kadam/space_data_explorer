@@ -1,11 +1,14 @@
 {
   "search": "खोजें",
-  "dateFilters": "दिनांक फ़िल्टर",
+  "dateFilter": "दिनांक फ़िल्टर",
   "dateMin": "न्यूनतम:",
   "dateMax": "अधिकतम:",
   "selectDateRange": "दिनांक फ़िल्टर चुनें",
   "language": "भाषा",
   "dateFormat": "दिनांक प्रारूप",
   "system": "सिस्टम",
-  "languageDefault": "भाषा चयनित"
+  "languageDefault": "भाषा चयनित",
+  "smallBodyFilter": "छोटे बॉडी फ़िल्टर",
+  "comet": "धूमकेतू",
+  "neaComet": "NEA और धूमकेतू"
 }

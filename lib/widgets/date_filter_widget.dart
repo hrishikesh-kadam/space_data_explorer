@@ -6,12 +6,11 @@ import 'package:hrk_logging/hrk_logging.dart';
 import 'package:intl/intl.dart';
 
 import '../constants/constants.dart';
-import '../constants/dimensions.dart';
-import '../constants/theme.dart';
 import '../route/settings/bloc/settings_bloc.dart';
 import '../route/settings/bloc/settings_state.dart';
+import 'filter_container.dart';
 
-typedef DateTimeRangeCallback = void Function(DateTimeRange?);
+typedef DateRangeSelected = void Function(DateTimeRange?);
 
 enum DateFilter {
   min,
@@ -25,13 +24,17 @@ class DateFilterWidget extends StatefulWidget {
     required this.lastDate,
     this.onDateRangeSelected,
     required this.l10n,
+    this.spacing = 8,
   }) : super(key: Key('$keyPrefix$defaultKey'));
 
   final String keyPrefix;
   final DateTime firstDate;
   final DateTime lastDate;
-  final DateTimeRangeCallback? onDateRangeSelected;
+  final DateRangeSelected? onDateRangeSelected;
   final AppLocalizations l10n;
+  final double spacing;
+  // ignore: unused_field
+  final _log = Logger('$appNamePascalCase.DateFilterWidget');
   static const String defaultKey = 'date_filter_widget_key';
   static const String minDateKey = 'min_date_key';
   static const String maxDateKey = 'max_date_key';
@@ -46,36 +49,23 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: Dimensions.cadQueryFilterWidth,
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 1,
-          color: AppTheme.filterContainerBorderColor,
-        ),
-        borderRadius: const BorderRadius.all(Radius.circular(
-          Dimensions.cadQueryFilterRadius,
-        )),
-        color: AppTheme.filterContainerColor,
-      ),
-      padding: const EdgeInsets.all(Dimensions.cadQueryFilterPadding),
-      margin: const EdgeInsets.all(Dimensions.cadQueryFilterMargin),
-      child: _getColumn(context: context),
+    return QueryFilterContainer(
+      child: _getBody(context: context),
     );
   }
 
-  Widget _getColumn({
+  Widget _getBody({
     required BuildContext context,
   }) {
     return Column(
       children: [
         Text(
-          widget.l10n.dateFilters,
+          widget.l10n.dateFilter,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        const SizedBox(height: Dimensions.cadQueryFilterSpacing),
+        SizedBox(height: widget.spacing),
         _getMinMaxWrap(context: context),
-        const SizedBox(height: Dimensions.cadQueryFilterSpacing),
+        SizedBox(height: widget.spacing),
         OutlinedButton(
           key: Key(
             '${widget.keyPrefix}'
@@ -98,7 +88,7 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
   }) {
     return Wrap(
       spacing: 16,
-      runSpacing: Dimensions.cadQueryFilterSpacing,
+      runSpacing: widget.spacing,
       alignment: WrapAlignment.center,
       children: [
         Row(

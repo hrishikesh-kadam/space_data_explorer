@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +18,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     _sbdbCadApi = sbdbCadApi ?? SbdbCadApi();
     on<CadRequested>(_onCadRequested);
     on<CadDateRangeSelected>(_onCadDateRangeSelected);
+    on<CadSmallBodySelected>(_onCadSmallBodySelected);
   }
 
   final _log = Logger('$appNamePascalCase.CadBloc');
@@ -25,12 +28,27 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     CadRequested event,
     Emitter<CadState> emit,
   ) async {
-    emit(state.copyWith(networkState: NetworkState.sent));
+    emit(state.copyWith(networkState: NetworkState.sending));
     try {
-      final queryParameters = SbdbCadQueryParameters();
+      SbdbCadQueryParameters queryParameters = SbdbCadQueryParameters();
       if (state.dateRange != null) {
-        queryParameters.dateMin = dateFormatter.format(state.dateRange!.start);
-        queryParameters.dateMax = dateFormatter.format(state.dateRange!.end);
+        queryParameters = queryParameters.copyWith(
+          dateMin: dateFormatter.format(state.dateRange!.start),
+          dateMax: dateFormatter.format(state.dateRange!.end),
+        );
+      }
+      switch (state.smallBody) {
+        case SmallBody.pha:
+          queryParameters = queryParameters.copyWith(pha: true);
+        case SmallBody.nea:
+          queryParameters = queryParameters.copyWith(nea: true);
+        case SmallBody.comet:
+          queryParameters = queryParameters.copyWith(comet: true);
+        case SmallBody.neaComet:
+          queryParameters = queryParameters.copyWith(neaComet: true);
+        case SmallBody.neo:
+          queryParameters = queryParameters.copyWith(nea: true);
+        default:
       }
       Response<SbdbCadBody> response = await _sbdbCadApi.get(
         queryParameters: queryParameters.toJson(),
@@ -51,5 +69,12 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     Emitter<CadState> emit,
   ) async {
     emit(state.copyWith(dateRange: event.dateRange));
+  }
+
+  Future<void> _onCadSmallBodySelected(
+    CadSmallBodySelected event,
+    Emitter<CadState> emit,
+  ) async {
+    emit(state.copyWith(smallBody: event.smallBody));
   }
 }

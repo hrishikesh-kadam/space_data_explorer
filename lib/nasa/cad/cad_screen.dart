@@ -6,9 +6,11 @@ import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import '../../constants/constants.dart';
+import '../../constants/dimensions.dart';
 import '../../constants/theme.dart';
 import '../../globals.dart';
 import '../../widgets/app_bar.dart';
+import '../../widgets/choice_chip_filter_widget.dart';
 import '../../widgets/date_filter_widget.dart';
 import '../cad_result/cad_result_route.dart';
 import 'bloc/cad_bloc.dart';
@@ -77,6 +79,7 @@ class CadScreen extends StatelessWidget {
         children: [
           _getSearchButton(context: context),
           _getDateFilterWidget(context: context),
+          _getSmallBodyFilterWidget(context: context),
         ],
       ),
     );
@@ -92,7 +95,7 @@ class CadScreen extends StatelessWidget {
       builder: (context, state) {
         return OutlinedButton(
           key: searchButtonKey,
-          onPressed: state == NetworkState.sent
+          onPressed: state == NetworkState.sending
               ? null
               : () async {
                   context.read<CadBloc>().add(const CadRequested());
@@ -116,6 +119,39 @@ class CadScreen extends StatelessWidget {
             ));
       },
       l10n: l10n,
+      spacing: Dimensions.cadQueryFilterSpacing,
+    );
+  }
+
+  ChoiceChipFilterWidget _getSmallBodyFilterWidget({
+    required BuildContext context,
+  }) {
+    final List<SmallBody> smallBodies = [
+      SmallBody.pha,
+      SmallBody.nea,
+      SmallBody.comet,
+      SmallBody.neaComet,
+      SmallBody.neo,
+    ];
+    final List<String> chipLabels = [
+      SmallBody.pha.displayName,
+      SmallBody.nea.displayName,
+      l10n.comet,
+      l10n.neaComet,
+      SmallBody.neo.displayName,
+    ];
+    return ChoiceChipFilterWidget<SmallBody>(
+      keyPrefix: keyPrefix,
+      title: l10n.smallBodyFilter,
+      values: smallBodies,
+      labels: chipLabels,
+      onChipSelected: (smallBody) {
+        context.read<CadBloc>().add(CadSmallBodySelected(
+              smallBody: smallBody,
+            ));
+      },
+      l10n: l10n,
+      spacing: Dimensions.cadQueryFilterSpacing,
     );
   }
 }

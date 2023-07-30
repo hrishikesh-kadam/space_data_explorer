@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CadState {
   DateTimeRange? get dateRange => throw _privateConstructorUsedError;
+  SmallBody? get smallBody => throw _privateConstructorUsedError;
   NetworkState get networkState => throw _privateConstructorUsedError;
   SbdbCadBody? get sbdbCadBody => throw _privateConstructorUsedError;
 
@@ -32,6 +33,7 @@ abstract class $CadStateCopyWith<$Res> {
   @useResult
   $Res call(
       {DateTimeRange? dateRange,
+      SmallBody? smallBody,
       NetworkState networkState,
       SbdbCadBody? sbdbCadBody});
 
@@ -52,6 +54,7 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
   @override
   $Res call({
     Object? dateRange = freezed,
+    Object? smallBody = freezed,
     Object? networkState = null,
     Object? sbdbCadBody = freezed,
   }) {
@@ -60,6 +63,10 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
           ? _value.dateRange
           : dateRange // ignore: cast_nullable_to_non_nullable
               as DateTimeRange?,
+      smallBody: freezed == smallBody
+          ? _value.smallBody
+          : smallBody // ignore: cast_nullable_to_non_nullable
+              as SmallBody?,
       networkState: null == networkState
           ? _value.networkState
           : networkState // ignore: cast_nullable_to_non_nullable
@@ -93,6 +100,7 @@ abstract class _$$_CadStateCopyWith<$Res> implements $CadStateCopyWith<$Res> {
   @useResult
   $Res call(
       {DateTimeRange? dateRange,
+      SmallBody? smallBody,
       NetworkState networkState,
       SbdbCadBody? sbdbCadBody});
 
@@ -112,6 +120,7 @@ class __$$_CadStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? dateRange = freezed,
+    Object? smallBody = freezed,
     Object? networkState = null,
     Object? sbdbCadBody = freezed,
   }) {
@@ -120,6 +129,10 @@ class __$$_CadStateCopyWithImpl<$Res>
           ? _value.dateRange
           : dateRange // ignore: cast_nullable_to_non_nullable
               as DateTimeRange?,
+      smallBody: freezed == smallBody
+          ? _value.smallBody
+          : smallBody // ignore: cast_nullable_to_non_nullable
+              as SmallBody?,
       networkState: null == networkState
           ? _value.networkState
           : networkState // ignore: cast_nullable_to_non_nullable
@@ -137,11 +150,14 @@ class __$$_CadStateCopyWithImpl<$Res>
 class _$_CadState implements _CadState {
   _$_CadState(
       {this.dateRange,
+      this.smallBody,
       this.networkState = NetworkState.initial,
       this.sbdbCadBody});
 
   @override
   final DateTimeRange? dateRange;
+  @override
+  final SmallBody? smallBody;
   @override
   @JsonKey()
   final NetworkState networkState;
@@ -150,7 +166,7 @@ class _$_CadState implements _CadState {
 
   @override
   String toString() {
-    return 'CadState(dateRange: $dateRange, networkState: $networkState, sbdbCadBody: $sbdbCadBody)';
+    return 'CadState(dateRange: $dateRange, smallBody: $smallBody, networkState: $networkState, sbdbCadBody: $sbdbCadBody)';
   }
 
   @override
@@ -160,6 +176,8 @@ class _$_CadState implements _CadState {
             other is _$_CadState &&
             (identical(other.dateRange, dateRange) ||
                 other.dateRange == dateRange) &&
+            (identical(other.smallBody, smallBody) ||
+                other.smallBody == smallBody) &&
             (identical(other.networkState, networkState) ||
                 other.networkState == networkState) &&
             (identical(other.sbdbCadBody, sbdbCadBody) ||
@@ -168,7 +186,7 @@ class _$_CadState implements _CadState {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, dateRange, networkState, sbdbCadBody);
+      Object.hash(runtimeType, dateRange, smallBody, networkState, sbdbCadBody);
 
   @JsonKey(ignore: true)
   @override
@@ -180,11 +198,14 @@ class _$_CadState implements _CadState {
 abstract class _CadState implements CadState {
   factory _CadState(
       {final DateTimeRange? dateRange,
+      final SmallBody? smallBody,
       final NetworkState networkState,
       final SbdbCadBody? sbdbCadBody}) = _$_CadState;
 
   @override
   DateTimeRange? get dateRange;
+  @override
+  SmallBody? get smallBody;
   @override
   NetworkState get networkState;
   @override
