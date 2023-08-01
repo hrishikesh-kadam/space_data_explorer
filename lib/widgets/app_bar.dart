@@ -15,29 +15,47 @@ AppBar getAppBar({
   Widget? leading,
   Widget? title,
   List<Widget>? actions,
-  Color? backgroundColor,
 }) {
-  if (leading == null) {
-    String location = GoRouterState.of(context).matchedLocation;
-    switch (location) {
-      // Routes which doesn't need leading BackButton
-      case HomeRoute.relativePath:
-        break;
-      default:
-        leading = getAppBarBackButton(context: context);
-    }
-  }
-
+  leading ??= getLeadingWidget(context: context);
   actions ??= getDefaultAppBarActions(context: context);
-
   return AppBar(
     key: key,
     leading: leading,
     title: title,
     actions: actions,
-    backgroundColor:
-        backgroundColor ?? Theme.of(context).colorScheme.inversePrimary,
+    backgroundColor: Theme.of(context).colorScheme.inversePrimary,
   );
+}
+
+SliverAppBar getSliverAppBar({
+  Key? key,
+  required BuildContext context,
+  Widget? leading,
+  Widget? title,
+  List<Widget>? actions,
+}) {
+  leading ??= getLeadingWidget(context: context);
+  actions ??= getDefaultAppBarActions(context: context);
+  return SliverAppBar(
+    key: key,
+    leading: leading,
+    title: title,
+    actions: actions,
+    backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+  );
+}
+
+Widget? getLeadingWidget({
+  required BuildContext context,
+}) {
+  String location = GoRouterState.of(context).matchedLocation;
+  switch (location) {
+    // Routes which doesn't need leading BackButton
+    case HomeRoute.relativePath:
+      return null;
+    default:
+      return getAppBarBackButton(context: context);
+  }
 }
 
 List<Widget> getDefaultAppBarActions({required BuildContext context}) {

@@ -54,10 +54,7 @@ class CadScreen extends StatelessWidget {
     return BlocProvider<CadBloc>(
       create: (_) => cadBloc ?? routeExtraMap?['$CadBloc'] ?? CadBloc(),
       child: Scaffold(
-        appBar: getAppBar(
-          context: context,
-          title: const Text(CadRoute.displayName),
-        ),
+        backgroundColor: AppTheme.pageBackgroundColor,
         body: BlocListener<CadBloc, CadState>(
           listenWhen: (previous, current) {
             return previous.networkState != current.networkState &&
@@ -68,52 +65,16 @@ class CadScreen extends StatelessWidget {
             routeExtraMap['$SbdbCadBody'] = state.sbdbCadBody!;
             CadResultRoute($extra: routeExtraMap).go(context);
           },
-          child: Builder(
-            builder: (context) {
-              return _getCadScreen(context: context);
-            },
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _getCadScreen({
-    required BuildContext context,
-  }) {
-    List<Widget> filterWidgetList = [
-      _getDateFilterWidget(context: context),
-      _getSmallBodyFilterWidget(context: context),
-      const QueryFilterContainer(child: SizedBox(height: 150)),
-      const QueryFilterContainer(child: SizedBox(height: 100)),
-    ];
-    return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: Dimensions.pagePaddingHorizontal,
-        ),
-        color: AppTheme.pageBackgroundColor,
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            _getSearchButton(context: context),
-            SizedBox(
-              width: MediaQuery.of(context).size.width <
-                      2 * Dimensions.cadQueryFilterExtent +
-                          2 * Dimensions.pagePaddingHorizontal
-                  ? Dimensions.cadQueryFilterExtent
-                  : 2 * Dimensions.cadQueryFilterExtent,
-              child: MasonryGridView.extent(
-                physics: const NeverScrollableScrollPhysics(),
-                maxCrossAxisExtent: Dimensions.cadQueryFilterExtent,
-                shrinkWrap: true,
-                itemCount: filterWidgetList.length,
-                itemBuilder: (context, index) {
-                  return filterWidgetList[index];
-                },
+          child: CustomScrollView(
+            slivers: [
+              getSliverAppBar(
+                context: context,
+                title: const Text(CadRoute.displayName),
               ),
-            ),
-          ],
+              _getSearchButton(context: context),
+              _getFilterList(context: context),
+            ],
+          ),
         ),
       ),
     );
@@ -127,16 +88,73 @@ class CadScreen extends StatelessWidget {
         return state.networkState;
       },
       builder: (context, state) {
-        return OutlinedButton(
-          key: searchButtonKey,
-          onPressed: state == NetworkState.sending
-              ? null
-              : () async {
-                  context.read<CadBloc>().add(const CadRequested());
-                },
-          child: Text(l10n.search),
+        return SliverPadding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Dimensions.pagePaddingHorizontal,
+          ),
+          sliver: SliverToBoxAdapter(
+            child: Center(
+              child: OutlinedButton(
+                key: searchButtonKey,
+                onPressed: state == NetworkState.sending
+                    ? null
+                    : () async {
+                        context.read<CadBloc>().add(const CadRequested());
+                      },
+                child: Text(l10n.search),
+              ),
+            ),
+          ),
         );
       },
+    );
+  }
+
+  Widget _getFilterList({
+    required BuildContext context,
+  }) {
+    List<Widget> filterWidgetList = [
+      _getDateFilterWidget(context: context),
+      _getSmallBodyFilterWidget(context: context),
+      const QueryFilterContainer(child: SizedBox(height: 150)),
+      const QueryFilterContainer(child: SizedBox(height: 100)),
+    ];
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double whiteSpaceWhenTwo = deviceWidth -
+        2 * Dimensions.cadQueryFilterExtent -
+        2 * Dimensions.pagePaddingHorizontal;
+    int crossAxisCount;
+    double horizontalPadding;
+    if (whiteSpaceWhenTwo >= 0) {
+      crossAxisCount = 2;
+      horizontalPadding = whiteSpaceWhenTwo / 2;
+    } else {
+      final double whiteSpaceWhenOne = deviceWidth -
+          Dimensions.cadQueryFilterExtent -
+          2 * Dimensions.pagePaddingHorizontal;
+      if (whiteSpaceWhenOne >= 0) {
+        crossAxisCount = 1;
+        horizontalPadding = whiteSpaceWhenOne / 2;
+      } else {
+        crossAxisCount = 1;
+        horizontalPadding = 0;
+      }
+    }
+    // _log.debug('deviceWidth = $deviceWidth');
+    // _log.debug('whiteSpaceWhenTwo = $whiteSpaceWhenTwo');
+    // _log.debug('whiteSpaceWhenOne = $whiteSpaceWhenOne');
+    // _log.debug('horizontalPadding = $horizontalPadding');
+    return SliverPadding(
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontalPadding,
+      ),
+      sliver: SliverMasonryGrid.count(
+        crossAxisCount: crossAxisCount,
+        childCount: filterWidgetList.length,
+        itemBuilder: (context, index) {
+          return filterWidgetList[index];
+        },
+      ),
     );
   }
 
