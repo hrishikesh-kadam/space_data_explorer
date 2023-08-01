@@ -33,6 +33,8 @@ SliverAppBar getSliverAppBar({
   Widget? leading,
   Widget? title,
   List<Widget>? actions,
+  bool floating = false,
+  bool snap = false,
 }) {
   leading ??= getLeadingWidget(context: context);
   actions ??= getDefaultAppBarActions(context: context);
@@ -42,6 +44,8 @@ SliverAppBar getSliverAppBar({
     title: title,
     actions: actions,
     backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+    floating: floating,
+    snap: snap,
   );
 }
 

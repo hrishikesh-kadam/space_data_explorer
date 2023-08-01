@@ -2,8 +2,9 @@ class Dimensions {
   static const double linearProgressIndicatorHeight = 6;
 
   static const double pagePaddingHorizontal = 8;
+  static const double pagePaddingVertical = 8;
 
-  static const double cadQueryFilterWidth = 400;
+  static const double cadQueryFilterWidth = 360;
   static const double cadQueryFilterMargin = 8;
   static const double cadQueryFilterPadding = 16;
 

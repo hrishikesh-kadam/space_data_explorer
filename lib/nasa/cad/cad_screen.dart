@@ -65,15 +65,26 @@ class CadScreen extends StatelessWidget {
             routeExtraMap['$SbdbCadBody'] = state.sbdbCadBody!;
             CadResultRoute($extra: routeExtraMap).go(context);
           },
-          child: CustomScrollView(
-            slivers: [
-              getSliverAppBar(
-                context: context,
-                title: const Text(CadRoute.displayName),
-              ),
-              _getSearchButton(context: context),
-              _getFilterList(context: context),
-            ],
+          child: Builder(
+            builder: (context) {
+              return CustomScrollView(
+                slivers: [
+                  getSliverAppBar(
+                    context: context,
+                    title: const Text(CadRoute.displayName),
+                    floating: true,
+                    snap: true,
+                  ),
+                  _getSearchButton(context: context),
+                  _getFilterList(context: context),
+                  const SliverPadding(
+                    padding: EdgeInsets.only(
+                      bottom: Dimensions.pagePaddingVertical,
+                    ),
+                  )
+                ],
+              );
+            },
           ),
         ),
       ),
@@ -116,6 +127,8 @@ class CadScreen extends StatelessWidget {
     List<Widget> filterWidgetList = [
       _getDateFilterWidget(context: context),
       _getSmallBodyFilterWidget(context: context),
+      const QueryFilterContainer(child: SizedBox(height: 200)),
+      const QueryFilterContainer(child: SizedBox(height: 100)),
       const QueryFilterContainer(child: SizedBox(height: 150)),
       const QueryFilterContainer(child: SizedBox(height: 100)),
     ];
