@@ -46,8 +46,6 @@ class CadBloc extends Bloc<CadEvent, CadState> {
           queryParameters = queryParameters.copyWith(comet: true);
         case SmallBody.neaComet:
           queryParameters = queryParameters.copyWith(neaComet: true);
-        case SmallBody.neo:
-          queryParameters = queryParameters.copyWith(nea: true);
         default:
       }
       Response<SbdbCadBody> response = await _sbdbCadApi.get(
@@ -75,6 +73,10 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     CadSmallBodySelected event,
     Emitter<CadState> emit,
   ) async {
-    emit(state.copyWith(smallBody: event.smallBody));
+    if (event.smallBody == null) {
+      emit(state.copyWith(smallBody: CadState.defaultSmallBody));
+    } else {
+      emit(state.copyWith(smallBody: event.smallBody!));
+    }
   }
 }

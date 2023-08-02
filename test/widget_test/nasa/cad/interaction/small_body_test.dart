@@ -20,8 +20,8 @@ void main() {
     testWidgets('Basic', (tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       expect(smallBodyFilterWidgetFinder, findsOneWidget);
-      expectSmallBodySelected(tester, smallBody: null);
-      expect(CadScreen.cadBloc!.state.smallBody, null);
+      expectSmallBodySelected(tester, smallBody: CadState.defaultSmallBody);
+      expect(CadScreen.cadBloc!.state.smallBody, CadState.defaultSmallBody);
     });
 
     testWidgets('Select ${SmallBody.pha.displayName}', (tester) async {
@@ -34,28 +34,28 @@ void main() {
 
     testWidgets(
         'Select ${SmallBody.comet.displayName}, '
-        'Select ${SmallBody.neaComet.displayName}', (tester) async {
+        'Select ${SmallBody.nea.displayName}', (tester) async {
       SmallBody smallBody = SmallBody.comet;
       await pumpCadRouteAsInitialLocation(tester);
       await tapSmallBody(tester, smallBody: smallBody);
       expectSmallBodySelected(tester, smallBody: smallBody);
       expect(CadScreen.cadBloc!.state.smallBody, smallBody);
-      smallBody = SmallBody.neaComet;
+      smallBody = SmallBody.nea;
       await tapSmallBody(tester, smallBody: smallBody);
       expectSmallBodySelected(tester, smallBody: smallBody);
       expect(CadScreen.cadBloc!.state.smallBody, smallBody);
     });
 
-    testWidgets('Select and Unselect ${SmallBody.neo.displayName}',
+    testWidgets('Select and Unselect ${SmallBody.comet.displayName}',
         (tester) async {
-      const smallBody = SmallBody.neo;
+      const smallBody = SmallBody.comet;
       await pumpCadRouteAsInitialLocation(tester);
       await tapSmallBody(tester, smallBody: smallBody);
       expectSmallBodySelected(tester, smallBody: smallBody);
       expect(CadScreen.cadBloc!.state.smallBody, smallBody);
       await tapSmallBody(tester, smallBody: smallBody);
-      expectSmallBodySelected(tester, smallBody: null);
-      expect(CadScreen.cadBloc!.state.smallBody, null);
+      expectSmallBodySelected(tester, smallBody: CadState.defaultSmallBody);
+      expect(CadScreen.cadBloc!.state.smallBody, CadState.defaultSmallBody);
     });
 
     testWidgets('Select and Search Each', (tester) async {

@@ -21,9 +21,11 @@ enum SmallBody {
 
 @freezed
 class CadState with _$CadState {
+  static const defaultSmallBody = SmallBody.neo;
+
   factory CadState({
     DateTimeRange? dateRange,
-    SmallBody? smallBody,
+    @Default(CadState.defaultSmallBody) SmallBody smallBody,
     @Default(NetworkState.initial) NetworkState networkState,
     SbdbCadBody? sbdbCadBody,
   }) = _CadState;

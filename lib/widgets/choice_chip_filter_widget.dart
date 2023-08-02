@@ -13,6 +13,7 @@ class ChoiceChipFilterWidget<T> extends StatefulWidget {
     required this.values,
     required this.labels,
     this.keys,
+    this.selected,
     this.onChipSelected,
     required this.l10n,
     this.spacing = 8,
@@ -23,6 +24,7 @@ class ChoiceChipFilterWidget<T> extends StatefulWidget {
   final List<T> values;
   final List<String> labels;
   final List<String>? keys;
+  final T? selected;
   final ChipSelected<T>? onChipSelected;
   final AppLocalizations l10n;
   final double spacing;
@@ -46,6 +48,10 @@ class _ChoiceChipFilterWidgetState<T> extends State<ChoiceChipFilterWidget<T>> {
   Widget _getBody({
     required BuildContext context,
   }) {
+    if (widget.selected != null) {
+      final index = widget.values.indexOf(widget.selected as T);
+      selectedIndex = index >= 0 ? index : null;
+    }
     return Column(
       children: [
         Text(

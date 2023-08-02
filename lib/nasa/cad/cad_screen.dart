@@ -40,11 +40,11 @@ class CadScreen extends StatelessWidget {
   static const Key selectDateRangeButtonKey =
       Key('$keyPrefix${DateFilterWidget.selectDateRangeButtonKey}');
   static final List<SmallBody> smallBodyList = [
+    SmallBody.neo,
     SmallBody.pha,
     SmallBody.nea,
     SmallBody.comet,
     SmallBody.neaComet,
-    SmallBody.neo,
   ];
   // To inject during deep-link, see pumpCadRouteAsInitialLocation()
   @visibleForTesting
@@ -189,30 +189,38 @@ class CadScreen extends StatelessWidget {
     );
   }
 
-  ChoiceChipFilterWidget _getSmallBodyFilterWidget({
+  Widget _getSmallBodyFilterWidget({
     required BuildContext context,
   }) {
     final List<String> chipLabels = [
+      SmallBody.neo.displayName,
       SmallBody.pha.displayName,
       SmallBody.nea.displayName,
       l10n.comet,
       l10n.neaComet,
-      SmallBody.neo.displayName,
     ];
     final List<String> keys = smallBodyList.map((e) => e.toString()).toList();
-    return ChoiceChipFilterWidget<SmallBody>(
-      keyPrefix: keyPrefix,
-      title: l10n.smallBodyFilter,
-      values: smallBodyList,
-      labels: chipLabels,
-      keys: keys,
-      onChipSelected: (smallBody) {
-        context.read<CadBloc>().add(CadSmallBodySelected(
-              smallBody: smallBody,
-            ));
+    return BlocSelector<CadBloc, CadState, SmallBody>(
+      selector: (state) {
+        return state.smallBody;
       },
-      l10n: l10n,
-      spacing: Dimensions.cadQueryFilterSpacing,
+      builder: (context, state) {
+        return ChoiceChipFilterWidget<SmallBody>(
+          keyPrefix: keyPrefix,
+          title: l10n.smallBodyFilter,
+          values: smallBodyList,
+          labels: chipLabels,
+          keys: keys,
+          selected: state,
+          onChipSelected: (smallBody) {
+            context.read<CadBloc>().add(CadSmallBodySelected(
+                  smallBody: smallBody,
+                ));
+          },
+          l10n: l10n,
+          spacing: Dimensions.cadQueryFilterSpacing,
+        );
+      },
     );
   }
 }

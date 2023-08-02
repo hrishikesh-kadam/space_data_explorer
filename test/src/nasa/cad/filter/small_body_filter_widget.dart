@@ -28,7 +28,7 @@ Future<void> tapSmallBody(
 
 void expectSmallBodySelected(
   WidgetTester tester, {
-  required SmallBody? smallBody,
+  required SmallBody smallBody,
 }) {
   for (var i = 0; i < CadScreen.smallBodyList.length; i++) {
     final finder = smallBodyChipFinders[i];
