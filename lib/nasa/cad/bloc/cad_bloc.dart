@@ -15,14 +15,15 @@ class CadBloc extends Bloc<CadEvent, CadState> {
   CadBloc({
     SbdbCadApi? sbdbCadApi,
   }) : super(CadState()) {
-    _sbdbCadApi = sbdbCadApi ?? SbdbCadApi();
+    this.sbdbCadApi = sbdbCadApi ?? SbdbCadApi();
     on<CadRequested>(_onCadRequested);
     on<CadDateRangeSelected>(_onCadDateRangeSelected);
     on<CadSmallBodySelected>(_onCadSmallBodySelected);
   }
 
   final _log = Logger('$appNamePascalCase.CadBloc');
-  late final SbdbCadApi _sbdbCadApi;
+  @visibleForTesting
+  late final SbdbCadApi sbdbCadApi;
 
   Future<void> _onCadRequested(
     CadRequested event,
@@ -48,7 +49,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
           queryParameters = queryParameters.copyWith(neaComet: true);
         default:
       }
-      Response<SbdbCadBody> response = await _sbdbCadApi.get(
+      Response<SbdbCadBody> response = await sbdbCadApi.get(
         queryParameters: queryParameters.toJson(),
       );
       _log.fine('_onCadRequested success');

@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
+import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
+import 'package:mockito/mockito.dart';
 
 import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
@@ -59,6 +61,13 @@ void main() {
     });
 
     testWidgets('Select and Search Each', (tester) async {
+      final List<JsonMap> verifyQueryParamters = [
+        SbdbCadQueryParameters().toJson(),
+        SbdbCadQueryParameters(pha: true).toJson(),
+        SbdbCadQueryParameters(nea: true).toJson(),
+        SbdbCadQueryParameters(comet: true).toJson(),
+        SbdbCadQueryParameters(neaComet: true).toJson(),
+      ];
       for (var i = 0; i < CadScreen.smallBodyList.length; i++) {
         if (i == 0) {
           await pumpCadRouteAsInitialLocation(tester);
@@ -72,6 +81,11 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
         expect(find.byType(CadResultScreen), findsOneWidget);
+        final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
+        verify(sbdbCadApi.get(
+          queryParameters: verifyQueryParamters[i],
+        )).called(1);
+        clearInteractions(sbdbCadApi);
       }
     });
   });
