@@ -371,10 +371,10 @@ packages:
     dependency: "direct dev"
     description:
       name: hrk_flutter_test_batteries
-      sha256: "751ed60169497203ede36e3b38b59c2656765390bd20e39622c5fd78cadf7ca9"
+      sha256: ec40ff15ac168fe8c989062be3d3f9c44b6479931daf37b1cf76fc98b7220804
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.0"
+    version: "0.5.0"
   hrk_logging:
     dependency: "direct main"
     description:

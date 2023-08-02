@@ -32,6 +32,7 @@ class CadScreen extends StatelessWidget {
   final _log = Logger('$appNamePascalCase.CadScreen');
   static const String keyPrefix = 'cad_screen_';
   static const Key searchButtonKey = Key('${keyPrefix}search_button');
+  static const Key queryFilterGridKey = Key('${keyPrefix}query_filter_grid');
   static const Key dateFilterWidgetKey =
       Key('$keyPrefix${DateFilterWidget.defaultKey}');
   static const Key minDateKey = Key('$keyPrefix${DateFilterWidget.minDateKey}');
@@ -136,32 +137,32 @@ class CadScreen extends StatelessWidget {
     final double whiteSpaceWhenTwo = deviceWidth -
         2 * Dimensions.cadQueryFilterExtent -
         2 * Dimensions.pagePaddingHorizontal;
+    // _log.debug('deviceWidth = $deviceWidth');
+    // _log.debug('whiteSpaceWhenTwo = $whiteSpaceWhenTwo');
     int crossAxisCount;
-    double horizontalPadding;
+    double horizontalPadding = Dimensions.pagePaddingHorizontal;
     if (whiteSpaceWhenTwo >= 0) {
       crossAxisCount = 2;
-      horizontalPadding = whiteSpaceWhenTwo / 2;
+      horizontalPadding += whiteSpaceWhenTwo / 2;
     } else {
       final double whiteSpaceWhenOne = deviceWidth -
           Dimensions.cadQueryFilterExtent -
           2 * Dimensions.pagePaddingHorizontal;
+      // _log.debug('whiteSpaceWhenOne = $whiteSpaceWhenOne');
       if (whiteSpaceWhenOne >= 0) {
         crossAxisCount = 1;
-        horizontalPadding = whiteSpaceWhenOne / 2;
+        horizontalPadding += whiteSpaceWhenOne / 2;
       } else {
         crossAxisCount = 1;
-        horizontalPadding = 0;
       }
     }
-    // _log.debug('deviceWidth = $deviceWidth');
-    // _log.debug('whiteSpaceWhenTwo = $whiteSpaceWhenTwo');
-    // _log.debug('whiteSpaceWhenOne = $whiteSpaceWhenOne');
     // _log.debug('horizontalPadding = $horizontalPadding');
     return SliverPadding(
       padding: EdgeInsets.symmetric(
         horizontal: horizontalPadding,
       ),
       sliver: SliverMasonryGrid.count(
+        key: queryFilterGridKey,
         crossAxisCount: crossAxisCount,
         childCount: filterWidgetList.length,
         itemBuilder: (context, index) {

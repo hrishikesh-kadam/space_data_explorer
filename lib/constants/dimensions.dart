@@ -4,7 +4,7 @@ class Dimensions {
   static const double pagePaddingHorizontal = 8;
   static const double pagePaddingVertical = 8;
 
-  static const double cadQueryFilterWidth = 360;
+  static const double cadQueryFilterWidth = 328;
   static const double cadQueryFilterMargin = 8;
   static const double cadQueryFilterPadding = 16;
 
