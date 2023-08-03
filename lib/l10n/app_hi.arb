@@ -11,7 +11,7 @@
   "smallBodyFilter": "छोटे पिंड चयन",
   "comet": "धूमकेतू",
   "neaComet": "NEA और धूमकेतू",
-  "closeApproachBodyFilter": "पिंड के निकट चयन",
+  "closeApproachBodySelector": "पिंड के निकट चयन",
   "earth": "पृथ्वी",
   "moon": "चंद्रमा",
   "all": "सभी",

@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import '../constants/constants.dart';
 import '../route/settings/bloc/settings_bloc.dart';
 import '../route/settings/bloc/settings_state.dart';
-import 'filter_container.dart';
+import 'query_grid_container.dart';
 
 typedef DateRangeSelected = void Function(DateTimeRange?);
 
@@ -49,7 +49,7 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return QueryFilterContainer(
+    return QueryItemContainer(
       child: _getBody(context: context),
     );
   }

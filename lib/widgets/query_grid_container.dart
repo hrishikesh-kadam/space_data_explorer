@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import '../constants/dimensions.dart';
 import '../constants/theme.dart';
 
-class QueryFilterContainer extends StatelessWidget {
-  const QueryFilterContainer({
+class QueryItemContainer extends StatelessWidget {
+  const QueryItemContainer({
     super.key,
     this.child,
   });
@@ -14,19 +14,19 @@ class QueryFilterContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Dimensions.cadQueryFilterWidth,
+      width: Dimensions.cadQueryItemWidth,
       decoration: BoxDecoration(
         border: Border.all(
           width: 1,
-          color: AppTheme.filterContainerBorderColor,
+          color: AppTheme.queryContainerBorderColor,
         ),
         borderRadius: const BorderRadius.all(Radius.circular(
-          Dimensions.cadQueryFilterRadius,
+          Dimensions.cadQueryItemRadius,
         )),
-        color: AppTheme.filterContainerColor,
+        color: AppTheme.queryContainerColor,
       ),
-      padding: const EdgeInsets.all(Dimensions.cadQueryFilterPadding),
-      margin: const EdgeInsets.all(Dimensions.cadQueryFilterMargin),
+      padding: const EdgeInsets.all(Dimensions.cadQueryItemPadding),
+      margin: const EdgeInsets.all(Dimensions.cadQueryItemMargin),
       child: child,
     );
   }

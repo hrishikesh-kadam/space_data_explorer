@@ -4,17 +4,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
-import 'package:space_data_explorer/widgets/choice_chip_filter_widget.dart';
+import 'package:space_data_explorer/widgets/choice_chip_query_widget.dart';
 
-final closeApproachBodyFilterWidgetFinder = find.byKey(const Key(
-  '${CadScreen.closeApproachBodyFilterKeyPrefix}'
-  '${ChoiceChipFilterWidget.defaultKey}',
+final closeApproachBodySelectorWidgetFinder = find.byKey(const Key(
+  '${CadScreen.closeApproachBodySelectorKeyPrefix}'
+  '${ChoiceChipQueryWidget.defaultKey}',
 ));
 
 final List<Finder> closeApproachBodyChipFinders =
     CadScreen.closeApproachBodyList.map((e) {
   return find.byKey(Key(
-    '${CadScreen.closeApproachBodyFilterKeyPrefix}'
+    '${CadScreen.closeApproachBodySelectorKeyPrefix}'
     '${e.name}',
   ));
 }).toList();

@@ -4,15 +4,15 @@ import 'package:space_data_explorer/nasa/cad/bloc/cad_bloc.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/route/nasa_screen.dart';
-import 'package:space_data_explorer/widgets/filter_container.dart';
+import 'package:space_data_explorer/widgets/query_grid_container.dart';
 import '../../space_data_explorer_app.dart';
 import '../route/nasa_route.dart';
 import 'sbdb_cad_api.dart';
 
-final queryFilterGridFinder = find.byKey(CadScreen.queryFilterGridKey);
-final queryFilterGridItemFinder = find.descendant(
-  of: queryFilterGridFinder,
-  matching: find.byType(QueryFilterContainer),
+final queryGridFinder = find.byKey(CadScreen.queryGridKey);
+final queryGridItemFinder = find.descendant(
+  of: queryGridFinder,
+  matching: find.byType(QueryItemContainer),
 );
 
 Future<void> pumpCadRouteAsInitialLocation(WidgetTester tester) async {

@@ -11,9 +11,9 @@ import '../../constants/dimensions.dart';
 import '../../constants/theme.dart';
 import '../../globals.dart';
 import '../../widgets/app_bar.dart';
-import '../../widgets/choice_chip_filter_widget.dart';
+import '../../widgets/choice_chip_query_widget.dart';
 import '../../widgets/date_filter_widget.dart';
-import '../../widgets/filter_container.dart';
+import '../../widgets/query_grid_container.dart';
 import '../cad_result/cad_result_route.dart';
 import 'bloc/cad_bloc.dart';
 import 'bloc/cad_state.dart';
@@ -31,8 +31,8 @@ class CadScreen extends StatelessWidget {
   // ignore: unused_field
   final _log = Logger('$appNamePascalCase.CadScreen');
   static const String keyPrefix = 'cad_screen_';
-  static const Key searchButtonKey = Key('${keyPrefix}search_button');
-  static const Key queryFilterGridKey = Key('${keyPrefix}query_filter_grid');
+  static const Key searchButtonKey = Key('${keyPrefix}search_button_key');
+  static const Key queryGridKey = Key('${keyPrefix}query_grid_key');
   static const Key dateFilterWidgetKey =
       Key('$keyPrefix${DateFilterWidget.defaultKey}');
   static const Key minDateKey = Key('$keyPrefix${DateFilterWidget.minDateKey}');
@@ -40,7 +40,7 @@ class CadScreen extends StatelessWidget {
   static const Key selectDateRangeButtonKey =
       Key('$keyPrefix${DateFilterWidget.selectDateRangeButtonKey}');
   static const String smallBodyFilterKeyPrefix = '${keyPrefix}small_body_';
-  static const String closeApproachBodyFilterKeyPrefix =
+  static const String closeApproachBodySelectorKeyPrefix =
       '${keyPrefix}close_approach_body_';
   static final List<SmallBody> smallBodyList = [
     SmallBody.neo,
@@ -92,7 +92,7 @@ class CadScreen extends StatelessWidget {
                     snap: true,
                   ),
                   _getSearchButton(context: context),
-                  _getFilterList(context: context),
+                  _getQueryGrid(context: context),
                   const SliverPadding(
                     padding: EdgeInsets.only(
                       bottom: Dimensions.pagePaddingVertical,
@@ -137,20 +137,20 @@ class CadScreen extends StatelessWidget {
     );
   }
 
-  Widget _getFilterList({
+  Widget _getQueryGrid({
     required BuildContext context,
   }) {
-    List<Widget> filterWidgetList = [
+    List<Widget> queryWidgetList = [
       _getDateFilterWidget(context: context),
       _getSmallBodyFilterWidget(context: context),
-      _getCloseApproachBodyFilterWidget(context: context),
-      const QueryFilterContainer(child: SizedBox(height: 100)),
-      const QueryFilterContainer(child: SizedBox(height: 150)),
-      const QueryFilterContainer(child: SizedBox(height: 100)),
+      _getCloseApproachBodySelectorWidget(context: context),
+      const QueryItemContainer(child: SizedBox(height: 100)),
+      const QueryItemContainer(child: SizedBox(height: 150)),
+      const QueryItemContainer(child: SizedBox(height: 100)),
     ];
     final double deviceWidth = MediaQuery.of(context).size.width;
     final double whiteSpaceWhenTwo = deviceWidth -
-        2 * Dimensions.cadQueryFilterExtent -
+        2 * Dimensions.cadQueryItemExtent -
         2 * Dimensions.pagePaddingHorizontal;
     // _log.debug('deviceWidth = $deviceWidth');
     // _log.debug('whiteSpaceWhenTwo = $whiteSpaceWhenTwo');
@@ -161,7 +161,7 @@ class CadScreen extends StatelessWidget {
       horizontalPadding += whiteSpaceWhenTwo / 2;
     } else {
       final double whiteSpaceWhenOne = deviceWidth -
-          Dimensions.cadQueryFilterExtent -
+          Dimensions.cadQueryItemExtent -
           2 * Dimensions.pagePaddingHorizontal;
       // _log.debug('whiteSpaceWhenOne = $whiteSpaceWhenOne');
       if (whiteSpaceWhenOne >= 0) {
@@ -177,11 +177,11 @@ class CadScreen extends StatelessWidget {
         horizontal: horizontalPadding,
       ),
       sliver: SliverMasonryGrid.count(
-        key: queryFilterGridKey,
+        key: queryGridKey,
         crossAxisCount: crossAxisCount,
-        childCount: filterWidgetList.length,
+        childCount: queryWidgetList.length,
         itemBuilder: (context, index) {
-          return filterWidgetList[index];
+          return queryWidgetList[index];
         },
       ),
     );
@@ -200,7 +200,7 @@ class CadScreen extends StatelessWidget {
             ));
       },
       l10n: l10n,
-      spacing: Dimensions.cadQueryFilterSpacing,
+      spacing: Dimensions.cadQueryItemSpacing,
     );
   }
 
@@ -222,7 +222,7 @@ class CadScreen extends StatelessWidget {
         return state.smallBody;
       },
       builder: (context, state) {
-        return ChoiceChipFilterWidget<SmallBody>(
+        return ChoiceChipQueryWidget<SmallBody>(
           keyPrefix: smallBodyFilterKeyPrefix,
           title: l10n.smallBodyFilter,
           values: smallBodyList,
@@ -235,13 +235,13 @@ class CadScreen extends StatelessWidget {
                 ));
           },
           l10n: l10n,
-          spacing: Dimensions.cadQueryFilterSpacing,
+          spacing: Dimensions.cadQueryItemSpacing,
         );
       },
     );
   }
 
-  Widget _getCloseApproachBodyFilterWidget({
+  Widget _getCloseApproachBodySelectorWidget({
     required BuildContext context,
   }) {
     final List<String> chipLabels = [
@@ -264,9 +264,9 @@ class CadScreen extends StatelessWidget {
         return state.closeApproachBody;
       },
       builder: (context, state) {
-        return ChoiceChipFilterWidget<CloseApproachBody>(
-          keyPrefix: closeApproachBodyFilterKeyPrefix,
-          title: l10n.closeApproachBodyFilter,
+        return ChoiceChipQueryWidget<CloseApproachBody>(
+          keyPrefix: closeApproachBodySelectorKeyPrefix,
+          title: l10n.closeApproachBodySelector,
           values: closeApproachBodyList,
           labels: chipLabels,
           keys: keys,
@@ -277,7 +277,7 @@ class CadScreen extends StatelessWidget {
                 ));
           },
           l10n: l10n,
-          spacing: Dimensions.cadQueryFilterSpacing,
+          spacing: Dimensions.cadQueryItemSpacing,
         );
       },
     );

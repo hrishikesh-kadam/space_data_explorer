@@ -6,12 +6,12 @@ import 'package:mockito/mockito.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
-import 'package:space_data_explorer/widgets/choice_chip_filter_widget.dart';
+import 'package:space_data_explorer/widgets/choice_chip_query_widget.dart';
 import '../../../../../src/nasa/cad/cad_route.dart';
-import '../../../../../src/nasa/cad/filter/small_body.dart';
+import '../../../../../src/nasa/cad/query/small_body_filter.dart';
 
 void main() {
-  group('$CadRoute ${ChoiceChipFilterWidget<SmallBody>} Interaction Test', () {
+  group('$CadRoute ${ChoiceChipQueryWidget<SmallBody>} Interaction Test', () {
     testWidgets('DeferredLoading workaround', (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       await tester.tap(find.byKey(CadScreen.searchButtonKey));

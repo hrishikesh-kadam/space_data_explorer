@@ -4,12 +4,12 @@ class Dimensions {
   static const double pagePaddingHorizontal = 8;
   static const double pagePaddingVertical = 8;
 
-  static const double cadQueryFilterWidth = 328;
-  static const double cadQueryFilterMargin = 8;
-  static const double cadQueryFilterPadding = 16;
+  static const double cadQueryItemWidth = 328;
+  static const double cadQueryItemMargin = 8;
+  static const double cadQueryItemPadding = 16;
 
-  static const double cadQueryFilterExtent =
-      cadQueryFilterWidth + 2 * cadQueryFilterMargin;
-  static const double cadQueryFilterRadius = 10;
-  static const double cadQueryFilterSpacing = 8;
+  static const double cadQueryItemExtent =
+      cadQueryItemWidth + 2 * cadQueryItemMargin;
+  static const double cadQueryItemRadius = 10;
+  static const double cadQueryItemSpacing = 8;
 }

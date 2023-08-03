@@ -8,7 +8,7 @@ import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
 import 'package:space_data_explorer/widgets/date_filter_widget.dart';
 import '../../../../../src/globals.dart';
 import '../../../../../src/nasa/cad/cad_route.dart';
-import '../../../../../src/nasa/cad/filter/date.dart';
+import '../../../../../src/nasa/cad/query/date_filter.dart';
 import '../../../../../src/route/settings/settings_route.dart';
 import '../../../../../src/route/settings/tiles/date_format_tile.dart';
 

@@ -11,7 +11,7 @@
   "smallBodyFilter": "लहान वस्तू निवड",
   "comet": "धूमकेतू",
   "neaComet": "NEA आणि धूमकेतू",
-  "closeApproachBodyFilter": "वस्तूच्या जवळ येणारा निवड",
+  "closeApproachBodySelector": "वस्तूच्या जवळ येणारा निवड",
   "earth": "पृथ्वी",
   "moon": "चंद्र",
   "all": "सर्व",

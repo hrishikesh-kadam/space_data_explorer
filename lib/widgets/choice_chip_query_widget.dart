@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'filter_container.dart';
+import 'query_grid_container.dart';
 
 typedef ChipSelected<T> = void Function(T? value);
 
-class ChoiceChipFilterWidget<T> extends StatefulWidget {
-  ChoiceChipFilterWidget({
+class ChoiceChipQueryWidget<T> extends StatefulWidget {
+  ChoiceChipQueryWidget({
     this.keyPrefix = '',
     required this.title,
     required this.values,
@@ -28,19 +28,19 @@ class ChoiceChipFilterWidget<T> extends StatefulWidget {
   final ChipSelected<T>? onChipSelected;
   final AppLocalizations l10n;
   final double spacing;
-  static const String defaultKey = 'choice_chip_filter_widget_key';
+  static const String defaultKey = 'choice_chip_query_widget_key';
 
   @override
-  State<ChoiceChipFilterWidget<T>> createState() =>
-      _ChoiceChipFilterWidgetState();
+  State<ChoiceChipQueryWidget<T>> createState() =>
+      _ChoiceChipQueryWidgetState();
 }
 
-class _ChoiceChipFilterWidgetState<T> extends State<ChoiceChipFilterWidget<T>> {
+class _ChoiceChipQueryWidgetState<T> extends State<ChoiceChipQueryWidget<T>> {
   int? selectedIndex;
 
   @override
   Widget build(BuildContext context) {
-    return QueryFilterContainer(
+    return QueryItemContainer(
       child: _getBody(context: context),
     );
   }

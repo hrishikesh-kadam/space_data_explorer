@@ -3,16 +3,16 @@ import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
 import 'package:space_data_explorer/constants/dimensions.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
-import 'package:space_data_explorer/widgets/filter_container.dart';
+import 'package:space_data_explorer/widgets/query_grid_container.dart';
 import '../../../../../src/nasa/cad/cad_route.dart';
 
 void main() {
   group('$CadRoute Filter Painting Test', () {
     group('Masonry', () {
-      const fitsTwoItems = 2 * Dimensions.cadQueryFilterExtent +
+      const fitsTwoItems = 2 * Dimensions.cadQueryItemExtent +
           2 * Dimensions.pagePaddingHorizontal;
-      const fitsOneItem = Dimensions.cadQueryFilterExtent +
-          2 * Dimensions.pagePaddingHorizontal;
+      const fitsOneItem =
+          Dimensions.cadQueryItemExtent + 2 * Dimensions.pagePaddingHorizontal;
 
       testWidgets('Screen Width ${fitsTwoItems + 1}',
           (WidgetTester tester) async {
@@ -61,12 +61,11 @@ void _expectCrossAxisCount(
   WidgetTester tester, {
   required int count,
 }) {
-  final queryFilterGridItems = tester
-      .widgetList<QueryFilterContainer>(queryFilterGridItemFinder)
-      .toList();
-  final firstItemRect = tester.getRect(find.byWidget(queryFilterGridItems[0]));
-  final secondItemRect = tester.getRect(find.byWidget(queryFilterGridItems[1]));
-  final thirdItemRect = tester.getRect(find.byWidget(queryFilterGridItems[2]));
+  final queryGridItems =
+      tester.widgetList<QueryItemContainer>(queryGridItemFinder).toList();
+  final firstItemRect = tester.getRect(find.byWidget(queryGridItems[0]));
+  final secondItemRect = tester.getRect(find.byWidget(queryGridItems[1]));
+  final thirdItemRect = tester.getRect(find.byWidget(queryGridItems[2]));
   if (count == 2) {
     expect(firstItemRect.top == secondItemRect.top, true);
     expect(secondItemRect.top < thirdItemRect.top, true);

@@ -4,11 +4,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
-import 'package:space_data_explorer/widgets/choice_chip_filter_widget.dart';
+import 'package:space_data_explorer/widgets/choice_chip_query_widget.dart';
 
 final smallBodyFilterWidgetFinder = find.byKey(const Key(
   '${CadScreen.smallBodyFilterKeyPrefix}'
-  '${ChoiceChipFilterWidget.defaultKey}',
+  '${ChoiceChipQueryWidget.defaultKey}',
 ));
 
 final List<Finder> smallBodyChipFinders = CadScreen.smallBodyList.map((e) {
