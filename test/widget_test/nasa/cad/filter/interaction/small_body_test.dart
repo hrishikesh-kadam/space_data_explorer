@@ -18,7 +18,7 @@ void main() {
       await tester.pumpAndSettle();
     });
 
-    testWidgets('Basic', (tester) async {
+    testWidgets('No Interaction', (tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       expect(smallBodyFilterWidgetFinder, findsOneWidget);
       expectSmallBodySelected(
@@ -31,31 +31,8 @@ void main() {
       );
     });
 
-    testWidgets('Select ${SmallBody.pha.displayName}', (tester) async {
+    testWidgets('Select and Unselect ${SmallBody.pha.name}', (tester) async {
       const smallBody = SmallBody.pha;
-      await pumpCadRouteAsInitialLocation(tester);
-      await tapSmallBody(tester, smallBody: smallBody);
-      expectSmallBodySelected(tester, smallBody: smallBody);
-      expect(CadScreen.cadBloc!.state.smallBody, smallBody);
-    });
-
-    testWidgets(
-        'Select ${SmallBody.comet.displayName}, '
-        'Select ${SmallBody.nea.displayName}', (tester) async {
-      SmallBody smallBody = SmallBody.comet;
-      await pumpCadRouteAsInitialLocation(tester);
-      await tapSmallBody(tester, smallBody: smallBody);
-      expectSmallBodySelected(tester, smallBody: smallBody);
-      expect(CadScreen.cadBloc!.state.smallBody, smallBody);
-      smallBody = SmallBody.nea;
-      await tapSmallBody(tester, smallBody: smallBody);
-      expectSmallBodySelected(tester, smallBody: smallBody);
-      expect(CadScreen.cadBloc!.state.smallBody, smallBody);
-    });
-
-    testWidgets('Select and Unselect ${SmallBody.comet.displayName}',
-        (tester) async {
-      const smallBody = SmallBody.comet;
       await pumpCadRouteAsInitialLocation(tester);
       await tapSmallBody(tester, smallBody: smallBody);
       expectSmallBodySelected(tester, smallBody: smallBody);
@@ -88,6 +65,8 @@ void main() {
         }
         final smallBody = CadScreen.smallBodyList[i];
         await tapSmallBody(tester, smallBody: smallBody);
+        expectSmallBodySelected(tester, smallBody: smallBody);
+        expect(CadScreen.cadBloc!.state.smallBody, smallBody);
         await tester.tap(find.byKey(CadScreen.searchButtonKey));
         await tester.pumpAndSettle();
         expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
