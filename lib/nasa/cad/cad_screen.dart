@@ -39,12 +39,27 @@ class CadScreen extends StatelessWidget {
   static const Key maxDateKey = Key('$keyPrefix${DateFilterWidget.maxDateKey}');
   static const Key selectDateRangeButtonKey =
       Key('$keyPrefix${DateFilterWidget.selectDateRangeButtonKey}');
+  static const String smallBodyFilterKeyPrefix = '${keyPrefix}small_body_';
+  static const String closeApproachBodyFilterKeyPrefix =
+      '${keyPrefix}close_approach_body_';
   static final List<SmallBody> smallBodyList = [
     SmallBody.neo,
     SmallBody.pha,
     SmallBody.nea,
     SmallBody.comet,
     SmallBody.neaComet,
+  ];
+  static final List<CloseApproachBody> closeApproachBodyList = [
+    CloseApproachBody.earth,
+    CloseApproachBody.moon,
+    CloseApproachBody.all,
+    CloseApproachBody.mercury,
+    CloseApproachBody.venus,
+    CloseApproachBody.mars,
+    CloseApproachBody.jupiter,
+    CloseApproachBody.saturn,
+    CloseApproachBody.uranus,
+    CloseApproachBody.neptune,
   ];
   // To inject during deep-link, see pumpCadRouteAsInitialLocation()
   @visibleForTesting
@@ -128,7 +143,7 @@ class CadScreen extends StatelessWidget {
     List<Widget> filterWidgetList = [
       _getDateFilterWidget(context: context),
       _getSmallBodyFilterWidget(context: context),
-      const QueryFilterContainer(child: SizedBox(height: 200)),
+      _getCloseApproachBodyFilterWidget(context: context),
       const QueryFilterContainer(child: SizedBox(height: 100)),
       const QueryFilterContainer(child: SizedBox(height: 150)),
       const QueryFilterContainer(child: SizedBox(height: 100)),
@@ -199,14 +214,16 @@ class CadScreen extends StatelessWidget {
       l10n.comet,
       l10n.neaComet,
     ];
-    final List<String> keys = smallBodyList.map((e) => e.toString()).toList();
+    final List<String> keys = smallBodyList.map((e) => e.name).toList();
+    assert(smallBodyList.length == chipLabels.length);
+    assert(smallBodyList.length == keys.length);
     return BlocSelector<CadBloc, CadState, SmallBody>(
       selector: (state) {
         return state.smallBody;
       },
       builder: (context, state) {
         return ChoiceChipFilterWidget<SmallBody>(
-          keyPrefix: keyPrefix,
+          keyPrefix: smallBodyFilterKeyPrefix,
           title: l10n.smallBodyFilter,
           values: smallBodyList,
           labels: chipLabels,
@@ -215,6 +232,48 @@ class CadScreen extends StatelessWidget {
           onChipSelected: (smallBody) {
             context.read<CadBloc>().add(CadSmallBodySelected(
                   smallBody: smallBody,
+                ));
+          },
+          l10n: l10n,
+          spacing: Dimensions.cadQueryFilterSpacing,
+        );
+      },
+    );
+  }
+
+  Widget _getCloseApproachBodyFilterWidget({
+    required BuildContext context,
+  }) {
+    final List<String> chipLabels = [
+      l10n.earth,
+      l10n.moon,
+      l10n.all,
+      l10n.mercury,
+      l10n.venus,
+      l10n.mars,
+      l10n.jupiter,
+      l10n.saturn,
+      l10n.uranus,
+      l10n.neptune,
+    ];
+    final List<String> keys = closeApproachBodyList.map((e) => e.name).toList();
+    assert(closeApproachBodyList.length == chipLabels.length);
+    assert(closeApproachBodyList.length == keys.length);
+    return BlocSelector<CadBloc, CadState, CloseApproachBody>(
+      selector: (state) {
+        return state.closeApproachBody;
+      },
+      builder: (context, state) {
+        return ChoiceChipFilterWidget<CloseApproachBody>(
+          keyPrefix: closeApproachBodyFilterKeyPrefix,
+          title: l10n.closeApproachBodyFilter,
+          values: closeApproachBodyList,
+          labels: chipLabels,
+          keys: keys,
+          selected: state,
+          onChipSelected: (closeApproachBody) {
+            context.read<CadBloc>().add(CadCloseApproachBodySelected(
+                  closeApproachBody: closeApproachBody,
                 ));
           },
           l10n: l10n,

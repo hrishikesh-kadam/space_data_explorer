@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
-import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/widgets/choice_chip_filter_widget.dart';
 
-final smallBodyFilterWidgetFinder = find.byKey(
-    const Key('${CadScreen.keyPrefix}${ChoiceChipFilterWidget.defaultKey}'));
+final smallBodyFilterWidgetFinder = find.byKey(const Key(
+  '${CadScreen.smallBodyFilterKeyPrefix}'
+  '${ChoiceChipFilterWidget.defaultKey}',
+));
 
 final List<Finder> smallBodyChipFinders = CadScreen.smallBodyList.map((e) {
-  return find.byKey(Key('${CadScreen.keyPrefix}${e.toString()}'));
+  return find.byKey(Key(
+    '${CadScreen.smallBodyFilterKeyPrefix}'
+    '${e.name}',
+  ));
 }).toList();
 
 final Map<SmallBody, Finder> smallBodyChipFinderMap = {

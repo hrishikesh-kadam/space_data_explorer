@@ -3,7 +3,6 @@ import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
@@ -22,8 +21,14 @@ void main() {
     testWidgets('Basic', (tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       expect(smallBodyFilterWidgetFinder, findsOneWidget);
-      expectSmallBodySelected(tester, smallBody: CadState.defaultSmallBody);
-      expect(CadScreen.cadBloc!.state.smallBody, CadState.defaultSmallBody);
+      expectSmallBodySelected(
+        tester,
+        smallBody: SbdbCadQueryParameters.defaultSmallBody,
+      );
+      expect(
+        CadScreen.cadBloc!.state.smallBody,
+        SbdbCadQueryParameters.defaultSmallBody,
+      );
     });
 
     testWidgets('Select ${SmallBody.pha.displayName}', (tester) async {
@@ -56,8 +61,14 @@ void main() {
       expectSmallBodySelected(tester, smallBody: smallBody);
       expect(CadScreen.cadBloc!.state.smallBody, smallBody);
       await tapSmallBody(tester, smallBody: smallBody);
-      expectSmallBodySelected(tester, smallBody: CadState.defaultSmallBody);
-      expect(CadScreen.cadBloc!.state.smallBody, CadState.defaultSmallBody);
+      expectSmallBodySelected(
+        tester,
+        smallBody: SbdbCadQueryParameters.defaultSmallBody,
+      );
+      expect(
+        CadScreen.cadBloc!.state.smallBody,
+        SbdbCadQueryParameters.defaultSmallBody,
+      );
     });
 
     testWidgets('Select and Search Each', (tester) async {

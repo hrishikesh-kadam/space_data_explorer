@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CadState {
   DateTimeRange? get dateRange => throw _privateConstructorUsedError;
   SmallBody get smallBody => throw _privateConstructorUsedError;
+  CloseApproachBody get closeApproachBody => throw _privateConstructorUsedError;
   NetworkState get networkState => throw _privateConstructorUsedError;
   SbdbCadBody? get sbdbCadBody => throw _privateConstructorUsedError;
 
@@ -34,6 +35,7 @@ abstract class $CadStateCopyWith<$Res> {
   $Res call(
       {DateTimeRange? dateRange,
       SmallBody smallBody,
+      CloseApproachBody closeApproachBody,
       NetworkState networkState,
       SbdbCadBody? sbdbCadBody});
 
@@ -55,6 +57,7 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
   $Res call({
     Object? dateRange = freezed,
     Object? smallBody = null,
+    Object? closeApproachBody = null,
     Object? networkState = null,
     Object? sbdbCadBody = freezed,
   }) {
@@ -67,6 +70,10 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
           ? _value.smallBody
           : smallBody // ignore: cast_nullable_to_non_nullable
               as SmallBody,
+      closeApproachBody: null == closeApproachBody
+          ? _value.closeApproachBody
+          : closeApproachBody // ignore: cast_nullable_to_non_nullable
+              as CloseApproachBody,
       networkState: null == networkState
           ? _value.networkState
           : networkState // ignore: cast_nullable_to_non_nullable
@@ -101,6 +108,7 @@ abstract class _$$_CadStateCopyWith<$Res> implements $CadStateCopyWith<$Res> {
   $Res call(
       {DateTimeRange? dateRange,
       SmallBody smallBody,
+      CloseApproachBody closeApproachBody,
       NetworkState networkState,
       SbdbCadBody? sbdbCadBody});
 
@@ -121,6 +129,7 @@ class __$$_CadStateCopyWithImpl<$Res>
   $Res call({
     Object? dateRange = freezed,
     Object? smallBody = null,
+    Object? closeApproachBody = null,
     Object? networkState = null,
     Object? sbdbCadBody = freezed,
   }) {
@@ -133,6 +142,10 @@ class __$$_CadStateCopyWithImpl<$Res>
           ? _value.smallBody
           : smallBody // ignore: cast_nullable_to_non_nullable
               as SmallBody,
+      closeApproachBody: null == closeApproachBody
+          ? _value.closeApproachBody
+          : closeApproachBody // ignore: cast_nullable_to_non_nullable
+              as CloseApproachBody,
       networkState: null == networkState
           ? _value.networkState
           : networkState // ignore: cast_nullable_to_non_nullable
@@ -150,7 +163,8 @@ class __$$_CadStateCopyWithImpl<$Res>
 class _$_CadState implements _CadState {
   _$_CadState(
       {this.dateRange,
-      this.smallBody = CadState.defaultSmallBody,
+      this.smallBody = SbdbCadQueryParameters.defaultSmallBody,
+      this.closeApproachBody = SbdbCadQueryParameters.defaultCloseApproachBody,
       this.networkState = NetworkState.initial,
       this.sbdbCadBody});
 
@@ -161,13 +175,16 @@ class _$_CadState implements _CadState {
   final SmallBody smallBody;
   @override
   @JsonKey()
+  final CloseApproachBody closeApproachBody;
+  @override
+  @JsonKey()
   final NetworkState networkState;
   @override
   final SbdbCadBody? sbdbCadBody;
 
   @override
   String toString() {
-    return 'CadState(dateRange: $dateRange, smallBody: $smallBody, networkState: $networkState, sbdbCadBody: $sbdbCadBody)';
+    return 'CadState(dateRange: $dateRange, smallBody: $smallBody, closeApproachBody: $closeApproachBody, networkState: $networkState, sbdbCadBody: $sbdbCadBody)';
   }
 
   @override
@@ -179,6 +196,8 @@ class _$_CadState implements _CadState {
                 other.dateRange == dateRange) &&
             (identical(other.smallBody, smallBody) ||
                 other.smallBody == smallBody) &&
+            (identical(other.closeApproachBody, closeApproachBody) ||
+                other.closeApproachBody == closeApproachBody) &&
             (identical(other.networkState, networkState) ||
                 other.networkState == networkState) &&
             (identical(other.sbdbCadBody, sbdbCadBody) ||
@@ -186,8 +205,8 @@ class _$_CadState implements _CadState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, dateRange, smallBody, networkState, sbdbCadBody);
+  int get hashCode => Object.hash(runtimeType, dateRange, smallBody,
+      closeApproachBody, networkState, sbdbCadBody);
 
   @JsonKey(ignore: true)
   @override
@@ -200,6 +219,7 @@ abstract class _CadState implements CadState {
   factory _CadState(
       {final DateTimeRange? dateRange,
       final SmallBody smallBody,
+      final CloseApproachBody closeApproachBody,
       final NetworkState networkState,
       final SbdbCadBody? sbdbCadBody}) = _$_CadState;
 
@@ -207,6 +227,8 @@ abstract class _CadState implements CadState {
   DateTimeRange? get dateRange;
   @override
   SmallBody get smallBody;
+  @override
+  CloseApproachBody get closeApproachBody;
   @override
   NetworkState get networkState;
   @override

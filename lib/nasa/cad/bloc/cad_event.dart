@@ -22,3 +22,9 @@ class CadSmallBodySelected extends CadEvent {
 
   final SmallBody? smallBody;
 }
+
+class CadCloseApproachBodySelected extends CadEvent {
+  const CadCloseApproachBodySelected({this.closeApproachBody});
+
+  final CloseApproachBody? closeApproachBody;
+}

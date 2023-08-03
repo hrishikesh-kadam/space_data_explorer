@@ -10,5 +10,17 @@
   "languageDefault": "Language Default",
   "smallBodyFilter": "Small Body Filter",
   "comet": "Comet",
-  "neaComet": "NEA and Comet"
+  "neaComet": "NEA and Comet",
+  "closeApproachBodyFilter": "Close Approach Body Filter",
+  "earth": "Earth",
+  "moon": "Moon",
+  "all": "All",
+  "mercury": "Mercury",
+  "venus": "Venus",
+  "mars": "Mars",
+  "jupiter": "Jupiter",
+  "saturn": "Saturn",
+  "uranus": "Uranus",
+  "neptune": "Neptune",
+  "pluto": "Pluto"
 }

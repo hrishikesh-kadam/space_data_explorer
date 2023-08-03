@@ -19,6 +19,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     on<CadRequested>(_onCadRequested);
     on<CadDateRangeSelected>(_onCadDateRangeSelected);
     on<CadSmallBodySelected>(_onCadSmallBodySelected);
+    on<CadCloseApproachBodySelected>(_onCadCloseApproachBodySelected);
   }
 
   final _log = Logger('$appNamePascalCase.CadBloc');
@@ -38,16 +39,12 @@ class CadBloc extends Bloc<CadEvent, CadState> {
           dateMax: dateFormatter.format(state.dateRange!.end),
         );
       }
-      switch (state.smallBody) {
-        case SmallBody.pha:
-          queryParameters = queryParameters.copyWith(pha: true);
-        case SmallBody.nea:
-          queryParameters = queryParameters.copyWith(nea: true);
-        case SmallBody.comet:
-          queryParameters = queryParameters.copyWith(comet: true);
-        case SmallBody.neaComet:
-          queryParameters = queryParameters.copyWith(neaComet: true);
-        default:
+      queryParameters = queryParameters.copyWithSmallBody(state.smallBody);
+      if (state.closeApproachBody !=
+          SbdbCadQueryParameters.defaultCloseApproachBody) {
+        queryParameters = queryParameters.copyWith(
+          body: state.closeApproachBody,
+        );
       }
       Response<SbdbCadBody> response = await sbdbCadApi.get(
         queryParameters: queryParameters.toJson(),
@@ -75,9 +72,22 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     Emitter<CadState> emit,
   ) async {
     if (event.smallBody == null) {
-      emit(state.copyWith(smallBody: CadState.defaultSmallBody));
+      emit(state.copyWith(smallBody: SbdbCadQueryParameters.defaultSmallBody));
     } else {
       emit(state.copyWith(smallBody: event.smallBody!));
+    }
+  }
+
+  Future<void> _onCadCloseApproachBodySelected(
+    CadCloseApproachBodySelected event,
+    Emitter<CadState> emit,
+  ) async {
+    if (event.closeApproachBody == null) {
+      emit(state.copyWith(
+        closeApproachBody: SbdbCadQueryParameters.defaultCloseApproachBody,
+      ));
+    } else {
+      emit(state.copyWith(closeApproachBody: event.closeApproachBody!));
     }
   }
 }
