@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,6 +16,7 @@ import '../../widgets/choice_chip_query_widget.dart';
 import '../../widgets/date_filter_widget.dart';
 import '../../widgets/query_grid_container.dart';
 import '../cad_result/cad_result_route.dart';
+import '../widgets/segmented_input_widget.dart';
 import 'bloc/cad_bloc.dart';
 import 'bloc/cad_state.dart';
 import 'cad_route.dart';
@@ -143,6 +145,7 @@ class CadScreen extends StatelessWidget {
     List<Widget> queryWidgetList = [
       _getDateFilterWidget(context: context),
       _getSmallBodyFilterWidget(context: context),
+      _getSmallBodySelectorWidget(context: context),
       _getCloseApproachBodySelectorWidget(context: context),
       const QueryItemContainer(child: SizedBox(height: 100)),
       const QueryItemContainer(child: SizedBox(height: 150)),
@@ -194,13 +197,13 @@ class CadScreen extends StatelessWidget {
       keyPrefix: keyPrefix,
       firstDate: DateTime(1900, 1, 1),
       lastDate: DateTime(2200, 12, 31),
+      spacing: Dimensions.cadQueryItemSpacing,
+      l10n: l10n,
       onDateRangeSelected: (dateRange) {
         context.read<CadBloc>().add(CadDateRangeSelected(
               dateRange: dateRange,
             ));
       },
-      l10n: l10n,
-      spacing: Dimensions.cadQueryItemSpacing,
     );
   }
 
@@ -229,13 +232,79 @@ class CadScreen extends StatelessWidget {
           labels: chipLabels,
           keys: keys,
           selected: state,
+          spacing: Dimensions.cadQueryItemSpacing,
           onChipSelected: (smallBody) {
             context.read<CadBloc>().add(CadSmallBodySelected(
                   smallBody: smallBody,
                 ));
           },
-          l10n: l10n,
+        );
+      },
+    );
+  }
+
+  Widget _getSmallBodySelectorWidget({
+    required BuildContext context,
+  }) {
+    const Set<SmallBodySelector> segmentValues = {
+      SmallBodySelector.spkId,
+      SmallBodySelector.designation,
+    };
+    final Set<String> segmentLabels =
+        segmentValues.map((e) => e.displayName).toSet();
+    final Set<IconData> segmentIcons = {
+      Icons.onetwothree,
+      Icons.abc,
+    };
+    final List<TextInputType> keyboardTypes = [
+      TextInputType.number,
+      TextInputType.text,
+    ];
+    final List<List<TextInputFormatter>?> inputFormattersList = [
+      [FilteringTextInputFormatter.digitsOnly],
+      null
+    ];
+    return BlocBuilder<CadBloc, CadState>(
+      buildWhen: (previous, current) {
+        return previous.smallBodySelector != current.smallBodySelector ||
+            previous.spkId != current.spkId ||
+            previous.designation != current.designation;
+      },
+      builder: (context, state) {
+        final cadBloc = context.read<CadBloc>();
+        return SegmentedInputWidget<SmallBodySelector>(
+          title: l10n.smallBodySelector,
+          segmentValues: segmentValues,
+          segmentLabels: segmentLabels,
+          segmentIcons: segmentIcons,
+          selected: state.smallBodySelector,
+          keyboardTypes: keyboardTypes,
+          inputFormattersList: inputFormattersList,
+          textFieldTextAlign: TextAlign.center,
+          textFieldWidth: Dimensions.smallBodySelectorInputWidth,
           spacing: Dimensions.cadQueryItemSpacing,
+          onSelectionChanged: (smallBodySelector) {
+            cadBloc.add(CadSmallBodySelectorEvent(
+              smallBodySelector: smallBodySelector,
+              spkId: state.spkId,
+              designation: state.designation,
+            ));
+          },
+          onTextChanged: (value) {
+            int? spkId = state.spkId;
+            String? designation = state.designation;
+            switch (state.smallBodySelector) {
+              case SmallBodySelector.spkId:
+                spkId = value.isNotEmpty ? int.parse(value) : null;
+              case SmallBodySelector.designation:
+                designation = value.isNotEmpty ? value : null;
+            }
+            cadBloc.add(CadSmallBodySelectorEvent(
+              smallBodySelector: state.smallBodySelector,
+              spkId: spkId,
+              designation: designation,
+            ));
+          },
         );
       },
     );
@@ -271,13 +340,12 @@ class CadScreen extends StatelessWidget {
           labels: chipLabels,
           keys: keys,
           selected: state,
+          spacing: Dimensions.cadQueryItemSpacing,
           onChipSelected: (closeApproachBody) {
             context.read<CadBloc>().add(CadCloseApproachBodySelected(
                   closeApproachBody: closeApproachBody,
                 ));
           },
-          l10n: l10n,
-          spacing: Dimensions.cadQueryItemSpacing,
         );
       },
     );

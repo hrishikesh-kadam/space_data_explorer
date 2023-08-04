@@ -61,6 +61,7 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
       children: [
         Text(
           widget.l10n.dateFilter,
+          textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.titleMedium,
         ),
         SizedBox(height: widget.spacing),

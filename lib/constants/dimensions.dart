@@ -5,6 +5,7 @@ class Dimensions {
   static const double pagePaddingVertical = 8;
 
   static const double cadQueryItemWidth = 328;
+  static const double smallBodySelectorInputWidth = 150;
   static const double cadQueryItemMargin = 8;
   static const double cadQueryItemPadding = 16;
 

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'query_grid_container.dart';
 
 typedef ChipSelected<T> = void Function(T? value);
@@ -14,9 +12,8 @@ class ChoiceChipQueryWidget<T> extends StatefulWidget {
     required this.labels,
     this.keys,
     this.selected,
-    this.onChipSelected,
-    required this.l10n,
     this.spacing = 8,
+    this.onChipSelected,
   }) : super(key: Key('$keyPrefix$defaultKey'));
 
   final String keyPrefix;
@@ -25,9 +22,8 @@ class ChoiceChipQueryWidget<T> extends StatefulWidget {
   final List<String> labels;
   final List<String>? keys;
   final T? selected;
-  final ChipSelected<T>? onChipSelected;
-  final AppLocalizations l10n;
   final double spacing;
+  final ChipSelected<T>? onChipSelected;
   static const String defaultKey = 'choice_chip_query_widget_key';
 
   @override
@@ -56,6 +52,7 @@ class _ChoiceChipQueryWidgetState<T> extends State<ChoiceChipQueryWidget<T>> {
       children: [
         Text(
           widget.title,
+          textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.titleMedium,
         ),
         SizedBox(height: widget.spacing),

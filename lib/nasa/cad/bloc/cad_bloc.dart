@@ -19,6 +19,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     on<CadRequested>(_onCadRequested);
     on<CadDateRangeSelected>(_onCadDateRangeSelected);
     on<CadSmallBodySelected>(_onCadSmallBodySelected);
+    on<CadSmallBodySelectorEvent>(_onCadSmallBodySelectorEvent);
     on<CadCloseApproachBodySelected>(_onCadCloseApproachBodySelected);
   }
 
@@ -40,6 +41,12 @@ class CadBloc extends Bloc<CadEvent, CadState> {
         );
       }
       queryParameters = queryParameters.copyWithSmallBody(state.smallBody);
+      switch (state.smallBodySelector) {
+        case SmallBodySelector.spkId:
+          queryParameters = queryParameters.copyWith(spk: state.spkId);
+        case SmallBodySelector.designation:
+          queryParameters = queryParameters.copyWith(des: state.designation);
+      }
       if (state.closeApproachBody !=
           SbdbCadQueryParameters.defaultCloseApproachBody) {
         queryParameters = queryParameters.copyWith(
@@ -76,6 +83,17 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     } else {
       emit(state.copyWith(smallBody: event.smallBody!));
     }
+  }
+
+  Future<void> _onCadSmallBodySelectorEvent(
+    CadSmallBodySelectorEvent event,
+    Emitter<CadState> emit,
+  ) async {
+    emit(state.copyWith(
+      smallBodySelector: event.smallBodySelector,
+      spkId: event.spkId,
+      designation: event.designation,
+    ));
   }
 
   Future<void> _onCadCloseApproachBodySelected(

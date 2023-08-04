@@ -18,6 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CadState {
   DateTimeRange? get dateRange => throw _privateConstructorUsedError;
   SmallBody get smallBody => throw _privateConstructorUsedError;
+  SmallBodySelector get smallBodySelector => throw _privateConstructorUsedError;
+  int? get spkId => throw _privateConstructorUsedError;
+  String? get designation => throw _privateConstructorUsedError;
   CloseApproachBody get closeApproachBody => throw _privateConstructorUsedError;
   NetworkState get networkState => throw _privateConstructorUsedError;
   SbdbCadBody? get sbdbCadBody => throw _privateConstructorUsedError;
@@ -35,6 +38,9 @@ abstract class $CadStateCopyWith<$Res> {
   $Res call(
       {DateTimeRange? dateRange,
       SmallBody smallBody,
+      SmallBodySelector smallBodySelector,
+      int? spkId,
+      String? designation,
       CloseApproachBody closeApproachBody,
       NetworkState networkState,
       SbdbCadBody? sbdbCadBody});
@@ -57,6 +63,9 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
   $Res call({
     Object? dateRange = freezed,
     Object? smallBody = null,
+    Object? smallBodySelector = null,
+    Object? spkId = freezed,
+    Object? designation = freezed,
     Object? closeApproachBody = null,
     Object? networkState = null,
     Object? sbdbCadBody = freezed,
@@ -70,6 +79,18 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
           ? _value.smallBody
           : smallBody // ignore: cast_nullable_to_non_nullable
               as SmallBody,
+      smallBodySelector: null == smallBodySelector
+          ? _value.smallBodySelector
+          : smallBodySelector // ignore: cast_nullable_to_non_nullable
+              as SmallBodySelector,
+      spkId: freezed == spkId
+          ? _value.spkId
+          : spkId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      designation: freezed == designation
+          ? _value.designation
+          : designation // ignore: cast_nullable_to_non_nullable
+              as String?,
       closeApproachBody: null == closeApproachBody
           ? _value.closeApproachBody
           : closeApproachBody // ignore: cast_nullable_to_non_nullable
@@ -108,6 +129,9 @@ abstract class _$$_CadStateCopyWith<$Res> implements $CadStateCopyWith<$Res> {
   $Res call(
       {DateTimeRange? dateRange,
       SmallBody smallBody,
+      SmallBodySelector smallBodySelector,
+      int? spkId,
+      String? designation,
       CloseApproachBody closeApproachBody,
       NetworkState networkState,
       SbdbCadBody? sbdbCadBody});
@@ -129,6 +153,9 @@ class __$$_CadStateCopyWithImpl<$Res>
   $Res call({
     Object? dateRange = freezed,
     Object? smallBody = null,
+    Object? smallBodySelector = null,
+    Object? spkId = freezed,
+    Object? designation = freezed,
     Object? closeApproachBody = null,
     Object? networkState = null,
     Object? sbdbCadBody = freezed,
@@ -142,6 +169,18 @@ class __$$_CadStateCopyWithImpl<$Res>
           ? _value.smallBody
           : smallBody // ignore: cast_nullable_to_non_nullable
               as SmallBody,
+      smallBodySelector: null == smallBodySelector
+          ? _value.smallBodySelector
+          : smallBodySelector // ignore: cast_nullable_to_non_nullable
+              as SmallBodySelector,
+      spkId: freezed == spkId
+          ? _value.spkId
+          : spkId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      designation: freezed == designation
+          ? _value.designation
+          : designation // ignore: cast_nullable_to_non_nullable
+              as String?,
       closeApproachBody: null == closeApproachBody
           ? _value.closeApproachBody
           : closeApproachBody // ignore: cast_nullable_to_non_nullable
@@ -164,6 +203,9 @@ class _$_CadState implements _CadState {
   _$_CadState(
       {this.dateRange,
       this.smallBody = SbdbCadQueryParameters.defaultSmallBody,
+      this.smallBodySelector = SmallBodySelector.spkId,
+      this.spkId,
+      this.designation,
       this.closeApproachBody = SbdbCadQueryParameters.defaultCloseApproachBody,
       this.networkState = NetworkState.initial,
       this.sbdbCadBody});
@@ -175,6 +217,13 @@ class _$_CadState implements _CadState {
   final SmallBody smallBody;
   @override
   @JsonKey()
+  final SmallBodySelector smallBodySelector;
+  @override
+  final int? spkId;
+  @override
+  final String? designation;
+  @override
+  @JsonKey()
   final CloseApproachBody closeApproachBody;
   @override
   @JsonKey()
@@ -184,7 +233,7 @@ class _$_CadState implements _CadState {
 
   @override
   String toString() {
-    return 'CadState(dateRange: $dateRange, smallBody: $smallBody, closeApproachBody: $closeApproachBody, networkState: $networkState, sbdbCadBody: $sbdbCadBody)';
+    return 'CadState(dateRange: $dateRange, smallBody: $smallBody, smallBodySelector: $smallBodySelector, spkId: $spkId, designation: $designation, closeApproachBody: $closeApproachBody, networkState: $networkState, sbdbCadBody: $sbdbCadBody)';
   }
 
   @override
@@ -196,6 +245,11 @@ class _$_CadState implements _CadState {
                 other.dateRange == dateRange) &&
             (identical(other.smallBody, smallBody) ||
                 other.smallBody == smallBody) &&
+            (identical(other.smallBodySelector, smallBodySelector) ||
+                other.smallBodySelector == smallBodySelector) &&
+            (identical(other.spkId, spkId) || other.spkId == spkId) &&
+            (identical(other.designation, designation) ||
+                other.designation == designation) &&
             (identical(other.closeApproachBody, closeApproachBody) ||
                 other.closeApproachBody == closeApproachBody) &&
             (identical(other.networkState, networkState) ||
@@ -205,8 +259,16 @@ class _$_CadState implements _CadState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, dateRange, smallBody,
-      closeApproachBody, networkState, sbdbCadBody);
+  int get hashCode => Object.hash(
+      runtimeType,
+      dateRange,
+      smallBody,
+      smallBodySelector,
+      spkId,
+      designation,
+      closeApproachBody,
+      networkState,
+      sbdbCadBody);
 
   @JsonKey(ignore: true)
   @override
@@ -219,6 +281,9 @@ abstract class _CadState implements CadState {
   factory _CadState(
       {final DateTimeRange? dateRange,
       final SmallBody smallBody,
+      final SmallBodySelector smallBodySelector,
+      final int? spkId,
+      final String? designation,
       final CloseApproachBody closeApproachBody,
       final NetworkState networkState,
       final SbdbCadBody? sbdbCadBody}) = _$_CadState;
@@ -227,6 +292,12 @@ abstract class _CadState implements CadState {
   DateTimeRange? get dateRange;
   @override
   SmallBody get smallBody;
+  @override
+  SmallBodySelector get smallBodySelector;
+  @override
+  int? get spkId;
+  @override
+  String? get designation;
   @override
   CloseApproachBody get closeApproachBody;
   @override

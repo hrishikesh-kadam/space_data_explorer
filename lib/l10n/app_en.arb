@@ -11,6 +11,7 @@
   "smallBodyFilter": "Small Body Filter",
   "comet": "Comet",
   "neaComet": "NEA and Comet",
+  "smallBodySelector": "Small Body Selector",
   "closeApproachBodySelector": "Close Approach Body Selector",
   "earth": "Earth",
   "moon": "Moon",
