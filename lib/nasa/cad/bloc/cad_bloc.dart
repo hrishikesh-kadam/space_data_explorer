@@ -46,6 +46,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
           queryParameters = queryParameters.copyWith(spk: state.spkId);
         case SmallBodySelector.designation:
           queryParameters = queryParameters.copyWith(des: state.designation);
+        default:
       }
       if (state.closeApproachBody !=
           SbdbCadQueryParameters.defaultCloseApproachBody) {

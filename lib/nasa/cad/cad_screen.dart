@@ -16,7 +16,7 @@ import '../../widgets/choice_chip_query_widget.dart';
 import '../../widgets/date_filter_widget.dart';
 import '../../widgets/query_grid_container.dart';
 import '../cad_result/cad_result_route.dart';
-import '../widgets/segmented_input_widget.dart';
+import '../widgets/choice_chip_input_widget.dart';
 import 'bloc/cad_bloc.dart';
 import 'bloc/cad_state.dart';
 import 'cad_route.dart';
@@ -246,16 +246,11 @@ class CadScreen extends StatelessWidget {
   Widget _getSmallBodySelectorWidget({
     required BuildContext context,
   }) {
-    const Set<SmallBodySelector> segmentValues = {
+    const Set<SmallBodySelector> values = {
       SmallBodySelector.spkId,
       SmallBodySelector.designation,
     };
-    final Set<String> segmentLabels =
-        segmentValues.map((e) => e.displayName).toSet();
-    final Set<IconData> segmentIcons = {
-      Icons.onetwothree,
-      Icons.abc,
-    };
+    final Set<String> labels = values.map((e) => e.displayName).toSet();
     final List<TextInputType> keyboardTypes = [
       TextInputType.number,
       TextInputType.text,
@@ -272,18 +267,17 @@ class CadScreen extends StatelessWidget {
       },
       builder: (context, state) {
         final cadBloc = context.read<CadBloc>();
-        return SegmentedInputWidget<SmallBodySelector>(
+        return ChoiceChipInputWidget<SmallBodySelector>(
           title: l10n.smallBodySelector,
-          segmentValues: segmentValues,
-          segmentLabels: segmentLabels,
-          segmentIcons: segmentIcons,
+          values: values,
+          labels: labels,
           selected: state.smallBodySelector,
           keyboardTypes: keyboardTypes,
           inputFormattersList: inputFormattersList,
           textFieldTextAlign: TextAlign.center,
           textFieldWidth: Dimensions.smallBodySelectorInputWidth,
           spacing: Dimensions.cadQueryItemSpacing,
-          onSelectionChanged: (smallBodySelector) {
+          onChipSelected: (smallBodySelector) {
             cadBloc.add(CadSmallBodySelectorEvent(
               smallBodySelector: smallBodySelector,
               spkId: state.spkId,
@@ -293,7 +287,7 @@ class CadScreen extends StatelessWidget {
           onTextChanged: (value) {
             int? spkId = state.spkId;
             String? designation = state.designation;
-            switch (state.smallBodySelector) {
+            switch (state.smallBodySelector!) {
               case SmallBodySelector.spkId:
                 spkId = value.isNotEmpty ? int.parse(value) : null;
               case SmallBodySelector.designation:

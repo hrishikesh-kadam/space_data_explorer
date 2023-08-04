@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CadState {
   DateTimeRange? get dateRange => throw _privateConstructorUsedError;
   SmallBody get smallBody => throw _privateConstructorUsedError;
-  SmallBodySelector get smallBodySelector => throw _privateConstructorUsedError;
+  SmallBodySelector? get smallBodySelector =>
+      throw _privateConstructorUsedError;
   int? get spkId => throw _privateConstructorUsedError;
   String? get designation => throw _privateConstructorUsedError;
   CloseApproachBody get closeApproachBody => throw _privateConstructorUsedError;
@@ -38,7 +39,7 @@ abstract class $CadStateCopyWith<$Res> {
   $Res call(
       {DateTimeRange? dateRange,
       SmallBody smallBody,
-      SmallBodySelector smallBodySelector,
+      SmallBodySelector? smallBodySelector,
       int? spkId,
       String? designation,
       CloseApproachBody closeApproachBody,
@@ -63,7 +64,7 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
   $Res call({
     Object? dateRange = freezed,
     Object? smallBody = null,
-    Object? smallBodySelector = null,
+    Object? smallBodySelector = freezed,
     Object? spkId = freezed,
     Object? designation = freezed,
     Object? closeApproachBody = null,
@@ -79,10 +80,10 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
           ? _value.smallBody
           : smallBody // ignore: cast_nullable_to_non_nullable
               as SmallBody,
-      smallBodySelector: null == smallBodySelector
+      smallBodySelector: freezed == smallBodySelector
           ? _value.smallBodySelector
           : smallBodySelector // ignore: cast_nullable_to_non_nullable
-              as SmallBodySelector,
+              as SmallBodySelector?,
       spkId: freezed == spkId
           ? _value.spkId
           : spkId // ignore: cast_nullable_to_non_nullable
@@ -129,7 +130,7 @@ abstract class _$$_CadStateCopyWith<$Res> implements $CadStateCopyWith<$Res> {
   $Res call(
       {DateTimeRange? dateRange,
       SmallBody smallBody,
-      SmallBodySelector smallBodySelector,
+      SmallBodySelector? smallBodySelector,
       int? spkId,
       String? designation,
       CloseApproachBody closeApproachBody,
@@ -153,7 +154,7 @@ class __$$_CadStateCopyWithImpl<$Res>
   $Res call({
     Object? dateRange = freezed,
     Object? smallBody = null,
-    Object? smallBodySelector = null,
+    Object? smallBodySelector = freezed,
     Object? spkId = freezed,
     Object? designation = freezed,
     Object? closeApproachBody = null,
@@ -169,10 +170,10 @@ class __$$_CadStateCopyWithImpl<$Res>
           ? _value.smallBody
           : smallBody // ignore: cast_nullable_to_non_nullable
               as SmallBody,
-      smallBodySelector: null == smallBodySelector
+      smallBodySelector: freezed == smallBodySelector
           ? _value.smallBodySelector
           : smallBodySelector // ignore: cast_nullable_to_non_nullable
-              as SmallBodySelector,
+              as SmallBodySelector?,
       spkId: freezed == spkId
           ? _value.spkId
           : spkId // ignore: cast_nullable_to_non_nullable
@@ -203,7 +204,7 @@ class _$_CadState implements _CadState {
   _$_CadState(
       {this.dateRange,
       this.smallBody = SbdbCadQueryParameters.defaultSmallBody,
-      this.smallBodySelector = SmallBodySelector.spkId,
+      this.smallBodySelector,
       this.spkId,
       this.designation,
       this.closeApproachBody = SbdbCadQueryParameters.defaultCloseApproachBody,
@@ -216,8 +217,7 @@ class _$_CadState implements _CadState {
   @JsonKey()
   final SmallBody smallBody;
   @override
-  @JsonKey()
-  final SmallBodySelector smallBodySelector;
+  final SmallBodySelector? smallBodySelector;
   @override
   final int? spkId;
   @override
@@ -281,7 +281,7 @@ abstract class _CadState implements CadState {
   factory _CadState(
       {final DateTimeRange? dateRange,
       final SmallBody smallBody,
-      final SmallBodySelector smallBodySelector,
+      final SmallBodySelector? smallBodySelector,
       final int? spkId,
       final String? designation,
       final CloseApproachBody closeApproachBody,
@@ -293,7 +293,7 @@ abstract class _CadState implements CadState {
   @override
   SmallBody get smallBody;
   @override
-  SmallBodySelector get smallBodySelector;
+  SmallBodySelector? get smallBodySelector;
   @override
   int? get spkId;
   @override

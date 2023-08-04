@@ -21,7 +21,7 @@ class CadState with _$CadState {
   factory CadState({
     DateTimeRange? dateRange,
     @Default(SbdbCadQueryParameters.defaultSmallBody) SmallBody smallBody,
-    @Default(SmallBodySelector.spkId) SmallBodySelector smallBodySelector,
+    SmallBodySelector? smallBodySelector,
     int? spkId,
     String? designation,
     @Default(SbdbCadQueryParameters.defaultCloseApproachBody)

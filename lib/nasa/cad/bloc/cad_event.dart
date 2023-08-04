@@ -25,12 +25,12 @@ class CadSmallBodySelected extends CadEvent {
 
 class CadSmallBodySelectorEvent extends CadEvent {
   const CadSmallBodySelectorEvent({
-    required this.smallBodySelector,
+    this.smallBodySelector,
     this.spkId,
     this.designation,
   });
 
-  final SmallBodySelector smallBodySelector;
+  final SmallBodySelector? smallBodySelector;
   final int? spkId;
   final String? designation;
 }

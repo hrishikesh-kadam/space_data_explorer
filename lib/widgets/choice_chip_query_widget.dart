@@ -61,7 +61,7 @@ class _ChoiceChipQueryWidgetState<T> extends State<ChoiceChipQueryWidget<T>> {
           runSpacing: widget.spacing,
           alignment: WrapAlignment.center,
           children: List<Widget>.generate(
-            widget.labels.length,
+            widget.values.length,
             (index) {
               return ChoiceChip(
                 key: widget.keys != null
