@@ -33,6 +33,7 @@ class CadScreen extends StatelessWidget {
   // ignore: unused_field
   final _log = Logger('$appNamePascalCase.CadScreen');
   static const String keyPrefix = 'cad_screen_';
+  static const Key customScrollViewKey = Key('${keyPrefix}scroll_view_key');
   static const Key searchButtonKey = Key('${keyPrefix}search_button_key');
   static const Key queryGridKey = Key('${keyPrefix}query_grid_key');
   static const Key dateFilterWidgetKey =
@@ -86,6 +87,7 @@ class CadScreen extends StatelessWidget {
           child: Builder(
             builder: (context) {
               return CustomScrollView(
+                key: customScrollViewKey,
                 slivers: [
                   getSliverAppBar(
                     context: context,

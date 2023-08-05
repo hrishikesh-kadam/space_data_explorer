@@ -53,6 +53,7 @@ void main() {
     });
 
     testWidgets('Select and Search Each', (tester) async {
+      tester.view.setLogicalSize(height: 700);
       for (var i = 0; i < CadScreen.closeApproachBodyList.length; i++) {
         if (i == 0) {
           await pumpCadRouteAsInitialLocation(tester);

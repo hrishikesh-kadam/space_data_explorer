@@ -15,8 +15,13 @@ void main() {
     testWidgets('Doesn\'t Overflow ${Dimensions.galaxyFoldPortraitWidth}',
         (WidgetTester tester) async {
       disableOverflowError();
-      tester.view.setPhysicalSize(width: Dimensions.galaxyFoldPortraitWidth);
+      tester.view.setLogicalSize(width: Dimensions.galaxyFoldPortraitWidth);
       await pumpCadRouteAsInitialLocation(tester);
+      await tester.dragUntilVisible(
+        closeApproachBodySelectorWidgetFinder,
+        customScrollViewFinder,
+        const Offset(0, -200),
+      );
       for (var i = 0; i < CadScreen.closeApproachBodyList.length; i++) {
         final closeApproachBody = CadScreen.closeApproachBodyList[i];
         await tapCloseApproachBody(tester,

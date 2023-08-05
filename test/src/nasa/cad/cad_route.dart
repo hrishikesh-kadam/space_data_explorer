@@ -9,6 +9,7 @@ import '../../space_data_explorer_app.dart';
 import '../route/nasa_route.dart';
 import 'sbdb_cad_api.dart';
 
+final customScrollViewFinder = find.byKey(CadScreen.customScrollViewKey);
 final queryGridFinder = find.byKey(CadScreen.queryGridKey);
 final queryGridItemFinder = find.descendant(
   of: queryGridFinder,

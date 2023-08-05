@@ -12,7 +12,7 @@ void main() {
     testWidgets('Doesn\'t Overflow ${Dimensions.galaxyFoldPortraitWidth}',
         (WidgetTester tester) async {
       disableOverflowError();
-      tester.view.setPhysicalSize(width: Dimensions.galaxyFoldPortraitWidth);
+      tester.view.setLogicalSize(width: Dimensions.galaxyFoldPortraitWidth);
       await pumpCadRouteAsInitialLocation(tester);
       await selectDateRange(tester);
       final overflowingRenderFlexList = tester.getOverflowingRenderFlexList(
@@ -23,7 +23,7 @@ void main() {
 
     testWidgets('Doesn\'t Overflow 167', (WidgetTester tester) async {
       disableOverflowError();
-      tester.view.setPhysicalSize(width: 167);
+      tester.view.setLogicalSize(width: 167);
       await pumpCadRouteAsInitialLocation(tester);
       await selectDateRange(tester);
       final overflowingRenderFlexList = tester.getOverflowingRenderFlexList(
@@ -34,7 +34,7 @@ void main() {
 
     testWidgets('Doesn\'t Overflow 146', (WidgetTester tester) async {
       disableOverflowError();
-      tester.view.setPhysicalSize(width: 146);
+      tester.view.setLogicalSize(width: 146);
       await pumpCadRouteAsInitialLocation(tester);
       await selectDateRange(tester);
       final overflowingRenderFlexList = tester.getOverflowingRenderFlexList(
@@ -45,7 +45,7 @@ void main() {
 
     testWidgets('Does Overflow 145', (WidgetTester tester) async {
       disableOverflowError();
-      tester.view.setPhysicalSize(width: 145);
+      tester.view.setLogicalSize(width: 145);
       await pumpCadRouteAsInitialLocation(tester);
       await selectDateRange(tester);
       final overflowingRenderFlexList = tester.getOverflowingRenderFlexList(

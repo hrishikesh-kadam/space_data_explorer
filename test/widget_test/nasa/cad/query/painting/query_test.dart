@@ -16,40 +16,40 @@ void main() {
 
       testWidgets('Screen Width ${fitsTwoItems + 1}',
           (WidgetTester tester) async {
-        tester.view.setPhysicalSize(width: fitsTwoItems + 1);
+        tester.view.setLogicalSize(width: fitsTwoItems + 1);
         await pumpCadRouteAsInitialLocation(tester);
         _expectCrossAxisCount(tester, count: 2);
       });
 
       testWidgets('Screen Width $fitsTwoItems', (WidgetTester tester) async {
-        tester.view.setPhysicalSize(width: fitsTwoItems);
+        tester.view.setLogicalSize(width: fitsTwoItems);
         await pumpCadRouteAsInitialLocation(tester);
         _expectCrossAxisCount(tester, count: 2);
       });
 
       testWidgets('Screen Width ${fitsTwoItems - 1}',
           (WidgetTester tester) async {
-        tester.view.setPhysicalSize(width: fitsTwoItems - 1);
+        tester.view.setLogicalSize(width: fitsTwoItems - 1);
         await pumpCadRouteAsInitialLocation(tester);
         _expectCrossAxisCount(tester, count: 1);
       });
 
       testWidgets('Screen Width ${fitsOneItem + 1}',
           (WidgetTester tester) async {
-        tester.view.setPhysicalSize(width: fitsOneItem + 1);
+        tester.view.setLogicalSize(width: fitsOneItem + 1);
         await pumpCadRouteAsInitialLocation(tester);
         _expectCrossAxisCount(tester, count: 1);
       });
 
       testWidgets('Screen Width $fitsOneItem', (WidgetTester tester) async {
-        tester.view.setPhysicalSize(width: fitsOneItem);
+        tester.view.setLogicalSize(width: fitsOneItem);
         await pumpCadRouteAsInitialLocation(tester);
         _expectCrossAxisCount(tester, count: 1);
       });
 
       testWidgets('Screen Width ${fitsOneItem - 1}',
           (WidgetTester tester) async {
-        tester.view.setPhysicalSize(width: fitsOneItem - 1);
+        tester.view.setLogicalSize(width: fitsOneItem - 1);
         await pumpCadRouteAsInitialLocation(tester);
         _expectCrossAxisCount(tester, count: 1);
       });
