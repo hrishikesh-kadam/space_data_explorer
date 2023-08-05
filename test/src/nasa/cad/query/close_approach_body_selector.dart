@@ -10,7 +10,6 @@ final closeApproachBodySelectorWidgetFinder = find.byKey(const Key(
   '${CadScreen.closeApproachBodySelectorKeyPrefix}'
   '${ChoiceChipQueryWidget.defaultKey}',
 ));
-
 final List<Finder> closeApproachBodyChipFinders =
     CadScreen.closeApproachBodyList.map((e) {
   return find.byKey(Key(
@@ -18,7 +17,6 @@ final List<Finder> closeApproachBodyChipFinders =
     '${e.name}',
   ));
 }).toList();
-
 final Map<CloseApproachBody, Finder> closeApproachBodyChipFinderMap = {
   for (var i = 0; i < CadScreen.closeApproachBodyList.length; i++)
     CadScreen.closeApproachBodyList[i]: closeApproachBodyChipFinders[i]

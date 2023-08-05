@@ -10,14 +10,12 @@ final smallBodyFilterWidgetFinder = find.byKey(const Key(
   '${CadScreen.smallBodyFilterKeyPrefix}'
   '${ChoiceChipQueryWidget.defaultKey}',
 ));
-
 final List<Finder> smallBodyChipFinders = CadScreen.smallBodyList.map((e) {
   return find.byKey(Key(
     '${CadScreen.smallBodyFilterKeyPrefix}'
     '${e.name}',
   ));
 }).toList();
-
 final Map<SmallBody, Finder> smallBodyChipFinderMap = {
   for (var i = 0; i < CadScreen.smallBodyList.length; i++)
     CadScreen.smallBodyList[i]: smallBodyChipFinders[i]

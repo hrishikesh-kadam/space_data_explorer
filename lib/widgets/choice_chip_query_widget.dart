@@ -7,20 +7,20 @@ typedef ChipSelected<T> = void Function(T? value);
 class ChoiceChipQueryWidget<T> extends StatefulWidget {
   ChoiceChipQueryWidget({
     this.keyPrefix = '',
+    this.keys,
     required this.title,
     required this.values,
     required this.labels,
-    this.keys,
     this.selected,
     this.spacing = 8,
     this.onChipSelected,
   }) : super(key: Key('$keyPrefix$defaultKey'));
 
   final String keyPrefix;
+  final List<String>? keys;
   final String title;
   final List<T> values;
   final List<String> labels;
-  final List<String>? keys;
   final T? selected;
   final double spacing;
   final ChipSelected<T>? onChipSelected;

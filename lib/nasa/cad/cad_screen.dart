@@ -42,7 +42,10 @@ class CadScreen extends StatelessWidget {
   static const Key maxDateKey = Key('$keyPrefix${DateFilterWidget.maxDateKey}');
   static const Key selectDateRangeButtonKey =
       Key('$keyPrefix${DateFilterWidget.selectDateRangeButtonKey}');
-  static const String smallBodyFilterKeyPrefix = '${keyPrefix}small_body_';
+  static const String smallBodyFilterKeyPrefix =
+      '${keyPrefix}small_body_filter_';
+  static const String smallBodySelectorKeyPrefix =
+      '${keyPrefix}small_body_selector_';
   static const String closeApproachBodySelectorKeyPrefix =
       '${keyPrefix}close_approach_body_';
   static final List<SmallBody> smallBodyList = [
@@ -52,6 +55,10 @@ class CadScreen extends StatelessWidget {
     SmallBody.comet,
     SmallBody.neaComet,
   ];
+  static final Set<SmallBodySelector> smallBodySelectors = {
+    SmallBodySelector.spkId,
+    SmallBodySelector.designation,
+  };
   static final List<CloseApproachBody> closeApproachBodyList = [
     CloseApproachBody.earth,
     CloseApproachBody.moon,
@@ -248,11 +255,9 @@ class CadScreen extends StatelessWidget {
   Widget _getSmallBodySelectorWidget({
     required BuildContext context,
   }) {
-    const Set<SmallBodySelector> values = {
-      SmallBodySelector.spkId,
-      SmallBodySelector.designation,
-    };
-    final Set<String> labels = values.map((e) => e.displayName).toSet();
+    final Set<String> keys = smallBodySelectors.map((e) => e.name).toSet();
+    final Set<String> labels =
+        smallBodySelectors.map((e) => e.displayName).toSet();
     final List<TextInputType> keyboardTypes = [
       TextInputType.number,
       TextInputType.text,
@@ -270,8 +275,10 @@ class CadScreen extends StatelessWidget {
       builder: (context, state) {
         final cadBloc = context.read<CadBloc>();
         return ChoiceChipInputWidget<SmallBodySelector>(
+          keyPrefix: smallBodySelectorKeyPrefix,
+          keys: keys,
           title: l10n.smallBodySelector,
-          values: values,
+          values: smallBodySelectors,
           labels: labels,
           selected: state.smallBodySelector,
           keyboardTypes: keyboardTypes,

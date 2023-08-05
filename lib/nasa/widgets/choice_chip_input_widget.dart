@@ -11,8 +11,9 @@ import '../../widgets/query_grid_container.dart';
 typedef ChipSelected<T> = void Function(T? value);
 
 class ChoiceChipInputWidget<T> extends StatefulWidget {
-  const ChoiceChipInputWidget({
-    super.key,
+  ChoiceChipInputWidget({
+    this.keyPrefix = '',
+    this.keys,
     required this.title,
     required this.values,
     required this.labels,
@@ -25,8 +26,10 @@ class ChoiceChipInputWidget<T> extends StatefulWidget {
     this.spacing = 8,
     this.onChipSelected,
     this.onTextChanged,
-  });
+  }) : super(key: Key('$keyPrefix$defaultKey'));
 
+  final String keyPrefix;
+  final Set<String>? keys;
   final String title;
   final Set<T> values;
   final Set<String> labels;
@@ -39,6 +42,9 @@ class ChoiceChipInputWidget<T> extends StatefulWidget {
   final double spacing;
   final ChipSelected<T>? onChipSelected;
   final ValueChanged<String>? onTextChanged;
+  static const String titleKey = 'title_key';
+  static const String textFieldKey = 'text_field_key';
+  static const String defaultKey = 'choice_chip_input_widget_key';
 
   @override
   State<ChoiceChipInputWidget<T>> createState() =>
@@ -87,86 +93,102 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
       child: Column(
         children: [
           Text(
+            key: Key('${widget.keyPrefix}${ChoiceChipInputWidget.titleKey}'),
             widget.title,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           SizedBox(height: widget.spacing),
-          Wrap(
-            spacing: widget.spacing,
-            runSpacing: widget.spacing,
-            alignment: WrapAlignment.center,
-            children: List<Widget>.generate(
-              widget.values.length,
-              (index) {
-                return TextFieldTapRegion(
-                  child: ChoiceChip(
-                    label: Text(
-                      widget.labels.elementAt(index),
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    selected: selectedIndex == index,
-                    onSelected: (selected) {
-                      setState(() {
-                        selectedIndex = selected ? index : null;
-                        if (selectedIndex != null) {
-                          if (widget.keyboardTypes != null &&
-                              textFieldFocusNode.hasFocus &&
-                              keyboardVisible == true) {
-                            // To change the keyboard
-                            textFieldFocusNode.unfocus();
-                            WidgetsBinding.instance.addPostFrameCallback(
-                              (_) => textFieldFocusNode.requestFocus(),
-                            );
-                          }
-                          textController.text = textList[selectedIndex!];
-                        }
-                      });
-                      if (widget.onChipSelected != null) {
-                        final T? value =
-                            selected ? widget.values.elementAt(index) : null;
-                        widget.onChipSelected!(value);
-                      }
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
+          _getChoiceChips(context: context),
           const SizedBox(height: Dimensions.cadQueryItemPadding),
-          SizedBox(
-            width: widget.textFieldWidth,
-            child: TextField(
-              enabled: selectedIndex != null,
-              controller: textController,
-              focusNode: textFieldFocusNode,
-              keyboardType:
-                  widget.keyboardTypes != null && selectedIndex != null
-                      ? widget.keyboardTypes![selectedIndex!]
-                      : null,
-              inputFormatters:
-                  widget.inputFormattersList != null && selectedIndex != null
-                      ? widget.inputFormattersList![selectedIndex!]
-                      : null,
-              textAlign: widget.textFieldTextAlign,
-              decoration: const InputDecoration(
-                isDense: true,
-                border: OutlineInputBorder(),
+          _getTextField(context: context),
+        ],
+      ),
+    );
+  }
+
+  Widget _getChoiceChips({
+    required BuildContext context,
+  }) {
+    return Wrap(
+      spacing: widget.spacing,
+      runSpacing: widget.spacing,
+      alignment: WrapAlignment.center,
+      children: List<Widget>.generate(
+        widget.values.length,
+        (index) {
+          return TextFieldTapRegion(
+            child: ChoiceChip(
+              key: widget.keys != null
+                  ? Key('${widget.keyPrefix}${widget.keys!.elementAt(index)}')
+                  : null,
+              label: Text(
+                widget.labels.elementAt(index),
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-              onTapOutside: (event) {
-                textFieldFocusNode.unfocus();
-              },
-              onChanged: (value) {
+              selected: selectedIndex == index,
+              onSelected: (selected) {
                 setState(() {
-                  textList[selectedIndex!] = value;
+                  selectedIndex = selected ? index : null;
+                  if (selectedIndex != null) {
+                    if (widget.keyboardTypes != null &&
+                        textFieldFocusNode.hasFocus &&
+                        keyboardVisible == true) {
+                      // To change the keyboard
+                      textFieldFocusNode.unfocus();
+                      WidgetsBinding.instance.addPostFrameCallback(
+                        (_) => textFieldFocusNode.requestFocus(),
+                      );
+                    }
+                    textController.text = textList[selectedIndex!];
+                  }
                 });
-                if (widget.onTextChanged != null) {
-                  widget.onTextChanged!(value);
+                if (widget.onChipSelected != null) {
+                  final T? value =
+                      selected ? widget.values.elementAt(index) : null;
+                  widget.onChipSelected!(value);
                 }
               },
             ),
-          )
-        ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _getTextField({
+    required BuildContext context,
+  }) {
+    return SizedBox(
+      width: widget.textFieldWidth,
+      child: TextField(
+        key: Key('${widget.keyPrefix}${ChoiceChipInputWidget.textFieldKey}'),
+        enabled: selectedIndex != null,
+        controller: textController,
+        focusNode: textFieldFocusNode,
+        keyboardType: widget.keyboardTypes != null && selectedIndex != null
+            ? widget.keyboardTypes![selectedIndex!]
+            : null,
+        inputFormatters:
+            widget.inputFormattersList != null && selectedIndex != null
+                ? widget.inputFormattersList![selectedIndex!]
+                : null,
+        textAlign: widget.textFieldTextAlign,
+        decoration: const InputDecoration(
+          isDense: true,
+          border: OutlineInputBorder(),
+        ),
+        onTapOutside: (event) {
+          textFieldFocusNode.unfocus();
+        },
+        onChanged: (value) {
+          setState(() {
+            textList[selectedIndex!] = value;
+          });
+          if (widget.onTextChanged != null) {
+            widget.onTextChanged!(value);
+          }
+        },
       ),
     );
   }
