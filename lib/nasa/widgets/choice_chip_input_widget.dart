@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../../constants/dimensions.dart';
 import '../../widgets/query_grid_container.dart';
@@ -45,6 +49,9 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
   int? selectedIndex;
   late final List<String> textList;
   late final TextEditingController textController;
+  late FocusNode textFieldFocusNode;
+  StreamSubscription<bool>? keyboardSubscription;
+  bool? keyboardVisible;
 
   @override
   void initState() {
@@ -55,6 +62,23 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
     }
     textList = List.generate(widget.values.length, (index) => '');
     textController = TextEditingController();
+    textFieldFocusNode = FocusNode();
+    if (widget.keyboardTypes != null) {
+      final keyboardVisibilityController = KeyboardVisibilityController();
+      keyboardVisible = keyboardVisibilityController.isVisible;
+      keyboardSubscription =
+          keyboardVisibilityController.onChange.listen((bool visible) {
+        keyboardVisible = visible;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    textController.dispose();
+    textFieldFocusNode.dispose();
+    keyboardSubscription?.cancel();
+    super.dispose();
   }
 
   @override
@@ -75,25 +99,36 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
             children: List<Widget>.generate(
               widget.values.length,
               (index) {
-                return ChoiceChip(
-                  label: Text(
-                    widget.labels.elementAt(index),
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  selected: selectedIndex == index,
-                  onSelected: (selected) {
-                    setState(() {
-                      selectedIndex = selected ? index : null;
-                      if (selectedIndex != null) {
-                        textController.text = textList[selectedIndex!];
+                return TextFieldTapRegion(
+                  child: ChoiceChip(
+                    label: Text(
+                      widget.labels.elementAt(index),
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    selected: selectedIndex == index,
+                    onSelected: (selected) {
+                      setState(() {
+                        selectedIndex = selected ? index : null;
+                        if (selectedIndex != null) {
+                          if (widget.keyboardTypes != null &&
+                              textFieldFocusNode.hasFocus &&
+                              keyboardVisible == true) {
+                            // To change the keyboard
+                            textFieldFocusNode.unfocus();
+                            WidgetsBinding.instance.addPostFrameCallback(
+                              (_) => textFieldFocusNode.requestFocus(),
+                            );
+                          }
+                          textController.text = textList[selectedIndex!];
+                        }
+                      });
+                      if (widget.onChipSelected != null) {
+                        final T? value =
+                            selected ? widget.values.elementAt(index) : null;
+                        widget.onChipSelected!(value);
                       }
-                    });
-                    if (widget.onChipSelected != null) {
-                      final T? value =
-                          selected ? widget.values.elementAt(index) : null;
-                      widget.onChipSelected!(value);
-                    }
-                  },
+                    },
+                  ),
                 );
               },
             ),
@@ -104,6 +139,7 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
             child: TextField(
               enabled: selectedIndex != null,
               controller: textController,
+              focusNode: textFieldFocusNode,
               keyboardType:
                   widget.keyboardTypes != null && selectedIndex != null
                       ? widget.keyboardTypes![selectedIndex!]
@@ -117,6 +153,9 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
                 isDense: true,
                 border: OutlineInputBorder(),
               ),
+              onTapOutside: (event) {
+                textFieldFocusNode.unfocus();
+              },
               onChanged: (value) {
                 setState(() {
                   textList[selectedIndex!] = value;
