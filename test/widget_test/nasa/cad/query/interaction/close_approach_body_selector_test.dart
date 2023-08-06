@@ -54,14 +54,14 @@ void main() {
 
     testWidgets('Select and Search Each', (tester) async {
       tester.view.setLogicalSize(height: 700);
-      for (var i = 0; i < CadScreen.closeApproachBodyList.length; i++) {
+      for (var i = 0; i < CadScreen.closeApproachBodySet.length; i++) {
         if (i == 0) {
           await pumpCadRouteAsInitialLocation(tester);
         }
         if (i > 0) {
           await tapBackButton(tester);
         }
-        final closeApproachBody = CadScreen.closeApproachBodyList[i];
+        final closeApproachBody = CadScreen.closeApproachBodySet.elementAt(i);
         await tapCloseApproachBody(tester,
             closeApproachBody: closeApproachBody);
         expectCloseApproachBodySelected(tester,

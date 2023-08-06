@@ -56,14 +56,14 @@ void main() {
         SbdbCadQueryParameters(comet: true).toJson(),
         SbdbCadQueryParameters(neaComet: true).toJson(),
       ];
-      for (var i = 0; i < CadScreen.smallBodyList.length; i++) {
+      for (var i = 0; i < CadScreen.smallBodySet.length; i++) {
         if (i == 0) {
           await pumpCadRouteAsInitialLocation(tester);
         }
         if (i > 0) {
           await tapBackButton(tester);
         }
-        final smallBody = CadScreen.smallBodyList[i];
+        final smallBody = CadScreen.smallBodySet.elementAt(i);
         await tapSmallBody(tester, smallBody: smallBody);
         expectSmallBodySelected(tester, smallBody: smallBody);
         expect(CadScreen.cadBloc!.state.smallBody, smallBody);

@@ -10,16 +10,17 @@ final closeApproachBodySelectorWidgetFinder = find.byKey(const Key(
   '${CadScreen.closeApproachBodySelectorKeyPrefix}'
   '${ChoiceChipQueryWidget.defaultKey}',
 ));
-final List<Finder> closeApproachBodyChipFinders =
-    CadScreen.closeApproachBodyList.map((e) {
+final Set<Finder> closeApproachBodyChipFinders =
+    CadScreen.closeApproachBodySet.map((e) {
   return find.byKey(Key(
     '${CadScreen.closeApproachBodySelectorKeyPrefix}'
     '${e.name}',
   ));
-}).toList();
+}).toSet();
 final Map<CloseApproachBody, Finder> closeApproachBodyChipFinderMap = {
-  for (var i = 0; i < CadScreen.closeApproachBodyList.length; i++)
-    CadScreen.closeApproachBodyList[i]: closeApproachBodyChipFinders[i]
+  for (var i = 0; i < CadScreen.closeApproachBodySet.length; i++)
+    CadScreen.closeApproachBodySet.elementAt(i):
+        closeApproachBodyChipFinders.elementAt(i)
 };
 
 Future<void> tapCloseApproachBody(
@@ -34,9 +35,10 @@ void expectCloseApproachBodySelected(
   WidgetTester tester, {
   required CloseApproachBody closeApproachBody,
 }) {
-  for (var i = 0; i < CadScreen.closeApproachBodyList.length; i++) {
-    final finder = closeApproachBodyChipFinders[i];
-    final matcher = closeApproachBody == CadScreen.closeApproachBodyList[i];
+  for (var i = 0; i < CadScreen.closeApproachBodySet.length; i++) {
+    final finder = closeApproachBodyChipFinders.elementAt(i);
+    final matcher =
+        closeApproachBody == CadScreen.closeApproachBodySet.elementAt(i);
     expect(tester.widget<ChoiceChip>(finder).selected, matcher);
   }
 }

@@ -10,15 +10,15 @@ final smallBodyFilterWidgetFinder = find.byKey(const Key(
   '${CadScreen.smallBodyFilterKeyPrefix}'
   '${ChoiceChipQueryWidget.defaultKey}',
 ));
-final List<Finder> smallBodyChipFinders = CadScreen.smallBodyList.map((e) {
+final Set<Finder> smallBodyChipFinders = CadScreen.smallBodySet.map((e) {
   return find.byKey(Key(
     '${CadScreen.smallBodyFilterKeyPrefix}'
     '${e.name}',
   ));
-}).toList();
+}).toSet();
 final Map<SmallBody, Finder> smallBodyChipFinderMap = {
-  for (var i = 0; i < CadScreen.smallBodyList.length; i++)
-    CadScreen.smallBodyList[i]: smallBodyChipFinders[i]
+  for (var i = 0; i < CadScreen.smallBodySet.length; i++)
+    CadScreen.smallBodySet.elementAt(i): smallBodyChipFinders.elementAt(i)
 };
 
 Future<void> tapSmallBody(
@@ -33,9 +33,9 @@ void expectSmallBodySelected(
   WidgetTester tester, {
   required SmallBody smallBody,
 }) {
-  for (var i = 0; i < CadScreen.smallBodyList.length; i++) {
-    final finder = smallBodyChipFinders[i];
-    final matcher = smallBody == CadScreen.smallBodyList[i];
+  for (var i = 0; i < CadScreen.smallBodySet.length; i++) {
+    final finder = smallBodyChipFinders.elementAt(i);
+    final matcher = smallBody == CadScreen.smallBodySet.elementAt(i);
     expect(tester.widget<ChoiceChip>(finder).selected, matcher);
   }
 }

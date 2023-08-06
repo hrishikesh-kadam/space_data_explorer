@@ -4,7 +4,7 @@ import 'query_grid_container.dart';
 
 typedef ChipSelected<T> = void Function(T? value);
 
-class ChoiceChipQueryWidget<T> extends StatefulWidget {
+class ChoiceChipQueryWidget<T> extends StatelessWidget {
   ChoiceChipQueryWidget({
     this.keyPrefix = '',
     this.keys,
@@ -17,22 +17,14 @@ class ChoiceChipQueryWidget<T> extends StatefulWidget {
   }) : super(key: Key('$keyPrefix$defaultKey'));
 
   final String keyPrefix;
-  final List<String>? keys;
+  final Set<String>? keys;
   final String title;
-  final List<T> values;
-  final List<String> labels;
+  final Set<T> values;
+  final Set<String> labels;
   final T? selected;
   final double spacing;
   final ChipSelected<T>? onChipSelected;
   static const String defaultKey = 'choice_chip_query_widget_key';
-
-  @override
-  State<ChoiceChipQueryWidget<T>> createState() =>
-      _ChoiceChipQueryWidgetState();
-}
-
-class _ChoiceChipQueryWidgetState<T> extends State<ChoiceChipQueryWidget<T>> {
-  int? selectedIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -44,41 +36,34 @@ class _ChoiceChipQueryWidgetState<T> extends State<ChoiceChipQueryWidget<T>> {
   Widget _getBody({
     required BuildContext context,
   }) {
-    if (widget.selected != null) {
-      final index = widget.values.indexOf(widget.selected as T);
-      selectedIndex = index >= 0 ? index : null;
-    }
     return Column(
       children: [
         Text(
-          widget.title,
+          title,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        SizedBox(height: widget.spacing),
+        SizedBox(height: spacing),
         Wrap(
-          spacing: widget.spacing,
-          runSpacing: widget.spacing,
+          spacing: spacing,
+          runSpacing: spacing,
           alignment: WrapAlignment.center,
           children: List<Widget>.generate(
-            widget.values.length,
+            values.length,
             (index) {
               return ChoiceChip(
-                key: widget.keys != null
-                    ? Key('${widget.keyPrefix}${widget.keys![index]}')
+                key: keys != null
+                    ? Key('$keyPrefix${keys!.elementAt(index)}')
                     : null,
                 label: Text(
-                  widget.labels[index],
+                  labels.elementAt(index),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                selected: selectedIndex == index,
+                selected: selected == values.elementAt(index),
                 onSelected: (selected) {
-                  setState(() {
-                    selectedIndex = selected ? index : null;
-                  });
-                  if (widget.onChipSelected != null) {
-                    final T? value = selected ? widget.values[index] : null;
-                    widget.onChipSelected!(value);
+                  if (onChipSelected != null) {
+                    final T? value = selected ? values.elementAt(index) : null;
+                    onChipSelected!(value);
                   }
                 },
               );

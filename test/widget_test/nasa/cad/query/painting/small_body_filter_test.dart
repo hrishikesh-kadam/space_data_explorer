@@ -16,8 +16,8 @@ void main() {
       disableOverflowError();
       tester.view.setLogicalSize(width: Dimensions.galaxyFoldPortraitWidth);
       await pumpCadRouteAsInitialLocation(tester);
-      for (var i = 0; i < CadScreen.smallBodyList.length; i++) {
-        final smallBody = CadScreen.smallBodyList[i];
+      for (var i = 0; i < CadScreen.smallBodySet.length; i++) {
+        final smallBody = CadScreen.smallBodySet.elementAt(i);
         await tapSmallBody(tester, smallBody: smallBody);
         tester.expectNoOverflow(of: smallBodyFilterWidgetFinder);
       }
