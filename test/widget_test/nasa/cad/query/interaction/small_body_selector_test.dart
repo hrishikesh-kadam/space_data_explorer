@@ -21,6 +21,10 @@ void main() {
     const String designation = '2023 HK';
     const int spkId = 54354503;
 
+    tearDown(() {
+      KeyboardVisibilityTesting.setVisibilityForTesting(false);
+    });
+
     testWidgets('DeferredLoading workaround', (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       await tester.tap(find.byKey(CadScreen.searchButtonKey));
