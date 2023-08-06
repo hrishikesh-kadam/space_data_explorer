@@ -29,7 +29,7 @@ void main() {
           tester,
           closeApproachBody: closeApproachBody,
         );
-        tester.expectNotOverflowing(of: closeApproachBodySelectorWidgetFinder);
+        tester.expectNoOverflow(of: closeApproachBodySelectorWidgetFinder);
       }
     });
   });

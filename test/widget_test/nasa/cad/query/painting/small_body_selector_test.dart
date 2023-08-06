@@ -22,11 +22,11 @@ void main() {
         const Offset(0, -200),
       );
       await tester.pumpAndSettle();
-      tester.expectNotOverflowing(of: smallBodySelectorWidgetFinder);
+      tester.expectNoOverflow(of: smallBodySelectorWidgetFinder);
       await tapSmallBodySelector(tester, SmallBodySelector.spkId);
-      tester.expectNotOverflowing(of: smallBodySelectorWidgetFinder);
+      tester.expectNoOverflow(of: smallBodySelectorWidgetFinder);
       await tapSmallBodySelector(tester, SmallBodySelector.designation);
-      tester.expectNotOverflowing(of: smallBodySelectorWidgetFinder);
+      tester.expectNoOverflow(of: smallBodySelectorWidgetFinder);
     });
   });
 }
