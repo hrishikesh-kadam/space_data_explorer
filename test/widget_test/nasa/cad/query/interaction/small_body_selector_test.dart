@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:mockito/mockito.dart';
 
+import 'package:space_data_explorer/nasa/cad/bloc/cad_bloc.dart';
 import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
@@ -140,6 +142,7 @@ void main() {
       await pumpCadRouteAsInitialLocation(tester);
       await tapSmallBodySelector(tester, SmallBodySelector.spkId);
       await tester.tap(textFieldFinder);
+      KeyboardVisibilityTesting.setVisibilityForTesting(true);
       await tapSmallBodySelector(tester, smallBodySelector);
       expect(
         tester.widget<TextField>(textFieldFinder).focusNode!.hasFocus,
@@ -306,6 +309,15 @@ void main() {
       );
       expect(CadScreen.cadBloc!.state.spkId, spkId);
       expect(CadScreen.cadBloc!.state.designation, designation);
+    });
+
+    testWidgets('CadBloc prefilled smallBodySelector', (tester) async {
+      final cadBloc = getCadBloc();
+      cadBloc.add(const CadSmallBodySelectorEvent(
+        smallBodySelector: SmallBodySelector.designation,
+      ));
+      await pumpCadRouteAsInitialLocation(tester, cadBloc: cadBloc);
+      expect(tester.widget<ChoiceChip>(designationChipFinder).selected, true);
     });
   });
 }

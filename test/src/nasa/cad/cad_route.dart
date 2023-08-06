@@ -17,15 +17,21 @@ final queryGridItemFinder = find.descendant(
   matching: find.byType(QueryItemContainer),
 );
 
-Future<void> pumpCadRouteAsInitialLocation(WidgetTester tester) async {
-  CadScreen.cadBloc = getCadBloc();
+Future<void> pumpCadRouteAsInitialLocation(
+  WidgetTester tester, {
+  CadBloc? cadBloc,
+}) async {
+  CadScreen.cadBloc = cadBloc ?? getCadBloc();
   await pumpApp(tester, initialLocation: CadRoute.path);
   expect(find.byType(CadScreen), findsOneWidget);
 }
 
-Future<void> pumpCadRouteAsNormalLink(WidgetTester tester) async {
+Future<void> pumpCadRouteAsNormalLink(
+  WidgetTester tester, {
+  CadBloc? cadBloc,
+}) async {
   await pumpNasaRouteAsNormalLink(tester);
-  CadScreen.cadBloc = getCadBloc();
+  CadScreen.cadBloc = cadBloc ?? getCadBloc();
   await tester.tap(find.byKey(NasaScreen.cadButtonKey));
   await tester.pumpAndSettle();
   expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
