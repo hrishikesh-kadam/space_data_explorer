@@ -15,10 +15,7 @@ void main() {
       tester.view.setLogicalSize(width: Dimensions.galaxyFoldPortraitWidth);
       await pumpCadRouteAsInitialLocation(tester);
       await selectDateRange(tester);
-      final overflowingRenderFlexList = tester.getOverflowingRenderFlexList(
-        of: dateFilterWidgetFinder,
-      );
-      expect(overflowingRenderFlexList.length, 0);
+      tester.expectNotOverflowing(of: dateFilterWidgetFinder);
     });
 
     testWidgets('Doesn\'t Overflow 167', (WidgetTester tester) async {
@@ -26,10 +23,7 @@ void main() {
       tester.view.setLogicalSize(width: 167);
       await pumpCadRouteAsInitialLocation(tester);
       await selectDateRange(tester);
-      final overflowingRenderFlexList = tester.getOverflowingRenderFlexList(
-        of: dateFilterWidgetFinder,
-      );
-      expect(overflowingRenderFlexList.length, 0);
+      tester.expectNotOverflowing(of: dateFilterWidgetFinder);
     });
 
     testWidgets('Doesn\'t Overflow 146', (WidgetTester tester) async {
@@ -37,10 +31,7 @@ void main() {
       tester.view.setLogicalSize(width: 146);
       await pumpCadRouteAsInitialLocation(tester);
       await selectDateRange(tester);
-      final overflowingRenderFlexList = tester.getOverflowingRenderFlexList(
-        of: dateFilterWidgetFinder,
-      );
-      expect(overflowingRenderFlexList.length, 0);
+      tester.expectNotOverflowing(of: dateFilterWidgetFinder);
     });
 
     testWidgets('Does Overflow 145', (WidgetTester tester) async {

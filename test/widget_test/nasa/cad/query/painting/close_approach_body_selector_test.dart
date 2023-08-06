@@ -22,14 +22,14 @@ void main() {
         customScrollViewFinder,
         const Offset(0, -200),
       );
+      await tester.pumpAndSettle();
       for (var i = 0; i < CadScreen.closeApproachBodyList.length; i++) {
         final closeApproachBody = CadScreen.closeApproachBodyList[i];
-        await tapCloseApproachBody(tester,
-            closeApproachBody: closeApproachBody);
-        final overflowingRenderFlexList = tester.getOverflowingRenderFlexList(
-          of: closeApproachBodySelectorWidgetFinder,
+        await tapCloseApproachBody(
+          tester,
+          closeApproachBody: closeApproachBody,
         );
-        expect(overflowingRenderFlexList.length, 0);
+        tester.expectNotOverflowing(of: closeApproachBodySelectorWidgetFinder);
       }
     });
   });

@@ -10,6 +10,7 @@ import '../route/nasa_route.dart';
 import 'sbdb_cad_api.dart';
 
 final customScrollViewFinder = find.byKey(CadScreen.customScrollViewKey);
+final searchButtonFinder = find.byKey(CadScreen.searchButtonKey);
 final queryGridFinder = find.byKey(CadScreen.queryGridKey);
 final queryGridItemFinder = find.descendant(
   of: queryGridFinder,
@@ -33,4 +34,9 @@ Future<void> pumpCadRouteAsNormalLink(WidgetTester tester) async {
 
 CadBloc getCadBloc() {
   return CadBloc(sbdbCadApi: getMockedSbdbCadApi());
+}
+
+Future<void> tapSearchButton(WidgetTester tester) async {
+  await tester.tap(searchButtonFinder);
+  await tester.pumpAndSettle();
 }

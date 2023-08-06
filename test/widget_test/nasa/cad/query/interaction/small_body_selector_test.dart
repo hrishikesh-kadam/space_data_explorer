@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
+import 'package:mockito/mockito.dart';
+
 import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
+import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
 import 'package:space_data_explorer/nasa/widgets/choice_chip_input_widget.dart';
-
 import '../../../../../src/nasa/cad/cad_route.dart';
 import '../../../../../src/nasa/cad/query/small_body_selector.dart';
 
@@ -33,8 +37,8 @@ void main() {
     });
 
     testWidgets('Select ${SmallBodySelector.spkId.name}', (tester) async {
-      await pumpCadRouteAsInitialLocation(tester);
       const smallBodySelector = SmallBodySelector.spkId;
+      await pumpCadRouteAsInitialLocation(tester);
       await tapSmallBodySelector(tester, smallBodySelector);
       expect(tester.widget<ChoiceChip>(spkIdChipFinder).selected, true);
       expect(tester.widget<ChoiceChip>(designationChipFinder).selected, false);
@@ -46,11 +50,18 @@ void main() {
       expect(CadScreen.cadBloc!.state.smallBodySelector, smallBodySelector);
       expect(CadScreen.cadBloc!.state.spkId, null);
       expect(CadScreen.cadBloc!.state.designation, null);
+      await tapSearchButton(tester);
+      expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(CadResultScreen), findsOneWidget);
+      final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
+      verify(sbdbCadApi.get(
+        queryParameters: SbdbCadQueryParameters().toJson(),
+      )).called(1);
     });
 
     testWidgets('Select ${SmallBodySelector.designation.name}', (tester) async {
-      await pumpCadRouteAsInitialLocation(tester);
       const smallBodySelector = SmallBodySelector.designation;
+      await pumpCadRouteAsInitialLocation(tester);
       await tapSmallBodySelector(tester, smallBodySelector);
       expect(tester.widget<ChoiceChip>(spkIdChipFinder).selected, false);
       expect(tester.widget<ChoiceChip>(designationChipFinder).selected, true);
@@ -62,14 +73,21 @@ void main() {
       expect(CadScreen.cadBloc!.state.smallBodySelector, smallBodySelector);
       expect(CadScreen.cadBloc!.state.spkId, null);
       expect(CadScreen.cadBloc!.state.designation, null);
+      await tapSearchButton(tester);
+      expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(CadResultScreen), findsOneWidget);
+      final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
+      verify(sbdbCadApi.get(
+        queryParameters: SbdbCadQueryParameters().toJson(),
+      )).called(1);
     });
 
     testWidgets(
         'Select ${SmallBodySelector.spkId.name}, '
         'select ${SmallBodySelector.designation.name}, '
         'select ${SmallBodySelector.spkId.name}, ', (tester) async {
-      await pumpCadRouteAsInitialLocation(tester);
       SmallBodySelector smallBodySelector = SmallBodySelector.spkId;
+      await pumpCadRouteAsInitialLocation(tester);
       await tapSmallBodySelector(tester, smallBodySelector);
       await tapSmallBodySelector(tester, SmallBodySelector.designation);
       await tapSmallBodySelector(tester, smallBodySelector);
@@ -87,8 +105,8 @@ void main() {
 
     testWidgets('Select ${SmallBodySelector.spkId.name}, tap TextField',
         (tester) async {
-      await pumpCadRouteAsInitialLocation(tester);
       const smallBodySelector = SmallBodySelector.spkId;
+      await pumpCadRouteAsInitialLocation(tester);
       await tapSmallBodySelector(tester, smallBodySelector);
       await tester.tap(textFieldFinder);
       expect(
@@ -102,8 +120,8 @@ void main() {
 
     testWidgets('Select ${SmallBodySelector.designation.name}, tap TextField',
         (tester) async {
-      await pumpCadRouteAsInitialLocation(tester);
       const smallBodySelector = SmallBodySelector.designation;
+      await pumpCadRouteAsInitialLocation(tester);
       await tapSmallBodySelector(tester, smallBodySelector);
       await tester.tap(textFieldFinder);
       expect(
@@ -118,8 +136,8 @@ void main() {
     testWidgets(
         'Select ${SmallBodySelector.spkId.name}, tap TextField, '
         'select ${SmallBodySelector.designation.name}', (tester) async {
-      await pumpCadRouteAsInitialLocation(tester);
       const smallBodySelector = SmallBodySelector.designation;
+      await pumpCadRouteAsInitialLocation(tester);
       await tapSmallBodySelector(tester, SmallBodySelector.spkId);
       await tester.tap(textFieldFinder);
       await tapSmallBodySelector(tester, smallBodySelector);
@@ -135,8 +153,8 @@ void main() {
     testWidgets(
         'Select ${SmallBodySelector.spkId.name}, tap TextField, tap outside',
         (tester) async {
-      await pumpCadRouteAsInitialLocation(tester);
       const smallBodySelector = SmallBodySelector.spkId;
+      await pumpCadRouteAsInitialLocation(tester);
       await tapSmallBodySelector(tester, smallBodySelector);
       await tester.tap(textFieldFinder);
       await tester.tap(titleFinder);
@@ -151,8 +169,8 @@ void main() {
 
     testWidgets('Select and unselect ${SmallBodySelector.spkId.name}',
         (tester) async {
-      await pumpCadRouteAsInitialLocation(tester);
       const smallBodySelector = SmallBodySelector.spkId;
+      await pumpCadRouteAsInitialLocation(tester);
       await tapSmallBodySelector(tester, smallBodySelector);
       expect(tester.widget<ChoiceChip>(spkIdChipFinder).selected, true);
       expect(tester.widget<ChoiceChip>(designationChipFinder).selected, false);
@@ -175,8 +193,8 @@ void main() {
 
     testWidgets('Select and unselect ${SmallBodySelector.designation.name}',
         (tester) async {
-      await pumpCadRouteAsInitialLocation(tester);
       const smallBodySelector = SmallBodySelector.designation;
+      await pumpCadRouteAsInitialLocation(tester);
       await tapSmallBodySelector(tester, smallBodySelector);
       expect(tester.widget<ChoiceChip>(spkIdChipFinder).selected, false);
       expect(tester.widget<ChoiceChip>(designationChipFinder).selected, true);
@@ -221,17 +239,13 @@ void main() {
       await tester.enterText(textFieldFinder, spkId.toString());
       expect(CadScreen.cadBloc!.state.spkId, spkId);
       expect(CadScreen.cadBloc!.state.designation, null);
-    });
-
-    testWidgets(
-        'Select ${SmallBodySelector.designation.name}, tap TextField, '
-        'input designation', (tester) async {
-      await pumpCadRouteAsInitialLocation(tester);
-      await tapSmallBodySelector(tester, SmallBodySelector.designation);
-      await tester.tap(textFieldFinder);
-      await tester.enterText(textFieldFinder, designation);
-      expect(CadScreen.cadBloc!.state.spkId, null);
-      expect(CadScreen.cadBloc!.state.designation, designation);
+      await tapSearchButton(tester);
+      expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(CadResultScreen), findsOneWidget);
+      final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
+      verify(sbdbCadApi.get(
+        queryParameters: SbdbCadQueryParameters(spk: spkId).toJson(),
+      )).called(1);
     });
 
     testWidgets(
@@ -245,35 +259,53 @@ void main() {
       expect(CadScreen.cadBloc!.state.designation, spkId.toString());
     });
 
-    // testWidgets(
-    //     'Select ${SmallBodySelector.spkId.name}, tap TextField, input spkId, '
-    //     'Select ${SmallBodySelector.designation.name}, input designation, '
-    //     'Select ${SmallBodySelector.spkId.name}, '
-    //     'Select ${SmallBodySelector.designation.name}', (tester) async {
-    //   await pumpCadRouteAsInitialLocation(tester);
-    //   await tapSmallBodySelector(tester, SmallBodySelector.spkId);
-    //   await tester.tap(textFieldFinder);
-    //   await tester.enterText(textFieldFinder, spkId.toString());
-    //   expect(CadScreen.cadBloc!.state.spkId, spkId);
-    //   expect(CadScreen.cadBloc!.state.designation, null);
-    //   await tapSmallBodySelector(tester, SmallBodySelector.designation);
-    //   await tester.enterText(textFieldFinder, designation);
-    //   expect(CadScreen.cadBloc!.state.spkId, spkId);
-    //   expect(CadScreen.cadBloc!.state.designation, designation);
-    //   await tapSmallBodySelector(tester, SmallBodySelector.spkId);
-    //   expect(
-    //     tester.widget<TextField>(textFieldFinder).controller!.text,
-    //     spkId.toString(),
-    //   );
-    //   expect(CadScreen.cadBloc!.state.spkId, spkId);
-    //   expect(CadScreen.cadBloc!.state.designation, designation);
-    //   await tapSmallBodySelector(tester, SmallBodySelector.designation);
-    //   expect(
-    //     tester.widget<TextField>(textFieldFinder).controller!.text,
-    //     designation,
-    //   );
-    //   expect(CadScreen.cadBloc!.state.spkId, spkId);
-    //   expect(CadScreen.cadBloc!.state.designation, designation);
-    // });
+    testWidgets(
+        'Select ${SmallBodySelector.designation.name}, tap TextField, '
+        'input designation', (tester) async {
+      await pumpCadRouteAsInitialLocation(tester);
+      await tapSmallBodySelector(tester, SmallBodySelector.designation);
+      await tester.tap(textFieldFinder);
+      await tester.enterText(textFieldFinder, designation);
+      expect(CadScreen.cadBloc!.state.spkId, null);
+      expect(CadScreen.cadBloc!.state.designation, designation);
+      await tapSearchButton(tester);
+      expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(CadResultScreen), findsOneWidget);
+      final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
+      verify(sbdbCadApi.get(
+        queryParameters: SbdbCadQueryParameters(des: designation).toJson(),
+      )).called(1);
+    });
+
+    testWidgets(
+        'Select ${SmallBodySelector.spkId.name}, tap TextField, input spkId, '
+        'Select ${SmallBodySelector.designation.name}, input designation, '
+        'Select ${SmallBodySelector.spkId.name}, '
+        'Select ${SmallBodySelector.designation.name}', (tester) async {
+      await pumpCadRouteAsInitialLocation(tester);
+      await tapSmallBodySelector(tester, SmallBodySelector.spkId);
+      await tester.tap(textFieldFinder);
+      await tester.enterText(textFieldFinder, spkId.toString());
+      expect(CadScreen.cadBloc!.state.spkId, spkId);
+      expect(CadScreen.cadBloc!.state.designation, null);
+      await tapSmallBodySelector(tester, SmallBodySelector.designation);
+      await tester.enterText(textFieldFinder, designation);
+      expect(CadScreen.cadBloc!.state.spkId, spkId);
+      expect(CadScreen.cadBloc!.state.designation, designation);
+      await tapSmallBodySelector(tester, SmallBodySelector.spkId);
+      expect(
+        tester.widget<TextField>(textFieldFinder).controller!.text,
+        spkId.toString(),
+      );
+      expect(CadScreen.cadBloc!.state.spkId, spkId);
+      expect(CadScreen.cadBloc!.state.designation, designation);
+      await tapSmallBodySelector(tester, SmallBodySelector.designation);
+      expect(
+        tester.widget<TextField>(textFieldFinder).controller!.text,
+        designation,
+      );
+      expect(CadScreen.cadBloc!.state.spkId, spkId);
+      expect(CadScreen.cadBloc!.state.designation, designation);
+    });
   });
 }

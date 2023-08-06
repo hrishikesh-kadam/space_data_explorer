@@ -67,8 +67,7 @@ void main() {
         await tapSmallBody(tester, smallBody: smallBody);
         expectSmallBodySelected(tester, smallBody: smallBody);
         expect(CadScreen.cadBloc!.state.smallBody, smallBody);
-        await tester.tap(find.byKey(CadScreen.searchButtonKey));
-        await tester.pumpAndSettle();
+        await tapSearchButton(tester);
         expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
         expect(find.byType(CadResultScreen), findsOneWidget);
         final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;

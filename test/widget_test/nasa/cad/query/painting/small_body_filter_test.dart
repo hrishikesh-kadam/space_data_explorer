@@ -19,10 +19,7 @@ void main() {
       for (var i = 0; i < CadScreen.smallBodyList.length; i++) {
         final smallBody = CadScreen.smallBodyList[i];
         await tapSmallBody(tester, smallBody: smallBody);
-        final overflowingRenderFlexList = tester.getOverflowingRenderFlexList(
-          of: smallBodyFilterWidgetFinder,
-        );
-        expect(overflowingRenderFlexList.length, 0);
+        tester.expectNotOverflowing(of: smallBodyFilterWidgetFinder);
       }
     });
   });

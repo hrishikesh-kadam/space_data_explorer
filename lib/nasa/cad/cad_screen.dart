@@ -273,7 +273,6 @@ class CadScreen extends StatelessWidget {
             previous.designation != current.designation;
       },
       builder: (context, state) {
-        final cadBloc = context.read<CadBloc>();
         return ChoiceChipInputWidget<SmallBodySelector>(
           keyPrefix: smallBodySelectorKeyPrefix,
           keys: keys,
@@ -287,23 +286,25 @@ class CadScreen extends StatelessWidget {
           textFieldWidth: Dimensions.smallBodySelectorInputWidth,
           spacing: Dimensions.cadQueryItemSpacing,
           onChipSelected: (smallBodySelector) {
+            final cadBloc = context.read<CadBloc>();
             cadBloc.add(CadSmallBodySelectorEvent(
               smallBodySelector: smallBodySelector,
-              spkId: state.spkId,
-              designation: state.designation,
+              spkId: cadBloc.state.spkId,
+              designation: cadBloc.state.designation,
             ));
           },
           onTextChanged: (value) {
-            int? spkId = state.spkId;
-            String? designation = state.designation;
-            switch (state.smallBodySelector!) {
+            final cadBloc = context.read<CadBloc>();
+            int? spkId = cadBloc.state.spkId;
+            String? designation = cadBloc.state.designation;
+            switch (cadBloc.state.smallBodySelector!) {
               case SmallBodySelector.spkId:
                 spkId = value.isNotEmpty ? int.parse(value) : null;
               case SmallBodySelector.designation:
                 designation = value.isNotEmpty ? value : null;
             }
             cadBloc.add(CadSmallBodySelectorEvent(
-              smallBodySelector: state.smallBodySelector,
+              smallBodySelector: cadBloc.state.smallBodySelector,
               spkId: spkId,
               designation: designation,
             ));
