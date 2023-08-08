@@ -13,7 +13,7 @@ void main() {
     testWidgets('Navigate to and from $CadRoute', (WidgetTester tester) async {
       await pumpNasaRouteAsInitialLocation(tester);
       expect(find.byType(NasaScreen), findsOneWidget);
-      tapCadButton(tester);
+      await tapCadButton(tester);
       expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(CadScreen), findsOneWidget);
       await tapBackButton(tester);
