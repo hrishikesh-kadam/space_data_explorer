@@ -11,10 +11,12 @@ void main() {
   group('$HomeRoute Widget Test', () {
     testWidgets('Basic', (WidgetTester tester) async {
       await pumpHomeRoute(tester);
+      expect(find.byType(HomeScreen), findsOneWidget);
     });
 
     testWidgets('Navigate to and from $NasaRoute', (WidgetTester tester) async {
       await pumpHomeRoute(tester);
+      expect(find.byType(HomeScreen), findsOneWidget);
       await tester.tap(find.byKey(HomeScreen.nasaButtonKey));
       await tester.pumpAndSettle();
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
