@@ -163,8 +163,7 @@ void appBarBackButtonTest() {
     testWidgets('Browser forward on Route with extra and redirect',
         skip: !kIsWeb, (tester) async {
       await pumpCadRouteAsNormalLink(tester);
-      await tester.tap(find.byKey(CadScreen.searchButtonKey));
-      await tester.pumpAndSettle();
+      await tapSearchButton(tester);
       await tapBackButton(tester);
       platform.historyForward();
       await tester.pumpAndSettle();

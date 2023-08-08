@@ -13,8 +13,7 @@ void main() {
     testWidgets('Navigate to and from $CadResultRoute',
         (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
-      await tester.tap(find.byKey(CadScreen.searchButtonKey));
-      await tester.pumpAndSettle();
+      await tapSearchButton(tester);
       expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(CadResultScreen), findsOneWidget);
       await tapBackButton(tester);

@@ -16,8 +16,7 @@ void main() {
       () {
     testWidgets('DeferredLoading workaround', (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
-      await tester.tap(find.byKey(CadScreen.searchButtonKey));
-      await tester.pumpAndSettle();
+      await tapSearchButton(tester);
     });
 
     testWidgets('No Interaction', (tester) async {
@@ -67,8 +66,7 @@ void main() {
         expectCloseApproachBodySelected(tester,
             closeApproachBody: closeApproachBody);
         expect(CadScreen.cadBloc!.state.closeApproachBody, closeApproachBody);
-        await tester.tap(find.byKey(CadScreen.searchButtonKey));
-        await tester.pumpAndSettle();
+        await tapSearchButton(tester);
         expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
         expect(find.byType(CadResultScreen), findsOneWidget);
         final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;

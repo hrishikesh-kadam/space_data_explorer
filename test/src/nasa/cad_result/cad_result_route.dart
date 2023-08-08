@@ -13,7 +13,7 @@ Future<void> pumpCadResultRouteAsInitialLocation(WidgetTester tester) async {
 
 Future<void> pumpCadResultRouteAsNormalLink(WidgetTester tester) async {
   await pumpCadRouteAsNormalLink(tester);
-  await tester.tap(find.byKey(CadScreen.searchButtonKey));
+  await tapSearchButton(tester);
   await tester.pumpAndSettle();
   expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
   expect(find.byType(CadResultScreen), findsOneWidget);

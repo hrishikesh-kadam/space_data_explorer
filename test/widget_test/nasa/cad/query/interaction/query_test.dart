@@ -12,8 +12,7 @@ void main() {
     testWidgets('$DateFilter', (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       await selectDateRange(tester);
-      await tester.tap(find.byKey(CadScreen.searchButtonKey));
-      await tester.pumpAndSettle();
+      await tapSearchButton(tester);
       expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(CadResultScreen), findsOneWidget);
     });
