@@ -21,9 +21,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     on<CadSmallBodySelected>(_onCadSmallBodySelected);
     on<CadSmallBodySelectorEvent>(_onCadSmallBodySelectorEvent);
     on<CadCloseApproachBodySelected>(_onCadCloseApproachBodySelected);
-    on<CadTotalOnlySelected>(_onCadTotalOnlySelected);
-    on<CadDiameterSelected>(_onCadDiameterSelected);
-    on<CadFullnameSelected>(_onCadFullnameSelected);
+    on<CadDataOutputEvent>(_onCadDataOutputEvent);
   }
 
   final _log = Logger('$appNamePascalCase.CadBloc');
@@ -57,14 +55,15 @@ class CadBloc extends Bloc<CadEvent, CadState> {
           body: state.closeApproachBody,
         );
       }
-      if (state.totalOnly == true) {
-        queryParameters = queryParameters.copyWith(totalOnly: true);
-      }
-      if (state.diameter == true) {
-        queryParameters = queryParameters.copyWith(diameter: true);
-      }
-      if (state.fullname == true) {
-        queryParameters = queryParameters.copyWith(fullname: true);
+      for (final dataOutput in state.dataOutputSet) {
+        switch (dataOutput) {
+          case DataOutput.totalOnly:
+            queryParameters = queryParameters.copyWith(totalOnly: true);
+          case DataOutput.diameter:
+            queryParameters = queryParameters.copyWith(diameter: true);
+          case DataOutput.fullname:
+            queryParameters = queryParameters.copyWith(fullname: true);
+        }
       }
       Response<SbdbCadBody> response = await sbdbCadApi.get(
         queryParameters: queryParameters.toJson(),
@@ -122,30 +121,12 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     }
   }
 
-  Future<void> _onCadTotalOnlySelected(
-    CadTotalOnlySelected event,
+  Future<void> _onCadDataOutputEvent(
+    CadDataOutputEvent event,
     Emitter<CadState> emit,
   ) async {
     emit(state.copyWith(
-      totalOnly: event.selected == true ? true : null,
-    ));
-  }
-
-  Future<void> _onCadDiameterSelected(
-    CadDiameterSelected event,
-    Emitter<CadState> emit,
-  ) async {
-    emit(state.copyWith(
-      diameter: event.selected == true ? true : null,
-    ));
-  }
-
-  Future<void> _onCadFullnameSelected(
-    CadFullnameSelected event,
-    Emitter<CadState> emit,
-  ) async {
-    emit(state.copyWith(
-      fullname: event.selected == true ? true : null,
+      dataOutputSet: event.dataOutputSet,
     ));
   }
 }

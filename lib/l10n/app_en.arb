@@ -23,5 +23,9 @@
   "saturn": "Saturn",
   "uranus": "Uranus",
   "neptune": "Neptune",
-  "pluto": "Pluto"
+  "pluto": "Pluto",
+  "dataOutput": "Data Output",
+  "totalOnly": "Total Only",
+  "diameter": "Diameter",
+  "fullname": "Fullname"
 }

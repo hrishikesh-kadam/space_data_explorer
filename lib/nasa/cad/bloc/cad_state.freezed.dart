@@ -23,9 +23,7 @@ mixin _$CadState {
   int? get spkId => throw _privateConstructorUsedError;
   String? get designation => throw _privateConstructorUsedError;
   CloseApproachBody get closeApproachBody => throw _privateConstructorUsedError;
-  bool? get totalOnly => throw _privateConstructorUsedError;
-  bool? get diameter => throw _privateConstructorUsedError;
-  bool? get fullname => throw _privateConstructorUsedError;
+  Set<DataOutput> get dataOutputSet => throw _privateConstructorUsedError;
   NetworkState get networkState => throw _privateConstructorUsedError;
   SbdbCadBody? get sbdbCadBody => throw _privateConstructorUsedError;
 
@@ -46,9 +44,7 @@ abstract class $CadStateCopyWith<$Res> {
       int? spkId,
       String? designation,
       CloseApproachBody closeApproachBody,
-      bool? totalOnly,
-      bool? diameter,
-      bool? fullname,
+      Set<DataOutput> dataOutputSet,
       NetworkState networkState,
       SbdbCadBody? sbdbCadBody});
 
@@ -74,9 +70,7 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
     Object? spkId = freezed,
     Object? designation = freezed,
     Object? closeApproachBody = null,
-    Object? totalOnly = freezed,
-    Object? diameter = freezed,
-    Object? fullname = freezed,
+    Object? dataOutputSet = null,
     Object? networkState = null,
     Object? sbdbCadBody = freezed,
   }) {
@@ -105,18 +99,10 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
           ? _value.closeApproachBody
           : closeApproachBody // ignore: cast_nullable_to_non_nullable
               as CloseApproachBody,
-      totalOnly: freezed == totalOnly
-          ? _value.totalOnly
-          : totalOnly // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      diameter: freezed == diameter
-          ? _value.diameter
-          : diameter // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      fullname: freezed == fullname
-          ? _value.fullname
-          : fullname // ignore: cast_nullable_to_non_nullable
-              as bool?,
+      dataOutputSet: null == dataOutputSet
+          ? _value.dataOutputSet
+          : dataOutputSet // ignore: cast_nullable_to_non_nullable
+              as Set<DataOutput>,
       networkState: null == networkState
           ? _value.networkState
           : networkState // ignore: cast_nullable_to_non_nullable
@@ -155,9 +141,7 @@ abstract class _$$_CadStateCopyWith<$Res> implements $CadStateCopyWith<$Res> {
       int? spkId,
       String? designation,
       CloseApproachBody closeApproachBody,
-      bool? totalOnly,
-      bool? diameter,
-      bool? fullname,
+      Set<DataOutput> dataOutputSet,
       NetworkState networkState,
       SbdbCadBody? sbdbCadBody});
 
@@ -182,9 +166,7 @@ class __$$_CadStateCopyWithImpl<$Res>
     Object? spkId = freezed,
     Object? designation = freezed,
     Object? closeApproachBody = null,
-    Object? totalOnly = freezed,
-    Object? diameter = freezed,
-    Object? fullname = freezed,
+    Object? dataOutputSet = null,
     Object? networkState = null,
     Object? sbdbCadBody = freezed,
   }) {
@@ -213,18 +195,10 @@ class __$$_CadStateCopyWithImpl<$Res>
           ? _value.closeApproachBody
           : closeApproachBody // ignore: cast_nullable_to_non_nullable
               as CloseApproachBody,
-      totalOnly: freezed == totalOnly
-          ? _value.totalOnly
-          : totalOnly // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      diameter: freezed == diameter
-          ? _value.diameter
-          : diameter // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      fullname: freezed == fullname
-          ? _value.fullname
-          : fullname // ignore: cast_nullable_to_non_nullable
-              as bool?,
+      dataOutputSet: null == dataOutputSet
+          ? _value._dataOutputSet
+          : dataOutputSet // ignore: cast_nullable_to_non_nullable
+              as Set<DataOutput>,
       networkState: null == networkState
           ? _value.networkState
           : networkState // ignore: cast_nullable_to_non_nullable
@@ -247,11 +221,10 @@ class _$_CadState implements _CadState {
       this.spkId,
       this.designation,
       this.closeApproachBody = SbdbCadQueryParameters.defaultCloseApproachBody,
-      this.totalOnly,
-      this.diameter,
-      this.fullname,
+      final Set<DataOutput> dataOutputSet = const {},
       this.networkState = NetworkState.initial,
-      this.sbdbCadBody});
+      this.sbdbCadBody})
+      : _dataOutputSet = dataOutputSet;
 
   @override
   final DateTimeRange? dateRange;
@@ -267,12 +240,15 @@ class _$_CadState implements _CadState {
   @override
   @JsonKey()
   final CloseApproachBody closeApproachBody;
+  final Set<DataOutput> _dataOutputSet;
   @override
-  final bool? totalOnly;
-  @override
-  final bool? diameter;
-  @override
-  final bool? fullname;
+  @JsonKey()
+  Set<DataOutput> get dataOutputSet {
+    if (_dataOutputSet is EqualUnmodifiableSetView) return _dataOutputSet;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableSetView(_dataOutputSet);
+  }
+
   @override
   @JsonKey()
   final NetworkState networkState;
@@ -281,7 +257,7 @@ class _$_CadState implements _CadState {
 
   @override
   String toString() {
-    return 'CadState(dateRange: $dateRange, smallBody: $smallBody, smallBodySelector: $smallBodySelector, spkId: $spkId, designation: $designation, closeApproachBody: $closeApproachBody, totalOnly: $totalOnly, diameter: $diameter, fullname: $fullname, networkState: $networkState, sbdbCadBody: $sbdbCadBody)';
+    return 'CadState(dateRange: $dateRange, smallBody: $smallBody, smallBodySelector: $smallBodySelector, spkId: $spkId, designation: $designation, closeApproachBody: $closeApproachBody, dataOutputSet: $dataOutputSet, networkState: $networkState, sbdbCadBody: $sbdbCadBody)';
   }
 
   @override
@@ -300,12 +276,8 @@ class _$_CadState implements _CadState {
                 other.designation == designation) &&
             (identical(other.closeApproachBody, closeApproachBody) ||
                 other.closeApproachBody == closeApproachBody) &&
-            (identical(other.totalOnly, totalOnly) ||
-                other.totalOnly == totalOnly) &&
-            (identical(other.diameter, diameter) ||
-                other.diameter == diameter) &&
-            (identical(other.fullname, fullname) ||
-                other.fullname == fullname) &&
+            const DeepCollectionEquality()
+                .equals(other._dataOutputSet, _dataOutputSet) &&
             (identical(other.networkState, networkState) ||
                 other.networkState == networkState) &&
             (identical(other.sbdbCadBody, sbdbCadBody) ||
@@ -321,9 +293,7 @@ class _$_CadState implements _CadState {
       spkId,
       designation,
       closeApproachBody,
-      totalOnly,
-      diameter,
-      fullname,
+      const DeepCollectionEquality().hash(_dataOutputSet),
       networkState,
       sbdbCadBody);
 
@@ -342,9 +312,7 @@ abstract class _CadState implements CadState {
       final int? spkId,
       final String? designation,
       final CloseApproachBody closeApproachBody,
-      final bool? totalOnly,
-      final bool? diameter,
-      final bool? fullname,
+      final Set<DataOutput> dataOutputSet,
       final NetworkState networkState,
       final SbdbCadBody? sbdbCadBody}) = _$_CadState;
 
@@ -361,11 +329,7 @@ abstract class _CadState implements CadState {
   @override
   CloseApproachBody get closeApproachBody;
   @override
-  bool? get totalOnly;
-  @override
-  bool? get diameter;
-  @override
-  bool? get fullname;
+  Set<DataOutput> get dataOutputSet;
   @override
   NetworkState get networkState;
   @override

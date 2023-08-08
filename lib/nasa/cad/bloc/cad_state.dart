@@ -16,6 +16,8 @@ enum SmallBodySelector {
   final String displayName;
 }
 
+enum DataOutput { totalOnly, diameter, fullname }
+
 @freezed
 class CadState with _$CadState {
   factory CadState({
@@ -26,9 +28,7 @@ class CadState with _$CadState {
     String? designation,
     @Default(SbdbCadQueryParameters.defaultCloseApproachBody)
     CloseApproachBody closeApproachBody,
-    bool? totalOnly,
-    bool? diameter,
-    bool? fullname,
+    @Default({}) Set<DataOutput> dataOutputSet,
     @Default(NetworkState.initial) NetworkState networkState,
     SbdbCadBody? sbdbCadBody,
   }) = _CadState;

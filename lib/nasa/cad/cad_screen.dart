@@ -14,6 +14,7 @@ import '../../globals.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/choice_chip_query_widget.dart';
 import '../../widgets/date_filter_widget.dart';
+import '../../widgets/filter_chip_query_widget.dart';
 import '../../widgets/query_grid_container.dart';
 import '../cad_result/cad_result_route.dart';
 import '../widgets/choice_chip_input_widget.dart';
@@ -48,6 +49,7 @@ class CadScreen extends StatelessWidget {
       '${keyPrefix}small_body_selector_';
   static const String closeApproachBodySelectorKeyPrefix =
       '${keyPrefix}close_approach_body_';
+  static const String dataOutputKeyPrefix = '${keyPrefix}data_output_';
   static final Set<SmallBody> smallBodySet = {
     SmallBody.neo,
     SmallBody.pha,
@@ -70,6 +72,11 @@ class CadScreen extends StatelessWidget {
     CloseApproachBody.saturn,
     CloseApproachBody.uranus,
     CloseApproachBody.neptune,
+  };
+  static final Set<DataOutput> dataOutputSet = {
+    DataOutput.totalOnly,
+    DataOutput.diameter,
+    DataOutput.fullname,
   };
   // To inject during deep-link, see pumpCadRouteAsInitialLocation()
   @visibleForTesting
@@ -156,6 +163,7 @@ class CadScreen extends StatelessWidget {
       _getSmallBodyFilterWidget(context: context),
       _getSmallBodySelectorWidget(context: context),
       _getCloseApproachBodySelectorWidget(context: context),
+      _getDataOutputWidget(context: context),
       const QueryItemContainer(child: SizedBox(height: 100)),
       const QueryItemContainer(child: SizedBox(height: 150)),
       const QueryItemContainer(child: SizedBox(height: 100)),
@@ -348,6 +356,40 @@ class CadScreen extends StatelessWidget {
           onChipSelected: (closeApproachBody) {
             context.read<CadBloc>().add(CadCloseApproachBodySelected(
                   closeApproachBody: closeApproachBody,
+                ));
+          },
+        );
+      },
+    );
+  }
+
+  _getDataOutputWidget({
+    required BuildContext context,
+  }) {
+    final Set<String> chipLabels = {
+      l10n.totalOnly,
+      l10n.diameter,
+      l10n.fullname,
+    };
+    final Set<String> keys = dataOutputSet.map((e) => e.name).toSet();
+    assert(dataOutputSet.length == chipLabels.length);
+    assert(dataOutputSet.length == keys.length);
+    return BlocSelector<CadBloc, CadState, Set<DataOutput>>(
+      selector: (state) {
+        return state.dataOutputSet;
+      },
+      builder: (context, state) {
+        return FilterChipQueryWidget<DataOutput>(
+          keyPrefix: dataOutputKeyPrefix,
+          title: l10n.dataOutput,
+          values: dataOutputSet,
+          labels: chipLabels,
+          keys: keys,
+          selected: state,
+          spacing: Dimensions.cadQueryItemSpacing,
+          onChipsSelected: (dataOutputSet) {
+            context.read<CadBloc>().add(CadDataOutputEvent(
+                  dataOutputSet: dataOutputSet,
                 ));
           },
         );

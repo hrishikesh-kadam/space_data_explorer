@@ -41,20 +41,8 @@ class CadCloseApproachBodySelected extends CadEvent {
   final CloseApproachBody? closeApproachBody;
 }
 
-class CadTotalOnlySelected extends CadEvent {
-  const CadTotalOnlySelected(this.selected);
+class CadDataOutputEvent extends CadEvent {
+  const CadDataOutputEvent({required this.dataOutputSet});
 
-  final bool? selected;
-}
-
-class CadDiameterSelected extends CadEvent {
-  const CadDiameterSelected(this.selected);
-
-  final bool? selected;
-}
-
-class CadFullnameSelected extends CadEvent {
-  const CadFullnameSelected(this.selected);
-
-  final bool? selected;
+  final Set<DataOutput> dataOutputSet;
 }

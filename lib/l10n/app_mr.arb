@@ -23,5 +23,9 @@
   "saturn": "शनि",
   "uranus": "अरुण",
   "neptune": "वरुण",
-  "pluto": "प्लूटो"
+  "pluto": "प्लूटो",
+  "dataOutput": "डेटा आउटपुट",
+  "totalOnly": "फक्त एकूण",
+  "diameter": "व्यास",
+  "fullname": "पूर्ण नाव"
 }
