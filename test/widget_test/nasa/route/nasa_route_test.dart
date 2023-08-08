@@ -12,6 +12,7 @@ void main() {
   group('$NasaRoute Widget Test', () {
     testWidgets('Navigate to and from $CadRoute', (WidgetTester tester) async {
       await pumpNasaRouteAsInitialLocation(tester);
+      expect(find.byType(NasaScreen), findsOneWidget);
       await tester.tap(find.byKey(NasaScreen.cadButtonKey));
       await tester.pumpAndSettle();
       expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
@@ -23,10 +24,13 @@ void main() {
 
     testWidgets('Basic', (WidgetTester tester) async {
       await pumpNasaRouteAsInitialLocation(tester);
+      expect(find.byType(NasaScreen), findsOneWidget);
     });
 
     testWidgets('Navigate back', (WidgetTester tester) async {
       await pumpNasaRouteAsNormalLink(tester);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(NasaScreen), findsOneWidget);
       await tapBackButton(tester);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);

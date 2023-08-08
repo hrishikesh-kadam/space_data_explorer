@@ -47,6 +47,8 @@ void appBackButtonDispatcherTest() {
 
     testWidgets('2 routes down and 1 route up', (tester) async {
       await pumpNasaRouteAsNormalLink(tester);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(NasaScreen), findsOneWidget);
       await simulateAndroidBackButton(tester);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
