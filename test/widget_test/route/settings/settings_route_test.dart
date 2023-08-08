@@ -24,10 +24,15 @@ void main() {
 
     testWidgets('Basic', (WidgetTester tester) async {
       await pumpSettingsRouteAsInitialLocation(tester);
+      expect(find.byType(SettingsScreen), findsOneWidget);
+      expect(settingsButtonFinder, findsNothing);
     });
 
     testWidgets('Navigate back', (WidgetTester tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(SettingsScreen), findsOneWidget);
+      expect(settingsButtonFinder, findsNothing);
       await tapBackButton(tester);
       expect(find.byType(SettingsScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
