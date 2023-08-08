@@ -15,6 +15,8 @@ void main() {
   group('$CadResultRoute Widget Test', () {
     testWidgets('Navigate back', (WidgetTester tester) async {
       await pumpCadResultRouteAsNormalLink(tester);
+      expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(CadResultScreen), findsOneWidget);
       await tapBackButton(tester);
       expect(find.byType(CadResultScreen), findsNothing);
       expect(find.byType(CadScreen), findsOneWidget);
@@ -22,6 +24,7 @@ void main() {
 
     testWidgets('Basic', (WidgetTester tester) async {
       await pumpCadResultRouteAsInitialLocation(tester);
+      expect(find.byType(CadScreen), findsOneWidget);
     });
 
     testWidgets('extra[SbdbCadBody] JsonMap', (WidgetTester tester) async {
