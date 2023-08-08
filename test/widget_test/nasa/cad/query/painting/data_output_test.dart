@@ -4,21 +4,22 @@ import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
-import 'package:space_data_explorer/widgets/choice_chip_query_widget.dart';
+import 'package:space_data_explorer/widgets/filter_chip_query_widget.dart';
 import '../../../../../constants/dimensions.dart';
 import '../../../../../src/nasa/cad/cad_route.dart';
-import '../../../../../src/nasa/cad/query/small_body_filter.dart';
+import '../../../../../src/nasa/cad/query/data_output.dart';
 
 void main() {
-  group('$CadRoute ${ChoiceChipQueryWidget<SmallBody>} Painting Test', () {
+  group('$CadRoute ${FilterChipQueryWidget<DataOutput>} Painting Test', () {
     testWidgets('Doesn\'t Overflow ${Dimensions.galaxyFoldPortraitWidth}',
         (WidgetTester tester) async {
       disableOverflowError();
       tester.view.setLogicalSize(width: Dimensions.galaxyFoldPortraitWidth);
       await pumpCadRouteAsInitialLocation(tester);
-      for (final smallBody in CadScreen.smallBodySet) {
-        await tapSmallBody(tester, smallBody: smallBody);
-        tester.expectNoOverflow(of: smallBodyFilterWidgetFinder);
+      await ensureDataOutputWidgetVisible(tester);
+      for (final dataOutput in CadScreen.dataOutputSet) {
+        await tapDataOutputChip(tester, dataOutput: dataOutput);
+        tester.expectNoOverflow(of: dataOutputWidgetFinder);
       }
     });
   });

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:space_data_explorer/nasa/cad/bloc/cad_bloc.dart';
@@ -42,6 +44,18 @@ CadBloc getCadBloc() {
   return CadBloc(sbdbCadApi: getMockedSbdbCadApi());
 }
 
+Future<void> ensureSearchButtonVisible(WidgetTester tester) async {
+  await tester.dragUntilVisible(
+    searchButtonFinder,
+    customScrollViewFinder,
+    const Offset(0, 200),
+  );
+  await tester.pumpAndSettle();
+  await tester.tap(find.byType(AppBar));
+  await tester.pumpAndSettle();
+}
+
+// TODO(hrishikesh-kadam): Use this everywhere
 Future<void> tapSearchButton(WidgetTester tester) async {
   await tester.tap(searchButtonFinder);
   await tester.pumpAndSettle();

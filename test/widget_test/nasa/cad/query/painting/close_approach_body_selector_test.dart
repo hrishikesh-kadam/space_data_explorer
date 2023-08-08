@@ -23,8 +23,7 @@ void main() {
         const Offset(0, -200),
       );
       await tester.pumpAndSettle();
-      for (var i = 0; i < CadScreen.closeApproachBodySet.length; i++) {
-        final closeApproachBody = CadScreen.closeApproachBodySet.elementAt(i);
+      for (final closeApproachBody in CadScreen.closeApproachBodySet) {
         await tapCloseApproachBody(
           tester,
           closeApproachBody: closeApproachBody,
