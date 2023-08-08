@@ -21,7 +21,7 @@ extension HrkFinder on CommonFinders {
     );
   }
 
-  Finder descendantTexContaining({
+  Finder descendantTextContaining({
     required Finder of,
     required Pattern pattern,
     bool matchRoot = false,

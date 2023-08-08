@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:space_data_explorer/route/settings/language.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
+import '../../../extension/common_finders.dart';
 
 final languageTileFinder = find.byKey(SettingsScreen.languageTileKey);
 final languageDialogFinder = find.byKey(SettingsScreen.languageDialogKey);
@@ -37,13 +38,11 @@ Future<void> verifyLanguageTileSubtitle(
   required AppLocalizations l10n,
   required Language language,
 }) async {
-  final subTitleFinder = find.descendant(
+  final subTitleFinder = find.descendantText(
     of: languageTileFinder,
-    matching: find.text(
-      SettingsScreen.getLanguageValueTitle(
-        l10n: l10n,
-        language: language,
-      ),
+    text: SettingsScreen.getLanguageValueTitle(
+      l10n: l10n,
+      language: language,
     ),
   );
   expect(subTitleFinder, findsOneWidget);

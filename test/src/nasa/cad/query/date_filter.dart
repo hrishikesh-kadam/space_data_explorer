@@ -50,7 +50,7 @@ void expectDateTextContaining(
   Finder dateFinder,
 ) {
   expect(
-    find.descendantTexContaining(of: dateFinder, pattern: actual),
+    find.descendantTextContaining(of: dateFinder, pattern: actual),
     findsOneWidget,
   );
 }

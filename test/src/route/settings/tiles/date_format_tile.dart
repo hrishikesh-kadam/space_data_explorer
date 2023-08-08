@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
+import '../../../extension/common_finders.dart';
 
 final dateFormatTileFinder = find.byKey(SettingsScreen.dateFormatTileKey);
 final dateFormatDialogFinder = find.byKey(SettingsScreen.dateFormatDialogKey);
@@ -37,13 +38,11 @@ Future<void> verifyDateFormatTileSubtitle(
   required AppLocalizations l10n,
   required DateFormatPattern dateFormatPattern,
 }) async {
-  final subTitleFinder = find.descendant(
+  final subTitleFinder = find.descendantText(
     of: dateFormatTileFinder,
-    matching: find.text(
-      SettingsScreen.getDateFormatValueTitle(
-        l10n: l10n,
-        dateFormatPattern: dateFormatPattern,
-      ),
+    text: SettingsScreen.getDateFormatValueTitle(
+      l10n: l10n,
+      dateFormatPattern: dateFormatPattern,
     ),
   );
   expect(subTitleFinder, findsOneWidget);
