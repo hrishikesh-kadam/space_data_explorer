@@ -25,7 +25,6 @@ Future<void> pumpCadRouteAsInitialLocation(
 }) async {
   CadScreen.cadBloc = cadBloc ?? getCadBloc();
   await pumpApp(tester, initialLocation: CadRoute.path);
-  expect(find.byType(CadScreen), findsOneWidget);
 }
 
 Future<void> pumpCadRouteAsNormalLink(
@@ -36,8 +35,6 @@ Future<void> pumpCadRouteAsNormalLink(
   CadScreen.cadBloc = cadBloc ?? getCadBloc();
   await tester.tap(find.byKey(NasaScreen.cadButtonKey));
   await tester.pumpAndSettle();
-  expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
-  expect(find.byType(CadScreen), findsOneWidget);
 }
 
 CadBloc getCadBloc() {

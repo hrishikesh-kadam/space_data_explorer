@@ -48,6 +48,8 @@ void appBarBackButtonTest() {
 
     testWidgets('3 routes down and 2 routes up', (tester) async {
       await pumpCadRouteAsNormalLink(tester);
+      expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(CadScreen), findsOneWidget);
       await tapBackButton(tester);
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsOneWidget);
@@ -165,6 +167,8 @@ void appBarBackButtonTest() {
     testWidgets('Browser forward on Route with extra and redirect',
         skip: !kIsWeb, (tester) async {
       await pumpCadRouteAsNormalLink(tester);
+      expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(CadScreen), findsOneWidget);
       await tapSearchButton(tester);
       await tapBackButton(tester);
       platform.historyForward();
