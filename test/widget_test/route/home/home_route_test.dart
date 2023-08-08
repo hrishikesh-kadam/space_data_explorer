@@ -17,8 +17,7 @@ void main() {
     testWidgets('Navigate to and from $NasaRoute', (WidgetTester tester) async {
       await pumpHomeRoute(tester);
       expect(find.byType(HomeScreen), findsOneWidget);
-      await tester.tap(find.byKey(HomeScreen.nasaButtonKey));
-      await tester.pumpAndSettle();
+      await tapNasaButton(tester);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NasaScreen), findsOneWidget);
       await tapBackButton(tester);
