@@ -42,12 +42,12 @@ class CadBloc extends Bloc<CadEvent, CadState> {
         );
       }
       queryParameters = queryParameters.copyWithSmallBody(state.smallBody);
-      switch (state.smallBodySelector) {
-        case SmallBodySelector.spkId:
-          queryParameters = queryParameters.copyWith(spk: state.spkId);
-        case SmallBodySelector.designation:
-          queryParameters = queryParameters.copyWith(des: state.designation);
-        default:
+      if (state.smallBodySelector != null) {
+        queryParameters = queryParameters.copyWithSmallBodySelector(
+          state.smallBodySelector!,
+          spkId: state.spkId,
+          desgination: state.designation,
+        );
       }
       if (state.closeApproachBody !=
           SbdbCadQueryParameters.defaultCloseApproachBody) {
@@ -55,16 +55,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
           body: state.closeApproachBody,
         );
       }
-      for (final dataOutput in state.dataOutputSet) {
-        switch (dataOutput) {
-          case DataOutput.totalOnly:
-            queryParameters = queryParameters.copyWith(totalOnly: true);
-          case DataOutput.diameter:
-            queryParameters = queryParameters.copyWith(diameter: true);
-          case DataOutput.fullname:
-            queryParameters = queryParameters.copyWith(fullname: true);
-        }
-      }
+      queryParameters = queryParameters.copyWithDataOutput(state.dataOutputSet);
       Response<SbdbCadBody> response = await sbdbCadApi.get(
         queryParameters: queryParameters.toJson(),
       );

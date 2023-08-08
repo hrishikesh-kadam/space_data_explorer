@@ -7,17 +7,6 @@ part 'cad_state.freezed.dart';
 
 enum NetworkState { initial, sending, success, failure }
 
-enum SmallBodySelector {
-  spkId(displayName: 'SPK-ID'),
-  designation(displayName: 'Designation');
-
-  const SmallBodySelector({required this.displayName});
-
-  final String displayName;
-}
-
-enum DataOutput { totalOnly, diameter, fullname }
-
 @freezed
 class CadState with _$CadState {
   factory CadState({
