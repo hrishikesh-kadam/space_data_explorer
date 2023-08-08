@@ -26,6 +26,9 @@ class CadState with _$CadState {
     String? designation,
     @Default(SbdbCadQueryParameters.defaultCloseApproachBody)
     CloseApproachBody closeApproachBody,
+    bool? totalOnly,
+    bool? diameter,
+    bool? fullname,
     @Default(NetworkState.initial) NetworkState networkState,
     SbdbCadBody? sbdbCadBody,
   }) = _CadState;
