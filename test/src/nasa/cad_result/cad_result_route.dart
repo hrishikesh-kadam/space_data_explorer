@@ -11,5 +11,4 @@ Future<void> pumpCadResultRouteAsInitialLocation(WidgetTester tester) async {
 Future<void> pumpCadResultRouteAsNormalLink(WidgetTester tester) async {
   await pumpCadRouteAsNormalLink(tester);
   await tapSearchButton(tester);
-  await tester.pumpAndSettle();
 }
