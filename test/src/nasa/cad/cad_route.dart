@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:space_data_explorer/nasa/cad/bloc/cad_bloc.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
-import 'package:space_data_explorer/nasa/route/nasa_screen.dart';
 import 'package:space_data_explorer/widgets/query_grid_container.dart';
 import '../../space_data_explorer_app.dart';
 import '../route/nasa_route.dart';
@@ -33,8 +32,7 @@ Future<void> pumpCadRouteAsNormalLink(
 }) async {
   await pumpNasaRouteAsNormalLink(tester);
   CadScreen.cadBloc = cadBloc ?? getCadBloc();
-  await tester.tap(find.byKey(NasaScreen.cadButtonKey));
-  await tester.pumpAndSettle();
+  await tapCadButton(tester);
 }
 
 CadBloc getCadBloc() {

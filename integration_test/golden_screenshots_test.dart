@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:space_data_explorer/main.dart' as app;
-import 'package:space_data_explorer/nasa/route/nasa_screen.dart';
 import '../test/src/helper/helper.dart';
+import '../test/src/nasa/route/nasa_route.dart';
 import '../test/src/route/home/home_route.dart';
 
 void main() {
@@ -20,7 +20,7 @@ void main() {
     await tapNasaButton(tester);
     await testScreenshot('2$imageNameSuffix.png', tester, binding);
 
-    await tester.tap(find.byKey(NasaScreen.cadButtonKey));
+    await tapCadButton(tester);
     await testScreenshot('3$imageNameSuffix.png', tester, binding);
   });
 }
