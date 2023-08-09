@@ -168,7 +168,7 @@ class CadScreen extends StatelessWidget {
       const QueryItemContainer(child: SizedBox(height: 150)),
       const QueryItemContainer(child: SizedBox(height: 100)),
     ];
-    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double deviceWidth = MediaQuery.sizeOf(context).width;
     final double whiteSpaceWhenTwo = deviceWidth -
         2 * Dimensions.cadQueryItemExtent -
         2 * Dimensions.pagePaddingHorizontal;
