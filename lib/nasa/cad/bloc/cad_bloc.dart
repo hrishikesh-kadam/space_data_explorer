@@ -14,10 +14,11 @@ part 'cad_event.dart';
 class CadBloc extends Bloc<CadEvent, CadState> {
   CadBloc({
     SbdbCadApi? sbdbCadApi,
-  }) : super(CadState()) {
+  }) : super(const CadState()) {
     this.sbdbCadApi = sbdbCadApi ?? SbdbCadApi();
     on<CadRequested>(_onCadRequested);
     on<CadDateRangeSelected>(_onCadDateRangeSelected);
+    on<CadDistanceRangeEvent>(_onCadDistanceRangeEvent);
     on<CadSmallBodySelected>(_onCadSmallBodySelected);
     on<CadSmallBodySelectorEvent>(_onCadSmallBodySelectorEvent);
     on<CadCloseApproachBodySelected>(_onCadCloseApproachBodySelected);
@@ -33,29 +34,32 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     Emitter<CadState> emit,
   ) async {
     emit(state.copyWith(networkState: NetworkState.sending));
+    SbdbCadQueryParameters queryParameters = const SbdbCadQueryParameters();
+    if (state.dateRange != null) {
+      queryParameters = queryParameters.copyWith(
+        dateMin: dateFormatter.format(state.dateRange!.start),
+        dateMax: dateFormatter.format(state.dateRange!.end),
+      );
+    }
+    queryParameters = queryParameters.copyWithDistanceRange(
+      state.distanceRange,
+    );
+    queryParameters = queryParameters.copyWithSmallBody(state.smallBody);
+    if (state.smallBodySelector != null) {
+      queryParameters = queryParameters.copyWithSmallBodySelector(
+        state.smallBodySelector!,
+        spkId: state.spkId,
+        desgination: state.designation,
+      );
+    }
+    if (state.closeApproachBody !=
+        SbdbCadQueryParameters.defaultCloseApproachBody) {
+      queryParameters = queryParameters.copyWith(
+        body: state.closeApproachBody,
+      );
+    }
+    queryParameters = queryParameters.copyWithDataOutput(state.dataOutputSet);
     try {
-      SbdbCadQueryParameters queryParameters = SbdbCadQueryParameters();
-      if (state.dateRange != null) {
-        queryParameters = queryParameters.copyWith(
-          dateMin: dateFormatter.format(state.dateRange!.start),
-          dateMax: dateFormatter.format(state.dateRange!.end),
-        );
-      }
-      queryParameters = queryParameters.copyWithSmallBody(state.smallBody);
-      if (state.smallBodySelector != null) {
-        queryParameters = queryParameters.copyWithSmallBodySelector(
-          state.smallBodySelector!,
-          spkId: state.spkId,
-          desgination: state.designation,
-        );
-      }
-      if (state.closeApproachBody !=
-          SbdbCadQueryParameters.defaultCloseApproachBody) {
-        queryParameters = queryParameters.copyWith(
-          body: state.closeApproachBody,
-        );
-      }
-      queryParameters = queryParameters.copyWithDataOutput(state.dataOutputSet);
       Response<SbdbCadBody> response = await sbdbCadApi.get(
         queryParameters: queryParameters.toJson(),
       );
@@ -75,6 +79,13 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     Emitter<CadState> emit,
   ) async {
     emit(state.copyWith(dateRange: event.dateRange));
+  }
+
+  Future<void> _onCadDistanceRangeEvent(
+    CadDistanceRangeEvent event,
+    Emitter<CadState> emit,
+  ) async {
+    emit(state.copyWith(distanceRange: event.distanceRange));
   }
 
   Future<void> _onCadSmallBodySelected(

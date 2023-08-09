@@ -12,7 +12,7 @@ void main() {
   group('$SettingsState Unit Test', () {
     const Language language = Language.english;
     const DateFormatPattern dateFormatPattern = DateFormatPattern.yMd;
-    final SettingsState initialState = SettingsState(
+    const SettingsState initialState = SettingsState(
       language: language,
       dateFormatPattern: dateFormatPattern,
     );

@@ -77,7 +77,7 @@ Future<void> verifyQueryParameters(
   expect(find.byType(CadResultScreen), findsOneWidget);
   final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
   final queryParameters =
-      SbdbCadQueryParameters().copyWithDataOutput(dataOutputSet);
+      const SbdbCadQueryParameters().copyWithDataOutput(dataOutputSet);
   verify(sbdbCadApi.get(queryParameters: queryParameters.toJson())).called(1);
   clearInteractions(sbdbCadApi);
   await tapBackButton(tester);

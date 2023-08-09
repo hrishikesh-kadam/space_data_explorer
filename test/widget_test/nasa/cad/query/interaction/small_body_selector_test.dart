@@ -59,7 +59,7 @@ void main() {
       expect(find.byType(CadResultScreen), findsOneWidget);
       final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
       verify(sbdbCadApi.get(
-        queryParameters: SbdbCadQueryParameters().toJson(),
+        queryParameters: const SbdbCadQueryParameters().toJson(),
       )).called(1);
     });
 
@@ -82,7 +82,7 @@ void main() {
       expect(find.byType(CadResultScreen), findsOneWidget);
       final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
       verify(sbdbCadApi.get(
-        queryParameters: SbdbCadQueryParameters().toJson(),
+        queryParameters: const SbdbCadQueryParameters().toJson(),
       )).called(1);
     });
 
@@ -249,7 +249,7 @@ void main() {
       expect(find.byType(CadResultScreen), findsOneWidget);
       final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
       verify(sbdbCadApi.get(
-        queryParameters: SbdbCadQueryParameters(spk: spkId).toJson(),
+        queryParameters: const SbdbCadQueryParameters(spk: spkId).toJson(),
       )).called(1);
     });
 
@@ -278,7 +278,9 @@ void main() {
       expect(find.byType(CadResultScreen), findsOneWidget);
       final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
       verify(sbdbCadApi.get(
-        queryParameters: SbdbCadQueryParameters(des: designation).toJson(),
+        queryParameters: const SbdbCadQueryParameters(
+          des: designation,
+        ).toJson(),
       )).called(1);
     });
 

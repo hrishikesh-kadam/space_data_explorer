@@ -49,11 +49,11 @@ void main() {
 
     testWidgets('Select and Search Each', (tester) async {
       final List<JsonMap> verifyQueryParamters = [
-        SbdbCadQueryParameters().toJson(),
-        SbdbCadQueryParameters(pha: true).toJson(),
-        SbdbCadQueryParameters(nea: true).toJson(),
-        SbdbCadQueryParameters(comet: true).toJson(),
-        SbdbCadQueryParameters(neaComet: true).toJson(),
+        const SbdbCadQueryParameters().toJson(),
+        const SbdbCadQueryParameters(pha: true).toJson(),
+        const SbdbCadQueryParameters(nea: true).toJson(),
+        const SbdbCadQueryParameters(comet: true).toJson(),
+        const SbdbCadQueryParameters(neaComet: true).toJson(),
       ];
       for (var i = 0; i < CadScreen.smallBodySet.length; i++) {
         if (i == 0) {

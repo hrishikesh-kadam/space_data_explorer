@@ -139,7 +139,7 @@ class __$$_SettingsStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_SettingsState implements _SettingsState {
-  _$_SettingsState(
+  const _$_SettingsState(
       {required this.language,
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
       required this.dateFormatPattern,
@@ -211,7 +211,7 @@ class _$_SettingsState implements _SettingsState {
 }
 
 abstract class _SettingsState implements SettingsState {
-  factory _SettingsState(
+  const factory _SettingsState(
       {required final Language language,
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
       required final DateFormatPattern dateFormatPattern,

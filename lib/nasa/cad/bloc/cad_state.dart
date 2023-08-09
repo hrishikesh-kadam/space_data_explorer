@@ -9,8 +9,9 @@ enum NetworkState { initial, sending, success, failure }
 
 @freezed
 class CadState with _$CadState {
-  factory CadState({
+  const factory CadState({
     DateTimeRange? dateRange,
+    @Default(DistanceRange()) DistanceRange distanceRange,
     @Default(SbdbCadQueryParameters.defaultSmallBody) SmallBody smallBody,
     SmallBodySelector? smallBodySelector,
     int? spkId,

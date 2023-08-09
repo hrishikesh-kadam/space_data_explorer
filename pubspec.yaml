@@ -49,9 +49,9 @@ dev_dependencies:
   json_serializable: ^6.7.1
   go_router_builder: ^2.2.4
 
-# dependency_overrides:
-#   hrk_nasa_apis:
-#     path: '../../dart/packages/hrk_nasa_apis'
+dependency_overrides:
+  hrk_nasa_apis:
+    path: '../../dart/packages/hrk_nasa_apis'
 #   hrk_flutter_test_batteries:
 #     path: '../packages/hrk_flutter_test_batteries'
 

@@ -11,7 +11,7 @@ part 'settings_state.g.dart';
 
 @freezed
 class SettingsState with _$SettingsState {
-  factory SettingsState({
+  const factory SettingsState({
     required final Language language,
     @LocaleListJsonConverter() List<Locale>? systemLocales,
     required final DateFormatPattern dateFormatPattern,
