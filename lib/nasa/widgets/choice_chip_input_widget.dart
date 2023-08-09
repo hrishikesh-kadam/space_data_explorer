@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../../constants/dimensions.dart';
+import '../../globals.dart';
 import '../../widgets/query_grid_container.dart';
 
 typedef ChipSelected<T> = void Function(T? value);
@@ -132,13 +133,16 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
                   selectedIndex = selected ? index : null;
                   if (selectedIndex != null) {
                     if (widget.keyboardTypes != null &&
-                        textFieldFocusNode.hasFocus &&
-                        keyboardVisible == true) {
-                      // To change the keyboard
-                      textFieldFocusNode.unfocus();
-                      WidgetsBinding.instance.addPostFrameCallback(
-                        (_) => textFieldFocusNode.requestFocus(),
-                      );
+                        textFieldFocusNode.hasFocus) {
+                      if (keyboardVisibilitySupported &&
+                              keyboardVisible == true ||
+                          !keyboardVisibilitySupported) {
+                        // To change the keyboard
+                        textFieldFocusNode.unfocus();
+                        WidgetsBinding.instance.addPostFrameCallback(
+                          (_) => textFieldFocusNode.requestFocus(),
+                        );
+                      }
                     }
                     textController.text = textList[selectedIndex!];
                   }

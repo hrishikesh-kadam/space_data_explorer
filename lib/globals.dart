@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hrk_batteries/hrk_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 
+import 'config/config.dart';
 import 'constants/constants.dart';
 
 bool flutterTest = isFlutterTest();
@@ -18,6 +19,8 @@ JsonMap getRouteExtraMap() {
   extra[isNormalLink] = true;
   return extra;
 }
+
+final bool keyboardVisibilitySupported = isKeyboardVisibilitySupported();
 
 @visibleForTesting
 bool isSurfaceRendered = false;
