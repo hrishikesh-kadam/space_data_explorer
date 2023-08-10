@@ -46,8 +46,11 @@ Future<void> ensureSearchButtonVisible(WidgetTester tester) async {
     const Offset(0, 200),
   );
   await tester.pumpAndSettle();
-  await tester.tap(find.byType(AppBar));
-  await tester.pumpAndSettle();
+  try {
+    await tester.tap(find.byType(AppBar));
+    await tester.pumpAndSettle();
+    // ignore: empty_catches
+  } catch (e) {}
 }
 
 Future<void> tapSearchButton(WidgetTester tester) async {

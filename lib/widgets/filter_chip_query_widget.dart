@@ -5,22 +5,23 @@ import 'query_grid_container.dart';
 typedef ChipsSelected<T> = void Function(Set<T> selected);
 
 class FilterChipQueryWidget<T> extends StatelessWidget {
-  FilterChipQueryWidget({
+  const FilterChipQueryWidget({
+    super.key,
     this.keyPrefix = '',
-    this.keys,
     required this.title,
     required this.values,
     required this.labels,
+    this.keys,
     this.selected = const {},
     this.spacing = 8,
     this.onChipsSelected,
-  }) : super(key: Key('$keyPrefix$defaultKey'));
+  });
 
   final String keyPrefix;
-  final Set<String>? keys;
   final String title;
   final Set<T> values;
   final Set<String> labels;
+  final Set<String>? keys;
   final Set<T> selected;
   final double spacing;
   final ChipsSelected<T>? onChipsSelected;

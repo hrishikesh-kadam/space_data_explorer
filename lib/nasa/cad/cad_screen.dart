@@ -45,11 +45,8 @@ class CadScreen extends StatelessWidget {
       Key('$keyPrefix${DateFilterWidget.selectDateRangeButtonKey}');
   static const String smallBodyFilterKeyPrefix =
       '${keyPrefix}small_body_filter_';
-  static const String smallBodySelectorKeyPrefix =
-      '${keyPrefix}small_body_selector_';
-  static const String closeApproachBodySelectorKeyPrefix =
-      '${keyPrefix}close_approach_body_';
-  static const String dataOutputKeyPrefix = '${keyPrefix}data_output_';
+  static const Key smallBodyFilterKey =
+      Key('$smallBodyFilterKeyPrefix${ChoiceChipQueryWidget.defaultKey}');
   static final Set<SmallBody> smallBodySet = {
     SmallBody.neo,
     SmallBody.pha,
@@ -57,10 +54,18 @@ class CadScreen extends StatelessWidget {
     SmallBody.comet,
     SmallBody.neaComet,
   };
+  static const String smallBodySelectorKeyPrefix =
+      '${keyPrefix}small_body_selector_';
+  static const Key smallBodySelectorKey =
+      Key('$smallBodySelectorKeyPrefix${ChoiceChipInputWidget.defaultKey}');
   static final Set<SmallBodySelector> smallBodySelectors = {
     SmallBodySelector.spkId,
     SmallBodySelector.designation,
   };
+  static const String closeApproachBodySelectorKeyPrefix =
+      '${keyPrefix}close_approach_body_';
+  static const Key closeApproachBodySelectorKey = Key(
+      '$closeApproachBodySelectorKeyPrefix${ChoiceChipQueryWidget.defaultKey}');
   static final Set<CloseApproachBody> closeApproachBodySet = {
     CloseApproachBody.earth,
     CloseApproachBody.moon,
@@ -73,6 +78,9 @@ class CadScreen extends StatelessWidget {
     CloseApproachBody.uranus,
     CloseApproachBody.neptune,
   };
+  static const String dataOutputKeyPrefix = '${keyPrefix}data_output_';
+  static const Key dataOutputKey =
+      Key('$dataOutputKeyPrefix${FilterChipQueryWidget.defaultKey}');
   static final Set<DataOutput> dataOutputSet = {
     DataOutput.totalOnly,
     DataOutput.diameter,
@@ -160,6 +168,7 @@ class CadScreen extends StatelessWidget {
   }) {
     List<Widget> queryWidgetList = [
       _getDateFilterWidget(context: context),
+      _getDistanceFilterWidget(context: context),
       _getSmallBodyFilterWidget(context: context),
       _getSmallBodySelectorWidget(context: context),
       _getCloseApproachBodySelectorWidget(context: context),
@@ -224,10 +233,23 @@ class CadScreen extends StatelessWidget {
     );
   }
 
+  Widget _getDistanceFilterWidget({
+    required BuildContext context,
+  }) {
+    return BlocSelector<CadBloc, CadState, DistanceRange>(
+      selector: (state) {
+        return state.distanceRange;
+      },
+      builder: (context, state) {
+        return const QueryItemContainer(child: SizedBox(height: 100));
+      },
+    );
+  }
+
   Widget _getSmallBodyFilterWidget({
     required BuildContext context,
   }) {
-    final Set<String> chipLabels = {
+    final Set<String> labels = {
       SmallBody.neo.displayName,
       SmallBody.pha.displayName,
       SmallBody.nea.displayName,
@@ -235,7 +257,7 @@ class CadScreen extends StatelessWidget {
       l10n.neaComet,
     };
     final Set<String> keys = smallBodySet.map((e) => e.name).toSet();
-    assert(smallBodySet.length == chipLabels.length);
+    assert(smallBodySet.length == labels.length);
     assert(smallBodySet.length == keys.length);
     return BlocSelector<CadBloc, CadState, SmallBody>(
       selector: (state) {
@@ -243,10 +265,11 @@ class CadScreen extends StatelessWidget {
       },
       builder: (context, state) {
         return ChoiceChipQueryWidget<SmallBody>(
+          key: smallBodyFilterKey,
           keyPrefix: smallBodyFilterKeyPrefix,
           title: l10n.smallBodyFilter,
           values: smallBodySet,
-          labels: chipLabels,
+          labels: labels,
           keys: keys,
           selected: state,
           spacing: Dimensions.cadQueryItemSpacing,
@@ -263,9 +286,9 @@ class CadScreen extends StatelessWidget {
   Widget _getSmallBodySelectorWidget({
     required BuildContext context,
   }) {
-    final Set<String> keys = smallBodySelectors.map((e) => e.name).toSet();
     final Set<String> labels =
         smallBodySelectors.map((e) => e.displayName).toSet();
+    final Set<String> keys = smallBodySelectors.map((e) => e.name).toSet();
     final List<TextInputType> keyboardTypes = [
       TextInputType.number,
       TextInputType.text,
@@ -282,11 +305,12 @@ class CadScreen extends StatelessWidget {
       },
       builder: (context, state) {
         return ChoiceChipInputWidget<SmallBodySelector>(
+          key: smallBodySelectorKey,
           keyPrefix: smallBodySelectorKeyPrefix,
-          keys: keys,
           title: l10n.smallBodySelector,
           values: smallBodySelectors,
           labels: labels,
+          keys: keys,
           selected: state.smallBodySelector,
           keyboardTypes: keyboardTypes,
           inputFormattersList: inputFormattersList,
@@ -325,7 +349,7 @@ class CadScreen extends StatelessWidget {
   Widget _getCloseApproachBodySelectorWidget({
     required BuildContext context,
   }) {
-    final Set<String> chipLabels = {
+    final Set<String> labels = {
       l10n.earth,
       l10n.moon,
       l10n.all,
@@ -338,7 +362,7 @@ class CadScreen extends StatelessWidget {
       l10n.neptune,
     };
     final Set<String> keys = closeApproachBodySet.map((e) => e.name).toSet();
-    assert(closeApproachBodySet.length == chipLabels.length);
+    assert(closeApproachBodySet.length == labels.length);
     assert(closeApproachBodySet.length == keys.length);
     return BlocSelector<CadBloc, CadState, CloseApproachBody>(
       selector: (state) {
@@ -346,10 +370,11 @@ class CadScreen extends StatelessWidget {
       },
       builder: (context, state) {
         return ChoiceChipQueryWidget<CloseApproachBody>(
+          key: closeApproachBodySelectorKey,
           keyPrefix: closeApproachBodySelectorKeyPrefix,
           title: l10n.closeApproachBodySelector,
           values: closeApproachBodySet,
-          labels: chipLabels,
+          labels: labels,
           keys: keys,
           selected: state,
           spacing: Dimensions.cadQueryItemSpacing,
@@ -366,13 +391,13 @@ class CadScreen extends StatelessWidget {
   _getDataOutputWidget({
     required BuildContext context,
   }) {
-    final Set<String> chipLabels = {
+    final Set<String> labels = {
       l10n.totalOnly,
       l10n.diameter,
       l10n.fullname,
     };
     final Set<String> keys = dataOutputSet.map((e) => e.name).toSet();
-    assert(dataOutputSet.length == chipLabels.length);
+    assert(dataOutputSet.length == labels.length);
     assert(dataOutputSet.length == keys.length);
     return BlocSelector<CadBloc, CadState, Set<DataOutput>>(
       selector: (state) {
@@ -380,10 +405,11 @@ class CadScreen extends StatelessWidget {
       },
       builder: (context, state) {
         return FilterChipQueryWidget<DataOutput>(
+          key: dataOutputKey,
           keyPrefix: dataOutputKeyPrefix,
           title: l10n.dataOutput,
           values: dataOutputSet,
-          labels: chipLabels,
+          labels: labels,
           keys: keys,
           selected: state,
           spacing: Dimensions.cadQueryItemSpacing,

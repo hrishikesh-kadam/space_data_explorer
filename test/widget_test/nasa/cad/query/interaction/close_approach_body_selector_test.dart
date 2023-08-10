@@ -36,6 +36,7 @@ void main() {
         (tester) async {
       const closeApproachBody = CloseApproachBody.moon;
       await pumpCadRouteAsInitialLocation(tester);
+      await ensureSelectorWidgetVisible(tester);
       await tapCloseApproachBody(tester, closeApproachBody: closeApproachBody);
       expectCloseApproachBodySelected(tester,
           closeApproachBody: closeApproachBody);
@@ -52,10 +53,11 @@ void main() {
     });
 
     testWidgets('Select and Search Each', (tester) async {
-      tester.view.setLogicalSize(height: 700);
+      tester.view.setLogicalSize(height: 800);
       for (var i = 0; i < CadScreen.closeApproachBodySet.length; i++) {
         if (i == 0) {
           await pumpCadRouteAsInitialLocation(tester);
+          await ensureSelectorWidgetVisible(tester);
         }
         if (i > 0) {
           await tapBackButton(tester);
@@ -66,6 +68,7 @@ void main() {
         expectCloseApproachBodySelected(tester,
             closeApproachBody: closeApproachBody);
         expect(CadScreen.cadBloc!.state.closeApproachBody, closeApproachBody);
+        await ensureSearchButtonVisible(tester);
         await tapSearchButton(tester);
         expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
         expect(find.byType(CadResultScreen), findsOneWidget);

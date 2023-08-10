@@ -4,12 +4,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
-import 'package:space_data_explorer/widgets/choice_chip_query_widget.dart';
+import '../cad_route.dart';
 
-final closeApproachBodySelectorWidgetFinder = find.byKey(const Key(
-  '${CadScreen.closeApproachBodySelectorKeyPrefix}'
-  '${ChoiceChipQueryWidget.defaultKey}',
-));
+final closeApproachBodySelectorWidgetFinder =
+    find.byKey(CadScreen.closeApproachBodySelectorKey);
 final Set<Finder> closeApproachBodyChipFinders =
     CadScreen.closeApproachBodySet.map((e) {
   return find.byKey(Key(
@@ -22,6 +20,15 @@ final Map<CloseApproachBody, Finder> closeApproachBodyChipFinderMap = {
     CadScreen.closeApproachBodySet.elementAt(i):
         closeApproachBodyChipFinders.elementAt(i)
 };
+
+Future<void> ensureSelectorWidgetVisible(WidgetTester tester) async {
+  await tester.dragUntilVisible(
+    closeApproachBodySelectorWidgetFinder,
+    customScrollViewFinder,
+    const Offset(0, -400),
+  );
+  await tester.pumpAndSettle();
+}
 
 Future<void> tapCloseApproachBody(
   WidgetTester tester, {

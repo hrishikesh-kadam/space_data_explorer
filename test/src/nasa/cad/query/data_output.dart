@@ -7,13 +7,9 @@ import 'package:mockito/mockito.dart';
 
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
-import 'package:space_data_explorer/widgets/filter_chip_query_widget.dart';
 import '../cad_route.dart';
 
-final dataOutputWidgetFinder = find.byKey(const Key(
-  '${CadScreen.dataOutputKeyPrefix}'
-  '${FilterChipQueryWidget.defaultKey}',
-));
+final dataOutputWidgetFinder = find.byKey(CadScreen.dataOutputKey);
 final totalOnlyChipFinder = find.byKey(Key(
   '${CadScreen.dataOutputKeyPrefix}'
   '${DataOutput.totalOnly.name}',

@@ -14,7 +14,10 @@ void main() {
     testWidgets('Doesn\'t Overflow ${Dimensions.galaxyFoldPortraitWidth}',
         (WidgetTester tester) async {
       disableOverflowError();
-      tester.view.setLogicalSize(width: Dimensions.galaxyFoldPortraitWidth);
+      tester.view.setLogicalSize(
+        width: Dimensions.galaxyFoldPortraitWidth,
+        height: Dimensions.galaxyFoldPortraitHeight,
+      );
       await pumpCadRouteAsInitialLocation(tester);
       for (final smallBody in CadScreen.smallBodySet) {
         await tapSmallBody(tester, smallBody: smallBody);

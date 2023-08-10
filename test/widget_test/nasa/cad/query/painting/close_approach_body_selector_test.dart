@@ -17,12 +17,7 @@ void main() {
       disableOverflowError();
       tester.view.setLogicalSize(width: Dimensions.galaxyFoldPortraitWidth);
       await pumpCadRouteAsInitialLocation(tester);
-      await tester.dragUntilVisible(
-        closeApproachBodySelectorWidgetFinder,
-        customScrollViewFinder,
-        const Offset(0, -200),
-      );
-      await tester.pumpAndSettle();
+      await ensureSelectorWidgetVisible(tester);
       for (final closeApproachBody in CadScreen.closeApproachBodySet) {
         await tapCloseApproachBody(
           tester,

@@ -6,10 +6,8 @@ import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/widgets/choice_chip_input_widget.dart';
 
-final smallBodySelectorWidgetFinder = find.byKey(const Key(
-  '${CadScreen.smallBodySelectorKeyPrefix}'
-  '${ChoiceChipInputWidget.defaultKey}',
-));
+final smallBodySelectorWidgetFinder =
+    find.byKey(CadScreen.smallBodySelectorKey);
 final titleFinder = find.byKey(const Key(
   '${CadScreen.smallBodySelectorKeyPrefix}'
   '${ChoiceChipInputWidget.titleKey}',

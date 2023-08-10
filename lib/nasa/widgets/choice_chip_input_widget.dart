@@ -12,12 +12,13 @@ import '../../widgets/query_grid_container.dart';
 typedef ChipSelected<T> = void Function(T? value);
 
 class ChoiceChipInputWidget<T> extends StatefulWidget {
-  ChoiceChipInputWidget({
+  const ChoiceChipInputWidget({
+    super.key,
     this.keyPrefix = '',
-    this.keys,
     required this.title,
     required this.values,
     required this.labels,
+    this.keys,
     this.iconSize = 32,
     required this.selected,
     this.keyboardTypes,
@@ -27,13 +28,13 @@ class ChoiceChipInputWidget<T> extends StatefulWidget {
     this.spacing = 8,
     this.onChipSelected,
     this.onTextChanged,
-  }) : super(key: Key('$keyPrefix$defaultKey'));
+  });
 
   final String keyPrefix;
-  final Set<String>? keys;
   final String title;
   final Set<T> values;
   final Set<String> labels;
+  final Set<String>? keys;
   final double iconSize;
   final T? selected;
   final List<TextInputType>? keyboardTypes;
