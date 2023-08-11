@@ -68,3 +68,26 @@ class LocaleListJsonConverter
     }
   }
 }
+
+// LABEL: eligible-hrk_flutter_batteries
+double getLargestTextWidth({
+  required BuildContext context,
+  required List<String> textList,
+  TextStyle? style,
+  double? textScaleFactor,
+}) {
+  textScaleFactor ??= View.of(context).platformDispatcher.textScaleFactor;
+  double largestWidth = 0;
+  for (final text in textList) {
+    final TextPainter textPainter = TextPainter(
+      text: TextSpan(text: text, style: style),
+      textDirection: TextDirection.ltr,
+      textScaleFactor: textScaleFactor,
+    );
+    textPainter.layout();
+    if (textPainter.size.width > largestWidth) {
+      largestWidth = textPainter.size.width;
+    }
+  }
+  return largestWidth;
+}

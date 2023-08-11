@@ -23,7 +23,7 @@ class ChoiceChipInputWidget<T> extends StatefulWidget {
     required this.selected,
     this.keyboardTypes,
     this.inputFormattersList,
-    required this.textFieldTextAlign,
+    this.textFieldTextAlign = TextAlign.center,
     this.textFieldWidth = 200,
     this.spacing = 8,
     this.onChipSelected,
@@ -179,6 +179,7 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
                 ? widget.inputFormattersList![selectedIndex!]
                 : null,
         textAlign: widget.textFieldTextAlign,
+        style: Theme.of(context).textTheme.bodyMedium,
         decoration: const InputDecoration(
           isDense: true,
           border: OutlineInputBorder(),

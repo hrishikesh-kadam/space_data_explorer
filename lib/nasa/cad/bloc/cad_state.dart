@@ -11,7 +11,13 @@ enum NetworkState { initial, sending, success, failure }
 class CadState with _$CadState {
   const factory CadState({
     DateTimeRange? dateRange,
-    @Default(DistanceRange()) DistanceRange distanceRange,
+    @Default(DistanceRange(
+      start: Distance(
+        unit: SbdbCadQueryParameters.defaultDistanceUnit,
+      ),
+      end: SbdbCadQueryParameters.defaultDistMax,
+    ))
+    DistanceRange distanceRange,
     @Default(SbdbCadQueryParameters.defaultSmallBody) SmallBody smallBody,
     SmallBodySelector? smallBodySelector,
     int? spkId,

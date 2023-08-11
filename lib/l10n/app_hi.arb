@@ -27,5 +27,8 @@
   "dataOutput": "डेटा आउटपुट",
   "totalOnly": "केवल कुल",
   "diameter": "व्यास",
-  "fullname": "पूरा नाम"
+  "fullname": "पूरा नाम",
+  "distanceFilter": "Distance Filter",
+  "minimum": "Minimum",
+  "maximum": "Maximum"
 }

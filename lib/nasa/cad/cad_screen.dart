@@ -16,6 +16,7 @@ import '../../widgets/choice_chip_query_widget.dart';
 import '../../widgets/date_filter_widget.dart';
 import '../../widgets/filter_chip_query_widget.dart';
 import '../../widgets/query_grid_container.dart';
+import '../../widgets/value_range_filter_widget.dart';
 import '../cad_result/cad_result_route.dart';
 import '../widgets/choice_chip_input_widget.dart';
 import 'bloc/cad_bloc.dart';
@@ -43,6 +44,9 @@ class CadScreen extends StatelessWidget {
   static const Key maxDateKey = Key('$keyPrefix${DateFilterWidget.maxDateKey}');
   static const Key selectDateRangeButtonKey =
       Key('$keyPrefix${DateFilterWidget.selectDateRangeButtonKey}');
+  static const String distanceFilterKeyPrefix = '${keyPrefix}distance_filter_';
+  static const Key distanceFilterKey =
+      Key('$distanceFilterKeyPrefix${ValueRangeFilterWidget.defaultKey}');
   static const String smallBodyFilterKeyPrefix =
       '${keyPrefix}small_body_filter_';
   static const Key smallBodyFilterKey =
@@ -236,12 +240,97 @@ class CadScreen extends StatelessWidget {
   Widget _getDistanceFilterWidget({
     required BuildContext context,
   }) {
+    final Set<String> labels = {
+      l10n.minimum,
+      l10n.maximum,
+    };
+    final List<String?> defaultValues = [
+      null,
+      SbdbCadQueryParameters.defaultDistMax.value?.toString(),
+    ];
+    const List<TextInputType?> keyboardTypes = [
+      TextInputType.numberWithOptions(decimal: true),
+      TextInputType.numberWithOptions(decimal: true),
+    ];
+    final List<List<TextInputFormatter>?> inputFormattersList = [
+      [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
+      [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
+    ];
+    final Set<DistanceUnit> units = {
+      DistanceUnit.au,
+      DistanceUnit.ld,
+    };
+    final Set<String> unitSymbols = {
+      DistanceUnit.au.symbol,
+      DistanceUnit.ld.symbol,
+    };
     return BlocSelector<CadBloc, CadState, DistanceRange>(
       selector: (state) {
         return state.distanceRange;
       },
       builder: (context, state) {
-        return const QueryItemContainer(child: SizedBox(height: 100));
+        return ValueRangeFilterWidget<DistanceUnit>(
+          key: distanceFilterKey,
+          keyPrefix: distanceFilterKeyPrefix,
+          title: l10n.distanceFilter,
+          labels: labels,
+          defaultValues: defaultValues,
+          values: [
+            state.start!.value?.toString(),
+            state.end!.value?.toString(),
+          ],
+          keyboardTypes: keyboardTypes,
+          inputFormattersList: inputFormattersList,
+          units: units,
+          unitSymbols: unitSymbols,
+          unitsSelected: [
+            state.start!.unit!,
+            state.end!.unit!,
+          ],
+          spacing: Dimensions.cadQueryItemSpacing,
+          onValueChanged: (value, index) {
+            DistanceRange distanceRange;
+            if (index == 0) {
+              distanceRange = state.copyWith(
+                start: Distance(
+                  value: double.tryParse(value),
+                  unit: state.start!.unit,
+                ),
+              );
+            } else {
+              distanceRange = state.copyWith(
+                end: Distance(
+                  value: double.tryParse(value),
+                  unit: state.end!.unit,
+                ),
+              );
+            }
+            context.read<CadBloc>().add(CadDistanceRangeEvent(
+                  distanceRange: distanceRange,
+                ));
+          },
+          onUnitChanged: (unit, index) {
+            DistanceRange distanceRange;
+            if (index == 0) {
+              distanceRange = state.copyWith(
+                start: Distance(
+                  value: state.start!.value,
+                  unit: unit,
+                ),
+              );
+            } else {
+              distanceRange = state.copyWith(
+                end: Distance(
+                  value: state.end!.value,
+                  unit: unit,
+                ),
+              );
+            }
+            context.read<CadBloc>().add(CadDistanceRangeEvent(
+                  distanceRange: distanceRange,
+                ));
+          },
+        );
       },
     );
   }
@@ -314,7 +403,6 @@ class CadScreen extends StatelessWidget {
           selected: state.smallBodySelector,
           keyboardTypes: keyboardTypes,
           inputFormattersList: inputFormattersList,
-          textFieldTextAlign: TextAlign.center,
           textFieldWidth: Dimensions.smallBodySelectorInputWidth,
           spacing: Dimensions.cadQueryItemSpacing,
           onChipSelected: (smallBodySelector) {

@@ -242,7 +242,9 @@ class __$$_CadStateCopyWithImpl<$Res>
 class _$_CadState implements _CadState {
   const _$_CadState(
       {this.dateRange,
-      this.distanceRange = const DistanceRange(),
+      this.distanceRange = const DistanceRange(
+          start: Distance(unit: SbdbCadQueryParameters.defaultDistanceUnit),
+          end: SbdbCadQueryParameters.defaultDistMax),
       this.smallBody = SbdbCadQueryParameters.defaultSmallBody,
       this.smallBodySelector,
       this.spkId,
