@@ -28,7 +28,6 @@ class ValueRangeFilterWidget<V, U> extends StatefulWidget {
     this.onValueRangeChanged,
     this.spacing = 8,
   })  : assert(labels.length == 2),
-        // assert(range.start != null && range.end != null),
         assert(units?.length == unitSymbols?.length);
 
   final String keyPrefix;
@@ -63,7 +62,9 @@ class _ValueRangeFilterWidgetState<V, U>
   void initState() {
     super.initState();
     rangeList = [];
+    assert(widget.range.start != null);
     rangeList.add(widget.range.start!);
+    assert(widget.range.end != null);
     rangeList.add(widget.range.end!);
     defaultRangeList = [];
     defaultRangeList.add(widget.defaultRange?.start);
@@ -73,28 +74,29 @@ class _ValueRangeFilterWidgetState<V, U>
     for (int i = 0; i < 2; i++) {
       V? value = rangeList[i].value;
       V? defaultValue = defaultRangeList[i]?.value;
+      if (value == null && defaultValue != null) {
+        value = defaultValue;
+        rangeList[i] = rangeList[i].copyWith(value: defaultValue);
+      }
       textControllers.add(TextEditingController(
-        text: value?.toString() ?? defaultValue?.toString() ?? '',
+        text: value?.toString() ?? '',
       ));
       textFocusNodes.add(FocusNode());
     }
   }
 
-  // @override
-  // void didUpdateWidget(covariant ValueRangeFilterWidget<V, U> oldWidget) {
-  //   super.didUpdateWidget(oldWidget);
-  //   for (int i = 0; i < widget.labels.length; i++) {
-  //     if (!(textFocusNodes[i].hasFocus && textControllers[i].text.isEmpty)) {
-  //       if (widget.valueParser != null) {
-  //         if (widget.range[i] != widget.valueParser!(textControllers[i].text)) {
-  //           textControllers[i].text = widget.range[i]?.toString() ?? '';
-  //         }
-  //       } else if (widget.range[i]?.toString() != textControllers[i].text) {
-  //         textControllers[i].text = widget.range[i]?.toString() ?? '';
-  //       }
-  //     }
-  //   }
-  // }
+  @override
+  void didUpdateWidget(covariant ValueRangeFilterWidget<V, U> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    rangeList.clear();
+    assert(widget.range.start != null);
+    rangeList.add(widget.range.start!);
+    assert(widget.range.end != null);
+    rangeList.add(widget.range.end!);
+    defaultRangeList.clear();
+    defaultRangeList.add(widget.defaultRange?.start);
+    defaultRangeList.add(widget.defaultRange?.end);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,10 +109,13 @@ class _ValueRangeFilterWidgetState<V, U>
     required BuildContext context,
   }) {
     for (int i = 0; i < 2; i++) {
-      V? sourceValue = rangeList[i].value;
+      V? sourceValue = rangeList[i].value ?? defaultRangeList[i]?.value;
       V? parsedValue = widget.valueParser(textControllers[i].text);
       if (sourceValue != parsedValue) {
-        textControllers[i].text = sourceValue?.toString() ?? '';
+        if (!textFocusNodes[i].hasFocus) {
+          textControllers[i].text = sourceValue?.toString() ?? '';
+          rangeList[i] = rangeList[i].copyWith(value: sourceValue);
+        }
       }
     }
     double largestLabelWidth = getLargestTextWidth(
