@@ -244,18 +244,14 @@ class CadScreen extends StatelessWidget {
       l10n.minimum,
       l10n.maximum,
     };
-    final List<String?> defaultValues = [
-      null,
-      SbdbCadQueryParameters.defaultDistMax.value?.toString(),
+    const DistanceRange defaultRange = DistanceRange(
+      end: SbdbCadQueryParameters.defaultDistMax,
+    );
+    const keyboardType = TextInputType.numberWithOptions(decimal: true);
+    final inputFormatters = [
+      FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
     ];
-    const List<TextInputType?> keyboardTypes = [
-      TextInputType.numberWithOptions(decimal: true),
-      TextInputType.numberWithOptions(decimal: true),
-    ];
-    final List<List<TextInputFormatter>?> inputFormattersList = [
-      [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
-      [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
-    ];
+    // TODO(hrishikesh-kadam): Can this be moved to hrk_nasa_apis?
     final Set<DistanceUnit> units = {
       DistanceUnit.au,
       DistanceUnit.ld,
@@ -269,65 +265,22 @@ class CadScreen extends StatelessWidget {
         return state.distanceRange;
       },
       builder: (context, state) {
-        return ValueRangeFilterWidget<DistanceUnit>(
+        return ValueRangeFilterWidget<double, DistanceUnit>(
           key: distanceFilterKey,
           keyPrefix: distanceFilterKeyPrefix,
           title: l10n.distanceFilter,
           labels: labels,
-          defaultValues: defaultValues,
-          values: [
-            state.start!.value?.toString(),
-            state.end!.value?.toString(),
-          ],
-          keyboardTypes: keyboardTypes,
-          inputFormattersList: inputFormattersList,
+          range: state,
+          defaultRange: defaultRange,
+          valueParser: (text) => double.tryParse(text),
+          keyboardType: keyboardType,
+          inputFormatters: inputFormatters,
           units: units,
           unitSymbols: unitSymbols,
-          unitsSelected: [
-            state.start!.unit!,
-            state.end!.unit!,
-          ],
           spacing: Dimensions.cadQueryItemSpacing,
-          onValueChanged: (value, index) {
-            DistanceRange distanceRange;
-            if (index == 0) {
-              distanceRange = state.copyWith(
-                start: Distance(
-                  value: double.tryParse(value),
-                  unit: state.start!.unit,
-                ),
-              );
-            } else {
-              distanceRange = state.copyWith(
-                end: Distance(
-                  value: double.tryParse(value),
-                  unit: state.end!.unit,
-                ),
-              );
-            }
+          onValueRangeChanged: (range) {
             context.read<CadBloc>().add(CadDistanceRangeEvent(
-                  distanceRange: distanceRange,
-                ));
-          },
-          onUnitChanged: (unit, index) {
-            DistanceRange distanceRange;
-            if (index == 0) {
-              distanceRange = state.copyWith(
-                start: Distance(
-                  value: state.start!.value,
-                  unit: unit,
-                ),
-              );
-            } else {
-              distanceRange = state.copyWith(
-                end: Distance(
-                  value: state.end!.value,
-                  unit: unit,
-                ),
-              );
-            }
-            context.read<CadBloc>().add(CadDistanceRangeEvent(
-                  distanceRange: distanceRange,
+                  distanceRange: range,
                 ));
           },
         );

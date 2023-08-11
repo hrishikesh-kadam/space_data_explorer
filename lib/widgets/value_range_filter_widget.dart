@@ -1,55 +1,100 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hrk_logging/hrk_logging.dart';
+import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
+import '../globals.dart';
 import '../helper/helper.dart';
 import 'query_grid_container.dart';
 
-typedef ValueChanged = void Function(String value, int index);
-typedef UnitChanged<U> = void Function(U unit, int index);
+typedef ValueParser<V> = V? Function(String text);
+typedef ValueRangeChanged<V, U> = void Function(ValueRange<V, U> range);
 
-class ValueRangeFilterWidget<U> extends StatelessWidget {
+class ValueRangeFilterWidget<V, U> extends StatefulWidget {
   const ValueRangeFilterWidget({
     super.key,
     this.keyPrefix = '',
     required this.title,
     required this.labels,
-    this.defaultValues,
-    this.values,
-    this.keyboardTypes,
-    this.inputFormattersList,
+    required this.range,
+    this.defaultRange,
+    required this.valueParser,
+    this.keyboardType,
+    this.inputFormatters,
     this.textFieldTextAlign = TextAlign.center,
     this.textFieldWidth = 80,
-    this.onValueChanged,
     this.units,
     this.unitSymbols,
-    this.unitsSelected,
-    this.onUnitChanged,
+    this.onValueRangeChanged,
     this.spacing = 8,
   })  : assert(labels.length == 2),
-        assert(defaultValues == null || defaultValues.length == 2),
-        assert(values == null || values.length == 2),
-        assert(defaultValues?.length == values?.length),
-        assert(keyboardTypes == null || keyboardTypes.length == 2),
-        assert(inputFormattersList == null || inputFormattersList.length == 2),
-        assert(units?.length == unitSymbols?.length),
-        assert(unitsSelected == null || unitsSelected.length == 2);
+        // assert(range.start != null && range.end != null),
+        assert(units?.length == unitSymbols?.length);
 
   final String keyPrefix;
   final String title;
   final Set<String> labels;
-  final List<String?>? defaultValues;
-  final List<String?>? values;
-  final List<TextInputType?>? keyboardTypes;
-  final List<List<TextInputFormatter>?>? inputFormattersList;
+  final ValueRange<V, U> range;
+  final ValueRange<V, U>? defaultRange;
+  final ValueParser<V> valueParser;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
   final TextAlign textFieldTextAlign;
   final double textFieldWidth;
-  final ValueChanged? onValueChanged;
   final Set<U>? units;
   final Set<String>? unitSymbols;
-  final List<U>? unitsSelected;
-  final UnitChanged<U>? onUnitChanged;
   final double spacing;
+  final ValueRangeChanged<V, U>? onValueRangeChanged;
   static const String defaultKey = 'value_range_filter_widget_key';
+
+  @override
+  State<ValueRangeFilterWidget<V, U>> createState() =>
+      _ValueRangeFilterWidgetState<V, U>();
+}
+
+class _ValueRangeFilterWidgetState<V, U>
+    extends State<ValueRangeFilterWidget<V, U>> {
+  late final List<ValueUnit<V, U>> rangeList;
+  late final List<ValueUnit<V, U>?> defaultRangeList;
+  late final List<TextEditingController> textControllers;
+  late final List<FocusNode> textFocusNodes;
+
+  @override
+  void initState() {
+    super.initState();
+    rangeList = [];
+    rangeList.add(widget.range.start!);
+    rangeList.add(widget.range.end!);
+    defaultRangeList = [];
+    defaultRangeList.add(widget.defaultRange?.start);
+    defaultRangeList.add(widget.defaultRange?.end);
+    textControllers = [];
+    textFocusNodes = [];
+    for (int i = 0; i < 2; i++) {
+      V? value = rangeList[i].value;
+      V? defaultValue = defaultRangeList[i]?.value;
+      textControllers.add(TextEditingController(
+        text: value?.toString() ?? defaultValue?.toString() ?? '',
+      ));
+      textFocusNodes.add(FocusNode());
+    }
+  }
+
+  // @override
+  // void didUpdateWidget(covariant ValueRangeFilterWidget<V, U> oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+  //   for (int i = 0; i < widget.labels.length; i++) {
+  //     if (!(textFocusNodes[i].hasFocus && textControllers[i].text.isEmpty)) {
+  //       if (widget.valueParser != null) {
+  //         if (widget.range[i] != widget.valueParser!(textControllers[i].text)) {
+  //           textControllers[i].text = widget.range[i]?.toString() ?? '';
+  //         }
+  //       } else if (widget.range[i]?.toString() != textControllers[i].text) {
+  //         textControllers[i].text = widget.range[i]?.toString() ?? '';
+  //       }
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -61,25 +106,32 @@ class ValueRangeFilterWidget<U> extends StatelessWidget {
   Widget _getBody({
     required BuildContext context,
   }) {
+    for (int i = 0; i < 2; i++) {
+      V? sourceValue = rangeList[i].value;
+      V? parsedValue = widget.valueParser(textControllers[i].text);
+      if (sourceValue != parsedValue) {
+        textControllers[i].text = sourceValue?.toString() ?? '';
+      }
+    }
     double largestLabelWidth = getLargestTextWidth(
       context: context,
-      textList: labels.toList(),
+      textList: widget.labels.toList(),
       style: Theme.of(context).textTheme.bodyMedium,
     );
     return Column(
       children: [
         Text(
-          title,
+          widget.title,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        SizedBox(height: spacing),
+        SizedBox(height: widget.spacing),
         _getValueWrap(
           context: context,
           index: 0,
           largestLabelWidth: largestLabelWidth,
         ),
-        SizedBox(height: spacing),
+        SizedBox(height: widget.spacing),
         _getValueWrap(
           context: context,
           index: 1,
@@ -95,13 +147,13 @@ class ValueRangeFilterWidget<U> extends StatelessWidget {
     required double largestLabelWidth,
   }) {
     List<DropdownMenuItem<U>>? dropDownItems;
-    if (units != null && units!.length > 1) {
+    if (widget.units != null && widget.units!.length >= 2) {
       dropDownItems = [];
-      for (int j = 0; j < units!.length; j++) {
+      for (int j = 0; j < widget.units!.length; j++) {
         dropDownItems.add(DropdownMenuItem(
-          value: units!.elementAt(j),
+          value: widget.units!.elementAt(j),
           child: Text(
-            unitSymbols!.elementAt(j),
+            widget.unitSymbols!.elementAt(j),
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         ));
@@ -109,57 +161,90 @@ class ValueRangeFilterWidget<U> extends StatelessWidget {
     }
     return Wrap(
       spacing: 16,
-      runSpacing: spacing,
+      runSpacing: widget.spacing,
       alignment: WrapAlignment.center,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         SizedBox(
           width: largestLabelWidth,
           child: Text(
-            labels.elementAt(index),
+            widget.labels.elementAt(index),
             style: Theme.of(context).textTheme.bodyMedium,
             textAlign: TextAlign.end,
           ),
         ),
         SizedBox(
-          width: textFieldWidth,
-          child: TextField(
-            controller:
-                values != null && values![index] == defaultValues![index]
-                    ? TextEditingController(text: defaultValues![index])
-                    : null,
-            keyboardType: keyboardTypes?[index],
-            inputFormatters: inputFormattersList?[index],
-            textAlign: textFieldTextAlign,
-            style: Theme.of(context).textTheme.bodyMedium,
-            decoration: const InputDecoration(
-              isDense: true,
-              border: OutlineInputBorder(),
-            ),
+          width: widget.textFieldWidth,
+          child: TapRegion(
             onTapOutside: (event) {
-              FocusManager.instance.primaryFocus?.unfocus();
-            },
-            onChanged: (value) {
-              if (onValueChanged != null) {
-                onValueChanged!(value, index);
+              log.debug('TapRegion -> onTapOutside -> $index');
+              if (textFocusNodes[index].hasFocus) {
+                if (textControllers[index].text.isEmpty &&
+                    defaultRangeList[index]?.value != null) {
+                  setState(() {
+                    rangeList[index] = defaultRangeList[index]!;
+                  });
+                  // textControllers[index].text =
+                  //     defaultRangeList[index]!.value!.toString();
+                  if (widget.onValueRangeChanged != null) {
+                    ValueRange<V, U> range = ValueRange(
+                      start: rangeList[0],
+                      end: rangeList[1],
+                    );
+                    widget.onValueRangeChanged!(range);
+                  }
+                }
               }
             },
+            child: TextField(
+              controller: textControllers[index],
+              focusNode: textFocusNodes[index],
+              keyboardType: widget.keyboardType,
+              inputFormatters: widget.inputFormatters,
+              textAlign: widget.textFieldTextAlign,
+              style: Theme.of(context).textTheme.bodyMedium,
+              decoration: const InputDecoration(
+                isDense: true,
+                border: OutlineInputBorder(),
+              ),
+              onTapOutside: (event) {
+                log.debug('onTapOutside -> $index');
+                if (textFocusNodes[index].hasFocus) {
+                  textFocusNodes[index].unfocus();
+                }
+              },
+              onChanged: (text) {
+                V? value = widget.valueParser(text);
+                rangeList[index] = rangeList[index].copyWith(value: value);
+                if (widget.onValueRangeChanged != null) {
+                  ValueRange<V, U> range = ValueRange(
+                    start: rangeList[0],
+                    end: rangeList[1],
+                  );
+                  widget.onValueRangeChanged!(range);
+                }
+              },
+            ),
           ),
         ),
-        if (units != null && units!.length == 1)
+        if (widget.units != null && widget.units!.length == 1)
           Text(
-            unitSymbols!.first,
+            widget.unitSymbols!.first,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
-        if (units != null && units!.length > 1)
-          DropdownButton(
+        if (widget.units != null && widget.units!.length >= 2)
+          DropdownButton<U>(
             items: dropDownItems,
-            value: unitsSelected?[index] ?? units!.first,
+            value: rangeList[index].unit ?? widget.units!.first,
             onChanged: (unit) {
-              if (onUnitChanged != null &&
-                  // Not required, but just being extra safe here
-                  unit != null) {
-                onUnitChanged!(unit, index);
+              assert(unit != null);
+              rangeList[index] = rangeList[index].copyWith(unit: unit);
+              if (widget.onValueRangeChanged != null) {
+                ValueRange<V, U> range = ValueRange(
+                  start: rangeList[0],
+                  end: rangeList[1],
+                );
+                widget.onValueRangeChanged!(range);
               }
             },
           ),
