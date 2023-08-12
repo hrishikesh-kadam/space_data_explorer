@@ -14,7 +14,7 @@ part 'cad_event.dart';
 class CadBloc extends Bloc<CadEvent, CadState> {
   CadBloc({
     SbdbCadApi? sbdbCadApi,
-  }) : super(const CadState()) {
+  }) : super(CadState.getInitial()) {
     this.sbdbCadApi = sbdbCadApi ?? SbdbCadApi();
     on<CadRequested>(_onCadRequested);
     on<CadDateRangeSelected>(_onCadDateRangeSelected);

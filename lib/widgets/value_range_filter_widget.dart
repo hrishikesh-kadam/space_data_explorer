@@ -80,6 +80,15 @@ class _ValueRangeFilterWidgetState<V, U>
     initOrUpdate(method: StateMethod.didUpdateWidget);
   }
 
+  @override
+  void dispose() {
+    textControllers[0].dispose();
+    textControllers[1].dispose();
+    textFocusNodes[0].dispose();
+    textFocusNodes[1].dispose();
+    super.dispose();
+  }
+
   void initOrUpdate({
     required StateMethod method,
   }) {
@@ -192,7 +201,7 @@ class _ValueRangeFilterWidgetState<V, U>
       children: [
         getLabelText(index: index, largestLabelWidth: largestLabelWidth),
         getValueTextField(index: index),
-        getUnitDropdown(index: index),
+        if (widget.units?.isNotEmpty == true) getUnitDropdown(index: index),
       ],
     );
   }
@@ -245,6 +254,7 @@ class _ValueRangeFilterWidgetState<V, U>
           }
         },
         child: TextField(
+          key: Key('${widget.keyPrefix}text_field_$index'),
           controller: textControllers[index],
           focusNode: textFocusNodes[index],
           keyboardType: widget.keyboardType,
@@ -272,18 +282,22 @@ class _ValueRangeFilterWidgetState<V, U>
     );
   }
 
-  dynamic getUnitDropdown({
+  Widget getUnitDropdown({
     required int index,
   }) {
-    if (widget.units != null && widget.units!.length == 1) {
+    if (widget.units!.length < 2) {
       return Text(
         widget.unitSymbols!.first,
         style: Theme.of(context).textTheme.bodyMedium,
       );
-    } else if (widget.units != null && widget.units!.length >= 2) {
+    } else {
       final List<DropdownMenuItem<U>> dropDownItems = [];
       for (int j = 0; j < widget.units!.length; j++) {
         dropDownItems.add(DropdownMenuItem(
+          key: Key(
+            '${widget.keyPrefix}'
+            'dropdown_item_${widget.unitSymbols!.elementAt(j)}',
+          ),
           value: widget.units!.elementAt(j),
           child: Text(
             widget.unitSymbols!.elementAt(j),
@@ -292,6 +306,7 @@ class _ValueRangeFilterWidgetState<V, U>
         ));
       }
       return DropdownButton<U>(
+        key: Key('${widget.keyPrefix}dropdown_$index'),
         items: dropDownItems,
         value: rangeList[index].unit ?? widget.units!.first,
         onChanged: (unit) {
@@ -300,8 +315,6 @@ class _ValueRangeFilterWidgetState<V, U>
           callOnValueRangeChanged();
         },
       );
-    } else {
-      return;
     }
   }
 
