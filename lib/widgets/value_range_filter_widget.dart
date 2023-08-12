@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
-import '../globals.dart';
+import '../constants/constants.dart';
 import '../helper/helper.dart';
 import 'query_grid_container.dart';
 
@@ -63,6 +63,7 @@ class _ValueRangeFilterWidgetState<V, U>
   late final List<ValueUnit<V, U>?> defaultRangeList;
   late final List<TextEditingController> textControllers;
   late final List<FocusNode> textFocusNodes;
+  final Logger logger = Logger('$appNamePascalCase.ValueRangeFilterWidget');
 
   @override
   void initState() {
@@ -122,12 +123,23 @@ class _ValueRangeFilterWidgetState<V, U>
       V? value = rangeList[i].value;
       String text = rangeTextList[i].value ?? '';
       final V? defaultValue = defaultRangeList[i]?.value;
+      // logger.info(
+      //   '_getBody -> $i -> hasFocus = ${textFocusNodes[i].hasFocus}',
+      // );
+      // logger.info(
+      //   '_getBody -> $i -> hasPrimaryFocus = ${textFocusNodes[i].hasPrimaryFocus}',
+      // );
+      // Still Editing, so ignore updates
       if (!textFocusNodes[i].hasFocus) {
-        if (value == null && defaultValue != null) {
+        if (value == null &&
+            // If view rebuilds after coming back in viewport
+            text.isEmpty &&
+            defaultValue != null) {
           value = defaultValue;
           rangeList[i] = rangeList[i].copyWith(value: defaultValue);
           rangeTextList[i] = ValueUnit(value: defaultValue.toString());
         }
+        // If in case of any mismatch then fallback to source value
         if (value != widget.valueParser(text)) {
           text = value?.toString() ?? '';
           rangeTextList[i] = ValueUnit(value: text);
@@ -201,7 +213,7 @@ class _ValueRangeFilterWidgetState<V, U>
           width: widget.textFieldWidth,
           child: TapRegion(
             onTapOutside: (event) {
-              log.debug('TapRegion -> onTapOutside -> $index');
+              logger.debug('TapRegion -> onTapOutside -> $index');
               if (textFocusNodes[index].hasFocus) {
                 if (textControllers[index].text.isEmpty &&
                     defaultRangeList[index]?.value != null) {
@@ -210,6 +222,9 @@ class _ValueRangeFilterWidgetState<V, U>
                     rangeTextList[index] = ValueUnit(
                       value: defaultRangeList[index]!.value!.toString(),
                     );
+                    // Required for Android, Chrome on Android
+                    // Clicking on adjacent TextField, doesn't give appropriate hasFocus() value as false in _getBody()
+                    textControllers[index].text = rangeTextList[index].value!;
                   });
                   if (widget.onValueRangeChanged != null) {
                     ValueRange<V, U> range = ValueRange(
@@ -223,6 +238,12 @@ class _ValueRangeFilterWidgetState<V, U>
                     widget.onValueRangeChanged!(range, rangeText);
                   }
                 }
+                // logger.info(
+                //   'TapRegion -> onTapOutside -> $index -> hasFocus = ${textFocusNodes[index].hasFocus}',
+                // );
+                // logger.info(
+                //   'TapRegion -> onTapOutside -> $index -> hasPrimaryFocus = ${textFocusNodes[index].hasPrimaryFocus}',
+                // );
               }
             },
             child: TextField(
@@ -237,7 +258,7 @@ class _ValueRangeFilterWidgetState<V, U>
                 border: OutlineInputBorder(),
               ),
               onTapOutside: (event) {
-                log.debug('onTapOutside -> $index');
+                logger.debug('TextField -> onTapOutside -> $index');
                 if (textFocusNodes[index].hasFocus) {
                   textFocusNodes[index].unfocus();
                 }
