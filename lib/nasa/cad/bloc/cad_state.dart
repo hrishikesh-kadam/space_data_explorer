@@ -18,6 +18,11 @@ class CadState with _$CadState {
       end: SbdbCadQueryParameters.defaultDistMax,
     ))
     DistanceRange distanceRange,
+    @Default(ValueRange<String, void>(
+      start: ValueUnit<String, void>(),
+      end: ValueUnit<String, void>(),
+    ))
+    ValueRange<String, void> distanceTextRange,
     @Default(SbdbCadQueryParameters.defaultSmallBody) SmallBody smallBody,
     SmallBodySelector? smallBodySelector,
     int? spkId,

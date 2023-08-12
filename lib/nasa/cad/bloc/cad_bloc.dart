@@ -85,7 +85,10 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     CadDistanceRangeEvent event,
     Emitter<CadState> emit,
   ) async {
-    emit(state.copyWith(distanceRange: event.distanceRange));
+    emit(state.copyWith(
+      distanceRange: event.distanceRange,
+      distanceTextRange: event.distanceTextRange,
+    ));
   }
 
   Future<void> _onCadSmallBodySelected(

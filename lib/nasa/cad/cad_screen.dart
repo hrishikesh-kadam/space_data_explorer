@@ -271,6 +271,7 @@ class CadScreen extends StatelessWidget {
           title: l10n.distanceFilter,
           labels: labels,
           range: state,
+          rangeText: context.read<CadBloc>().state.distanceTextRange,
           defaultRange: defaultRange,
           valueParser: (text) => double.tryParse(text),
           keyboardType: keyboardType,
@@ -278,9 +279,10 @@ class CadScreen extends StatelessWidget {
           units: units,
           unitSymbols: unitSymbols,
           spacing: Dimensions.cadQueryItemSpacing,
-          onValueRangeChanged: (range) {
+          onValueRangeChanged: (range, rangeText) {
             context.read<CadBloc>().add(CadDistanceRangeEvent(
                   distanceRange: range,
+                  distanceTextRange: rangeText,
                 ));
           },
         );

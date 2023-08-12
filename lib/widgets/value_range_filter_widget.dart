@@ -8,7 +8,10 @@ import '../helper/helper.dart';
 import 'query_grid_container.dart';
 
 typedef ValueParser<V> = V? Function(String text);
-typedef ValueRangeChanged<V, U> = void Function(ValueRange<V, U> range);
+typedef ValueRangeChanged<V, U> = void Function(
+  ValueRange<V, U> range,
+  ValueRange<String, void> rangeText,
+);
 
 class ValueRangeFilterWidget<V, U> extends StatefulWidget {
   const ValueRangeFilterWidget({
@@ -17,6 +20,7 @@ class ValueRangeFilterWidget<V, U> extends StatefulWidget {
     required this.title,
     required this.labels,
     required this.range,
+    required this.rangeText,
     this.defaultRange,
     required this.valueParser,
     this.keyboardType,
@@ -34,6 +38,7 @@ class ValueRangeFilterWidget<V, U> extends StatefulWidget {
   final String title;
   final Set<String> labels;
   final ValueRange<V, U> range;
+  final ValueRange<String, void> rangeText;
   final ValueRange<V, U>? defaultRange;
   final ValueParser<V> valueParser;
   final TextInputType? keyboardType;
@@ -54,6 +59,7 @@ class ValueRangeFilterWidget<V, U> extends StatefulWidget {
 class _ValueRangeFilterWidgetState<V, U>
     extends State<ValueRangeFilterWidget<V, U>> {
   late final List<ValueUnit<V, U>> rangeList;
+  late final List<ValueUnit<String, void>> rangeTextList;
   late final List<ValueUnit<V, U>?> defaultRangeList;
   late final List<TextEditingController> textControllers;
   late final List<FocusNode> textFocusNodes;
@@ -66,23 +72,22 @@ class _ValueRangeFilterWidgetState<V, U>
     rangeList.add(widget.range.start!);
     assert(widget.range.end != null);
     rangeList.add(widget.range.end!);
+    rangeTextList = [];
+    assert(widget.rangeText.start != null);
+    rangeTextList.add(widget.rangeText.start!);
+    assert(widget.rangeText.end != null);
+    rangeTextList.add(widget.rangeText.end!);
     defaultRangeList = [];
     defaultRangeList.add(widget.defaultRange?.start);
     defaultRangeList.add(widget.defaultRange?.end);
     textControllers = [];
+    textControllers
+      ..add(TextEditingController())
+      ..add(TextEditingController());
     textFocusNodes = [];
-    for (int i = 0; i < 2; i++) {
-      V? value = rangeList[i].value;
-      V? defaultValue = defaultRangeList[i]?.value;
-      if (value == null && defaultValue != null) {
-        value = defaultValue;
-        rangeList[i] = rangeList[i].copyWith(value: defaultValue);
-      }
-      textControllers.add(TextEditingController(
-        text: value?.toString() ?? '',
-      ));
-      textFocusNodes.add(FocusNode());
-    }
+    textFocusNodes
+      ..add(FocusNode())
+      ..add(FocusNode());
   }
 
   @override
@@ -93,6 +98,11 @@ class _ValueRangeFilterWidgetState<V, U>
     rangeList.add(widget.range.start!);
     assert(widget.range.end != null);
     rangeList.add(widget.range.end!);
+    rangeTextList.clear();
+    assert(widget.rangeText.start != null);
+    rangeTextList.add(widget.rangeText.start!);
+    assert(widget.rangeText.end != null);
+    rangeTextList.add(widget.rangeText.end!);
     defaultRangeList.clear();
     defaultRangeList.add(widget.defaultRange?.start);
     defaultRangeList.add(widget.defaultRange?.end);
@@ -109,12 +119,21 @@ class _ValueRangeFilterWidgetState<V, U>
     required BuildContext context,
   }) {
     for (int i = 0; i < 2; i++) {
-      V? sourceValue = rangeList[i].value ?? defaultRangeList[i]?.value;
-      V? parsedValue = widget.valueParser(textControllers[i].text);
-      if (sourceValue != parsedValue) {
-        if (!textFocusNodes[i].hasFocus) {
-          textControllers[i].text = sourceValue?.toString() ?? '';
-          rangeList[i] = rangeList[i].copyWith(value: sourceValue);
+      V? value = rangeList[i].value;
+      String text = rangeTextList[i].value ?? '';
+      final V? defaultValue = defaultRangeList[i]?.value;
+      if (!textFocusNodes[i].hasFocus) {
+        if (value == null && defaultValue != null) {
+          value = defaultValue;
+          rangeList[i] = rangeList[i].copyWith(value: defaultValue);
+          rangeTextList[i] = ValueUnit(value: defaultValue.toString());
+        }
+        if (value != widget.valueParser(text)) {
+          text = value?.toString() ?? '';
+          rangeTextList[i] = ValueUnit(value: text);
+        }
+        if (textControllers[i].text != text) {
+          textControllers[i].text = text;
         }
       }
     }
@@ -188,15 +207,20 @@ class _ValueRangeFilterWidgetState<V, U>
                     defaultRangeList[index]?.value != null) {
                   setState(() {
                     rangeList[index] = defaultRangeList[index]!;
+                    rangeTextList[index] = ValueUnit(
+                      value: defaultRangeList[index]!.value!.toString(),
+                    );
                   });
-                  // textControllers[index].text =
-                  //     defaultRangeList[index]!.value!.toString();
                   if (widget.onValueRangeChanged != null) {
                     ValueRange<V, U> range = ValueRange(
                       start: rangeList[0],
                       end: rangeList[1],
                     );
-                    widget.onValueRangeChanged!(range);
+                    ValueRange<String, void> rangeText = ValueRange(
+                      start: rangeTextList[0],
+                      end: rangeTextList[1],
+                    );
+                    widget.onValueRangeChanged!(range, rangeText);
                   }
                 }
               }
@@ -219,6 +243,7 @@ class _ValueRangeFilterWidgetState<V, U>
                 }
               },
               onChanged: (text) {
+                rangeTextList[index] = ValueUnit(value: text);
                 V? value = widget.valueParser(text);
                 rangeList[index] = rangeList[index].copyWith(value: value);
                 if (widget.onValueRangeChanged != null) {
@@ -226,7 +251,11 @@ class _ValueRangeFilterWidgetState<V, U>
                     start: rangeList[0],
                     end: rangeList[1],
                   );
-                  widget.onValueRangeChanged!(range);
+                  ValueRange<String, void> rangeText = ValueRange(
+                    start: rangeTextList[0],
+                    end: rangeTextList[1],
+                  );
+                  widget.onValueRangeChanged!(range, rangeText);
                 }
               },
             ),
@@ -249,7 +278,11 @@ class _ValueRangeFilterWidgetState<V, U>
                   start: rangeList[0],
                   end: rangeList[1],
                 );
-                widget.onValueRangeChanged!(range);
+                ValueRange<String, void> rangeText = ValueRange(
+                  start: rangeTextList[0],
+                  end: rangeTextList[1],
+                );
+                widget.onValueRangeChanged!(range, rangeText);
               }
             },
           ),
