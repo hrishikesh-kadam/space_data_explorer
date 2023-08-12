@@ -28,7 +28,7 @@
   "totalOnly": "केवल कुल",
   "diameter": "व्यास",
   "fullname": "पूरा नाम",
-  "distanceFilter": "Distance Filter",
-  "minimum": "Minimum",
-  "maximum": "Maximum"
+  "distanceFilter": "दूरी चयन",
+  "minimum": "न्यूनतम",
+  "maximum": "अधिकतम"
 }
