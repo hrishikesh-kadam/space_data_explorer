@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
+import '../cad_route.dart';
 
 final smallBodyFilterWidgetFinder = find.byKey(CadScreen.smallBodyFilterKey);
 final Set<Finder> smallBodyChipFinders = CadScreen.smallBodySet.map((e) {
@@ -16,6 +17,15 @@ final Map<SmallBody, Finder> smallBodyChipFinderMap = {
   for (var i = 0; i < CadScreen.smallBodySet.length; i++)
     CadScreen.smallBodySet.elementAt(i): smallBodyChipFinders.elementAt(i)
 };
+
+Future<void> ensureFilterWidgetVisible(WidgetTester tester) async {
+  await tester.dragUntilVisible(
+    smallBodyFilterWidgetFinder,
+    customScrollViewFinder,
+    const Offset(0, -200),
+  );
+  await tester.pumpAndSettle();
+}
 
 Future<void> tapSmallBody(
   WidgetTester tester, {

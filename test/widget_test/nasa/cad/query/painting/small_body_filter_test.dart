@@ -19,6 +19,7 @@ void main() {
         height: Dimensions.galaxyFoldPortraitHeight,
       );
       await pumpCadRouteAsInitialLocation(tester);
+      await ensureFilterWidgetVisible(tester);
       for (final smallBody in CadScreen.smallBodySet) {
         await tapSmallBody(tester, smallBody: smallBody);
         tester.expectNoOverflow(of: smallBodyFilterWidgetFinder);
