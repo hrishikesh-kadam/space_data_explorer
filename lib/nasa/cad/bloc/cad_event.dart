@@ -20,11 +20,11 @@ class CadDateRangeSelected extends CadEvent {
 class CadDistanceRangeEvent extends CadEvent {
   const CadDistanceRangeEvent({
     required this.distanceRange,
-    required this.distanceTextRange,
+    required this.distanceRangeText,
   });
 
   final DistanceRange distanceRange;
-  final ValueRange<String, void> distanceTextRange;
+  final ValueRange<String, void> distanceRangeText;
 }
 
 class CadSmallBodySelected extends CadEvent {

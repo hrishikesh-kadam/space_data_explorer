@@ -49,6 +49,10 @@ class CadScreen extends StatelessWidget {
       Key('$distanceFilterKeyPrefix${ValueRangeFilterWidget.defaultKey}');
   static const String smallBodyFilterKeyPrefix =
       '${keyPrefix}small_body_filter_';
+  static const Set<DistanceUnit> distanceFilterUnits = {
+    DistanceUnit.au,
+    DistanceUnit.ld,
+  };
   static const Key smallBodyFilterKey =
       Key('$smallBodyFilterKeyPrefix${ChoiceChipQueryWidget.defaultKey}');
   static final Set<SmallBody> smallBodySet = {
@@ -114,6 +118,7 @@ class CadScreen extends StatelessWidget {
             builder: (context) {
               return CustomScrollView(
                 key: customScrollViewKey,
+                controller: ScrollController(),
                 slivers: [
                   getSliverAppBar(
                     context: context,
@@ -251,15 +256,9 @@ class CadScreen extends StatelessWidget {
     final inputFormatters = [
       FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
     ];
-    // TODO(hrishikesh-kadam): Can this be moved to hrk_nasa_apis?
-    final Set<DistanceUnit> units = {
-      DistanceUnit.au,
-      DistanceUnit.ld,
-    };
-    final Set<String> unitSymbols = {
-      DistanceUnit.au.symbol,
-      DistanceUnit.ld.symbol,
-    };
+    final Set<String> unitSymbols = distanceFilterUnits.map((e) {
+      return e.symbol;
+    }).toSet();
     return BlocSelector<CadBloc, CadState, DistanceRange>(
       selector: (state) {
         return state.distanceRange;
@@ -271,18 +270,18 @@ class CadScreen extends StatelessWidget {
           title: l10n.distanceFilter,
           labels: labels,
           range: state,
-          rangeText: context.read<CadBloc>().state.distanceTextRange,
+          rangeText: context.read<CadBloc>().state.distanceRangeText,
           defaultRange: defaultRange,
           valueParser: (text) => double.tryParse(text),
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
-          units: units,
+          units: distanceFilterUnits,
           unitSymbols: unitSymbols,
           spacing: Dimensions.cadQueryItemSpacing,
           onValueRangeChanged: (range, rangeText) {
             context.read<CadBloc>().add(CadDistanceRangeEvent(
                   distanceRange: range,
-                  distanceTextRange: rangeText,
+                  distanceRangeText: rangeText,
                 ));
           },
         );

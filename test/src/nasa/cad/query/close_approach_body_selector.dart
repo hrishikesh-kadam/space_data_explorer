@@ -25,7 +25,7 @@ Future<void> ensureSelectorWidgetVisible(WidgetTester tester) async {
   await tester.dragUntilVisible(
     closeApproachBodySelectorWidgetFinder,
     customScrollViewFinder,
-    const Offset(0, -400),
+    const Offset(0, -200),
   );
   await tester.pumpAndSettle();
 }
@@ -48,4 +48,14 @@ void expectCloseApproachBodySelected(
         closeApproachBody == CadScreen.closeApproachBodySet.elementAt(i);
     expect(tester.widget<ChoiceChip>(finder).selected, matcher);
   }
+}
+
+Future<void> verifyCloseApproachBodyQueryParameters(
+  WidgetTester tester,
+  CloseApproachBody? closeApproachBody,
+) async {
+  await verifyQueryParameters(
+    tester,
+    SbdbCadQueryParameters(body: closeApproachBody),
+  );
 }

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
-import 'package:mockito/mockito.dart';
 
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
-import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
 import '../cad_route.dart';
 
 final dataOutputWidgetFinder = find.byKey(CadScreen.dataOutputKey);
@@ -63,18 +60,12 @@ void expectDataOutputSelected(
   }
 }
 
-Future<void> verifyQueryParameters(
+Future<void> verifyDataOutputQueryParameters(
   WidgetTester tester,
   Set<DataOutput> dataOutputSet,
 ) async {
-  await ensureSearchButtonVisible(tester);
-  await tapSearchButton(tester);
-  expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
-  expect(find.byType(CadResultScreen), findsOneWidget);
-  final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
-  final queryParameters =
-      const SbdbCadQueryParameters().copyWithDataOutput(dataOutputSet);
-  verify(sbdbCadApi.get(queryParameters: queryParameters.toJson())).called(1);
-  clearInteractions(sbdbCadApi);
-  await tapBackButton(tester);
+  await verifyQueryParameters(
+    tester,
+    const SbdbCadQueryParameters().copyWithDataOutput(dataOutputSet),
+  );
 }

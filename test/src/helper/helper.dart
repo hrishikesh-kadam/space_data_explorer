@@ -26,3 +26,13 @@ Future<void> testScreenshot(
 ) async {
   await platform.testScreenshot(name, tester, binding);
 }
+
+// LABEL: eligible-hrk_flutter_test_batteries
+Future<void> tap(
+  WidgetTester tester, {
+  required Finder finder,
+  bool warnIfMissed = true,
+}) async {
+  await tester.tap(finder, warnIfMissed: warnIfMissed);
+  await tester.pumpAndSettle();
+}

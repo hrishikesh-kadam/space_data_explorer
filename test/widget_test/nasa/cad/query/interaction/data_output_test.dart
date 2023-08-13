@@ -32,7 +32,7 @@ void main() {
         await tapDataOutputChip(tester, dataOutput: dataOutput);
         expectDataOutputSelected(tester, dataOutputSet);
         expect(CadScreen.cadBloc!.state.dataOutputSet, dataOutputSet);
-        await verifyQueryParameters(tester, dataOutputSet);
+        await verifyDataOutputQueryParameters(tester, dataOutputSet);
         await ensureDataOutputWidgetVisible(tester);
         await tapDataOutputChip(tester, dataOutput: dataOutput);
         expectDataOutputSelected(tester, <DataOutput>{});
@@ -49,7 +49,7 @@ void main() {
         await tapDataOutputChip(tester, dataOutput: dataOutput);
         expectDataOutputSelected(tester, dataOutputSet);
         expect(CadScreen.cadBloc!.state.dataOutputSet, dataOutputSet);
-        await verifyQueryParameters(tester, dataOutputSet);
+        await verifyDataOutputQueryParameters(tester, dataOutputSet);
       }
       for (final dataOutput in CadScreen.dataOutputSet) {
         dataOutputSet.remove(dataOutput);
@@ -57,7 +57,7 @@ void main() {
         await tapDataOutputChip(tester, dataOutput: dataOutput);
         expectDataOutputSelected(tester, dataOutputSet);
         expect(CadScreen.cadBloc!.state.dataOutputSet, dataOutputSet);
-        await verifyQueryParameters(tester, dataOutputSet);
+        await verifyDataOutputQueryParameters(tester, dataOutputSet);
       }
     });
 

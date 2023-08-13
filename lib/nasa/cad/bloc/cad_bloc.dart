@@ -87,7 +87,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
   ) async {
     emit(state.copyWith(
       distanceRange: event.distanceRange,
-      distanceTextRange: event.distanceTextRange,
+      distanceRangeText: event.distanceRangeText,
     ));
   }
 

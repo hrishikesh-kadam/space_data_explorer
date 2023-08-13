@@ -9,12 +9,12 @@ part 'cad_state.freezed.dart';
 class CadState with _$CadState {
   const factory CadState({
     DateTimeRange? dateRange,
-    @Default(defaultDistanceRange) DistanceRange distanceRange,
+    @Default(distRangeDefault) DistanceRange distanceRange,
     @Default(ValueRange<String, void>(
-      start: minDistTextDefault,
+      start: ValueUnit<String, void>(value: ''),
       end: ValueUnit<String, void>(value: ''),
     ))
-    ValueRange<String, void> distanceTextRange,
+    ValueRange<String, void> distanceRangeText,
     @Default(SbdbCadQueryParameters.defaultSmallBody) SmallBody smallBody,
     SmallBodySelector? smallBodySelector,
     int? spkId,
@@ -28,7 +28,8 @@ class CadState with _$CadState {
 
   static CadState getInitial() {
     return const CadState().copyWith(
-      distanceTextRange: defaultDistaceTextRange.copyWith(
+      distanceRangeText: distRangeTextDefault.copyWith(
+        start: minDistTextDefault,
         end: maxDistTextDefault,
       ),
     );
@@ -41,15 +42,17 @@ const minDistDefault = Distance(
   unit: SbdbCadQueryParameters.defaultDistanceUnit,
 );
 const maxDistDefault = SbdbCadQueryParameters.defaultDistMax;
-const defaultDistanceRange = DistanceRange(
+const distRangeDefault = DistanceRange(
   start: minDistDefault,
   end: maxDistDefault,
 );
-const minDistTextDefault = ValueUnit<String, void>(value: '');
+final minDistTextDefault = ValueUnit<String, void>(
+  value: minDistDefault.value?.toString() ?? '',
+);
 final maxDistTextDefault = ValueUnit<String, void>(
   value: maxDistDefault.value?.toString() ?? '',
 );
-final defaultDistaceTextRange = ValueRange<String, void>(
+final distRangeTextDefault = ValueRange<String, void>(
   start: minDistTextDefault,
   end: maxDistTextDefault,
 );

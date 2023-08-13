@@ -296,7 +296,7 @@ class _ValueRangeFilterWidgetState<V, U>
         dropDownItems.add(DropdownMenuItem(
           key: Key(
             '${widget.keyPrefix}'
-            'dropdown_item_${widget.unitSymbols!.elementAt(j)}',
+            'dropdown_item_${index}_${widget.unitSymbols!.elementAt(j)}',
           ),
           value: widget.units!.elementAt(j),
           child: Text(

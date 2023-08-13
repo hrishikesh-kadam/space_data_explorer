@@ -1,11 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
-import 'package:mockito/mockito.dart';
 
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
-import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
 import 'package:space_data_explorer/widgets/choice_chip_query_widget.dart';
 import '../../../../../src/nasa/cad/cad_route.dart';
 import '../../../../../src/nasa/cad/query/close_approach_body_selector.dart';
@@ -53,36 +50,23 @@ void main() {
     });
 
     testWidgets('Select and Search Each', (tester) async {
-      tester.view.setLogicalSize(height: 800);
+      await pumpCadRouteAsInitialLocation(tester);
       for (var i = 0; i < CadScreen.closeApproachBodySet.length; i++) {
-        if (i == 0) {
-          await pumpCadRouteAsInitialLocation(tester);
-          await ensureSelectorWidgetVisible(tester);
-        }
-        if (i > 0) {
-          await tapBackButton(tester);
-        }
+        await ensureSelectorWidgetVisible(tester);
         final closeApproachBody = CadScreen.closeApproachBodySet.elementAt(i);
         await tapCloseApproachBody(tester,
             closeApproachBody: closeApproachBody);
         expectCloseApproachBodySelected(tester,
             closeApproachBody: closeApproachBody);
         expect(CadScreen.cadBloc!.state.closeApproachBody, closeApproachBody);
-        await ensureSearchButtonVisible(tester);
-        await tapSearchButton(tester);
-        expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
-        expect(find.byType(CadResultScreen), findsOneWidget);
-        final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
         final verifyCloseApproachBody = switch (closeApproachBody) {
           SbdbCadQueryParameters.defaultCloseApproachBody => null,
           _ => closeApproachBody
         };
-        verify(sbdbCadApi.get(
-          queryParameters: SbdbCadQueryParameters(
-            body: verifyCloseApproachBody,
-          ).toJson(),
-        )).called(1);
-        clearInteractions(sbdbCadApi);
+        await verifyCloseApproachBodyQueryParameters(
+          tester,
+          verifyCloseApproachBody,
+        );
       }
     });
   });

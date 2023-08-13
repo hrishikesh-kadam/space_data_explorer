@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
+import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
+import 'package:mockito/mockito.dart';
 
 import 'package:space_data_explorer/nasa/cad/bloc/cad_bloc.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
+import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
 import 'package:space_data_explorer/widgets/query_grid_container.dart';
 import '../../space_data_explorer_app.dart';
 import '../route/nasa_route.dart';
@@ -39,21 +43,31 @@ CadBloc getCadBloc() {
   return CadBloc(sbdbCadApi: getMockedSbdbCadApi());
 }
 
-Future<void> ensureSearchButtonVisible(WidgetTester tester) async {
-  await tester.dragUntilVisible(
-    searchButtonFinder,
-    customScrollViewFinder,
-    const Offset(0, 200),
-  );
-  await tester.pumpAndSettle();
-  try {
-    await tester.tap(find.byType(AppBar));
-    await tester.pumpAndSettle();
-    // ignore: empty_catches
-  } catch (e) {}
-}
-
 Future<void> tapSearchButton(WidgetTester tester) async {
   await tester.tap(searchButtonFinder);
   await tester.pumpAndSettle();
+}
+
+Future<void> scrollToTop(WidgetTester tester) async {
+  final offset = tester
+      .widget<CustomScrollView>(customScrollViewFinder)
+      .controller!
+      .offset;
+  await tester.drag(customScrollViewFinder, Offset(0, offset));
+  await tester.pumpAndSettle();
+}
+
+// TODO(hrishikesh-kadam): Use this everywhere
+Future<void> verifyQueryParameters(
+  WidgetTester tester,
+  SbdbCadQueryParameters queryParameters,
+) async {
+  await scrollToTop(tester);
+  await tapSearchButton(tester);
+  expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
+  expect(find.byType(CadResultScreen), findsOneWidget);
+  final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
+  verify(sbdbCadApi.get(queryParameters: queryParameters.toJson())).called(1);
+  clearInteractions(sbdbCadApi);
+  await tapBackButton(tester);
 }
