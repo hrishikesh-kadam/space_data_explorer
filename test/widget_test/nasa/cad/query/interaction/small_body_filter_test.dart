@@ -1,11 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
-import 'package:mockito/mockito.dart';
 
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
-import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
 import 'package:space_data_explorer/widgets/choice_chip_query_widget.dart';
 import '../../../../../src/nasa/cad/cad_route.dart';
 import '../../../../../src/nasa/cad/query/small_body_filter.dart';
@@ -48,32 +45,20 @@ void main() {
     });
 
     testWidgets('Select and Search Each', (tester) async {
-      final List<JsonMap> verifyQueryParamters = [
-        const SbdbCadQueryParameters().toJson(),
-        const SbdbCadQueryParameters(pha: true).toJson(),
-        const SbdbCadQueryParameters(nea: true).toJson(),
-        const SbdbCadQueryParameters(comet: true).toJson(),
-        const SbdbCadQueryParameters(neaComet: true).toJson(),
+      final List<SbdbCadQueryParameters> queryParamtersList = [
+        const SbdbCadQueryParameters(),
+        const SbdbCadQueryParameters(pha: true),
+        const SbdbCadQueryParameters(nea: true),
+        const SbdbCadQueryParameters(comet: true),
+        const SbdbCadQueryParameters(neaComet: true),
       ];
+      await pumpCadRouteAsInitialLocation(tester);
       for (var i = 0; i < CadScreen.smallBodySet.length; i++) {
-        if (i == 0) {
-          await pumpCadRouteAsInitialLocation(tester);
-        }
-        if (i > 0) {
-          await tapBackButton(tester);
-        }
         final smallBody = CadScreen.smallBodySet.elementAt(i);
         await tapSmallBody(tester, smallBody: smallBody);
         expectSmallBodySelected(tester, smallBody: smallBody);
         expect(CadScreen.cadBloc!.state.smallBody, smallBody);
-        await tapSearchButton(tester);
-        expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
-        expect(find.byType(CadResultScreen), findsOneWidget);
-        final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
-        verify(sbdbCadApi.get(
-          queryParameters: verifyQueryParamters[i],
-        )).called(1);
-        clearInteractions(sbdbCadApi);
+        await verifyQueryParameters(tester, queryParamtersList[i]);
       }
     });
   });

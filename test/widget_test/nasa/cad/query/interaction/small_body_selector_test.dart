@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
-import 'package:mockito/mockito.dart';
 
 import 'package:space_data_explorer/nasa/cad/bloc/cad_bloc.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
-import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
 import 'package:space_data_explorer/nasa/widgets/choice_chip_input_widget.dart';
 import '../../../../../src/nasa/cad/cad_route.dart';
 import '../../../../../src/nasa/cad/query/small_body_selector.dart';
@@ -54,13 +52,7 @@ void main() {
       expect(CadScreen.cadBloc!.state.smallBodySelector, smallBodySelector);
       expect(CadScreen.cadBloc!.state.spkId, null);
       expect(CadScreen.cadBloc!.state.designation, null);
-      await tapSearchButton(tester);
-      expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
-      expect(find.byType(CadResultScreen), findsOneWidget);
-      final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
-      verify(sbdbCadApi.get(
-        queryParameters: const SbdbCadQueryParameters().toJson(),
-      )).called(1);
+      verifyQueryParameters(tester, const SbdbCadQueryParameters());
     });
 
     testWidgets('Select ${SmallBodySelector.designation.name}', (tester) async {
@@ -77,13 +69,7 @@ void main() {
       expect(CadScreen.cadBloc!.state.smallBodySelector, smallBodySelector);
       expect(CadScreen.cadBloc!.state.spkId, null);
       expect(CadScreen.cadBloc!.state.designation, null);
-      await tapSearchButton(tester);
-      expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
-      expect(find.byType(CadResultScreen), findsOneWidget);
-      final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
-      verify(sbdbCadApi.get(
-        queryParameters: const SbdbCadQueryParameters().toJson(),
-      )).called(1);
+      verifyQueryParameters(tester, const SbdbCadQueryParameters());
     });
 
     testWidgets(
@@ -244,13 +230,7 @@ void main() {
       await tester.enterText(textFieldFinder, spkId.toString());
       expect(CadScreen.cadBloc!.state.spkId, spkId);
       expect(CadScreen.cadBloc!.state.designation, null);
-      await tapSearchButton(tester);
-      expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
-      expect(find.byType(CadResultScreen), findsOneWidget);
-      final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
-      verify(sbdbCadApi.get(
-        queryParameters: const SbdbCadQueryParameters(spk: spkId).toJson(),
-      )).called(1);
+      verifyQueryParameters(tester, const SbdbCadQueryParameters(spk: spkId));
     });
 
     testWidgets(
@@ -273,15 +253,10 @@ void main() {
       await tester.enterText(textFieldFinder, designation);
       expect(CadScreen.cadBloc!.state.spkId, null);
       expect(CadScreen.cadBloc!.state.designation, designation);
-      await tapSearchButton(tester);
-      expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
-      expect(find.byType(CadResultScreen), findsOneWidget);
-      final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
-      verify(sbdbCadApi.get(
-        queryParameters: const SbdbCadQueryParameters(
-          des: designation,
-        ).toJson(),
-      )).called(1);
+      verifyQueryParameters(
+        tester,
+        const SbdbCadQueryParameters(des: designation),
+      );
     });
 
     testWidgets(
