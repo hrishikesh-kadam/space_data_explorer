@@ -181,10 +181,39 @@ void main() {
       await tester.pumpAndSettle();
       filter = DistanceFilter.min;
       expectText(tester, filter, minDistTextDefault.value!);
-      expectDropdownValue(tester, filter, defaultUnit);
+      expectDropdownValue(tester, filter, minDistDefault.unit!);
       filter = DistanceFilter.max;
       expectText(tester, filter, maxDistTextDefault.value!);
-      expectDropdownValue(tester, filter, defaultUnit);
+      expectDropdownValue(tester, filter, maxDistDefault.unit!);
+    });
+
+    testWidgets('Initial state with empty rangeText', (tester) async {
+      final cadBloc = getCadBloc(initialState: const CadState());
+      await pumpCadRouteAsInitialLocation(tester, cadBloc: cadBloc);
+      const DistanceFilter filter = DistanceFilter.max;
+      expectText(tester, filter, maxDistTextDefault.value!);
+      expectDropdownValue(tester, filter, maxDistDefault.unit!);
+      final state = CadScreen.cadBloc!.state;
+      expect(state.distanceRange, distRangeDefault);
+      expect(state.distanceRangeText, distRangeTextDefault);
+    });
+
+    testWidgets('Initial state with null range and empty rangeText',
+        (tester) async {
+      final initialState = const CadState().copyWith(
+        distanceRange: const DistanceRange(
+          start: Distance(),
+          end: Distance(),
+        ),
+      );
+      final cadBloc = getCadBloc(initialState: initialState);
+      await pumpCadRouteAsInitialLocation(tester, cadBloc: cadBloc);
+      const DistanceFilter filter = DistanceFilter.max;
+      expectText(tester, filter, maxDistTextDefault.value!);
+      expectDropdownValue(tester, filter, maxDistDefault.unit!);
+      final state = CadScreen.cadBloc!.state;
+      expect(state.distanceRange, distRangeDefault);
+      expect(state.distanceRangeText, distRangeTextDefault);
     });
 
     testWidgets('verifyDistanceQueryParameters()', (tester) async {

@@ -155,36 +155,41 @@ class _ValueRangeFilterWidgetState<V, U>
   }
 
   void prepareState() {
+    bool propogateState = false;
     for (int i = 0; i < 2; i++) {
       V? value = rangeList[i].value;
+      U? unit = rangeList[i].unit;
       String text = rangeTextList[i].value ?? '';
       final V? defaultValue = defaultRangeList[i]?.value;
-      // logger.info(
-      //   '_getBody -> $i -> hasFocus = ${textFocusNodes[i].hasFocus}',
-      // );
-      // logger.info(
-      //   '_getBody -> $i -> '
-      //   'hasPrimaryFocus = ${textFocusNodes[i].hasPrimaryFocus}',
-      // );
+      final U? defaultUnit = defaultRangeList[i]?.unit;
       // Still Editing, so ignore updates
       if (!textFocusNodes[i].hasFocus) {
-        if (value == null &&
-            // If view rebuilds after coming back in viewport
-            text.isEmpty &&
-            defaultValue != null) {
+        if (value == null && text.isEmpty && defaultValue != null) {
           value = defaultValue;
-          rangeList[i] = rangeList[i].copyWith(value: defaultValue);
+          unit = defaultUnit;
+          rangeList[i] = ValueUnit<V, U>(value: value, unit: unit);
           rangeTextList[i] = ValueUnit(value: defaultValue.toString());
+          propogateState = true;
         }
-        // If in case of any mismatch then fallback to source value
+        // If in case of any mismatch between value and text, then fallback to
+        // value
         if (value != widget.valueParser(text)) {
           text = value?.toString() ?? '';
           rangeTextList[i] = ValueUnit(value: text);
+          propogateState = true;
         }
         if (textControllers[i].text != text) {
           textControllers[i].text = text;
         }
       }
+      if (unit == null && widget.units != null) {
+        unit = widget.units!.first;
+        rangeList[i] = rangeList[i].copyWith(unit: unit);
+        propogateState = true;
+      }
+    }
+    if (propogateState) {
+      callOnValueRangeChanged();
     }
   }
 
@@ -238,19 +243,11 @@ class _ValueRangeFilterWidgetState<V, U>
                 );
                 // Required for Android, Chrome on Android
                 // Clicking on adjacent TextField, doesn't give hasFocus()
-                // value as false in _getBody()
+                // value as false in prepareState()
                 textControllers[index].text = rangeTextList[index].value!;
               });
               callOnValueRangeChanged();
             }
-            // logger.info(
-            //   'TapRegion -> onTapOutside -> $index -> '
-            //   'hasFocus = ${textFocusNodes[index].hasFocus}',
-            // );
-            // logger.info(
-            //   'TapRegion -> onTapOutside -> $index -> '
-            //   'hasPrimaryFocus = ${textFocusNodes[index].hasPrimaryFocus}',
-            // );
           }
         },
         child: TextField(
@@ -308,7 +305,7 @@ class _ValueRangeFilterWidgetState<V, U>
       return DropdownButton<U>(
         key: Key('${widget.keyPrefix}dropdown_$index'),
         items: dropDownItems,
-        value: rangeList[index].unit ?? widget.units!.first,
+        value: rangeList[index].unit,
         onChanged: (unit) {
           assert(unit != null);
           rangeList[index] = rangeList[index].copyWith(unit: unit);

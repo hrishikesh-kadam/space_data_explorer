@@ -6,6 +6,7 @@ import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:mockito/mockito.dart';
 
 import 'package:space_data_explorer/nasa/cad/bloc/cad_bloc.dart';
+import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
@@ -39,8 +40,8 @@ Future<void> pumpCadRouteAsNormalLink(
   await tapCadButton(tester);
 }
 
-CadBloc getCadBloc() {
-  return CadBloc(sbdbCadApi: getMockedSbdbCadApi());
+CadBloc getCadBloc({CadState? initialState}) {
+  return CadBloc(sbdbCadApi: getMockedSbdbCadApi(), initialState: initialState);
 }
 
 Future<void> tapSearchButton(WidgetTester tester) async {
