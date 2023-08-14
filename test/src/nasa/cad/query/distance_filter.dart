@@ -57,44 +57,54 @@ Finder getTextFieldFinder(DistanceFilter filter) {
   ));
 }
 
-Finder getDropdownFinder(DistanceFilter filter) {
+Finder getUnitDropdownFinder(DistanceFilter filter) {
   return find.byKey(Key(
     '${CadScreen.distanceFilterKeyPrefix}'
-    'dropdown_${filter.index}',
+    'unit_dropdown_${filter.index}',
   ));
 }
 
-Future<void> tapDropdown(
+Finder getUnitTextFinder(DistanceFilter filter) {
+  return find.byKey(Key(
+    '${CadScreen.distanceFilterKeyPrefix}'
+    'unit_text_${filter.index}',
+  ));
+}
+
+Future<void> tapUnitDropdown(
   WidgetTester tester,
   DistanceFilter filter,
 ) async {
-  await tester.tap(getDropdownFinder(filter));
+  await tester.tap(getUnitDropdownFinder(filter));
   await tester.pumpAndSettle();
 }
 
-Finder getDropdownItemFinder(
+Finder getUnitDropdownItemFinder(
   DistanceFilter filter,
   DistanceUnit unit,
 ) {
   final finder = find.byKey(
     Key(
       '${CadScreen.distanceFilterKeyPrefix}'
-      'dropdown_item_${filter.index}_${unit.symbol}',
+      'unit_dropdown_item_${filter.index}_${unit.symbol}',
     ),
   );
   return finder.last;
 }
 
-Future<void> tapDropdownItem(
+Future<void> tapUnitDropdownItem(
   WidgetTester tester,
   DistanceFilter filter,
   DistanceUnit unit,
 ) async {
-  await tester.tap(getDropdownItemFinder(filter, unit), warnIfMissed: false);
+  await tester.tap(
+    getUnitDropdownItemFinder(filter, unit),
+    warnIfMissed: false,
+  );
   await tester.pumpAndSettle();
 }
 
-void expectText(
+void expectValueText(
   WidgetTester tester,
   DistanceFilter filter,
   String text,
@@ -105,20 +115,20 @@ void expectText(
   );
 }
 
-void expectDropdownValue(
+void expectUnitDropdownValue(
   WidgetTester tester,
   DistanceFilter filter,
   DistanceUnit unit,
 ) {
   expect(
     tester
-        .widget<DropdownButton<DistanceUnit>>(getDropdownFinder(filter))
+        .widget<DropdownButton<DistanceUnit>>(getUnitDropdownFinder(filter))
         .value,
     unit,
   );
 }
 
-void expectDropdownValueFromState(
+void expectUnitDropdownValueFromState(
   DistanceFilter filter,
   DistanceUnit unit,
 ) {
@@ -129,6 +139,14 @@ void expectDropdownValueFromState(
     case DistanceFilter.max:
       expect(state.distanceRange.end!.unit, unit);
   }
+}
+
+void expectUnitText(
+  WidgetTester tester,
+  DistanceFilter filter,
+  DistanceUnit unit,
+) {
+  expect(tester.widget<Text>(getUnitTextFinder(filter)).data, unit.symbol);
 }
 
 Future<void> ensureOutofViewport(WidgetTester tester) async {

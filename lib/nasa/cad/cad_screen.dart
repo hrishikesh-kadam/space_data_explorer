@@ -49,13 +49,13 @@ class CadScreen extends StatelessWidget {
       Key('$distanceFilterKeyPrefix${ValueRangeFilterWidget.defaultKey}');
   static const String smallBodyFilterKeyPrefix =
       '${keyPrefix}small_body_filter_';
-  static const Set<DistanceUnit> distanceFilterUnits = {
+  static final Set<DistanceUnit> distanceFilterUnits = {
     DistanceUnit.au,
     DistanceUnit.ld,
   };
   static const Key smallBodyFilterKey =
       Key('$smallBodyFilterKeyPrefix${ChoiceChipQueryWidget.defaultKey}');
-  static final Set<SmallBody> smallBodySet = {
+  static const Set<SmallBody> smallBodySet = {
     SmallBody.neo,
     SmallBody.pha,
     SmallBody.nea,
@@ -66,7 +66,7 @@ class CadScreen extends StatelessWidget {
       '${keyPrefix}small_body_selector_';
   static const Key smallBodySelectorKey =
       Key('$smallBodySelectorKeyPrefix${ChoiceChipInputWidget.defaultKey}');
-  static final Set<SmallBodySelector> smallBodySelectors = {
+  static const Set<SmallBodySelector> smallBodySelectors = {
     SmallBodySelector.spkId,
     SmallBodySelector.designation,
   };
@@ -74,7 +74,7 @@ class CadScreen extends StatelessWidget {
       '${keyPrefix}close_approach_body_';
   static const Key closeApproachBodySelectorKey = Key(
       '$closeApproachBodySelectorKeyPrefix${ChoiceChipQueryWidget.defaultKey}');
-  static final Set<CloseApproachBody> closeApproachBodySet = {
+  static const Set<CloseApproachBody> closeApproachBodySet = {
     CloseApproachBody.earth,
     CloseApproachBody.moon,
     CloseApproachBody.all,
@@ -89,7 +89,7 @@ class CadScreen extends StatelessWidget {
   static const String dataOutputKeyPrefix = '${keyPrefix}data_output_';
   static const Key dataOutputKey =
       Key('$dataOutputKeyPrefix${FilterChipQueryWidget.defaultKey}');
-  static final Set<DataOutput> dataOutputSet = {
+  static const Set<DataOutput> dataOutputSet = {
     DataOutput.totalOnly,
     DataOutput.diameter,
     DataOutput.fullname,

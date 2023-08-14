@@ -182,7 +182,7 @@ class _ValueRangeFilterWidgetState<V, U>
           textControllers[i].text = text;
         }
       }
-      if (unit == null && widget.units != null) {
+      if (unit == null && widget.units?.isNotEmpty != null) {
         unit = widget.units!.first;
         rangeList[i] = rangeList[i].copyWith(unit: unit);
         propogateState = true;
@@ -206,7 +206,7 @@ class _ValueRangeFilterWidgetState<V, U>
       children: [
         getLabelText(index: index, largestLabelWidth: largestLabelWidth),
         getValueTextField(index: index),
-        if (widget.units?.isNotEmpty == true) getUnitDropdown(index: index),
+        if (widget.units?.isNotEmpty == true) getUnitWidget(index: index),
       ],
     );
   }
@@ -279,11 +279,12 @@ class _ValueRangeFilterWidgetState<V, U>
     );
   }
 
-  Widget getUnitDropdown({
+  Widget getUnitWidget({
     required int index,
   }) {
     if (widget.units!.length < 2) {
       return Text(
+        key: Key('${widget.keyPrefix}unit_text_$index'),
         widget.unitSymbols!.first,
         style: Theme.of(context).textTheme.bodyMedium,
       );
@@ -293,7 +294,7 @@ class _ValueRangeFilterWidgetState<V, U>
         dropDownItems.add(DropdownMenuItem(
           key: Key(
             '${widget.keyPrefix}'
-            'dropdown_item_${index}_${widget.unitSymbols!.elementAt(j)}',
+            'unit_dropdown_item_${index}_${widget.unitSymbols!.elementAt(j)}',
           ),
           value: widget.units!.elementAt(j),
           child: Text(
@@ -303,7 +304,7 @@ class _ValueRangeFilterWidgetState<V, U>
         ));
       }
       return DropdownButton<U>(
-        key: Key('${widget.keyPrefix}dropdown_$index'),
+        key: Key('${widget.keyPrefix}unit_dropdown_$index'),
         items: dropDownItems,
         value: rangeList[index].unit,
         onChanged: (unit) {
