@@ -46,6 +46,15 @@ Future<void> configureHydratedBloc() async {
 // coverage:ignore-end
 
 // https://github.com/MisterJimson/flutter_keyboard_visibility
+// coverage:ignore-start
 bool isKeyboardVisibilitySupported() {
-  return platform.isKeyboardVisibilitySupported();
+  if (kIsWeb) {
+    return false;
+  } else {
+    return switch (defaultTargetPlatform) {
+      TargetPlatform.android || TargetPlatform.iOS => true,
+      _ => false
+    };
+  }
 }
+// coverage:ignore-end

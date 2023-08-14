@@ -62,5 +62,3 @@ BackButton getAppBarBackButton({
     },
   );
 }
-
-bool isKeyboardVisibilitySupported() => false;
