@@ -28,13 +28,13 @@ final distRangeNonDefault = DistanceRange(
   start: minDistNonDefault,
   end: maxDistNonDefault,
 );
-final minDistTextNonDefault = ValueUnit<String, void>(
+final minDistTextNonDefault = ValueUnit<String, Never>(
   value: minDistNonDefault.value?.toString() ?? '',
 );
-final maxDistTextNonDefault = ValueUnit<String, void>(
+final maxDistTextNonDefault = ValueUnit<String, Never>(
   value: maxDistNonDefault.value?.toString() ?? '',
 );
-final distRangeTextNonDefault = ValueRange<String, void>(
+final distRangeTextNonDefault = ValueRange<String, Never>(
   start: minDistTextNonDefault,
   end: maxDistTextNonDefault,
 );

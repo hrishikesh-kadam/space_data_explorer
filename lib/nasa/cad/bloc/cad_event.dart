@@ -24,7 +24,7 @@ class CadDistanceRangeEvent extends CadEvent {
   });
 
   final DistanceRange distanceRange;
-  final ValueRange<String, void> distanceRangeText;
+  final ValueRange<String, Never> distanceRangeText;
 }
 
 class CadSmallBodySelected extends CadEvent {

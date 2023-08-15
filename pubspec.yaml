@@ -50,10 +50,12 @@ dev_dependencies:
   go_router_builder: ^2.2.4
 
 dependency_overrides:
-  hrk_nasa_apis:
-    path: '../../dart/packages/hrk_nasa_apis'
+  hrk_batteries:
+    path: '../../dart/packages/hrk_batteries'
 #   hrk_flutter_test_batteries:
 #     path: '../packages/hrk_flutter_test_batteries'
+  hrk_nasa_apis:
+    path: '../../dart/packages/hrk_nasa_apis'
 
 flutter:
   uses-material-design: true

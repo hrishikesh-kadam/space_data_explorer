@@ -9,12 +9,12 @@ import '../helper/helper.dart';
 import 'query_grid_container.dart';
 
 typedef ValueParser<V> = V? Function(String text);
-typedef ValueRangeChanged<V, U> = void Function(
+typedef ValueRangeChanged<V, U extends Unit> = void Function(
   ValueRange<V, U> range,
-  ValueRange<String, void> rangeText,
+  ValueRange<String, Never> rangeText,
 );
 
-class ValueRangeFilterWidget<V, U> extends StatefulWidget {
+class ValueRangeFilterWidget<V, U extends Unit> extends StatefulWidget {
   const ValueRangeFilterWidget({
     super.key,
     this.keyPrefix = '',
@@ -39,7 +39,7 @@ class ValueRangeFilterWidget<V, U> extends StatefulWidget {
   final String title;
   final Set<String> labels;
   final ValueRange<V, U> range;
-  final ValueRange<String, void> rangeText;
+  final ValueRange<String, Never> rangeText;
   final ValueRange<V, U>? defaultRange;
   final ValueParser<V> valueParser;
   final TextInputType? keyboardType;
@@ -59,10 +59,10 @@ class ValueRangeFilterWidget<V, U> extends StatefulWidget {
 
 enum StateMethod { initState, didUpdateWidget }
 
-class _ValueRangeFilterWidgetState<V, U>
+class _ValueRangeFilterWidgetState<V, U extends Unit>
     extends State<ValueRangeFilterWidget<V, U>> {
   final List<ValueUnit<V, U>> rangeList = [];
-  final List<ValueUnit<String, void>> rangeTextList = [];
+  final List<ValueUnit<String, Never>> rangeTextList = [];
   final List<ValueUnit<V, U>?> defaultRangeList = [];
   final List<TextEditingController> textControllers = [];
   final List<FocusNode> textFocusNodes = [];
@@ -322,7 +322,7 @@ class _ValueRangeFilterWidgetState<V, U>
         start: rangeList[0],
         end: rangeList[1],
       );
-      ValueRange<String, void> rangeText = ValueRange(
+      ValueRange<String, Never> rangeText = ValueRange(
         start: rangeTextList[0],
         end: rangeTextList[1],
       );

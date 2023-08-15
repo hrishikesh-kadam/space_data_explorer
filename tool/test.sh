@@ -6,11 +6,13 @@ rm -rf coverage
 
 flutter test test/unit_test --coverage \
   --coverage-path coverage/unit_test_lcov.info
-lcov --list coverage/unit_test_lcov.info
+lcov --list coverage/unit_test_lcov.info \
+  | grep -v ".*|.*100%.*|.*|"
 
 flutter test test/widget_test --coverage \
   --coverage-path coverage/widget_test_lcov.info
-lcov --list coverage/widget_test_lcov.info
+lcov --list coverage/widget_test_lcov.info \
+  | grep -v ".*|.*100%.*|.*|"
 
 if [[ -s coverage/unit_test_lcov.info ]]; then
   lcov --add-tracefile coverage/unit_test_lcov.info \
@@ -19,7 +21,8 @@ if [[ -s coverage/unit_test_lcov.info ]]; then
 else
   cp coverage/widget_test_lcov.info coverage/lcov.info
 fi
-lcov --list coverage/lcov.info
+lcov --list coverage/lcov.info \
+  | grep -v ".*|.*100%.*|.*|"
 
 ./tool/coverage/check-coverage-ignored.sh
 

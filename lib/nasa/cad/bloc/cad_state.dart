@@ -10,11 +10,11 @@ class CadState with _$CadState {
   const factory CadState({
     DateTimeRange? dateRange,
     @Default(distRangeDefault) DistanceRange distanceRange,
-    @Default(ValueRange<String, void>(
-      start: ValueUnit<String, void>(value: ''),
-      end: ValueUnit<String, void>(value: ''),
+    @Default(ValueRange<String, Never>(
+      start: ValueUnit<String, Never>(value: ''),
+      end: ValueUnit<String, Never>(value: ''),
     ))
-    ValueRange<String, void> distanceRangeText,
+    ValueRange<String, Never> distanceRangeText,
     @Default(SbdbCadQueryParameters.defaultSmallBody) SmallBody smallBody,
     SmallBodySelector? smallBodySelector,
     int? spkId,
@@ -46,13 +46,13 @@ const distRangeDefault = DistanceRange(
   start: minDistDefault,
   end: maxDistDefault,
 );
-final minDistTextDefault = ValueUnit<String, void>(
+final minDistTextDefault = ValueUnit<String, Never>(
   value: minDistDefault.value?.toString() ?? '',
 );
-final maxDistTextDefault = ValueUnit<String, void>(
+final maxDistTextDefault = ValueUnit<String, Never>(
   value: maxDistDefault.value?.toString() ?? '',
 );
-final distRangeTextDefault = ValueRange<String, void>(
+final distRangeTextDefault = ValueRange<String, Never>(
   start: minDistTextDefault,
   end: maxDistTextDefault,
 );
