@@ -213,10 +213,10 @@ packages:
     dependency: transitive
     description:
       name: ffi
-      sha256: ed5337a5660c506388a9f012be0288fb38b49020ce2b45fe1f8b8323fe429f99
+      sha256: "7bf0adc28a23d395f19f3f1eb21dd7cfd1dd9f8e1c50051c069122e6853bc878"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.2"
+    version: "2.1.0"
   file:
     dependency: transitive
     description:
@@ -410,9 +410,10 @@ packages:
   hrk_batteries:
     dependency: "direct main"
     description:
-      path: "../../dart/packages/hrk_batteries"
-      relative: true
-    source: path
+      name: hrk_batteries
+      sha256: f66a4871c3146628f075b8d2ff87442ab8f31da378c773a4de97821d44fd0a4a
+      url: "https://pub.dev"
+    source: hosted
     version: "0.2.0"
   hrk_flutter_test_batteries:
     dependency: "direct dev"
@@ -426,16 +427,17 @@ packages:
     dependency: "direct main"
     description:
       name: hrk_logging
-      sha256: ebc112e91f5119a4b5035a2290a839eeaf35c9da45aad45c853dbb5b6d47018b
+      sha256: "7ea3d02ed46f19533a8cae075cafe636757548a300a0e404193f6dd142c024b5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.2"
+    version: "0.1.3"
   hrk_nasa_apis:
     dependency: "direct main"
     description:
-      path: "../../dart/packages/hrk_nasa_apis"
-      relative: true
-    source: path
+      name: hrk_nasa_apis
+      sha256: "107625f470ff518cf208ce96723b9779fa3248e8a8ed39cdcc1d878a0db55edd"
+      url: "https://pub.dev"
+    source: hosted
     version: "0.10.0"
   hrk_settings_list:
     dependency: "direct main"
@@ -606,10 +608,10 @@ packages:
     dependency: "direct main"
     description:
       name: path_provider
-      sha256: "3087813781ab814e4157b172f1a11c46be20179fcc9bea043e0fba36bc0acaa2"
+      sha256: "909b84830485dbcd0308edf6f7368bc8fd76afa26a270420f34cabea2a6467a0"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.15"
+    version: "2.1.0"
   path_provider_android:
     dependency: transitive
     description:
@@ -891,10 +893,10 @@ packages:
     dependency: transitive
     description:
       name: xdg_directories
-      sha256: e0b1147eec179d3911f1f19b59206448f78195ca1d20514134e10641b7d7fbff
+      sha256: f0c26453a2d47aa4c2570c6a033246a3fc62da2fe23c7ffdd0a7495086dc0247
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   yaml:
     dependency: transitive
     description:
