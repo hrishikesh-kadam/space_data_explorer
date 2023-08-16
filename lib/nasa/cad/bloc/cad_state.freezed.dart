@@ -17,9 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CadState {
   DateTimeRange? get dateRange => throw _privateConstructorUsedError;
-  ValueRange<double, DistanceUnit> get distanceRange =>
+  ValueRange<double, DistanceUnit> get distRange =>
       throw _privateConstructorUsedError;
-  ValueRange<String, Never> get distanceRangeText =>
+  ValueRange<String, Never> get distRangeText =>
       throw _privateConstructorUsedError;
   SmallBody get smallBody => throw _privateConstructorUsedError;
   SmallBodySelector? get smallBodySelector =>
@@ -43,8 +43,8 @@ abstract class $CadStateCopyWith<$Res> {
   @useResult
   $Res call(
       {DateTimeRange? dateRange,
-      ValueRange<double, DistanceUnit> distanceRange,
-      ValueRange<String, Never> distanceRangeText,
+      ValueRange<double, DistanceUnit> distRange,
+      ValueRange<String, Never> distRangeText,
       SmallBody smallBody,
       SmallBodySelector? smallBodySelector,
       int? spkId,
@@ -54,8 +54,8 @@ abstract class $CadStateCopyWith<$Res> {
       NetworkState networkState,
       SbdbCadBody? sbdbCadBody});
 
-  $ValueRangeCopyWith<double, DistanceUnit, $Res> get distanceRange;
-  $ValueRangeCopyWith<String, Never, $Res> get distanceRangeText;
+  $ValueRangeCopyWith<double, DistanceUnit, $Res> get distRange;
+  $ValueRangeCopyWith<String, Never, $Res> get distRangeText;
   $SbdbCadBodyCopyWith<$Res>? get sbdbCadBody;
 }
 
@@ -73,8 +73,8 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
   @override
   $Res call({
     Object? dateRange = freezed,
-    Object? distanceRange = null,
-    Object? distanceRangeText = null,
+    Object? distRange = null,
+    Object? distRangeText = null,
     Object? smallBody = null,
     Object? smallBodySelector = freezed,
     Object? spkId = freezed,
@@ -89,13 +89,13 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
           ? _value.dateRange
           : dateRange // ignore: cast_nullable_to_non_nullable
               as DateTimeRange?,
-      distanceRange: null == distanceRange
-          ? _value.distanceRange
-          : distanceRange // ignore: cast_nullable_to_non_nullable
+      distRange: null == distRange
+          ? _value.distRange
+          : distRange // ignore: cast_nullable_to_non_nullable
               as ValueRange<double, DistanceUnit>,
-      distanceRangeText: null == distanceRangeText
-          ? _value.distanceRangeText
-          : distanceRangeText // ignore: cast_nullable_to_non_nullable
+      distRangeText: null == distRangeText
+          ? _value.distRangeText
+          : distRangeText // ignore: cast_nullable_to_non_nullable
               as ValueRange<String, Never>,
       smallBody: null == smallBody
           ? _value.smallBody
@@ -134,19 +134,19 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
 
   @override
   @pragma('vm:prefer-inline')
-  $ValueRangeCopyWith<double, DistanceUnit, $Res> get distanceRange {
-    return $ValueRangeCopyWith<double, DistanceUnit, $Res>(_value.distanceRange,
+  $ValueRangeCopyWith<double, DistanceUnit, $Res> get distRange {
+    return $ValueRangeCopyWith<double, DistanceUnit, $Res>(_value.distRange,
         (value) {
-      return _then(_value.copyWith(distanceRange: value) as $Val);
+      return _then(_value.copyWith(distRange: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ValueRangeCopyWith<String, Never, $Res> get distanceRangeText {
-    return $ValueRangeCopyWith<String, Never, $Res>(_value.distanceRangeText,
+  $ValueRangeCopyWith<String, Never, $Res> get distRangeText {
+    return $ValueRangeCopyWith<String, Never, $Res>(_value.distRangeText,
         (value) {
-      return _then(_value.copyWith(distanceRangeText: value) as $Val);
+      return _then(_value.copyWith(distRangeText: value) as $Val);
     });
   }
 
@@ -172,8 +172,8 @@ abstract class _$$_CadStateCopyWith<$Res> implements $CadStateCopyWith<$Res> {
   @useResult
   $Res call(
       {DateTimeRange? dateRange,
-      ValueRange<double, DistanceUnit> distanceRange,
-      ValueRange<String, Never> distanceRangeText,
+      ValueRange<double, DistanceUnit> distRange,
+      ValueRange<String, Never> distRangeText,
       SmallBody smallBody,
       SmallBodySelector? smallBodySelector,
       int? spkId,
@@ -184,9 +184,9 @@ abstract class _$$_CadStateCopyWith<$Res> implements $CadStateCopyWith<$Res> {
       SbdbCadBody? sbdbCadBody});
 
   @override
-  $ValueRangeCopyWith<double, DistanceUnit, $Res> get distanceRange;
+  $ValueRangeCopyWith<double, DistanceUnit, $Res> get distRange;
   @override
-  $ValueRangeCopyWith<String, Never, $Res> get distanceRangeText;
+  $ValueRangeCopyWith<String, Never, $Res> get distRangeText;
   @override
   $SbdbCadBodyCopyWith<$Res>? get sbdbCadBody;
 }
@@ -203,8 +203,8 @@ class __$$_CadStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? dateRange = freezed,
-    Object? distanceRange = null,
-    Object? distanceRangeText = null,
+    Object? distRange = null,
+    Object? distRangeText = null,
     Object? smallBody = null,
     Object? smallBodySelector = freezed,
     Object? spkId = freezed,
@@ -219,13 +219,13 @@ class __$$_CadStateCopyWithImpl<$Res>
           ? _value.dateRange
           : dateRange // ignore: cast_nullable_to_non_nullable
               as DateTimeRange?,
-      distanceRange: null == distanceRange
-          ? _value.distanceRange
-          : distanceRange // ignore: cast_nullable_to_non_nullable
+      distRange: null == distRange
+          ? _value.distRange
+          : distRange // ignore: cast_nullable_to_non_nullable
               as ValueRange<double, DistanceUnit>,
-      distanceRangeText: null == distanceRangeText
-          ? _value.distanceRangeText
-          : distanceRangeText // ignore: cast_nullable_to_non_nullable
+      distRangeText: null == distRangeText
+          ? _value.distRangeText
+          : distRangeText // ignore: cast_nullable_to_non_nullable
               as ValueRange<String, Never>,
       smallBody: null == smallBody
           ? _value.smallBody
@@ -268,15 +268,15 @@ class __$$_CadStateCopyWithImpl<$Res>
 class _$_CadState implements _CadState {
   const _$_CadState(
       {this.dateRange,
-      this.distanceRange = distRangeDefault,
-      this.distanceRangeText = const ValueRange<String, Never>(
+      this.distRange = distRangeDefault,
+      this.distRangeText = const ValueRange<String, Never>(
           start: ValueUnit<String, Never>(value: ''),
           end: ValueUnit<String, Never>(value: '')),
-      this.smallBody = SbdbCadQueryParameters.defaultSmallBody,
+      this.smallBody = SbdbCadQueryParameters.smallBodyDefault,
       this.smallBodySelector,
       this.spkId,
       this.designation,
-      this.closeApproachBody = SbdbCadQueryParameters.defaultCloseApproachBody,
+      this.closeApproachBody = SbdbCadQueryParameters.closeApproachBodyDefault,
       final Set<DataOutput> dataOutputSet = const {},
       this.networkState = NetworkState.initial,
       this.sbdbCadBody})
@@ -286,10 +286,10 @@ class _$_CadState implements _CadState {
   final DateTimeRange? dateRange;
   @override
   @JsonKey()
-  final ValueRange<double, DistanceUnit> distanceRange;
+  final ValueRange<double, DistanceUnit> distRange;
   @override
   @JsonKey()
-  final ValueRange<String, Never> distanceRangeText;
+  final ValueRange<String, Never> distRangeText;
   @override
   @JsonKey()
   final SmallBody smallBody;
@@ -319,7 +319,7 @@ class _$_CadState implements _CadState {
 
   @override
   String toString() {
-    return 'CadState(dateRange: $dateRange, distanceRange: $distanceRange, distanceRangeText: $distanceRangeText, smallBody: $smallBody, smallBodySelector: $smallBodySelector, spkId: $spkId, designation: $designation, closeApproachBody: $closeApproachBody, dataOutputSet: $dataOutputSet, networkState: $networkState, sbdbCadBody: $sbdbCadBody)';
+    return 'CadState(dateRange: $dateRange, distRange: $distRange, distRangeText: $distRangeText, smallBody: $smallBody, smallBodySelector: $smallBodySelector, spkId: $spkId, designation: $designation, closeApproachBody: $closeApproachBody, dataOutputSet: $dataOutputSet, networkState: $networkState, sbdbCadBody: $sbdbCadBody)';
   }
 
   @override
@@ -329,10 +329,10 @@ class _$_CadState implements _CadState {
             other is _$_CadState &&
             (identical(other.dateRange, dateRange) ||
                 other.dateRange == dateRange) &&
-            (identical(other.distanceRange, distanceRange) ||
-                other.distanceRange == distanceRange) &&
-            (identical(other.distanceRangeText, distanceRangeText) ||
-                other.distanceRangeText == distanceRangeText) &&
+            (identical(other.distRange, distRange) ||
+                other.distRange == distRange) &&
+            (identical(other.distRangeText, distRangeText) ||
+                other.distRangeText == distRangeText) &&
             (identical(other.smallBody, smallBody) ||
                 other.smallBody == smallBody) &&
             (identical(other.smallBodySelector, smallBodySelector) ||
@@ -354,8 +354,8 @@ class _$_CadState implements _CadState {
   int get hashCode => Object.hash(
       runtimeType,
       dateRange,
-      distanceRange,
-      distanceRangeText,
+      distRange,
+      distRangeText,
       smallBody,
       smallBodySelector,
       spkId,
@@ -375,8 +375,8 @@ class _$_CadState implements _CadState {
 abstract class _CadState implements CadState {
   const factory _CadState(
       {final DateTimeRange? dateRange,
-      final ValueRange<double, DistanceUnit> distanceRange,
-      final ValueRange<String, Never> distanceRangeText,
+      final ValueRange<double, DistanceUnit> distRange,
+      final ValueRange<String, Never> distRangeText,
       final SmallBody smallBody,
       final SmallBodySelector? smallBodySelector,
       final int? spkId,
@@ -389,9 +389,9 @@ abstract class _CadState implements CadState {
   @override
   DateTimeRange? get dateRange;
   @override
-  ValueRange<double, DistanceUnit> get distanceRange;
+  ValueRange<double, DistanceUnit> get distRange;
   @override
-  ValueRange<String, Never> get distanceRangeText;
+  ValueRange<String, Never> get distRangeText;
   @override
   SmallBody get smallBody;
   @override

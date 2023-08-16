@@ -16,14 +16,14 @@ void main() {
       expectValueText(tester, filter, maxDistTextDefault.value!);
       expectUnitDropdownValue(tester, filter, maxDistDefault.unit!);
       final state = CadScreen.cadBloc!.state;
-      expect(state.distanceRange, distRangeDefault);
-      expect(state.distanceRangeText, distRangeTextDefault);
+      expect(state.distRange, distRangeDefault);
+      expect(state.distRangeText, distRangeTextDefault);
     });
 
     testWidgets('Initial state with null range and empty rangeText',
         (tester) async {
       final initialState = const CadState().copyWith(
-        distanceRange: const DistanceRange(
+        distRange: const DistanceRange(
           start: Distance(),
           end: Distance(),
         ),
@@ -34,14 +34,14 @@ void main() {
       expectValueText(tester, filter, maxDistTextDefault.value!);
       expectUnitDropdownValue(tester, filter, maxDistDefault.unit!);
       final state = CadScreen.cadBloc!.state;
-      expect(state.distanceRange, distRangeDefault);
-      expect(state.distanceRangeText, distRangeTextDefault);
+      expect(state.distRange, distRangeDefault);
+      expect(state.distRangeText, distRangeTextDefault);
     });
 
     testWidgets('Only 1 unit', (tester) async {
-      CadScreen.distanceFilterUnits.clear();
-      CadScreen.distanceFilterUnits.add(
-        SbdbCadQueryParameters.defaultDistanceUnit,
+      CadScreen.distFilterUnits.clear();
+      CadScreen.distFilterUnits.add(
+        SbdbCadQueryParameters.distUnitDefault,
       );
       await pumpCadRouteAsInitialLocation(tester);
       expectValueText(tester, DistanceFilter.min, minDistTextDefault.value!);
@@ -51,7 +51,7 @@ void main() {
     });
 
     testWidgets('No units', (tester) async {
-      CadScreen.distanceFilterUnits.clear();
+      CadScreen.distFilterUnits.clear();
       await pumpCadRouteAsInitialLocation(tester);
       expectValueText(tester, DistanceFilter.min, minDistTextDefault.value!);
       expectValueText(tester, DistanceFilter.max, maxDistTextDefault.value!);

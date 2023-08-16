@@ -19,7 +19,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     this.sbdbCadApi = sbdbCadApi ?? SbdbCadApi();
     on<CadRequested>(_onCadRequested);
     on<CadDateRangeSelected>(_onCadDateRangeSelected);
-    on<CadDistanceRangeEvent>(_onCadDistanceRangeEvent);
+    on<CadDistRangeEvent>(_onCadDistanceRangeEvent);
     on<CadSmallBodySelected>(_onCadSmallBodySelected);
     on<CadSmallBodySelectorEvent>(_onCadSmallBodySelectorEvent);
     on<CadCloseApproachBodySelected>(_onCadCloseApproachBodySelected);
@@ -42,8 +42,8 @@ class CadBloc extends Bloc<CadEvent, CadState> {
         dateMax: dateFormatter.format(state.dateRange!.end),
       );
     }
-    queryParameters = queryParameters.copyWithDistanceRange(
-      state.distanceRange,
+    queryParameters = queryParameters.copyWithDistRange(
+      state.distRange,
     );
     queryParameters = queryParameters.copyWithSmallBody(state.smallBody);
     if (state.smallBodySelector != null) {
@@ -54,7 +54,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
       );
     }
     if (state.closeApproachBody !=
-        SbdbCadQueryParameters.defaultCloseApproachBody) {
+        SbdbCadQueryParameters.closeApproachBodyDefault) {
       queryParameters = queryParameters.copyWith(
         body: state.closeApproachBody,
       );
@@ -83,12 +83,12 @@ class CadBloc extends Bloc<CadEvent, CadState> {
   }
 
   Future<void> _onCadDistanceRangeEvent(
-    CadDistanceRangeEvent event,
+    CadDistRangeEvent event,
     Emitter<CadState> emit,
   ) async {
     emit(state.copyWith(
-      distanceRange: event.distanceRange,
-      distanceRangeText: event.distanceRangeText,
+      distRange: event.distRange,
+      distRangeText: event.distRangeText,
     ));
   }
 
@@ -97,7 +97,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     Emitter<CadState> emit,
   ) async {
     if (event.smallBody == null) {
-      emit(state.copyWith(smallBody: SbdbCadQueryParameters.defaultSmallBody));
+      emit(state.copyWith(smallBody: SbdbCadQueryParameters.smallBodyDefault));
     } else {
       emit(state.copyWith(smallBody: event.smallBody!));
     }
@@ -120,7 +120,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
   ) async {
     if (event.closeApproachBody == null) {
       emit(state.copyWith(
-        closeApproachBody: SbdbCadQueryParameters.defaultCloseApproachBody,
+        closeApproachBody: SbdbCadQueryParameters.closeApproachBodyDefault,
       ));
     } else {
       emit(state.copyWith(closeApproachBody: event.closeApproachBody!));

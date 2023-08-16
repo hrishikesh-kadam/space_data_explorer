@@ -10,33 +10,33 @@ import '../cad_route.dart';
 
 enum DistanceFilter { min, max }
 
-final distanceFilterWidgetFinder = find.byKey(CadScreen.distanceFilterKey);
+final distFilterWidgetFinder = find.byKey(CadScreen.distFilterKey);
 
-const defaultUnit = SbdbCadQueryParameters.defaultDistanceUnit;
-final nonDefaultUnit = CadScreen.distanceFilterUnits.firstWhere(
-  (unit) => unit != SbdbCadQueryParameters.defaultDistanceUnit,
+const defaultUnit = SbdbCadQueryParameters.distUnitDefault;
+final nonDefaultUnit = CadScreen.distFilterUnits.firstWhere(
+  (unit) => unit != defaultUnit,
 );
-final minDistNonDefault = Distance(
+final distMinNonDefault = Distance(
   value: getNonDefaultValue(DistanceFilter.min),
   unit: nonDefaultUnit,
 );
-final maxDistNonDefault = Distance(
+final distMaxNonDefault = Distance(
   value: getNonDefaultValue(DistanceFilter.max),
   unit: nonDefaultUnit,
 );
 final distRangeNonDefault = DistanceRange(
-  start: minDistNonDefault,
-  end: maxDistNonDefault,
+  start: distMinNonDefault,
+  end: distMaxNonDefault,
 );
-final minDistTextNonDefault = ValueUnit<String, Never>(
-  value: minDistNonDefault.value?.toString() ?? '',
+final distMinTextNonDefault = ValueUnit<String, Never>(
+  value: distMinNonDefault.value?.toString() ?? '',
 );
-final maxDistTextNonDefault = ValueUnit<String, Never>(
-  value: maxDistNonDefault.value?.toString() ?? '',
+final distMaxTextNonDefault = ValueUnit<String, Never>(
+  value: distMaxNonDefault.value?.toString() ?? '',
 );
 final distRangeTextNonDefault = ValueRange<String, Never>(
-  start: minDistTextNonDefault,
-  end: maxDistTextNonDefault,
+  start: distMinTextNonDefault,
+  end: distMaxTextNonDefault,
 );
 
 double getNonDefaultValue(DistanceFilter filter) {
@@ -52,21 +52,21 @@ double getNonDefaultValue(DistanceFilter filter) {
 
 Finder getTextFieldFinder(DistanceFilter filter) {
   return find.byKey(Key(
-    '${CadScreen.distanceFilterKeyPrefix}'
+    '${CadScreen.distFilterKeyPrefix}'
     'text_field_${filter.index}',
   ));
 }
 
 Finder getUnitDropdownFinder(DistanceFilter filter) {
   return find.byKey(Key(
-    '${CadScreen.distanceFilterKeyPrefix}'
+    '${CadScreen.distFilterKeyPrefix}'
     'unit_dropdown_${filter.index}',
   ));
 }
 
 Finder getUnitTextFinder(DistanceFilter filter) {
   return find.byKey(Key(
-    '${CadScreen.distanceFilterKeyPrefix}'
+    '${CadScreen.distFilterKeyPrefix}'
     'unit_text_${filter.index}',
   ));
 }
@@ -85,7 +85,7 @@ Finder getUnitDropdownItemFinder(
 ) {
   final finder = find.byKey(
     Key(
-      '${CadScreen.distanceFilterKeyPrefix}'
+      '${CadScreen.distFilterKeyPrefix}'
       'unit_dropdown_item_${filter.index}_${unit.symbol}',
     ),
   );
@@ -135,9 +135,9 @@ void expectUnitDropdownValueFromState(
   final state = CadScreen.cadBloc!.state;
   switch (filter) {
     case DistanceFilter.min:
-      expect(state.distanceRange.start!.unit, unit);
+      expect(state.distRange.start!.unit, unit);
     case DistanceFilter.max:
-      expect(state.distanceRange.end!.unit, unit);
+      expect(state.distRange.end!.unit, unit);
   }
 }
 
@@ -160,19 +160,19 @@ Future<void> ensureOutofViewport(WidgetTester tester) async {
 Future<void> ensureFilterWidgetVisible(WidgetTester tester) async {
   await scrollToTop(tester);
   await tester.dragUntilVisible(
-    distanceFilterWidgetFinder,
+    distFilterWidgetFinder,
     customScrollViewFinder,
     const Offset(0, -200),
   );
   await tester.pumpAndSettle();
 }
 
-Future<void> verifyDistanceQueryParameters(
+Future<void> verifyDistQueryParameters(
   WidgetTester tester,
-  DistanceRange distanceRange,
+  DistanceRange distRange,
 ) async {
   await verifyQueryParameters(
     tester,
-    const SbdbCadQueryParameters().copyWithDistanceRange(distanceRange),
+    const SbdbCadQueryParameters().copyWithDistRange(distRange),
   );
 }

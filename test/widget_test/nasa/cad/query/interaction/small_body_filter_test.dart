@@ -19,11 +19,11 @@ void main() {
       expect(smallBodyFilterWidgetFinder, findsOneWidget);
       expectSmallBodySelected(
         tester,
-        smallBody: SbdbCadQueryParameters.defaultSmallBody,
+        smallBody: SbdbCadQueryParameters.smallBodyDefault,
       );
       expect(
         CadScreen.cadBloc!.state.smallBody,
-        SbdbCadQueryParameters.defaultSmallBody,
+        SbdbCadQueryParameters.smallBodyDefault,
       );
     });
 
@@ -36,11 +36,11 @@ void main() {
       await tapSmallBody(tester, smallBody: smallBody);
       expectSmallBodySelected(
         tester,
-        smallBody: SbdbCadQueryParameters.defaultSmallBody,
+        smallBody: SbdbCadQueryParameters.smallBodyDefault,
       );
       expect(
         CadScreen.cadBloc!.state.smallBody,
-        SbdbCadQueryParameters.defaultSmallBody,
+        SbdbCadQueryParameters.smallBodyDefault,
       );
     });
 

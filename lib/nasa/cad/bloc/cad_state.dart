@@ -9,17 +9,17 @@ part 'cad_state.freezed.dart';
 class CadState with _$CadState {
   const factory CadState({
     DateTimeRange? dateRange,
-    @Default(distRangeDefault) DistanceRange distanceRange,
+    @Default(distRangeDefault) DistanceRange distRange,
     @Default(ValueRange<String, Never>(
       start: ValueUnit<String, Never>(value: ''),
       end: ValueUnit<String, Never>(value: ''),
     ))
-    ValueRange<String, Never> distanceRangeText,
-    @Default(SbdbCadQueryParameters.defaultSmallBody) SmallBody smallBody,
+    ValueRange<String, Never> distRangeText,
+    @Default(SbdbCadQueryParameters.smallBodyDefault) SmallBody smallBody,
     SmallBodySelector? smallBodySelector,
     int? spkId,
     String? designation,
-    @Default(SbdbCadQueryParameters.defaultCloseApproachBody)
+    @Default(SbdbCadQueryParameters.closeApproachBodyDefault)
     CloseApproachBody closeApproachBody,
     @Default({}) Set<DataOutput> dataOutputSet,
     @Default(NetworkState.initial) NetworkState networkState,
@@ -28,7 +28,7 @@ class CadState with _$CadState {
 
   static CadState getInitial() {
     return const CadState().copyWith(
-      distanceRangeText: distRangeTextDefault.copyWith(
+      distRangeText: distRangeTextDefault.copyWith(
         start: minDistTextDefault,
         end: maxDistTextDefault,
       ),
@@ -39,9 +39,9 @@ class CadState with _$CadState {
 enum NetworkState { initial, sending, success, failure }
 
 const minDistDefault = Distance(
-  unit: SbdbCadQueryParameters.defaultDistanceUnit,
+  unit: SbdbCadQueryParameters.distUnitDefault,
 );
-const maxDistDefault = SbdbCadQueryParameters.defaultDistMax;
+const maxDistDefault = SbdbCadQueryParameters.distMaxDefault;
 const distRangeDefault = DistanceRange(
   start: minDistDefault,
   end: maxDistDefault,

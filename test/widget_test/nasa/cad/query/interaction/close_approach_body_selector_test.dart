@@ -21,11 +21,11 @@ void main() {
       expect(closeApproachBodySelectorWidgetFinder, findsOneWidget);
       expectCloseApproachBodySelected(
         tester,
-        closeApproachBody: SbdbCadQueryParameters.defaultCloseApproachBody,
+        closeApproachBody: SbdbCadQueryParameters.closeApproachBodyDefault,
       );
       expect(
         CadScreen.cadBloc!.state.closeApproachBody,
-        SbdbCadQueryParameters.defaultCloseApproachBody,
+        SbdbCadQueryParameters.closeApproachBodyDefault,
       );
     });
 
@@ -41,11 +41,11 @@ void main() {
       await tapCloseApproachBody(tester, closeApproachBody: closeApproachBody);
       expectCloseApproachBodySelected(
         tester,
-        closeApproachBody: SbdbCadQueryParameters.defaultCloseApproachBody,
+        closeApproachBody: SbdbCadQueryParameters.closeApproachBodyDefault,
       );
       expect(
         CadScreen.cadBloc!.state.closeApproachBody,
-        SbdbCadQueryParameters.defaultCloseApproachBody,
+        SbdbCadQueryParameters.closeApproachBodyDefault,
       );
     });
 
@@ -60,7 +60,7 @@ void main() {
             closeApproachBody: closeApproachBody);
         expect(CadScreen.cadBloc!.state.closeApproachBody, closeApproachBody);
         final verifyCloseApproachBody = switch (closeApproachBody) {
-          SbdbCadQueryParameters.defaultCloseApproachBody => null,
+          SbdbCadQueryParameters.closeApproachBodyDefault => null,
           _ => closeApproachBody
         };
         await verifyCloseApproachBodyQueryParameters(

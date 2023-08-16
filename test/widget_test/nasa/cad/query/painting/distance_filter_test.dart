@@ -18,13 +18,13 @@ void main() {
       disableOverflowError();
       tester.view.setLogicalSize(width: Dimensions.galaxyFoldPortraitWidth);
       await pumpCadRouteAsInitialLocation(tester);
-      tester.expectNoOverflow(of: distanceFilterWidgetFinder);
+      tester.expectNoOverflow(of: distFilterWidgetFinder);
       for (final filter in DistanceFilter.values) {
-        for (final unit in CadScreen.distanceFilterUnits) {
+        for (final unit in CadScreen.distFilterUnits) {
           await tapUnitDropdown(tester, filter);
-          tester.expectNoOverflow(of: distanceFilterWidgetFinder);
+          tester.expectNoOverflow(of: distFilterWidgetFinder);
           await tapUnitDropdownItem(tester, filter, unit);
-          tester.expectNoOverflow(of: distanceFilterWidgetFinder);
+          tester.expectNoOverflow(of: distFilterWidgetFinder);
         }
       }
     });

@@ -44,15 +44,15 @@ class CadScreen extends StatelessWidget {
   static const Key maxDateKey = Key('$keyPrefix${DateFilterWidget.maxDateKey}');
   static const Key selectDateRangeButtonKey =
       Key('$keyPrefix${DateFilterWidget.selectDateRangeButtonKey}');
-  static const String distanceFilterKeyPrefix = '${keyPrefix}distance_filter_';
-  static const Key distanceFilterKey =
-      Key('$distanceFilterKeyPrefix${ValueRangeFilterWidget.defaultKey}');
-  static const String smallBodyFilterKeyPrefix =
-      '${keyPrefix}small_body_filter_';
-  static final Set<DistanceUnit> distanceFilterUnits = {
+  static const String distFilterKeyPrefix = '${keyPrefix}distance_filter_';
+  static const Key distFilterKey =
+      Key('$distFilterKeyPrefix${ValueRangeFilterWidget.defaultKey}');
+  static final Set<DistanceUnit> distFilterUnits = {
     DistanceUnit.au,
     DistanceUnit.ld,
   };
+  static const String smallBodyFilterKeyPrefix =
+      '${keyPrefix}small_body_filter_';
   static const Key smallBodyFilterKey =
       Key('$smallBodyFilterKeyPrefix${ChoiceChipQueryWidget.defaultKey}');
   static const Set<SmallBody> smallBodySet = {
@@ -177,7 +177,7 @@ class CadScreen extends StatelessWidget {
   }) {
     List<Widget> queryWidgetList = [
       _getDateFilterWidget(context: context),
-      _getDistanceFilterWidget(context: context),
+      _getDistFilterWidget(context: context),
       _getSmallBodyFilterWidget(context: context),
       _getSmallBodySelectorWidget(context: context),
       _getCloseApproachBodySelectorWidget(context: context),
@@ -242,7 +242,7 @@ class CadScreen extends StatelessWidget {
     );
   }
 
-  Widget _getDistanceFilterWidget({
+  Widget _getDistFilterWidget({
     required BuildContext context,
   }) {
     final Set<String> labels = {
@@ -250,38 +250,38 @@ class CadScreen extends StatelessWidget {
       l10n.maximum,
     };
     const DistanceRange defaultRange = DistanceRange(
-      end: SbdbCadQueryParameters.defaultDistMax,
+      end: SbdbCadQueryParameters.distMaxDefault,
     );
     const keyboardType = TextInputType.numberWithOptions(decimal: true);
     final inputFormatters = [
       FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
     ];
-    final Set<String> unitSymbols = distanceFilterUnits.map((e) {
+    final Set<String> unitSymbols = distFilterUnits.map((e) {
       return e.symbol;
     }).toSet();
     return BlocSelector<CadBloc, CadState, DistanceRange>(
       selector: (state) {
-        return state.distanceRange;
+        return state.distRange;
       },
       builder: (context, state) {
         return ValueRangeFilterWidget<double, DistanceUnit>(
-          key: distanceFilterKey,
-          keyPrefix: distanceFilterKeyPrefix,
-          title: l10n.distanceFilter,
+          key: distFilterKey,
+          keyPrefix: distFilterKeyPrefix,
+          title: l10n.distFilter,
           labels: labels,
           range: state,
-          rangeText: context.read<CadBloc>().state.distanceRangeText,
+          rangeText: context.read<CadBloc>().state.distRangeText,
           defaultRange: defaultRange,
           valueParser: (text) => double.tryParse(text),
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
-          units: distanceFilterUnits,
+          units: distFilterUnits,
           unitSymbols: unitSymbols,
           spacing: Dimensions.cadQueryItemSpacing,
           onValueRangeChanged: (range, rangeText) {
-            context.read<CadBloc>().add(CadDistanceRangeEvent(
-                  distanceRange: range,
-                  distanceRangeText: rangeText,
+            context.read<CadBloc>().add(CadDistRangeEvent(
+                  distRange: range,
+                  distRangeText: rangeText,
                 ));
           },
         );

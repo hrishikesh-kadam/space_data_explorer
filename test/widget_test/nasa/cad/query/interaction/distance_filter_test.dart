@@ -23,14 +23,14 @@ void main() {
 
     testWidgets('No Interaction', (tester) async {
       await pumpCadRouteAsInitialLocation(tester);
-      expect(distanceFilterWidgetFinder, findsOneWidget);
+      expect(distFilterWidgetFinder, findsOneWidget);
       expectValueText(tester, DistanceFilter.min, minDistTextDefault.value!);
       expectValueText(tester, DistanceFilter.max, maxDistTextDefault.value!);
       expectUnitDropdownValue(tester, DistanceFilter.min, minDistDefault.unit!);
       expectUnitDropdownValue(tester, DistanceFilter.max, maxDistDefault.unit!);
       final state = CadScreen.cadBloc!.state;
-      expect(state.distanceRange, distRangeDefault);
-      expect(state.distanceRangeText, distRangeTextDefault);
+      expect(state.distRange, distRangeDefault);
+      expect(state.distRangeText, distRangeTextDefault);
     });
 
     testWidgets('For max, select non-default unit, empty value, tap outside',
@@ -45,14 +45,14 @@ void main() {
       expectUnitDropdownValueFromState(filter, nonDefaultUnit);
       await tester.enterText(getTextFieldFinder(filter), maxText);
       CadState state = CadScreen.cadBloc!.state;
-      expect(state.distanceRange.end!.value, maxValue);
-      expect(state.distanceRangeText.end!.value, maxText);
+      expect(state.distRange.end!.value, maxValue);
+      expect(state.distRangeText.end!.value, maxText);
       await tap(tester, finder: getTextFieldFinder(DistanceFilter.min));
       expectValueText(tester, filter, maxDistTextDefault.value!);
       expectUnitDropdownValue(tester, filter, maxDistDefault.unit!);
       state = CadScreen.cadBloc!.state;
-      expect(state.distanceRange.end!.value, maxDistDefault.value);
-      expect(state.distanceRangeText.end!.value, maxDistTextDefault.value);
+      expect(state.distRange.end!.value, maxDistDefault.value);
+      expect(state.distRangeText.end!.value, maxDistTextDefault.value);
       expectUnitDropdownValueFromState(filter, maxDistDefault.unit!);
     });
 
@@ -62,12 +62,12 @@ void main() {
       await pumpCadRouteAsInitialLocation(tester);
       await tester.enterText(getTextFieldFinder(DistanceFilter.max), maxText);
       CadState state = CadScreen.cadBloc!.state;
-      expect(state.distanceRange.end!.value, maxValue);
-      expect(state.distanceRangeText.end!.value, maxText);
+      expect(state.distRange.end!.value, maxValue);
+      expect(state.distRangeText.end!.value, maxText);
       await tap(tester, finder: getTextFieldFinder(DistanceFilter.min));
       state = CadScreen.cadBloc!.state;
-      expect(state.distanceRange.end!.value, maxValue);
-      expect(state.distanceRangeText.end!.value, maxText);
+      expect(state.distRange.end!.value, maxValue);
+      expect(state.distRangeText.end!.value, maxText);
     });
 
     testWidgets('For max, enter .0 value, tap outside', (tester) async {
@@ -76,12 +76,12 @@ void main() {
       await pumpCadRouteAsInitialLocation(tester);
       await tester.enterText(getTextFieldFinder(DistanceFilter.max), maxText);
       CadState state = CadScreen.cadBloc!.state;
-      expect(state.distanceRange.end!.value, maxValue);
-      expect(state.distanceRangeText.end!.value, maxText);
+      expect(state.distRange.end!.value, maxValue);
+      expect(state.distRangeText.end!.value, maxText);
       await tap(tester, finder: getTextFieldFinder(DistanceFilter.min));
       state = CadScreen.cadBloc!.state;
-      expect(state.distanceRange.end!.value, maxValue);
-      expect(state.distanceRangeText.end!.value, maxText);
+      expect(state.distRange.end!.value, maxValue);
+      expect(state.distRangeText.end!.value, maxText);
     });
 
     testWidgets('For max, enter . value, tap outside', (tester) async {
@@ -90,12 +90,12 @@ void main() {
       await pumpCadRouteAsInitialLocation(tester);
       await tester.enterText(getTextFieldFinder(DistanceFilter.max), maxText);
       CadState state = CadScreen.cadBloc!.state;
-      expect(state.distanceRange.end!.value, maxValue);
-      expect(state.distanceRangeText.end!.value, maxText);
+      expect(state.distRange.end!.value, maxValue);
+      expect(state.distRangeText.end!.value, maxText);
       await tap(tester, finder: getTextFieldFinder(DistanceFilter.min));
       state = CadScreen.cadBloc!.state;
-      expect(state.distanceRange.end!.value, maxValue);
-      expect(state.distanceRangeText.end!.value, maxText);
+      expect(state.distRange.end!.value, maxValue);
+      expect(state.distRangeText.end!.value, maxText);
     });
 
     testWidgets('For max, empty and enter default value, tap outside',
@@ -106,18 +106,18 @@ void main() {
       await tester.enterText(getTextFieldFinder(DistanceFilter.max), '');
       await tester.enterText(getTextFieldFinder(DistanceFilter.max), maxText);
       CadState state = CadScreen.cadBloc!.state;
-      expect(state.distanceRange.end!.value, maxValue);
-      expect(state.distanceRangeText.end!.value, maxText);
+      expect(state.distRange.end!.value, maxValue);
+      expect(state.distRangeText.end!.value, maxText);
       await tap(tester, finder: getTextFieldFinder(DistanceFilter.min));
       state = CadScreen.cadBloc!.state;
-      expect(state.distanceRange.end!.value, maxValue);
-      expect(state.distanceRangeText.end!.value, maxText);
+      expect(state.distRange.end!.value, maxValue);
+      expect(state.distRangeText.end!.value, maxText);
     });
 
     testWidgets('Select every unit', (tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       for (final filter in DistanceFilter.values) {
-        for (final unit in CadScreen.distanceFilterUnits) {
+        for (final unit in CadScreen.distFilterUnits) {
           await tapUnitDropdown(tester, filter);
           await tapUnitDropdownItem(tester, filter, unit);
           expectUnitDropdownValue(tester, filter, unit);
@@ -135,48 +135,48 @@ void main() {
       DistanceFilter filter = DistanceFilter.min;
       await tester.enterText(
         getTextFieldFinder(filter),
-        minDistTextNonDefault.value!,
+        distMinTextNonDefault.value!,
       );
       await tapUnitDropdown(tester, filter);
       await tapUnitDropdownItem(tester, filter, nonDefaultUnit);
       filter = DistanceFilter.max;
       await tester.enterText(
         getTextFieldFinder(filter),
-        maxDistTextNonDefault.value!,
+        distMaxTextNonDefault.value!,
       );
       await tapUnitDropdown(tester, filter);
       await tapUnitDropdownItem(tester, filter, nonDefaultUnit);
       await ensureOutofViewport(tester);
-      expect(distanceFilterWidgetFinder, findsNothing);
+      expect(distFilterWidgetFinder, findsNothing);
       await ensureFilterWidgetVisible(tester);
-      expect(distanceFilterWidgetFinder, findsOneWidget);
+      expect(distFilterWidgetFinder, findsOneWidget);
       filter = DistanceFilter.min;
-      expectValueText(tester, filter, minDistTextNonDefault.value!);
+      expectValueText(tester, filter, distMinTextNonDefault.value!);
       expectUnitDropdownValue(tester, filter, nonDefaultUnit);
       filter = DistanceFilter.max;
-      expectValueText(tester, filter, maxDistTextNonDefault.value!);
+      expectValueText(tester, filter, distMaxTextNonDefault.value!);
       expectUnitDropdownValue(tester, filter, nonDefaultUnit);
       final state = CadScreen.cadBloc!.state;
-      expect(state.distanceRange, distRangeNonDefault);
-      expect(state.distanceRangeText, distRangeTextNonDefault);
+      expect(state.distRange, distRangeNonDefault);
+      expect(state.distRangeText, distRangeTextNonDefault);
     });
 
     testWidgets('CadBloc prefilled, reset', (tester) async {
       final cadBloc = getCadBloc();
-      cadBloc.add(CadDistanceRangeEvent(
-        distanceRange: distRangeNonDefault,
-        distanceRangeText: distRangeTextNonDefault,
+      cadBloc.add(CadDistRangeEvent(
+        distRange: distRangeNonDefault,
+        distRangeText: distRangeTextNonDefault,
       ));
       await pumpCadRouteAsInitialLocation(tester, cadBloc: cadBloc);
       DistanceFilter filter = DistanceFilter.min;
-      expectValueText(tester, filter, minDistTextNonDefault.value!);
+      expectValueText(tester, filter, distMinTextNonDefault.value!);
       expectUnitDropdownValue(tester, filter, nonDefaultUnit);
       filter = DistanceFilter.max;
-      expectValueText(tester, filter, maxDistTextNonDefault.value!);
+      expectValueText(tester, filter, distMaxTextNonDefault.value!);
       expectUnitDropdownValue(tester, filter, nonDefaultUnit);
-      cadBloc.add(CadDistanceRangeEvent(
-        distanceRange: distRangeDefault,
-        distanceRangeText: distRangeTextDefault,
+      cadBloc.add(CadDistRangeEvent(
+        distRange: distRangeDefault,
+        distRangeText: distRangeTextDefault,
       ));
       await tester.pumpAndSettle();
       filter = DistanceFilter.min;
@@ -189,22 +189,22 @@ void main() {
 
     testWidgets('verifyDistanceQueryParameters()', (tester) async {
       final distRangeEventList = [
-        CadDistanceRangeEvent(
-          distanceRange: distRangeDefault,
-          distanceRangeText: distRangeTextDefault,
+        CadDistRangeEvent(
+          distRange: distRangeDefault,
+          distRangeText: distRangeTextDefault,
         ),
-        CadDistanceRangeEvent(
-          distanceRange: distRangeNonDefault,
-          distanceRangeText: distRangeTextNonDefault,
+        CadDistRangeEvent(
+          distRange: distRangeNonDefault,
+          distRangeText: distRangeTextNonDefault,
         ),
       ];
       await pumpCadRouteAsInitialLocation(tester);
       for (int i = 0; i < distRangeEventList.length; i++) {
         CadScreen.cadBloc!.add(distRangeEventList[i]);
         await tester.pumpAndSettle();
-        await verifyDistanceQueryParameters(
+        await verifyDistQueryParameters(
           tester,
-          distRangeEventList[i].distanceRange,
+          distRangeEventList[i].distRange,
         );
       }
     });

@@ -49,13 +49,13 @@ dev_dependencies:
   json_serializable: ^6.7.1
   go_router_builder: ^2.2.4
 
-# dependency_overrides:
+dependency_overrides:
 #   hrk_batteries:
 #     path: '../../dart/packages/hrk_batteries'
 #   hrk_flutter_test_batteries:
 #     path: '../packages/hrk_flutter_test_batteries'
-#   hrk_nasa_apis:
-#     path: '../../dart/packages/hrk_nasa_apis'
+  hrk_nasa_apis:
+    path: '../../dart/packages/hrk_nasa_apis'
 
 flutter:
   uses-material-design: true

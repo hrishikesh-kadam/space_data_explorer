@@ -28,7 +28,7 @@
   "totalOnly": "Total Only",
   "diameter": "Diameter",
   "fullname": "Fullname",
-  "distanceFilter": "Distance Filter",
+  "distFilter": "Distance Filter",
   "minimum": "Minimum",
   "maximum": "Maximum"
 }
