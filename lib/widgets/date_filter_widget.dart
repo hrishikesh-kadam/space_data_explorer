@@ -13,8 +13,8 @@ import 'query_grid_container.dart';
 typedef DateRangeSelected = void Function(DateTimeRange?);
 
 enum DateFilter {
-  min,
-  max,
+  start,
+  end,
 }
 
 class DateFilterWidget extends StatefulWidget {
@@ -36,8 +36,8 @@ class DateFilterWidget extends StatefulWidget {
   // ignore: unused_field
   final _log = Logger('$appNamePascalCase.DateFilterWidget');
   static const String defaultKey = 'date_filter_widget_key';
-  static const String minDateKey = 'min_date_key';
-  static const String maxDateKey = 'max_date_key';
+  static const String startDateKey = 'start_date_key';
+  static const String endDateKey = 'end_date_key';
   static const String selectDateRangeButtonKey = 'select_date_range_button_key';
 
   @override
@@ -65,7 +65,7 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         SizedBox(height: widget.spacing),
-        _getMinMaxWrap(context: context),
+        _getStartEndWrap(context: context),
         SizedBox(height: widget.spacing),
         OutlinedButton(
           key: Key(
@@ -84,7 +84,7 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
     );
   }
 
-  Widget _getMinMaxWrap({
+  Widget _getStartEndWrap({
     required BuildContext context,
   }) {
     return Wrap(
@@ -103,9 +103,9 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
             ),
             const SizedBox(width: 8),
             FormattedDateRangeText(
-              key: Key('${widget.keyPrefix}${DateFilterWidget.minDateKey}'),
+              key: Key('${widget.keyPrefix}${DateFilterWidget.startDateKey}'),
               dateRange: dateRange,
-              dateFilter: DateFilter.min,
+              dateFilter: DateFilter.start,
             ),
           ],
         ),
@@ -119,9 +119,9 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
             ),
             const SizedBox(width: 8),
             FormattedDateRangeText(
-              key: Key('${widget.keyPrefix}${DateFilterWidget.maxDateKey}'),
+              key: Key('${widget.keyPrefix}${DateFilterWidget.endDateKey}'),
               dateRange: dateRange,
-              dateFilter: DateFilter.max,
+              dateFilter: DateFilter.end,
             ),
           ],
         ),
@@ -175,11 +175,11 @@ class FormattedDateRangeText extends StatelessWidget {
           final dateFormatPattern = state.dateFormatPattern;
           final dateFormat = DateFormat(dateFormatPattern.pattern, languageTag);
           switch (dateFilter) {
-            case DateFilter.min:
+            case DateFilter.start:
               formattedDate = dateFormat.format(dateRange!.start);
               _log.fine('languageTag = $languageTag');
               _log.fine('dateFormat.pattern = ${dateFormat.pattern}');
-            case DateFilter.max:
+            case DateFilter.end:
               formattedDate = dateFormat.format(dateRange!.end);
           }
           return Text(

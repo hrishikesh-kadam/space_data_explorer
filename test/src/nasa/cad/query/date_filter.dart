@@ -15,14 +15,14 @@ final selectDateRangeButtonFinder =
 const String notSelectedDefaultText =
     FormattedDateRangeText.notSelectedDefaultText;
 final DateTime nowDate = DateTime.now();
-final DateTime startDate = nowDate.copyWith(day: 1);
-final DateTime endDate = nowDate.copyWith(day: 2);
+final DateTime minDateForTest = nowDate.copyWith(day: 1);
+final DateTime maxDateForTest = nowDate.copyWith(day: 2);
 
 Future<void> selectDateRange(
   WidgetTester tester, {
   DateTimeRange? dateRange,
 }) async {
-  dateRange ??= DateTimeRange(start: startDate, end: endDate);
+  dateRange ??= DateTimeRange(start: minDateForTest, end: maxDateForTest);
   await tester.tap(selectDateRangeButtonFinder);
   await tester.pumpAndSettle();
   await tester.tap(find.text(dateRange.start.day.toString()).first);

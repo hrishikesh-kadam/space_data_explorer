@@ -29,8 +29,8 @@ void main() {
         (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       await selectDateRange(tester);
-      expectDateTextContaining(startDate.day.toString(), minDateFinder);
-      expectDateTextContaining(endDate.day.toString(), maxDateFinder);
+      expectDateTextContaining(minDateForTest.day.toString(), minDateFinder);
+      expectDateTextContaining(maxDateForTest.day.toString(), maxDateFinder);
     });
 
     testWidgets('Tap ${l10n.selectDateRange}, Tap $CloseButton',

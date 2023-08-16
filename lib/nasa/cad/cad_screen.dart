@@ -40,8 +40,9 @@ class CadScreen extends StatelessWidget {
   static const Key queryGridKey = Key('${keyPrefix}query_grid_key');
   static const Key dateFilterWidgetKey =
       Key('$keyPrefix${DateFilterWidget.defaultKey}');
-  static const Key minDateKey = Key('$keyPrefix${DateFilterWidget.minDateKey}');
-  static const Key maxDateKey = Key('$keyPrefix${DateFilterWidget.maxDateKey}');
+  static const Key minDateKey =
+      Key('$keyPrefix${DateFilterWidget.startDateKey}');
+  static const Key maxDateKey = Key('$keyPrefix${DateFilterWidget.endDateKey}');
   static const Key selectDateRangeButtonKey =
       Key('$keyPrefix${DateFilterWidget.selectDateRangeButtonKey}');
   static const String distFilterKeyPrefix = '${keyPrefix}distance_filter_';
