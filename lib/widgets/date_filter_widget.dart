@@ -5,6 +5,7 @@ import 'package:hrk_logging/hrk_logging.dart';
 import 'package:intl/intl.dart';
 
 import '../constants/constants.dart';
+import '../helper/helper.dart';
 import '../route/settings/bloc/settings_bloc.dart';
 import '../route/settings/bloc/settings_state.dart';
 import 'query_grid_container.dart';
@@ -63,6 +64,11 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
   Widget getBody({
     required BuildContext context,
   }) {
+    double largestLabelWidth = getLargestTextWidth(
+      context: context,
+      textSet: {widget.startTitle, widget.endTitle},
+      style: Theme.of(context).textTheme.bodyMedium,
+    );
     return Column(
       children: [
         Text(
@@ -71,7 +77,17 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         SizedBox(height: widget.spacing),
-        getStartEndWrap(context: context),
+        getLabelDateWrap(
+          context: context,
+          filter: DateFilter.start,
+          largestLabelWidth: largestLabelWidth,
+        ),
+        SizedBox(height: widget.spacing),
+        getLabelDateWrap(
+          context: context,
+          filter: DateFilter.end,
+          largestLabelWidth: largestLabelWidth,
+        ),
         SizedBox(height: widget.spacing),
         OutlinedButton(
           key: Key('${widget.keyPrefix}${DateFilterWidget.selectButtonKey}'),
@@ -81,51 +97,40 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
           child: Text(
             widget.selectButtonTitle,
             style: Theme.of(context).textTheme.bodyMedium,
+            textAlign: TextAlign.center,
           ),
         )
       ],
     );
   }
 
-  Widget getStartEndWrap({
+  Widget getLabelDateWrap({
     required BuildContext context,
+    required DateFilter filter,
+    required double largestLabelWidth,
   }) {
+    final String dateKey = switch (filter) {
+      DateFilter.start => DateFilterWidget.startDateKey,
+      DateFilter.end => DateFilterWidget.endDateKey,
+    };
     return Wrap(
-      spacing: 16,
+      spacing: widget.spacing,
       runSpacing: widget.spacing,
       alignment: WrapAlignment.center,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              widget.startTitle,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const SizedBox(width: 8),
-            FormattedDateRangeText(
-              key: Key('${widget.keyPrefix}${DateFilterWidget.startDateKey}'),
-              dateRange: dateRange,
-              dateFilter: DateFilter.start,
-            ),
-          ],
+        SizedBox(
+          width: largestLabelWidth,
+          child: Text(
+            filter == DateFilter.start ? widget.startTitle : widget.endTitle,
+            style: Theme.of(context).textTheme.bodyMedium,
+            textAlign: TextAlign.center,
+          ),
         ),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              widget.endTitle,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const SizedBox(width: 8),
-            FormattedDateRangeText(
-              key: Key('${widget.keyPrefix}${DateFilterWidget.endDateKey}'),
-              dateRange: dateRange,
-              dateFilter: DateFilter.end,
-            ),
-          ],
+        FormattedDateRangeText(
+          key: Key('${widget.keyPrefix}$dateKey'),
+          dateRange: dateRange,
+          filter: filter,
         ),
       ],
     );
@@ -152,12 +157,12 @@ class FormattedDateRangeText extends StatelessWidget {
   FormattedDateRangeText({
     super.key,
     this.dateRange,
-    required this.dateFilter,
+    required this.filter,
     this.notSelectedText = notSelectedDefaultText,
   });
 
   final DateTimeRange? dateRange;
-  final DateFilter dateFilter;
+  final DateFilter filter;
   final String notSelectedText;
   final _log = Logger('$appNamePascalCase.FormattedDateRangeText');
   static const String notSelectedDefaultText = '-';
@@ -176,7 +181,7 @@ class FormattedDateRangeText extends StatelessWidget {
           final languageTag = Localizations.localeOf(context).toLanguageTag();
           final dateFormatPattern = state.dateFormatPattern;
           final dateFormat = DateFormat(dateFormatPattern.pattern, languageTag);
-          switch (dateFilter) {
+          switch (filter) {
             case DateFilter.start:
               formattedDate = dateFormat.format(dateRange!.start);
               _log.fine('languageTag = $languageTag');

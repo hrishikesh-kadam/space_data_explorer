@@ -128,7 +128,7 @@ class _ValueRangeFilterWidgetState<V, U extends Unit>
     prepareState();
     double largestLabelWidth = getLargestTextWidth(
       context: context,
-      textList: widget.labels.toList(),
+      textSet: widget.labels,
       style: Theme.of(context).textTheme.bodyMedium,
     );
     return Column(
@@ -220,7 +220,7 @@ class _ValueRangeFilterWidgetState<V, U extends Unit>
       child: Text(
         widget.labels.elementAt(index),
         style: Theme.of(context).textTheme.bodyMedium,
-        textAlign: TextAlign.end,
+        textAlign: TextAlign.center,
       ),
     );
   }
