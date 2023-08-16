@@ -101,15 +101,15 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
             style: Theme.of(context).textTheme.titleMedium,
           ),
           SizedBox(height: widget.spacing),
-          _getChoiceChips(context: context),
+          getChoiceChips(context: context),
           const SizedBox(height: Dimensions.cadQueryItemPadding),
-          _getTextField(context: context),
+          getTextField(context: context),
         ],
       ),
     );
   }
 
-  Widget _getChoiceChips({
+  Widget getChoiceChips({
     required BuildContext context,
   }) {
     return Wrap(
@@ -161,7 +161,7 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
     );
   }
 
-  Widget _getTextField({
+  Widget getTextField({
     required BuildContext context,
   }) {
     return SizedBox(

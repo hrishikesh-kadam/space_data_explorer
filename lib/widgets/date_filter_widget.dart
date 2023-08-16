@@ -50,11 +50,11 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
   @override
   Widget build(BuildContext context) {
     return QueryItemContainer(
-      child: _getBody(context: context),
+      child: getBody(context: context),
     );
   }
 
-  Widget _getBody({
+  Widget getBody({
     required BuildContext context,
   }) {
     return Column(
@@ -65,7 +65,7 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         SizedBox(height: widget.spacing),
-        _getStartEndWrap(context: context),
+        getStartEndWrap(context: context),
         SizedBox(height: widget.spacing),
         OutlinedButton(
           key: Key(
@@ -73,7 +73,7 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
             '${DateFilterWidget.selectDateRangeButtonKey}',
           ),
           onPressed: () {
-            _dateRangePickerOnPressed(context: context);
+            dateRangePickerOnPressed(context: context);
           },
           child: Text(
             widget.l10n.selectDateRange,
@@ -84,7 +84,7 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
     );
   }
 
-  Widget _getStartEndWrap({
+  Widget getStartEndWrap({
     required BuildContext context,
   }) {
     return Wrap(
@@ -129,7 +129,7 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
     );
   }
 
-  void _dateRangePickerOnPressed({
+  void dateRangePickerOnPressed({
     required BuildContext context,
   }) async {
     final dateRange = await showDateRangePicker(

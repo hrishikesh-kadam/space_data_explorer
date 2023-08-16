@@ -118,11 +118,11 @@ class _ValueRangeFilterWidgetState<V, U extends Unit>
   @override
   Widget build(BuildContext context) {
     return QueryItemContainer(
-      child: _getBody(context: context),
+      child: getBody(context: context),
     );
   }
 
-  Widget _getBody({
+  Widget getBody({
     required BuildContext context,
   }) {
     prepareState();
