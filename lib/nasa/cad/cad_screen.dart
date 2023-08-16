@@ -6,11 +6,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
+import 'package:intl/intl.dart';
 
 import '../../constants/constants.dart';
 import '../../constants/dimensions.dart';
 import '../../constants/theme.dart';
 import '../../globals.dart';
+import '../../route/settings/bloc/settings_bloc.dart';
+import '../../route/settings/bloc/settings_state.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/choice_chip_query_widget.dart';
 import '../../widgets/date_filter_widget.dart';
@@ -224,23 +227,47 @@ class CadScreen extends StatelessWidget {
     );
   }
 
-  DateFilterWidget _getDateFilterWidget({
+  Widget _getDateFilterWidget({
     required BuildContext context,
   }) {
-    return DateFilterWidget(
-      key: dateFilterWidgetKey,
-      keyPrefix: dateFilterKeyPrefix,
-      title: l10n.dateFilter,
-      firstDate: DateTime(1900, 1, 1),
-      lastDate: DateTime(2200, 12, 31),
-      startTitle: '${l10n.minimum}:',
-      endTitle: '${l10n.maximum}:',
-      selectButtonTitle: l10n.selectDateRange,
-      spacing: Dimensions.cadQueryItemSpacing,
-      onDateRangeSelected: (dateRange) {
-        context.read<CadBloc>().add(CadDateRangeSelected(
+    return BlocSelector<CadBloc, CadState, DateTimeRange?>(
+      selector: (state) {
+        return state.dateRange;
+      },
+      builder: (context, dateRange) {
+        return BlocBuilder<SettingsBloc, SettingsState>(
+          buildWhen: (previous, current) {
+            return previous.dateFormatPattern != current.dateFormatPattern ||
+                previous.language != current.language ||
+                previous.systemLocales != current.systemLocales;
+          },
+          builder: (context, settingsState) {
+            final languageTag = Localizations.localeOf(context).toLanguageTag();
+            final dateFormatPattern = settingsState.dateFormatPattern;
+            final dateFormat = DateFormat(
+              dateFormatPattern.pattern,
+              languageTag,
+            );
+            return DateFilterWidget(
+              key: dateFilterWidgetKey,
+              keyPrefix: dateFilterKeyPrefix,
+              title: l10n.dateFilter,
               dateRange: dateRange,
-            ));
+              firstDate: DateTime(1900, 1, 1),
+              lastDate: DateTime(2200, 12, 31),
+              dateFormat: dateFormat,
+              startTitle: '${l10n.minimum}:',
+              endTitle: '${l10n.maximum}:',
+              selectButtonTitle: l10n.selectDateRange,
+              spacing: Dimensions.cadQueryItemSpacing,
+              onDateRangeSelected: (dateRange) {
+                context.read<CadBloc>().add(CadDateRangeSelected(
+                      dateRange: dateRange,
+                    ));
+              },
+            );
+          },
+        );
       },
     );
   }

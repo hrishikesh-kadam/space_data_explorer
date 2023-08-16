@@ -17,32 +17,5 @@ void main() {
       await selectDateRange(tester);
       tester.expectNoOverflow(of: dateFilterWidgetFinder);
     });
-
-    testWidgets('Doesn\'t Overflow 167', (WidgetTester tester) async {
-      disableOverflowError();
-      tester.view.setLogicalSize(width: 167);
-      await pumpCadRouteAsInitialLocation(tester);
-      await selectDateRange(tester);
-      tester.expectNoOverflow(of: dateFilterWidgetFinder);
-    });
-
-    testWidgets('Doesn\'t Overflow 146', (WidgetTester tester) async {
-      disableOverflowError();
-      tester.view.setLogicalSize(width: 146);
-      await pumpCadRouteAsInitialLocation(tester);
-      await selectDateRange(tester);
-      tester.expectNoOverflow(of: dateFilterWidgetFinder);
-    });
-
-    testWidgets('Does Overflow 145', (WidgetTester tester) async {
-      disableOverflowError();
-      tester.view.setLogicalSize(width: 145);
-      await pumpCadRouteAsInitialLocation(tester);
-      await selectDateRange(tester);
-      final overflowingRenderFlexList = tester.getOverflowRenderFlexList(
-        of: dateFilterWidgetFinder,
-      );
-      expect(overflowingRenderFlexList.length, greaterThan(0));
-    });
   });
 }

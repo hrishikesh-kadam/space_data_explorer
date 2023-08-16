@@ -21,16 +21,16 @@ void main() {
 
     testWidgets('Basic', (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
-      expectDateText(notSelectedDefaultText, minDateFinder);
-      expectDateText(notSelectedDefaultText, maxDateFinder);
+      expectDate(tester, notSelectedDateText, minDateFinder);
+      expectDate(tester, notSelectedDateText, maxDateFinder);
     });
 
     testWidgets('Tap ${l10n.selectDateRange}, Select dates, Tap Save',
         (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       await selectDateRange(tester);
-      expectDateTextContaining(minDateForTest.day.toString(), minDateFinder);
-      expectDateTextContaining(maxDateForTest.day.toString(), maxDateFinder);
+      expectDatePattern(tester, minDateForTest.day.toString(), minDateFinder);
+      expectDatePattern(tester, maxDateForTest.day.toString(), maxDateFinder);
     });
 
     testWidgets('Tap ${l10n.selectDateRange}, Tap $CloseButton',
@@ -40,8 +40,8 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.byType(CloseButton));
       await tester.pumpAndSettle();
-      expectDateText(notSelectedDefaultText, minDateFinder);
-      expectDateText(notSelectedDefaultText, maxDateFinder);
+      expectDate(tester, notSelectedDateText, minDateFinder);
+      expectDate(tester, notSelectedDateText, maxDateFinder);
     });
 
     testWidgets(
@@ -54,38 +54,27 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.byType(CloseButton));
       await tester.pumpAndSettle();
-      expectDateText(notSelectedDefaultText, minDateFinder);
-      expectDateText(notSelectedDefaultText, maxDateFinder);
+      expectDate(tester, notSelectedDateText, minDateFinder);
+      expectDate(tester, notSelectedDateText, maxDateFinder);
     });
 
     testWidgets('Reacts to $DateFormatPattern settings change',
         (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       await selectDateRange(tester);
-      // Before
-      Text minDateText = tester.widget<Text>(
-          find.descendant(of: minDateFinder, matching: find.byType(Text)));
-      Text maxDateText = tester.widget<Text>(
-          find.descendant(of: maxDateFinder, matching: find.byType(Text)));
-      String minDateBeforeString = minDateText.data!;
-      String maxDateBeforeString = maxDateText.data!;
-      // Change settings
+      String minDateBeforeString = tester.widget<Text>(minDateFinder).data!;
+      String maxDateBeforeString = tester.widget<Text>(maxDateFinder).data!;
       await tapSettingsButton(tester);
       await tapDateFormatTile(tester);
       await chooseDateFormat(tester,
           l10n: l10n, dateFormatPattern: DateFormatPattern.ddMMyyyy);
       await tapBackButton(tester);
-      // After
-      minDateText = tester.widget<Text>(
-          find.descendant(of: minDateFinder, matching: find.byType(Text)));
-      maxDateText = tester.widget<Text>(
-          find.descendant(of: maxDateFinder, matching: find.byType(Text)));
-      String minDateAfterString = minDateText.data!;
-      String maxDateAfterString = maxDateText.data!;
-      expect(minDateAfterString != notSelectedDefaultText, isTrue);
-      expect(maxDateAfterString != notSelectedDefaultText, isTrue);
-      expect(minDateBeforeString != minDateAfterString, isTrue);
-      expect(maxDateBeforeString != maxDateAfterString, isTrue);
+      String minDateAfterString = tester.widget<Text>(minDateFinder).data!;
+      String maxDateAfterString = tester.widget<Text>(maxDateFinder).data!;
+      expect(minDateAfterString != notSelectedDateText, true);
+      expect(maxDateAfterString != notSelectedDateText, true);
+      expect(minDateBeforeString != minDateAfterString, true);
+      expect(maxDateBeforeString != maxDateAfterString, true);
     });
   });
 }
