@@ -1,8 +1,8 @@
 {
   "search": "खोजें",
   "dateFilter": "दिनांक चयन",
-  "dateMin": "न्यूनतम:",
-  "dateMax": "अधिकतम:",
+  "minimum": "न्यूनतम",
+  "maximum": "अधिकतम",
   "selectDateRange": "दिनांक चुनें",
   "language": "भाषा",
   "dateFormat": "दिनांक प्रारूप",
@@ -28,7 +28,5 @@
   "totalOnly": "केवल कुल",
   "diameter": "व्यास",
   "fullname": "पूरा नाम",
-  "distFilter": "दूरी चयन",
-  "minimum": "न्यूनतम",
-  "maximum": "अधिकतम"
+  "distFilter": "दूरी चयन"
 }

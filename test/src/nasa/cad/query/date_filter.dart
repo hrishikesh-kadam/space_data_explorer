@@ -8,10 +8,12 @@ import '../../../extension/common_finders.dart';
 import '../../../globals.dart';
 
 final dateFilterWidgetFinder = find.byKey(CadScreen.dateFilterWidgetKey);
-final minDateFinder = find.byKey(CadScreen.minDateKey);
-final maxDateFinder = find.byKey(CadScreen.maxDateKey);
-final selectDateRangeButtonFinder =
-    find.byKey(CadScreen.selectDateRangeButtonKey);
+final minDateFinder = find.byKey(const Key(
+    '${CadScreen.dateFilterKeyPrefix}${DateFilterWidget.startDateKey}'));
+final maxDateFinder = find.byKey(const Key(
+    '${CadScreen.dateFilterKeyPrefix}${DateFilterWidget.endDateKey}'));
+final selectDateRangeButtonFinder = find.byKey(const Key(
+    '${CadScreen.dateFilterKeyPrefix}${DateFilterWidget.selectButtonKey}'));
 const String notSelectedDefaultText =
     FormattedDateRangeText.notSelectedDefaultText;
 final DateTime nowDate = DateTime.now();

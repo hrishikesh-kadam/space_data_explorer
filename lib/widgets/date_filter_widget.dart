@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:intl/intl.dart';
 
@@ -19,26 +18,33 @@ enum DateFilter {
 
 class DateFilterWidget extends StatefulWidget {
   DateFilterWidget({
+    super.key,
     this.keyPrefix = '',
+    required this.title,
+    required this.startTitle,
+    required this.endTitle,
     required this.firstDate,
     required this.lastDate,
+    required this.selectButtonTitle,
     this.onDateRangeSelected,
-    required this.l10n,
     this.spacing = 8,
-  }) : super(key: Key('$keyPrefix$defaultKey'));
+  });
 
   final String keyPrefix;
+  final String title;
+  final String startTitle;
+  final String endTitle;
   final DateTime firstDate;
   final DateTime lastDate;
+  final String selectButtonTitle;
   final DateRangeSelected? onDateRangeSelected;
-  final AppLocalizations l10n;
   final double spacing;
   // ignore: unused_field
   final _log = Logger('$appNamePascalCase.DateFilterWidget');
   static const String defaultKey = 'date_filter_widget_key';
   static const String startDateKey = 'start_date_key';
   static const String endDateKey = 'end_date_key';
-  static const String selectDateRangeButtonKey = 'select_date_range_button_key';
+  static const String selectButtonKey = 'select_button_key';
 
   @override
   State<DateFilterWidget> createState() => _DateFilterWidgetState();
@@ -60,7 +66,7 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
     return Column(
       children: [
         Text(
-          widget.l10n.dateFilter,
+          widget.title,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.titleMedium,
         ),
@@ -68,15 +74,12 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
         getStartEndWrap(context: context),
         SizedBox(height: widget.spacing),
         OutlinedButton(
-          key: Key(
-            '${widget.keyPrefix}'
-            '${DateFilterWidget.selectDateRangeButtonKey}',
-          ),
+          key: Key('${widget.keyPrefix}${DateFilterWidget.selectButtonKey}'),
           onPressed: () {
             dateRangePickerOnPressed(context: context);
           },
           child: Text(
-            widget.l10n.selectDateRange,
+            widget.selectButtonTitle,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         )
@@ -97,8 +100,7 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              // TODO(hrishikesh-kadam): Merge this l10n with minimum, maximum
-              widget.l10n.dateMin,
+              widget.startTitle,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(width: 8),
@@ -114,7 +116,7 @@ class _DateFilterWidgetState extends State<DateFilterWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              widget.l10n.dateMax,
+              widget.endTitle,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(width: 8),

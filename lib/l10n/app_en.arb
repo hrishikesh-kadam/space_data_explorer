@@ -1,8 +1,8 @@
 {
   "search": "Search",
   "dateFilter": "Date Filter",
-  "dateMin": "Min:",
-  "dateMax": "Max:",
+  "minimum": "Minimum",
+  "maximum": "Maximum",
   "selectDateRange": "Select Date Range",
   "language": "Language",
   "dateFormat": "Date Format",
@@ -28,7 +28,5 @@
   "totalOnly": "Total Only",
   "diameter": "Diameter",
   "fullname": "Fullname",
-  "distFilter": "Distance Filter",
-  "minimum": "Minimum",
-  "maximum": "Maximum"
+  "distFilter": "Distance Filter"
 }

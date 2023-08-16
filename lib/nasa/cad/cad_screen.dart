@@ -38,16 +38,14 @@ class CadScreen extends StatelessWidget {
   static const Key customScrollViewKey = Key('${keyPrefix}scroll_view_key');
   static const Key searchButtonKey = Key('${keyPrefix}search_button_key');
   static const Key queryGridKey = Key('${keyPrefix}query_grid_key');
+  static const String dateFilterKeyPrefix =
+      '$keyPrefix${DateFilterWidget.defaultKey}_';
   static const Key dateFilterWidgetKey =
       Key('$keyPrefix${DateFilterWidget.defaultKey}');
-  static const Key minDateKey =
-      Key('$keyPrefix${DateFilterWidget.startDateKey}');
-  static const Key maxDateKey = Key('$keyPrefix${DateFilterWidget.endDateKey}');
-  static const Key selectDateRangeButtonKey =
-      Key('$keyPrefix${DateFilterWidget.selectDateRangeButtonKey}');
   static const String distFilterKeyPrefix = '${keyPrefix}distance_filter_';
   static const Key distFilterKey =
       Key('$distFilterKeyPrefix${ValueRangeFilterWidget.defaultKey}');
+
   static final Set<DistanceUnit> distFilterUnits = {
     DistanceUnit.au,
     DistanceUnit.ld,
@@ -230,11 +228,15 @@ class CadScreen extends StatelessWidget {
     required BuildContext context,
   }) {
     return DateFilterWidget(
-      keyPrefix: keyPrefix,
+      key: dateFilterWidgetKey,
+      keyPrefix: dateFilterKeyPrefix,
+      title: l10n.dateFilter,
       firstDate: DateTime(1900, 1, 1),
       lastDate: DateTime(2200, 12, 31),
+      startTitle: '${l10n.minimum}:',
+      endTitle: '${l10n.maximum}:',
+      selectButtonTitle: l10n.selectDateRange,
       spacing: Dimensions.cadQueryItemSpacing,
-      l10n: l10n,
       onDateRangeSelected: (dateRange) {
         context.read<CadBloc>().add(CadDateRangeSelected(
               dateRange: dateRange,

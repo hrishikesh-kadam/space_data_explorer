@@ -1,8 +1,8 @@
 {
   "search": "शोधा",
   "dateFilter": "तारीख निवड",
-  "dateMin": "किमान:",
-  "dateMax": "कमाल:",
+  "minimum": "किमान",
+  "maximum": "कमाल",
   "selectDateRange": "तारीख निवडा",
   "language": "भाषा",
   "dateFormat": "तारीख स्वरूप",
@@ -28,7 +28,5 @@
   "totalOnly": "फक्त एकूण",
   "diameter": "व्यास",
   "fullname": "पूर्ण नाव",
-  "distFilter": "अंतर निवड",
-  "minimum": "किमान",
-  "maximum": "कमाल"
+  "distFilter": "अंतर निवड"
 }
