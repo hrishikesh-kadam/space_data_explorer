@@ -3,6 +3,16 @@
   "dateFilter": "तारीख निवड",
   "minimum": "किमान",
   "maximum": "कमाल",
+  "nowToday": "आज",
+  "plusSomeDays": "{some, plural, =1{+ {some} दिवस} other{+ {some} दिवस}}",
+  "@plusSomeDays": {
+    "placeholders": {
+      "some": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
   "selectDateRange": "तारीख निवडा",
   "language": "भाषा",
   "dateFormat": "तारीख स्वरूप",

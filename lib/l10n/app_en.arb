@@ -3,6 +3,16 @@
   "dateFilter": "Date Filter",
   "minimum": "Minimum",
   "maximum": "Maximum",
+  "nowToday": "Now",
+  "plusSomeDays": "{some, plural, =1{+ 1 day} other{+ {some} days}}",
+  "@plusSomeDays": {
+    "placeholders": {
+      "some": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
   "selectDateRange": "Select Date Range",
   "language": "Language",
   "dateFormat": "Date Format",

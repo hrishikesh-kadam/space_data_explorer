@@ -3,6 +3,16 @@
   "dateFilter": "दिनांक चयन",
   "minimum": "न्यूनतम",
   "maximum": "अधिकतम",
+  "nowToday": "आज",
+  "plusSomeDays": "{some, plural, =1{+ {some} दिन} other{+ {some} दिन}}",
+  "@plusSomeDays": {
+    "placeholders": {
+      "some": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
   "selectDateRange": "दिनांक चुनें",
   "language": "भाषा",
   "dateFormat": "दिनांक प्रारूप",

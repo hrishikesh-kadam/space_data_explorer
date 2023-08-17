@@ -13,10 +13,11 @@ final maxDateFinder = find.byKey(const Key(
     '${CadScreen.dateFilterKeyPrefix}${DateFilterWidget.endDateKey}'));
 final selectDateRangeButtonFinder = find.byKey(const Key(
     '${CadScreen.dateFilterKeyPrefix}${DateFilterWidget.selectButtonKey}'));
-const String notSelectedDateText = DateFilterWidget.notSelectedDateDefaultText;
-final DateTime nowDate = DateTime.now();
-final DateTime minDateForTest = nowDate.copyWith(day: 1);
-final DateTime maxDateForTest = nowDate.copyWith(day: 2);
+final String minDateTextDefault = l10n.nowToday;
+final String maxDateTextDefault =
+    l10n.plusSomeDays(CadScreen.dateMaxDaysDefault);
+final DateTime minDateForTest = DateTime.now().copyWith(day: 1);
+final DateTime maxDateForTest = DateTime.now().copyWith(day: 2);
 
 Future<void> selectDateRange(
   WidgetTester tester, {

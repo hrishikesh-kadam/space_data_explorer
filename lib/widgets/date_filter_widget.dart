@@ -25,10 +25,12 @@ class DateFilterWidget extends StatelessWidget {
     required this.firstDate,
     required this.lastDate,
     required this.dateFormat,
-    this.notSelectedDateText = notSelectedDateDefaultText,
+    this.startDateTextDefault = dateTextDefault,
+    this.endDateTextDefault = dateTextDefault,
     required this.selectButtonTitle,
     required this.onDateRangeSelected,
     this.spacing = 8,
+    this.startEndAlign = false,
   });
 
   final String keyPrefix;
@@ -39,17 +41,21 @@ class DateFilterWidget extends StatelessWidget {
   final DateTime firstDate;
   final DateTime lastDate;
   final DateFormat dateFormat;
-  final String notSelectedDateText;
+  final String startDateTextDefault;
+  final String endDateTextDefault;
   final String selectButtonTitle;
   final DateRangeSelected onDateRangeSelected;
   final double spacing;
+  final bool startEndAlign;
   // ignore: unused_field
   final _log = Logger('$appNamePascalCase.DateFilterWidget');
   static const String defaultKey = 'date_filter_widget_key';
+  static const String startLabelKey = 'start_label_key';
+  static const String endLabelKey = 'end_label_key';
   static const String startDateKey = 'start_date_key';
   static const String endDateKey = 'end_date_key';
   static const String selectButtonKey = 'select_button_key';
-  static const String notSelectedDateDefaultText = '-';
+  static const String dateTextDefault = '-';
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +67,18 @@ class DateFilterWidget extends StatelessWidget {
   Widget getBody({
     required BuildContext context,
   }) {
-    double largestLabelWidth = getLargestTextWidth(
-      context: context,
-      textSet: {startTitle, endTitle},
-      style: Theme.of(context).textTheme.bodyMedium,
-    );
+    List<String> formattedDateStringList = getFormattedDateStringList();
+    double? largestTextWidth = startEndAlign
+        ? getLargestTextWidth(
+            context: context,
+            textSet: {
+              startTitle,
+              endTitle,
+              ...formattedDateStringList.toSet(),
+            },
+            style: Theme.of(context).textTheme.bodyMedium,
+          )
+        : null;
     return Column(
       children: [
         Text(
@@ -77,13 +90,15 @@ class DateFilterWidget extends StatelessWidget {
         getLabelDateWrap(
           context: context,
           filter: DateFilter.start,
-          largestLabelWidth: largestLabelWidth,
+          largestTextWidth: largestTextWidth,
+          formattedDateString: formattedDateStringList[0],
         ),
         SizedBox(height: spacing),
         getLabelDateWrap(
           context: context,
           filter: DateFilter.end,
-          largestLabelWidth: largestLabelWidth,
+          largestTextWidth: largestTextWidth,
+          formattedDateString: formattedDateStringList[1],
         ),
         SizedBox(height: spacing),
         OutlinedButton(
@@ -104,7 +119,8 @@ class DateFilterWidget extends StatelessWidget {
   Widget getLabelDateWrap({
     required BuildContext context,
     required DateFilter filter,
-    required double largestLabelWidth,
+    required double? largestTextWidth,
+    required String formattedDateString,
   }) {
     return Wrap(
       spacing: spacing,
@@ -113,40 +129,41 @@ class DateFilterWidget extends StatelessWidget {
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         SizedBox(
-          width: largestLabelWidth,
+          width: largestTextWidth,
           child: Text(
+            key: filter == DateFilter.start
+                ? Key('$keyPrefix$startLabelKey')
+                : Key('$keyPrefix$endLabelKey'),
             filter == DateFilter.start ? startTitle : endTitle,
             style: Theme.of(context).textTheme.bodyMedium,
-            textAlign: TextAlign.center,
+            textAlign: startEndAlign ? TextAlign.end : null,
           ),
         ),
-        getFormattedDateText(context: context, filter: filter),
+        SizedBox(
+          width: largestTextWidth,
+          child: Text(
+            key: filter == DateFilter.start
+                ? Key('$keyPrefix$startDateKey')
+                : Key('$keyPrefix$endDateKey'),
+            formattedDateString,
+            style: Theme.of(context).textTheme.bodyMedium,
+            textAlign: startEndAlign ? TextAlign.start : null,
+          ),
+        ),
       ],
     );
   }
 
-  Widget getFormattedDateText({
-    required BuildContext context,
-    required DateFilter filter,
-  }) {
-    final String dateKey = switch (filter) {
-      DateFilter.start => startDateKey,
-      DateFilter.end => endDateKey,
-    };
-    late final String formattedDate;
+  List<String> getFormattedDateStringList() {
+    final List<String> formattedDateSet = [];
     if (dateRange != null) {
-      formattedDate = switch (filter) {
-        DateFilter.start => dateFormat.format(dateRange!.start),
-        DateFilter.end => dateFormat.format(dateRange!.end),
-      };
+      formattedDateSet.add(dateFormat.format(dateRange!.start));
+      formattedDateSet.add(dateFormat.format(dateRange!.end));
     } else {
-      formattedDate = notSelectedDateText;
+      formattedDateSet.add(startDateTextDefault);
+      formattedDateSet.add(endDateTextDefault);
     }
-    return Text(
-      key: Key('$keyPrefix$dateKey'),
-      formattedDate,
-      style: Theme.of(context).textTheme.bodyMedium,
-    );
+    return formattedDateSet;
   }
 
   void dateRangePickerOnPressed({

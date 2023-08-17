@@ -37,9 +37,9 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     emit(state.copyWith(networkState: NetworkState.sending));
     SbdbCadQueryParameters queryParameters = const SbdbCadQueryParameters();
     if (state.dateRange != null) {
-      queryParameters = queryParameters.copyWith(
-        dateMin: dateFormatter.format(state.dateRange!.start),
-        dateMax: dateFormatter.format(state.dateRange!.end),
+      queryParameters = queryParameters.copyWithDateRange(
+        state.dateRange!.start,
+        state.dateRange!.end,
       );
     }
     queryParameters = queryParameters.copyWithDistRange(

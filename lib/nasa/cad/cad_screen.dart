@@ -45,6 +45,9 @@ class CadScreen extends StatelessWidget {
       '$keyPrefix${DateFilterWidget.defaultKey}_';
   static const Key dateFilterWidgetKey =
       Key('$keyPrefix${DateFilterWidget.defaultKey}');
+  static final dateMaxDaysDefault = SbdbCadQueryParameters.getDateMaxDefault()
+      .difference(DateTime.now())
+      .inDays;
   static const String distFilterKeyPrefix = '${keyPrefix}distance_filter_';
   static const Key distFilterKey =
       Key('$distFilterKeyPrefix${ValueRangeFilterWidget.defaultKey}');
@@ -248,16 +251,19 @@ class CadScreen extends StatelessWidget {
               dateFormatPattern.pattern,
               languageTag,
             );
+            final ltrLanguage = !Bidi.isRtlLanguage(languageTag);
             return DateFilterWidget(
               key: dateFilterWidgetKey,
               keyPrefix: dateFilterKeyPrefix,
               title: l10n.dateFilter,
+              startTitle: ltrLanguage ? '${l10n.minimum}:' : ':${l10n.minimum}',
+              endTitle: ltrLanguage ? '${l10n.maximum}:' : ':${l10n.maximum}',
               dateRange: dateRange,
               firstDate: DateTime(1900, 1, 1),
               lastDate: DateTime(2200, 12, 31),
               dateFormat: dateFormat,
-              startTitle: '${l10n.minimum}:',
-              endTitle: '${l10n.maximum}:',
+              startDateTextDefault: l10n.nowToday,
+              endDateTextDefault: l10n.plusSomeDays(dateMaxDaysDefault),
               selectButtonTitle: l10n.selectDateRange,
               spacing: Dimensions.cadQueryItemSpacing,
               onDateRangeSelected: (dateRange) {

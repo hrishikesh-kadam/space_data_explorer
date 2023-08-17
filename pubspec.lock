@@ -437,7 +437,7 @@ packages:
       path: "../../dart/packages/hrk_nasa_apis"
       relative: true
     source: path
-    version: "0.10.1"
+    version: "0.11.0"
   hrk_settings_list:
     dependency: "direct main"
     description:
