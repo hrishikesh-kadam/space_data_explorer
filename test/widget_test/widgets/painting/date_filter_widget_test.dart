@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import 'package:space_data_explorer/widgets/date_filter_widget.dart';
-import '../../../../../src/nasa/cad/query/date_filter_widget.dart';
+import '../../../src/nasa/cad/query/date_filter_widget.dart';
 
 void main() {
   group('$DateFilterWidget Painting Test', () {

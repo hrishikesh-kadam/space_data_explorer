@@ -4,8 +4,8 @@ import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/widgets/value_range_filter_widget.dart';
-import '../../src/nasa/cad/cad_route.dart';
-import '../../src/nasa/cad/query/distance_filter.dart';
+import '../../../src/nasa/cad/cad_route.dart';
+import '../../../src/nasa/cad/query/distance_filter.dart';
 
 void main() {
   group('$ValueRangeFilterWidget Interaction Test', () {

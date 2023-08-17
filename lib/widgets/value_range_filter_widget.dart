@@ -232,7 +232,6 @@ class _ValueRangeFilterWidgetState<V, U extends Unit>
       width: widget.textFieldWidth,
       child: TapRegion(
         onTapOutside: (event) {
-          logger.debug('TapRegion -> onTapOutside -> $index');
           if (textFocusNodes[index].hasFocus) {
             if (textControllers[index].text.isEmpty &&
                 defaultRangeList[index]?.value != null) {
@@ -263,7 +262,6 @@ class _ValueRangeFilterWidgetState<V, U extends Unit>
             border: OutlineInputBorder(),
           ),
           onTapOutside: (event) {
-            logger.debug('TextField -> onTapOutside -> $index');
             if (textFocusNodes[index].hasFocus) {
               textFocusNodes[index].unfocus();
             }
