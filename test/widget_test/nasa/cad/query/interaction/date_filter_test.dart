@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
+import 'package:space_data_explorer/nasa/cad/bloc/cad_bloc.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
+import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
 import 'package:space_data_explorer/widgets/date_filter_widget.dart';
 import '../../../../../src/globals.dart';
@@ -16,6 +18,7 @@ void main() {
   group('$CadRoute $DateFilterWidget Interaction Test', () {
     testWidgets('DeferredLoading workaround', (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
+      await tapSearchButton(tester);
       await tapSettingsButton(tester);
     });
 
@@ -75,6 +78,54 @@ void main() {
       expect(maxDateAfterString != maxDateTextDefault, true);
       expect(minDateBeforeString != minDateAfterString, true);
       expect(maxDateBeforeString != maxDateAfterString, true);
+    });
+
+    testWidgets('CadBloc prefilled, reset', (tester) async {
+      final cadBloc = getCadBloc();
+      cadBloc.add(CadDateRangeSelected(dateRange: dateRangeForTest));
+      await pumpCadRouteAsInitialLocation(tester, cadBloc: cadBloc);
+      expectDatePattern(tester, minDateForTest.day.toString(), minDateFinder);
+      expectDatePattern(tester, maxDateForTest.day.toString(), maxDateFinder);
+      cadBloc.add(const CadDateRangeSelected(dateRange: null));
+      await tester.pumpAndSettle();
+      expectDate(tester, minDateTextDefault, minDateFinder);
+      expectDate(tester, maxDateTextDefault, maxDateFinder);
+    });
+
+    testWidgets('verifyQueryParameters()', (tester) async {
+      final List<DateTimeRange> dateRangeList = [
+        DateTimeRange(start: minDateDefault, end: maxDateDefault),
+        DateTimeRange(
+          start: minDateDefault.subtract(const Duration(days: 1)),
+          end: maxDateDefault,
+        ),
+        DateTimeRange(
+          start: minDateDefault.add(const Duration(days: 1)),
+          end: maxDateDefault,
+        ),
+        DateTimeRange(
+          start: minDateDefault,
+          end: maxDateDefault.subtract(const Duration(days: 1)),
+        ),
+        DateTimeRange(
+          start: minDateDefault,
+          end: maxDateDefault.add(const Duration(days: 1)),
+        ),
+        DateTimeRange(
+          start: minDateDefault.subtract(const Duration(days: 1)),
+          end: maxDateDefault.subtract(const Duration(days: 1)),
+        ),
+        DateTimeRange(
+          start: minDateDefault.add(const Duration(days: 1)),
+          end: maxDateDefault.add(const Duration(days: 1)),
+        ),
+      ];
+      await pumpCadRouteAsInitialLocation(tester);
+      for (final dateRange in dateRangeList) {
+        CadScreen.cadBloc!.add(CadDateRangeSelected(dateRange: dateRange));
+        await tester.pumpAndSettle();
+        await verifyDateRangeQueryParameters(tester, dateRange);
+      }
     });
   });
 }

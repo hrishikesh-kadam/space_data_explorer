@@ -45,9 +45,8 @@ class CadScreen extends StatelessWidget {
       '$keyPrefix${DateFilterWidget.defaultKey}_';
   static const Key dateFilterWidgetKey =
       Key('$keyPrefix${DateFilterWidget.defaultKey}');
-  static final dateMaxDaysDefault = SbdbCadQueryParameters.getDateMaxDefault()
-      .difference(DateTime.now())
-      .inDays;
+  static int get dateMaxDaysDefault =>
+      SbdbCadQueryParameters.dateMaxDefault.difference(DateTime.now()).inDays;
   static const String distFilterKeyPrefix = '${keyPrefix}distance_filter_';
   static const Key distFilterKey =
       Key('$distFilterKeyPrefix${ValueRangeFilterWidget.defaultKey}');

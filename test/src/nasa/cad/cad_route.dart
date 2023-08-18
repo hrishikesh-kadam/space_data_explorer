@@ -58,7 +58,6 @@ Future<void> scrollToTop(WidgetTester tester) async {
   await tester.pumpAndSettle();
 }
 
-// TODO(hrishikesh-kadam): Use this everywhere
 Future<void> verifyQueryParameters(
   WidgetTester tester,
   SbdbCadQueryParameters queryParameters,
