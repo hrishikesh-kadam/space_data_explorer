@@ -28,7 +28,7 @@ void logNavigationHistoryState() {
   testLog.fine('history.state = $state');
 }
 
-bool verifyHistoryLengthAndSerialCount(
+bool expectHistoryLengthAndSerialCount(
   int historyLength,
   int serialCount,
 ) {

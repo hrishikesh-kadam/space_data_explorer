@@ -10,22 +10,22 @@ import 'package:space_data_explorer/globals.dart';
 import '../globals.dart';
 
 void historyForward() {
-  throw UnimplementedError('Not required for non Web Platforms');
+  throw UnimplementedError('Not required for non-Web Platforms');
 }
 
 void resetNavigationHistoryState() {
-  throw UnimplementedError('Not required for non Web Platforms');
+  throw UnimplementedError('Not required for non-Web Platforms');
 }
 
 void logNavigationHistoryState() {
-  throw UnimplementedError('Not required for non Web Platforms');
+  throw UnimplementedError('Not required for non-Web Platforms');
 }
 
-bool verifyHistoryLengthAndSerialCount(
+bool expectHistoryLengthAndSerialCount(
   int historyLength,
   int serialCount,
 ) {
-  throw UnimplementedError('Not required for non Web Platforms');
+  throw UnimplementedError('Not required for non-Web Platforms');
 }
 
 Future<void> testScreenshot(

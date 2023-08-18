@@ -55,14 +55,14 @@ void appBarBackButtonTest() {
       expect(find.byType(NasaScreen), findsOneWidget);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       if (kIsWeb) {
-        verifyHistoryLengthAndSerialCount(3, 1);
+        expectHistoryLengthAndSerialCount(3, 1);
       }
       await tapBackButton(tester);
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
-        verifyHistoryLengthAndSerialCount(3, 0);
+        expectHistoryLengthAndSerialCount(3, 0);
       }
     });
 
@@ -74,7 +74,7 @@ void appBarBackButtonTest() {
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
-        verifyHistoryLengthAndSerialCount(2, 0);
+        expectHistoryLengthAndSerialCount(2, 0);
       }
     });
 
@@ -91,7 +91,7 @@ void appBarBackButtonTest() {
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
-        verifyHistoryLengthAndSerialCount(2, 1);
+        expectHistoryLengthAndSerialCount(2, 1);
       }
     });
 
@@ -106,7 +106,7 @@ void appBarBackButtonTest() {
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       if (kIsWeb) {
-        verifyHistoryLengthAndSerialCount(2, 1);
+        expectHistoryLengthAndSerialCount(2, 1);
       }
     });
 
@@ -127,7 +127,7 @@ void appBarBackButtonTest() {
       // In case of web this would be normal navigation because
       // there is no check for extra
       if (kIsWeb) {
-        verifyHistoryLengthAndSerialCount(2, 0);
+        expectHistoryLengthAndSerialCount(2, 0);
       }
     });
 
@@ -147,7 +147,7 @@ void appBarBackButtonTest() {
       // In case of web this would be normal navigation because
       // there is no check for extra
       if (kIsWeb) {
-        verifyHistoryLengthAndSerialCount(2, 0);
+        expectHistoryLengthAndSerialCount(2, 0);
       }
     });
 

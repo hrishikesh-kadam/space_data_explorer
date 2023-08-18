@@ -12,11 +12,11 @@ void logNavigationHistoryState() {
   platform.logNavigationHistoryState();
 }
 
-bool verifyHistoryLengthAndSerialCount(
+bool expectHistoryLengthAndSerialCount(
   int historyLength,
   int serialCount,
 ) {
-  return platform.verifyHistoryLengthAndSerialCount(historyLength, serialCount);
+  return platform.expectHistoryLengthAndSerialCount(historyLength, serialCount);
 }
 
 Future<void> testScreenshot(
