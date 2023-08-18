@@ -18,11 +18,10 @@ import '../globals.dart';
 /// at the moment is not considered in GoRouter.
 void configureUrlStrategy() {
   // TODO(hrishikesh-kadam): File a bug for flutter beta
-  // Observed in Flutter 3.12.0 beta
+  // Observed in Flutter 3.12.0 beta, 3.13 stable
   // ignore: prefer_const_constructors
   UrlStrategy urlStrategyToSet = PathUrlStrategy();
-  // TODO(hrishikesh-kadam): File a request for idempotent calls for
-  // setUrlStrategy() method.
+  // Requires idempotent call
   if (urlStrategy?.runtimeType != urlStrategyToSet.runtimeType) {
     setUrlStrategy(urlStrategyToSet);
   }
