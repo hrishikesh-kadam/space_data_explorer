@@ -1,6 +1,11 @@
 plugins {
-    id 'com.github.ben-manes.versions' version '0.47.0'
+    id 'com.android.application'
+    id 'kotlin-android'
+    // https://github.com/flutter/flutter/blob/stable/packages/flutter_tools/gradle/src/main/groovy/flutter.groovy
+    id 'dev.flutter.flutter-gradle-plugin'
 }
+
+apply from: '../constants.gradle'
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
@@ -16,11 +21,6 @@ if (keyPropertiesFile.exists()) {
     keyProperties.load(new FileInputStream(keyPropertiesFile))
 }
 
-def flutterRoot = localProperties.getProperty('flutter.sdk')
-if (flutterRoot == null) {
-    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
-}
-
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
     flutterVersionCode = '1'
@@ -31,14 +31,8 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-// https://github.com/flutter/flutter/blob/stable/packages/flutter_tools/gradle/flutter.gradle
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-apply from: '../constants.gradle'
-
 android {
-    namespace "dev.hrishikesh_kadam.flutter.space_data_explorer"
+    namespace 'dev.hrishikesh_kadam.flutter.space_data_explorer'
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -64,7 +58,7 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         manifestPlaceholders += [ applicationLabel:constants.appName ]
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     signingConfigs {
@@ -86,8 +80,8 @@ android {
 
     buildTypes {
         debug {
-            applicationIdSuffix ".debug"
-            versionNameSuffix "-debug"
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-debug'
             if (keyPropertiesFile.exists()) {
                 signingConfig signingConfigs.nonRelease
             } else {
@@ -95,8 +89,8 @@ android {
             }
         }
         profile {
-            applicationIdSuffix ".profile"
-            versionNameSuffix "-profile"
+            applicationIdSuffix '.profile'
+            versionNameSuffix '-profile'
             if (keyPropertiesFile.exists()) {
                 signingConfig signingConfigs.nonRelease
             } else {
@@ -104,18 +98,18 @@ android {
             }
         }
         release {
-            applicationIdSuffix ".release"
-            versionNameSuffix "-release"
+            applicationIdSuffix '.release'
+            versionNameSuffix '-release'
         }
     }
 
-    flavorDimensions "env"
+    flavorDimensions 'env'
     productFlavors {
         dev {
-            dimension "env"
+            dimension 'env'
             manifestPlaceholders = [ hostName:constants.devHostName ]
-            applicationIdSuffix ".dev"
-            versionNameSuffix "-dev"
+            applicationIdSuffix '.dev'
+            versionNameSuffix '-dev'
             if (keyPropertiesFile.exists()) {
                 signingConfig signingConfigs.nonRelease
             } else {
@@ -123,10 +117,10 @@ android {
             }
         }
         stag {
-            dimension "env"
+            dimension 'env'
             manifestPlaceholders = [ hostName:constants.stagHostName ]
-            applicationIdSuffix ".stag"
-            versionNameSuffix "-stag"
+            applicationIdSuffix '.stag'
+            versionNameSuffix '-stag'
             if (keyPropertiesFile.exists()) {
                 signingConfig signingConfigs.nonRelease
             } else {
@@ -134,10 +128,10 @@ android {
             }
         }
         prod {
-            dimension "env"
+            dimension 'env'
             manifestPlaceholders = [ hostName:constants.prodHostName ]
-            applicationIdSuffix ".prod"
-            versionNameSuffix "-prod"
+            applicationIdSuffix '.prod'
+            versionNameSuffix '-prod'
             if (keyPropertiesFile.exists()) {
                 signingConfig signingConfigs.release
             } else {
@@ -153,19 +147,19 @@ android {
 androidComponents {
     def all = selector().all()
     onVariants(all) { variant ->
-        if(variant.flavorName == "prod" && variant.buildType == "release") {
+        if(variant.flavorName == 'prod' && variant.buildType == 'release') {
             // https://android.googlesource.com/platform/tools/base/+/studio-main/build-system/gradle-core/src/main/java/com/android/build/api/component/analytics/AnalyticsEnabledApplicationVariant.kt
             variant.applicationId.set(android.defaultConfig.applicationId)
             variant.outputs.each { output ->
                 // https://android.googlesource.com/platform/tools/base/+/studio-master-dev/build-system/gradle-core/src/main/java/com/android/build/api/variant/impl/VariantOutputImpl.kt
                 def defaultVersionName = android.defaultConfig.versionName
-                if (output.versionName.get() == defaultVersionName + "-prod-release") {
+                if (output.versionName.get() == defaultVersionName + '-prod-release') {
                     output.versionName.set(android.defaultConfig.versionName)
                 }
             }
         }
         // variant.outputs.each { output ->
-        //     output.outputFileName.set(constants.appNameSnakeCase + "-" + output.versionName.get() + ".apk")
+        //     output.outputFileName.set(constants.appNameSnakeCase + '-' + output.versionName.get() + '.apk')
         // }
     }
 }
@@ -175,29 +169,27 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
     // Source - https://github.com/flutter/flutter/tree/main/packages/integration_test#android-device-testing
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
-task("printAllVariants") {
+task('printAllVariants') {
     doLast {
-        println "applicationId,versionNameSuffix,signingConfig.keyAlias"
+        println 'applicationId,versionNameSuffix,signingConfig.keyAlias'
         // https://developer.android.com/build/gradle-tips#create-different-versions-of-your-app
         android.applicationVariants.all { variant ->
             def defaultVersionName = android.defaultConfig.versionName
-            def versionNameSuffix = variant.versionName.replaceFirst("^$defaultVersionName", "")
-            println variant.applicationId + "," \
-                + versionNameSuffix + "," \
+            def versionNameSuffix = variant.versionName.replaceFirst("^$defaultVersionName", '')
+            println variant.applicationId + ',' \
+                + versionNameSuffix + ',' \
                 + variant.signingConfig.keyAlias
         }
     }
 }
 
-task("getApplicationId") {
+task('getApplicationId') {
     doLast {
         android.applicationVariants.all { variant ->
             if (variant.name == variantName) {

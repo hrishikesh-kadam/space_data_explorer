@@ -1,8 +1,8 @@
 def constants = [:]
 
-constants.appName = "Space Data Explorer"
-constants.appNameSnakeCase = "space_data_explorer"
-constants.appNameKebabCase = "space-data-explorer"
+constants.appName = 'Space Data Explorer'
+constants.appNameSnakeCase = 'space_data_explorer'
+constants.appNameKebabCase = 'space-data-explorer'
 
 constants.applicationId = "dev.hrishikesh_kadam.flutter.${constants.appNameSnakeCase}"
 
