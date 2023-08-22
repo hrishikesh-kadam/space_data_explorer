@@ -82,6 +82,8 @@ double getLargestTextWidth({
     final TextPainter textPainter = TextPainter(
       text: TextSpan(text: text, style: style),
       textDirection: TextDirection.ltr,
+      // TODO(hrishikesh-kadam): Use TextScaler once it is in stable
+      // ignore: deprecated_member_use
       textScaleFactor: textScaleFactor,
     );
     textPainter.layout();
