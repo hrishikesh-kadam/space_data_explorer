@@ -20,7 +20,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     on<CadRequested>(_onCadRequested);
     on<CadDateRangeSelected>(_onCadDateRangeSelected);
     on<CadDistRangeEvent>(_onCadDistanceRangeEvent);
-    on<CadSmallBodySelected>(_onCadSmallBodySelected);
+    on<CadSmallBodyFilterSelected>(_onCadSmallBodyFilterSelected);
     on<CadSmallBodySelectorEvent>(_onCadSmallBodySelectorEvent);
     on<CadCloseApproachBodySelected>(_onCadCloseApproachBodySelected);
     on<CadDataOutputEvent>(_onCadDataOutputEvent);
@@ -45,9 +45,9 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     queryParameters = queryParameters.copyWithDistRange(
       state.distRange,
     );
-    if (state.smallBodyState.enabled) {
-      queryParameters = queryParameters.copyWithSmallBody(
-        state.smallBodyState.smallBody,
+    if (state.smallBodyFilterState.enabled) {
+      queryParameters = queryParameters.copyWithSmallBodyFilter(
+        state.smallBodyFilterState.smallBodyFilter,
       );
     } else if (state.smallBodySelectorState.smallBodySelector != null) {
       queryParameters = queryParameters.copyWithSmallBodySelector(
@@ -95,20 +95,20 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     ));
   }
 
-  Future<void> _onCadSmallBodySelected(
-    CadSmallBodySelected event,
+  Future<void> _onCadSmallBodyFilterSelected(
+    CadSmallBodyFilterSelected event,
     Emitter<CadState> emit,
   ) async {
-    if (event.smallBody == null) {
+    if (event.smallBodyFilter == null) {
       emit(state.copyWith(
-        smallBodyState: state.smallBodyState.copyWith(
-          smallBody: SbdbCadQueryParameters.smallBodyDefault,
+        smallBodyFilterState: state.smallBodyFilterState.copyWith(
+          smallBodyFilter: SbdbCadQueryParameters.smallBodyFilterDefault,
         ),
       ));
     } else {
       emit(state.copyWith(
-        smallBodyState: state.smallBodyState.copyWith(
-          smallBody: event.smallBody!,
+        smallBodyFilterState: state.smallBodyFilterState.copyWith(
+          smallBodyFilter: event.smallBodyFilter!,
         ),
       ));
     }
@@ -119,7 +119,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     Emitter<CadState> emit,
   ) async {
     emit(state.copyWith(
-      smallBodyState: state.smallBodyState.copyWith(
+      smallBodyFilterState: state.smallBodyFilterState.copyWith(
         enabled: event.smallBodySelectorState.smallBodySelector == null,
       ),
       smallBodySelectorState: event.smallBodySelectorState,

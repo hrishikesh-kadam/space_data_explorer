@@ -10,7 +10,8 @@ import '../../../../../src/nasa/cad/cad_route.dart';
 import '../../../../../src/nasa/cad/query/small_body_filter.dart';
 
 void main() {
-  group('$CadRoute ${ChoiceChipQueryWidget<SmallBody>} Painting Test', () {
+  group('$CadRoute ${ChoiceChipQueryWidget<SmallBodyFilter>} Painting Test',
+      () {
     testWidgets('Doesn\'t Overflow ${Dimensions.galaxyFoldPortraitWidth}',
         (WidgetTester tester) async {
       disableOverflowError();
@@ -20,8 +21,8 @@ void main() {
       );
       await pumpCadRouteAsInitialLocation(tester);
       await ensureFilterWidgetVisible(tester);
-      for (final smallBody in CadScreen.smallBodySet) {
-        await tapSmallBody(tester, smallBody: smallBody);
+      for (final smallBodyFilter in CadScreen.smallBodySet) {
+        await tapSmallBodyFilter(tester, smallBodyFilter: smallBodyFilter);
         tester.expectNoOverflow(of: smallBodyFilterWidgetFinder);
       }
     });

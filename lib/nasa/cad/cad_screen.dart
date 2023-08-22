@@ -58,12 +58,12 @@ class CadScreen extends StatelessWidget {
       '${keyPrefix}small_body_filter_';
   static const Key smallBodyFilterKey =
       Key('$smallBodyFilterKeyPrefix${ChoiceChipQueryWidget.defaultKey}');
-  static const Set<SmallBody> smallBodySet = {
-    SmallBody.neo,
-    SmallBody.pha,
-    SmallBody.nea,
-    SmallBody.comet,
-    SmallBody.neaComet,
+  static const Set<SmallBodyFilter> smallBodySet = {
+    SmallBodyFilter.neo,
+    SmallBodyFilter.pha,
+    SmallBodyFilter.nea,
+    SmallBodyFilter.comet,
+    SmallBodyFilter.neaComet,
   };
   static const String smallBodySelectorKeyPrefix =
       '${keyPrefix}small_body_selector_';
@@ -331,9 +331,9 @@ class CadScreen extends StatelessWidget {
     required BuildContext context,
   }) {
     final Set<String> labels = {
-      SmallBody.neo.displayName,
-      SmallBody.pha.displayName,
-      SmallBody.nea.displayName,
+      SmallBodyFilter.neo.displayName,
+      SmallBodyFilter.pha.displayName,
+      SmallBodyFilter.nea.displayName,
       l10n.comet,
       l10n.neaComet,
     };
@@ -341,12 +341,12 @@ class CadScreen extends StatelessWidget {
     // TODO(hrishikesh-kadam): Move these asserts to widget
     assert(smallBodySet.length == labels.length);
     assert(smallBodySet.length == keys.length);
-    return BlocSelector<CadBloc, CadState, SmallBodyState>(
+    return BlocSelector<CadBloc, CadState, SmallBodyFilterState>(
       selector: (state) {
-        return state.smallBodyState;
+        return state.smallBodyFilterState;
       },
       builder: (context, state) {
-        return ChoiceChipQueryWidget<SmallBody>(
+        return ChoiceChipQueryWidget<SmallBodyFilter>(
           key: smallBodyFilterKey,
           keyPrefix: smallBodyFilterKeyPrefix,
           enabled: state.enabled,
@@ -354,11 +354,11 @@ class CadScreen extends StatelessWidget {
           values: smallBodySet,
           labels: labels,
           keys: keys,
-          selected: state.smallBody,
+          selected: state.smallBodyFilter,
           spacing: Dimensions.cadQueryItemSpacing,
-          onChipSelected: (smallBody) {
-            context.read<CadBloc>().add(CadSmallBodySelected(
-                  smallBody: smallBody,
+          onChipSelected: (smallBodyFilter) {
+            context.read<CadBloc>().add(CadSmallBodyFilterSelected(
+                  smallBodyFilter: smallBodyFilter,
                 ));
           },
         );

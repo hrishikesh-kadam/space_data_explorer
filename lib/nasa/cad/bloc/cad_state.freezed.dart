@@ -21,7 +21,8 @@ mixin _$CadState {
       throw _privateConstructorUsedError;
   ValueRange<String, Never> get distRangeText =>
       throw _privateConstructorUsedError;
-  SmallBodyState get smallBodyState => throw _privateConstructorUsedError;
+  SmallBodyFilterState get smallBodyFilterState =>
+      throw _privateConstructorUsedError;
   SmallBodySelectorState get smallBodySelectorState =>
       throw _privateConstructorUsedError;
   CloseApproachBody get closeApproachBody => throw _privateConstructorUsedError;
@@ -43,7 +44,7 @@ abstract class $CadStateCopyWith<$Res> {
       {DateTimeRange? dateRange,
       ValueRange<double, DistanceUnit> distRange,
       ValueRange<String, Never> distRangeText,
-      SmallBodyState smallBodyState,
+      SmallBodyFilterState smallBodyFilterState,
       SmallBodySelectorState smallBodySelectorState,
       CloseApproachBody closeApproachBody,
       Set<DataOutput> dataOutputSet,
@@ -52,7 +53,7 @@ abstract class $CadStateCopyWith<$Res> {
 
   $ValueRangeCopyWith<double, DistanceUnit, $Res> get distRange;
   $ValueRangeCopyWith<String, Never, $Res> get distRangeText;
-  $SmallBodyStateCopyWith<$Res> get smallBodyState;
+  $SmallBodyFilterStateCopyWith<$Res> get smallBodyFilterState;
   $SmallBodySelectorStateCopyWith<$Res> get smallBodySelectorState;
   $SbdbCadBodyCopyWith<$Res>? get sbdbCadBody;
 }
@@ -73,7 +74,7 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
     Object? dateRange = freezed,
     Object? distRange = null,
     Object? distRangeText = null,
-    Object? smallBodyState = null,
+    Object? smallBodyFilterState = null,
     Object? smallBodySelectorState = null,
     Object? closeApproachBody = null,
     Object? dataOutputSet = null,
@@ -93,10 +94,10 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
           ? _value.distRangeText
           : distRangeText // ignore: cast_nullable_to_non_nullable
               as ValueRange<String, Never>,
-      smallBodyState: null == smallBodyState
-          ? _value.smallBodyState
-          : smallBodyState // ignore: cast_nullable_to_non_nullable
-              as SmallBodyState,
+      smallBodyFilterState: null == smallBodyFilterState
+          ? _value.smallBodyFilterState
+          : smallBodyFilterState // ignore: cast_nullable_to_non_nullable
+              as SmallBodyFilterState,
       smallBodySelectorState: null == smallBodySelectorState
           ? _value.smallBodySelectorState
           : smallBodySelectorState // ignore: cast_nullable_to_non_nullable
@@ -140,9 +141,10 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
 
   @override
   @pragma('vm:prefer-inline')
-  $SmallBodyStateCopyWith<$Res> get smallBodyState {
-    return $SmallBodyStateCopyWith<$Res>(_value.smallBodyState, (value) {
-      return _then(_value.copyWith(smallBodyState: value) as $Val);
+  $SmallBodyFilterStateCopyWith<$Res> get smallBodyFilterState {
+    return $SmallBodyFilterStateCopyWith<$Res>(_value.smallBodyFilterState,
+        (value) {
+      return _then(_value.copyWith(smallBodyFilterState: value) as $Val);
     });
   }
 
@@ -179,7 +181,7 @@ abstract class _$$_CadStateCopyWith<$Res> implements $CadStateCopyWith<$Res> {
       {DateTimeRange? dateRange,
       ValueRange<double, DistanceUnit> distRange,
       ValueRange<String, Never> distRangeText,
-      SmallBodyState smallBodyState,
+      SmallBodyFilterState smallBodyFilterState,
       SmallBodySelectorState smallBodySelectorState,
       CloseApproachBody closeApproachBody,
       Set<DataOutput> dataOutputSet,
@@ -191,7 +193,7 @@ abstract class _$$_CadStateCopyWith<$Res> implements $CadStateCopyWith<$Res> {
   @override
   $ValueRangeCopyWith<String, Never, $Res> get distRangeText;
   @override
-  $SmallBodyStateCopyWith<$Res> get smallBodyState;
+  $SmallBodyFilterStateCopyWith<$Res> get smallBodyFilterState;
   @override
   $SmallBodySelectorStateCopyWith<$Res> get smallBodySelectorState;
   @override
@@ -212,7 +214,7 @@ class __$$_CadStateCopyWithImpl<$Res>
     Object? dateRange = freezed,
     Object? distRange = null,
     Object? distRangeText = null,
-    Object? smallBodyState = null,
+    Object? smallBodyFilterState = null,
     Object? smallBodySelectorState = null,
     Object? closeApproachBody = null,
     Object? dataOutputSet = null,
@@ -232,10 +234,10 @@ class __$$_CadStateCopyWithImpl<$Res>
           ? _value.distRangeText
           : distRangeText // ignore: cast_nullable_to_non_nullable
               as ValueRange<String, Never>,
-      smallBodyState: null == smallBodyState
-          ? _value.smallBodyState
-          : smallBodyState // ignore: cast_nullable_to_non_nullable
-              as SmallBodyState,
+      smallBodyFilterState: null == smallBodyFilterState
+          ? _value.smallBodyFilterState
+          : smallBodyFilterState // ignore: cast_nullable_to_non_nullable
+              as SmallBodyFilterState,
       smallBodySelectorState: null == smallBodySelectorState
           ? _value.smallBodySelectorState
           : smallBodySelectorState // ignore: cast_nullable_to_non_nullable
@@ -269,7 +271,7 @@ class _$_CadState implements _CadState {
       this.distRangeText = const ValueRange<String, Never>(
           start: ValueUnit<String, Never>(value: ''),
           end: ValueUnit<String, Never>(value: '')),
-      this.smallBodyState = const SmallBodyState(),
+      this.smallBodyFilterState = const SmallBodyFilterState(),
       this.smallBodySelectorState = const SmallBodySelectorState(),
       this.closeApproachBody = SbdbCadQueryParameters.closeApproachBodyDefault,
       final Set<DataOutput> dataOutputSet = const {},
@@ -287,7 +289,7 @@ class _$_CadState implements _CadState {
   final ValueRange<String, Never> distRangeText;
   @override
   @JsonKey()
-  final SmallBodyState smallBodyState;
+  final SmallBodyFilterState smallBodyFilterState;
   @override
   @JsonKey()
   final SmallBodySelectorState smallBodySelectorState;
@@ -311,7 +313,7 @@ class _$_CadState implements _CadState {
 
   @override
   String toString() {
-    return 'CadState(dateRange: $dateRange, distRange: $distRange, distRangeText: $distRangeText, smallBodyState: $smallBodyState, smallBodySelectorState: $smallBodySelectorState, closeApproachBody: $closeApproachBody, dataOutputSet: $dataOutputSet, networkState: $networkState, sbdbCadBody: $sbdbCadBody)';
+    return 'CadState(dateRange: $dateRange, distRange: $distRange, distRangeText: $distRangeText, smallBodyFilterState: $smallBodyFilterState, smallBodySelectorState: $smallBodySelectorState, closeApproachBody: $closeApproachBody, dataOutputSet: $dataOutputSet, networkState: $networkState, sbdbCadBody: $sbdbCadBody)';
   }
 
   @override
@@ -325,8 +327,8 @@ class _$_CadState implements _CadState {
                 other.distRange == distRange) &&
             (identical(other.distRangeText, distRangeText) ||
                 other.distRangeText == distRangeText) &&
-            (identical(other.smallBodyState, smallBodyState) ||
-                other.smallBodyState == smallBodyState) &&
+            (identical(other.smallBodyFilterState, smallBodyFilterState) ||
+                other.smallBodyFilterState == smallBodyFilterState) &&
             (identical(other.smallBodySelectorState, smallBodySelectorState) ||
                 other.smallBodySelectorState == smallBodySelectorState) &&
             (identical(other.closeApproachBody, closeApproachBody) ||
@@ -345,7 +347,7 @@ class _$_CadState implements _CadState {
       dateRange,
       distRange,
       distRangeText,
-      smallBodyState,
+      smallBodyFilterState,
       smallBodySelectorState,
       closeApproachBody,
       const DeepCollectionEquality().hash(_dataOutputSet),
@@ -364,7 +366,7 @@ abstract class _CadState implements CadState {
       {final DateTimeRange? dateRange,
       final ValueRange<double, DistanceUnit> distRange,
       final ValueRange<String, Never> distRangeText,
-      final SmallBodyState smallBodyState,
+      final SmallBodyFilterState smallBodyFilterState,
       final SmallBodySelectorState smallBodySelectorState,
       final CloseApproachBody closeApproachBody,
       final Set<DataOutput> dataOutputSet,
@@ -378,7 +380,7 @@ abstract class _CadState implements CadState {
   @override
   ValueRange<String, Never> get distRangeText;
   @override
-  SmallBodyState get smallBodyState;
+  SmallBodyFilterState get smallBodyFilterState;
   @override
   SmallBodySelectorState get smallBodySelectorState;
   @override
@@ -396,28 +398,29 @@ abstract class _CadState implements CadState {
 }
 
 /// @nodoc
-mixin _$SmallBodyState {
+mixin _$SmallBodyFilterState {
   bool get enabled => throw _privateConstructorUsedError;
-  SmallBody get smallBody => throw _privateConstructorUsedError;
+  SmallBodyFilter get smallBodyFilter => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SmallBodyStateCopyWith<SmallBodyState> get copyWith =>
+  $SmallBodyFilterStateCopyWith<SmallBodyFilterState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SmallBodyStateCopyWith<$Res> {
-  factory $SmallBodyStateCopyWith(
-          SmallBodyState value, $Res Function(SmallBodyState) then) =
-      _$SmallBodyStateCopyWithImpl<$Res, SmallBodyState>;
+abstract class $SmallBodyFilterStateCopyWith<$Res> {
+  factory $SmallBodyFilterStateCopyWith(SmallBodyFilterState value,
+          $Res Function(SmallBodyFilterState) then) =
+      _$SmallBodyFilterStateCopyWithImpl<$Res, SmallBodyFilterState>;
   @useResult
-  $Res call({bool enabled, SmallBody smallBody});
+  $Res call({bool enabled, SmallBodyFilter smallBodyFilter});
 }
 
 /// @nodoc
-class _$SmallBodyStateCopyWithImpl<$Res, $Val extends SmallBodyState>
-    implements $SmallBodyStateCopyWith<$Res> {
-  _$SmallBodyStateCopyWithImpl(this._value, this._then);
+class _$SmallBodyFilterStateCopyWithImpl<$Res,
+        $Val extends SmallBodyFilterState>
+    implements $SmallBodyFilterStateCopyWith<$Res> {
+  _$SmallBodyFilterStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -428,109 +431,111 @@ class _$SmallBodyStateCopyWithImpl<$Res, $Val extends SmallBodyState>
   @override
   $Res call({
     Object? enabled = null,
-    Object? smallBody = null,
+    Object? smallBodyFilter = null,
   }) {
     return _then(_value.copyWith(
       enabled: null == enabled
           ? _value.enabled
           : enabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      smallBody: null == smallBody
-          ? _value.smallBody
-          : smallBody // ignore: cast_nullable_to_non_nullable
-              as SmallBody,
+      smallBodyFilter: null == smallBodyFilter
+          ? _value.smallBodyFilter
+          : smallBodyFilter // ignore: cast_nullable_to_non_nullable
+              as SmallBodyFilter,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_SmallBodyStateCopyWith<$Res>
-    implements $SmallBodyStateCopyWith<$Res> {
-  factory _$$_SmallBodyStateCopyWith(
-          _$_SmallBodyState value, $Res Function(_$_SmallBodyState) then) =
-      __$$_SmallBodyStateCopyWithImpl<$Res>;
+abstract class _$$_SmallBodyFilterStateCopyWith<$Res>
+    implements $SmallBodyFilterStateCopyWith<$Res> {
+  factory _$$_SmallBodyFilterStateCopyWith(_$_SmallBodyFilterState value,
+          $Res Function(_$_SmallBodyFilterState) then) =
+      __$$_SmallBodyFilterStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool enabled, SmallBody smallBody});
+  $Res call({bool enabled, SmallBodyFilter smallBodyFilter});
 }
 
 /// @nodoc
-class __$$_SmallBodyStateCopyWithImpl<$Res>
-    extends _$SmallBodyStateCopyWithImpl<$Res, _$_SmallBodyState>
-    implements _$$_SmallBodyStateCopyWith<$Res> {
-  __$$_SmallBodyStateCopyWithImpl(
-      _$_SmallBodyState _value, $Res Function(_$_SmallBodyState) _then)
+class __$$_SmallBodyFilterStateCopyWithImpl<$Res>
+    extends _$SmallBodyFilterStateCopyWithImpl<$Res, _$_SmallBodyFilterState>
+    implements _$$_SmallBodyFilterStateCopyWith<$Res> {
+  __$$_SmallBodyFilterStateCopyWithImpl(_$_SmallBodyFilterState _value,
+      $Res Function(_$_SmallBodyFilterState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? enabled = null,
-    Object? smallBody = null,
+    Object? smallBodyFilter = null,
   }) {
-    return _then(_$_SmallBodyState(
+    return _then(_$_SmallBodyFilterState(
       enabled: null == enabled
           ? _value.enabled
           : enabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      smallBody: null == smallBody
-          ? _value.smallBody
-          : smallBody // ignore: cast_nullable_to_non_nullable
-              as SmallBody,
+      smallBodyFilter: null == smallBodyFilter
+          ? _value.smallBodyFilter
+          : smallBodyFilter // ignore: cast_nullable_to_non_nullable
+              as SmallBodyFilter,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_SmallBodyState implements _SmallBodyState {
-  const _$_SmallBodyState(
+class _$_SmallBodyFilterState implements _SmallBodyFilterState {
+  const _$_SmallBodyFilterState(
       {this.enabled = true,
-      this.smallBody = SbdbCadQueryParameters.smallBodyDefault});
+      this.smallBodyFilter = SbdbCadQueryParameters.smallBodyFilterDefault});
 
   @override
   @JsonKey()
   final bool enabled;
   @override
   @JsonKey()
-  final SmallBody smallBody;
+  final SmallBodyFilter smallBodyFilter;
 
   @override
   String toString() {
-    return 'SmallBodyState(enabled: $enabled, smallBody: $smallBody)';
+    return 'SmallBodyFilterState(enabled: $enabled, smallBodyFilter: $smallBodyFilter)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SmallBodyState &&
+            other is _$_SmallBodyFilterState &&
             (identical(other.enabled, enabled) || other.enabled == enabled) &&
-            (identical(other.smallBody, smallBody) ||
-                other.smallBody == smallBody));
+            (identical(other.smallBodyFilter, smallBodyFilter) ||
+                other.smallBodyFilter == smallBodyFilter));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, enabled, smallBody);
+  int get hashCode => Object.hash(runtimeType, enabled, smallBodyFilter);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SmallBodyStateCopyWith<_$_SmallBodyState> get copyWith =>
-      __$$_SmallBodyStateCopyWithImpl<_$_SmallBodyState>(this, _$identity);
+  _$$_SmallBodyFilterStateCopyWith<_$_SmallBodyFilterState> get copyWith =>
+      __$$_SmallBodyFilterStateCopyWithImpl<_$_SmallBodyFilterState>(
+          this, _$identity);
 }
 
-abstract class _SmallBodyState implements SmallBodyState {
-  const factory _SmallBodyState(
-      {final bool enabled, final SmallBody smallBody}) = _$_SmallBodyState;
+abstract class _SmallBodyFilterState implements SmallBodyFilterState {
+  const factory _SmallBodyFilterState(
+      {final bool enabled,
+      final SmallBodyFilter smallBodyFilter}) = _$_SmallBodyFilterState;
 
   @override
   bool get enabled;
   @override
-  SmallBody get smallBody;
+  SmallBodyFilter get smallBodyFilter;
   @override
   @JsonKey(ignore: true)
-  _$$_SmallBodyStateCopyWith<_$_SmallBodyState> get copyWith =>
+  _$$_SmallBodyFilterStateCopyWith<_$_SmallBodyFilterState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

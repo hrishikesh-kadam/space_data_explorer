@@ -434,11 +434,10 @@ packages:
   hrk_nasa_apis:
     dependency: "direct main"
     description:
-      name: hrk_nasa_apis
-      sha256: "75a859ee609a00766a02ce97f06dac58a99a6bba0f698b509a60c4cc3be4e5e7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.11.1"
+      path: "../../dart/packages/hrk_nasa_apis"
+      relative: true
+    source: path
+    version: "0.12.0"
   hrk_settings_list:
     dependency: "direct main"
     description:

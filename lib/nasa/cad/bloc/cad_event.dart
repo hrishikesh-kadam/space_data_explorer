@@ -27,10 +27,10 @@ class CadDistRangeEvent extends CadEvent {
   final ValueRange<String, Never> distRangeText;
 }
 
-class CadSmallBodySelected extends CadEvent {
-  const CadSmallBodySelected({this.smallBody});
+class CadSmallBodyFilterSelected extends CadEvent {
+  const CadSmallBodyFilterSelected({this.smallBodyFilter});
 
-  final SmallBody? smallBody;
+  final SmallBodyFilter? smallBodyFilter;
 }
 
 class CadSmallBodySelectorEvent extends CadEvent {

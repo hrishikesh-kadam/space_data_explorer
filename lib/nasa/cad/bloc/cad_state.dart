@@ -15,7 +15,7 @@ class CadState with _$CadState {
       end: ValueUnit<String, Never>(value: ''),
     ))
     ValueRange<String, Never> distRangeText,
-    @Default(SmallBodyState()) SmallBodyState smallBodyState,
+    @Default(SmallBodyFilterState()) SmallBodyFilterState smallBodyFilterState,
     @Default(SmallBodySelectorState())
     SmallBodySelectorState smallBodySelectorState,
     @Default(SbdbCadQueryParameters.closeApproachBodyDefault)
@@ -36,11 +36,12 @@ class CadState with _$CadState {
 }
 
 @freezed
-class SmallBodyState with _$SmallBodyState {
-  const factory SmallBodyState({
+class SmallBodyFilterState with _$SmallBodyFilterState {
+  const factory SmallBodyFilterState({
     @Default(true) bool enabled,
-    @Default(SbdbCadQueryParameters.smallBodyDefault) SmallBody smallBody,
-  }) = _SmallBodyState;
+    @Default(SbdbCadQueryParameters.smallBodyFilterDefault)
+    SmallBodyFilter smallBodyFilter,
+  }) = _SmallBodyFilterState;
 }
 
 @freezed

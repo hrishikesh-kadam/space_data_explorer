@@ -10,7 +10,8 @@ import '../../../../../src/nasa/cad/query/small_body_filter.dart';
 import '../../../../../src/nasa/cad/query/small_body_selector.dart';
 
 void main() {
-  group('$CadRoute ${ChoiceChipQueryWidget<SmallBody>} Interaction Test', () {
+  group('$CadRoute ${ChoiceChipQueryWidget<SmallBodyFilter>} Interaction Test',
+      () {
     testWidgets('DeferredLoading workaround', (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       await tapSearchButton(tester);
@@ -19,28 +20,31 @@ void main() {
     testWidgets('No Interaction', (tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       expect(smallBodyFilterWidgetFinder, findsOneWidget);
-      expectSmallBodySelected(
+      expectSmallBodyFilterSelected(
         tester,
-        smallBody: SbdbCadQueryParameters.smallBodyDefault,
+        smallBodyFilter: SbdbCadQueryParameters.smallBodyFilterDefault,
       );
-      expect(CadScreen.cadBloc!.state.smallBodyState, const SmallBodyState());
+      expect(CadScreen.cadBloc!.state.smallBodyFilterState,
+          const SmallBodyFilterState());
     });
 
-    testWidgets('Select and Unselect ${SmallBody.pha.name}', (tester) async {
-      const smallBody = SmallBody.pha;
+    testWidgets('Select and Unselect ${SmallBodyFilter.pha.name}',
+        (tester) async {
+      const smallBodyFilter = SmallBodyFilter.pha;
       await pumpCadRouteAsInitialLocation(tester);
-      await tapSmallBody(tester, smallBody: smallBody);
-      expectSmallBodySelected(tester, smallBody: smallBody);
+      await tapSmallBodyFilter(tester, smallBodyFilter: smallBodyFilter);
+      expectSmallBodyFilterSelected(tester, smallBodyFilter: smallBodyFilter);
       expect(
-        CadScreen.cadBloc!.state.smallBodyState,
-        const SmallBodyState(smallBody: smallBody),
+        CadScreen.cadBloc!.state.smallBodyFilterState,
+        const SmallBodyFilterState(smallBodyFilter: smallBodyFilter),
       );
-      await tapSmallBody(tester, smallBody: smallBody);
-      expectSmallBodySelected(
+      await tapSmallBodyFilter(tester, smallBodyFilter: smallBodyFilter);
+      expectSmallBodyFilterSelected(
         tester,
-        smallBody: SbdbCadQueryParameters.smallBodyDefault,
+        smallBodyFilter: SbdbCadQueryParameters.smallBodyFilterDefault,
       );
-      expect(CadScreen.cadBloc!.state.smallBodyState, const SmallBodyState());
+      expect(CadScreen.cadBloc!.state.smallBodyFilterState,
+          const SmallBodyFilterState());
     });
 
     testWidgets('Select and Search Each', (tester) async {
@@ -53,12 +57,12 @@ void main() {
       ];
       await pumpCadRouteAsInitialLocation(tester);
       for (var i = 0; i < CadScreen.smallBodySet.length; i++) {
-        final smallBody = CadScreen.smallBodySet.elementAt(i);
-        await tapSmallBody(tester, smallBody: smallBody);
-        expectSmallBodySelected(tester, smallBody: smallBody);
+        final smallBodyFilter = CadScreen.smallBodySet.elementAt(i);
+        await tapSmallBodyFilter(tester, smallBodyFilter: smallBodyFilter);
+        expectSmallBodyFilterSelected(tester, smallBodyFilter: smallBodyFilter);
         expect(
-          CadScreen.cadBloc!.state.smallBodyState,
-          SmallBodyState(smallBody: smallBody),
+          CadScreen.cadBloc!.state.smallBodyFilterState,
+          SmallBodyFilterState(smallBodyFilter: smallBodyFilter),
         );
         await verifyQueryParameters(tester, queryParamtersList[i]);
       }
@@ -70,68 +74,69 @@ void main() {
       await pumpCadRouteAsInitialLocation(tester);
       expectChipsEnabled(tester);
       expect(
-        CadScreen.cadBloc!.state.smallBodyState,
-        const SmallBodyState(),
+        CadScreen.cadBloc!.state.smallBodyFilterState,
+        const SmallBodyFilterState(),
       );
       await tapSmallBodySelector(tester, smallBodySelector);
       await tester.enterText(textFieldFinder, designation);
-      expectSmallBodySelected(
+      expectSmallBodyFilterSelected(
         tester,
-        smallBody: SbdbCadQueryParameters.smallBodyDefault,
+        smallBodyFilter: SbdbCadQueryParameters.smallBodyFilterDefault,
       );
       expectChipsEnabled(tester, false);
       expect(
-        CadScreen.cadBloc!.state.smallBodyState,
-        const SmallBodyState(enabled: false),
+        CadScreen.cadBloc!.state.smallBodyFilterState,
+        const SmallBodyFilterState(enabled: false),
       );
       await verifyQueryParameters(
         tester,
         const SbdbCadQueryParameters(des: designation),
       );
       await tapSmallBodySelector(tester, smallBodySelector);
-      expectSmallBodySelected(
+      expectSmallBodyFilterSelected(
         tester,
-        smallBody: SbdbCadQueryParameters.smallBodyDefault,
+        smallBodyFilter: SbdbCadQueryParameters.smallBodyFilterDefault,
       );
       expectChipsEnabled(tester);
       expect(
-        CadScreen.cadBloc!.state.smallBodyState,
-        const SmallBodyState(),
+        CadScreen.cadBloc!.state.smallBodyFilterState,
+        const SmallBodyFilterState(),
       );
       await verifyQueryParameters(tester, const SbdbCadQueryParameters());
     });
 
     testWidgets(
-        'Select ${SmallBody.pha.name}, '
+        'Select ${SmallBodyFilter.pha.name}, '
         'Select and unselect ${SmallBodySelector.designation.name}',
         (tester) async {
-      const smallBody = SmallBody.pha;
+      const smallBodyFilter = SmallBodyFilter.pha;
       const smallBodySelector = SmallBodySelector.designation;
       await pumpCadRouteAsInitialLocation(tester);
-      await tapSmallBody(tester, smallBody: smallBody);
+      await tapSmallBodyFilter(tester, smallBodyFilter: smallBodyFilter);
       expectChipsEnabled(tester);
       expect(
-        CadScreen.cadBloc!.state.smallBodyState,
-        const SmallBodyState(smallBody: smallBody),
+        CadScreen.cadBloc!.state.smallBodyFilterState,
+        const SmallBodyFilterState(smallBodyFilter: smallBodyFilter),
       );
       await tapSmallBodySelector(tester, smallBodySelector);
       await tester.enterText(textFieldFinder, designation);
-      expectSmallBodySelected(tester, smallBody: smallBody);
+      expectSmallBodyFilterSelected(tester, smallBodyFilter: smallBodyFilter);
       expectChipsEnabled(tester, false);
       expect(
-        CadScreen.cadBloc!.state.smallBodyState,
-        const SmallBodyState(enabled: false, smallBody: smallBody),
+        CadScreen.cadBloc!.state.smallBodyFilterState,
+        const SmallBodyFilterState(
+            enabled: false, smallBodyFilter: smallBodyFilter),
       );
       await verifyQueryParameters(
         tester,
         const SbdbCadQueryParameters(des: designation),
       );
       await tapSmallBodySelector(tester, smallBodySelector);
-      expectSmallBodySelected(tester, smallBody: smallBody);
+      expectSmallBodyFilterSelected(tester, smallBodyFilter: smallBodyFilter);
       expectChipsEnabled(tester);
       expect(
-        CadScreen.cadBloc!.state.smallBodyState,
-        const SmallBodyState(smallBody: smallBody),
+        CadScreen.cadBloc!.state.smallBodyFilterState,
+        const SmallBodyFilterState(smallBodyFilter: smallBodyFilter),
       );
       await verifyQueryParameters(
         tester,
