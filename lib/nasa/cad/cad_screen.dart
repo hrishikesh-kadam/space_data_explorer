@@ -338,9 +338,6 @@ class CadScreen extends StatelessWidget {
       l10n.neaComet,
     };
     final Set<String> keys = smallBodySet.map((e) => e.name).toSet();
-    // TODO(hrishikesh-kadam): Move these asserts to widget
-    assert(smallBodySet.length == labels.length);
-    assert(smallBodySet.length == keys.length);
     return BlocSelector<CadBloc, CadState, SmallBodyFilterState>(
       selector: (state) {
         return state.smallBodyFilterState;
@@ -429,8 +426,6 @@ class CadScreen extends StatelessWidget {
       l10n.neptune,
     };
     final Set<String> keys = closeApproachBodySet.map((e) => e.name).toSet();
-    assert(closeApproachBodySet.length == labels.length);
-    assert(closeApproachBodySet.length == keys.length);
     return BlocSelector<CadBloc, CadState, CloseApproachBody>(
       selector: (state) {
         return state.closeApproachBody;
@@ -464,8 +459,6 @@ class CadScreen extends StatelessWidget {
       l10n.fullname,
     };
     final Set<String> keys = dataOutputSet.map((e) => e.name).toSet();
-    assert(dataOutputSet.length == labels.length);
-    assert(dataOutputSet.length == keys.length);
     return BlocSelector<CadBloc, CadState, Set<DataOutput>>(
       selector: (state) {
         return state.dataOutputSet;

@@ -16,7 +16,8 @@ class ChoiceChipQueryWidget<T> extends StatelessWidget {
     this.selected,
     this.spacing = 8,
     this.onChipSelected,
-  });
+  })  : assert(labels.length == values.length),
+        assert(keys == null || keys.length == values.length);
 
   final String keyPrefix;
   final bool enabled;

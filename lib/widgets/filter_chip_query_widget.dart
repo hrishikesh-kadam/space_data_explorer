@@ -16,7 +16,8 @@ class FilterChipQueryWidget<T> extends StatelessWidget {
     this.selected = const {},
     this.spacing = 8,
     this.onChipsSelected,
-  });
+  })  : assert(labels.length == values.length),
+        assert(keys == null || keys.length == values.length);
 
   final String keyPrefix;
   final bool enabled;
