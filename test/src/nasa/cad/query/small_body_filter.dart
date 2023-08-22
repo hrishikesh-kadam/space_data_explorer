@@ -45,3 +45,13 @@ void expectSmallBodySelected(
     expect(tester.widget<ChoiceChip>(finder).selected, matcher);
   }
 }
+
+void expectChipsEnabled(
+  WidgetTester tester, [
+  bool enabled = true,
+]) {
+  for (var i = 0; i < CadScreen.smallBodySet.length; i++) {
+    final finder = smallBodyChipFinders.elementAt(i);
+    expect(tester.widget<ChoiceChip>(finder).isEnabled, enabled);
+  }
+}

@@ -26,7 +26,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     on<CadDataOutputEvent>(_onCadDataOutputEvent);
   }
 
-  final _log = Logger('$appNamePascalCase.CadBloc');
+  final _logger = Logger('$appNamePascalCase.CadBloc');
   @visibleForTesting
   late final SbdbCadApi sbdbCadApi;
 
@@ -45,12 +45,15 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     queryParameters = queryParameters.copyWithDistRange(
       state.distRange,
     );
-    queryParameters = queryParameters.copyWithSmallBody(state.smallBody);
-    if (state.smallBodySelector != null) {
+    if (state.smallBodyState.enabled) {
+      queryParameters = queryParameters.copyWithSmallBody(
+        state.smallBodyState.smallBody,
+      );
+    } else if (state.smallBodySelectorState.smallBodySelector != null) {
       queryParameters = queryParameters.copyWithSmallBodySelector(
-        state.smallBodySelector!,
-        spkId: state.spkId,
-        desgination: state.designation,
+        state.smallBodySelectorState.smallBodySelector!,
+        spkId: state.smallBodySelectorState.spkId,
+        desgination: state.smallBodySelectorState.designation,
       );
     }
     if (state.closeApproachBody !=
@@ -64,13 +67,13 @@ class CadBloc extends Bloc<CadEvent, CadState> {
       Response<SbdbCadBody> response = await sbdbCadApi.get(
         queryParameters: queryParameters.toJson(),
       );
-      _log.fine('_onCadRequested success');
+      _logger.fine('_onCadRequested success');
       emit(state.copyWith(
         networkState: NetworkState.success,
         sbdbCadBody: response.data,
       ));
     } on Exception catch (e, s) {
-      _log.error('_onCadRequested failure', e, s);
+      _logger.error('_onCadRequested failure', e, s);
       emit(state.copyWith(networkState: NetworkState.failure));
     }
   }
@@ -97,9 +100,17 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     Emitter<CadState> emit,
   ) async {
     if (event.smallBody == null) {
-      emit(state.copyWith(smallBody: SbdbCadQueryParameters.smallBodyDefault));
+      emit(state.copyWith(
+        smallBodyState: state.smallBodyState.copyWith(
+          smallBody: SbdbCadQueryParameters.smallBodyDefault,
+        ),
+      ));
     } else {
-      emit(state.copyWith(smallBody: event.smallBody!));
+      emit(state.copyWith(
+        smallBodyState: state.smallBodyState.copyWith(
+          smallBody: event.smallBody!,
+        ),
+      ));
     }
   }
 
@@ -108,9 +119,10 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     Emitter<CadState> emit,
   ) async {
     emit(state.copyWith(
-      smallBodySelector: event.smallBodySelector,
-      spkId: event.spkId,
-      designation: event.designation,
+      smallBodyState: state.smallBodyState.copyWith(
+        enabled: event.smallBodySelectorState.smallBodySelector == null,
+      ),
+      smallBodySelectorState: event.smallBodySelectorState,
     ));
   }
 

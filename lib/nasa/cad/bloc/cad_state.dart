@@ -15,10 +15,9 @@ class CadState with _$CadState {
       end: ValueUnit<String, Never>(value: ''),
     ))
     ValueRange<String, Never> distRangeText,
-    @Default(SbdbCadQueryParameters.smallBodyDefault) SmallBody smallBody,
-    SmallBodySelector? smallBodySelector,
-    int? spkId,
-    String? designation,
+    @Default(SmallBodyState()) SmallBodyState smallBodyState,
+    @Default(SmallBodySelectorState())
+    SmallBodySelectorState smallBodySelectorState,
     @Default(SbdbCadQueryParameters.closeApproachBodyDefault)
     CloseApproachBody closeApproachBody,
     @Default({}) Set<DataOutput> dataOutputSet,
@@ -34,6 +33,23 @@ class CadState with _$CadState {
       ),
     );
   }
+}
+
+@freezed
+class SmallBodyState with _$SmallBodyState {
+  const factory SmallBodyState({
+    @Default(true) bool enabled,
+    @Default(SbdbCadQueryParameters.smallBodyDefault) SmallBody smallBody,
+  }) = _SmallBodyState;
+}
+
+@freezed
+class SmallBodySelectorState with _$SmallBodySelectorState {
+  const factory SmallBodySelectorState({
+    SmallBodySelector? smallBodySelector,
+    int? spkId,
+    String? designation,
+  }) = _SmallBodySelectorState;
 }
 
 enum NetworkState { initial, sending, success, failure }

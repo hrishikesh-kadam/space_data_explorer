@@ -8,6 +8,7 @@ class FilterChipQueryWidget<T> extends StatelessWidget {
   const FilterChipQueryWidget({
     super.key,
     this.keyPrefix = '',
+    this.enabled = true,
     required this.title,
     required this.values,
     required this.labels,
@@ -18,6 +19,7 @@ class FilterChipQueryWidget<T> extends StatelessWidget {
   });
 
   final String keyPrefix;
+  final bool enabled;
   final String title;
   final Set<T> values;
   final Set<String> labels;
@@ -61,22 +63,28 @@ class FilterChipQueryWidget<T> extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 selected: selected.contains(values.elementAt(index)),
-                onSelected: (selectedBool) {
-                  if (onChipsSelected != null) {
-                    final Set<T> newSelected = Set.from(selected);
-                    if (selectedBool) {
-                      newSelected.add(values.elementAt(index));
-                    } else {
-                      newSelected.remove(values.elementAt(index));
-                    }
-                    onChipsSelected!(newSelected);
-                  }
-                },
+                onSelected: enabled
+                    ? (selectedBool) {
+                        _onSelected(selectedBool, index);
+                      }
+                    : null,
               );
             },
           ),
         )
       ],
     );
+  }
+
+  void _onSelected(bool selectedBool, int index) {
+    if (onChipsSelected != null) {
+      final Set<T> newSelected = Set.from(selected);
+      if (selectedBool) {
+        newSelected.add(values.elementAt(index));
+      } else {
+        newSelected.remove(values.elementAt(index));
+      }
+      onChipsSelected!(newSelected);
+    }
   }
 }

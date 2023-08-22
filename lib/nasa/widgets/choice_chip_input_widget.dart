@@ -9,7 +9,12 @@ import '../../constants/dimensions.dart';
 import '../../globals.dart';
 import '../../widgets/query_grid_container.dart';
 
-typedef ChipSelected<T> = void Function(T? value);
+// TODO(hrishikesh-kadam): Move this widget
+
+typedef ChoiceChipInputChanged<T> = void Function(
+  T? value,
+  List<String> textList,
+);
 
 class ChoiceChipInputWidget<T> extends StatefulWidget {
   const ChoiceChipInputWidget({
@@ -21,14 +26,19 @@ class ChoiceChipInputWidget<T> extends StatefulWidget {
     this.keys,
     this.iconSize = 32,
     required this.selected,
+    required this.textList,
     this.keyboardTypes,
     this.inputFormattersList,
     this.textFieldTextAlign = TextAlign.center,
     this.textFieldWidth = 200,
     this.spacing = 8,
-    this.onChipSelected,
-    this.onTextChanged,
-  });
+    this.onStateChanged,
+  })  : assert(labels.length == values.length),
+        assert(keys == null || keys.length == values.length),
+        assert(textList.length == values.length),
+        assert(keyboardTypes == null || keyboardTypes.length == values.length),
+        assert(inputFormattersList == null ||
+            inputFormattersList.length == values.length);
 
   final String keyPrefix;
   final String title;
@@ -37,13 +47,13 @@ class ChoiceChipInputWidget<T> extends StatefulWidget {
   final Set<String>? keys;
   final double iconSize;
   final T? selected;
+  final List<String> textList;
   final List<TextInputType>? keyboardTypes;
   final List<List<TextInputFormatter>?>? inputFormattersList;
   final TextAlign textFieldTextAlign;
   final double textFieldWidth;
   final double spacing;
-  final ChipSelected<T>? onChipSelected;
-  final ValueChanged<String>? onTextChanged;
+  final ChoiceChipInputChanged<T>? onStateChanged;
   static const String titleKey = 'title_key';
   static const String textFieldKey = 'text_field_key';
   static const String defaultKey = 'choice_chip_input_widget_key';
@@ -53,38 +63,73 @@ class ChoiceChipInputWidget<T> extends StatefulWidget {
       _ChoiceChipInputWidgetState<T>();
 }
 
+enum StateMethod { initState, didUpdateWidget }
+
 class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
   int? selectedIndex;
-  late final List<String> textList;
+  late List<String> textList;
   late final TextEditingController textController;
-  late FocusNode textFieldFocusNode;
+  late final FocusNode textFocusNode;
   StreamSubscription<bool>? keyboardSubscription;
   bool? keyboardVisible;
+  late bool requiresKeyboardChange;
 
   @override
   void initState() {
     super.initState();
+    initOrUpdate(method: StateMethod.initState);
+  }
+
+  @override
+  void didUpdateWidget(covariant ChoiceChipInputWidget<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    initOrUpdate(method: StateMethod.didUpdateWidget);
+  }
+
+  void initOrUpdate({
+    required StateMethod method,
+  }) {
     if (widget.selected != null) {
       final index = widget.values.toList().indexOf(widget.selected as T);
       selectedIndex = index >= 0 ? index : null;
+    } else {
+      selectedIndex = null;
     }
-    textList = List.generate(widget.values.length, (index) => '');
-    textController = TextEditingController();
-    textFieldFocusNode = FocusNode();
-    if (widget.keyboardTypes != null) {
-      final keyboardVisibilityController = KeyboardVisibilityController();
-      keyboardVisible = keyboardVisibilityController.isVisible;
-      keyboardSubscription =
-          keyboardVisibilityController.onChange.listen((bool visible) {
-        keyboardVisible = visible;
-      });
+    textList = List.from(widget.textList);
+    if (method == StateMethod.initState) {
+      textController = TextEditingController();
+      textFocusNode = FocusNode();
+    }
+    if (selectedIndex != null) {
+      if (textController.text != textList[selectedIndex!]) {
+        textController.text = textList[selectedIndex!];
+      }
+    } else if (!textList.contains(textController.text)) {
+      // Reset or mismatch
+      textController.text = '';
+    }
+    requiresKeyboardChange = widget.keyboardTypes != null &&
+        widget.keyboardTypes!.toSet().length > 1;
+    if (keyboardVisibilitySupported && requiresKeyboardChange) {
+      if (keyboardSubscription == null) {
+        final keyboardVisibilityController = KeyboardVisibilityController();
+        keyboardVisible = keyboardVisibilityController.isVisible;
+        keyboardSubscription =
+            keyboardVisibilityController.onChange.listen((bool visible) {
+          keyboardVisible = visible;
+        });
+      }
+    } else {
+      keyboardSubscription?.cancel();
+      keyboardSubscription = null;
+      keyboardVisible = null;
     }
   }
 
   @override
   void dispose() {
     textController.dispose();
-    textFieldFocusNode.dispose();
+    textFocusNode.dispose();
     keyboardSubscription?.cancel();
     super.dispose();
   }
@@ -132,27 +177,20 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
               onSelected: (selected) {
                 setState(() {
                   selectedIndex = selected ? index : null;
-                  if (selectedIndex != null) {
-                    if (widget.keyboardTypes != null &&
-                        textFieldFocusNode.hasFocus) {
-                      if (keyboardVisibilitySupported &&
-                              keyboardVisible == true ||
-                          !keyboardVisibilitySupported) {
-                        // To change the keyboard
-                        textFieldFocusNode.unfocus();
-                        WidgetsBinding.instance.addPostFrameCallback(
-                          (_) => textFieldFocusNode.requestFocus(),
-                        );
-                      }
-                    }
-                    textController.text = textList[selectedIndex!];
-                  }
                 });
-                if (widget.onChipSelected != null) {
-                  final T? value =
-                      selected ? widget.values.elementAt(index) : null;
-                  widget.onChipSelected!(value);
+                if (selectedIndex != null) {
+                  if (textFocusNode.hasFocus && requiresKeyboardChange) {
+                    if (keyboardVisible == true ||
+                        !keyboardVisibilitySupported) {
+                      textFocusNode.unfocus();
+                      WidgetsBinding.instance.addPostFrameCallback(
+                        (_) => textFocusNode.requestFocus(),
+                      );
+                    }
+                  }
+                  textController.text = textList[selectedIndex!];
                 }
+                callOnStateChanged();
               },
             ),
           );
@@ -170,7 +208,7 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
         key: Key('${widget.keyPrefix}${ChoiceChipInputWidget.textFieldKey}'),
         enabled: selectedIndex != null,
         controller: textController,
-        focusNode: textFieldFocusNode,
+        focusNode: textFocusNode,
         keyboardType: widget.keyboardTypes != null && selectedIndex != null
             ? widget.keyboardTypes![selectedIndex!]
             : null,
@@ -185,17 +223,24 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
           border: OutlineInputBorder(),
         ),
         onTapOutside: (event) {
-          textFieldFocusNode.unfocus();
-        },
-        onChanged: (value) {
-          setState(() {
-            textList[selectedIndex!] = value;
-          });
-          if (widget.onTextChanged != null) {
-            widget.onTextChanged!(value);
+          if (textFocusNode.hasFocus) {
+            textFocusNode.unfocus();
           }
+        },
+        onChanged: (text) {
+          textList[selectedIndex!] = text;
+          callOnStateChanged();
         },
       ),
     );
+  }
+
+  void callOnStateChanged() {
+    if (widget.onStateChanged != null) {
+      final T? value = selectedIndex != null
+          ? widget.values.elementAt(selectedIndex!)
+          : null;
+      widget.onStateChanged!(value, textList);
+    }
   }
 }

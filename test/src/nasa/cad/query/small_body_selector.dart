@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
+import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/widgets/choice_chip_input_widget.dart';
 
@@ -12,52 +13,48 @@ final titleFinder = find.byKey(const Key(
   '${CadScreen.smallBodySelectorKeyPrefix}'
   '${ChoiceChipInputWidget.titleKey}',
 ));
-final spkIdChipFinder = find.byKey(Key(
-  '${CadScreen.smallBodySelectorKeyPrefix}'
-  '${SmallBodySelector.spkId.name}',
-));
-final designationChipFinder = find.byKey(Key(
-  '${CadScreen.smallBodySelectorKeyPrefix}'
-  '${SmallBodySelector.designation.name}',
-));
+final Set<Finder> smallBodySelectorChipFinders =
+    CadScreen.smallBodySelectors.map((e) {
+  return find.byKey(Key(
+    '${CadScreen.smallBodySelectorKeyPrefix}'
+    '${e.name}',
+  ));
+}).toSet();
+final Map<SmallBodySelector, Finder> smallBodySelectorChipFinderMap = {
+  for (var i = 0; i < CadScreen.smallBodySelectors.length; i++)
+    CadScreen.smallBodySelectors.elementAt(i):
+        smallBodySelectorChipFinders.elementAt(i)
+};
 final textFieldFinder = find.byKey(const Key(
   '${CadScreen.smallBodySelectorKeyPrefix}'
   '${ChoiceChipInputWidget.textFieldKey}',
 ));
-
-Finder getSmallBodyFinder(
-  SmallBodySelector smallBodySelector,
-) {
-  return switch (smallBodySelector) {
-    SmallBodySelector.spkId => spkIdChipFinder,
-    SmallBodySelector.designation => designationChipFinder,
-  };
-}
+const String designation = '2023 HK';
+const int spkId = 54354503;
 
 Future<void> tapSmallBodySelector(
   WidgetTester tester,
   SmallBodySelector smallBodySelector,
 ) async {
-  await tester.tap(getSmallBodyFinder(smallBodySelector));
+  await tester.tap(smallBodySelectorChipFinderMap[smallBodySelector]!);
   await tester.pumpAndSettle();
 }
 
 void expectSmallBodySelectorSelected(
   WidgetTester tester,
-  SmallBodySelector smallBodySelector, [
-  bool expected = true,
-]) {
-  final finder = getSmallBodyFinder(smallBodySelector);
-  expect(tester.widget<ChoiceChip>(finder).selected, expected);
+  SmallBodySelector? smallBodySelector,
+) {
+  for (final entry in smallBodySelectorChipFinderMap.entries) {
+    final expected = smallBodySelector == entry.key;
+    expect(tester.widget<ChoiceChip>(entry.value).selected, expected);
+  }
 }
 
-void expectSmallBodySelectorNotSelected(
-  WidgetTester tester,
-  SmallBodySelector smallBodySelector,
+void expectSmallBodySelectorState(
+  SmallBodySelectorState expectedState,
 ) {
-  expectSmallBodySelectorSelected(
-    tester,
-    smallBodySelector,
-    false,
+  expect(
+    CadScreen.cadBloc!.state.smallBodySelectorState,
+    expectedState,
   );
 }

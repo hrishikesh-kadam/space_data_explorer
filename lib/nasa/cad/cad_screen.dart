@@ -50,7 +50,6 @@ class CadScreen extends StatelessWidget {
   static const String distFilterKeyPrefix = '${keyPrefix}distance_filter_';
   static const Key distFilterKey =
       Key('$distFilterKeyPrefix${ValueRangeFilterWidget.defaultKey}');
-
   static final Set<DistanceUnit> distFilterUnits = {
     DistanceUnit.au,
     DistanceUnit.ld,
@@ -74,6 +73,10 @@ class CadScreen extends StatelessWidget {
     SmallBodySelector.spkId,
     SmallBodySelector.designation,
   };
+  static final List<TextInputType> smallBodySelectorKeyboardTypes = [
+    TextInputType.number,
+    TextInputType.text,
+  ];
   static const String closeApproachBodySelectorKeyPrefix =
       '${keyPrefix}close_approach_body_';
   static const Key closeApproachBodySelectorKey = Key(
@@ -335,21 +338,23 @@ class CadScreen extends StatelessWidget {
       l10n.neaComet,
     };
     final Set<String> keys = smallBodySet.map((e) => e.name).toSet();
+    // TODO(hrishikesh-kadam): Move these asserts to widget
     assert(smallBodySet.length == labels.length);
     assert(smallBodySet.length == keys.length);
-    return BlocSelector<CadBloc, CadState, SmallBody>(
+    return BlocSelector<CadBloc, CadState, SmallBodyState>(
       selector: (state) {
-        return state.smallBody;
+        return state.smallBodyState;
       },
       builder: (context, state) {
         return ChoiceChipQueryWidget<SmallBody>(
           key: smallBodyFilterKey,
           keyPrefix: smallBodyFilterKeyPrefix,
+          enabled: state.enabled,
           title: l10n.smallBodyFilter,
           values: smallBodySet,
           labels: labels,
           keys: keys,
-          selected: state,
+          selected: state.smallBody,
           spacing: Dimensions.cadQueryItemSpacing,
           onChipSelected: (smallBody) {
             context.read<CadBloc>().add(CadSmallBodySelected(
@@ -367,19 +372,13 @@ class CadScreen extends StatelessWidget {
     final Set<String> labels =
         smallBodySelectors.map((e) => e.displayName).toSet();
     final Set<String> keys = smallBodySelectors.map((e) => e.name).toSet();
-    final List<TextInputType> keyboardTypes = [
-      TextInputType.number,
-      TextInputType.text,
-    ];
     final List<List<TextInputFormatter>?> inputFormattersList = [
       [FilteringTextInputFormatter.digitsOnly],
       null
     ];
-    return BlocBuilder<CadBloc, CadState>(
-      buildWhen: (previous, current) {
-        return previous.smallBodySelector != current.smallBodySelector ||
-            previous.spkId != current.spkId ||
-            previous.designation != current.designation;
+    return BlocSelector<CadBloc, CadState, SmallBodySelectorState>(
+      selector: (state) {
+        return state.smallBodySelectorState;
       },
       builder: (context, state) {
         return ChoiceChipInputWidget<SmallBodySelector>(
@@ -390,33 +389,24 @@ class CadScreen extends StatelessWidget {
           labels: labels,
           keys: keys,
           selected: state.smallBodySelector,
-          keyboardTypes: keyboardTypes,
+          textList: [
+            state.spkId?.toString() ?? '',
+            state.designation?.toString() ?? '',
+          ],
+          keyboardTypes: smallBodySelectorKeyboardTypes,
           inputFormattersList: inputFormattersList,
           textFieldWidth: Dimensions.smallBodySelectorInputWidth,
           spacing: Dimensions.cadQueryItemSpacing,
-          onChipSelected: (smallBodySelector) {
-            final cadBloc = context.read<CadBloc>();
-            cadBloc.add(CadSmallBodySelectorEvent(
-              smallBodySelector: smallBodySelector,
-              spkId: cadBloc.state.spkId,
-              designation: cadBloc.state.designation,
-            ));
-          },
-          onTextChanged: (value) {
-            final cadBloc = context.read<CadBloc>();
-            int? spkId = cadBloc.state.spkId;
-            String? designation = cadBloc.state.designation;
-            switch (cadBloc.state.smallBodySelector!) {
-              case SmallBodySelector.spkId:
-                spkId = value.isNotEmpty ? int.parse(value) : null;
-              case SmallBodySelector.designation:
-                designation = value.isNotEmpty ? value : null;
-            }
-            cadBloc.add(CadSmallBodySelectorEvent(
-              smallBodySelector: cadBloc.state.smallBodySelector,
-              spkId: spkId,
-              designation: designation,
-            ));
+          onStateChanged: (value, textList) {
+            int? spkId = textList[0].isNotEmpty ? int.parse(textList[0]) : null;
+            String? designation = textList[1].isNotEmpty ? textList[1] : null;
+            context.read<CadBloc>().add(CadSmallBodySelectorEvent(
+                  smallBodySelectorState: SmallBodySelectorState(
+                    smallBodySelector: value,
+                    spkId: spkId,
+                    designation: designation,
+                  ),
+                ));
           },
         );
       },

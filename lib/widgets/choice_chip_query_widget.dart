@@ -8,6 +8,7 @@ class ChoiceChipQueryWidget<T> extends StatelessWidget {
   const ChoiceChipQueryWidget({
     super.key,
     this.keyPrefix = '',
+    this.enabled = true,
     required this.title,
     required this.values,
     required this.labels,
@@ -18,6 +19,7 @@ class ChoiceChipQueryWidget<T> extends StatelessWidget {
   });
 
   final String keyPrefix;
+  final bool enabled;
   final String title;
   final Set<T> values;
   final Set<String> labels;
@@ -61,17 +63,23 @@ class ChoiceChipQueryWidget<T> extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 selected: selected == values.elementAt(index),
-                onSelected: (selected) {
-                  if (onChipSelected != null) {
-                    final T? value = selected ? values.elementAt(index) : null;
-                    onChipSelected!(value);
-                  }
-                },
+                onSelected: enabled
+                    ? (selected) {
+                        _onSelected(selected, index);
+                      }
+                    : null,
               );
             },
           ),
         )
       ],
     );
+  }
+
+  void _onSelected(bool selected, int index) {
+    if (onChipSelected != null) {
+      final T? value = selected ? values.elementAt(index) : null;
+      onChipSelected!(value);
+    }
   }
 }
