@@ -5,11 +5,9 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
-import '../../constants/dimensions.dart';
-import '../../globals.dart';
-import '../../widgets/query_grid_container.dart';
-
-// TODO(hrishikesh-kadam): Move this widget
+import '../constants/dimensions.dart';
+import '../globals.dart';
+import 'query_grid_container.dart';
 
 typedef ChoiceChipInputChanged<T> = void Function(
   T? value,
