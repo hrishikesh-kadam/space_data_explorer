@@ -36,7 +36,7 @@ class CadScreen extends StatelessWidget {
   final AppLocalizations l10n;
   final JsonMap? routeExtraMap;
   // ignore: unused_field
-  final _log = Logger('$appNamePascalCase.CadScreen');
+  final _logger = Logger('$appNamePascalCase.CadScreen');
   static const String keyPrefix = 'cad_screen_';
   static const Key customScrollViewKey = Key('${keyPrefix}scroll_view_key');
   static const Key searchButtonKey = Key('${keyPrefix}search_button_key');
@@ -45,8 +45,9 @@ class CadScreen extends StatelessWidget {
       '$keyPrefix${DateFilterWidget.defaultKey}_';
   static const Key dateFilterWidgetKey =
       Key('$keyPrefix${DateFilterWidget.defaultKey}');
-  static int get dateMaxDaysDefault =>
-      SbdbCadQueryParameters.dateMaxDefault.difference(DateTime.now()).inDays;
+  static int get dateMaxDaysDefault => SbdbCadQueryParameters.dateMaxDefault
+      .difference(HrkDateTime.today())
+      .inDays;
   static const String distFilterKeyPrefix = '${keyPrefix}distance_filter_';
   static const Key distFilterKey =
       Key('$distFilterKeyPrefix${ValueRangeFilterWidget.defaultKey}');

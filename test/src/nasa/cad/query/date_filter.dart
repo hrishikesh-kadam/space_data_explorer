@@ -20,8 +20,8 @@ final DateTime maxDateDefault = SbdbCadQueryParameters.dateMaxDefault;
 final String minDateTextDefault = l10n.nowToday;
 final String maxDateTextDefault =
     l10n.plusSomeDays(CadScreen.dateMaxDaysDefault);
-final DateTime minDateForTest = DateTime.now().copyWith(day: 1);
-final DateTime maxDateForTest = DateTime.now().copyWith(day: 2);
+final DateTime minDateForTest = HrkDateTime.today().copyWith(day: 1);
+final DateTime maxDateForTest = HrkDateTime.today().copyWith(day: 2);
 final DateTimeRange dateRangeForTest = DateTimeRange(
   start: minDateForTest,
   end: maxDateForTest,
