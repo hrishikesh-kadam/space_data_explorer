@@ -28,9 +28,10 @@ class DateFilterWidget extends StatelessWidget {
     this.startDateTextDefault = dateTextDefault,
     this.endDateTextDefault = dateTextDefault,
     required this.selectButtonTitle,
-    required this.onDateRangeSelected,
+    this.disableInputs = false,
     this.spacing = 8,
     this.startEndAlign = false,
+    required this.onDateRangeSelected,
   });
 
   final String keyPrefix;
@@ -44,9 +45,10 @@ class DateFilterWidget extends StatelessWidget {
   final String startDateTextDefault;
   final String endDateTextDefault;
   final String selectButtonTitle;
-  final DateRangeSelected onDateRangeSelected;
+  final bool disableInputs;
   final double spacing;
   final bool startEndAlign;
+  final DateRangeSelected onDateRangeSelected;
   // ignore: unused_field
   final _log = Logger('$appNamePascalCase.DateFilterWidget');
   static const String defaultKey = 'date_filter_widget_key';
@@ -101,15 +103,18 @@ class DateFilterWidget extends StatelessWidget {
           formattedDateString: formattedDateStringList[1],
         ),
         SizedBox(height: spacing),
-        OutlinedButton(
-          key: Key('$keyPrefix$selectButtonKey'),
-          onPressed: () {
-            dateRangePickerOnPressed(context: context);
-          },
-          child: Text(
-            selectButtonTitle,
-            style: Theme.of(context).textTheme.bodyMedium,
-            textAlign: TextAlign.center,
+        AbsorbPointer(
+          absorbing: disableInputs,
+          child: OutlinedButton(
+            key: Key('$keyPrefix$selectButtonKey'),
+            onPressed: () {
+              dateRangePickerOnPressed(context: context);
+            },
+            child: Text(
+              selectButtonTitle,
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
           ),
         )
       ],

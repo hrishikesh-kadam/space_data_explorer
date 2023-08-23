@@ -29,6 +29,7 @@ class ChoiceChipInputWidget<T> extends StatefulWidget {
     this.inputFormattersList,
     this.textFieldTextAlign = TextAlign.center,
     this.textFieldWidth = 200,
+    this.disableInputs = false,
     this.spacing = 8,
     this.onStateChanged,
   })  : assert(labels.length == values.length),
@@ -50,6 +51,7 @@ class ChoiceChipInputWidget<T> extends StatefulWidget {
   final List<List<TextInputFormatter>?>? inputFormattersList;
   final TextAlign textFieldTextAlign;
   final double textFieldWidth;
+  final bool disableInputs;
   final double spacing;
   final ChoiceChipInputChanged<T>? onStateChanged;
   static const String titleKey = 'title_key';
@@ -162,34 +164,37 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
       children: List<Widget>.generate(
         widget.values.length,
         (index) {
-          return TextFieldTapRegion(
-            child: ChoiceChip(
-              key: widget.keys != null
-                  ? Key('${widget.keyPrefix}${widget.keys!.elementAt(index)}')
-                  : null,
-              label: Text(
-                widget.labels.elementAt(index),
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              selected: selectedIndex == index,
-              onSelected: (selected) {
-                setState(() {
-                  selectedIndex = selected ? index : null;
-                });
-                if (selectedIndex != null) {
-                  if (textFocusNode.hasFocus && requiresKeyboardChange) {
-                    if (keyboardVisible == true ||
-                        !keyboardVisibilitySupported) {
-                      textFocusNode.unfocus();
-                      WidgetsBinding.instance.addPostFrameCallback(
-                        (_) => textFocusNode.requestFocus(),
-                      );
+          return AbsorbPointer(
+            absorbing: widget.disableInputs,
+            child: TextFieldTapRegion(
+              child: ChoiceChip(
+                key: widget.keys != null
+                    ? Key('${widget.keyPrefix}${widget.keys!.elementAt(index)}')
+                    : null,
+                label: Text(
+                  widget.labels.elementAt(index),
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                selected: selectedIndex == index,
+                onSelected: (selected) {
+                  setState(() {
+                    selectedIndex = selected ? index : null;
+                  });
+                  if (selectedIndex != null) {
+                    if (textFocusNode.hasFocus && requiresKeyboardChange) {
+                      if (keyboardVisible == true ||
+                          !keyboardVisibilitySupported) {
+                        textFocusNode.unfocus();
+                        WidgetsBinding.instance.addPostFrameCallback(
+                          (_) => textFocusNode.requestFocus(),
+                        );
+                      }
                     }
+                    textController.text = textList[selectedIndex!];
                   }
-                  textController.text = textList[selectedIndex!];
-                }
-                callOnStateChanged();
-              },
+                  callOnStateChanged();
+                },
+              ),
             ),
           );
         },
@@ -202,33 +207,36 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
   }) {
     return SizedBox(
       width: widget.textFieldWidth,
-      child: TextField(
-        key: Key('${widget.keyPrefix}${ChoiceChipInputWidget.textFieldKey}'),
-        enabled: selectedIndex != null,
-        controller: textController,
-        focusNode: textFocusNode,
-        keyboardType: widget.keyboardTypes != null && selectedIndex != null
-            ? widget.keyboardTypes![selectedIndex!]
-            : null,
-        inputFormatters:
-            widget.inputFormattersList != null && selectedIndex != null
-                ? widget.inputFormattersList![selectedIndex!]
-                : null,
-        textAlign: widget.textFieldTextAlign,
-        style: Theme.of(context).textTheme.bodyMedium,
-        decoration: const InputDecoration(
-          isDense: true,
-          border: OutlineInputBorder(),
+      child: AbsorbPointer(
+        absorbing: widget.disableInputs,
+        child: TextField(
+          key: Key('${widget.keyPrefix}${ChoiceChipInputWidget.textFieldKey}'),
+          enabled: selectedIndex != null,
+          controller: textController,
+          focusNode: textFocusNode,
+          keyboardType: widget.keyboardTypes != null && selectedIndex != null
+              ? widget.keyboardTypes![selectedIndex!]
+              : null,
+          inputFormatters:
+              widget.inputFormattersList != null && selectedIndex != null
+                  ? widget.inputFormattersList![selectedIndex!]
+                  : null,
+          textAlign: widget.textFieldTextAlign,
+          style: Theme.of(context).textTheme.bodyMedium,
+          decoration: const InputDecoration(
+            isDense: true,
+            border: OutlineInputBorder(),
+          ),
+          onTapOutside: (event) {
+            if (textFocusNode.hasFocus) {
+              textFocusNode.unfocus();
+            }
+          },
+          onChanged: (text) {
+            textList[selectedIndex!] = text;
+            callOnStateChanged();
+          },
         ),
-        onTapOutside: (event) {
-          if (textFocusNode.hasFocus) {
-            textFocusNode.unfocus();
-          }
-        },
-        onChanged: (text) {
-          textList[selectedIndex!] = text;
-          callOnStateChanged();
-        },
       ),
     );
   }

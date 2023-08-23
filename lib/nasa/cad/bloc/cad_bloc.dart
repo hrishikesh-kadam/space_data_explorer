@@ -34,7 +34,10 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     CadRequested event,
     Emitter<CadState> emit,
   ) async {
-    emit(state.copyWith(networkState: NetworkState.sending));
+    emit(state.copyWith(
+      networkState: NetworkState.preparing,
+      disableInputs: true,
+    ));
     SbdbCadQueryParameters queryParameters = const SbdbCadQueryParameters();
     if (state.dateRange != null) {
       queryParameters = queryParameters.copyWithDateRange(
@@ -63,18 +66,24 @@ class CadBloc extends Bloc<CadEvent, CadState> {
       );
     }
     queryParameters = queryParameters.copyWithDataOutput(state.dataOutputSet);
+    emit(state.copyWith(networkState: NetworkState.sending));
     try {
       Response<SbdbCadBody> response = await sbdbCadApi.get(
         queryParameters: queryParameters.toJson(),
       );
+      // await Future.delayed(const Duration(seconds: 10));
       _logger.fine('_onCadRequested success');
       emit(state.copyWith(
         networkState: NetworkState.success,
+        disableInputs: false,
         sbdbCadBody: response.data,
       ));
     } on Exception catch (e, s) {
       _logger.error('_onCadRequested failure', e, s);
-      emit(state.copyWith(networkState: NetworkState.failure));
+      emit(state.copyWith(
+        networkState: NetworkState.failure,
+        disableInputs: false,
+      ));
     }
   }
 

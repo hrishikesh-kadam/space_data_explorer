@@ -180,7 +180,8 @@ class CadScreen extends StatelessWidget {
             child: Center(
               child: OutlinedButton(
                 key: searchButtonKey,
-                onPressed: state == NetworkState.sending
+                onPressed: state == NetworkState.preparing ||
+                        state == NetworkState.sending
                     ? null
                     : () async {
                         context.read<CadBloc>().add(const CadRequested());
@@ -250,11 +251,12 @@ class CadScreen extends StatelessWidget {
   Widget _getDateFilterWidget({
     required BuildContext context,
   }) {
-    return BlocSelector<CadBloc, CadState, DateTimeRange?>(
-      selector: (state) {
-        return state.dateRange;
+    return BlocBuilder<CadBloc, CadState>(
+      buildWhen: (previous, current) {
+        return previous.dateRange != current.dateRange ||
+            previous.disableInputs != current.disableInputs;
       },
-      builder: (context, dateRange) {
+      builder: (context, cadState) {
         return BlocBuilder<SettingsBloc, SettingsState>(
           buildWhen: (previous, current) {
             return previous.dateFormatPattern != current.dateFormatPattern ||
@@ -275,13 +277,14 @@ class CadScreen extends StatelessWidget {
               title: l10n.dateFilter,
               startTitle: ltrLanguage ? '${l10n.minimum}:' : ':${l10n.minimum}',
               endTitle: ltrLanguage ? '${l10n.maximum}:' : ':${l10n.maximum}',
-              dateRange: dateRange,
+              dateRange: cadState.dateRange,
               firstDate: DateTime(1900, 1, 1),
               lastDate: DateTime(2200, 12, 31),
               dateFormat: dateFormat,
               startDateTextDefault: l10n.nowToday,
               endDateTextDefault: l10n.plusSomeDays(dateMaxDaysDefault),
               selectButtonTitle: l10n.selectDateRange,
+              disableInputs: cadState.disableInputs,
               spacing: Dimensions.cadQueryItemSpacing,
               onDateRangeSelected: (dateRange) {
                 context.read<CadBloc>().add(CadDateRangeSelected(
@@ -312,9 +315,10 @@ class CadScreen extends StatelessWidget {
     final Set<String> unitSymbols = distFilterUnits.map((e) {
       return e.symbol;
     }).toSet();
-    return BlocSelector<CadBloc, CadState, DistanceRange>(
-      selector: (state) {
-        return state.distRange;
+    return BlocBuilder<CadBloc, CadState>(
+      buildWhen: (previous, current) {
+        return previous.distRange != current.distRange ||
+            previous.disableInputs != current.disableInputs;
       },
       builder: (context, state) {
         return ValueRangeFilterWidget<double, DistanceUnit>(
@@ -322,7 +326,7 @@ class CadScreen extends StatelessWidget {
           keyPrefix: distFilterKeyPrefix,
           title: l10n.distFilter,
           labels: labels,
-          range: state,
+          range: state.distRange,
           rangeText: context.read<CadBloc>().state.distRangeText,
           defaultRange: defaultRange,
           valueParser: (text) => double.tryParse(text),
@@ -330,6 +334,7 @@ class CadScreen extends StatelessWidget {
           inputFormatters: inputFormatters,
           units: distFilterUnits,
           unitSymbols: unitSymbols,
+          disableInputs: state.disableInputs,
           spacing: Dimensions.cadQueryItemSpacing,
           onValueRangeChanged: (range, rangeText) {
             context.read<CadBloc>().add(CadDistRangeEvent(
@@ -353,20 +358,22 @@ class CadScreen extends StatelessWidget {
       l10n.neaComet,
     };
     final Set<String> keys = smallBodySet.map((e) => e.name).toSet();
-    return BlocSelector<CadBloc, CadState, SmallBodyFilterState>(
-      selector: (state) {
-        return state.smallBodyFilterState;
+    return BlocBuilder<CadBloc, CadState>(
+      buildWhen: (previous, current) {
+        return previous.smallBodyFilterState != current.smallBodyFilterState ||
+            previous.disableInputs != current.disableInputs;
       },
       builder: (context, state) {
         return ChoiceChipQueryWidget<SmallBodyFilter>(
           key: smallBodyFilterKey,
           keyPrefix: smallBodyFilterKeyPrefix,
-          enabled: state.enabled,
+          enabled: state.smallBodyFilterState.enabled,
           title: l10n.smallBodyFilter,
           values: smallBodySet,
           labels: labels,
           keys: keys,
-          selected: state.smallBodyFilter,
+          selected: state.smallBodyFilterState.smallBodyFilter,
+          disableInputs: state.disableInputs,
           spacing: Dimensions.cadQueryItemSpacing,
           onChipSelected: (smallBodyFilter) {
             context.read<CadBloc>().add(CadSmallBodyFilterSelected(
@@ -388,9 +395,11 @@ class CadScreen extends StatelessWidget {
       [FilteringTextInputFormatter.digitsOnly],
       null
     ];
-    return BlocSelector<CadBloc, CadState, SmallBodySelectorState>(
-      selector: (state) {
-        return state.smallBodySelectorState;
+    return BlocBuilder<CadBloc, CadState>(
+      buildWhen: (previous, current) {
+        return previous.smallBodySelectorState !=
+                current.smallBodySelectorState ||
+            previous.disableInputs != current.disableInputs;
       },
       builder: (context, state) {
         return ChoiceChipInputWidget<SmallBodySelector>(
@@ -400,14 +409,15 @@ class CadScreen extends StatelessWidget {
           values: smallBodySelectors,
           labels: labels,
           keys: keys,
-          selected: state.smallBodySelector,
+          selected: state.smallBodySelectorState.smallBodySelector,
           textList: [
-            state.spkId?.toString() ?? '',
-            state.designation?.toString() ?? '',
+            state.smallBodySelectorState.spkId?.toString() ?? '',
+            state.smallBodySelectorState.designation?.toString() ?? '',
           ],
           keyboardTypes: smallBodySelectorKeyboardTypes,
           inputFormattersList: inputFormattersList,
           textFieldWidth: Dimensions.smallBodySelectorInputWidth,
+          disableInputs: state.disableInputs,
           spacing: Dimensions.cadQueryItemSpacing,
           onStateChanged: (value, textList) {
             int? spkId = textList[0].isNotEmpty ? int.parse(textList[0]) : null;
@@ -441,9 +451,10 @@ class CadScreen extends StatelessWidget {
       l10n.neptune,
     };
     final Set<String> keys = closeApproachBodySet.map((e) => e.name).toSet();
-    return BlocSelector<CadBloc, CadState, CloseApproachBody>(
-      selector: (state) {
-        return state.closeApproachBody;
+    return BlocBuilder<CadBloc, CadState>(
+      buildWhen: (previous, current) {
+        return previous.closeApproachBody != current.closeApproachBody ||
+            previous.disableInputs != current.disableInputs;
       },
       builder: (context, state) {
         return ChoiceChipQueryWidget<CloseApproachBody>(
@@ -453,7 +464,8 @@ class CadScreen extends StatelessWidget {
           values: closeApproachBodySet,
           labels: labels,
           keys: keys,
-          selected: state,
+          selected: state.closeApproachBody,
+          disableInputs: state.disableInputs,
           spacing: Dimensions.cadQueryItemSpacing,
           onChipSelected: (closeApproachBody) {
             context.read<CadBloc>().add(CadCloseApproachBodySelected(
@@ -474,9 +486,10 @@ class CadScreen extends StatelessWidget {
       l10n.fullname,
     };
     final Set<String> keys = dataOutputSet.map((e) => e.name).toSet();
-    return BlocSelector<CadBloc, CadState, Set<DataOutput>>(
-      selector: (state) {
-        return state.dataOutputSet;
+    return BlocBuilder<CadBloc, CadState>(
+      buildWhen: (previous, current) {
+        return previous.dataOutputSet != current.dataOutputSet ||
+            previous.disableInputs != current.disableInputs;
       },
       builder: (context, state) {
         return FilterChipQueryWidget<DataOutput>(
@@ -486,7 +499,8 @@ class CadScreen extends StatelessWidget {
           values: dataOutputSet,
           labels: labels,
           keys: keys,
-          selected: state,
+          selected: state.dataOutputSet,
+          disableInputs: state.disableInputs,
           spacing: Dimensions.cadQueryItemSpacing,
           onChipsSelected: (dataOutputSet) {
             context.read<CadBloc>().add(CadDataOutputEvent(

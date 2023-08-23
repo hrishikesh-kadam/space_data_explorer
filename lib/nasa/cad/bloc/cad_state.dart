@@ -22,6 +22,7 @@ class CadState with _$CadState {
     CloseApproachBody closeApproachBody,
     @Default({}) Set<DataOutput> dataOutputSet,
     @Default(NetworkState.initial) NetworkState networkState,
+    @Default(false) bool disableInputs,
     SbdbCadBody? sbdbCadBody,
   }) = _CadState;
 
@@ -53,7 +54,13 @@ class SmallBodySelectorState with _$SmallBodySelectorState {
   }) = _SmallBodySelectorState;
 }
 
-enum NetworkState { initial, sending, success, failure }
+enum NetworkState {
+  initial,
+  preparing,
+  sending,
+  success,
+  failure,
+}
 
 const minDistDefault = Distance(
   unit: SbdbCadQueryParameters.distUnitDefault,

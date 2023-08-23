@@ -14,6 +14,7 @@ class ChoiceChipQueryWidget<T> extends StatelessWidget {
     required this.labels,
     this.keys,
     this.selected,
+    this.disableInputs = false,
     this.spacing = 8,
     this.onChipSelected,
   })  : assert(labels.length == values.length),
@@ -26,6 +27,7 @@ class ChoiceChipQueryWidget<T> extends StatelessWidget {
   final Set<String> labels;
   final Set<String>? keys;
   final T? selected;
+  final bool disableInputs;
   final double spacing;
   final ChipSelected<T>? onChipSelected;
   static const String defaultKey = 'choice_chip_query_widget_key';
@@ -48,32 +50,39 @@ class ChoiceChipQueryWidget<T> extends StatelessWidget {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         SizedBox(height: spacing),
-        Wrap(
-          spacing: spacing,
-          runSpacing: spacing,
-          alignment: WrapAlignment.center,
-          children: List<Widget>.generate(
-            values.length,
-            (index) {
-              return ChoiceChip(
-                key: keys != null
-                    ? Key('$keyPrefix${keys!.elementAt(index)}')
-                    : null,
-                label: Text(
-                  labels.elementAt(index),
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                selected: selected == values.elementAt(index),
-                onSelected: enabled
-                    ? (selected) {
-                        _onSelected(selected, index);
-                      }
-                    : null,
-              );
-            },
-          ),
-        )
+        _getChoiceChips(context)
       ],
+    );
+  }
+
+  Wrap _getChoiceChips(BuildContext context) {
+    return Wrap(
+      spacing: spacing,
+      runSpacing: spacing,
+      alignment: WrapAlignment.center,
+      children: List<Widget>.generate(
+        values.length,
+        (index) {
+          return AbsorbPointer(
+            absorbing: disableInputs,
+            child: ChoiceChip(
+              key: keys != null
+                  ? Key('$keyPrefix${keys!.elementAt(index)}')
+                  : null,
+              label: Text(
+                labels.elementAt(index),
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              selected: selected == values.elementAt(index),
+              onSelected: enabled
+                  ? (selected) {
+                      _onSelected(selected, index);
+                    }
+                  : null,
+            ),
+          );
+        },
+      ),
     );
   }
 

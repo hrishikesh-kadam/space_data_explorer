@@ -28,6 +28,7 @@ mixin _$CadState {
   CloseApproachBody get closeApproachBody => throw _privateConstructorUsedError;
   Set<DataOutput> get dataOutputSet => throw _privateConstructorUsedError;
   NetworkState get networkState => throw _privateConstructorUsedError;
+  bool get disableInputs => throw _privateConstructorUsedError;
   SbdbCadBody? get sbdbCadBody => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -49,6 +50,7 @@ abstract class $CadStateCopyWith<$Res> {
       CloseApproachBody closeApproachBody,
       Set<DataOutput> dataOutputSet,
       NetworkState networkState,
+      bool disableInputs,
       SbdbCadBody? sbdbCadBody});
 
   $ValueRangeCopyWith<double, DistanceUnit, $Res> get distRange;
@@ -79,6 +81,7 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
     Object? closeApproachBody = null,
     Object? dataOutputSet = null,
     Object? networkState = null,
+    Object? disableInputs = null,
     Object? sbdbCadBody = freezed,
   }) {
     return _then(_value.copyWith(
@@ -114,6 +117,10 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
           ? _value.networkState
           : networkState // ignore: cast_nullable_to_non_nullable
               as NetworkState,
+      disableInputs: null == disableInputs
+          ? _value.disableInputs
+          : disableInputs // ignore: cast_nullable_to_non_nullable
+              as bool,
       sbdbCadBody: freezed == sbdbCadBody
           ? _value.sbdbCadBody
           : sbdbCadBody // ignore: cast_nullable_to_non_nullable
@@ -186,6 +193,7 @@ abstract class _$$_CadStateCopyWith<$Res> implements $CadStateCopyWith<$Res> {
       CloseApproachBody closeApproachBody,
       Set<DataOutput> dataOutputSet,
       NetworkState networkState,
+      bool disableInputs,
       SbdbCadBody? sbdbCadBody});
 
   @override
@@ -219,6 +227,7 @@ class __$$_CadStateCopyWithImpl<$Res>
     Object? closeApproachBody = null,
     Object? dataOutputSet = null,
     Object? networkState = null,
+    Object? disableInputs = null,
     Object? sbdbCadBody = freezed,
   }) {
     return _then(_$_CadState(
@@ -254,6 +263,10 @@ class __$$_CadStateCopyWithImpl<$Res>
           ? _value.networkState
           : networkState // ignore: cast_nullable_to_non_nullable
               as NetworkState,
+      disableInputs: null == disableInputs
+          ? _value.disableInputs
+          : disableInputs // ignore: cast_nullable_to_non_nullable
+              as bool,
       sbdbCadBody: freezed == sbdbCadBody
           ? _value.sbdbCadBody
           : sbdbCadBody // ignore: cast_nullable_to_non_nullable
@@ -276,6 +289,7 @@ class _$_CadState implements _CadState {
       this.closeApproachBody = SbdbCadQueryParameters.closeApproachBodyDefault,
       final Set<DataOutput> dataOutputSet = const {},
       this.networkState = NetworkState.initial,
+      this.disableInputs = false,
       this.sbdbCadBody})
       : _dataOutputSet = dataOutputSet;
 
@@ -309,11 +323,14 @@ class _$_CadState implements _CadState {
   @JsonKey()
   final NetworkState networkState;
   @override
+  @JsonKey()
+  final bool disableInputs;
+  @override
   final SbdbCadBody? sbdbCadBody;
 
   @override
   String toString() {
-    return 'CadState(dateRange: $dateRange, distRange: $distRange, distRangeText: $distRangeText, smallBodyFilterState: $smallBodyFilterState, smallBodySelectorState: $smallBodySelectorState, closeApproachBody: $closeApproachBody, dataOutputSet: $dataOutputSet, networkState: $networkState, sbdbCadBody: $sbdbCadBody)';
+    return 'CadState(dateRange: $dateRange, distRange: $distRange, distRangeText: $distRangeText, smallBodyFilterState: $smallBodyFilterState, smallBodySelectorState: $smallBodySelectorState, closeApproachBody: $closeApproachBody, dataOutputSet: $dataOutputSet, networkState: $networkState, disableInputs: $disableInputs, sbdbCadBody: $sbdbCadBody)';
   }
 
   @override
@@ -337,6 +354,8 @@ class _$_CadState implements _CadState {
                 .equals(other._dataOutputSet, _dataOutputSet) &&
             (identical(other.networkState, networkState) ||
                 other.networkState == networkState) &&
+            (identical(other.disableInputs, disableInputs) ||
+                other.disableInputs == disableInputs) &&
             (identical(other.sbdbCadBody, sbdbCadBody) ||
                 other.sbdbCadBody == sbdbCadBody));
   }
@@ -352,6 +371,7 @@ class _$_CadState implements _CadState {
       closeApproachBody,
       const DeepCollectionEquality().hash(_dataOutputSet),
       networkState,
+      disableInputs,
       sbdbCadBody);
 
   @JsonKey(ignore: true)
@@ -371,6 +391,7 @@ abstract class _CadState implements CadState {
       final CloseApproachBody closeApproachBody,
       final Set<DataOutput> dataOutputSet,
       final NetworkState networkState,
+      final bool disableInputs,
       final SbdbCadBody? sbdbCadBody}) = _$_CadState;
 
   @override
@@ -389,6 +410,8 @@ abstract class _CadState implements CadState {
   Set<DataOutput> get dataOutputSet;
   @override
   NetworkState get networkState;
+  @override
+  bool get disableInputs;
   @override
   SbdbCadBody? get sbdbCadBody;
   @override

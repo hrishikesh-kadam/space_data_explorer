@@ -30,8 +30,9 @@ class ValueRangeFilterWidget<V, U extends Unit> extends StatefulWidget {
     this.textFieldWidth = 80,
     this.units,
     this.unitSymbols,
-    this.onValueRangeChanged,
+    this.disableInputs = false,
     this.spacing = 8,
+    this.onValueRangeChanged,
   })  : assert(labels.length == 2),
         assert(units?.length == unitSymbols?.length);
 
@@ -48,6 +49,7 @@ class ValueRangeFilterWidget<V, U extends Unit> extends StatefulWidget {
   final double textFieldWidth;
   final Set<U>? units;
   final Set<String>? unitSymbols;
+  final bool disableInputs;
   final double spacing;
   final ValueRangeChanged<V, U>? onValueRangeChanged;
   static const String defaultKey = 'value_range_filter_widget_key';
@@ -230,48 +232,51 @@ class _ValueRangeFilterWidgetState<V, U extends Unit>
   }) {
     return SizedBox(
       width: widget.textFieldWidth,
-      child: TapRegion(
-        onTapOutside: (event) {
-          if (textFocusNodes[index].hasFocus) {
-            if (textControllers[index].text.isEmpty &&
-                defaultRangeList[index]?.value != null) {
-              setState(() {
-                rangeList[index] = defaultRangeList[index]!;
-                rangeTextList[index] = ValueUnit(
-                  value: defaultRangeList[index]!.value!.toString(),
-                );
-                // Required for Android, Chrome on Android
-                // Clicking on adjacent TextField, doesn't give hasFocus()
-                // value as false in prepareState()
-                textControllers[index].text = rangeTextList[index].value!;
-              });
-              callOnValueRangeChanged();
-            }
-          }
-        },
-        child: TextField(
-          key: Key('${widget.keyPrefix}text_field_$index'),
-          controller: textControllers[index],
-          focusNode: textFocusNodes[index],
-          keyboardType: widget.keyboardType,
-          inputFormatters: widget.inputFormatters,
-          textAlign: widget.textFieldTextAlign,
-          style: Theme.of(context).textTheme.bodyMedium,
-          decoration: const InputDecoration(
-            isDense: true,
-            border: OutlineInputBorder(),
-          ),
+      child: AbsorbPointer(
+        absorbing: widget.disableInputs,
+        child: TapRegion(
           onTapOutside: (event) {
             if (textFocusNodes[index].hasFocus) {
-              textFocusNodes[index].unfocus();
+              if (textControllers[index].text.isEmpty &&
+                  defaultRangeList[index]?.value != null) {
+                setState(() {
+                  rangeList[index] = defaultRangeList[index]!;
+                  rangeTextList[index] = ValueUnit(
+                    value: defaultRangeList[index]!.value!.toString(),
+                  );
+                  // Required for Android, Chrome on Android
+                  // Clicking on adjacent TextField, doesn't give hasFocus()
+                  // value as false in prepareState()
+                  textControllers[index].text = rangeTextList[index].value!;
+                });
+                callOnValueRangeChanged();
+              }
             }
           },
-          onChanged: (text) {
-            rangeTextList[index] = ValueUnit(value: text);
-            V? value = widget.valueParser(text);
-            rangeList[index] = rangeList[index].copyWith(value: value);
-            callOnValueRangeChanged();
-          },
+          child: TextField(
+            key: Key('${widget.keyPrefix}text_field_$index'),
+            controller: textControllers[index],
+            focusNode: textFocusNodes[index],
+            keyboardType: widget.keyboardType,
+            inputFormatters: widget.inputFormatters,
+            textAlign: widget.textFieldTextAlign,
+            style: Theme.of(context).textTheme.bodyMedium,
+            decoration: const InputDecoration(
+              isDense: true,
+              border: OutlineInputBorder(),
+            ),
+            onTapOutside: (event) {
+              if (textFocusNodes[index].hasFocus) {
+                textFocusNodes[index].unfocus();
+              }
+            },
+            onChanged: (text) {
+              rangeTextList[index] = ValueUnit(value: text);
+              V? value = widget.valueParser(text);
+              rangeList[index] = rangeList[index].copyWith(value: value);
+              callOnValueRangeChanged();
+            },
+          ),
         ),
       ),
     );
@@ -301,15 +306,18 @@ class _ValueRangeFilterWidgetState<V, U extends Unit>
           ),
         ));
       }
-      return DropdownButton<U>(
-        key: Key('${widget.keyPrefix}unit_dropdown_$index'),
-        items: dropDownItems,
-        value: rangeList[index].unit,
-        onChanged: (unit) {
-          assert(unit != null);
-          rangeList[index] = rangeList[index].copyWith(unit: unit);
-          callOnValueRangeChanged();
-        },
+      return AbsorbPointer(
+        absorbing: widget.disableInputs,
+        child: DropdownButton<U>(
+          key: Key('${widget.keyPrefix}unit_dropdown_$index'),
+          items: dropDownItems,
+          value: rangeList[index].unit,
+          onChanged: (unit) {
+            assert(unit != null);
+            rangeList[index] = rangeList[index].copyWith(unit: unit);
+            callOnValueRangeChanged();
+          },
+        ),
       );
     }
   }

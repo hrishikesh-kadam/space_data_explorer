@@ -14,6 +14,7 @@ class FilterChipQueryWidget<T> extends StatelessWidget {
     required this.labels,
     this.keys,
     this.selected = const {},
+    this.disableInputs = false,
     this.spacing = 8,
     this.onChipsSelected,
   })  : assert(labels.length == values.length),
@@ -26,6 +27,7 @@ class FilterChipQueryWidget<T> extends StatelessWidget {
   final Set<String> labels;
   final Set<String>? keys;
   final Set<T> selected;
+  final bool disableInputs;
   final double spacing;
   final ChipsSelected<T>? onChipsSelected;
   static const String defaultKey = 'filter_chip_query_widget_key';
@@ -48,32 +50,39 @@ class FilterChipQueryWidget<T> extends StatelessWidget {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         SizedBox(height: spacing),
-        Wrap(
-          spacing: spacing,
-          runSpacing: spacing,
-          alignment: WrapAlignment.center,
-          children: List<Widget>.generate(
-            values.length,
-            (index) {
-              return FilterChip(
-                key: keys != null
-                    ? Key('$keyPrefix${keys!.elementAt(index)}')
-                    : null,
-                label: Text(
-                  labels.elementAt(index),
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                selected: selected.contains(values.elementAt(index)),
-                onSelected: enabled
-                    ? (selectedBool) {
-                        _onSelected(selectedBool, index);
-                      }
-                    : null,
-              );
-            },
-          ),
-        )
+        _getFilterChips(context)
       ],
+    );
+  }
+
+  Wrap _getFilterChips(BuildContext context) {
+    return Wrap(
+      spacing: spacing,
+      runSpacing: spacing,
+      alignment: WrapAlignment.center,
+      children: List<Widget>.generate(
+        values.length,
+        (index) {
+          return AbsorbPointer(
+            absorbing: disableInputs,
+            child: FilterChip(
+              key: keys != null
+                  ? Key('$keyPrefix${keys!.elementAt(index)}')
+                  : null,
+              label: Text(
+                labels.elementAt(index),
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              selected: selected.contains(values.elementAt(index)),
+              onSelected: enabled
+                  ? (selectedBool) {
+                      _onSelected(selectedBool, index);
+                    }
+                  : null,
+            ),
+          );
+        },
+      ),
     );
   }
 
