@@ -161,6 +161,23 @@ void main() {
       expect(state.distRangeText, distRangeTextNonDefault);
     });
 
+    testWidgets('disableInputs', (tester) async {
+      await pumpCadRouteAsInitialLocation(tester);
+      DistanceFilter filter = DistanceFilter.min;
+      expect(getTextFieldFinder(filter).hitTestable().evaluate().length, 1);
+      expect(getUnitDropdownFinder(filter).hitTestable().evaluate().length, 1);
+      filter = DistanceFilter.max;
+      expect(getTextFieldFinder(filter).hitTestable().evaluate().length, 1);
+      expect(getUnitDropdownFinder(filter).hitTestable().evaluate().length, 1);
+      await emitDisableInputs(tester);
+      filter = DistanceFilter.min;
+      expect(getTextFieldFinder(filter).hitTestable().evaluate().length, 0);
+      expect(getUnitDropdownFinder(filter).hitTestable().evaluate().length, 0);
+      filter = DistanceFilter.max;
+      expect(getTextFieldFinder(filter).hitTestable().evaluate().length, 0);
+      expect(getUnitDropdownFinder(filter).hitTestable().evaluate().length, 0);
+    });
+
     testWidgets('CadBloc prefilled, reset', (tester) async {
       final cadBloc = getCadBloc();
       cadBloc.add(CadDistRangeEvent(

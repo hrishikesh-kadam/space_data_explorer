@@ -59,7 +59,7 @@ class CadScreen extends StatelessWidget {
       '${keyPrefix}small_body_filter_';
   static const Key smallBodyFilterKey =
       Key('$smallBodyFilterKeyPrefix${ChoiceChipQueryWidget.defaultKey}');
-  static const Set<SmallBodyFilter> smallBodySet = {
+  static const Set<SmallBodyFilter> smallBodyFilterSet = {
     SmallBodyFilter.neo,
     SmallBodyFilter.pha,
     SmallBodyFilter.nea,
@@ -357,7 +357,7 @@ class CadScreen extends StatelessWidget {
       l10n.comet,
       l10n.neaComet,
     };
-    final Set<String> keys = smallBodySet.map((e) => e.name).toSet();
+    final Set<String> keys = smallBodyFilterSet.map((e) => e.name).toSet();
     return BlocBuilder<CadBloc, CadState>(
       buildWhen: (previous, current) {
         return previous.smallBodyFilterState != current.smallBodyFilterState ||
@@ -369,7 +369,7 @@ class CadScreen extends StatelessWidget {
           keyPrefix: smallBodyFilterKeyPrefix,
           enabled: state.smallBodyFilterState.enabled,
           title: l10n.smallBodyFilter,
-          values: smallBodySet,
+          values: smallBodyFilterSet,
           labels: labels,
           keys: keys,
           selected: state.smallBodyFilterState.smallBodyFilter,

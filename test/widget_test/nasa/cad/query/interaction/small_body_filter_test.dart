@@ -17,7 +17,7 @@ void main() {
       await tapSearchButton(tester);
     });
 
-    testWidgets('No Interaction', (tester) async {
+    testWidgets('No interaction', (tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       expect(smallBodyFilterWidgetFinder, findsOneWidget);
       expectSmallBodyFilterSelected(
@@ -28,7 +28,7 @@ void main() {
           const SmallBodyFilterState());
     });
 
-    testWidgets('Select and Unselect ${SmallBodyFilter.pha.name}',
+    testWidgets('Select and unselect ${SmallBodyFilter.pha.name}',
         (tester) async {
       const smallBodyFilter = SmallBodyFilter.pha;
       await pumpCadRouteAsInitialLocation(tester);
@@ -47,7 +47,7 @@ void main() {
           const SmallBodyFilterState());
     });
 
-    testWidgets('Select and Search Each', (tester) async {
+    testWidgets('Select and search each', (tester) async {
       final List<SbdbCadQueryParameters> queryParamtersList = [
         const SbdbCadQueryParameters(),
         const SbdbCadQueryParameters(pha: true),
@@ -56,8 +56,8 @@ void main() {
         const SbdbCadQueryParameters(neaComet: true),
       ];
       await pumpCadRouteAsInitialLocation(tester);
-      for (var i = 0; i < CadScreen.smallBodySet.length; i++) {
-        final smallBodyFilter = CadScreen.smallBodySet.elementAt(i);
+      for (var i = 0; i < CadScreen.smallBodyFilterSet.length; i++) {
+        final smallBodyFilter = CadScreen.smallBodyFilterSet.elementAt(i);
         await tapSmallBodyFilter(tester, smallBodyFilter: smallBodyFilter);
         expectSmallBodyFilterSelected(tester, smallBodyFilter: smallBodyFilter);
         expect(
@@ -107,7 +107,7 @@ void main() {
 
     testWidgets(
         'Select ${SmallBodyFilter.pha.name}, '
-        'Select and unselect ${SmallBodySelector.designation.name}',
+        'select and unselect ${SmallBodySelector.designation.name}',
         (tester) async {
       const smallBodyFilter = SmallBodyFilter.pha;
       const smallBodySelector = SmallBodySelector.designation;
@@ -142,6 +142,19 @@ void main() {
         tester,
         const SbdbCadQueryParameters(pha: true),
       );
+    });
+
+    testWidgets('disableInputs', (tester) async {
+      await pumpCadRouteAsInitialLocation(tester);
+      for (final smallBodyFilter in CadScreen.smallBodyFilterSet) {
+        final chipFinder = smallBodyFilterChipFinderMap[smallBodyFilter]!;
+        expect(chipFinder.hitTestable().evaluate().length, 1);
+      }
+      await emitDisableInputs(tester);
+      for (final smallBodyFilter in CadScreen.smallBodyFilterSet) {
+        final chipFinder = smallBodyFilterChipFinderMap[smallBodyFilter]!;
+        expect(chipFinder.hitTestable().evaluate().length, 0);
+      }
     });
   });
 }

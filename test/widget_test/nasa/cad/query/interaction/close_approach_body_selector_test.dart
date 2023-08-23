@@ -16,7 +16,7 @@ void main() {
       await tapSearchButton(tester);
     });
 
-    testWidgets('No Interaction', (tester) async {
+    testWidgets('No interaction', (tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       expect(closeApproachBodySelectorWidgetFinder, findsOneWidget);
       expectCloseApproachBodySelected(
@@ -29,7 +29,7 @@ void main() {
       );
     });
 
-    testWidgets('Select and Unselect ${CloseApproachBody.moon.name}',
+    testWidgets('Select and unselect ${CloseApproachBody.moon.name}',
         (tester) async {
       const closeApproachBody = CloseApproachBody.moon;
       await pumpCadRouteAsInitialLocation(tester);
@@ -49,11 +49,10 @@ void main() {
       );
     });
 
-    testWidgets('Select and Search Each', (tester) async {
+    testWidgets('Select and search each', (tester) async {
       await pumpCadRouteAsInitialLocation(tester);
-      for (var i = 0; i < CadScreen.closeApproachBodySet.length; i++) {
+      for (final closeApproachBody in CadScreen.closeApproachBodySet) {
         await ensureSelectorWidgetVisible(tester);
-        final closeApproachBody = CadScreen.closeApproachBodySet.elementAt(i);
         await tapCloseApproachBody(tester,
             closeApproachBody: closeApproachBody);
         expectCloseApproachBodySelected(tester,
@@ -67,6 +66,20 @@ void main() {
           tester,
           verifyCloseApproachBody,
         );
+      }
+    });
+
+    testWidgets('disableInput', (tester) async {
+      await pumpCadRouteAsInitialLocation(tester);
+      await ensureSelectorWidgetVisible(tester);
+      for (final closeApproachBody in CadScreen.closeApproachBodySet) {
+        final chipFinder = closeApproachBodyChipFinderMap[closeApproachBody]!;
+        expect(chipFinder.hitTestable().evaluate().length, 1);
+      }
+      await emitDisableInputs(tester);
+      for (final closeApproachBody in CadScreen.closeApproachBodySet) {
+        final chipFinder = closeApproachBodyChipFinderMap[closeApproachBody]!;
+        expect(chipFinder.hitTestable().evaluate().length, 0);
       }
     });
   });

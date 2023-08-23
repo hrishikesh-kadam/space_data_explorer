@@ -7,6 +7,7 @@ import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:space_data_explorer/nasa/cad/bloc/cad_bloc.dart';
 import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
+import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/widgets/choice_chip_input_widget.dart';
 import '../../../../../src/nasa/cad/cad_route.dart';
 import '../../../../../src/nasa/cad/query/small_body_selector.dart';
@@ -24,7 +25,7 @@ void main() {
       await tapSearchButton(tester);
     });
 
-    testWidgets('No Interaction', (tester) async {
+    testWidgets('No interaction', (tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       expect(smallBodySelectorWidgetFinder, findsOneWidget);
       expectSmallBodySelectorSelected(tester, null);
@@ -257,9 +258,9 @@ void main() {
 
     testWidgets(
         'Select ${SmallBodySelector.spkId.name}, tap TextField, input spkId, '
-        'Select ${SmallBodySelector.designation.name}, input designation, '
-        'Select ${SmallBodySelector.spkId.name}, '
-        'Select ${SmallBodySelector.designation.name}', (tester) async {
+        'select ${SmallBodySelector.designation.name}, input designation, '
+        'select ${SmallBodySelector.spkId.name}, '
+        'select ${SmallBodySelector.designation.name}', (tester) async {
       SmallBodySelector smallBodySelector = SmallBodySelector.spkId;
       await pumpCadRouteAsInitialLocation(tester);
       await tapSmallBodySelector(tester, smallBodySelector);
@@ -299,6 +300,21 @@ void main() {
         spkId: spkId,
         designation: designation,
       ));
+    });
+
+    testWidgets('disableInputs', (tester) async {
+      await pumpCadRouteAsInitialLocation(tester);
+      for (final smallBodySelector in CadScreen.smallBodySelectors) {
+        final chipFinder = smallBodySelectorChipFinderMap[smallBodySelector]!;
+        expect(chipFinder.hitTestable().evaluate().length, 1);
+      }
+      expect(textFieldFinder.hitTestable().evaluate().length, 1);
+      await emitDisableInputs(tester);
+      for (final smallBodySelector in CadScreen.smallBodySelectors) {
+        final chipFinder = smallBodySelectorChipFinderMap[smallBodySelector]!;
+        expect(chipFinder.hitTestable().evaluate().length, 0);
+      }
+      expect(textFieldFinder.hitTestable().evaluate().length, 0);
     });
 
     testWidgets('CadBloc prefilled, change, reset', (tester) async {

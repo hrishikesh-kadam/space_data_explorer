@@ -7,15 +7,17 @@ import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import '../cad_route.dart';
 
 final smallBodyFilterWidgetFinder = find.byKey(CadScreen.smallBodyFilterKey);
-final Set<Finder> smallBodyFilterChipFinders = CadScreen.smallBodySet.map((e) {
+final Set<Finder> smallBodyFilterChipFinders =
+    CadScreen.smallBodyFilterSet.map((e) {
   return find.byKey(Key(
     '${CadScreen.smallBodyFilterKeyPrefix}'
     '${e.name}',
   ));
 }).toSet();
 final Map<SmallBodyFilter, Finder> smallBodyFilterChipFinderMap = {
-  for (var i = 0; i < CadScreen.smallBodySet.length; i++)
-    CadScreen.smallBodySet.elementAt(i): smallBodyFilterChipFinders.elementAt(i)
+  for (var i = 0; i < CadScreen.smallBodyFilterSet.length; i++)
+    CadScreen.smallBodyFilterSet.elementAt(i):
+        smallBodyFilterChipFinders.elementAt(i)
 };
 
 Future<void> ensureFilterWidgetVisible(WidgetTester tester) async {
@@ -39,9 +41,10 @@ void expectSmallBodyFilterSelected(
   WidgetTester tester, {
   required SmallBodyFilter smallBodyFilter,
 }) {
-  for (var i = 0; i < CadScreen.smallBodySet.length; i++) {
+  for (var i = 0; i < CadScreen.smallBodyFilterSet.length; i++) {
     final finder = smallBodyFilterChipFinders.elementAt(i);
-    final matcher = smallBodyFilter == CadScreen.smallBodySet.elementAt(i);
+    final matcher =
+        smallBodyFilter == CadScreen.smallBodyFilterSet.elementAt(i);
     expect(tester.widget<ChoiceChip>(finder).selected, matcher);
   }
 }
@@ -50,7 +53,7 @@ void expectChipsEnabled(
   WidgetTester tester, [
   bool enabled = true,
 ]) {
-  for (var i = 0; i < CadScreen.smallBodySet.length; i++) {
+  for (var i = 0; i < CadScreen.smallBodyFilterSet.length; i++) {
     final finder = smallBodyFilterChipFinders.elementAt(i);
     expect(tester.widget<ChoiceChip>(finder).isEnabled, enabled);
   }

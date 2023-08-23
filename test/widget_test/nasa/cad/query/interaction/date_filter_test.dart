@@ -22,13 +22,13 @@ void main() {
       await tapSettingsButton(tester);
     });
 
-    testWidgets('Basic', (WidgetTester tester) async {
+    testWidgets('No interation', (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       expectDate(tester, minDateTextDefault, minDateFinder);
       expectDate(tester, maxDateTextDefault, maxDateFinder);
     });
 
-    testWidgets('Tap ${l10n.selectDateRange}, Select dates, Tap Save',
+    testWidgets('Tap ${l10n.selectDateRange}, select dates, tap Save',
         (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       await selectDateRange(tester);
@@ -36,7 +36,7 @@ void main() {
       expectDatePattern(tester, maxDateForTest.day.toString(), maxDateFinder);
     });
 
-    testWidgets('Tap ${l10n.selectDateRange}, Tap $CloseButton',
+    testWidgets('Tap ${l10n.selectDateRange}, tap $CloseButton',
         (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       await tester.tap(selectDateRangeButtonFinder);
@@ -48,8 +48,8 @@ void main() {
     });
 
     testWidgets(
-        'Tap ${l10n.selectDateRange}, Select dates, Tap Save, '
-        'Tap ${l10n.selectDateRange}, Tap $CloseButton',
+        'Tap ${l10n.selectDateRange}, select dates, tap Save, '
+        'tap ${l10n.selectDateRange}, tap $CloseButton',
         (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       await selectDateRange(tester);
@@ -78,6 +78,13 @@ void main() {
       expect(maxDateAfterString != maxDateTextDefault, true);
       expect(minDateBeforeString != minDateAfterString, true);
       expect(maxDateBeforeString != maxDateAfterString, true);
+    });
+
+    testWidgets('disableInputs', (tester) async {
+      await pumpCadRouteAsInitialLocation(tester);
+      expect(selectDateRangeButtonFinder.hitTestable().evaluate().length, 1);
+      await emitDisableInputs(tester);
+      expect(selectDateRangeButtonFinder.hitTestable().evaluate().length, 0);
     });
 
     testWidgets('CadBloc prefilled, reset', (tester) async {

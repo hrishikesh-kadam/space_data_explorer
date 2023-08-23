@@ -71,3 +71,10 @@ Future<void> verifyQueryParameters(
   clearInteractions(sbdbCadApi);
   await tapBackButton(tester);
 }
+
+Future<void> emitDisableInputs(WidgetTester tester) async {
+  CadScreen.cadBloc!.emit(CadScreen.cadBloc!.state.copyWith(
+    disableInputs: true,
+  ));
+  await tester.pumpAndSettle();
+}

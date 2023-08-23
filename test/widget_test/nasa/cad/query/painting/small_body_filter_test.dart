@@ -21,7 +21,7 @@ void main() {
       );
       await pumpCadRouteAsInitialLocation(tester);
       await ensureFilterWidgetVisible(tester);
-      for (final smallBodyFilter in CadScreen.smallBodySet) {
+      for (final smallBodyFilter in CadScreen.smallBodyFilterSet) {
         await tapSmallBodyFilter(tester, smallBodyFilter: smallBodyFilter);
         tester.expectNoOverflow(of: smallBodyFilterWidgetFinder);
       }

@@ -17,7 +17,7 @@ void main() {
       await tapSearchButton(tester);
     });
 
-    testWidgets('No Interaction', (tester) async {
+    testWidgets('No interaction', (tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       await ensureDataOutputWidgetVisible(tester);
       expect(dataOutputWidgetFinder, findsOneWidget);
@@ -25,7 +25,7 @@ void main() {
       expect(CadScreen.cadBloc!.state.dataOutputSet, <DataOutput>{});
     });
 
-    testWidgets('Select and Unselect each', (tester) async {
+    testWidgets('Select and unselect each', (tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       for (final dataOutput in CadScreen.dataOutputSet) {
         final dataOutputSet = {dataOutput};
@@ -59,6 +59,20 @@ void main() {
         expectDataOutputSelected(tester, dataOutputSet);
         expect(CadScreen.cadBloc!.state.dataOutputSet, dataOutputSet);
         await verifyDataOutputQueryParameters(tester, dataOutputSet);
+      }
+    });
+
+    testWidgets('disableInputs', (tester) async {
+      await pumpCadRouteAsInitialLocation(tester);
+      await ensureDataOutputWidgetVisible(tester);
+      for (final dataOutput in CadScreen.dataOutputSet) {
+        final chipFinder = dataOutputChipFinderMap[dataOutput]!;
+        expect(chipFinder.hitTestable().evaluate().length, 1);
+      }
+      await emitDisableInputs(tester);
+      for (final dataOutput in CadScreen.dataOutputSet) {
+        final chipFinder = dataOutputChipFinderMap[dataOutput]!;
+        expect(chipFinder.hitTestable().evaluate().length, 0);
       }
     });
 
