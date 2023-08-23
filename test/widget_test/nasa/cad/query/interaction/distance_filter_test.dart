@@ -146,7 +146,7 @@ void main() {
       );
       await tapUnitDropdown(tester, filter);
       await tapUnitDropdownItem(tester, filter, nonDefaultUnit);
-      await ensureOutofViewport(tester);
+      await ensureOutOfViewport(tester);
       expect(distFilterWidgetFinder, findsNothing);
       await ensureFilterWidgetVisible(tester);
       expect(distFilterWidgetFinder, findsOneWidget);

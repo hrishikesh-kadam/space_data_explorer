@@ -149,10 +149,11 @@ void expectUnitText(
   expect(tester.widget<Text>(getUnitTextFinder(filter)).data, unit.symbol);
 }
 
-Future<void> ensureOutofViewport(WidgetTester tester) async {
+// TODO(hrishikesh-kadam): Scope of improvement
+Future<void> ensureOutOfViewport(WidgetTester tester) async {
   await tester.drag(
     customScrollViewFinder,
-    Offset(0, -tester.view.getLogicalSize().height),
+    Offset(0, -tester.view.getLogicalSize().height * 1.5),
   );
   await tester.pumpAndSettle();
 }

@@ -16,7 +16,10 @@ void main() {
     testWidgets('Doesn\'t Overflow ${Dimensions.galaxyFoldPortraitWidth}',
         (tester) async {
       disableOverflowError();
-      tester.view.setLogicalSize(width: Dimensions.galaxyFoldPortraitWidth);
+      tester.view.setLogicalSize(
+        width: Dimensions.galaxyFoldPortraitWidth,
+        height: Dimensions.galaxyFoldPortraitHeight,
+      );
       await pumpCadRouteAsInitialLocation(tester);
       tester.expectNoOverflow(of: distFilterWidgetFinder);
       for (final filter in DistanceFilter.values) {

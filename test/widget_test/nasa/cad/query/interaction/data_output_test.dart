@@ -19,6 +19,7 @@ void main() {
 
     testWidgets('No Interaction', (tester) async {
       await pumpCadRouteAsInitialLocation(tester);
+      await ensureDataOutputWidgetVisible(tester);
       expect(dataOutputWidgetFinder, findsOneWidget);
       expectDataOutputSelected(tester, <DataOutput>{});
       expect(CadScreen.cadBloc!.state.dataOutputSet, <DataOutput>{});
@@ -68,6 +69,7 @@ void main() {
         dataOutputSet: {DataOutput.fullname},
       ));
       await pumpCadRouteAsInitialLocation(tester, cadBloc: cadBloc);
+      await ensureDataOutputWidgetVisible(tester);
       expect(tester.widget<FilterChip>(fullnameChipFinder).selected, true);
     });
   });
