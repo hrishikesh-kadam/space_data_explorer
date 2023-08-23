@@ -134,13 +134,7 @@ class CadScreen extends StatelessWidget {
                     floating: true,
                     snap: true,
                   ),
-                  _getSearchButton(context: context),
-                  _getQueryGrid(context: context),
-                  const SliverPadding(
-                    padding: EdgeInsets.only(
-                      bottom: Dimensions.pagePaddingVertical,
-                    ),
-                  )
+                  ..._getBody(context: context)
                 ],
               );
             },
@@ -148,6 +142,25 @@ class CadScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  List<Widget> _getBody({
+    required BuildContext context,
+  }) {
+    return [
+      const SliverPadding(
+        padding: EdgeInsets.only(
+          bottom: Dimensions.pagePaddingVertical,
+        ),
+      ),
+      _getSearchButton(context: context),
+      _getQueryGrid(context: context),
+      const SliverPadding(
+        padding: EdgeInsets.only(
+          bottom: Dimensions.pagePaddingVertical,
+        ),
+      )
+    ];
   }
 
   Widget _getSearchButton({
@@ -161,6 +174,7 @@ class CadScreen extends StatelessWidget {
         return SliverPadding(
           padding: const EdgeInsets.symmetric(
             horizontal: Dimensions.pagePaddingHorizontal,
+            vertical: Dimensions.pagePaddingVertical,
           ),
           sliver: SliverToBoxAdapter(
             child: Center(
