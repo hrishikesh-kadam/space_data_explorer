@@ -11,6 +11,10 @@ class CadRequested extends CadEvent {
   final JsonMap? queryParameters;
 }
 
+class CadResultOpened extends CadEvent {
+  const CadResultOpened();
+}
+
 class CadDateRangeSelected extends CadEvent {
   const CadDateRangeSelected({this.dateRange});
 

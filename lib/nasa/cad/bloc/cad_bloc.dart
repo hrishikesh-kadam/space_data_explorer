@@ -18,6 +18,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
   }) : super(initialState ?? CadState.getInitial()) {
     this.sbdbCadApi = sbdbCadApi ?? SbdbCadApi();
     on<CadRequested>(_onCadRequested);
+    on<CadResultOpened>(_onCadResultOpened);
     on<CadDateRangeSelected>(_onCadDateRangeSelected);
     on<CadDistRangeEvent>(_onCadDistanceRangeEvent);
     on<CadSmallBodyFilterSelected>(_onCadSmallBodyFilterSelected);
@@ -75,7 +76,6 @@ class CadBloc extends Bloc<CadEvent, CadState> {
       _logger.fine('_onCadRequested success');
       emit(state.copyWith(
         networkState: NetworkState.success,
-        disableInputs: false,
         sbdbCadBody: response.data,
       ));
     } on Exception catch (e, s) {
@@ -85,6 +85,13 @@ class CadBloc extends Bloc<CadEvent, CadState> {
         disableInputs: false,
       ));
     }
+  }
+
+  Future<void> _onCadResultOpened(
+    CadResultOpened event,
+    Emitter<CadState> emit,
+  ) async {
+    emit(state.copyWith(disableInputs: false));
   }
 
   Future<void> _onCadDateRangeSelected(
