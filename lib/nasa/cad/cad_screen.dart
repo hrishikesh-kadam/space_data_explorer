@@ -19,6 +19,7 @@ import '../../widgets/choice_chip_input_widget.dart';
 import '../../widgets/choice_chip_query_widget.dart';
 import '../../widgets/date_filter_widget.dart';
 import '../../widgets/filter_chip_query_widget.dart';
+import '../../widgets/outlined_button_extended.dart';
 import '../../widgets/query_grid_container.dart';
 import '../../widgets/value_range_filter_widget.dart';
 import '../cad_result/cad_result_route.dart';
@@ -178,15 +179,13 @@ class CadScreen extends StatelessWidget {
           ),
           sliver: SliverToBoxAdapter(
             child: Center(
-              child: OutlinedButton(
+              child: OutlinedButtonExtended(
                 key: searchButtonKey,
-                onPressed: state == NetworkState.preparing ||
-                        state == NetworkState.sending
-                    ? null
-                    : () async {
-                        context.read<CadBloc>().add(const CadRequested());
-                      },
-                child: Text(l10n.search),
+                label: Text(l10n.search),
+                networkState: state,
+                onPressed: () async {
+                  context.read<CadBloc>().add(const CadRequested());
+                },
               ),
             ),
           ),

@@ -71,7 +71,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
       Response<SbdbCadBody> response = await sbdbCadApi.get(
         queryParameters: queryParameters.toJson(),
       );
-      // await Future.delayed(const Duration(seconds: 10));
+      // await Future.delayed(const Duration(seconds: 5));
       _logger.fine('_onCadRequested success');
       emit(state.copyWith(
         networkState: NetworkState.success,

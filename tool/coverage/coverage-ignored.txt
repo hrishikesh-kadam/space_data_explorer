@@ -2,3 +2,4 @@ lib/config/config.dart:14
 lib/config/config.dart:37
 lib/config/config.dart:49
 lib/deferred_loading/deferred_widget.dart:3
+lib/widgets/outlined_button_extended.dart:34
