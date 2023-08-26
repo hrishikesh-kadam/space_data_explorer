@@ -54,7 +54,7 @@ Future<void> testScreenshot(
       // https://www.youtube.com/watch?v=7nrhTdS7dHg&list=PLjxrf2q8roU3LvrdR8Hv_phLrTj0xmjnD&index=6
       // At 12:00
       if (!const bool.hasEnvironment('GOLDEN_DIRECTORY')) {
-        throw Exception('Dart Environment variable GOLDEN_DIRECTORY missing');
+        throw ArgumentError.notNull('GOLDEN_DIRECTORY');
       }
       const goldenDirectory = String.fromEnvironment('GOLDEN_DIRECTORY');
       final goldenByteData = await rootBundle.load('$goldenDirectory/$name');
