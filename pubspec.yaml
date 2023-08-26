@@ -33,6 +33,7 @@ dependencies:
   flutter_keyboard_visibility: ^5.4.1
   firebase_core: ^2.15.1
   firebase_crashlytics: ^3.3.5
+  firebase_analytics: ^10.4.5
 
 dev_dependencies:
   flutter_test:
