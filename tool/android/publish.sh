@@ -7,7 +7,7 @@ if [[ $LOGS_ENV_SOURCED != "true" ]]; then
 fi
 
 source ./tool/constants.sh
-source ./tool/firebase/init.sh
+source ./tool/firebase/source.sh
 
 FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 

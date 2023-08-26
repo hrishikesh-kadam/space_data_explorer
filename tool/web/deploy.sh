@@ -7,7 +7,7 @@ if [[ $LOGS_ENV_SOURCED != "true" ]]; then
 fi
 
 source ./tool/constants.sh
-source ./tool/firebase/init.sh
+source ./tool/firebase/source.sh
 
 if [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then
   FIREBASE_CHANNEL_ID="pr-$(jq -r .number "$GITHUB_EVENT_PATH")"
