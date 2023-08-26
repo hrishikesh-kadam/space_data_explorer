@@ -2,6 +2,8 @@
 
 set -e -o pipefail
 
+FLAVOR_ENV=$(./tool/get-flavor-env.sh)
+
 TARGET_PATHS=(
   "integration_test/app_bar_back_button_test.dart"
 )
@@ -18,6 +20,7 @@ for i in "${!TARGET_PATHS[@]}"; do
     TARGET_PATH="${TARGET_PATHS[$i]}"
     REQUIRED_TIME="${REQUIRED_TIMES[$i]}"
     flutter run "${TARGET_PATH}" \
+      --dart-define="FLAVOR_ENV=$FLAVOR_ENV" \
       --vmservice-out-file=coverage/vm-service-url.txt \
       -d $DEVICE &
     sleep "$REQUIRED_TIME"

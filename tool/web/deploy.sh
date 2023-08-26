@@ -7,25 +7,7 @@ if [[ $LOGS_ENV_SOURCED != "true" ]]; then
 fi
 
 source ./tool/constants.sh
-
-BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-
-if [[ ! -s ./secrets/.git ]]; then
-  if [[ -n $FIREBASE_CONTRI_KEY ]]; then
-    echo "$FIREBASE_CONTRI_KEY" > "/tmp/firebase-contri-key.json"
-    GOOGLE_APPLICATION_CREDENTIALS="/tmp/firebase-contri-key.json"
-  fi
-  FIREBASE_PROJECT_ID="${APP_NAME_KEBAB_CASE}-contri"
-elif [[ $BRANCH == "stag" ]]; then
-  GOOGLE_APPLICATION_CREDENTIALS="./secrets/web/service-accounts/firebase-stag-key.json"
-  FIREBASE_PROJECT_ID="${APP_NAME_KEBAB_CASE}-stag"
-elif [[ $BRANCH == "prod" ]]; then
-  GOOGLE_APPLICATION_CREDENTIALS="./secrets/web/service-accounts/firebase-prod-key.json"
-  FIREBASE_PROJECT_ID="${APP_NAME_KEBAB_CASE}"
-else
-  GOOGLE_APPLICATION_CREDENTIALS="./secrets/web/service-accounts/firebase-dev-key.json"
-  FIREBASE_PROJECT_ID="${APP_NAME_KEBAB_CASE}-dev"
-fi
+source ./tool/firebase/init.sh
 
 if [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then
   FIREBASE_CHANNEL_ID="pr-$(jq -r .number "$GITHUB_EVENT_PATH")"
@@ -36,14 +18,6 @@ elif [[ $BRANCH != "dev" && $BRANCH != "stag" && $BRANCH != "prod" ]]; then
 else
   FIREBASE_CHANNEL_ID="live"
 fi
-
-_firebase() {
-  if [[ $GITHUB_ACTIONS == "true" ]]; then
-    GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS firebase "$@"
-  else
-    firebase "$@"
-  fi
-}
 
 _firebase use $FIREBASE_PROJECT_ID
 if [[ $FIREBASE_CHANNEL_ID == "live" ]]; then

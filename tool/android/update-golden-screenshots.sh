@@ -30,11 +30,12 @@ GOLDEN_DIRECTORIES=(
 # Reference - 
 # https://docs.flutter.dev/testing/integration-tests
 # https://github.com/flutter/flutter/issues/100292#issuecomment-1076927900
+FLAVOR_ENV_ARG=$(printf "FLAVOR_ENV=%s" "$FLAVOR_ENV" | base64)
 FLUTTER_TEST_ARG=$(printf "FLUTTER_TEST=true" | base64)
 UPDATE_GOLDENS_ARG=$(printf "UPDATE_GOLDENS=true" | base64)
 CONNECTED_ANDROID_TEST=":app:connected${FLAVOR_ENV@u}DebugAndroidTest"
 
-APP_PACKAGE="$APPLICATION_ID.$FLAVOR_ENV.debug"
+APP_PACKAGE="$ANDROID_APP_ID.$FLAVOR_ENV.debug"
 SCREENSHOT_DIR="app_flutter/screenshots"
 REMOTE_DIR="/data/user/0/$APP_PACKAGE/$SCREENSHOT_DIR"
 ACCESSIBLE_DIR="/storage/emulated/0/Download/$APP_NAME_KEBAB_CASE/screenshots"
@@ -50,6 +51,7 @@ for i in {0..2}; do
 
   # flutter test \
   #   --flavor "$FLAVOR_ENV" \
+  #   --dart-define="FLAVOR_ENV=$FLAVOR_ENV" \
   #   --dart-define="FLUTTER_TEST=true" \
   #   --dart-define="UPDATE_GOLDENS=true" \
   #   --dart-define="IMAGE_NAME_SUFFIX=${IMAGE_NAME_SUFFIXES[i]}" \
@@ -60,7 +62,7 @@ for i in {0..2}; do
   IMAGE_NAME_SUFFIX_ARG=$(printf "IMAGE_NAME_SUFFIX=%s" "${IMAGE_NAME_SUFFIXES[i]}" | base64)
 
   ./gradlew "$CONNECTED_ANDROID_TEST" \
-    -Pdart-defines="$FLUTTER_TEST_ARG,$UPDATE_GOLDENS_ARG,$IMAGE_NAME_SUFFIX_ARG" \
+    -Pdart-defines="$FLAVOR_ENV_ARG,$FLUTTER_TEST_ARG,$UPDATE_GOLDENS_ARG,$IMAGE_NAME_SUFFIX_ARG" \
     -Ptarget="$(pwd)/../integration_test/golden_screenshots_test.dart"
 
   popd &> /dev/null
@@ -73,7 +75,7 @@ for i in {0..2}; do
     adb shell <<- EOF
 		rm -rf $ACCESSIBLE_DIR
 		mkdir -p $ACCESSIBLE_DIR
-		run-as "$APPLICATION_ID.$FLAVOR_ENV.debug"
+		run-as "$ANDROID_APP_ID.$FLAVOR_ENV.debug"
 		cp "./$SCREENSHOT_DIR/*" $ACCESSIBLE_DIR
 		exit
 		exit

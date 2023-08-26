@@ -24,7 +24,7 @@ flutter build apk --flavor "$FLAVOR_ENV" --debug
 
 popd &> /dev/null
 
-APP_PACKAGE="$APPLICATION_ID.$FLAVOR_ENV.debug"
+APP_PACKAGE="$ANDROID_APP_ID.$FLAVOR_ENV.debug"
 SCREENSHOT_DIR="app_flutter/screenshots"
 REMOTE_DIR="/data/user/0/$APP_PACKAGE/$SCREENSHOT_DIR"
 LOCAL_DIR="./android/fastlane/$FLAVOR_ENV/metadata/android/en-US/images/phoneScreenshots"
@@ -57,7 +57,7 @@ done
 
 if adb root | grep "adbd cannot run as root in production builds"; then
   adb shell <<- EOF
-	run-as "$APPLICATION_ID.$FLAVOR_ENV.debug"
+	run-as "$ANDROID_APP_ID.$FLAVOR_ENV.debug"
   mkdir -p $SCREENSHOT_DIR
   # $ACCESSIBLE_DIR is not accessible after run-as
 	cp "$ACCESSIBLE_DIR/*" ./$SCREENSHOT_DIR
@@ -67,6 +67,6 @@ if adb root | grep "adbd cannot run as root in production builds"; then
 fi
 
 adb shell am instrument \
-  -w "$APPLICATION_ID.$FLAVOR_ENV.debug.test/androidx.test.runner.AndroidJUnitRunner"
+  -w "$ANDROID_APP_ID.$FLAVOR_ENV.debug.test/androidx.test.runner.AndroidJUnitRunner"
 
 ./tool/android/kill-emulator.sh || true

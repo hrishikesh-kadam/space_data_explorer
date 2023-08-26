@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1030109759765",
+    "project_id": "space-data-explorer-dev",
+    "storage_bucket": "space-data-explorer-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030109759765:android:b8aad4005ccb67a06b811c",
+        "android_client_info": {
+          "package_name": "dev.hrishikesh_kadam.flutter.space_data_explorer.dev.release"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1030109759765-3rq5c6njf3urfmp0iuq22kb3iumstcpc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBP4PtcOie6srwnCQjf9aUBImNJ7qs61z8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1030109759765-3rq5c6njf3urfmp0iuq22kb3iumstcpc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1030109759765-br8roig8dridfc4pi70unoj4qbp2rctd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dev.hrishikesh-kadam.flutter.space-data-explorer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

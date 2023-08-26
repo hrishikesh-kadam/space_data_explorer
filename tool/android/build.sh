@@ -21,7 +21,10 @@ fi
 
 flutter build appbundle \
   --flavor "$FLAVOR_ENV" \
-  --build-number "$INCREMENTED_VERSION_CODE"
+  --dart-define="FLAVOR_ENV=$FLAVOR_ENV" \
+  --build-number "$INCREMENTED_VERSION_CODE" \
+  --split-debug-info="build/app/outputs/bundle/${FLAVOR_ENV}Release/debug-info" \
+  --obfuscate
 
 BUNDLE_FILE="./build/app/outputs/bundle/${FLAVOR_ENV}Release/app-${FLAVOR_ENV}-release.aab"
 

@@ -11,7 +11,7 @@ set -e -o pipefail
 APP_NAME_SNAKE_CASE="space_data_explorer"
 APP_NAME_KEBAB_CASE="space-data-explorer"
 
-APPLICATION_ID="dev.hrishikesh_kadam.flutter.$APP_NAME_SNAKE_CASE"
+ANDROID_APP_ID="dev.hrishikesh_kadam.flutter.$APP_NAME_SNAKE_CASE"
 
 BUNDLETOOL_PATH="$ANDROID_HOME/bundletool-all.jar"
 BUNDLETOOL="java -jar $BUNDLETOOL_PATH"

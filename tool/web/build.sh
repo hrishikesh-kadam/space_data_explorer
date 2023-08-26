@@ -6,8 +6,10 @@ if [[ $LOGS_ENV_SOURCED != "true" ]]; then
   source ./tool/shell/logs-env.sh
 fi
 
-flutter build web --release
+FLAVOR_ENV=$(./tool/get-flavor-env.sh)
+
+flutter build web \
+  --dart-define="FLAVOR_ENV=$FLAVOR_ENV"
 
 mkdir -p ./build/web/.well-known
-FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 cp "assets/digital-asset-links/$FLAVOR_ENV/assetlinks.json" "build/web/.well-known/"

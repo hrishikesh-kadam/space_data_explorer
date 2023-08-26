@@ -55,6 +55,7 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
+        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         manifestPlaceholders += [ applicationLabel:constants.appName ]
@@ -169,6 +170,7 @@ flutter {
 }
 
 dependencies {
+    implementation 'androidx.multidex:multidex:2.0.1'
     // Source - https://github.com/flutter/flutter/tree/main/packages/integration_test#android-device-testing
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
@@ -203,3 +205,8 @@ task('getApplicationId') {
 // TODO(hrishikesh-kadam): Remove this once the following issue is resolved.
 // https://github.com/flutter/flutter/issues/88005
 project.gradle.startParameter.excludedTaskNames.add(':integration_test:lintDebug')
+
+// https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?platform=flutter#android
+// This section must appear at the bottom of the file
+// apply plugin: 'com.google.gms.google-services'
+// apply plugin: 'com.google.firebase.crashlytics'

@@ -6,7 +6,7 @@ import 'package:hrk_logging/hrk_logging.dart';
 import 'config/config.dart';
 import 'constants/constants.dart';
 
-bool flutterTest = isFlutterTest();
+final bool flutterTest = isFlutterTest();
 
 final log = Logger(appNamePascalCase);
 

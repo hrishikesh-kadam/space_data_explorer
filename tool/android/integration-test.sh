@@ -13,6 +13,7 @@ TARGET_PATHS=(
 for TARGET_PATH in "${TARGET_PATHS[@]}"; do
   flutter test \
     --flavor "$FLAVOR_ENV" \
+    --dart-define="FLAVOR_ENV=$FLAVOR_ENV" \
     --dart-define="FLUTTER_TEST=true" \
     "$TARGET_PATH"
 done

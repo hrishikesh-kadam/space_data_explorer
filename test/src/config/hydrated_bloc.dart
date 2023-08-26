@@ -17,7 +17,6 @@ void mockHydratedBloc() {
   } catch (_) {
     MockStorage storage = MockStorage();
     when(storage.write(any, any)).thenAnswer((_) async {});
-    WidgetsFlutterBinding.ensureInitialized();
     HydratedBloc.storage = storage;
   }
 }

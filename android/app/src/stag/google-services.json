@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "705512446254",
+    "project_id": "space-data-explorer-stag",
+    "storage_bucket": "space-data-explorer-stag.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705512446254:android:b08675d542e54a78b382bf",
+        "android_client_info": {
+          "package_name": "dev.hrishikesh_kadam.flutter.space_data_explorer.stag.release"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705512446254-cc3ksakmemigj2kmq7dbghchr87tmjuk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLwKETC_GEWBDDbSnpUMxCUcegawO9hYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705512446254-cc3ksakmemigj2kmq7dbghchr87tmjuk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

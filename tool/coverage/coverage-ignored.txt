@@ -1,5 +1,6 @@
-lib/config/config.dart:14
-lib/config/config.dart:37
-lib/config/config.dart:49
+lib/config/config.dart:1
 lib/deferred_loading/deferred_widget.dart:3
+lib/firebase/options/dev.dart:3
+lib/firebase/options/prod.dart:3
+lib/firebase/options/stag.dart:3
 lib/widgets/outlined_button_extended.dart:34

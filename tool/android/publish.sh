@@ -7,6 +7,7 @@ if [[ $LOGS_ENV_SOURCED != "true" ]]; then
 fi
 
 source ./tool/constants.sh
+source ./tool/firebase/init.sh
 
 FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
@@ -44,3 +45,13 @@ bundle exec fastlane upload_to_play_store \
   --aab ".$BUNDLE_FILE"
 
 popd &> /dev/null
+
+FIREBASE_APP_ID=$( \
+  jq -r \
+    .client[0].client_info.mobilesdk_app_id \
+    "android/app/src/$FLAVOR_ENV/google-services.json"
+)
+
+_firebase crashlytics:symbols:upload \
+  --app="$FIREBASE_APP_ID" \
+  "build/app/outputs/bundle/${FLAVOR_ENV}Release/debug-info"
