@@ -23,7 +23,7 @@ class CadResultRoute extends GoRouteData {
   });
 
   final JsonMap? $extra;
-  final _log = Logger('$appNamePascalCase.CadResultRoute');
+  final _logger = Logger('$appNamePascalCase.CadResultRoute');
 
   static const String relativePath = 'result';
   static const String path = '${CadRoute.path}/$relativePath';
@@ -31,15 +31,15 @@ class CadResultRoute extends GoRouteData {
 
   @override
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
-    _log.debug('redirect');
+    _logger.debug('redirect');
     if ($extra != null) {
       final JsonMap extra = $extra!;
       if (extra.containsKey('$SbdbCadBody')) {
         if (extra['$SbdbCadBody'] is SbdbCadBody) {
-          _log.debug('redirect -> extra[SbdbCadBody] is SbdbCadBody');
+          _logger.debug('redirect -> extra[SbdbCadBody] is SbdbCadBody');
           return null;
         } else if (extra['$SbdbCadBody'] is JsonMap) {
-          _log.debug('redirect -> extra[SbdbCadBody] is JsonMap');
+          _logger.debug('redirect -> extra[SbdbCadBody] is JsonMap');
           extra['$SbdbCadBody'] = SbdbCadBody.fromJson(extra['$SbdbCadBody']);
           return null;
         }

@@ -17,13 +17,13 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
 
   final GoRouter _goRouter;
   late final RouterDelegate _goRouterDelegate;
-  final _log = Logger('$appNamePascalCase.AppBackButtonDispatcher');
+  final _logger = Logger('$appNamePascalCase.AppBackButtonDispatcher');
 
   @override
   Future<bool> didPopRoute() async {
-    _log.log(isAndroid ? Level.FINEST : Level.WARNING, 'didPopRoute()');
+    _logger.log(isAndroid ? Level.FINEST : Level.WARNING, 'didPopRoute()');
     final Object? extraObject = _goRouterDelegate.currentConfiguration.extra;
-    _log.finer('didPopRoute() -> extraObject = $extraObject');
+    _logger.finer('didPopRoute() -> extraObject = $extraObject');
     Level logLevel = flutterTest ? Level.FINER : Level.SHOUT;
     if (extraObject == null) {
       final String fullPath = _goRouterDelegate.currentConfiguration.fullPath;
@@ -39,19 +39,20 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
       if (extraMap.containsKey(isNormalLink)) {
         return _goRouterDelegate.popRoute();
       } else {
-        _log.log(logLevel, 'Unusual navigation observed');
-        _log.log(logLevel, 'extra doesn\'t contains isNormalLink key');
+        _logger.log(logLevel, 'Unusual navigation observed');
+        _logger.log(logLevel, 'extra doesn\'t contains isNormalLink key');
         final List routeMatchList =
             _goRouter.routerDelegate.currentConfiguration.matches;
-        _log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
+        _logger.log(
+            logLevel, 'routeMatchList.length = ${routeMatchList.length}');
         _goRouter.go(HomeRoute.path);
       }
     } else {
-      _log.log(logLevel, 'Unusual navigation observed');
-      _log.log(logLevel, 'extra is not a JsonMap');
+      _logger.log(logLevel, 'Unusual navigation observed');
+      _logger.log(logLevel, 'extra is not a JsonMap');
       final List routeMatchList =
           _goRouter.routerDelegate.currentConfiguration.matches;
-      _log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
+      _logger.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
       _goRouter.go(HomeRoute.path);
     }
     return true;

@@ -8,7 +8,7 @@ import 'constants/constants.dart';
 
 final bool flutterTest = isFlutterTest();
 
-final log = Logger(appNamePascalCase);
+final logger = Logger(appNamePascalCase);
 
 /// isNormalLink is used to check if the route was opened by normal-link or
 /// deep-link.

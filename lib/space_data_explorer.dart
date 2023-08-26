@@ -30,7 +30,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
 
   late final GoRouter _goRouter;
   final bool _debugShowCheckedModeBanner;
-  final _log = Logger('$appNamePascalCase.App');
+  final _logger = Logger('$appNamePascalCase.App');
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
     List<Locale>? locales,
     required Iterable<Locale> supportedLocales,
   }) {
-    _log.fine('localeListResolutionCallback -> $locales');
+    _logger.fine('localeListResolutionCallback -> $locales');
     final settingsBloc = context.read<SettingsBloc>();
     settingsBloc.add(SettingsSystemLocalesChanged(systemLocales: locales));
     return null;

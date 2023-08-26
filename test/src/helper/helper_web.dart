@@ -23,9 +23,9 @@ void resetNavigationHistoryState() {
 
 void logNavigationHistoryState() {
   final html.History history = html.window.history;
-  testLog.fine('history.length = ${history.length}');
+  testLogger.fine('history.length = ${history.length}');
   Map? state = history.state;
-  testLog.fine('history.state = $state');
+  testLogger.fine('history.state = $state');
 }
 
 bool expectHistoryLengthAndSerialCount(
@@ -35,10 +35,10 @@ bool expectHistoryLengthAndSerialCount(
   final html.History history = html.window.history;
   Map state = history.state;
 
-  testLog.finer('history.length = ${history.length}');
-  testLog.finer('state[\'serialCount\'] = ${state['serialCount']}');
-  testLog.finer('historyLength = $historyLength');
-  testLog.finer('serialCount = $serialCount');
+  testLogger.finer('history.length = ${history.length}');
+  testLogger.finer('state[\'serialCount\'] = ${state['serialCount']}');
+  testLogger.finer('historyLength = $historyLength');
+  testLogger.finer('serialCount = $serialCount');
 
   // TODO(hrishikesh-kadam): Fails after `All tests passed!`
   // expect(history.length, historyLength);
@@ -47,10 +47,10 @@ bool expectHistoryLengthAndSerialCount(
   bool historyLengthNotEqual = false;
   bool serialCountNotEqual = false;
   if (historyLengthNotEqual = history.length != historyLength) {
-    printLog.error('history.length != historyLength');
+    printLogger.error('history.length != historyLength');
   }
   if (serialCountNotEqual = state['serialCount'] != serialCount) {
-    printLog.error('state[\'serialCount\'] != serialCount');
+    printLogger.error('state[\'serialCount\'] != serialCount');
   }
   if (historyLengthNotEqual || serialCountNotEqual) {
     return false;

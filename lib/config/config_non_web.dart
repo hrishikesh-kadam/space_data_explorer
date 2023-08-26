@@ -28,18 +28,21 @@ BackButton getAppBarBackButton({
         if (extraMap.containsKey(isNormalLink)) {
           GoRouter.of(context).pop();
         } else {
-          log.log(
+          logger.log(
               logLevel, 'getAppBarBackButton -> Unusual navigation observed');
-          log.log(logLevel, 'extra doesn\'t contains isNormalLink key');
+          logger.log(logLevel, 'extra doesn\'t contains isNormalLink key');
           final routeMatchList = getListOfRouteMatch(context);
-          log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
+          logger.log(
+              logLevel, 'routeMatchList.length = ${routeMatchList.length}');
           GoRouter.of(context).go(HomeRoute.path);
         }
       } else {
-        log.log(logLevel, 'getAppBarBackButton -> Unusual navigation observed');
-        log.log(logLevel, 'extra is not a JsonMap');
+        logger.log(
+            logLevel, 'getAppBarBackButton -> Unusual navigation observed');
+        logger.log(logLevel, 'extra is not a JsonMap');
         final routeMatchList = getListOfRouteMatch(context);
-        log.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
+        logger.log(
+            logLevel, 'routeMatchList.length = ${routeMatchList.length}');
         GoRouter.of(context).go(HomeRoute.path);
       }
     },

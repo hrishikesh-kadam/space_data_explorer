@@ -20,7 +20,7 @@ class SettingsScreen extends StatelessWidget {
   });
 
   final AppLocalizations l10n;
-  final _log = Logger('$appNamePascalCase.SettingsScreen');
+  final _logger = Logger('$appNamePascalCase.SettingsScreen');
   static const Key languageTileKey = Key('settings_screen_language_tile');
   static const Key languageDialogKey = Key('settings_screen_language_dialog');
   static const Key dateFormatTileKey = Key('settings_screen_date_format_tile');
@@ -39,7 +39,7 @@ class SettingsScreen extends StatelessWidget {
             previous.systemLocales != current.systemLocales,
         listener: (context, state) {
           final isAnyDialogOpen = state.isAnyDialogShown;
-          _log.debug(
+          _logger.debug(
               'systemLocales listener -> isAnyDialogOpen = $isAnyDialogOpen');
           if (isAnyDialogOpen != null && isAnyDialogOpen) {
             Navigator.pop(context);
@@ -105,7 +105,7 @@ class SettingsScreen extends StatelessWidget {
           groupValue: language,
           onChanged: (selectedLanguage) {
             if (selectedLanguage != null) {
-              _log.debug('selectedLanguage -> $selectedLanguage');
+              _logger.debug('selectedLanguage -> $selectedLanguage');
               settingsBloc.add(SettingsLaguageSelected(
                 language: selectedLanguage,
               ));
@@ -113,13 +113,13 @@ class SettingsScreen extends StatelessWidget {
             Navigator.pop(context);
           },
           beforeShowDialog: () {
-            _log.debug('getLanguageTile() -> beforeShowDialog');
+            _logger.debug('getLanguageTile() -> beforeShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: true,
             ));
           },
           afterShowDialog: () {
-            _log.debug('getLanguageTile() -> afterShowDialog');
+            _logger.debug('getLanguageTile() -> afterShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: false,
             ));
@@ -165,7 +165,7 @@ class SettingsScreen extends StatelessWidget {
           groupValue: dateFormatPattern,
           onChanged: (selectedDateFormatPattern) {
             if (selectedDateFormatPattern != null) {
-              _log.debug(
+              _logger.debug(
                   'getDateFormatTile() -> selectedDateFormatPattern -> $selectedDateFormatPattern');
               settingsBloc.add(SettingsDateFormatSelected(
                 dateFormatPattern: selectedDateFormatPattern,
@@ -174,13 +174,13 @@ class SettingsScreen extends StatelessWidget {
             Navigator.pop(context);
           },
           beforeShowDialog: () {
-            _log.debug('getDateFormatTile() -> beforeShowDialog');
+            _logger.debug('getDateFormatTile() -> beforeShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: true,
             ));
           },
           afterShowDialog: () {
-            _log.debug('getDateFormatTile() -> afterShowDialog');
+            _logger.debug('getDateFormatTile() -> afterShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: false,
             ));

@@ -50,7 +50,7 @@ class DateFilterWidget extends StatelessWidget {
   final bool startEndAlign;
   final DateRangeSelected onDateRangeSelected;
   // ignore: unused_field
-  final _log = Logger('$appNamePascalCase.DateFilterWidget');
+  final _logger = Logger('$appNamePascalCase.DateFilterWidget');
   static const String defaultKey = 'date_filter_widget_key';
   static const String startLabelKey = 'start_label_key';
   static const String endLabelKey = 'end_label_key';

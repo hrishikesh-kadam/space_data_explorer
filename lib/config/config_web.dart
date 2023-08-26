@@ -33,7 +33,7 @@ BackButton getAppBarBackButton({
   return BackButton(
     onPressed: () {
       final html.History history = html.window.history;
-      log.finer('getAppBarBackButton -> history.length = ${history.length}');
+      logger.finer('getAppBarBackButton -> history.length = ${history.length}');
       if (history.length <= 1) {
         while (GoRouter.of(context).canPop()) {
           GoRouter.of(context).pop();
@@ -46,7 +46,7 @@ BackButton getAppBarBackButton({
           }
         } else if (state.containsKey('serialCount')) {
           final int serialCount = state['serialCount'];
-          log.finer('getAppBarBackButton -> serialCount = $serialCount');
+          logger.finer('getAppBarBackButton -> serialCount = $serialCount');
           if (serialCount <= 0) {
             while (GoRouter.of(context).canPop()) {
               GoRouter.of(context).pop();
