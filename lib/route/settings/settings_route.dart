@@ -7,17 +7,11 @@ import '../../deferred_loading/deferred_loading.dart';
 import '../home/home_route.dart';
 import 'settings_screen.dart' deferred as settings_screen;
 
-part 'settings_route.g.dart';
-
-@TypedGoRoute<SettingsRoute>(
-  path: SettingsRoute.path,
-  name: SettingsRoute.displayName,
-)
 class SettingsRoute extends GoRouteData {
   const SettingsRoute();
 
-  static const String relativePath = 'settings';
-  static const String path = '${HomeRoute.path}settings';
+  static const String routeName = 'settings';
+  static const String path = '${HomeRoute.path}$routeName';
   static const String displayName = 'Settings Page';
 
   @override

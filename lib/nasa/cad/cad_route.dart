@@ -8,12 +8,6 @@ import '../../deferred_loading/deferred_loading.dart';
 import '../route/nasa_route.dart';
 import 'cad_screen.dart' deferred as cad_screen;
 
-part 'cad_route.g.dart';
-
-@TypedGoRoute<CadRoute>(
-  path: CadRoute.path,
-  name: CadRoute.displayName,
-)
 class CadRoute extends GoRouteData {
   const CadRoute({
     this.$extra,
@@ -21,8 +15,8 @@ class CadRoute extends GoRouteData {
 
   final JsonMap? $extra;
 
-  static const String relativePath = 'cad';
-  static const String path = '${NasaRoute.path}/$relativePath';
+  static const String routeName = 'cad';
+  static const String path = '${NasaRoute.path}/$routeName';
   static const String displayName = 'SBDB Close-Approach Data';
 
   @override

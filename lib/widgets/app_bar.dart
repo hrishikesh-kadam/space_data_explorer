@@ -55,7 +55,7 @@ Widget? getLeadingWidget({
   String location = GoRouterState.of(context).matchedLocation;
   switch (location) {
     // Routes which doesn't need leading BackButton
-    case HomeRoute.relativePath:
+    case HomeRoute.routeName:
       return null;
     default:
       return getAppBarBackButton(context: context);

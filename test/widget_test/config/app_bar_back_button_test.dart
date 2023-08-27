@@ -9,6 +9,7 @@ import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
 import 'package:space_data_explorer/nasa/route/nasa_route.dart';
 import 'package:space_data_explorer/nasa/route/nasa_screen.dart';
+import 'package:space_data_explorer/route/home/home_route.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
 import '../../src/config/config.dart';
 import '../../src/globals.dart';

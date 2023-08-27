@@ -4,6 +4,7 @@ import 'package:hrk_logging/hrk_logging.dart';
 
 import '../../constants/constants.dart';
 import '../../globals.dart';
+import '../../route/home/home_route.dart';
 import '../../widgets/app_bar.dart';
 import '../cad/cad_route.dart';
 import 'nasa_route.dart';
@@ -24,7 +25,7 @@ class NasaScreen extends StatelessWidget {
       ),
       body: TextButton(
         key: cadButtonKey,
-        child: const Text(CadRoute.relativePath),
+        child: const Text(CadRoute.routeName),
         onPressed: () async {
           CadRoute($extra: getRouteExtraMap()).go(context);
         },

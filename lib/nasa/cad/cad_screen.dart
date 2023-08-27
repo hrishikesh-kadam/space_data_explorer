@@ -12,6 +12,7 @@ import '../../constants/constants.dart';
 import '../../constants/dimensions.dart';
 import '../../constants/theme.dart';
 import '../../globals.dart';
+import '../../route/home/home_route.dart';
 import '../../route/settings/bloc/settings_bloc.dart';
 import '../../route/settings/bloc/settings_state.dart';
 import '../../widgets/app_bar.dart';

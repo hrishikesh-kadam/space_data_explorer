@@ -16,19 +16,22 @@ List<RouteBase> get $appRoutes => [
 
 RouteBase get $homeRoute => GoRouteData.$route(
       path: '/',
-      name: '/',
+      name: 'Home Page',
       factory: $HomeRouteExtension._fromState,
       routes: [
         GoRouteData.$route(
           path: 'nasa',
+          name: 'NASA',
           factory: $NasaRouteExtension._fromState,
           routes: [
             GoRouteData.$route(
               path: 'cad',
+              name: 'SBDB Close-Approach Data',
               factory: $CadRouteExtension._fromState,
               routes: [
                 GoRouteData.$route(
                   path: 'result',
+                  name: 'SBDB Close-Approach Data Result',
                   factory: $CadResultRouteExtension._fromState,
                 ),
               ],
@@ -37,6 +40,7 @@ RouteBase get $homeRoute => GoRouteData.$route(
         ),
         GoRouteData.$route(
           path: 'settings',
+          name: 'Settings Page',
           factory: $SettingsRouteExtension._fromState,
         ),
       ],

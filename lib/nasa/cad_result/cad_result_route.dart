@@ -11,12 +11,6 @@ import '../../constants/constants.dart';
 import '../cad/cad_route.dart';
 import 'cad_result_screen.dart' deferred as cad_result_screen;
 
-part 'cad_result_route.g.dart';
-
-@TypedGoRoute<CadResultRoute>(
-  path: CadResultRoute.path,
-  name: CadResultRoute.displayName,
-)
 class CadResultRoute extends GoRouteData {
   CadResultRoute({
     this.$extra,
@@ -25,8 +19,8 @@ class CadResultRoute extends GoRouteData {
   final JsonMap? $extra;
   final _logger = Logger('$appNamePascalCase.CadResultRoute');
 
-  static const String relativePath = 'result';
-  static const String path = '${CadRoute.path}/$relativePath';
+  static const String routeName = 'result';
+  static const String path = '${CadRoute.path}/$routeName';
   static const String displayName = 'SBDB Close-Approach Data Result';
 
   @override

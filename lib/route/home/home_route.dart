@@ -10,26 +10,29 @@ import 'home_screen.dart';
 
 part 'home_route.g.dart';
 
-// TODO(hrishikesh-kadam): Add name to other routes?
 @TypedGoRoute<HomeRoute>(
   path: HomeRoute.path,
-  name: HomeRoute.path,
+  name: HomeRoute.displayName,
   routes: [
     TypedGoRoute<NasaRoute>(
-      path: NasaRoute.relativePath,
+      path: NasaRoute.routeName,
+      name: NasaRoute.displayName,
       routes: [
         TypedGoRoute<CadRoute>(
-          path: CadRoute.relativePath,
+          path: CadRoute.routeName,
+          name: CadRoute.displayName,
           routes: [
             TypedGoRoute<CadResultRoute>(
-              path: CadResultRoute.relativePath,
+              path: CadResultRoute.routeName,
+              name: CadResultRoute.displayName,
             ),
           ],
         ),
       ],
     ),
     TypedGoRoute<SettingsRoute>(
-      path: SettingsRoute.relativePath,
+      path: SettingsRoute.routeName,
+      name: SettingsRoute.displayName,
     ),
   ],
 )
@@ -37,7 +40,7 @@ class HomeRoute extends GoRouteData {
   const HomeRoute();
 
   static const String path = '/';
-  static const String relativePath = path;
+  static const String routeName = path;
   static const String displayName = 'Home Page';
 
   @override
