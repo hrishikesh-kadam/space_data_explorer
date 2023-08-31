@@ -16,12 +16,14 @@ dependencies:
     sdk: flutter
   intl: any
   meta: ^1.9.1
+  pubspec_parse: ^1.2.3
   cupertino_icons: ^1.0.2
   hrk_batteries: '>=0.3.0 <1.0.0'
   hrk_logging: '>=0.1.3 <1.0.0'
   hrk_nasa_apis: '>=0.12.0 <1.0.0'
   hrk_settings_list:
     path: 'packages/hrk_settings_list'
+  recase: ^4.1.0
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
   go_router: ^10.0.0
@@ -34,6 +36,7 @@ dependencies:
   firebase_core: ^2.15.1
   firebase_crashlytics: ^3.3.5
   firebase_analytics: ^10.4.5
+  sentry_flutter: ^7.9.0
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +55,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
   go_router_builder: ^2.2.4
   flutterfire_cli: '>=0.3.0-dev.16 <1.0.0'
+  sentry_dart_plugin: ^1.5.0
 
 # dependency_overrides:
 #   hrk_batteries:
@@ -64,6 +68,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - pubspec.yaml
 
 import_sorter:
   comments: false
@@ -72,3 +78,9 @@ import_sorter:
     - test[/\\]src[/\\]config[/\\]hydrated_bloc\.dart
     - test[/\\]src[/\\]config[/\\]dio_response\.dart
     - test[/\\]src[/\\]nasa[/\\]cad[/\\]sbdb_cad_api\.dart
+
+# sentry:
+#   upload_source_maps: true
+#   upload_sources: true
+#   project: space-data-explorer
+#   org: hrishikesh-kadam

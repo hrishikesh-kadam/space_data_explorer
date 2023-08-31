@@ -12,6 +12,7 @@
 - Add Universal Links
 - i18n - https://docs.flutter.dev/accessibility-and-localization/internationalization#localizing-for-ios-updating-the-ios-app-bundle
 - Firebase - Crashlytics
+- Sentry
 
 ## Code shrinking / Tree-shaking / Resource shrinking / Obfuscation / Optimization
 
@@ -25,9 +26,22 @@
 - No need to upload Native Debug Symbols.  
   `libapp.so` and `libflutter.so` already included in App Bundle at `/base/lib/<arch-variants>/`.  
   Adding `android.defaultConfig.ndk.debugSymbolLevel = 'FULL'` to `build.gradle` has no effect in size of the App Bundle.  
-  This might only require if you have any extra Native library.
+  This might only require if we have any extra Native library.
 - No need to upload deobfuscation mapping files.  
   `proguard.map` already included in App Bundle at `/BUNDLE-METADATA/com.android.tools.build.obfuscation/`.
+
+## Error Reporting Services
+
+### Crashlytics
+
+- ✅ Dart Debug Symbol Files
+- ⬜ R8, ProGuard, and DexGuard Mapping Files
+
+### Sentry
+
+- ✅ Dart Debug Symbol Files, Source
+- ⬜ R8, ProGuard, and DexGuard Mapping Files
+- ✅ Web Source Maps
 
 ## Icons Notes
 

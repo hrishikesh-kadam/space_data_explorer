@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:hrk_logging/hrk_logging.dart';
 
-import '../../constants/constants.dart';
 import '../../globals.dart';
 import '../../route/home/home_route.dart';
 import '../../widgets/app_bar.dart';

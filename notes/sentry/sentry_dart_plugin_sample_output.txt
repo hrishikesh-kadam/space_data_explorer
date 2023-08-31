@@ -1,0 +1,339 @@
+✗  SENTRY_RELEASE=space-data-explorer@0.5.0 \
+    dart run sentry_dart_plugin
+Building package executable... (1.0s)
+Built sentry_dart_plugin:sentry_dart_plugin.
+[❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚] 0% reading config values..        
+Downloading sentry-cli from https://downloads.sentry-cdn.com/sentry-cli/2.19.4/sentry-cli-Linux-x86_64 to .dart_tool/pub/bin/sentry_dart_plugin/sentry-cli
+
+Downloaded Sentry CLI binary checksum verification passed successfully (hash: a9fb79e44c5bae6ca8dfd2c66ac918c7e0405e3456edeb100d698961842f057f).
+
+Sentry CLI downloaded successfully.
+☑ reading config values                                                             
+☑ validating config values                                                             
+[❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚] 18% uploading debug symbols..                                
+> Found 316 debug information files
+
+> Resolved source code for 3 debug information files
+
+> Prepared debug information files for upload
+
+> Uploaded 38 missing debug information files
+
+> File upload complete:
+
+  UPLOADED 01cca6a1-5264-b07b-3684-223eda75f327 (build/app/intermediates/stripped_native_libs/stagProfile/out/lib/x86_64/libvmservice_snapshot.so; x86_64 library)
+  UPLOADED 1d61bef2-0e11-2d70-ca2c-b555b8f60831 (build/app/intermediates/stripped_native_libs/stagProfile/out/lib/arm64-v8a/libvmservice_snapshot.so; arm64 library)
+  UPLOADED 4ae5c45b-623f-67f3-e052-915542b94e73 (build/app/intermediates/stripped_native_libs/stagProfile/out/lib/arm64-v8a/libflutter.so; arm64 library)
+  UPLOADED 591e409e-4575-f829-541e-68fcb203cd8d (build/app/intermediates/stripped_native_libs/stagRelease/out/lib/x86/libsentry-android.so; x86 library)
+  UPLOADED b0f46008-0043-031e-ef64-031db2d82435 (build/app/intermediates/flutter/stagRelease/armeabi-v7a/app.so; arm library)
+  UPLOADED 4bb27947-0861-b901-8d49-be1cd8d23d9f (build/app/outputs/bundle/devRelease/debug-info/app.android-x64.symbols; x86_64 debug companion)
+  UPLOADED 4bfd1f4c-eb5e-356b-ccd3-50346c422f10 (.dart_tool/pub/bin/sentry_dart_plugin/sentry-cli; x86_64 debug companion)
+  UPLOADED 0cfbf81e-2759-ae20-c8af-c13ec6a12727 (build/app/intermediates/stripped_native_libs/stagRelease/out/lib/armeabi-v7a/libflutter.so; arm library)
+  UPLOADED ec6481d8-eef4-2db4-9e48-688a89c34609 (build/app/intermediates/stripped_native_libs/stagProfile/out/lib/armeabi-v7a/libvmservice_snapshot.so; arm library)
+  UPLOADED 4bb27947-0861-b901-8d49-be1cd8d23d9f (build/app/outputs/bundle/devRelease/debug-info/app.android-x64.symbols; x86_64 sources)
+  UPLOADED cc8f3a3a-50e7-754a-1a61-670ecb9eae8d (build/app/intermediates/stripped_native_libs/stagDebug/out/lib/x86_64/libflutter.so; x86_64 library)
+  UPLOADED 4881808a-4d46-8edd-b467-08b54837949a (.crashlytics/dump_syms.bin; x86_64 executable)
+  UPLOADED 6ff64056-6eb9-deb6-c26e-f17139b228fa (build/app/intermediates/flutter/stagRelease/arm64-v8a/app.so; arm64 library)
+  UPLOADED dea26514-838e-f5c0-15ce-d3e4d2b07b7a (build/app/intermediates/stripped_native_libs/stagRelease/out/lib/armeabi-v7a/libsentry.so; arm library)
+  UPLOADED b0f46008-a05f-bcfe-a101-056adcf74d4b (build/app/outputs/bundle/devRelease/debug-info/app.android-arm.symbols; arm debug companion)
+  UPLOADED b0f46008-a05f-bcfe-a101-056adcf74d4b (build/app/outputs/bundle/devRelease/debug-info/app.android-arm.symbols; arm sources)
+  UPLOADED 1151998e-95b5-5f90-619a-f3fbb03ad814 (build/app/intermediates/stripped_native_libs/stagProfile/out/lib/x86_64/libflutter.so; x86_64 library)
+  UPLOADED 0138fda3-869e-c96b-3cc2-27fd8a1501dc (build/app/intermediates/stripped_native_libs/stagRelease/out/lib/arm64-v8a/libsentry.so; arm64 library)
+  UPLOADED d5ebc616-eed4-9dd8-bcb3-62beb36c6665 (build/app/intermediates/stripped_native_libs/stagRelease/out/lib/x86_64/libsentry-android.so; x86_64 library)
+  UPLOADED 18f729ea-5be5-a1bc-321d-e1ee17d8b506 (build/app/intermediates/stripped_native_libs/stagRelease/out/lib/arm64-v8a/libflutter.so; arm64 library)
+  UPLOADED b0b6c60d-1daf-f4cd-8093-3dc402872ebd (build/app/intermediates/stripped_native_libs/stagRelease/out/lib/x86_64/libsentry.so; x86_64 library)
+  UPLOADED 6ff64056-1485-4a9f-4067-e263cb9fd2b2 (build/app/outputs/bundle/devRelease/debug-info/app.android-arm64.symbols; arm64 debug companion)
+  UPLOADED f10b5296-9803-7af0-0e36-ea7f7c886936 (build/app/intermediates/stripped_native_libs/stagDebug/out/lib/arm64-v8a/libflutter.so; arm64 library)
+  UPLOADED 4bb27947-0861-b901-8d49-be1cd8d23d9f (lib/x86_64/libapp.so; x86_64 library)
+  UPLOADED bd0a0314-4a4f-4b02-90ed-b2dca1d06678 (build/app/intermediates/stripped_native_libs/stagRelease/out/lib/x86_64/libflutter.so; x86_64 library)
+  UPLOADED 6ff64056-1485-4a9f-4067-e263cb9fd2b2 (lib/arm64-v8a/libapp.so; arm64 library)
+  UPLOADED b3d3df50-749b-2baf-7e7b-e1deb7012017 (build/app/intermediates/stripped_native_libs/stagRelease/out/lib/arm64-v8a/libsentry-android.so; arm64 library)
+  UPLOADED 1d61bef2-b1da-d755-ca2c-b5550a6c584e (build/app/intermediates/flutter/stagProfile/arm64-v8a/app.so; arm64 library)
+  UPLOADED 6ff64056-1485-4a9f-4067-e263cb9fd2b2 (build/app/outputs/bundle/devRelease/debug-info/app.android-arm64.symbols; arm64 sources)
+  UPLOADED 4bb27947-db33-dd21-f9d1-a6dccc0c31e7 (build/app/intermediates/flutter/stagRelease/x86_64/app.so; x86_64 library)
+  UPLOADED 97b245b6-18af-97dc-1dff-23c5300cf958 (build/app/intermediates/stripped_native_libs/stagRelease/out/lib/x86/libsentry.so; x86 library)
+  UPLOADED b0f46008-a05f-bcfe-a101-056adcf74d4b (lib/armeabi-v7a/libapp.so; arm library)
+  UPLOADED ec6481d8-e87f-9d8c-9e48-688a683986c6 (build/app/intermediates/flutter/stagProfile/armeabi-v7a/app.so; arm library)
+  UPLOADED 68aed51e-337e-1ebc-4955-b63f999528ea (build/app/intermediates/stripped_native_libs/stagDebug/out/lib/x86/libflutter.so; x86 library)
+  UPLOADED 01cca6a1-6c0c-3c1f-3684-223e64018cf3 (build/app/intermediates/flutter/stagProfile/x86_64/app.so; x86_64 library)
+  UPLOADED de4ac219-33cc-3ff3-c192-02b93949b1dc (build/app/intermediates/stripped_native_libs/stagRelease/out/lib/armeabi-v7a/libsentry-android.so; arm library)
+  UPLOADED c92ab1f3-787e-fb6b-2a25-f38e4586bac8 (build/app/intermediates/stripped_native_libs/stagProfile/out/lib/armeabi-v7a/libflutter.so; arm library)
+  UPLOADED acc9e11b-cc0b-92a8-895e-974d0861e946 (build/app/intermediates/stripped_native_libs/stagDebug/out/lib/armeabi-v7a/libflutter.so; arm library)
+☑ uploading debug symbols                                                             
+
+Created release space-data-explorer@0.5.0
+[❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚] 27% uploading source maps..                               
+> Found 20 files
+
+> Analyzing 20 sources
+
+> Rewriting sources
+
+> Adding source map references
+
+> Bundled 20 files for upload
+> Bundle ID: 70922062-aa16-565e-80b3-9d87f4eea8e2
+
+> Uploaded files to Sentry
+
+> File upload complete (processing pending on server)
+> Organization: hrishikesh-kadam
+> Project: space-data-explorer
+> Release: space-data-explorer@0.5.0
+> Dist: None
+> Upload type: artifact bundle
+
+Source Map Upload Report
+  Scripts
+    ~/flutter.js
+    ~/flutter_service_worker.js
+  Minified Scripts
+    ~/canvaskit/canvaskit.js (no sourcemap ref)
+      - warning: could not determine a source map reference (Could not auto-detect referenced sourcemap for ~/canvaskit/canvaskit.js)
+
+~/canvaskit/chromium/canvaskit.js (no sourcemap ref)
+      - warning: could not determine a source map reference (Could not auto-detect referenced sourcemap for ~/canvaskit/chromium/canvaskit.js)
+
+~/canvaskit/skwasm.js (no sourcemap ref)
+      - warning: could not determine a source map reference (Could not auto-detect referenced sourcemap for ~/canvaskit/skwasm.js)
+    ~/canvaskit/skwasm.worker.js (no sourcemap ref)
+      - warning: could not determine a source map reference (Could not auto-detect referenced sourcemap for ~/canvaskit/skwasm.worker.js)
+    ~/main.dart.js (sourcemap at main.dart.js.map)
+    ~/main.dart.js_1.part.js (sourcemap at main.dart.js_1.part.js.map)
+    ~/main.dart.js_2.part.js (sourcemap at main.dart.js_2.part.js.map)
+    ~/main.dart.js_3.part.js (sourcemap at main.dart.js_3.part.js.map)
+    ~/main.dart.js_4.part.js (sourcemap at main.dart.js_4.part.js.map)
+    ~/main.dart.js_5.part.js (sourcemap at main.dart.js_5.part.js.map)
+    ~/main.dart.js_6.part.js (sourcemap at main.dart.js_6.part.js.map)
+  Source Maps
+    ~/main.dart.js.map
+    ~/main.dart.js_1.part.js.map
+    ~/main.dart.js_2.part.js.map
+    ~/main.dart.js_3.part.js.map
+    ~/main.dart.js_4.part.js.map
+    ~/main.dart.js_5.part.js.map
+    ~/main.dart.js_6.part.js.map
+
+> Found 190 files
+
+> Analyzing 190 sources
+
+> Rewriting sources
+
+> Adding source map references
+
+> Bundled 190 files for upload
+> Bundle ID: 4251e96a-69b4-57ec-b09e-e23a702c1926
+
+> Uploaded files to Sentry
+
+> File upload complete (processing pending on server)
+> Organization: hrishikesh-kadam
+> Project: space-data-explorer
+> Release: space-data-explorer@0.5.0
+> Dist: None
+> Upload type: artifact bundle
+
+Source Map Upload Report
+  Scripts
+    ~/integration_test/app_bar_back_button_test.dart
+    ~/integration_test/golden_screenshots_test.dart
+    ~/integration_test/space_data_explorer_app_test.dart
+    ~/integration_test/test/constants/dimensions.dart
+    ~/integration_test/test/src/config/config.dart
+    ~/integration_test/test/src/config/dio_response.dart
+    ~/integration_test/test/src/config/dio_response.mocks.dart
+    ~/integration_test/test/src/config/hydrated_bloc.dart
+    ~/integration_test/test/src/config/hydrated_bloc.mocks.dart
+    ~/integration_test/test/src/extension/common_finders.dart
+    ~/integration_test/test/src/globals.dart
+    ~/integration_test/test/src/helper/helper.dart
+    ~/integration_test/test/src/helper/helper_non_web.dart
+    ~/integration_test/test/src/helper/helper_web.dart
+    ~/integration_test/test/src/nasa/cad/cad_route.dart
+    ~/integration_test/test/src/nasa/cad/query/close_approach_body_selector.dart
+    ~/integration_test/test/src/nasa/cad/query/data_output.dart
+    ~/integration_test/test/src/nasa/cad/query/date_filter.dart
+    ~/integration_test/test/src/nasa/cad/query/date_filter_widget.dart
+    ~/integration_test/test/src/nasa/cad/query/distance_filter.dart
+    ~/integration_test/test/src/nasa/cad/query/small_body_filter.dart
+    ~/integration_test/test/src/nasa/cad/query/small_body_selector.dart
+    ~/integration_test/test/src/nasa/cad/sbdb_cad_api.dart
+    ~/integration_test/test/src/nasa/cad/sbdb_cad_api.mocks.dart
+    ~/integration_test/test/src/nasa/cad/sbdb_cad_body.dart
+    ~/integration_test/test/src/nasa/cad_result/cad_result_route.dart
+    ~/integration_test/test/src/nasa/route/nasa_route.dart
+    ~/integration_test/test/src/route/home/home_route.dart
+    ~/integration_test/test/src/route/settings/settings_route.dart
+    ~/integration_test/test/src/route/settings/tiles/date_format_tile.dart
+    ~/integration_test/test/src/route/settings/tiles/language_tile.dart
+    ~/integration_test/test/src/space_data_explorer_app.dart
+    ~/integration_test/test/unit_test/config/app_bloc_observer_test.dart
+    ~/integration_test/test/unit_test/helper/locale_json_converter_test.dart
+    ~/integration_test/test/unit_test/helper/locale_list_json_converter_test.dart
+    ~/integration_test/test/unit_test/route/settings/bloc/settings_bloc_test.dart
+    ~/integration_test/test/unit_test/route/settings/bloc/settings_state_test.dart
+    ~/integration_test/test/unit_test/route/settings/date_format_test.dart
+    ~/integration_test/test/widget_test.dart
+    ~/integration_test/test/widget_test/config/app_back_button_dispatcher_test.dart
+    ~/integration_test/test/widget_test/config/app_bar_back_button_test.dart
+    ~/integration_test/test/widget_test/deferred_loading/deferred_loading_placeholder_test.dart
+    ~/integration_test/test/widget_test/nasa/cad/cad_route_navigation_test.dart
+    ~/integration_test/test/widget_test/nasa/cad/query/interaction/close_approach_body_selector_test.dart
+    ~/integration_test/test/widget_test/nasa/cad/query/interaction/data_output_test.dart
+    ~/integration_test/test/widget_test/nasa/cad/query/interaction/date_filter_test.dart
+    ~/integration_test/test/widget_test/nasa/cad/query/interaction/distance_filter_test.dart
+    ~/integration_test/test/widget_test/nasa/cad/query/interaction/query_test.dart
+    ~/integration_test/test/widget_test/nasa/cad/query/interaction/small_body_filter_test.dart
+    ~/integration_test/test/widget_test/nasa/cad/query/interaction/small_body_selector_test.dart
+    ~/integration_test/test/widget_test/nasa/cad/query/painting/close_approach_body_selector_test.dart
+    ~/integration_test/test/widget_test/nasa/cad/query/painting/data_output_test.dart
+    ~/integration_test/test/widget_test/nasa/cad/query/painting/date_filter_test.dart
+    ~/integration_test/test/widget_test/nasa/cad/query/painting/distance_filter_test.dart
+    ~/integration_test/test/widget_test/nasa/cad/query/painting/query_test.dart
+    ~/integration_test/test/widget_test/nasa/cad/query/painting/small_body_filter_test.dart
+    ~/integration_test/test/widget_test/nasa/cad/query/painting/small_body_selector_test.dart
+    ~/integration_test/test/widget_test/nasa/cad_result/cad_result_route_test.dart
+    ~/integration_test/test/widget_test/nasa/route/nasa_route_test.dart
+    ~/integration_test/test/widget_test/route/home/home_route_test.dart
+    ~/integration_test/test/widget_test/route/settings/settings_route_test.dart
+    ~/integration_test/test/widget_test/route/settings/tiles/date_format_tile_test.dart
+    ~/integration_test/test/widget_test/route/settings/tiles/language_tile_test.dart
+    ~/integration_test/test/widget_test/space_data_explorer_app_test.dart
+    ~/integration_test/test/widget_test/widgets/interaction/choice_chip_input_widget_test.dart
+    ~/integration_test/test/widget_test/widgets/interaction/outlined_button_extended_test.dart
+    ~/integration_test/test/widget_test/widgets/interaction/value_range_filter_widget_test.dart
+    ~/integration_test/test/widget_test/widgets/painting/date_filter_widget_test.dart
+    ~/lib/config/app_back_button_dispatcher.dart
+    ~/lib/config/app_bloc_observer.dart
+    ~/lib/config/config.dart
+    ~/lib/config/config_non_web.dart
+    ~/lib/config/config_web.dart
+    ~/lib/constants/constants.dart
+    ~/lib/constants/dimensions.dart
+    ~/lib/constants/theme.dart
+    ~/lib/deferred_loading/deferred_loading.dart
+    ~/lib/deferred_loading/deferred_loading_placeholder.dart
+    ~/lib/deferred_loading/deferred_widget.dart
+    ~/lib/firebase/options/dev.dart
+    ~/lib/firebase/options/prod.dart
+    ~/lib/firebase/options/stag.dart
+    ~/lib/globals.dart
+    ~/lib/helper/helper.dart
+    ~/lib/main.dart
+    ~/lib/nasa/cad/bloc/cad_bloc.dart
+    ~/lib/nasa/cad/bloc/cad_event.dart
+    ~/lib/nasa/cad/bloc/cad_state.dart
+    ~/lib/nasa/cad/bloc/cad_state.freezed.dart
+    ~/lib/nasa/cad/cad_route.dart
+    ~/lib/nasa/cad/cad_screen.dart
+    ~/lib/nasa/cad_result/bloc/cad_result_bloc.dart
+    ~/lib/nasa/cad_result/bloc/cad_result_event.dart
+    ~/lib/nasa/cad_result/bloc/cad_result_state.dart
+    ~/lib/nasa/cad_result/cad_result_route.dart
+    ~/lib/nasa/cad_result/cad_result_screen.dart
+    ~/lib/nasa/route/nasa_route.dart
+    ~/lib/nasa/route/nasa_screen.dart
+    ~/lib/route/home/home_route.dart
+    ~/lib/route/home/home_route.g.dart
+    ~/lib/route/home/home_screen.dart
+    ~/lib/route/settings/bloc/settings_bloc.dart
+    ~/lib/route/settings/bloc/settings_event.dart
+    ~/lib/route/settings/bloc/settings_state.dart
+    ~/lib/route/settings/bloc/settings_state.freezed.dart
+    ~/lib/route/settings/bloc/settings_state.g.dart
+    ~/lib/route/settings/date_format_pattern.dart
+    ~/lib/route/settings/language.dart
+    ~/lib/route/settings/settings_route.dart
+    ~/lib/route/settings/settings_screen.dart
+    ~/lib/space_data_explorer.dart
+    ~/lib/widgets/app_bar.dart
+    ~/lib/widgets/choice_chip_input_widget.dart
+    ~/lib/widgets/choice_chip_query_widget.dart
+    ~/lib/widgets/date_filter_widget.dart
+    ~/lib/widgets/filter_chip_query_widget.dart
+    ~/lib/widgets/outlined_button_extended.dart
+    ~/lib/widgets/query_grid_container.dart
+    ~/lib/widgets/radio_dialog.dart
+    ~/lib/widgets/radio_settings_tile.dart
+    ~/lib/widgets/value_range_filter_widget.dart
+    ~/packages/hrk_settings_list/lib/hrk_settings_list.dart
+    ~/test/constants/dimensions.dart
+    ~/test/src/config/config.dart
+    ~/test/src/config/dio_response.dart
+    ~/test/src/config/dio_response.mocks.dart
+    ~/test/src/config/hydrated_bloc.dart
+    ~/test/src/config/hydrated_bloc.mocks.dart
+    ~/test/src/extension/common_finders.dart
+    ~/test/src/globals.dart
+    ~/test/src/helper/helper.dart
+    ~/test/src/helper/helper_non_web.dart
+    ~/test/src/helper/helper_web.dart
+    ~/test/src/nasa/cad/cad_route.dart
+    ~/test/src/nasa/cad/query/close_approach_body_selector.dart
+    ~/test/src/nasa/cad/query/data_output.dart
+    ~/test/src/nasa/cad/query/date_filter.dart
+    ~/test/src/nasa/cad/query/date_filter_widget.dart
+    ~/test/src/nasa/cad/query/distance_filter.dart
+    ~/test/src/nasa/cad/query/small_body_filter.dart
+    ~/test/src/nasa/cad/query/small_body_selector.dart
+    ~/test/src/nasa/cad/sbdb_cad_api.dart
+    ~/test/src/nasa/cad/sbdb_cad_api.mocks.dart
+    ~/test/src/nasa/cad/sbdb_cad_body.dart
+    ~/test/src/nasa/cad_result/cad_result_route.dart
+    ~/test/src/nasa/route/nasa_route.dart
+    ~/test/src/route/home/home_route.dart
+    ~/test/src/route/settings/settings_route.dart
+    ~/test/src/route/settings/tiles/date_format_tile.dart
+    ~/test/src/route/settings/tiles/language_tile.dart
+    ~/test/src/space_data_explorer_app.dart
+    ~/test/unit_test/config/app_bloc_observer_test.dart
+    ~/test/unit_test/helper/locale_json_converter_test.dart
+    ~/test/unit_test/helper/locale_list_json_converter_test.dart
+    ~/test/unit_test/route/settings/bloc/settings_bloc_test.dart
+    ~/test/unit_test/route/settings/bloc/settings_state_test.dart
+    ~/test/unit_test/route/settings/date_format_test.dart
+    ~/test/widget_test.dart
+    ~/test/widget_test/config/app_back_button_dispatcher_test.dart
+    ~/test/widget_test/config/app_bar_back_button_test.dart
+    ~/test/widget_test/deferred_loading/deferred_loading_placeholder_test.dart
+    ~/test/widget_test/nasa/cad/cad_route_navigation_test.dart
+    ~/test/widget_test/nasa/cad/query/interaction/close_approach_body_selector_test.dart
+    ~/test/widget_test/nasa/cad/query/interaction/data_output_test.dart
+    ~/test/widget_test/nasa/cad/query/interaction/date_filter_test.dart
+    ~/test/widget_test/nasa/cad/query/interaction/distance_filter_test.dart
+    ~/test/widget_test/nasa/cad/query/interaction/query_test.dart
+    ~/test/widget_test/nasa/cad/query/interaction/small_body_filter_test.dart
+    ~/test/widget_test/nasa/cad/query/interaction/small_body_selector_test.dart
+    ~/test/widget_test/nasa/cad/query/painting/close_approach_body_selector_test.dart
+    ~/test/widget_test/nasa/cad/query/painting/data_output_test.dart
+    ~/test/widget_test/nasa/cad/query/painting/date_filter_test.dart
+    ~/test/widget_test/nasa/cad/query/painting/distance_filter_test.dart
+    ~/test/widget_test/nasa/cad/query/painting/query_test.dart
+    ~/test/widget_test/nasa/cad/query/painting/small_body_filter_test.dart
+    ~/test/widget_test/nasa/cad/query/painting/small_body_selector_test.dart
+    ~/test/widget_test/nasa/cad_result/cad_result_route_test.dart
+    ~/test/widget_test/nasa/route/nasa_route_test.dart
+    ~/test/widget_test/route/home/home_route_test.dart
+    ~/test/widget_test/route/settings/settings_route_test.dart
+    ~/test/widget_test/route/settings/tiles/date_format_tile_test.dart
+    ~/test/widget_test/route/settings/tiles/language_tile_test.dart
+    ~/test/widget_test/space_data_explorer_app_test.dart
+    ~/test/widget_test/widgets/interaction/choice_chip_input_widget_test.dart
+    ~/test/widget_test/widgets/interaction/outlined_button_extended_test.dart
+    ~/test/widget_test/widgets/interaction/value_range_filter_widget_test.dart
+    ~/test/widget_test/widgets/painting/date_filter_widget_test.dart
+    ~/test_driver/integration_test.dart
+    ~/test_driver/screenshots_test.dart
+  Minified Scripts
+    ~/packages/hrk_settings_list/lib/src/hrk_settings_list.dart (no sourcemap ref)
+      - warning: could not determine a source map reference (Could not auto-detect referenced sourcemap for ~/packages/hrk_settings_list/lib/src/hrk_settings_list.dart)
+☑ uploading source maps                                                             
+
+Could not determine any commits to be associated with a repo-based integration. Proceeding to find commits from local git tree.
+
+Could not find the previous commit. Creating a release with 20 commits.
+
+Success! Set commits for release space-data-explorer@0.5.0
+
+Finalized release space-data-explorer@0.5.0

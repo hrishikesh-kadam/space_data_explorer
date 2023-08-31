@@ -3,29 +3,57 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pubspec_parse/pubspec_parse.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
-import '../firebase/options/dev.dart' as firebase_dev;
-import '../firebase/options/prod.dart' as firebase_prod;
-import '../firebase/options/stag.dart' as firebase_stag;
+import '../constants/constants.dart';
+import '../coverage_ignored.dart';
 import 'app_bloc_observer.dart';
+import 'firebase/firebase.dart';
 
 import 'config_non_web.dart' if (dart.library.html) 'config_web.dart'
     as platform;
 
-Future<void> configureApp() async {
-  WidgetsFlutterBinding.ensureInitialized();
+Future<void> configureApp({
+  required AppRunner appRunner,
+}) async {
   configureUrlStrategy();
   configureHrkLogging();
   configureBloc();
+  await SentryFlutter.init(
+    (options) async {
+      options.dsn = kReleaseMode
+          ? 'https://3656530f2f6bf1ad4f46db3ad3e152d7@o4505777435377664.ingest.sentry.io/4505783833001984'
+          : '';
+      options.tracesSampleRate = 1.0;
+      options.environment = flavorEnv.name;
+      options.release = '$appNameKebabCase@$version';
+    },
+    appRunner: () async {
+      await configurePostBinding();
+      await appRunner();
+    },
+  );
+}
+
+Future<void> configurePostBinding() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await loadPubspec();
   await configureHydratedBloc();
-  await configureFirebase();
-  configureErrorReporting();
+  if (isFirebaseSupported()) {
+    await configureFirebase();
+  }
+  if (isFirebaseAnalyticsSupported()) {
+    configureFirebaseAnalytics();
+  }
+  if (isCrashlyticsSupported()) {
+    configureCrashlytics();
+  }
 }
 
 BackButton getAppBarBackButton({
@@ -50,15 +78,12 @@ Future<void> configureHydratedBloc() async {
   );
 }
 
-// https://github.com/MisterJimson/flutter_keyboard_visibility
-bool isKeyboardVisibilitySupported() {
-  if (kIsWeb) {
-    return false;
-  } else {
-    return switch (defaultTargetPlatform) {
-      TargetPlatform.android || TargetPlatform.iOS => true,
-      _ => false
-    };
+Pubspec? pubspec;
+Future<void> loadPubspec() async {
+  if (pubspec != null) {
+    pubspec = Pubspec.parse(await rootBundle.loadString('pubspec.yaml'));
+    assert(appName == pubspec!.name);
+    assert(version == pubspec!.version.toString());
   }
 }
 
@@ -82,27 +107,3 @@ enum FlavorEnv {
 final FlavorEnv flavorEnv = FlavorEnv.fromString(
   const String.fromEnvironment('FLAVOR_ENV'),
 );
-
-Future<void> configureFirebase() async {
-  final FirebaseOptions options = switch (flavorEnv) {
-    FlavorEnv.dev => firebase_dev.DefaultFirebaseOptions.currentPlatform,
-    FlavorEnv.stag => firebase_stag.DefaultFirebaseOptions.currentPlatform,
-    FlavorEnv.prod => firebase_prod.DefaultFirebaseOptions.currentPlatform,
-    _ => throw ArgumentError.value(flavorEnv),
-  };
-  await Firebase.initializeApp(
-    options: options,
-  );
-}
-
-void configureErrorReporting() {
-  FlutterError.onError = (errorDetails) {
-    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-  };
-  // Pass all uncaught asynchronous errors that aren't handled by the Flutter
-  // framework to Crashlytics
-  PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-    return true;
-  };
-}

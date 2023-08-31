@@ -7,7 +7,7 @@ import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import '../../../deferred_loading/deferred_loading.dart';
-import '../../constants/constants.dart';
+import '../../globals.dart';
 import '../cad/cad_route.dart';
 import 'cad_result_screen.dart' deferred as cad_result_screen;
 

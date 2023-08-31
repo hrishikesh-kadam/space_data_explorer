@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:intl/intl.dart';
 
-import '../constants/constants.dart';
+import '../globals.dart';
 import '../helper/helper.dart';
 import 'query_grid_container.dart';
 

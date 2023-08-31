@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
-import '../constants/constants.dart';
+import '../globals.dart';
 import '../helper/helper.dart';
 import 'query_grid_container.dart';
 

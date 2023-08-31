@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
-import '../../../constants/constants.dart';
+import '../../../globals.dart';
 import 'cad_state.dart';
 
 part 'cad_event.dart';
@@ -88,7 +88,9 @@ class CadBloc extends Bloc<CadEvent, CadState> {
         disableInputs: false,
       ));
       FirebaseCrashlytics.instance.recordError(e, s,
-          reason: '_onCadRequested failure', printDetails: false);
+          reason: '_onCadRequested failure',
+          information: [queryParameters],
+          printDetails: false);
     }
   }
 

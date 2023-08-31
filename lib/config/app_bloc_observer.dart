@@ -2,7 +2,7 @@ import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../constants/constants.dart';
+import '../globals.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 
-import '../../constants/constants.dart';
+import '../../globals.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/radio_settings_tile.dart';
 import 'bloc/settings_bloc.dart';
