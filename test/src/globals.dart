@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations_en.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 
-import 'package:space_data_explorer/constants/constants.dart';
+import 'package:space_data_explorer/globals.dart';
 
 final testLogger = Logger('$appNamePascalCase.Test');
 final printLogger = Logger('${testLogger.fullName}.Print')..level = Level.ALL;

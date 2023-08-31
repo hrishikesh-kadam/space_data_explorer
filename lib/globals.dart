@@ -2,9 +2,12 @@ import 'package:flutter/foundation.dart';
 
 import 'package:hrk_batteries/hrk_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
+import 'package:recase/recase.dart';
 
-import 'config/config.dart';
 import 'constants/constants.dart';
+import 'coverage_ignored.dart';
+
+final String appNamePascalCase = appName.pascalCase;
 
 final bool flutterTest = isFlutterTest();
 

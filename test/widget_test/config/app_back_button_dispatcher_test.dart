@@ -24,8 +24,8 @@ void main() {
 
 void appBackButtonDispatcherTest() {
   group('AppBackButtonDispatcher $testType Test', () {
-    setUpAll(() {
-      configureApp();
+    setUpAll(() async {
+      await configureApp();
     });
 
     setUp(() {

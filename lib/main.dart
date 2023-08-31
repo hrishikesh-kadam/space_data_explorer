@@ -8,10 +8,13 @@ Future<void> main({
   String? initialLocation,
   bool debugShowCheckedModeBanner = true,
 }) async {
-  await configureApp();
-  runApp(SpaceDataExplorerApp(
-    navigatorKey: navigatorKey,
-    initialLocation: initialLocation,
-    debugShowCheckedModeBanner: debugShowCheckedModeBanner,
-  ));
+  await configureApp(
+    appRunner: () => runApp(
+      SpaceDataExplorerApp(
+        navigatorKey: navigatorKey,
+        initialLocation: initialLocation,
+        debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+      ),
+    ),
+  );
 }

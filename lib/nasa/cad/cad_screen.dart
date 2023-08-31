@@ -8,7 +8,6 @@ import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:intl/intl.dart';
 
-import '../../constants/constants.dart';
 import '../../constants/dimensions.dart';
 import '../../constants/theme.dart';
 import '../../globals.dart';
@@ -185,6 +184,7 @@ class CadScreen extends StatelessWidget {
                 label: Text(l10n.search),
                 networkState: state,
                 onPressed: () async {
+                  // throw Exception();
                   context.read<CadBloc>().add(const CadRequested());
                 },
               ),

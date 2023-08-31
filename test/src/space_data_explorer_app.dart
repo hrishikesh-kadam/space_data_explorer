@@ -20,7 +20,7 @@ Future<void> pumpApp(
   String? initialLocation,
   bool debugShowCheckedModeBanner = true,
 }) async {
-  configureApp();
+  await configureApp();
   await tester.pumpWidget(SpaceDataExplorerApp(
     navigatorKey: navigatorKey ?? globals.navigatorKey,
     initialLocation: initialLocation,

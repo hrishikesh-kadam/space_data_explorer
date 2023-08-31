@@ -11,12 +11,16 @@ source ./tool/firebase/source.sh
 
 if [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then
   FIREBASE_CHANNEL_ID="pr-$(jq -r .number "$GITHUB_EVENT_PATH")"
+  UPLOAD_SOURCEMAPS="false"
 elif [[ ! -s ./secrets/.git ]]; then
   FIREBASE_CHANNEL_ID="$BRANCH"
+  UPLOAD_SOURCEMAPS="false"
 elif [[ $BRANCH != "dev" && $BRANCH != "stag" && $BRANCH != "prod" ]]; then
   FIREBASE_CHANNEL_ID="$BRANCH"
+  UPLOAD_SOURCEMAPS="false"
 else
   FIREBASE_CHANNEL_ID="live"
+  UPLOAD_SOURCEMAPS="true"
 fi
 
 _firebase use $FIREBASE_PROJECT_ID
@@ -25,6 +29,12 @@ if [[ $FIREBASE_CHANNEL_ID == "live" ]]; then
 else
   _firebase hosting:channel:deploy "$FIREBASE_CHANNEL_ID" \
     --expires 30d
+fi
+
+if [[ $UPLOAD_SOURCEMAPS == "true" ]]; then
+  source ./secrets/sentry/source.sh
+  sentry-cli releases files upload-sourcemaps \
+    ./build/web
 fi
 
 rm -f "/tmp/firebase-contri-key.json"

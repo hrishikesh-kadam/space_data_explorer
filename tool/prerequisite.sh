@@ -194,6 +194,10 @@ if [[ $ROLE == "contributor" || $ROLE == "member" ]]; then
     printf "firebase "
     firebase --version
   fi
+  if [[ ! -x $(command -v sentry-cli) ]]; then
+    npm install -g @sentry/cli
+    sentry-cli --version
+  fi
 fi
 
 if [[ $ROLE == "member" ]]; then

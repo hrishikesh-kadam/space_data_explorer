@@ -4,9 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hrk_logging/hrk_logging.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'config/app_back_button_dispatcher.dart';
-import 'constants/constants.dart';
+import 'globals.dart';
 import 'route/home/home_route.dart';
 import 'route/settings/bloc/settings_bloc.dart';
 import 'route/settings/bloc/settings_state.dart';
@@ -25,6 +26,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
       routes: [
         $homeRoute,
       ],
+      observers: [SentryNavigatorObserver()],
     );
   }
 

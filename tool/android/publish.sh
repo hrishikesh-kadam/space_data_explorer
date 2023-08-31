@@ -8,6 +8,7 @@ fi
 
 source ./tool/constants.sh
 source ./tool/firebase/source.sh
+source ./secrets/sentry/source.sh
 
 FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
@@ -53,5 +54,9 @@ FIREBASE_APP_ID=$( \
 )
 
 _firebase crashlytics:symbols:upload \
-  --app="$FIREBASE_APP_ID" \
+  --app "$FIREBASE_APP_ID" \
+  "build/app/outputs/bundle/${FLAVOR_ENV}Release/debug-info"
+
+sentry-cli debug-files upload \
+  --include-sources \
   "build/app/outputs/bundle/${FLAVOR_ENV}Release/debug-info"

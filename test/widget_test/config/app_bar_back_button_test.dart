@@ -37,8 +37,8 @@ void appBarBackButtonTest() {
   bool skipDeepLinkTests = kIsWeb;
 
   group('getAppBarBackButtonTest() $testType Test', () {
-    setUpAll(() {
-      configureApp();
+    setUpAll(() async {
+      await configureApp();
     });
 
     setUp(() {
