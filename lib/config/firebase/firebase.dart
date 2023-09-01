@@ -14,6 +14,7 @@ import 'options/stag.dart' as firebase_stag;
 
 // https://firebase.google.com/docs/flutter/setup?platform=flutter#available-plugins
 // https://github.com/firebase/flutterfire/tree/master/packages/firebase_core/firebase_core
+final bool firebaseSupported = isFirebaseSupported();
 bool isFirebaseSupported() {
   if (kIsWeb) {
     return true;
@@ -42,6 +43,7 @@ Future<void> configureFirebase() async {
 }
 
 // https://github.com/firebase/flutterfire/tree/master/packages/firebase_analytics/firebase_analytics
+final bool firebaseAnalyticsSupported = isFirebaseAnalyticsSupported();
 bool isFirebaseAnalyticsSupported() {
   if (kIsWeb) {
     return true;
@@ -63,6 +65,7 @@ void configureFirebaseAnalytics() async {
 }
 
 // https://github.com/firebase/flutterfire/tree/master/packages/firebase_crashlytics/firebase_crashlytics
+final bool crashlyticsSupported = isCrashlyticsSupported();
 bool isCrashlyticsSupported() {
   if (kIsWeb) {
     return false;

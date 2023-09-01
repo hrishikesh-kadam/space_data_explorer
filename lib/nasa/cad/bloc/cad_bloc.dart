@@ -4,11 +4,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
+import '../../../extension/logger.dart';
 import '../../../globals.dart';
 import 'cad_state.dart';
 
@@ -81,16 +81,17 @@ class CadBloc extends Bloc<CadEvent, CadState> {
         networkState: NetworkState.success,
         sbdbCadBody: response.data,
       ));
-    } on Exception catch (e, s) {
-      _logger.error('_onCadRequested failure', e, s);
+    } on Exception catch (error, stackTrace) {
+      _logger.reportError(
+        '_onCadRequested failure',
+        error: error,
+        stackTrace: stackTrace,
+        information: [queryParameters],
+      );
       emit(state.copyWith(
         networkState: NetworkState.failure,
         disableInputs: false,
       ));
-      FirebaseCrashlytics.instance.recordError(e, s,
-          reason: '_onCadRequested failure',
-          information: [queryParameters],
-          printDetails: false);
     }
   }
 

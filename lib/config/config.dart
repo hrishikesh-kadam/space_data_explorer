@@ -45,13 +45,13 @@ Future<void> configurePostBinding() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadPubspec();
   await configureHydratedBloc();
-  if (isFirebaseSupported()) {
+  if (firebaseSupported) {
     await configureFirebase();
   }
-  if (isFirebaseAnalyticsSupported()) {
+  if (firebaseAnalyticsSupported) {
     configureFirebaseAnalytics();
   }
-  if (isCrashlyticsSupported()) {
+  if (crashlyticsSupported) {
     configureCrashlytics();
   }
 }
