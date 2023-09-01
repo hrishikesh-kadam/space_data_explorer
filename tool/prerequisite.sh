@@ -4,7 +4,6 @@
 
 set -e -o pipefail
 
-source ./tool/constants.sh
 source ./tool/shell/logs-env.sh
 
 check_command_on_path() {
@@ -170,7 +169,7 @@ if ! export -p | grep "declare -x ANDROID_HOME=" &> /dev/null; then
   log_error_with_exit "ANDROID_HOME exported variable not found" 1
 fi
 
-if [[ ! -s $BUNDLETOOL_PATH ]]; then
+if [[ ! -s "$ANDROID_HOME/bundletool-all.jar" ]]; then
   ./tool/android/install-bundletool.sh
 fi
 
