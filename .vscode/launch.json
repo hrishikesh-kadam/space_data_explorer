@@ -1,4 +1,4 @@
-// TODO(hrishikesh-kadam): Add flavors using toolArgs
+// https://dartcode.org/docs/launch-configuration/
 {
   "version": "0.2.0",
   "configurations": [
@@ -8,64 +8,25 @@
       "request": "attach"
     },
     {
-      "name": "flutter run -d chrome",
+      "name": "Flutter: Run on Chrome",
+      "type": "dart",
+      "request": "launch",
       "deviceId": "chrome",
-      "request": "launch",
-      "type": "dart"
+      "flutterMode": "debug",
+      "toolArgs": [
+        "--web-browser-flag=--disable-web-security",
+        "--dart-define=FLAVOR_ENV=dev",
+      ]
     },
     {
-      "name": "flutter run -d chrome --profile",
-      "deviceId": "chrome",
-      "request": "launch",
+      "name": "Flutter: Run on Android",
       "type": "dart",
-      "flutterMode": "profile"
-    },
-    {
-      "name": "flutter run -d chrome --release",
-      "deviceId": "chrome",
       "request": "launch",
-      "type": "dart",
-      "flutterMode": "release"
+      "flutterMode": "debug",
+      "toolArgs": [
+        "--flavor=dev",
+        "--dart-define=FLAVOR_ENV=dev",
+      ]
     },
-    {
-      "name": "flutter run -d linux",
-      "deviceId": "linux",
-      "request": "launch",
-      "type": "dart"
-    },
-    {
-      "name": "flutter run -d linux --profile",
-      "deviceId": "linux",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "profile"
-    },
-    {
-      "name": "flutter run -d linux --release",
-      "deviceId": "linux",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "release"
-    },
-    {
-      "name": "flutter run -d emulator-5554",
-      "deviceId": "emulator-5554",
-      "request": "launch",
-      "type": "dart"
-    },
-    {
-      "name": "flutter run -d emulator-5554 --profile",
-      "deviceId": "emulator-5554",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "profile"
-    },
-    {
-      "name": "flutter run -d emulator-5554 --release",
-      "deviceId": "emulator-5554",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "release"
-    }
   ]
 }
