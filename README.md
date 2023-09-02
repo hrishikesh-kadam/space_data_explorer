@@ -3,8 +3,6 @@
 [![ci-schedule](https://github.com/hrishikesh-kadam/space_data_explorer/actions/workflows/ci-schedule.yml/badge.svg)](https://github.com/hrishikesh-kadam/space_data_explorer/actions/workflows/ci-schedule.yml)
 [![codecov](https://codecov.io/gh/hrishikesh-kadam/space_data_explorer/branch/dev/graph/badge.svg)](https://codecov.io/gh/hrishikesh-kadam/space_data_explorer)
 
-<!-- TODO(hrishikesh-kadam): Compare codecov with coveralls -->
-
 An app to explore space data from various sources.
 
 
