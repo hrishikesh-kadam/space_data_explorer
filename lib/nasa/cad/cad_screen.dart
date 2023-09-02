@@ -284,9 +284,11 @@ class CadScreen extends StatelessWidget {
               disableInputs: cadState.disableInputs,
               spacing: Dimensions.cadQueryItemSpacing,
               onDateRangeSelected: (dateRange) {
-                context.read<CadBloc>().add(CadDateRangeSelected(
-                      dateRange: dateRange,
-                    ));
+                if (context.mounted) {
+                  context.read<CadBloc>().add(CadDateRangeSelected(
+                        dateRange: dateRange,
+                      ));
+                }
               },
             );
           },
