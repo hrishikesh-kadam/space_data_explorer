@@ -1,9 +1,11 @@
-part of 'cad_result_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
-@immutable
-sealed class CadResultState extends Equatable {
-  @override
-  List<Object?> get props => [];
+part 'cad_result_state.freezed.dart';
+
+@freezed
+class CadResultState with _$CadResultState {
+  factory CadResultState({
+    required SbdbCadBody sbdbCadBody,
+  }) = _CadResultState;
 }
-
-class CadResultInitial extends CadResultState {}

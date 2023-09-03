@@ -8,6 +8,7 @@ List getListOfRouteMatch(BuildContext context) {
   return GoRouter.of(context).routerDelegate.currentConfiguration.matches;
 }
 
+// LABEL: eligible-hrk_batteries
 class LocaleJsonConverter implements JsonConverter<Locale?, JsonMap?> {
   const LocaleJsonConverter();
 
@@ -42,6 +43,7 @@ class LocaleJsonConverter implements JsonConverter<Locale?, JsonMap?> {
   }
 }
 
+// LABEL: eligible-hrk_batteries
 class LocaleListJsonConverter
     implements JsonConverter<List<Locale>?, List<dynamic>?> {
   const LocaleListJsonConverter();
@@ -92,4 +94,34 @@ double getLargestTextWidth({
     }
   }
   return largestWidth;
+}
+
+(double, int) getSliverMasonryGridParameters({
+  required BuildContext context,
+  required double itemExtent,
+  double pagePaddingHorizontal = 0,
+}) {
+  final double deviceWidth = MediaQuery.sizeOf(context).width;
+  final double whiteSpaceWhenTwo =
+      deviceWidth - 2 * itemExtent - 2 * pagePaddingHorizontal;
+  // logger.debug('deviceWidth = $deviceWidth');
+  // logger.debug('whiteSpaceWhenTwo = $whiteSpaceWhenTwo');
+  int crossAxisCount;
+  double horizontalPadding = pagePaddingHorizontal;
+  if (whiteSpaceWhenTwo >= 0) {
+    crossAxisCount = 2;
+    horizontalPadding += whiteSpaceWhenTwo / 2;
+  } else {
+    final double whiteSpaceWhenOne =
+        deviceWidth - itemExtent - 2 * pagePaddingHorizontal;
+    // logger.debug('whiteSpaceWhenOne = $whiteSpaceWhenOne');
+    if (whiteSpaceWhenOne >= 0) {
+      crossAxisCount = 1;
+      horizontalPadding += whiteSpaceWhenOne / 2;
+    } else {
+      crossAxisCount = 1;
+    }
+  }
+  // logger.debug('horizontalPadding = $horizontalPadding');
+  return (horizontalPadding, crossAxisCount);
 }

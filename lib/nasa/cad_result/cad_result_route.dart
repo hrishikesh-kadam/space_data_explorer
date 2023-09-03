@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
@@ -47,7 +48,8 @@ class CadResultRoute extends GoRouteData {
     return DeferredWidget(
       cad_result_screen.loadLibrary,
       () => cad_result_screen.CadResultScreen(
-        sbdbCadBody: $extra!['$SbdbCadBody'],
+        l10n: AppLocalizations.of(context),
+        routeExtraMap: $extra!,
       ),
       placeholder: const DeferredPlaceholderWidget(
         name: CadResultRoute.displayName,

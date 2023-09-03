@@ -11,6 +11,7 @@ import 'package:intl/intl.dart';
 import '../../constants/dimensions.dart';
 import '../../constants/theme.dart';
 import '../../globals.dart';
+import '../../helper/helper.dart';
 import '../../route/home/home_route.dart';
 import '../../route/settings/bloc/settings_bloc.dart';
 import '../../route/settings/bloc/settings_state.dart';
@@ -145,9 +146,7 @@ class CadScreen extends StatelessWidget {
     );
   }
 
-  List<Widget> _getBody({
-    required BuildContext context,
-  }) {
+  List<Widget> _getBody({required BuildContext context}) {
     return [
       const SliverPadding(
         padding: EdgeInsets.only(
@@ -164,9 +163,7 @@ class CadScreen extends StatelessWidget {
     ];
   }
 
-  Widget _getSearchButton({
-    required BuildContext context,
-  }) {
+  Widget _getSearchButton({required BuildContext context}) {
     return BlocSelector<CadBloc, CadState, NetworkState>(
       selector: (state) {
         return state.networkState;
@@ -195,9 +192,7 @@ class CadScreen extends StatelessWidget {
     );
   }
 
-  Widget _getQueryGrid({
-    required BuildContext context,
-  }) {
+  Widget _getQueryGrid({required BuildContext context}) {
     List<Widget> queryWidgetList = [
       _getDateFilterWidget(context: context),
       _getDistFilterWidget(context: context),
@@ -206,37 +201,18 @@ class CadScreen extends StatelessWidget {
       _getCloseApproachBodySelectorWidget(context: context),
       _getDataOutputWidget(context: context),
     ];
-    final double deviceWidth = MediaQuery.sizeOf(context).width;
-    final double whiteSpaceWhenTwo = deviceWidth -
-        2 * Dimensions.cadQueryItemExtent -
-        2 * Dimensions.pagePaddingHorizontal;
-    // _log.debug('deviceWidth = $deviceWidth');
-    // _log.debug('whiteSpaceWhenTwo = $whiteSpaceWhenTwo');
-    int crossAxisCount;
-    double horizontalPadding = Dimensions.pagePaddingHorizontal;
-    if (whiteSpaceWhenTwo >= 0) {
-      crossAxisCount = 2;
-      horizontalPadding += whiteSpaceWhenTwo / 2;
-    } else {
-      final double whiteSpaceWhenOne = deviceWidth -
-          Dimensions.cadQueryItemExtent -
-          2 * Dimensions.pagePaddingHorizontal;
-      // _log.debug('whiteSpaceWhenOne = $whiteSpaceWhenOne');
-      if (whiteSpaceWhenOne >= 0) {
-        crossAxisCount = 1;
-        horizontalPadding += whiteSpaceWhenOne / 2;
-      } else {
-        crossAxisCount = 1;
-      }
-    }
-    // _log.debug('horizontalPadding = $horizontalPadding');
+    final gridParameters = getSliverMasonryGridParameters(
+      context: context,
+      itemExtent: Dimensions.cadQueryItemExtent,
+      pagePaddingHorizontal: Dimensions.pagePaddingHorizontal,
+    );
     return SliverPadding(
       padding: EdgeInsets.symmetric(
-        horizontal: horizontalPadding,
+        horizontal: gridParameters.$1,
       ),
       sliver: SliverMasonryGrid.count(
         key: queryGridKey,
-        crossAxisCount: crossAxisCount,
+        crossAxisCount: gridParameters.$2,
         childCount: queryWidgetList.length,
         itemBuilder: (context, index) {
           return queryWidgetList[index];
@@ -245,9 +221,7 @@ class CadScreen extends StatelessWidget {
     );
   }
 
-  Widget _getDateFilterWidget({
-    required BuildContext context,
-  }) {
+  Widget _getDateFilterWidget({required BuildContext context}) {
     return BlocBuilder<CadBloc, CadState>(
       buildWhen: (previous, current) {
         return previous.dateRange != current.dateRange ||
@@ -297,9 +271,7 @@ class CadScreen extends StatelessWidget {
     );
   }
 
-  Widget _getDistFilterWidget({
-    required BuildContext context,
-  }) {
+  Widget _getDistFilterWidget({required BuildContext context}) {
     final Set<String> labels = {
       l10n.minimum,
       l10n.maximum,
@@ -346,9 +318,7 @@ class CadScreen extends StatelessWidget {
     );
   }
 
-  Widget _getSmallBodyFilterWidget({
-    required BuildContext context,
-  }) {
+  Widget _getSmallBodyFilterWidget({required BuildContext context}) {
     final Set<String> labels = {
       SmallBodyFilter.neo.displayName,
       SmallBodyFilter.pha.displayName,
@@ -384,9 +354,7 @@ class CadScreen extends StatelessWidget {
     );
   }
 
-  Widget _getSmallBodySelectorWidget({
-    required BuildContext context,
-  }) {
+  Widget _getSmallBodySelectorWidget({required BuildContext context}) {
     final Set<String> labels =
         smallBodySelectors.map((e) => e.displayName).toSet();
     final Set<String> keys = smallBodySelectors.map((e) => e.name).toSet();
@@ -434,9 +402,7 @@ class CadScreen extends StatelessWidget {
     );
   }
 
-  Widget _getCloseApproachBodySelectorWidget({
-    required BuildContext context,
-  }) {
+  Widget _getCloseApproachBodySelectorWidget({required BuildContext context}) {
     final Set<String> labels = {
       l10n.earth,
       l10n.moon,
@@ -476,9 +442,7 @@ class CadScreen extends StatelessWidget {
     );
   }
 
-  _getDataOutputWidget({
-    required BuildContext context,
-  }) {
+  _getDataOutputWidget({required BuildContext context}) {
     final Set<String> labels = {
       l10n.totalOnly,
       l10n.diameter,

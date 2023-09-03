@@ -1,14 +1,17 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:meta/meta.dart';
 
+import 'cad_result_state.dart';
+
 part 'cad_result_event.dart';
-part 'cad_result_state.dart';
 
 class CadResultBloc extends Bloc<CadResultEvent, CadResultState> {
-  CadResultBloc() : super(CadResultInitial()) {
-    on<CadResultEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+  CadResultBloc({
+    required SbdbCadBody sbdbCadBody,
+  }) : super(CadResultState(
+          sbdbCadBody: sbdbCadBody,
+        )) {
+    on<CadResultEvent>((event, emit) {});
   }
 }
