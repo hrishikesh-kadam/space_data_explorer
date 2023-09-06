@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
+import 'package:hrk_nasa_apis_test/hrk_nasa_apis_test.dart';
 
 import 'package:space_data_explorer/globals.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
@@ -9,7 +10,6 @@ import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
 import 'package:space_data_explorer/route/home/home_route.dart';
 import '../../../src/globals.dart';
 import '../../../src/nasa/cad/cad_route.dart';
-import '../../../src/nasa/cad/sbdb_cad_body.dart';
 import '../../../src/nasa/cad_result/cad_result_route.dart';
 
 void main() {
@@ -31,7 +31,7 @@ void main() {
     testWidgets('extra[SbdbCadBody] JsonMap', (WidgetTester tester) async {
       await pumpCadRouteAsNormalLink(tester);
       JsonMap routeExtraMap = getRouteExtraMap();
-      routeExtraMap['$SbdbCadBody'] = getSbdbCadBodyCountZeroJson();
+      routeExtraMap['$SbdbCadBody'] = SbdbCadBodyExt.getSampleJsonMap('200/0');
       CadResultRoute($extra: routeExtraMap).go(navigatorKey.currentContext!);
       await tester.pumpAndSettle();
       expect(find.byType(CadResultScreen), findsOneWidget);
