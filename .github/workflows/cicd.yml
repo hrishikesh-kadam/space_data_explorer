@@ -23,7 +23,7 @@ jobs:
     outputs:
       ALLOW_CICD: ${{ steps.check.outputs.ALLOW_CICD }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - id: check
         run: ./tool/github/check-allow-cicd.sh
 
@@ -52,11 +52,11 @@ jobs:
           fi
           echo "CHECKOUT_REF=$CHECKOUT_REF" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ steps.get-checkout-ref.outputs.CHECKOUT_REF }}
           fetch-depth: '10'
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: 'hrishikesh-kadam/space_data_explorer_secrets'
           path: 'secrets'
