@@ -81,19 +81,36 @@ double getLargestTextWidth({
   textScaleFactor ??= View.of(context).platformDispatcher.textScaleFactor;
   double largestWidth = 0;
   for (final text in textSet) {
-    final TextPainter textPainter = TextPainter(
-      text: TextSpan(text: text, style: style),
-      textDirection: TextDirection.ltr,
-      // TODO(hrishikesh-kadam): Use TextScaler once it is in stable
-      // ignore: deprecated_member_use
+    final TextPainter textPainter = getTextPainterLaidout(
+      context: context,
+      text: text,
+      style: style,
       textScaleFactor: textScaleFactor,
     );
-    textPainter.layout();
     if (textPainter.size.width > largestWidth) {
       largestWidth = textPainter.size.width;
     }
   }
   return largestWidth;
+}
+
+// LABEL: eligible-hrk_flutter_batteries
+TextPainter getTextPainterLaidout({
+  required BuildContext context,
+  required String text,
+  TextStyle? style,
+  double? textScaleFactor,
+}) {
+  textScaleFactor ??= View.of(context).platformDispatcher.textScaleFactor;
+  final TextPainter textPainter = TextPainter(
+    text: TextSpan(text: text, style: style),
+    textDirection: TextDirection.ltr,
+    // TODO(hrishikesh-kadam): Use TextScaler once it is in stable
+    // ignore: deprecated_member_use
+    textScaleFactor: textScaleFactor,
+  );
+  textPainter.layout();
+  return textPainter;
 }
 
 (double, int) getSliverMasonryGridParameters({

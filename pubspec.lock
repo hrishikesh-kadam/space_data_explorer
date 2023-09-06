@@ -576,7 +576,7 @@ packages:
     source: hosted
     version: "0.13.1"
   hrk_nasa_apis_test:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: hrk_nasa_apis_test
       sha256: df2c6f0f38a08a01a353d7c2ade04f06f2f74ebfe568e8d6003cebf063ecf925

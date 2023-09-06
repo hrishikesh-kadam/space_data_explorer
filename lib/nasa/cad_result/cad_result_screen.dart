@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hrk_logging/hrk_logging.dart';
-
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import '../../../widgets/app_bar.dart';
@@ -71,7 +70,7 @@ class CadResultScreen extends StatelessWidget {
           bottom: Dimensions.pagePaddingVertical,
         ),
       ),
-      _getResultGrid(context: context),
+      _getGrid(context: context),
       const SliverPadding(
         padding: EdgeInsets.only(
           bottom: Dimensions.pagePaddingVertical,
@@ -80,7 +79,7 @@ class CadResultScreen extends StatelessWidget {
     ];
   }
 
-  Widget _getResultGrid({required BuildContext context}) {
+  Widget _getGrid({required BuildContext context}) {
     final gridParameters = getSliverMasonryGridParameters(
       context: context,
       itemExtent: Dimensions.cadQueryItemExtent,
@@ -98,8 +97,9 @@ class CadResultScreen extends StatelessWidget {
             crossAxisCount: gridParameters.$2,
             childCount: sbdbCadBody.count,
             itemBuilder: (context, index) {
-              return getResultItemWidget(
+              return getItemWidget(
                 context: context,
+                sbdbCadBody: sbdbCadBody,
                 data: sbdbCadBody.data![index],
               );
             },
@@ -109,17 +109,22 @@ class CadResultScreen extends StatelessWidget {
     );
   }
 
-  Widget getResultItemWidget({
+  Widget getItemWidget({
     required BuildContext context,
+    required SbdbCadBody sbdbCadBody,
     required SbdbCadData data,
   }) {
-    return getResultItemContainer(
+    return getItemContainer(
       context: context,
-      child: getResultItemBody(context: context, data: data),
+      child: getItemBody(
+        context: context,
+        sbdbCadBody: sbdbCadBody,
+        data: data,
+      ),
     );
   }
 
-  Widget getResultItemContainer({
+  Widget getItemContainer({
     required BuildContext context,
     required Widget child,
   }) {
@@ -141,48 +146,142 @@ class CadResultScreen extends StatelessWidget {
     );
   }
 
-  Widget getResultItemBody({
+  Widget getItemBody({
     required BuildContext context,
+    required SbdbCadBody sbdbCadBody,
     required SbdbCadData data,
   }) {
+    final fields = List<String>.from(sbdbCadBody.rawBody!['fields']);
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        getResultItemWrap(
-          context: context,
+        getItemDetail(
           label: 'Desgination:',
           displayValue: data.des,
         ),
-        getResultItemWrap(
-          context: context,
-          label: 'Close Approach Time:',
+        if (fields.contains('fullname'))
+          getItemDetail(
+            label: 'Fullname:',
+            displayValue: data.fullname.toString().trim(),
+          ),
+        getItemDetail(
+          label: 'Orbit ID:',
+          displayValue: data.orbitId,
+        ),
+        getItemDetail(
+          label: 'Close-Approach Time:',
           displayValue: data.cd,
         ),
-        getResultItemWrap(
-          context: context,
+        getItemDetail(
+          label: 'Time Sigma:',
+          displayValue: data.tSigmaF,
+        ),
+        if (data.body != null)
+          getItemDetail(
+            label: 'Close-Approach Body:',
+            displayValue: data.body!,
+          ),
+        getItemDetail(
           label: 'Distance:',
           displayValue: data.dist,
         ),
+        getItemDetail(
+          label: 'Distance Min:',
+          displayValue: data.distMin,
+        ),
+        getItemDetail(
+          label: 'Distance Max:',
+          displayValue: data.distMax,
+        ),
+        getItemDetail(
+          label: 'Velocity Rel:',
+          displayValue: data.vRel,
+        ),
+        getItemDetail(
+          label: 'Velocity Inf:',
+          displayValue: data.vInf.toString(),
+        ),
+        getItemDetail(
+          label: 'Absolute Magnitude:',
+          displayValue: data.h.toString(),
+        ),
+        if (fields.contains('diameter'))
+          getItemDetail(
+            label: 'Diameter:',
+            displayValue: data.diameter.toString(),
+          ),
+        if (fields.contains('diameter_sigma'))
+          getItemDetail(
+            label: 'Diameter Sigma:',
+            displayValue: data.diameterSigma.toString(),
+          ),
       ],
     );
   }
 
-  Widget getResultItemWrap({
-    required BuildContext context,
+  Widget getItemDetail({
     required String label,
     required String displayValue,
   }) {
-    return Wrap(
-      children: [
-        Text(
-          label,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        Text(
-          displayValue,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-      ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final style = Theme.of(context).textTheme.bodyMedium;
+        final labelWidth = getTextPainterLaidout(
+          context: context,
+          text: label,
+          style: style,
+        ).width;
+        final displayValueWidth = getTextPainterLaidout(
+          context: context,
+          text: displayValue,
+          style: style,
+        ).width;
+        final constrainWidth = constraints.constrainWidth();
+        // _logger.debug('constraints = $constraints');
+        // _logger.debug('constrainWidth() = $constrainWidth');
+        // _logger.debug('labelWidth = $labelWidth');
+        // _logger.debug('displayValueWidth = $displayValueWidth');
+        if (constrainWidth >=
+            labelWidth + displayValueWidth + Dimensions.cadResultItemSpacing) {
+          // _logger.debug('Will fit');
+          return Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            spacing: Dimensions.cadResultItemSpacing,
+            children: [
+              Text(
+                label,
+                style: style,
+              ),
+              Text(
+                displayValue,
+                style: style,
+              ),
+            ],
+          );
+        } else {
+          // _logger.debug('Will not fit');
+          return Column(
+            children: [
+              SizedBox(
+                width: constrainWidth,
+                child: Text(
+                  label,
+                  style: style,
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              SizedBox(
+                width: constrainWidth,
+                child: Text(
+                  displayValue,
+                  style: style,
+                  textAlign: TextAlign.end,
+                ),
+              )
+            ],
+          );
+        }
+      },
     );
   }
 }

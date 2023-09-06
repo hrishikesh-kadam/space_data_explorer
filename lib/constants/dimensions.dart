@@ -13,4 +13,5 @@ class Dimensions {
       cadQueryItemWidth + 2 * cadQueryItemMargin;
   static const double cadQueryItemRadius = 10;
   static const double cadQueryItemSpacing = 8;
+  static const double cadResultItemSpacing = 8;
 }
