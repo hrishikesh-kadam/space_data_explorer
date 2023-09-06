@@ -15,9 +15,11 @@ import 'cad_result_screen.dart' deferred as cad_result_screen;
 class CadResultRoute extends GoRouteData {
   CadResultRoute({
     this.$extra,
-  });
+  }) {
+    // mockSampleResponse();
+  }
 
-  final JsonMap? $extra;
+  JsonMap? $extra;
   final _logger = Logger('$appNamePascalCase.CadResultRoute');
 
   static const String routeName = 'result';
@@ -56,4 +58,11 @@ class CadResultRoute extends GoRouteData {
       ),
     );
   }
+
+  // void mockSampleResponse() {
+  //   if ($extra == null) {
+  //     $extra = {};
+  //     $extra!['$SbdbCadBody'] = SbdbCadBodyExt.getSample('200/1');
+  //   }
+  // }
 }
