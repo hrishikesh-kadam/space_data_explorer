@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../globals.dart';
 import '../../nasa/route/nasa_route.dart';
 import '../../widgets/app_bar.dart';
+import '../../widgets/directionality_widget.dart';
 import 'home_route.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -14,17 +15,19 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: getAppBar(
-        context: context,
-        title: const Text(HomeRoute.displayName),
-      ),
-      body: TextButton(
-        key: nasaButtonKey,
-        child: const Text(NasaRoute.routeName),
-        onPressed: () async {
-          GoRouter.of(context).go(NasaRoute.path, extra: getRouteExtraMap());
-        },
+    return getDirectionality(
+      child: Scaffold(
+        appBar: getAppBar(
+          context: context,
+          title: const Text(HomeRoute.displayName),
+        ),
+        body: TextButton(
+          key: nasaButtonKey,
+          child: const Text(NasaRoute.routeName),
+          onPressed: () async {
+            GoRouter.of(context).go(NasaRoute.path, extra: getRouteExtraMap());
+          },
+        ),
       ),
     );
   }

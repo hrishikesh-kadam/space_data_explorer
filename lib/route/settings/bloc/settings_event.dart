@@ -27,3 +27,9 @@ class SettingsSystemLocalesChanged extends SettingsEvent {
 
   final List<Locale>? systemLocales;
 }
+
+class SettingsTextDirectionSelected extends SettingsEvent {
+  const SettingsTextDirectionSelected({required this.textDirection});
+
+  final TextDirection? textDirection;
+}

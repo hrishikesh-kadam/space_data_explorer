@@ -5,6 +5,7 @@ import 'package:hrk_logging/hrk_logging.dart';
 import '../../globals.dart';
 import '../../route/home/home_route.dart';
 import '../../widgets/app_bar.dart';
+import '../../widgets/directionality_widget.dart';
 import '../cad/cad_route.dart';
 import 'nasa_route.dart';
 
@@ -17,17 +18,19 @@ class NasaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: getAppBar(
-        context: context,
-        title: const Text(NasaRoute.displayName),
-      ),
-      body: TextButton(
-        key: cadButtonKey,
-        child: const Text(CadRoute.routeName),
-        onPressed: () async {
-          CadRoute($extra: getRouteExtraMap()).go(context);
-        },
+    return getDirectionality(
+      child: Scaffold(
+        appBar: getAppBar(
+          context: context,
+          title: const Text(NasaRoute.displayName),
+        ),
+        body: TextButton(
+          key: cadButtonKey,
+          child: const Text(CadRoute.routeName),
+          onPressed: () async {
+            CadRoute($extra: getRouteExtraMap()).go(context);
+          },
+        ),
       ),
     );
   }

@@ -1,3 +1,12 @@
+# 0.6.0
+
+- Add CadResultScreen body implementation
+- Add TextDirection to Settings
+
+# 0.5.0
+
+- Before moving to CadScreenResult implementation
+
 # 0.4.0
 
 - Start with `SettingsScreen`

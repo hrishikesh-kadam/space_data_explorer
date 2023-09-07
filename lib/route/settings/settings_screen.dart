@@ -6,6 +6,7 @@ import 'package:hrk_logging/hrk_logging.dart';
 
 import '../../globals.dart';
 import '../../widgets/app_bar.dart';
+import '../../widgets/directionality_widget.dart';
 import '../../widgets/radio_settings_tile.dart';
 import 'bloc/settings_bloc.dart';
 import 'bloc/settings_state.dart';
@@ -21,52 +22,63 @@ class SettingsScreen extends StatelessWidget {
 
   final AppLocalizations l10n;
   final _logger = Logger('$appNamePascalCase.SettingsScreen');
-  static const Key languageTileKey = Key('settings_screen_language_tile');
-  static const Key languageDialogKey = Key('settings_screen_language_dialog');
-  static const Key dateFormatTileKey = Key('settings_screen_date_format_tile');
-  static const Key dateFormatDialogKey =
-      Key('settings_screen_date_format_dialog');
+  static const String keyPrefix = 'settings_screen';
+  static const Key languageTileKey = Key('${keyPrefix}_language_tile');
+  static const Key languageDialogKey = Key('${keyPrefix}_language_dialog');
+  static const Key dateFormatTileKey = Key('${keyPrefix}_date_format_tile');
+  static const Key dateFormatDialogKey = Key('${keyPrefix}_date_format_dialog');
+  static const Key textDirectionTileKey =
+      Key('${keyPrefix}_text_direction_tile');
+  static const Key textDirectionDialogKey =
+      Key('${keyPrefix}_text_direction_dialog');
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: getAppBar(
-        context: context,
-        title: const Text(SettingsRoute.displayName),
-      ),
-      body: BlocListener<SettingsBloc, SettingsState>(
-        listenWhen: (previous, current) =>
-            previous.systemLocales != current.systemLocales,
-        listener: (context, state) {
-          final isAnyDialogOpen = state.isAnyDialogShown;
-          _logger.debug(
-              'systemLocales listener -> isAnyDialogOpen = $isAnyDialogOpen');
-          if (isAnyDialogOpen != null && isAnyDialogOpen) {
-            Navigator.pop(context);
-          }
-        },
-        child: Builder(
-          builder: (context) {
-            final settingsTiles = getSettingsTiles();
-            return ListView.separated(
-              itemCount: settingsTiles.length,
-              itemBuilder: (context, index) {
-                return settingsTiles[index];
-              },
-              separatorBuilder: (context, index) {
-                return const Divider();
-              },
-            );
-          },
+    return BlocListener<SettingsBloc, SettingsState>(
+      listenWhen: (previous, current) =>
+          previous.systemLocales != current.systemLocales,
+      listener: (context, state) {
+        final isAnyDialogOpen = state.isAnyDialogShown;
+        _logger.fine(
+            'systemLocales listener -> isAnyDialogOpen = $isAnyDialogOpen');
+        if (isAnyDialogOpen != null && isAnyDialogOpen) {
+          Navigator.pop(context);
+        }
+      },
+      child: getDirectionality(
+        child: Scaffold(
+          appBar: getAppBar(
+            context: context,
+            title: const Text(SettingsRoute.displayName),
+          ),
+          body: _getBody(),
         ),
       ),
     );
   }
 
-  List<Widget> getSettingsTiles() {
+  Builder _getBody() {
+    return Builder(
+      builder: (context) {
+        final settingsTiles = _getSettingsTiles();
+        return ListView.separated(
+          itemCount: settingsTiles.length,
+          itemBuilder: (context, index) {
+            return settingsTiles[index];
+          },
+          separatorBuilder: (context, index) {
+            return const Divider();
+          },
+        );
+      },
+    );
+  }
+
+  List<Widget> _getSettingsTiles() {
     return [
-      getLanguageTile(),
-      getDateFormatTile(),
+      _getLanguageTile(),
+      _getDateFormatTile(),
+      _getTextDirectionTile(),
     ];
   }
 
@@ -80,7 +92,7 @@ class SettingsScreen extends StatelessWidget {
     };
   }
 
-  Widget getLanguageTile() {
+  Widget _getLanguageTile() {
     const values = <Language>[
       Language.system,
       Language.english,
@@ -105,7 +117,7 @@ class SettingsScreen extends StatelessWidget {
           groupValue: language,
           onChanged: (selectedLanguage) {
             if (selectedLanguage != null) {
-              _logger.debug('selectedLanguage -> $selectedLanguage');
+              _logger.fine('selectedLanguage -> $selectedLanguage');
               settingsBloc.add(SettingsLaguageSelected(
                 language: selectedLanguage,
               ));
@@ -113,13 +125,13 @@ class SettingsScreen extends StatelessWidget {
             Navigator.pop(context);
           },
           beforeShowDialog: () {
-            _logger.debug('getLanguageTile() -> beforeShowDialog');
+            _logger.finer('getLanguageTile() -> beforeShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: true,
             ));
           },
           afterShowDialog: () {
-            _logger.debug('getLanguageTile() -> afterShowDialog');
+            _logger.finer('getLanguageTile() -> afterShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: false,
             ));
@@ -139,7 +151,7 @@ class SettingsScreen extends StatelessWidget {
     };
   }
 
-  Widget getDateFormatTile() {
+  Widget _getDateFormatTile() {
     final values = <DateFormatPattern>[
       DateFormatPattern.yMd,
       DateFormatPattern.ddMMyyyy,
@@ -165,7 +177,7 @@ class SettingsScreen extends StatelessWidget {
           groupValue: dateFormatPattern,
           onChanged: (selectedDateFormatPattern) {
             if (selectedDateFormatPattern != null) {
-              _logger.debug(
+              _logger.fine(
                   'getDateFormatTile() -> selectedDateFormatPattern -> $selectedDateFormatPattern');
               settingsBloc.add(SettingsDateFormatSelected(
                 dateFormatPattern: selectedDateFormatPattern,
@@ -174,13 +186,73 @@ class SettingsScreen extends StatelessWidget {
             Navigator.pop(context);
           },
           beforeShowDialog: () {
-            _logger.debug('getDateFormatTile() -> beforeShowDialog');
+            _logger.finer('getDateFormatTile() -> beforeShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: true,
             ));
           },
           afterShowDialog: () {
-            _logger.debug('getDateFormatTile() -> afterShowDialog');
+            _logger.finer('getDateFormatTile() -> afterShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
+              isAnyDialogShown: false,
+            ));
+          },
+        );
+      },
+    );
+  }
+
+  static String getTextDirectionValueTitle({
+    required AppLocalizations l10n,
+    required TextDirection? textDirection,
+  }) {
+    return switch (textDirection) {
+      null => l10n.system,
+      TextDirection.ltr => l10n.leftToRight,
+      TextDirection.rtl => l10n.rightToLeft,
+    };
+  }
+
+  Widget _getTextDirectionTile() {
+    const values = <TextDirection?>[
+      null,
+      TextDirection.ltr,
+      TextDirection.rtl,
+    ];
+    List<String> valueTitles = values
+        .map((e) => getTextDirectionValueTitle(l10n: l10n, textDirection: e))
+        .toList();
+
+    return BlocSelector<SettingsBloc, SettingsState, TextDirection?>(
+      selector: (state) => state.textDirection,
+      builder: (context, textDirection) {
+        final settingsBloc = context.read<SettingsBloc>();
+        return RadioSettingsTile<TextDirection?>(
+          key: textDirectionTileKey,
+          dialogKey: textDirectionDialogKey,
+          title: l10n.textDirection,
+          subTitle: getTextDirectionValueTitle(
+            l10n: l10n,
+            textDirection: textDirection,
+          ),
+          values: values,
+          valueTitles: valueTitles,
+          groupValue: textDirection,
+          onChanged: (selectedTextDirection) {
+            _logger.fine('selectedTextDirection -> $selectedTextDirection');
+            settingsBloc.add(SettingsTextDirectionSelected(
+              textDirection: selectedTextDirection,
+            ));
+            Navigator.pop(context);
+          },
+          beforeShowDialog: () {
+            _logger.finer('getTextDirectionTile() -> beforeShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
+              isAnyDialogShown: true,
+            ));
+          },
+          afterShowDialog: () {
+            _logger.finer('getTextDirectionTile() -> afterShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: false,
             ));

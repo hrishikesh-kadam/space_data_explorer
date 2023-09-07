@@ -17,6 +17,8 @@ _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
           .fromJson(json['systemLocales'] as List?),
       dateFormatPattern:
           $enumDecode(_$DateFormatPatternEnumMap, json['dateFormatPattern']),
+      textDirection:
+          $enumDecodeNullable(_$TextDirectionEnumMap, json['textDirection']),
       isAnyDialogShown: json['isAnyDialogShown'] as bool?,
     );
 
@@ -35,6 +37,7 @@ Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) {
       const LocaleListJsonConverter().toJson(instance.systemLocales));
   val['dateFormatPattern'] =
       _$DateFormatPatternEnumMap[instance.dateFormatPattern]!;
+  writeNotNull('textDirection', _$TextDirectionEnumMap[instance.textDirection]);
   writeNotNull('isAnyDialogShown', instance.isAnyDialogShown);
   return val;
 }
@@ -51,4 +54,9 @@ const _$DateFormatPatternEnumMap = {
   DateFormatPattern.ddMMyyyy: 'dd/MM/yyyy',
   DateFormatPattern.MMddyyyy: 'MM/dd/yyyy',
   DateFormatPattern.yyyyMMdd: 'yyyy/MM/dd',
+};
+
+const _$TextDirectionEnumMap = {
+  TextDirection.rtl: 'rtl',
+  TextDirection.ltr: 'ltr',
 };

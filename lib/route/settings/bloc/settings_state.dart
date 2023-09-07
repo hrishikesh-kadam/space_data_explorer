@@ -12,9 +12,10 @@ part 'settings_state.g.dart';
 @freezed
 class SettingsState with _$SettingsState {
   const factory SettingsState({
-    required final Language language,
+    required Language language,
     @LocaleListJsonConverter() List<Locale>? systemLocales,
-    required final DateFormatPattern dateFormatPattern,
+    required DateFormatPattern dateFormatPattern,
+    TextDirection? textDirection,
     bool? isAnyDialogShown,
   }) = _SettingsState;
 

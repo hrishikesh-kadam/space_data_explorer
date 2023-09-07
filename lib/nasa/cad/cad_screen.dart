@@ -19,6 +19,7 @@ import '../../widgets/app_bar.dart';
 import '../../widgets/choice_chip_input_widget.dart';
 import '../../widgets/choice_chip_query_widget.dart';
 import '../../widgets/date_filter_widget.dart';
+import '../../widgets/directionality_widget.dart';
 import '../../widgets/filter_chip_query_widget.dart';
 import '../../widgets/outlined_button_extended.dart';
 import '../../widgets/value_range_filter_widget.dart';
@@ -111,42 +112,48 @@ class CadScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<CadBloc>(
       create: (_) => cadBloc ?? routeExtraMap?['$CadBloc'] ?? CadBloc(),
-      child: Scaffold(
-        backgroundColor: AppTheme.pageBackgroundColor,
-        body: BlocListener<CadBloc, CadState>(
-          listenWhen: (previous, current) {
-            return previous.networkState != current.networkState &&
-                current.networkState == NetworkState.success;
+      child: BlocListener<CadBloc, CadState>(
+        listenWhen: (previous, current) {
+          return previous.networkState != current.networkState &&
+              current.networkState == NetworkState.success;
+        },
+        listener: (context, state) {
+          JsonMap routeExtraMap = getRouteExtraMap();
+          routeExtraMap['$SbdbCadBody'] = state.sbdbCadBody!;
+          CadResultRoute($extra: routeExtraMap).go(context);
+          context.read<CadBloc>().add(const CadResultOpened());
+        },
+        child: Builder(
+          builder: (context) {
+            return getDirectionality(
+              child: Scaffold(
+                backgroundColor: AppTheme.pageBackgroundColor,
+                body: _getBody(context: context),
+              ),
+            );
           },
-          listener: (context, state) {
-            JsonMap routeExtraMap = getRouteExtraMap();
-            routeExtraMap['$SbdbCadBody'] = state.sbdbCadBody!;
-            CadResultRoute($extra: routeExtraMap).go(context);
-            context.read<CadBloc>().add(const CadResultOpened());
-          },
-          child: Builder(
-            builder: (context) {
-              return CustomScrollView(
-                key: customScrollViewKey,
-                controller: ScrollController(),
-                slivers: [
-                  getSliverAppBar(
-                    context: context,
-                    title: const Text(CadRoute.displayName),
-                    floating: true,
-                    snap: true,
-                  ),
-                  ..._getBody(context: context)
-                ],
-              );
-            },
-          ),
         ),
       ),
     );
   }
 
-  List<Widget> _getBody({required BuildContext context}) {
+  Widget _getBody({required BuildContext context}) {
+    return CustomScrollView(
+      key: customScrollViewKey,
+      controller: ScrollController(),
+      slivers: [
+        getSliverAppBar(
+          context: context,
+          title: const Text(CadRoute.displayName),
+          floating: true,
+          snap: true,
+        ),
+        ..._getSliverBody(context: context)
+      ],
+    );
+  }
+
+  List<Widget> _getSliverBody({required BuildContext context}) {
     return [
       const SliverPadding(
         padding: EdgeInsets.only(
@@ -241,13 +248,12 @@ class CadScreen extends StatelessWidget {
               dateFormatPattern.pattern,
               languageTag,
             );
-            final ltrLanguage = !Bidi.isRtlLanguage(languageTag);
             return DateFilterWidget(
               key: dateFilterWidgetKey,
               keyPrefix: dateFilterKeyPrefix,
               title: l10n.dateFilter,
-              startTitle: ltrLanguage ? '${l10n.minimum}:' : ':${l10n.minimum}',
-              endTitle: ltrLanguage ? '${l10n.maximum}:' : ':${l10n.maximum}',
+              startTitle: '${l10n.minimum}:',
+              endTitle: '${l10n.maximum}:',
               dateRange: cadState.dateRange,
               firstDate: DateTime(1900, 1, 1),
               lastDate: DateTime(2200, 12, 31),

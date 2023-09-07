@@ -22,6 +22,7 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
     on<SettingsDateFormatSelected>(_onSettingsDateFormatSelected);
     on<SettingsDialogEvent>(_onSettingsDialogEvent);
     on<SettingsSystemLocalesChanged>(_onSettingsSystemLocalesChanged);
+    on<SettingsTextDirectionSelected>(_onSettingsTextDirectionSelected);
   }
 
   static SettingsBloc getInitialSettings() {
@@ -73,6 +74,15 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   ) {
     emit(state.copyWith(
       systemLocales: event.systemLocales,
+    ));
+  }
+
+  void _onSettingsTextDirectionSelected(
+    SettingsTextDirectionSelected event,
+    Emitter<SettingsState> emit,
+  ) {
+    emit(state.copyWith(
+      textDirection: event.textDirection,
     ));
   }
 }

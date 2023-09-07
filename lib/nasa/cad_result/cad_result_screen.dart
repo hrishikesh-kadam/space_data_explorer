@@ -11,6 +11,7 @@ import '../../constants/dimensions.dart';
 import '../../constants/theme.dart';
 import '../../globals.dart';
 import '../../helper/helper.dart';
+import '../../widgets/directionality_widget.dart';
 import 'bloc/cad_result_bloc.dart';
 import 'bloc/cad_result_state.dart';
 import 'cad_result_route.dart';
@@ -44,26 +45,32 @@ class CadResultScreen extends StatelessWidget {
           );
         }
       },
-      child: Scaffold(
-        backgroundColor: AppTheme.pageBackgroundColor,
-        body: CustomScrollView(
-          key: customScrollViewKey,
-          controller: ScrollController(),
-          slivers: [
-            getSliverAppBar(
-              context: context,
-              title: const Text(CadResultRoute.displayName),
-              floating: true,
-              snap: true,
-            ),
-            ..._getBody(context: context)
-          ],
+      child: getDirectionality(
+        child: Scaffold(
+          backgroundColor: AppTheme.pageBackgroundColor,
+          body: _getBody(context: context),
         ),
       ),
     );
   }
 
-  List<Widget> _getBody({required BuildContext context}) {
+  Widget _getBody({required BuildContext context}) {
+    return CustomScrollView(
+      key: customScrollViewKey,
+      controller: ScrollController(),
+      slivers: [
+        getSliverAppBar(
+          context: context,
+          title: const Text(CadResultRoute.displayName),
+          floating: true,
+          snap: true,
+        ),
+        ..._getSliverBody(context: context)
+      ],
+    );
+  }
+
+  List<Widget> _getSliverBody({required BuildContext context}) {
     return [
       const SliverPadding(
         padding: EdgeInsets.only(
@@ -156,7 +163,7 @@ class CadResultScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         getItemDetail(
-          label: 'Desgination:',
+          label: 'Designation:',
           displayValue: data.des,
         ),
         if (fields.contains('fullname'))
