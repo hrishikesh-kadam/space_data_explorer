@@ -80,7 +80,7 @@ Future<void> configureHydratedBloc() async {
 
 Pubspec? pubspec;
 Future<void> loadPubspec() async {
-  if (pubspec != null) {
+  if (pubspec == null) {
     pubspec = Pubspec.parse(await rootBundle.loadString('pubspec.yaml'));
     assert(appName == pubspec!.name);
     assert(version == pubspec!.version.toString());
