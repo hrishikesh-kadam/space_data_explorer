@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
+import 'package:intl/intl.dart';
 
 import '../../../deferred_loading/deferred_loading.dart';
 import '../../globals.dart';
@@ -47,11 +48,17 @@ class CadResultRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
+    final languageCode = Localizations.localeOf(context).languageCode;
+    // TODO(hrishikesh-kadam): Request export of numberFormatSymbols from intl package
+    // https://github.com/dart-lang/i18n/blob/main/pkgs/intl/lib/number_symbols_data.dart
+    final zeroDigit = NumberFormat(null, languageCode).symbols.ZERO_DIGIT;
+
     return DeferredWidget(
       cad_result_screen.loadLibrary,
       () => cad_result_screen.CadResultScreen(
         l10n: AppLocalizations.of(context),
         routeExtraMap: $extra!,
+        zeroDigit: zeroDigit,
       ),
       placeholder: const DeferredPlaceholderWidget(
         name: CadResultRoute.displayName,

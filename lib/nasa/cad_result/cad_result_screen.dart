@@ -21,10 +21,12 @@ class CadResultScreen extends StatelessWidget {
     super.key,
     required this.l10n,
     required this.routeExtraMap,
+    required this.zeroDigit,
   });
 
   final AppLocalizations l10n;
   final JsonMap routeExtraMap;
+  final String zeroDigit;
   // ignore: unused_field
   final _logger = Logger('$appNamePascalCase.CadResultScreen');
   static const String keyPrefix = 'cad_result_screen_';
@@ -238,6 +240,7 @@ class CadResultScreen extends StatelessWidget {
           text: label,
           style: style,
         ).width;
+        displayValue = displayValue.localizeDigits(toZeroDigit: zeroDigit);
         final displayValueWidth = getTextPainterLaidout(
           context: context,
           text: displayValue,
