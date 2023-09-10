@@ -5,12 +5,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
+import 'package:intl/intl.dart';
 
 import '../../../widgets/app_bar.dart';
 import '../../constants/dimensions.dart';
 import '../../constants/theme.dart';
 import '../../globals.dart';
 import '../../helper/helper.dart';
+import '../../route/settings/bloc/settings_bloc.dart';
+import '../../route/settings/bloc/settings_state.dart';
+import '../../route/settings/date_format_pattern.dart';
 import '../../widgets/directionality_widget.dart';
 import 'bloc/cad_result_bloc.dart';
 import 'bloc/cad_result_state.dart';
@@ -177,9 +181,24 @@ class CadResultScreen extends StatelessWidget {
           label: 'Orbit ID:',
           displayValue: data.orbitId,
         ),
+        BlocSelector<SettingsBloc, SettingsState, DateFormatPattern>(
+          selector: (state) {
+            return state.dateFormatPattern;
+          },
+          builder: (context, dateFormatPattern) {
+            return getItemDetail(
+              label: 'Close-Approach Date:',
+              displayValue: formatCloseApproachDate(
+                context: context,
+                cd: data.cd,
+                dateFormatPattern: dateFormatPattern,
+              ),
+            );
+          },
+        ),
         getItemDetail(
           label: 'Close-Approach Time:',
-          displayValue: data.cd,
+          displayValue: DateFormat('HH:mm').format(data.cd),
         ),
         getItemDetail(
           label: 'Time Sigma:',
@@ -226,6 +245,19 @@ class CadResultScreen extends StatelessWidget {
           ),
       ],
     );
+  }
+
+  String formatCloseApproachDate({
+    required BuildContext context,
+    required DateTime cd,
+    required DateFormatPattern dateFormatPattern,
+  }) {
+    final languageTag = Localizations.localeOf(context).toLanguageTag();
+    final dateFormat = DateFormat(
+      dateFormatPattern.pattern,
+      languageTag,
+    );
+    return dateFormat.format(cd);
   }
 
   Widget getItemDetail({
