@@ -51,9 +51,13 @@ const _$LanguageEnumMap = {
 
 const _$DateFormatPatternEnumMap = {
   DateFormatPattern.yMd: 'yMd',
-  DateFormatPattern.ddMMyyyy: 'dd/MM/yyyy',
-  DateFormatPattern.MMddyyyy: 'MM/dd/yyyy',
-  DateFormatPattern.yyyyMMdd: 'yyyy/MM/dd',
+  DateFormatPattern.ddMMyyyySlash: 'dd/MM/yyyy',
+  DateFormatPattern.ddMMyyyyHyphen: 'dd-MM-yyyy',
+  DateFormatPattern.MMddyyyySlash: 'MM/dd/yyyy',
+  DateFormatPattern.MMddyyyyHyphen: 'MM-dd-yyyy',
+  DateFormatPattern.yyyyMMddSlash: 'yyyy/MM/dd',
+  DateFormatPattern.yyyyMMddHyphen: 'yyyy-MM-dd',
+  DateFormatPattern.yyyyMMMddHyphen: 'yyyy-MMM-dd',
 };
 
 const _$TextDirectionEnumMap = {

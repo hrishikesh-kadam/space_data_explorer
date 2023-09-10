@@ -51,7 +51,7 @@ void main() {
         final SettingsBloc hydratedBloc = SettingsBloc.getInitialSettings();
         hydratedBloc.add(
           const SettingsDateFormatSelected(
-            dateFormatPattern: DateFormatPattern.ddMMyyyy,
+            dateFormatPattern: DateFormatPattern.ddMMyyyySlash,
           ),
         );
         await sleep();

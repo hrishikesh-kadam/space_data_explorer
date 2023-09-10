@@ -76,7 +76,7 @@ void main() {
       expect(settingsBloc.state.isAnyDialogShown, null);
       await tapLanguageTile(tester);
       expect(settingsBloc.state.isAnyDialogShown, true);
-      await tester.tap(find.byType(AppBar), warnIfMissed: false);
+      await tester.tapAt(Offset.zero);
       await tester.pumpAndSettle();
       expect(languageDialogFinder, findsNothing);
       expect(find.byType(SettingsScreen), findsOneWidget);

@@ -70,7 +70,7 @@ void main() {
       await tapSettingsButton(tester);
       await tapDateFormatTile(tester);
       await chooseDateFormat(tester,
-          l10n: l10n, dateFormatPattern: DateFormatPattern.ddMMyyyy);
+          l10n: l10n, dateFormatPattern: DateFormatPattern.ddMMyyyySlash);
       await tapBackButton(tester);
       String minDateAfterString = tester.widget<Text>(minDateFinder).data!;
       String maxDateAfterString = tester.widget<Text>(maxDateFinder).data!;

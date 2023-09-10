@@ -21,8 +21,8 @@ void main() {
       expect(settingsBloc.state.dateFormatPattern, DateFormatPattern.yMd);
     });
 
-    testWidgets('Choose ${DateFormatPattern.ddMMyyyy}', (tester) async {
-      const dateFormatPattern = DateFormatPattern.ddMMyyyy;
+    testWidgets('Choose ${DateFormatPattern.ddMMyyyySlash}', (tester) async {
+      const dateFormatPattern = DateFormatPattern.ddMMyyyySlash;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapDateFormatTile(tester);
       expect(dateFormatDialogFinder, findsOneWidget);
@@ -33,8 +33,8 @@ void main() {
           l10n: l10n, dateFormatPattern: dateFormatPattern);
     });
 
-    testWidgets('Choose ${DateFormatPattern.MMddyyyy}', (tester) async {
-      const dateFormatPattern = DateFormatPattern.MMddyyyy;
+    testWidgets('Choose ${DateFormatPattern.MMddyyyySlash}', (tester) async {
+      const dateFormatPattern = DateFormatPattern.MMddyyyySlash;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapDateFormatTile(tester);
       await chooseDateFormat(tester,
@@ -43,8 +43,8 @@ void main() {
           l10n: l10n, dateFormatPattern: dateFormatPattern);
     });
 
-    testWidgets('Choose ${DateFormatPattern.yyyyMMdd}', (tester) async {
-      const dateFormatPattern = DateFormatPattern.yyyyMMdd;
+    testWidgets('Choose ${DateFormatPattern.yyyyMMddSlash}', (tester) async {
+      const dateFormatPattern = DateFormatPattern.yyyyMMddSlash;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapDateFormatTile(tester);
       await chooseDateFormat(tester,
@@ -81,7 +81,7 @@ void main() {
       expect(settingsBloc.state.isAnyDialogShown, null);
       await tapDateFormatTile(tester);
       expect(settingsBloc.state.isAnyDialogShown, true);
-      await tester.tap(find.byType(AppBar), warnIfMissed: false);
+      await tester.tapAt(Offset.zero);
       await tester.pumpAndSettle();
       expect(dateFormatDialogFinder, findsNothing);
       expect(find.byType(SettingsScreen), findsOneWidget);
@@ -89,9 +89,9 @@ void main() {
     });
 
     testWidgets(
-        'Choose ${DateFormatPattern.ddMMyyyy}, exit screen, enter again',
+        'Choose ${DateFormatPattern.ddMMyyyySlash}, exit screen, enter again',
         (tester) async {
-      const dateFormatPattern = DateFormatPattern.ddMMyyyy;
+      const dateFormatPattern = DateFormatPattern.ddMMyyyySlash;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapDateFormatTile(tester);
       await chooseDateFormat(tester,

@@ -12,11 +12,19 @@ enum DateFormatPattern {
   @JsonValue('yMd')
   yMd(pattern: 'yMd'),
   @JsonValue('dd/MM/yyyy')
-  ddMMyyyy(pattern: 'dd/MM/yyyy'),
+  ddMMyyyySlash(pattern: 'dd/MM/yyyy'),
+  @JsonValue('dd-MM-yyyy')
+  ddMMyyyyHyphen(pattern: 'dd-MM-yyyy'),
   @JsonValue('MM/dd/yyyy')
-  MMddyyyy(pattern: 'MM/dd/yyyy'),
+  MMddyyyySlash(pattern: 'MM/dd/yyyy'),
+  @JsonValue('MM-dd-yyyy')
+  MMddyyyyHyphen(pattern: 'MM-dd-yyyy'),
   @JsonValue('yyyy/MM/dd')
-  yyyyMMdd(pattern: 'yyyy/MM/dd');
+  yyyyMMddSlash(pattern: 'yyyy/MM/dd'),
+  @JsonValue('yyyy-MM-dd')
+  yyyyMMddHyphen(pattern: 'yyyy-MM-dd'),
+  @JsonValue('yyyy-MMM-dd')
+  yyyyMMMddHyphen(pattern: 'yyyy-MMM-dd');
 
   const DateFormatPattern({
     required this.pattern,

@@ -11,8 +11,8 @@ class RadioDialog<T> extends StatelessWidget {
   });
 
   final String title;
-  final List<T> values;
-  final List<String> valueTitles;
+  final Set<T> values;
+  final Set<String> valueTitles;
   final T? groupValue;
   final ValueChanged<T?>? onChanged;
 
@@ -27,9 +27,9 @@ class RadioDialog<T> extends StatelessWidget {
           itemCount: values.length,
           itemBuilder: (context, index) {
             return RadioListTile<T>(
-              key: Key(valueTitles[index]),
-              value: values[index],
-              title: Text(valueTitles[index]),
+              key: Key(valueTitles.elementAt(index)),
+              value: values.elementAt(index),
+              title: Text(valueTitles.elementAt(index)),
               groupValue: groupValue,
               onChanged: onChanged,
               toggleable: true,

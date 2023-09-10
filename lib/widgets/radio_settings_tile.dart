@@ -19,8 +19,8 @@ class RadioSettingsTile<T> extends StatelessWidget {
   final Key? dialogKey;
   final String title;
   final String? subTitle;
-  final List<T> values;
-  final List<String> valueTitles;
+  final Set<T> values;
+  final Set<String> valueTitles;
   final T? groupValue;
   final ValueChanged<T?>? onChanged;
   final VoidCallback? beforeShowDialog;

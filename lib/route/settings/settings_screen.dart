@@ -93,16 +93,10 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _getLanguageTile() {
-    const values = <Language>[
-      Language.system,
-      Language.english,
-      Language.hindi,
-      Language.marathi,
-    ];
-    List<String> valueTitles = values
+    final Set<Language> values = Language.values.toSet();
+    final Set<String> valueTitles = values
         .map((e) => getLanguageValueTitle(l10n: l10n, language: e))
-        .toList();
-
+        .toSet();
     return BlocSelector<SettingsBloc, SettingsState, Language>(
       selector: (state) => state.language,
       builder: (context, language) {
@@ -152,16 +146,10 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _getDateFormatTile() {
-    final values = <DateFormatPattern>[
-      DateFormatPattern.yMd,
-      DateFormatPattern.ddMMyyyy,
-      DateFormatPattern.MMddyyyy,
-      DateFormatPattern.yyyyMMdd,
-    ];
-    List<String> valueTitles = values
+    final Set<DateFormatPattern> values = DateFormatPattern.values.toSet();
+    final Set<String> valueTitles = values
         .map((e) => getDateFormatValueTitle(l10n: l10n, dateFormatPattern: e))
-        .toList();
-
+        .toSet();
     return BlocSelector<SettingsBloc, SettingsState, DateFormatPattern>(
       selector: (state) => state.dateFormatPattern,
       builder: (context, dateFormatPattern) {
@@ -214,15 +202,14 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _getTextDirectionTile() {
-    const values = <TextDirection?>[
+    final Set<TextDirection?> values = {
       null,
       TextDirection.ltr,
       TextDirection.rtl,
-    ];
-    List<String> valueTitles = values
+    };
+    final Set<String> valueTitles = values
         .map((e) => getTextDirectionValueTitle(l10n: l10n, textDirection: e))
-        .toList();
-
+        .toSet();
     return BlocSelector<SettingsBloc, SettingsState, TextDirection?>(
       selector: (state) => state.textDirection,
       builder: (context, textDirection) {
