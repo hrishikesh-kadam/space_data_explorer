@@ -182,8 +182,8 @@ class CadResultScreen extends StatelessWidget {
           displayValue: data.orbitId,
         ),
         getItemDetail(
-          label: 'JD Ephemeris Time:',
-          displayValue: data.jd,
+          label: 'Julian Date:',
+          displayValue: '${data.jd} TDB',
         ),
         BlocSelector<SettingsBloc, SettingsState, DateFormatPattern>(
           selector: (state) {
@@ -191,18 +191,14 @@ class CadResultScreen extends StatelessWidget {
           },
           builder: (context, dateFormatPattern) {
             return getItemDetail(
-              label: 'Calendar Date:',
-              displayValue: formatCloseApproachDate(
+              label: 'Date/Time:',
+              displayValue: formatCloseApproachDateTime(
                 context: context,
                 cd: data.cd,
                 dateFormatPattern: dateFormatPattern,
               ),
             );
           },
-        ),
-        getItemDetail(
-          label: 'Calendar Time:',
-          displayValue: DateFormat('HH:mm').format(data.cd),
         ),
         getItemDetail(
           label: 'Time Sigma:',
@@ -251,7 +247,7 @@ class CadResultScreen extends StatelessWidget {
     );
   }
 
-  String formatCloseApproachDate({
+  String formatCloseApproachDateTime({
     required BuildContext context,
     required DateTime cd,
     required DateFormatPattern dateFormatPattern,
@@ -261,7 +257,11 @@ class CadResultScreen extends StatelessWidget {
       dateFormatPattern.pattern,
       languageTag,
     );
-    return dateFormat.format(cd);
+    final dateTimeStringBuffer = StringBuffer(dateFormat.format(cd));
+    dateTimeStringBuffer.write(' ');
+    dateTimeStringBuffer.write(DateFormat('HH:mm').format(cd));
+    dateTimeStringBuffer.write(' TDB');
+    return dateTimeStringBuffer.toString();
   }
 
   Widget getItemDetail({

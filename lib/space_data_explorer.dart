@@ -103,6 +103,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
       Locale(Language.english.code, 'MY'),
       Locale(Language.english.code, 'NZ'),
       Locale(Language.english.code, 'SG'),
+      Locale(Language.english.code, 'US'),
       Locale(Language.english.code, 'ZA'),
     ];
   }
