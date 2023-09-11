@@ -1,0 +1,14 @@
+{
+  "en": "M/d/y",
+  "en_AU": "dd/MM/y",
+  "en_CA": "M/d/y",
+  "en_GB": "dd/MM/y",
+  "en_IE": "d/M/y",
+  "en_IN": "d/M/y",
+  "en_SG": "dd/MM/y",
+  "en_US": "M/d/y",
+  "en_ZA": "y/MM/dd",
+  "en_ISO": "M/d/y",
+  "en_MY": "dd/MM/y",
+  "en_NZ": "d/MM/y"
+}

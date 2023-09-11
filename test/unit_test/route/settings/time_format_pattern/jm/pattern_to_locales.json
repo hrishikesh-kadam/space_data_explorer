@@ -1,0 +1,18 @@
+{
+  "h:mm a": [
+    "en",
+    "en_AU",
+    "en_CA",
+    "en_IN",
+    "en_SG",
+    "en_US",
+    "en_MY",
+    "en_NZ"
+  ],
+  "HH:mm": [
+    "en_GB",
+    "en_IE",
+    "en_ZA",
+    "en_ISO"
+  ]
+}

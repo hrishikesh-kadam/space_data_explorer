@@ -1,0 +1,28 @@
+{
+  "yyyy-MM-dd": [
+    "en_ISO"
+  ],
+  "M/d/yy": [
+    "en",
+    "en_CA",
+    "en_US"
+  ],
+  "d/M/yy": [
+    "en_AU",
+    "en_SG"
+  ],
+  "dd/MM/y": [
+    "en_GB",
+    "en_IE",
+    "en_MY"
+  ],
+  "dd/MM/yy": [
+    "en_IN"
+  ],
+  "d/MM/yy": [
+    "en_NZ"
+  ],
+  "y/MM/dd": [
+    "en_ZA"
+  ]
+}
