@@ -181,13 +181,17 @@ class CadResultScreen extends StatelessWidget {
           label: 'Orbit ID:',
           displayValue: data.orbitId,
         ),
+        getItemDetail(
+          label: 'JD Ephemeris Time:',
+          displayValue: data.jd,
+        ),
         BlocSelector<SettingsBloc, SettingsState, DateFormatPattern>(
           selector: (state) {
             return state.dateFormatPattern;
           },
           builder: (context, dateFormatPattern) {
             return getItemDetail(
-              label: 'Close-Approach Date:',
+              label: 'Calendar Date:',
               displayValue: formatCloseApproachDate(
                 context: context,
                 cd: data.cd,
@@ -197,7 +201,7 @@ class CadResultScreen extends StatelessWidget {
           },
         ),
         getItemDetail(
-          label: 'Close-Approach Time:',
+          label: 'Calendar Time:',
           displayValue: DateFormat('HH:mm').format(data.cd),
         ),
         getItemDetail(
