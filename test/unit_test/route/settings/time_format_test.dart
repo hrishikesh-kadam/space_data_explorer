@@ -4,33 +4,33 @@ import 'package:intl/date_symbols.dart';
 import 'package:intl/date_time_patterns.dart';
 
 void main() {
-  group('Date Format Unit Test', () {
+  group('Time Format Unit Test', () {
     final Map<String, DateSymbols> dateTimeSymbols =
         Map<String, DateSymbols>.from(dateTimeSymbolMap());
     final Map<String, Map<String, String>> dateTimePatterns =
         dateTimePatternMap();
 
-    group('English yMd Date Format Patterns', () {
+    group('English jm Time Format Patterns', () {
       test('Map Locale to Pattern', () {
         const Map<String, String> expected = {
-          'en': 'M/d/y',
-          'en_AU': 'dd/MM/y',
-          'en_CA': 'M/d/y',
-          'en_GB': 'dd/MM/y',
-          'en_IE': 'd/M/y',
-          'en_IN': 'd/M/y',
-          'en_SG': 'dd/MM/y',
-          'en_US': 'M/d/y',
-          'en_ZA': 'y/MM/dd',
-          'en_ISO': 'M/d/y',
-          'en_MY': 'dd/MM/y',
-          'en_NZ': 'd/MM/y'
+          'en': 'h:mm a',
+          'en_AU': 'h:mm a',
+          'en_CA': 'h:mm a',
+          'en_GB': 'HH:mm',
+          'en_IE': 'HH:mm',
+          'en_IN': 'h:mm a',
+          'en_SG': 'h:mm a',
+          'en_US': 'h:mm a',
+          'en_ZA': 'HH:mm',
+          'en_ISO': 'HH:mm',
+          'en_MY': 'h:mm a',
+          'en_NZ': 'h:mm a'
         };
         final Map<String, String> actual = {};
         for (final entry in dateTimePatterns.entries) {
           if (entry.key.startsWith('en')) {
             final String locale = entry.key;
-            final String dateFormatPattern = entry.value['yMd']!;
+            final String dateFormatPattern = entry.value['jm']!;
             actual[locale] = dateFormatPattern;
           }
         }
@@ -39,17 +39,23 @@ void main() {
 
       test('Map Patterns to Locales', () {
         const Map<String, Set<String>> expected = {
-          'M/d/y': {'en', 'en_CA', 'en_US', 'en_ISO'},
-          'dd/MM/y': {'en_AU', 'en_GB', 'en_SG', 'en_MY'},
-          'd/M/y': {'en_IE', 'en_IN'},
-          'y/MM/dd': {'en_ZA'},
-          'd/MM/y': {'en_NZ'},
+          'h:mm a': {
+            'en',
+            'en_AU',
+            'en_CA',
+            'en_IN',
+            'en_SG',
+            'en_US',
+            'en_MY',
+            'en_NZ'
+          },
+          'HH:mm': {'en_GB', 'en_IE', 'en_ZA', 'en_ISO'}
         };
         final Map<String, Set<String>> actual = {};
         for (final entry in dateTimePatterns.entries) {
           if (entry.key.startsWith('en')) {
             final String locale = entry.key;
-            final String dateFormatPattern = entry.value['yMd']!;
+            final String dateFormatPattern = entry.value['jm']!;
             actual[dateFormatPattern] ??= <String>{};
             final Set<String> locales = actual[dateFormatPattern]!;
             locales.add(locale);
@@ -59,28 +65,28 @@ void main() {
       });
     });
 
-    group('English Short Date Format Patterns', () {
+    group('English Short Time Format Patterns', () {
       test('Map Locale to Pattern', () {
         const Map<String, String> expected = {
-          'en_ISO': 'yyyy-MM-dd',
-          'en': 'M/d/yy',
-          'en_AU': 'd/M/yy',
-          'en_CA': 'M/d/yy',
-          'en_GB': 'dd/MM/y',
-          'en_IE': 'dd/MM/y',
-          'en_IN': 'dd/MM/yy',
-          'en_MY': 'dd/MM/y',
-          'en_NZ': 'd/MM/yy',
-          'en_SG': 'd/M/yy',
-          'en_US': 'M/d/yy',
-          'en_ZA': 'y/MM/dd',
+          'en_ISO': 'HH:mm',
+          'en': 'h:mm a',
+          'en_AU': 'h:mm a',
+          'en_CA': 'h:mm a',
+          'en_GB': 'HH:mm',
+          'en_IE': 'HH:mm',
+          'en_IN': 'h:mm a',
+          'en_MY': 'h:mm a',
+          'en_NZ': 'h:mm a',
+          'en_SG': 'h:mm a',
+          'en_US': 'h:mm a',
+          'en_ZA': 'HH:mm'
         };
         final Map<String, String> actual = {};
         for (final entry in dateTimeSymbols.entries) {
           if (entry.key.startsWith('en')) {
             final String locale = entry.key;
             final DateSymbols dateSymbols = entry.value;
-            final String dateFormatPattern = dateSymbols.DATEFORMATS.last;
+            final String dateFormatPattern = dateSymbols.TIMEFORMATS.last;
             actual[locale] = dateFormatPattern;
           }
         }
@@ -89,20 +95,24 @@ void main() {
 
       test('Map Patterns to Locales', () {
         const Map<String, Set<String>> expected = {
-          'yyyy-MM-dd': {'en_ISO'},
-          'M/d/yy': {'en', 'en_CA', 'en_US'},
-          'd/M/yy': {'en_AU', 'en_SG'},
-          'dd/MM/y': {'en_GB', 'en_IE', 'en_MY'},
-          'dd/MM/yy': {'en_IN'},
-          'd/MM/yy': {'en_NZ'},
-          'y/MM/dd': {'en_ZA'},
+          'HH:mm': {'en_ISO', 'en_GB', 'en_IE', 'en_ZA'},
+          'h:mm a': {
+            'en',
+            'en_AU',
+            'en_CA',
+            'en_IN',
+            'en_MY',
+            'en_NZ',
+            'en_SG',
+            'en_US'
+          }
         };
         final Map<String, Set<String>> actual = {};
         for (final entry in dateTimeSymbols.entries) {
           if (entry.key.startsWith('en')) {
             final String locale = entry.key;
             final DateSymbols dateSymbols = entry.value;
-            final String dateFormatPattern = dateSymbols.DATEFORMATS.last;
+            final String dateFormatPattern = dateSymbols.TIMEFORMATS.last;
             actual[dateFormatPattern] ??= <String>{};
             final Set<String> locales = actual[dateFormatPattern]!;
             locales.add(locale);
