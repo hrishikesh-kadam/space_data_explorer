@@ -4,10 +4,10 @@ sealed class SettingsEvent {
   const SettingsEvent();
 }
 
-class SettingsLaguageSelected extends SettingsEvent {
-  const SettingsLaguageSelected({required this.language});
+class SettingsLocaleSelected extends SettingsEvent {
+  const SettingsLocaleSelected({required this.locale});
 
-  final Language language;
+  final Locale? locale;
 }
 
 class SettingsDateFormatSelected extends SettingsEvent {

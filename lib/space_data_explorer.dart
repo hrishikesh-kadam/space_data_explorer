@@ -11,7 +11,7 @@ import 'globals.dart';
 import 'route/home/home_route.dart';
 import 'route/settings/bloc/settings_bloc.dart';
 import 'route/settings/bloc/settings_state.dart';
-import 'route/settings/language.dart';
+import 'route/settings/locale.dart';
 
 class SpaceDataExplorerApp extends StatelessWidget {
   SpaceDataExplorerApp({
@@ -38,12 +38,12 @@ class SpaceDataExplorerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<SettingsBloc>(
       create: (_) => SettingsBloc.getInitialSettings(),
-      child: BlocSelector<SettingsBloc, SettingsState, Language>(
-        selector: (state) => state.language,
-        builder: (context, language) {
+      child: BlocSelector<SettingsBloc, SettingsState, Locale?>(
+        selector: (state) => state.locale,
+        builder: (context, locale) {
           return getApp(
             context: context,
-            locale: language != Language.system ? Locale(language.code) : null,
+            locale: locale,
           );
         },
       ),
@@ -72,7 +72,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
           supportedLocales: supportedLocales,
         );
       },
-      supportedLocales: getSupportedLocales(),
+      supportedLocales: LocaleExt.getSupportedLocales(),
       debugShowCheckedModeBanner: _debugShowCheckedModeBanner,
     );
   }
@@ -86,25 +86,5 @@ class SpaceDataExplorerApp extends StatelessWidget {
     final settingsBloc = context.read<SettingsBloc>();
     settingsBloc.add(SettingsSystemLocalesChanged(systemLocales: locales));
     return null;
-  }
-
-  List<Locale> getSupportedLocales() {
-    return [
-      Locale(Language.english.code),
-      Locale(Language.hindi.code),
-      Locale(Language.marathi.code),
-      // Below locales are included for formatting differences like date
-      // See test/unit_test/route/settings/date_format_test.dart
-      Locale(Language.english.code, 'AU'),
-      Locale(Language.english.code, 'CA'),
-      Locale(Language.english.code, 'GB'),
-      Locale(Language.english.code, 'IE'),
-      Locale(Language.english.code, 'IN'),
-      Locale(Language.english.code, 'MY'),
-      Locale(Language.english.code, 'NZ'),
-      Locale(Language.english.code, 'SG'),
-      Locale(Language.english.code, 'US'),
-      Locale(Language.english.code, 'ZA'),
-    ];
   }
 }

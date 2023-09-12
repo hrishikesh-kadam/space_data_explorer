@@ -6,18 +6,14 @@ import 'package:hrk_batteries/hrk_batteries.dart';
 import 'package:space_data_explorer/helper/helper.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
 import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
-import 'package:space_data_explorer/route/settings/language.dart';
 
 void main() {
   group('$SettingsState Unit Test', () {
-    const Language language = Language.english;
     const DateFormatPattern dateFormatPattern = DateFormatPattern.yMd;
     const SettingsState initialState = SettingsState(
-      language: language,
       dateFormatPattern: dateFormatPattern,
     );
     final JsonMap initialJson = {
-      'language': language.code,
       'dateFormatPattern': dateFormatPattern.pattern,
     };
     late JsonMap json;

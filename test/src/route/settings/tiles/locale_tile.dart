@@ -3,29 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:space_data_explorer/route/settings/language.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import '../../../extension/common_finders.dart';
 
-final languageTileFinder = find.byKey(SettingsScreen.languageTileKey);
-final languageDialogFinder = find.byKey(SettingsScreen.languageDialogKey);
+final localeTileFinder = find.byKey(SettingsScreen.localeTileKey);
+final localeDialogFinder = find.byKey(SettingsScreen.localeDialogKey);
 
-Future<void> tapLanguageTile(WidgetTester tester) async {
-  await tester.tap(languageTileFinder);
+Future<void> tapLocaleTile(WidgetTester tester) async {
+  await tester.tap(localeTileFinder);
   await tester.pumpAndSettle();
 }
 
-Future<void> chooseLanguage(
+Future<void> chooseLocale(
   WidgetTester tester, {
   required AppLocalizations l10n,
-  required Language language,
+  required Locale? locale,
 }) async {
   await tester.tap(
     find.byKey(
       Key(
-        SettingsScreen.getLanguageValueTitle(
+        SettingsScreen.getLocaleValueTitle(
           l10n: l10n,
-          language: language,
+          locale: locale,
         ),
       ),
     ),
@@ -33,16 +32,16 @@ Future<void> chooseLanguage(
   await tester.pumpAndSettle();
 }
 
-Future<void> verifyLanguageTileSubtitle(
+Future<void> verifyLocaleTileSubtitle(
   WidgetTester tester, {
   required AppLocalizations l10n,
-  required Language language,
+  required Locale? locale,
 }) async {
   final subTitleFinder = find.descendantText(
-    of: languageTileFinder,
-    text: SettingsScreen.getLanguageValueTitle(
+    of: localeTileFinder,
+    text: SettingsScreen.getLocaleValueTitle(
       l10n: l10n,
-      language: language,
+      locale: locale,
     ),
   );
   expect(subTitleFinder, findsOneWidget);

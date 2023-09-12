@@ -11,7 +11,7 @@ import '../../widgets/radio_settings_tile.dart';
 import 'bloc/settings_bloc.dart';
 import 'bloc/settings_state.dart';
 import 'date_format_pattern.dart';
-import 'language.dart';
+import 'locale.dart';
 import 'settings_route.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -23,8 +23,8 @@ class SettingsScreen extends StatelessWidget {
   final AppLocalizations l10n;
   final _logger = Logger('$appNamePascalCase.SettingsScreen');
   static const String keyPrefix = 'settings_screen';
-  static const Key languageTileKey = Key('${keyPrefix}_language_tile');
-  static const Key languageDialogKey = Key('${keyPrefix}_language_dialog');
+  static const Key localeTileKey = Key('${keyPrefix}_locale_tile');
+  static const Key localeDialogKey = Key('${keyPrefix}_locale_dialog');
   static const Key dateFormatTileKey = Key('${keyPrefix}_date_format_tile');
   static const Key dateFormatDialogKey = Key('${keyPrefix}_date_format_dialog');
   static const Key textDirectionTileKey =
@@ -76,56 +76,53 @@ class SettingsScreen extends StatelessWidget {
 
   List<Widget> _getSettingsTiles() {
     return [
-      _getLanguageTile(),
+      _getLocaleTile(),
       _getDateFormatTile(),
       _getTextDirectionTile(),
     ];
   }
 
-  static String getLanguageValueTitle({
+  static String getLocaleValueTitle({
     required AppLocalizations l10n,
-    required Language language,
+    required Locale? locale,
   }) {
-    return switch (language) {
-      Language.system => l10n.system,
-      _ => language.displayName!,
+    return switch (locale) {
+      null => l10n.system,
+      _ => locale.toDisplayName(),
     };
   }
 
-  Widget _getLanguageTile() {
-    final Set<Language> values = Language.values.toSet();
-    final Set<String> valueTitles = values
-        .map((e) => getLanguageValueTitle(l10n: l10n, language: e))
-        .toSet();
-    return BlocSelector<SettingsBloc, SettingsState, Language>(
-      selector: (state) => state.language,
-      builder: (context, language) {
+  Widget _getLocaleTile() {
+    final Set<Locale?> values = {null, ...LocaleExt.getSupportedLocales()};
+    final Set<String> valueTitles =
+        values.map((e) => getLocaleValueTitle(l10n: l10n, locale: e)).toSet();
+    return BlocSelector<SettingsBloc, SettingsState, Locale?>(
+      selector: (state) => state.locale,
+      builder: (context, locale) {
         final settingsBloc = context.read<SettingsBloc>();
-        return RadioSettingsTile<Language>(
-          key: languageTileKey,
-          dialogKey: languageDialogKey,
+        return RadioSettingsTile<Locale?>(
+          key: localeTileKey,
+          dialogKey: localeDialogKey,
           title: l10n.language,
-          subTitle: getLanguageValueTitle(l10n: l10n, language: language),
+          subTitle: getLocaleValueTitle(l10n: l10n, locale: locale),
           values: values,
           valueTitles: valueTitles,
-          groupValue: language,
-          onChanged: (selectedLanguage) {
-            if (selectedLanguage != null) {
-              _logger.fine('selectedLanguage -> $selectedLanguage');
-              settingsBloc.add(SettingsLaguageSelected(
-                language: selectedLanguage,
-              ));
-            }
+          groupValue: locale,
+          onChanged: (selectedLocale) {
+            _logger.fine('selectedLocale -> $selectedLocale');
+            settingsBloc.add(SettingsLocaleSelected(
+              locale: selectedLocale,
+            ));
             Navigator.pop(context);
           },
           beforeShowDialog: () {
-            _logger.finer('getLanguageTile() -> beforeShowDialog');
+            _logger.finer('_getLocaleTile() -> beforeShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: true,
             ));
           },
           afterShowDialog: () {
-            _logger.finer('getLanguageTile() -> afterShowDialog');
+            _logger.finer('_getLocaleTile() -> afterShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: false,
             ));

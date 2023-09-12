@@ -238,15 +238,15 @@ class CadScreen extends StatelessWidget {
         return BlocBuilder<SettingsBloc, SettingsState>(
           buildWhen: (previous, current) {
             return previous.dateFormatPattern != current.dateFormatPattern ||
-                previous.language != current.language ||
+                previous.locale != current.locale ||
                 previous.systemLocales != current.systemLocales;
           },
           builder: (context, settingsState) {
-            final languageTag = Localizations.localeOf(context).toLanguageTag();
+            final localeString = Localizations.localeOf(context).toString();
             final dateFormatPattern = settingsState.dateFormatPattern;
             final dateFormat = DateFormat(
               dateFormatPattern.pattern,
-              languageTag,
+              localeString,
             );
             return DateFilterWidget(
               key: dateFilterWidgetKey,

@@ -20,7 +20,8 @@ SettingsState _$SettingsStateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SettingsState {
-  Language get language => throw _privateConstructorUsedError;
+  @LocaleJsonConverter()
+  Locale? get locale => throw _privateConstructorUsedError;
   @LocaleListJsonConverter()
   List<Locale>? get systemLocales => throw _privateConstructorUsedError;
   DateFormatPattern get dateFormatPattern => throw _privateConstructorUsedError;
@@ -40,7 +41,7 @@ abstract class $SettingsStateCopyWith<$Res> {
       _$SettingsStateCopyWithImpl<$Res, SettingsState>;
   @useResult
   $Res call(
-      {Language language,
+      {@LocaleJsonConverter() Locale? locale,
       @LocaleListJsonConverter() List<Locale>? systemLocales,
       DateFormatPattern dateFormatPattern,
       TextDirection? textDirection,
@@ -60,17 +61,17 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? language = null,
+    Object? locale = freezed,
     Object? systemLocales = freezed,
     Object? dateFormatPattern = null,
     Object? textDirection = freezed,
     Object? isAnyDialogShown = freezed,
   }) {
     return _then(_value.copyWith(
-      language: null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as Language,
+      locale: freezed == locale
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as Locale?,
       systemLocales: freezed == systemLocales
           ? _value.systemLocales
           : systemLocales // ignore: cast_nullable_to_non_nullable
@@ -100,7 +101,7 @@ abstract class _$$_SettingsStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Language language,
+      {@LocaleJsonConverter() Locale? locale,
       @LocaleListJsonConverter() List<Locale>? systemLocales,
       DateFormatPattern dateFormatPattern,
       TextDirection? textDirection,
@@ -118,17 +119,17 @@ class __$$_SettingsStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? language = null,
+    Object? locale = freezed,
     Object? systemLocales = freezed,
     Object? dateFormatPattern = null,
     Object? textDirection = freezed,
     Object? isAnyDialogShown = freezed,
   }) {
     return _then(_$_SettingsState(
-      language: null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as Language,
+      locale: freezed == locale
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as Locale?,
       systemLocales: freezed == systemLocales
           ? _value._systemLocales
           : systemLocales // ignore: cast_nullable_to_non_nullable
@@ -153,7 +154,7 @@ class __$$_SettingsStateCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SettingsState implements _SettingsState {
   const _$_SettingsState(
-      {required this.language,
+      {@LocaleJsonConverter() this.locale,
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
       required this.dateFormatPattern,
       this.textDirection,
@@ -164,7 +165,8 @@ class _$_SettingsState implements _SettingsState {
       _$$_SettingsStateFromJson(json);
 
   @override
-  final Language language;
+  @LocaleJsonConverter()
+  final Locale? locale;
   final List<Locale>? _systemLocales;
   @override
   @LocaleListJsonConverter()
@@ -185,7 +187,7 @@ class _$_SettingsState implements _SettingsState {
 
   @override
   String toString() {
-    return 'SettingsState(language: $language, systemLocales: $systemLocales, dateFormatPattern: $dateFormatPattern, textDirection: $textDirection, isAnyDialogShown: $isAnyDialogShown)';
+    return 'SettingsState(locale: $locale, systemLocales: $systemLocales, dateFormatPattern: $dateFormatPattern, textDirection: $textDirection, isAnyDialogShown: $isAnyDialogShown)';
   }
 
   @override
@@ -193,8 +195,7 @@ class _$_SettingsState implements _SettingsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SettingsState &&
-            (identical(other.language, language) ||
-                other.language == language) &&
+            (identical(other.locale, locale) || other.locale == locale) &&
             const DeepCollectionEquality()
                 .equals(other._systemLocales, _systemLocales) &&
             (identical(other.dateFormatPattern, dateFormatPattern) ||
@@ -209,7 +210,7 @@ class _$_SettingsState implements _SettingsState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      language,
+      locale,
       const DeepCollectionEquality().hash(_systemLocales),
       dateFormatPattern,
       textDirection,
@@ -231,7 +232,7 @@ class _$_SettingsState implements _SettingsState {
 
 abstract class _SettingsState implements SettingsState {
   const factory _SettingsState(
-      {required final Language language,
+      {@LocaleJsonConverter() final Locale? locale,
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
       required final DateFormatPattern dateFormatPattern,
       final TextDirection? textDirection,
@@ -241,7 +242,8 @@ abstract class _SettingsState implements SettingsState {
       _$_SettingsState.fromJson;
 
   @override
-  Language get language;
+  @LocaleJsonConverter()
+  Locale? get locale;
   @override
   @LocaleListJsonConverter()
   List<Locale>? get systemLocales;

@@ -12,7 +12,8 @@ part of 'settings_state.dart';
 
 _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
     _$_SettingsState(
-      language: $enumDecode(_$LanguageEnumMap, json['language']),
+      locale: const LocaleJsonConverter()
+          .fromJson(json['locale'] as Map<String, dynamic>?),
       systemLocales: const LocaleListJsonConverter()
           .fromJson(json['systemLocales'] as List?),
       dateFormatPattern:
@@ -23,9 +24,7 @@ _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) {
-  final val = <String, dynamic>{
-    'language': _$LanguageEnumMap[instance.language]!,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -33,6 +32,7 @@ Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) {
     }
   }
 
+  writeNotNull('locale', const LocaleJsonConverter().toJson(instance.locale));
   writeNotNull('systemLocales',
       const LocaleListJsonConverter().toJson(instance.systemLocales));
   val['dateFormatPattern'] =
@@ -41,13 +41,6 @@ Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) {
   writeNotNull('isAnyDialogShown', instance.isAnyDialogShown);
   return val;
 }
-
-const _$LanguageEnumMap = {
-  Language.system: 'system',
-  Language.english: 'en',
-  Language.hindi: 'hi',
-  Language.marathi: 'mr',
-};
 
 const _$DateFormatPatternEnumMap = {
   DateFormatPattern.yMd: 'yMd',

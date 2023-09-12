@@ -252,11 +252,8 @@ class CadResultScreen extends StatelessWidget {
     required DateTime cd,
     required DateFormatPattern dateFormatPattern,
   }) {
-    final languageTag = Localizations.localeOf(context).toLanguageTag();
-    final dateFormat = DateFormat(
-      dateFormatPattern.pattern,
-      languageTag,
-    );
+    final locale = Localizations.localeOf(context).toString();
+    final dateFormat = DateFormat(dateFormatPattern.pattern, locale);
     final dateTimeStringBuffer = StringBuffer(dateFormat.format(cd));
     dateTimeStringBuffer.write(' ');
     dateTimeStringBuffer.write(DateFormat('HH:mm').format(cd));

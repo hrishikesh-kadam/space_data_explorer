@@ -5,20 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import '../date_format_pattern.dart';
-import '../language.dart';
 import 'settings_state.dart';
 
 part 'settings_event.dart';
 
 class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   SettingsBloc({
-    required Language language,
     required DateFormatPattern dateFormatPattern,
   }) : super(SettingsState(
-          language: language,
           dateFormatPattern: dateFormatPattern,
         )) {
-    on<SettingsLaguageSelected>(_onLanguageSettingsChanged);
+    on<SettingsLocaleSelected>(_onSettingsLocaleChanged);
     on<SettingsDateFormatSelected>(_onSettingsDateFormatSelected);
     on<SettingsDialogEvent>(_onSettingsDialogEvent);
     on<SettingsSystemLocalesChanged>(_onSettingsSystemLocalesChanged);
@@ -27,17 +24,16 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
 
   static SettingsBloc getInitialSettings() {
     return SettingsBloc(
-      language: Language.system,
       dateFormatPattern: DateFormatPattern.yMd,
     );
   }
 
-  void _onLanguageSettingsChanged(
-    SettingsLaguageSelected event,
+  void _onSettingsLocaleChanged(
+    SettingsLocaleSelected event,
     Emitter<SettingsState> emit,
   ) {
     emit(state.copyWith(
-      language: event.language,
+      locale: event.locale,
       isAnyDialogShown: false,
     ));
   }

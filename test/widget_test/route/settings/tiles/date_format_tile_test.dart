@@ -1,12 +1,10 @@
-import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
 import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
 import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
-import 'package:space_data_explorer/route/settings/language.dart';
+import 'package:space_data_explorer/route/settings/locale.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import '../../../../src/globals.dart';
 import '../../../../src/route/settings/settings_route.dart';
@@ -68,7 +66,7 @@ void main() {
       await tapDateFormatTile(tester);
       final platformLocales = tester.platformDispatcher.locales;
       final changedPlatformLocales = List.of(platformLocales, growable: true);
-      changedPlatformLocales.add(Locale(Language.hindi.code));
+      changedPlatformLocales.add(LocaleExt.hi);
       tester.platformDispatcher.localesTestValue = changedPlatformLocales;
       await tester.pumpAndSettle();
       expect(dateFormatDialogFinder, findsNothing);

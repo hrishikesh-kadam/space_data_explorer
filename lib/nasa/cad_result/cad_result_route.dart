@@ -48,10 +48,10 @@ class CadResultRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    final languageCode = Localizations.localeOf(context).languageCode;
+    final locale = Localizations.localeOf(context).toString();
     // TODO(hrishikesh-kadam): Request export of numberFormatSymbols from intl package
     // https://github.com/dart-lang/i18n/blob/main/pkgs/intl/lib/number_symbols_data.dart
-    final zeroDigit = NumberFormat(null, languageCode).symbols.ZERO_DIGIT;
+    final zeroDigit = NumberFormat(null, locale).symbols.ZERO_DIGIT;
 
     return DeferredWidget(
       cad_result_screen.loadLibrary,
