@@ -1,9 +1,12 @@
 {
   "HH:mm": [
-    "en_ISO",
     "en_GB",
     "en_IE",
     "en_ZA"
+  ],
+  "h:mm a": [
+    "hi",
+    "mr"
   ],
   "h:mm a": [
     "en",

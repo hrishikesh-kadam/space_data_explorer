@@ -1,7 +1,4 @@
 {
-  "yyyy-MM-dd": [
-    "en_ISO"
-  ],
   "M/d/yy": [
     "en",
     "en_CA",
@@ -9,7 +6,12 @@
   ],
   "d/M/yy": [
     "en_AU",
-    "en_SG"
+    "en_SG",
+    "hi",
+    "mr"
+  ],
+  "d/MM/yy": [
+    "en_NZ"
   ],
   "dd/MM/y": [
     "en_GB",
@@ -18,9 +20,6 @@
   ],
   "dd/MM/yy": [
     "en_IN"
-  ],
-  "d/MM/yy": [
-    "en_NZ"
   ],
   "y/MM/dd": [
     "en_ZA"

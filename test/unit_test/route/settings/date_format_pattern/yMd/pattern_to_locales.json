@@ -2,23 +2,24 @@
   "M/d/y": [
     "en",
     "en_CA",
-    "en_US",
-    "en_ISO"
+    "en_US"
+  ],
+  "d/M/y": [
+    "en_IE",
+    "en_IN",
+    "hi",
+    "mr"
+  ],
+  "d/MM/y": [
+    "en_NZ"
   ],
   "dd/MM/y": [
     "en_AU",
     "en_GB",
-    "en_SG",
-    "en_MY"
-  ],
-  "d/M/y": [
-    "en_IE",
-    "en_IN"
+    "en_MY",
+    "en_SG"
   ],
   "y/MM/dd": [
     "en_ZA"
-  ],
-  "d/MM/y": [
-    "en_NZ"
   ]
 }
