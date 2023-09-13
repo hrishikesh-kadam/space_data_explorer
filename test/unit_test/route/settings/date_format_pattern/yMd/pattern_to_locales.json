@@ -4,6 +4,9 @@
     "en_CA",
     "en_US"
   ],
+  "d.M.y": [
+    "he"
+  ],
   "d/M/y": [
     "en_IE",
     "en_IN",
@@ -18,6 +21,9 @@
     "en_GB",
     "en_MY",
     "en_SG"
+  ],
+  "d‏/M‏/y": [
+    "ar"
   ],
   "y/MM/dd": [
     "en_ZA"

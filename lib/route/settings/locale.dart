@@ -4,6 +4,8 @@ extension LocaleExt on Locale {
   static const Locale en = Locale('en');
   static const Locale hi = Locale('hi');
   static const Locale mr = Locale('mr');
+  static const Locale he = Locale('he');
+  static const Locale ar = Locale('ar');
   // Below locales are included for formatting differences like date
   // See test/unit_test/route/settings/date_format_pattern/date_format_pattern_test.dart
   static const Locale enAu = Locale('en', 'AU');
@@ -22,6 +24,8 @@ extension LocaleExt on Locale {
       en,
       hi,
       mr,
+      he,
+      ar,
       enAu,
       enCa,
       enGb,
@@ -40,6 +44,8 @@ extension LocaleExt on Locale {
       en => 'English',
       hi => 'हिंदी / Hindi',
       mr => 'मराठी / Marathi',
+      he => 'עִברִית / Hebrew',
+      ar => 'عربي / Arabic',
       enAu => 'English (Australia)',
       enCa => 'English (Canada)',
       enGb => 'English (Great Britain)',

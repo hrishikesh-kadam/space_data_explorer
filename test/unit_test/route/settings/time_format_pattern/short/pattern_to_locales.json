@@ -1,10 +1,14 @@
 {
+  "H:mm": [
+    "he"
+  ],
   "HH:mm": [
     "en_GB",
     "en_IE",
     "en_ZA"
   ],
   "h:mm a": [
+    "ar",
     "hi",
     "mr"
   ],

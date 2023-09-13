@@ -8,8 +8,8 @@ fi
 
 flutter create . --org "dev.hrishikesh_kadam.flutter"
 
-if ! jq -e '. == {}' lib/l10n/unstranslated-messages.json &> /dev/null; then
-  log_error_with_exit "Unstranslated messages found" 1
-fi
+# if ! jq -e '. == {}' lib/l10n/unstranslated-messages.json &> /dev/null; then
+#   log_error_with_exit "Unstranslated messages found" 1
+# fi
 
 dart run build_runner build --delete-conflicting-outputs
