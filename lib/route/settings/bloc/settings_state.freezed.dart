@@ -25,6 +25,7 @@ mixin _$SettingsState {
   @LocaleListJsonConverter()
   List<Locale>? get systemLocales => throw _privateConstructorUsedError;
   DateFormatPattern get dateFormatPattern => throw _privateConstructorUsedError;
+  TimeFormatPattern get timeFormatPattern => throw _privateConstructorUsedError;
   TextDirection? get textDirection => throw _privateConstructorUsedError;
   bool? get isAnyDialogShown => throw _privateConstructorUsedError;
 
@@ -44,6 +45,7 @@ abstract class $SettingsStateCopyWith<$Res> {
       {@LocaleJsonConverter() Locale? locale,
       @LocaleListJsonConverter() List<Locale>? systemLocales,
       DateFormatPattern dateFormatPattern,
+      TimeFormatPattern timeFormatPattern,
       TextDirection? textDirection,
       bool? isAnyDialogShown});
 }
@@ -64,6 +66,7 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
     Object? locale = freezed,
     Object? systemLocales = freezed,
     Object? dateFormatPattern = null,
+    Object? timeFormatPattern = null,
     Object? textDirection = freezed,
     Object? isAnyDialogShown = freezed,
   }) {
@@ -80,6 +83,10 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
           ? _value.dateFormatPattern
           : dateFormatPattern // ignore: cast_nullable_to_non_nullable
               as DateFormatPattern,
+      timeFormatPattern: null == timeFormatPattern
+          ? _value.timeFormatPattern
+          : timeFormatPattern // ignore: cast_nullable_to_non_nullable
+              as TimeFormatPattern,
       textDirection: freezed == textDirection
           ? _value.textDirection
           : textDirection // ignore: cast_nullable_to_non_nullable
@@ -104,6 +111,7 @@ abstract class _$$_SettingsStateCopyWith<$Res>
       {@LocaleJsonConverter() Locale? locale,
       @LocaleListJsonConverter() List<Locale>? systemLocales,
       DateFormatPattern dateFormatPattern,
+      TimeFormatPattern timeFormatPattern,
       TextDirection? textDirection,
       bool? isAnyDialogShown});
 }
@@ -122,6 +130,7 @@ class __$$_SettingsStateCopyWithImpl<$Res>
     Object? locale = freezed,
     Object? systemLocales = freezed,
     Object? dateFormatPattern = null,
+    Object? timeFormatPattern = null,
     Object? textDirection = freezed,
     Object? isAnyDialogShown = freezed,
   }) {
@@ -138,6 +147,10 @@ class __$$_SettingsStateCopyWithImpl<$Res>
           ? _value.dateFormatPattern
           : dateFormatPattern // ignore: cast_nullable_to_non_nullable
               as DateFormatPattern,
+      timeFormatPattern: null == timeFormatPattern
+          ? _value.timeFormatPattern
+          : timeFormatPattern // ignore: cast_nullable_to_non_nullable
+              as TimeFormatPattern,
       textDirection: freezed == textDirection
           ? _value.textDirection
           : textDirection // ignore: cast_nullable_to_non_nullable
@@ -157,6 +170,7 @@ class _$_SettingsState implements _SettingsState {
       {@LocaleJsonConverter() this.locale,
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
       required this.dateFormatPattern,
+      required this.timeFormatPattern,
       this.textDirection,
       this.isAnyDialogShown})
       : _systemLocales = systemLocales;
@@ -181,13 +195,15 @@ class _$_SettingsState implements _SettingsState {
   @override
   final DateFormatPattern dateFormatPattern;
   @override
+  final TimeFormatPattern timeFormatPattern;
+  @override
   final TextDirection? textDirection;
   @override
   final bool? isAnyDialogShown;
 
   @override
   String toString() {
-    return 'SettingsState(locale: $locale, systemLocales: $systemLocales, dateFormatPattern: $dateFormatPattern, textDirection: $textDirection, isAnyDialogShown: $isAnyDialogShown)';
+    return 'SettingsState(locale: $locale, systemLocales: $systemLocales, dateFormatPattern: $dateFormatPattern, timeFormatPattern: $timeFormatPattern, textDirection: $textDirection, isAnyDialogShown: $isAnyDialogShown)';
   }
 
   @override
@@ -200,6 +216,8 @@ class _$_SettingsState implements _SettingsState {
                 .equals(other._systemLocales, _systemLocales) &&
             (identical(other.dateFormatPattern, dateFormatPattern) ||
                 other.dateFormatPattern == dateFormatPattern) &&
+            (identical(other.timeFormatPattern, timeFormatPattern) ||
+                other.timeFormatPattern == timeFormatPattern) &&
             (identical(other.textDirection, textDirection) ||
                 other.textDirection == textDirection) &&
             (identical(other.isAnyDialogShown, isAnyDialogShown) ||
@@ -213,6 +231,7 @@ class _$_SettingsState implements _SettingsState {
       locale,
       const DeepCollectionEquality().hash(_systemLocales),
       dateFormatPattern,
+      timeFormatPattern,
       textDirection,
       isAnyDialogShown);
 
@@ -235,6 +254,7 @@ abstract class _SettingsState implements SettingsState {
       {@LocaleJsonConverter() final Locale? locale,
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
       required final DateFormatPattern dateFormatPattern,
+      required final TimeFormatPattern timeFormatPattern,
       final TextDirection? textDirection,
       final bool? isAnyDialogShown}) = _$_SettingsState;
 
@@ -249,6 +269,8 @@ abstract class _SettingsState implements SettingsState {
   List<Locale>? get systemLocales;
   @override
   DateFormatPattern get dateFormatPattern;
+  @override
+  TimeFormatPattern get timeFormatPattern;
   @override
   TextDirection? get textDirection;
   @override

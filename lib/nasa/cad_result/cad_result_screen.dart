@@ -15,6 +15,7 @@ import '../../helper/helper.dart';
 import '../../route/settings/bloc/settings_bloc.dart';
 import '../../route/settings/bloc/settings_state.dart';
 import '../../route/settings/date_format_pattern.dart';
+import '../../route/settings/time_format_pattern.dart';
 import '../../widgets/directionality_widget.dart';
 import 'bloc/cad_result_bloc.dart';
 import 'bloc/cad_result_state.dart';
@@ -185,17 +186,19 @@ class CadResultScreen extends StatelessWidget {
           label: 'Julian Date:',
           displayValue: '${data.jd} TDB',
         ),
-        BlocSelector<SettingsBloc, SettingsState, DateFormatPattern>(
-          selector: (state) {
-            return state.dateFormatPattern;
+        BlocBuilder<SettingsBloc, SettingsState>(
+          buildWhen: (previous, current) {
+            return previous.dateFormatPattern != current.dateFormatPattern ||
+                previous.timeFormatPattern != current.timeFormatPattern;
           },
-          builder: (context, dateFormatPattern) {
+          builder: (context, settingsState) {
             return getItemDetail(
               label: 'Date/Time:',
               displayValue: formatCloseApproachDateTime(
                 context: context,
                 cd: data.cd,
-                dateFormatPattern: dateFormatPattern,
+                dateFormatPattern: settingsState.dateFormatPattern,
+                timeFormatPattern: settingsState.timeFormatPattern,
               ),
             );
           },
@@ -251,12 +254,14 @@ class CadResultScreen extends StatelessWidget {
     required BuildContext context,
     required DateTime cd,
     required DateFormatPattern dateFormatPattern,
+    required TimeFormatPattern timeFormatPattern,
   }) {
     final locale = Localizations.localeOf(context).toString();
     final dateFormat = DateFormat(dateFormatPattern.pattern, locale);
     final dateTimeStringBuffer = StringBuffer(dateFormat.format(cd));
     dateTimeStringBuffer.write(' ');
-    dateTimeStringBuffer.write(DateFormat('HH:mm').format(cd));
+    final timeFormat = DateFormat(timeFormatPattern.pattern, locale);
+    dateTimeStringBuffer.write(timeFormat.format(cd));
     dateTimeStringBuffer.write(' TDB');
     return dateTimeStringBuffer.toString();
   }

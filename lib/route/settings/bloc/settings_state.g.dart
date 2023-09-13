@@ -18,6 +18,8 @@ _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
           .fromJson(json['systemLocales'] as List?),
       dateFormatPattern:
           $enumDecode(_$DateFormatPatternEnumMap, json['dateFormatPattern']),
+      timeFormatPattern:
+          $enumDecode(_$TimeFormatPatternEnumMap, json['timeFormatPattern']),
       textDirection:
           $enumDecodeNullable(_$TextDirectionEnumMap, json['textDirection']),
       isAnyDialogShown: json['isAnyDialogShown'] as bool?,
@@ -37,6 +39,8 @@ Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) {
       const LocaleListJsonConverter().toJson(instance.systemLocales));
   val['dateFormatPattern'] =
       _$DateFormatPatternEnumMap[instance.dateFormatPattern]!;
+  val['timeFormatPattern'] =
+      _$TimeFormatPatternEnumMap[instance.timeFormatPattern]!;
   writeNotNull('textDirection', _$TextDirectionEnumMap[instance.textDirection]);
   writeNotNull('isAnyDialogShown', instance.isAnyDialogShown);
   return val;
@@ -51,6 +55,12 @@ const _$DateFormatPatternEnumMap = {
   DateFormatPattern.yyyyMMddSlash: 'yyyy/MM/dd',
   DateFormatPattern.yyyyMMddHyphen: 'yyyy-MM-dd',
   DateFormatPattern.yyyyMMMddHyphen: 'yyyy-MMM-dd',
+};
+
+const _$TimeFormatPatternEnumMap = {
+  TimeFormatPattern.jm: 'jm',
+  TimeFormatPattern.twelveHourClock: 'h:mm a',
+  TimeFormatPattern.twentyFourHourClock: 'HH:mm',
 };
 
 const _$TextDirectionEnumMap = {

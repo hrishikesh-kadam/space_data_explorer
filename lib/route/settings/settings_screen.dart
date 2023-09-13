@@ -13,6 +13,7 @@ import 'bloc/settings_state.dart';
 import 'date_format_pattern.dart';
 import 'locale.dart';
 import 'settings_route.dart';
+import 'time_format_pattern.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({
@@ -27,6 +28,8 @@ class SettingsScreen extends StatelessWidget {
   static const Key localeDialogKey = Key('${keyPrefix}_locale_dialog');
   static const Key dateFormatTileKey = Key('${keyPrefix}_date_format_tile');
   static const Key dateFormatDialogKey = Key('${keyPrefix}_date_format_dialog');
+  static const Key timeFormatTileKey = Key('${keyPrefix}_time_format_tile');
+  static const Key timeFormatDialogKey = Key('${keyPrefix}_time_format_dialog');
   static const Key textDirectionTileKey =
       Key('${keyPrefix}_text_direction_tile');
   static const Key textDirectionDialogKey =
@@ -78,6 +81,7 @@ class SettingsScreen extends StatelessWidget {
     return [
       _getLocaleTile(),
       _getDateFormatTile(),
+      _getTimeFormatTile(),
       _getTextDirectionTile(),
     ];
   }
@@ -156,7 +160,9 @@ class SettingsScreen extends StatelessWidget {
           dialogKey: dateFormatDialogKey,
           title: l10n.dateFormat,
           subTitle: getDateFormatValueTitle(
-              l10n: l10n, dateFormatPattern: dateFormatPattern),
+            l10n: l10n,
+            dateFormatPattern: dateFormatPattern,
+          ),
           values: values,
           valueTitles: valueTitles,
           groupValue: dateFormatPattern,
@@ -178,6 +184,64 @@ class SettingsScreen extends StatelessWidget {
           },
           afterShowDialog: () {
             _logger.finer('getDateFormatTile() -> afterShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
+              isAnyDialogShown: false,
+            ));
+          },
+        );
+      },
+    );
+  }
+
+  static String getTimeFormatValueTitle({
+    required AppLocalizations l10n,
+    required TimeFormatPattern timeFormatPattern,
+  }) {
+    return switch (timeFormatPattern) {
+      TimeFormatPattern.jm => l10n.languageDefault,
+      TimeFormatPattern.twelveHourClock => l10n.twelveHourClock,
+      TimeFormatPattern.twentyFourHourClock => l10n.twentyFourHourClock,
+    };
+  }
+
+  Widget _getTimeFormatTile() {
+    final Set<TimeFormatPattern> values = TimeFormatPattern.values.toSet();
+    final Set<String> valueTitles = values
+        .map((e) => getTimeFormatValueTitle(l10n: l10n, timeFormatPattern: e))
+        .toSet();
+    return BlocSelector<SettingsBloc, SettingsState, TimeFormatPattern>(
+      selector: (state) => state.timeFormatPattern,
+      builder: (context, timeFormatPattern) {
+        final settingsBloc = context.read<SettingsBloc>();
+        return RadioSettingsTile<TimeFormatPattern>(
+          key: timeFormatTileKey,
+          dialogKey: timeFormatDialogKey,
+          title: l10n.timeFormat,
+          subTitle: getTimeFormatValueTitle(
+            l10n: l10n,
+            timeFormatPattern: timeFormatPattern,
+          ),
+          values: values,
+          valueTitles: valueTitles,
+          groupValue: timeFormatPattern,
+          onChanged: (selectedTimeFormatPattern) {
+            if (selectedTimeFormatPattern != null) {
+              _logger.fine(
+                  '_getTimeFormatTile() -> selectedTimeFormatPattern -> $selectedTimeFormatPattern');
+              settingsBloc.add(SettingsTimeFormatSelected(
+                timeFormatPattern: selectedTimeFormatPattern,
+              ));
+            }
+            Navigator.pop(context);
+          },
+          beforeShowDialog: () {
+            _logger.finer('_getTimeFormatTile() -> beforeShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
+              isAnyDialogShown: true,
+            ));
+          },
+          afterShowDialog: () {
+            _logger.finer('_getTimeFormatTile() -> afterShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: false,
             ));

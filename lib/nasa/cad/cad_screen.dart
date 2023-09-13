@@ -238,8 +238,7 @@ class CadScreen extends StatelessWidget {
         return BlocBuilder<SettingsBloc, SettingsState>(
           buildWhen: (previous, current) {
             return previous.dateFormatPattern != current.dateFormatPattern ||
-                previous.locale != current.locale ||
-                previous.systemLocales != current.systemLocales;
+                previous.locale != current.locale;
           },
           builder: (context, settingsState) {
             final localeString = Localizations.localeOf(context).toString();

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import '../date_format_pattern.dart';
+import '../time_format_pattern.dart';
 import 'settings_state.dart';
 
 part 'settings_event.dart';
@@ -12,11 +13,14 @@ part 'settings_event.dart';
 class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   SettingsBloc({
     required DateFormatPattern dateFormatPattern,
+    required TimeFormatPattern timeFormatPattern,
   }) : super(SettingsState(
           dateFormatPattern: dateFormatPattern,
+          timeFormatPattern: timeFormatPattern,
         )) {
     on<SettingsLocaleSelected>(_onSettingsLocaleChanged);
     on<SettingsDateFormatSelected>(_onSettingsDateFormatSelected);
+    on<SettingsTimeFormatSelected>(_onSettingsTimeFormatSelected);
     on<SettingsDialogEvent>(_onSettingsDialogEvent);
     on<SettingsSystemLocalesChanged>(_onSettingsSystemLocalesChanged);
     on<SettingsTextDirectionSelected>(_onSettingsTextDirectionSelected);
@@ -25,6 +29,7 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   static SettingsBloc getInitialSettings() {
     return SettingsBloc(
       dateFormatPattern: DateFormatPattern.yMd,
+      timeFormatPattern: TimeFormatPattern.jm,
     );
   }
 
@@ -44,6 +49,16 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   ) {
     emit(state.copyWith(
       dateFormatPattern: event.dateFormatPattern,
+      isAnyDialogShown: false,
+    ));
+  }
+
+  void _onSettingsTimeFormatSelected(
+    SettingsTimeFormatSelected event,
+    Emitter<SettingsState> emit,
+  ) {
+    emit(state.copyWith(
+      timeFormatPattern: event.timeFormatPattern,
       isAnyDialogShown: false,
     ));
   }

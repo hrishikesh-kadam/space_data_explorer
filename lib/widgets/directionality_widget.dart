@@ -15,8 +15,7 @@ Widget getDirectionality({required Widget child}) {
   return BlocBuilder<SettingsBloc, SettingsState>(
     buildWhen: (previous, current) {
       return previous.textDirection != current.textDirection ||
-          previous.locale != current.locale ||
-          previous.systemLocales != current.systemLocales;
+          previous.locale != current.locale;
     },
     builder: (context, settingsState) {
       late final TextDirection textDirection;

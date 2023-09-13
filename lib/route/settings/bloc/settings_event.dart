@@ -16,6 +16,12 @@ class SettingsDateFormatSelected extends SettingsEvent {
   final DateFormatPattern dateFormatPattern;
 }
 
+class SettingsTimeFormatSelected extends SettingsEvent {
+  const SettingsTimeFormatSelected({required this.timeFormatPattern});
+
+  final TimeFormatPattern timeFormatPattern;
+}
+
 class SettingsDialogEvent extends SettingsEvent {
   const SettingsDialogEvent({this.isAnyDialogShown});
 
