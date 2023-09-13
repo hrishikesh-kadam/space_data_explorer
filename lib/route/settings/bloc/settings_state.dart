@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hrk_batteries/hrk_batteries.dart';
 
 import '../../../helper/helper.dart';
 import '../date_format_pattern.dart';
@@ -11,11 +12,14 @@ part 'settings_state.g.dart';
 
 @freezed
 class SettingsState with _$SettingsState {
+  // ignore: invalid_annotation_target
+  @JsonSerializable(explicitToJson: true)
   const factory SettingsState({
     @LocaleJsonConverter() Locale? locale,
     @LocaleListJsonConverter() List<Locale>? systemLocales,
-    required DateFormatPattern dateFormatPattern,
-    required TimeFormatPattern timeFormatPattern,
+    @Default(DateFormatPattern.yMd) DateFormatPattern dateFormatPattern,
+    @Default(TimeFormatPattern.jm) TimeFormatPattern timeFormatPattern,
+    @Default(DistanceUnit.au) DistanceUnit distanceUnit,
     TextDirection? textDirection,
     bool? isAnyDialogShown,
   }) = _SettingsState;

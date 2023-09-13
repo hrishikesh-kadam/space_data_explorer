@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrk_logging/hrk_logging.dart';
+import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import '../../globals.dart';
 import '../../widgets/app_bar.dart';
@@ -30,6 +31,9 @@ class SettingsScreen extends StatelessWidget {
   static const Key dateFormatDialogKey = Key('${keyPrefix}_date_format_dialog');
   static const Key timeFormatTileKey = Key('${keyPrefix}_time_format_tile');
   static const Key timeFormatDialogKey = Key('${keyPrefix}_time_format_dialog');
+  static const Key distanceUnitTileKey = Key('${keyPrefix}_distance_unit_tile');
+  static const Key distanceUnitDialogKey =
+      Key('${keyPrefix}_distance_unit_dialog');
   static const Key textDirectionTileKey =
       Key('${keyPrefix}_text_direction_tile');
   static const Key textDirectionDialogKey =
@@ -83,6 +87,7 @@ class SettingsScreen extends StatelessWidget {
       _getDateFormatTile(),
       _getTimeFormatTile(),
       _getTextDirectionTile(),
+      _getDistanceUnitTile(),
     ];
   }
 
@@ -301,6 +306,67 @@ class SettingsScreen extends StatelessWidget {
           },
           afterShowDialog: () {
             _logger.finer('getTextDirectionTile() -> afterShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
+              isAnyDialogShown: false,
+            ));
+          },
+        );
+      },
+    );
+  }
+
+  static String getDistanceUnitValueTitle({
+    required AppLocalizations l10n,
+    required DistanceUnit distanceUnit,
+  }) {
+    return switch (distanceUnit) {
+      DistanceUnit.au => l10n.astronomicalUnit,
+      DistanceUnit.ld => l10n.lunarDistanceUnit,
+      DistanceUnit.km => l10n.kilometersUnit,
+      DistanceUnit.mi => l10n.milesUnit,
+      DistanceUnit.re => l10n.earthRadiiEquatorialUnit,
+      _ => throw ArgumentError.value(distanceUnit),
+    };
+  }
+
+  Widget _getDistanceUnitTile() {
+    final Set<DistanceUnit> values = DistanceUnit.all.toSet();
+    final Set<String> valueTitles = values
+        .map((e) => getDistanceUnitValueTitle(l10n: l10n, distanceUnit: e))
+        .toSet();
+    return BlocSelector<SettingsBloc, SettingsState, DistanceUnit>(
+      selector: (state) => state.distanceUnit,
+      builder: (context, distanceUnit) {
+        final settingsBloc = context.read<SettingsBloc>();
+        return RadioSettingsTile<DistanceUnit>(
+          key: distanceUnitTileKey,
+          dialogKey: distanceUnitDialogKey,
+          title: l10n.distanceUnit,
+          subTitle: getDistanceUnitValueTitle(
+            l10n: l10n,
+            distanceUnit: distanceUnit,
+          ),
+          values: values,
+          valueTitles: valueTitles,
+          groupValue: distanceUnit,
+          onChanged: (selectedDistanceUnitPattern) {
+            if (selectedDistanceUnitPattern != null) {
+              _logger.fine(
+                  '_getDistanceUnitTile() -> selectedDistanceUnitPattern -> $selectedDistanceUnitPattern');
+              settingsBloc.add(SettingsDistanceUnitSelected(
+                distanceUnit: selectedDistanceUnitPattern,
+              ));
+            }
+            Navigator.pop(context);
+          },
+          beforeShowDialog: () {
+            _logger.finer('_getDistanceUnitTile() -> beforeShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
+              isAnyDialogShown: true,
+            ));
+          },
+          afterShowDialog: () {
+            _logger.finer('_getDistanceUnitTile() -> afterShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: false,
             ));

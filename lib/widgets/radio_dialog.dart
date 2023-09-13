@@ -21,6 +21,7 @@ class RadioDialog<T> extends StatelessWidget {
     return AlertDialog(
       title: Text(title),
       content: SizedBox(
+        // TODO(hrishikesh-kadam): Fix width
         width: double.minPositive,
         child: ListView.builder(
           shrinkWrap: true,

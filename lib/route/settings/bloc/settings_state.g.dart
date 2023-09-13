@@ -16,10 +16,15 @@ _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
           .fromJson(json['locale'] as Map<String, dynamic>?),
       systemLocales: const LocaleListJsonConverter()
           .fromJson(json['systemLocales'] as List?),
-      dateFormatPattern:
-          $enumDecode(_$DateFormatPatternEnumMap, json['dateFormatPattern']),
-      timeFormatPattern:
-          $enumDecode(_$TimeFormatPatternEnumMap, json['timeFormatPattern']),
+      dateFormatPattern: $enumDecodeNullable(
+              _$DateFormatPatternEnumMap, json['dateFormatPattern']) ??
+          DateFormatPattern.yMd,
+      timeFormatPattern: $enumDecodeNullable(
+              _$TimeFormatPatternEnumMap, json['timeFormatPattern']) ??
+          TimeFormatPattern.jm,
+      distanceUnit: json['distanceUnit'] == null
+          ? DistanceUnit.au
+          : DistanceUnit.fromJson(json['distanceUnit'] as Map<String, dynamic>),
       textDirection:
           $enumDecodeNullable(_$TextDirectionEnumMap, json['textDirection']),
       isAnyDialogShown: json['isAnyDialogShown'] as bool?,
@@ -41,6 +46,7 @@ Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) {
       _$DateFormatPatternEnumMap[instance.dateFormatPattern]!;
   val['timeFormatPattern'] =
       _$TimeFormatPatternEnumMap[instance.timeFormatPattern]!;
+  val['distanceUnit'] = instance.distanceUnit.toJson();
   writeNotNull('textDirection', _$TextDirectionEnumMap[instance.textDirection]);
   writeNotNull('isAnyDialogShown', instance.isAnyDialogShown);
   return val;

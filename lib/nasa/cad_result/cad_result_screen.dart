@@ -212,17 +212,29 @@ class CadResultScreen extends StatelessWidget {
             label: 'Close-Approach Body:',
             displayValue: data.body!,
           ),
-        getItemDetail(
-          label: 'Distance:',
-          displayValue: data.dist,
-        ),
-        getItemDetail(
-          label: 'Distance Min:',
-          displayValue: data.distMin,
-        ),
-        getItemDetail(
-          label: 'Distance Max:',
-          displayValue: data.distMax,
+        BlocSelector<SettingsBloc, SettingsState, DistanceUnit>(
+          selector: (state) {
+            return state.distanceUnit;
+          },
+          builder: (context, distanceUnit) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                getItemDetail(
+                  label: 'Distance:',
+                  displayValue: data.dist,
+                ),
+                getItemDetail(
+                  label: 'Distance Min:',
+                  displayValue: data.distMin,
+                ),
+                getItemDetail(
+                  label: 'Distance Max:',
+                  displayValue: data.distMax,
+                ),
+              ],
+            );
+          },
         ),
         getItemDetail(
           label: 'Velocity Rel:',

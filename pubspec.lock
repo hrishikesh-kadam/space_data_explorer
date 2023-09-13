@@ -546,11 +546,10 @@ packages:
   hrk_batteries:
     dependency: "direct main"
     description:
-      name: hrk_batteries
-      sha256: f6d56fe754bab61bdaf700e19b5e5f60a761a9b1ca63603417b3c7476c6f31d8
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.6.0"
+      path: "../../dart/packages/hrk_batteries"
+      relative: true
+    source: path
+    version: "0.7.0"
   hrk_flutter_test_batteries:
     dependency: "direct dev"
     description:

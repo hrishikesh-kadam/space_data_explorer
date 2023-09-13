@@ -36,43 +36,43 @@ void main() {
       });
 
       test('$SettingsLocaleSelected', () async {
-        final SettingsBloc hydratedBloc = SettingsBloc.getInitialSettings();
+        final SettingsBloc hydratedBloc = SettingsBloc();
         hydratedBloc.add(
           const SettingsLocaleSelected(
             locale: LocaleExt.en,
           ),
         );
         await sleep();
-        final SettingsBloc reHydratedBloc = SettingsBloc.getInitialSettings();
+        final SettingsBloc reHydratedBloc = SettingsBloc();
         expect(reHydratedBloc.state, hydratedBloc.state);
       });
 
       test('$SettingsDateFormatSelected', () async {
-        final SettingsBloc hydratedBloc = SettingsBloc.getInitialSettings();
+        final SettingsBloc hydratedBloc = SettingsBloc();
         hydratedBloc.add(
           const SettingsDateFormatSelected(
             dateFormatPattern: DateFormatPattern.ddMMyyyySlash,
           ),
         );
         await sleep();
-        final SettingsBloc reHydratedBloc = SettingsBloc.getInitialSettings();
+        final SettingsBloc reHydratedBloc = SettingsBloc();
         expect(reHydratedBloc.state, hydratedBloc.state);
       });
 
       test('$SettingsDialogEvent', () async {
-        final SettingsBloc hydratedBloc = SettingsBloc.getInitialSettings();
+        final SettingsBloc hydratedBloc = SettingsBloc();
         hydratedBloc.add(
           const SettingsDialogEvent(
             isAnyDialogShown: false,
           ),
         );
         await sleep();
-        final SettingsBloc reHydratedBloc = SettingsBloc.getInitialSettings();
+        final SettingsBloc reHydratedBloc = SettingsBloc();
         expect(reHydratedBloc.state, hydratedBloc.state);
       });
 
       test('$SettingsSystemLocalesChanged', () async {
-        final SettingsBloc hydratedBloc = SettingsBloc.getInitialSettings();
+        final SettingsBloc hydratedBloc = SettingsBloc();
         hydratedBloc.add(
           const SettingsSystemLocalesChanged(systemLocales: [
             Locale('mr'),
@@ -80,7 +80,7 @@ void main() {
           ]),
         );
         await sleep();
-        final SettingsBloc reHydratedBloc = SettingsBloc.getInitialSettings();
+        final SettingsBloc reHydratedBloc = SettingsBloc();
         expect(reHydratedBloc.state, hydratedBloc.state);
       });
     });

@@ -39,3 +39,9 @@ class SettingsTextDirectionSelected extends SettingsEvent {
 
   final TextDirection? textDirection;
 }
+
+class SettingsDistanceUnitSelected extends SettingsEvent {
+  const SettingsDistanceUnitSelected({required this.distanceUnit});
+
+  final DistanceUnit distanceUnit;
+}

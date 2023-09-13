@@ -5,20 +5,14 @@ import 'package:hrk_batteries/hrk_batteries.dart';
 
 import 'package:space_data_explorer/helper/helper.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
-import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
-import 'package:space_data_explorer/route/settings/time_format_pattern.dart';
 
 void main() {
   group('$SettingsState Unit Test', () {
-    const DateFormatPattern dateFormatPattern = DateFormatPattern.yMd;
-    const TimeFormatPattern timeFormatPattern = TimeFormatPattern.jm;
-    const SettingsState initialState = SettingsState(
-      dateFormatPattern: dateFormatPattern,
-      timeFormatPattern: timeFormatPattern,
-    );
+    const SettingsState initialState = SettingsState();
     final JsonMap initialJson = {
-      'dateFormatPattern': dateFormatPattern.pattern,
-      'timeFormatPattern': timeFormatPattern.pattern,
+      'dateFormatPattern': 'yMd',
+      'timeFormatPattern': 'jm',
+      'distanceUnit': {'symbol': 'au'},
     };
     late JsonMap json;
     const localeListJsonConverter = LocaleListJsonConverter();

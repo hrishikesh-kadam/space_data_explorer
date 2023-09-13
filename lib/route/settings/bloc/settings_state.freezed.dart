@@ -26,6 +26,7 @@ mixin _$SettingsState {
   List<Locale>? get systemLocales => throw _privateConstructorUsedError;
   DateFormatPattern get dateFormatPattern => throw _privateConstructorUsedError;
   TimeFormatPattern get timeFormatPattern => throw _privateConstructorUsedError;
+  DistanceUnit get distanceUnit => throw _privateConstructorUsedError;
   TextDirection? get textDirection => throw _privateConstructorUsedError;
   bool? get isAnyDialogShown => throw _privateConstructorUsedError;
 
@@ -46,6 +47,7 @@ abstract class $SettingsStateCopyWith<$Res> {
       @LocaleListJsonConverter() List<Locale>? systemLocales,
       DateFormatPattern dateFormatPattern,
       TimeFormatPattern timeFormatPattern,
+      DistanceUnit distanceUnit,
       TextDirection? textDirection,
       bool? isAnyDialogShown});
 }
@@ -67,6 +69,7 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
     Object? systemLocales = freezed,
     Object? dateFormatPattern = null,
     Object? timeFormatPattern = null,
+    Object? distanceUnit = null,
     Object? textDirection = freezed,
     Object? isAnyDialogShown = freezed,
   }) {
@@ -87,6 +90,10 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
           ? _value.timeFormatPattern
           : timeFormatPattern // ignore: cast_nullable_to_non_nullable
               as TimeFormatPattern,
+      distanceUnit: null == distanceUnit
+          ? _value.distanceUnit
+          : distanceUnit // ignore: cast_nullable_to_non_nullable
+              as DistanceUnit,
       textDirection: freezed == textDirection
           ? _value.textDirection
           : textDirection // ignore: cast_nullable_to_non_nullable
@@ -112,6 +119,7 @@ abstract class _$$_SettingsStateCopyWith<$Res>
       @LocaleListJsonConverter() List<Locale>? systemLocales,
       DateFormatPattern dateFormatPattern,
       TimeFormatPattern timeFormatPattern,
+      DistanceUnit distanceUnit,
       TextDirection? textDirection,
       bool? isAnyDialogShown});
 }
@@ -131,6 +139,7 @@ class __$$_SettingsStateCopyWithImpl<$Res>
     Object? systemLocales = freezed,
     Object? dateFormatPattern = null,
     Object? timeFormatPattern = null,
+    Object? distanceUnit = null,
     Object? textDirection = freezed,
     Object? isAnyDialogShown = freezed,
   }) {
@@ -151,6 +160,10 @@ class __$$_SettingsStateCopyWithImpl<$Res>
           ? _value.timeFormatPattern
           : timeFormatPattern // ignore: cast_nullable_to_non_nullable
               as TimeFormatPattern,
+      distanceUnit: null == distanceUnit
+          ? _value.distanceUnit
+          : distanceUnit // ignore: cast_nullable_to_non_nullable
+              as DistanceUnit,
       textDirection: freezed == textDirection
           ? _value.textDirection
           : textDirection // ignore: cast_nullable_to_non_nullable
@@ -164,13 +177,15 @@ class __$$_SettingsStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_SettingsState implements _SettingsState {
   const _$_SettingsState(
       {@LocaleJsonConverter() this.locale,
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
-      required this.dateFormatPattern,
-      required this.timeFormatPattern,
+      this.dateFormatPattern = DateFormatPattern.yMd,
+      this.timeFormatPattern = TimeFormatPattern.jm,
+      this.distanceUnit = DistanceUnit.au,
       this.textDirection,
       this.isAnyDialogShown})
       : _systemLocales = systemLocales;
@@ -193,9 +208,14 @@ class _$_SettingsState implements _SettingsState {
   }
 
   @override
+  @JsonKey()
   final DateFormatPattern dateFormatPattern;
   @override
+  @JsonKey()
   final TimeFormatPattern timeFormatPattern;
+  @override
+  @JsonKey()
+  final DistanceUnit distanceUnit;
   @override
   final TextDirection? textDirection;
   @override
@@ -203,7 +223,7 @@ class _$_SettingsState implements _SettingsState {
 
   @override
   String toString() {
-    return 'SettingsState(locale: $locale, systemLocales: $systemLocales, dateFormatPattern: $dateFormatPattern, timeFormatPattern: $timeFormatPattern, textDirection: $textDirection, isAnyDialogShown: $isAnyDialogShown)';
+    return 'SettingsState(locale: $locale, systemLocales: $systemLocales, dateFormatPattern: $dateFormatPattern, timeFormatPattern: $timeFormatPattern, distanceUnit: $distanceUnit, textDirection: $textDirection, isAnyDialogShown: $isAnyDialogShown)';
   }
 
   @override
@@ -218,6 +238,8 @@ class _$_SettingsState implements _SettingsState {
                 other.dateFormatPattern == dateFormatPattern) &&
             (identical(other.timeFormatPattern, timeFormatPattern) ||
                 other.timeFormatPattern == timeFormatPattern) &&
+            (identical(other.distanceUnit, distanceUnit) ||
+                other.distanceUnit == distanceUnit) &&
             (identical(other.textDirection, textDirection) ||
                 other.textDirection == textDirection) &&
             (identical(other.isAnyDialogShown, isAnyDialogShown) ||
@@ -232,6 +254,7 @@ class _$_SettingsState implements _SettingsState {
       const DeepCollectionEquality().hash(_systemLocales),
       dateFormatPattern,
       timeFormatPattern,
+      distanceUnit,
       textDirection,
       isAnyDialogShown);
 
@@ -253,8 +276,9 @@ abstract class _SettingsState implements SettingsState {
   const factory _SettingsState(
       {@LocaleJsonConverter() final Locale? locale,
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
-      required final DateFormatPattern dateFormatPattern,
-      required final TimeFormatPattern timeFormatPattern,
+      final DateFormatPattern dateFormatPattern,
+      final TimeFormatPattern timeFormatPattern,
+      final DistanceUnit distanceUnit,
       final TextDirection? textDirection,
       final bool? isAnyDialogShown}) = _$_SettingsState;
 
@@ -271,6 +295,8 @@ abstract class _SettingsState implements SettingsState {
   DateFormatPattern get dateFormatPattern;
   @override
   TimeFormatPattern get timeFormatPattern;
+  @override
+  DistanceUnit get distanceUnit;
   @override
   TextDirection? get textDirection;
   @override
