@@ -29,7 +29,7 @@
   "lunarDistanceUnit": "Lunar Distance (LD)",
   "kilometersUnit": "Kilometers (km)",
   "milesUnit": "Miles (mi)",
-  "earthRadiiEquatorialUnit": "Earth Radii Equatorial (Re)",
+  "earthRadiusEquatorialUnit": "Earth Radius Equatorial (Re)",
   "smallBodyFilter": "Small Body Filter",
   "comet": "Comet",
   "neaComet": "NEA and Comet",

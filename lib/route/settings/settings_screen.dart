@@ -321,10 +321,10 @@ class SettingsScreen extends StatelessWidget {
   }) {
     return switch (distanceUnit) {
       DistanceUnit.au => l10n.astronomicalUnit,
-      DistanceUnit.ld => l10n.lunarDistanceUnit,
+      DistanceUnit.LD => l10n.lunarDistanceUnit,
       DistanceUnit.km => l10n.kilometersUnit,
       DistanceUnit.mi => l10n.milesUnit,
-      DistanceUnit.re => l10n.earthRadiiEquatorialUnit,
+      DistanceUnit.Re => l10n.earthRadiusEquatorialUnit,
       _ => throw ArgumentError.value(distanceUnit),
     };
   }

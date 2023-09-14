@@ -29,7 +29,7 @@
   "lunarDistanceUnit": "चंद्र दूरी (LD)",
   "kilometersUnit": "किलोमीटर (km)",
   "milesUnit": "मील (mi)",
-  "earthRadiiEquatorialUnit": "पृथ्वी त्रिज्या विषुवतरेखीय (Re)",
+  "earthRadiusEquatorialUnit": "पृथ्वी त्रिज्या विषुवतरेखीय (Re)",
   "smallBodyFilter": "छोटे पिंड चयन",
   "comet": "धूमकेतू",
   "neaComet": "NEA और धूमकेतू",

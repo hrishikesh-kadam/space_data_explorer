@@ -55,7 +55,7 @@ class CadScreen extends StatelessWidget {
       Key('$distFilterKeyPrefix${ValueRangeFilterWidget.defaultKey}');
   static final Set<DistanceUnit> distFilterUnits = {
     DistanceUnit.au,
-    DistanceUnit.ld,
+    DistanceUnit.LD,
   };
   static const String smallBodyFilterKeyPrefix =
       '${keyPrefix}small_body_filter_';

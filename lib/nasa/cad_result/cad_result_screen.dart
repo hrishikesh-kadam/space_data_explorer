@@ -222,15 +222,27 @@ class CadResultScreen extends StatelessWidget {
               children: [
                 getItemDetail(
                   label: 'Distance:',
-                  displayValue: data.dist,
+                  displayValue: formatDistance(
+                    value: data.dist,
+                    from: DistanceUnit.au,
+                    to: distanceUnit,
+                  ),
                 ),
                 getItemDetail(
                   label: 'Distance Min:',
-                  displayValue: data.distMin,
+                  displayValue: formatDistance(
+                    value: data.distMin,
+                    from: DistanceUnit.au,
+                    to: distanceUnit,
+                  ),
                 ),
                 getItemDetail(
                   label: 'Distance Max:',
-                  displayValue: data.distMax,
+                  displayValue: formatDistance(
+                    value: data.distMax,
+                    from: DistanceUnit.au,
+                    to: distanceUnit,
+                  ),
                 ),
               ],
             );
@@ -276,6 +288,17 @@ class CadResultScreen extends StatelessWidget {
     dateTimeStringBuffer.write(timeFormat.format(cd));
     dateTimeStringBuffer.write(' TDB');
     return dateTimeStringBuffer.toString();
+  }
+
+  String formatDistance({
+    required String value,
+    required DistanceUnit from,
+    required DistanceUnit to,
+  }) {
+    return Distance(
+      value: double.parse(value),
+      unit: from,
+    ).convert(to: to).toDisplayString();
   }
 
   Widget getItemDetail({
