@@ -222,27 +222,27 @@ class CadResultScreen extends StatelessWidget {
               children: [
                 getItemDetail(
                   label: 'Distance:',
-                  displayValue: formatDistance(
-                    value: data.dist,
-                    from: DistanceUnit.au,
-                    to: distanceUnit,
-                  ),
+                  displayValue: data.dist
+                      .convert(
+                        to: distanceUnit,
+                      )
+                      .toDisplayString(),
                 ),
                 getItemDetail(
                   label: 'Distance Min:',
-                  displayValue: formatDistance(
-                    value: data.distMin,
-                    from: DistanceUnit.au,
-                    to: distanceUnit,
-                  ),
+                  displayValue: data.distMin
+                      .convert(
+                        to: distanceUnit,
+                      )
+                      .toDisplayString(),
                 ),
                 getItemDetail(
                   label: 'Distance Max:',
-                  displayValue: formatDistance(
-                    value: data.distMax,
-                    from: DistanceUnit.au,
-                    to: distanceUnit,
-                  ),
+                  displayValue: data.distMax
+                      .convert(
+                        to: distanceUnit,
+                      )
+                      .toDisplayString(),
                 ),
               ],
             );
@@ -288,17 +288,6 @@ class CadResultScreen extends StatelessWidget {
     dateTimeStringBuffer.write(timeFormat.format(cd));
     dateTimeStringBuffer.write(' TDB');
     return dateTimeStringBuffer.toString();
-  }
-
-  String formatDistance({
-    required String value,
-    required DistanceUnit from,
-    required DistanceUnit to,
-  }) {
-    return Distance(
-      value: double.parse(value),
-      unit: from,
-    ).convert(to: to).toDisplayString();
   }
 
   Widget getItemDetail({
