@@ -17,9 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CadState {
   DateTimeRange? get dateRange => throw _privateConstructorUsedError;
-  ValueRange<double, DistanceUnit> get distRange =>
-      throw _privateConstructorUsedError;
-  ValueRange<String, Never> get distRangeText =>
+  DistanceRangeState get distanceRangeState =>
       throw _privateConstructorUsedError;
   SmallBodyFilterState get smallBodyFilterState =>
       throw _privateConstructorUsedError;
@@ -43,8 +41,7 @@ abstract class $CadStateCopyWith<$Res> {
   @useResult
   $Res call(
       {DateTimeRange? dateRange,
-      ValueRange<double, DistanceUnit> distRange,
-      ValueRange<String, Never> distRangeText,
+      DistanceRangeState distanceRangeState,
       SmallBodyFilterState smallBodyFilterState,
       SmallBodySelectorState smallBodySelectorState,
       CloseApproachBody closeApproachBody,
@@ -53,8 +50,7 @@ abstract class $CadStateCopyWith<$Res> {
       bool disableInputs,
       SbdbCadBody? sbdbCadBody});
 
-  $ValueRangeCopyWith<double, DistanceUnit, $Res> get distRange;
-  $ValueRangeCopyWith<String, Never, $Res> get distRangeText;
+  $DistanceRangeStateCopyWith<$Res> get distanceRangeState;
   $SmallBodyFilterStateCopyWith<$Res> get smallBodyFilterState;
   $SmallBodySelectorStateCopyWith<$Res> get smallBodySelectorState;
   $SbdbCadBodyCopyWith<$Res>? get sbdbCadBody;
@@ -74,8 +70,7 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
   @override
   $Res call({
     Object? dateRange = freezed,
-    Object? distRange = null,
-    Object? distRangeText = null,
+    Object? distanceRangeState = null,
     Object? smallBodyFilterState = null,
     Object? smallBodySelectorState = null,
     Object? closeApproachBody = null,
@@ -89,14 +84,10 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
           ? _value.dateRange
           : dateRange // ignore: cast_nullable_to_non_nullable
               as DateTimeRange?,
-      distRange: null == distRange
-          ? _value.distRange
-          : distRange // ignore: cast_nullable_to_non_nullable
-              as ValueRange<double, DistanceUnit>,
-      distRangeText: null == distRangeText
-          ? _value.distRangeText
-          : distRangeText // ignore: cast_nullable_to_non_nullable
-              as ValueRange<String, Never>,
+      distanceRangeState: null == distanceRangeState
+          ? _value.distanceRangeState
+          : distanceRangeState // ignore: cast_nullable_to_non_nullable
+              as DistanceRangeState,
       smallBodyFilterState: null == smallBodyFilterState
           ? _value.smallBodyFilterState
           : smallBodyFilterState // ignore: cast_nullable_to_non_nullable
@@ -130,19 +121,10 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
 
   @override
   @pragma('vm:prefer-inline')
-  $ValueRangeCopyWith<double, DistanceUnit, $Res> get distRange {
-    return $ValueRangeCopyWith<double, DistanceUnit, $Res>(_value.distRange,
+  $DistanceRangeStateCopyWith<$Res> get distanceRangeState {
+    return $DistanceRangeStateCopyWith<$Res>(_value.distanceRangeState,
         (value) {
-      return _then(_value.copyWith(distRange: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ValueRangeCopyWith<String, Never, $Res> get distRangeText {
-    return $ValueRangeCopyWith<String, Never, $Res>(_value.distRangeText,
-        (value) {
-      return _then(_value.copyWith(distRangeText: value) as $Val);
+      return _then(_value.copyWith(distanceRangeState: value) as $Val);
     });
   }
 
@@ -186,8 +168,7 @@ abstract class _$$_CadStateCopyWith<$Res> implements $CadStateCopyWith<$Res> {
   @useResult
   $Res call(
       {DateTimeRange? dateRange,
-      ValueRange<double, DistanceUnit> distRange,
-      ValueRange<String, Never> distRangeText,
+      DistanceRangeState distanceRangeState,
       SmallBodyFilterState smallBodyFilterState,
       SmallBodySelectorState smallBodySelectorState,
       CloseApproachBody closeApproachBody,
@@ -197,9 +178,7 @@ abstract class _$$_CadStateCopyWith<$Res> implements $CadStateCopyWith<$Res> {
       SbdbCadBody? sbdbCadBody});
 
   @override
-  $ValueRangeCopyWith<double, DistanceUnit, $Res> get distRange;
-  @override
-  $ValueRangeCopyWith<String, Never, $Res> get distRangeText;
+  $DistanceRangeStateCopyWith<$Res> get distanceRangeState;
   @override
   $SmallBodyFilterStateCopyWith<$Res> get smallBodyFilterState;
   @override
@@ -220,8 +199,7 @@ class __$$_CadStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? dateRange = freezed,
-    Object? distRange = null,
-    Object? distRangeText = null,
+    Object? distanceRangeState = null,
     Object? smallBodyFilterState = null,
     Object? smallBodySelectorState = null,
     Object? closeApproachBody = null,
@@ -235,14 +213,10 @@ class __$$_CadStateCopyWithImpl<$Res>
           ? _value.dateRange
           : dateRange // ignore: cast_nullable_to_non_nullable
               as DateTimeRange?,
-      distRange: null == distRange
-          ? _value.distRange
-          : distRange // ignore: cast_nullable_to_non_nullable
-              as ValueRange<double, DistanceUnit>,
-      distRangeText: null == distRangeText
-          ? _value.distRangeText
-          : distRangeText // ignore: cast_nullable_to_non_nullable
-              as ValueRange<String, Never>,
+      distanceRangeState: null == distanceRangeState
+          ? _value.distanceRangeState
+          : distanceRangeState // ignore: cast_nullable_to_non_nullable
+              as DistanceRangeState,
       smallBodyFilterState: null == smallBodyFilterState
           ? _value.smallBodyFilterState
           : smallBodyFilterState // ignore: cast_nullable_to_non_nullable
@@ -280,10 +254,7 @@ class __$$_CadStateCopyWithImpl<$Res>
 class _$_CadState implements _CadState {
   const _$_CadState(
       {this.dateRange,
-      this.distRange = distRangeDefault,
-      this.distRangeText = const ValueRange<String, Never>(
-          start: ValueUnit<String, Never>(value: ''),
-          end: ValueUnit<String, Never>(value: '')),
+      this.distanceRangeState = const DistanceRangeState(),
       this.smallBodyFilterState = const SmallBodyFilterState(),
       this.smallBodySelectorState = const SmallBodySelectorState(),
       this.closeApproachBody = SbdbCadQueryParameters.closeApproachBodyDefault,
@@ -297,10 +268,7 @@ class _$_CadState implements _CadState {
   final DateTimeRange? dateRange;
   @override
   @JsonKey()
-  final ValueRange<double, DistanceUnit> distRange;
-  @override
-  @JsonKey()
-  final ValueRange<String, Never> distRangeText;
+  final DistanceRangeState distanceRangeState;
   @override
   @JsonKey()
   final SmallBodyFilterState smallBodyFilterState;
@@ -330,7 +298,7 @@ class _$_CadState implements _CadState {
 
   @override
   String toString() {
-    return 'CadState(dateRange: $dateRange, distRange: $distRange, distRangeText: $distRangeText, smallBodyFilterState: $smallBodyFilterState, smallBodySelectorState: $smallBodySelectorState, closeApproachBody: $closeApproachBody, dataOutputSet: $dataOutputSet, networkState: $networkState, disableInputs: $disableInputs, sbdbCadBody: $sbdbCadBody)';
+    return 'CadState(dateRange: $dateRange, distanceRangeState: $distanceRangeState, smallBodyFilterState: $smallBodyFilterState, smallBodySelectorState: $smallBodySelectorState, closeApproachBody: $closeApproachBody, dataOutputSet: $dataOutputSet, networkState: $networkState, disableInputs: $disableInputs, sbdbCadBody: $sbdbCadBody)';
   }
 
   @override
@@ -340,10 +308,8 @@ class _$_CadState implements _CadState {
             other is _$_CadState &&
             (identical(other.dateRange, dateRange) ||
                 other.dateRange == dateRange) &&
-            (identical(other.distRange, distRange) ||
-                other.distRange == distRange) &&
-            (identical(other.distRangeText, distRangeText) ||
-                other.distRangeText == distRangeText) &&
+            (identical(other.distanceRangeState, distanceRangeState) ||
+                other.distanceRangeState == distanceRangeState) &&
             (identical(other.smallBodyFilterState, smallBodyFilterState) ||
                 other.smallBodyFilterState == smallBodyFilterState) &&
             (identical(other.smallBodySelectorState, smallBodySelectorState) ||
@@ -364,8 +330,7 @@ class _$_CadState implements _CadState {
   int get hashCode => Object.hash(
       runtimeType,
       dateRange,
-      distRange,
-      distRangeText,
+      distanceRangeState,
       smallBodyFilterState,
       smallBodySelectorState,
       closeApproachBody,
@@ -384,8 +349,7 @@ class _$_CadState implements _CadState {
 abstract class _CadState implements CadState {
   const factory _CadState(
       {final DateTimeRange? dateRange,
-      final ValueRange<double, DistanceUnit> distRange,
-      final ValueRange<String, Never> distRangeText,
+      final DistanceRangeState distanceRangeState,
       final SmallBodyFilterState smallBodyFilterState,
       final SmallBodySelectorState smallBodySelectorState,
       final CloseApproachBody closeApproachBody,
@@ -397,9 +361,7 @@ abstract class _CadState implements CadState {
   @override
   DateTimeRange? get dateRange;
   @override
-  ValueRange<double, DistanceUnit> get distRange;
-  @override
-  ValueRange<String, Never> get distRangeText;
+  DistanceRangeState get distanceRangeState;
   @override
   SmallBodyFilterState get smallBodyFilterState;
   @override
@@ -417,6 +379,196 @@ abstract class _CadState implements CadState {
   @override
   @JsonKey(ignore: true)
   _$$_CadStateCopyWith<_$_CadState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$DistanceRangeState {
+  List<double?> get valueList => throw _privateConstructorUsedError;
+  List<String> get textList => throw _privateConstructorUsedError;
+  List<DistanceUnit> get unitList => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $DistanceRangeStateCopyWith<DistanceRangeState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DistanceRangeStateCopyWith<$Res> {
+  factory $DistanceRangeStateCopyWith(
+          DistanceRangeState value, $Res Function(DistanceRangeState) then) =
+      _$DistanceRangeStateCopyWithImpl<$Res, DistanceRangeState>;
+  @useResult
+  $Res call(
+      {List<double?> valueList,
+      List<String> textList,
+      List<DistanceUnit> unitList});
+}
+
+/// @nodoc
+class _$DistanceRangeStateCopyWithImpl<$Res, $Val extends DistanceRangeState>
+    implements $DistanceRangeStateCopyWith<$Res> {
+  _$DistanceRangeStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? valueList = null,
+    Object? textList = null,
+    Object? unitList = null,
+  }) {
+    return _then(_value.copyWith(
+      valueList: null == valueList
+          ? _value.valueList
+          : valueList // ignore: cast_nullable_to_non_nullable
+              as List<double?>,
+      textList: null == textList
+          ? _value.textList
+          : textList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      unitList: null == unitList
+          ? _value.unitList
+          : unitList // ignore: cast_nullable_to_non_nullable
+              as List<DistanceUnit>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_DistanceRangeStateCopyWith<$Res>
+    implements $DistanceRangeStateCopyWith<$Res> {
+  factory _$$_DistanceRangeStateCopyWith(_$_DistanceRangeState value,
+          $Res Function(_$_DistanceRangeState) then) =
+      __$$_DistanceRangeStateCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {List<double?> valueList,
+      List<String> textList,
+      List<DistanceUnit> unitList});
+}
+
+/// @nodoc
+class __$$_DistanceRangeStateCopyWithImpl<$Res>
+    extends _$DistanceRangeStateCopyWithImpl<$Res, _$_DistanceRangeState>
+    implements _$$_DistanceRangeStateCopyWith<$Res> {
+  __$$_DistanceRangeStateCopyWithImpl(
+      _$_DistanceRangeState _value, $Res Function(_$_DistanceRangeState) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? valueList = null,
+    Object? textList = null,
+    Object? unitList = null,
+  }) {
+    return _then(_$_DistanceRangeState(
+      valueList: null == valueList
+          ? _value._valueList
+          : valueList // ignore: cast_nullable_to_non_nullable
+              as List<double?>,
+      textList: null == textList
+          ? _value._textList
+          : textList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      unitList: null == unitList
+          ? _value._unitList
+          : unitList // ignore: cast_nullable_to_non_nullable
+              as List<DistanceUnit>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DistanceRangeState implements _DistanceRangeState {
+  const _$_DistanceRangeState(
+      {final List<double?> valueList = const [],
+      final List<String> textList = const [],
+      final List<DistanceUnit> unitList = const []})
+      : _valueList = valueList,
+        _textList = textList,
+        _unitList = unitList;
+
+  final List<double?> _valueList;
+  @override
+  @JsonKey()
+  List<double?> get valueList {
+    if (_valueList is EqualUnmodifiableListView) return _valueList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_valueList);
+  }
+
+  final List<String> _textList;
+  @override
+  @JsonKey()
+  List<String> get textList {
+    if (_textList is EqualUnmodifiableListView) return _textList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_textList);
+  }
+
+  final List<DistanceUnit> _unitList;
+  @override
+  @JsonKey()
+  List<DistanceUnit> get unitList {
+    if (_unitList is EqualUnmodifiableListView) return _unitList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_unitList);
+  }
+
+  @override
+  String toString() {
+    return 'DistanceRangeState(valueList: $valueList, textList: $textList, unitList: $unitList)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DistanceRangeState &&
+            const DeepCollectionEquality()
+                .equals(other._valueList, _valueList) &&
+            const DeepCollectionEquality().equals(other._textList, _textList) &&
+            const DeepCollectionEquality().equals(other._unitList, _unitList));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_valueList),
+      const DeepCollectionEquality().hash(_textList),
+      const DeepCollectionEquality().hash(_unitList));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DistanceRangeStateCopyWith<_$_DistanceRangeState> get copyWith =>
+      __$$_DistanceRangeStateCopyWithImpl<_$_DistanceRangeState>(
+          this, _$identity);
+}
+
+abstract class _DistanceRangeState implements DistanceRangeState {
+  const factory _DistanceRangeState(
+      {final List<double?> valueList,
+      final List<String> textList,
+      final List<DistanceUnit> unitList}) = _$_DistanceRangeState;
+
+  @override
+  List<double?> get valueList;
+  @override
+  List<String> get textList;
+  @override
+  List<DistanceUnit> get unitList;
+  @override
+  @JsonKey(ignore: true)
+  _$$_DistanceRangeStateCopyWith<_$_DistanceRangeState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

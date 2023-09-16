@@ -9,12 +9,7 @@ part 'cad_state.freezed.dart';
 class CadState with _$CadState {
   const factory CadState({
     DateTimeRange? dateRange,
-    @Default(distRangeDefault) DistanceRange distRange,
-    @Default(ValueRange<String, Never>(
-      start: ValueUnit<String, Never>(value: ''),
-      end: ValueUnit<String, Never>(value: ''),
-    ))
-    ValueRange<String, Never> distRangeText,
+    @Default(DistanceRangeState()) DistanceRangeState distanceRangeState,
     @Default(SmallBodyFilterState()) SmallBodyFilterState smallBodyFilterState,
     @Default(SmallBodySelectorState())
     SmallBodySelectorState smallBodySelectorState,
@@ -28,10 +23,39 @@ class CadState with _$CadState {
 
   static CadState getInitial() {
     return const CadState().copyWith(
-      distRangeText: distRangeTextDefault.copyWith(
-        start: minDistTextDefault,
-        end: maxDistTextDefault,
-      ),
+      distanceRangeState: DistanceRangeState.getInitial(),
+    );
+  }
+}
+
+@freezed
+class DistanceRangeState with _$DistanceRangeState {
+  const factory DistanceRangeState({
+    @Default([]) List<double?> valueList,
+    @Default([]) List<String> textList,
+    @Default([]) List<DistanceUnit> unitList,
+  }) = _DistanceRangeState;
+
+  static const Distance? distMinDefault = null;
+  // ignore: unnecessary_nullable_for_final_variable_declarations
+  static const Distance? distMaxDefault = SbdbCadQueryParameters.distMaxDefault;
+  static final List<double?> valueListDefault = [
+    distMinDefault?.value,
+    distMaxDefault?.value,
+  ];
+  static final List<String> textListDefault = [
+    distMinDefault?.value.toString() ?? '',
+    distMaxDefault?.value.toString() ?? '',
+  ];
+  static final List<DistanceUnit> unitListDefault = [
+    distMinDefault?.unit ?? SbdbCadQueryParameters.distUnitDefault,
+    distMaxDefault?.unit ?? SbdbCadQueryParameters.distUnitDefault,
+  ];
+  static DistanceRangeState getInitial() {
+    return const DistanceRangeState().copyWith(
+      valueList: valueListDefault,
+      textList: textListDefault,
+      unitList: unitListDefault,
     );
   }
 }
@@ -61,22 +85,3 @@ enum NetworkState {
   success,
   failure,
 }
-
-const minDistDefault = Distance(
-  unit: SbdbCadQueryParameters.distUnitDefault,
-);
-const maxDistDefault = SbdbCadQueryParameters.distMaxDefault;
-const distRangeDefault = DistanceRange(
-  start: minDistDefault,
-  end: maxDistDefault,
-);
-final minDistTextDefault = ValueUnit<String, Never>(
-  value: minDistDefault.value?.toString() ?? '',
-);
-final maxDistTextDefault = ValueUnit<String, Never>(
-  value: maxDistDefault.value?.toString() ?? '',
-);
-final distRangeTextDefault = ValueRange<String, Never>(
-  start: minDistTextDefault,
-  end: maxDistTextDefault,
-);

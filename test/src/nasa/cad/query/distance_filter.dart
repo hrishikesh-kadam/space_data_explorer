@@ -10,42 +10,47 @@ import '../cad_route.dart';
 
 enum DistanceFilter { min, max }
 
-final distFilterWidgetFinder = find.byKey(CadScreen.distFilterKey);
+final Finder distFilterWidgetFinder = find.byKey(CadScreen.distFilterKey);
 
-const defaultUnit = SbdbCadQueryParameters.distUnitDefault;
-final nonDefaultUnit = CadScreen.distFilterUnits.firstWhere(
+const DistanceUnit defaultUnit = SbdbCadQueryParameters.distUnitDefault;
+final DistanceUnit nonDefaultUnit = CadScreen.distFilterUnits.firstWhere(
   (unit) => unit != defaultUnit,
 );
-final distMinNonDefault = Distance(
+
+const Distance? distMinDefault = DistanceRangeState.distMinDefault;
+const Distance? distMaxDefault = DistanceRangeState.distMaxDefault;
+final List<double?> valueListDefault = DistanceRangeState.valueListDefault;
+final List<String> textListDefault = DistanceRangeState.textListDefault;
+final List<DistanceUnit> unitListDefault = DistanceRangeState.unitListDefault;
+
+final Distance distMinNonDefault = Distance(
   value: getNonDefaultValue(DistanceFilter.min),
   unit: nonDefaultUnit,
 );
-final distMaxNonDefault = Distance(
+final Distance distMaxNonDefault = Distance(
   value: getNonDefaultValue(DistanceFilter.max),
   unit: nonDefaultUnit,
 );
-final distRangeNonDefault = DistanceRange(
-  start: distMinNonDefault,
-  end: distMaxNonDefault,
-);
-final distMinTextNonDefault = ValueUnit<String, Never>(
-  value: distMinNonDefault.value?.toString() ?? '',
-);
-final distMaxTextNonDefault = ValueUnit<String, Never>(
-  value: distMaxNonDefault.value?.toString() ?? '',
-);
-final distRangeTextNonDefault = ValueRange<String, Never>(
-  start: distMinTextNonDefault,
-  end: distMaxTextNonDefault,
-);
+final List<double> valueListNonDefault = [
+  distMinNonDefault.value,
+  distMaxNonDefault.value,
+];
+final List<String> textListNonDefault = [
+  distMinNonDefault.value.toString(),
+  distMaxNonDefault.value.toString(),
+];
+final List<DistanceUnit> unitListNonDefault = [
+  distMinNonDefault.unit,
+  distMaxNonDefault.unit,
+];
 
 double getNonDefaultValue(DistanceFilter filter) {
   switch (filter) {
     case DistanceFilter.min:
-      assert(1 != minDistDefault.value);
+      assert(1 != DistanceRangeState.distMinDefault?.value);
       return 1;
     case DistanceFilter.max:
-      assert(2 != maxDistDefault.value);
+      assert(2 != DistanceRangeState.distMaxDefault?.value);
       return 2;
   }
 }
@@ -133,12 +138,7 @@ void expectUnitDropdownValueFromState(
   DistanceUnit unit,
 ) {
   final state = CadScreen.cadBloc!.state;
-  switch (filter) {
-    case DistanceFilter.min:
-      expect(state.distRange.start!.unit, unit);
-    case DistanceFilter.max:
-      expect(state.distRange.end!.unit, unit);
-  }
+  expect(state.distanceRangeState.unitList[filter.index], unit);
 }
 
 void expectUnitText(
@@ -170,10 +170,11 @@ Future<void> ensureFilterWidgetVisible(WidgetTester tester) async {
 
 Future<void> verifyDistQueryParameters(
   WidgetTester tester,
-  DistanceRange distRange,
+  Distance? min,
+  Distance? max,
 ) async {
   await verifyQueryParameters(
     tester,
-    const SbdbCadQueryParameters().copyWithDistRange(distRange),
+    const SbdbCadQueryParameters().copyWithDistanceRange(min, max),
   );
 }

@@ -23,7 +23,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     on<CadRequested>(_onCadRequested);
     on<CadResultOpened>(_onCadResultOpened);
     on<CadDateRangeSelected>(_onCadDateRangeSelected);
-    on<CadDistRangeEvent>(_onCadDistanceRangeEvent);
+    on<CadDistanceEvent>(_onCadDistanceEvent);
     on<CadSmallBodyFilterSelected>(_onCadSmallBodyFilterSelected);
     on<CadSmallBodySelectorEvent>(_onCadSmallBodySelectorEvent);
     on<CadCloseApproachBodySelected>(_onCadCloseApproachBodySelected);
@@ -49,9 +49,15 @@ class CadBloc extends Bloc<CadEvent, CadState> {
         state.dateRange!.end,
       );
     }
-    queryParameters = queryParameters.copyWithDistRange(
-      state.distRange,
+    final Distance? distMin = constructDistance(
+      value: state.distanceRangeState.valueList[0],
+      unit: state.distanceRangeState.unitList[0],
     );
+    final Distance? distMax = constructDistance(
+      value: state.distanceRangeState.valueList[1],
+      unit: state.distanceRangeState.unitList[1],
+    );
+    queryParameters = queryParameters.copyWithDistanceRange(distMin, distMax);
     if (state.smallBodyFilterState.enabled) {
       queryParameters = queryParameters.copyWithSmallBodyFilter(
         state.smallBodyFilterState.smallBodyFilter,
@@ -95,6 +101,16 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     }
   }
 
+  static Distance? constructDistance({
+    required double? value,
+    required DistanceUnit unit,
+  }) {
+    if (value != null) {
+      return Distance(value: value, unit: unit);
+    }
+    return null;
+  }
+
   Future<void> _onCadResultOpened(
     CadResultOpened event,
     Emitter<CadState> emit,
@@ -109,13 +125,16 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     emit(state.copyWith(dateRange: event.dateRange));
   }
 
-  Future<void> _onCadDistanceRangeEvent(
-    CadDistRangeEvent event,
+  Future<void> _onCadDistanceEvent(
+    CadDistanceEvent event,
     Emitter<CadState> emit,
   ) async {
     emit(state.copyWith(
-      distRange: event.distRange,
-      distRangeText: event.distRangeText,
+      distanceRangeState: DistanceRangeState(
+        valueList: event.valueList,
+        textList: event.textList,
+        unitList: event.unitList,
+      ),
     ));
   }
 

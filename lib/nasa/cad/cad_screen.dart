@@ -53,6 +53,7 @@ class CadScreen extends StatelessWidget {
   static const String distFilterKeyPrefix = '${keyPrefix}distance_filter_';
   static const Key distFilterKey =
       Key('$distFilterKeyPrefix${ValueRangeFilterWidget.defaultKey}');
+  // deliberately set as final instead of const for testing
   static final Set<DistanceUnit> distFilterUnits = {
     DistanceUnit.au,
     DistanceUnit.LD,
@@ -76,6 +77,7 @@ class CadScreen extends StatelessWidget {
     SmallBodySelector.spkId,
     SmallBodySelector.designation,
   };
+  // deliberately set as final instead of const for testing
   static final List<TextInputType> smallBodySelectorKeyboardTypes = [
     TextInputType.number,
     TextInputType.text,
@@ -281,9 +283,6 @@ class CadScreen extends StatelessWidget {
       l10n.minimum,
       l10n.maximum,
     };
-    const DistanceRange defaultRange = DistanceRange(
-      end: SbdbCadQueryParameters.distMaxDefault,
-    );
     const keyboardType = TextInputType.numberWithOptions(decimal: true);
     final inputFormatters = [
       FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
@@ -293,7 +292,7 @@ class CadScreen extends StatelessWidget {
     }).toSet();
     return BlocBuilder<CadBloc, CadState>(
       buildWhen: (previous, current) {
-        return previous.distRange != current.distRange ||
+        return previous.distanceRangeState != current.distanceRangeState ||
             previous.disableInputs != current.disableInputs;
       },
       builder: (context, state) {
@@ -302,9 +301,11 @@ class CadScreen extends StatelessWidget {
           keyPrefix: distFilterKeyPrefix,
           title: l10n.distFilter,
           labels: labels,
-          range: state.distRange,
-          rangeText: context.read<CadBloc>().state.distRangeText,
-          defaultRange: defaultRange,
+          valueList: state.distanceRangeState.valueList,
+          textList: state.distanceRangeState.textList,
+          unitList: state.distanceRangeState.unitList,
+          defaultValueList: DistanceRangeState.valueListDefault,
+          defaultUnitList: DistanceRangeState.unitListDefault,
           valueParser: (text) => double.tryParse(text),
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
@@ -312,10 +313,11 @@ class CadScreen extends StatelessWidget {
           unitSymbols: unitSymbols,
           disableInputs: state.disableInputs,
           spacing: Dimensions.cadQueryItemSpacing,
-          onValueRangeChanged: (range, rangeText) {
-            context.read<CadBloc>().add(CadDistRangeEvent(
-                  distRange: range,
-                  distRangeText: rangeText,
+          onValueRangeChanged: (valueList, textList, unitList) {
+            context.read<CadBloc>().add(CadDistanceEvent(
+                  valueList: valueList,
+                  textList: textList,
+                  unitList: unitList!,
                 ));
           },
         );

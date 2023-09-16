@@ -21,14 +21,18 @@ class CadDateRangeSelected extends CadEvent {
   final DateTimeRange? dateRange;
 }
 
-class CadDistRangeEvent extends CadEvent {
-  const CadDistRangeEvent({
-    required this.distRange,
-    required this.distRangeText,
-  });
+class CadDistanceEvent extends CadEvent {
+  const CadDistanceEvent({
+    required this.valueList,
+    required this.textList,
+    required this.unitList,
+  })  : assert(valueList.length == 2),
+        assert(textList.length == 2);
+  // assert(unitList.length == 2);
 
-  final DistanceRange distRange;
-  final ValueRange<String, Never> distRangeText;
+  final List<double?> valueList;
+  final List<String> textList;
+  final List<DistanceUnit> unitList;
 }
 
 class CadSmallBodyFilterSelected extends CadEvent {

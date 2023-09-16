@@ -18,9 +18,9 @@ dependencies:
   meta: ^1.9.1
   pubspec_parse: ^1.2.3
   cupertino_icons: ^1.0.2
-  hrk_batteries: '>=0.7.0 <1.0.0'
+  hrk_batteries: '>=0.8.0 <1.0.0'
   hrk_logging: '>=0.1.3 <1.0.0'
-  hrk_nasa_apis: '>=0.15.0 <1.0.0'
+  hrk_nasa_apis: '>=0.16.0 <1.0.0'
   hrk_nasa_apis_test: '>=0.2.0 <1.0.0'
   hrk_settings_list:
     path: 'packages/hrk_settings_list'
@@ -60,13 +60,13 @@ dev_dependencies:
   flutterfire_cli: '>=0.3.0-dev.16 <1.0.0'
   sentry_dart_plugin: ^1.5.0
 
-# dependency_overrides:
-#   hrk_batteries:
-#     path: '../../dart/packages/hrk_batteries'
+dependency_overrides:
+  hrk_batteries:
+    path: '../../dart/packages/hrk_batteries'
 #   hrk_flutter_test_batteries:
 #     path: '../packages/hrk_flutter_test_batteries'
-#   hrk_nasa_apis:
-#     path: '../../dart/packages/hrk_nasa_apis/hrk_nasa_apis'
+  hrk_nasa_apis:
+    path: '../../dart/packages/hrk_nasa_apis/hrk_nasa_apis'
 #  hrk_nasa_apis_test:
 #    path: '../../dart/packages/hrk_nasa_apis/hrk_nasa_apis_test'
 

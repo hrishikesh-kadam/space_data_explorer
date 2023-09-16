@@ -10,8 +10,9 @@ import 'query_grid_container.dart';
 
 typedef ValueParser<V> = V? Function(String text);
 typedef ValueRangeChanged<V, U extends Unit> = void Function(
-  ValueRange<V, U> range,
-  ValueRange<String, Never> rangeText,
+  List<V?> valueList,
+  List<String> textList,
+  List<U>? unitList,
 );
 
 class ValueRangeFilterWidget<V, U extends Unit> extends StatefulWidget {
@@ -20,9 +21,11 @@ class ValueRangeFilterWidget<V, U extends Unit> extends StatefulWidget {
     this.keyPrefix = '',
     required this.title,
     required this.labels,
-    required this.range,
-    required this.rangeText,
-    this.defaultRange,
+    required this.valueList,
+    required this.textList,
+    this.unitList,
+    this.defaultValueList,
+    this.defaultUnitList,
     required this.valueParser,
     this.keyboardType,
     this.inputFormatters,
@@ -34,14 +37,21 @@ class ValueRangeFilterWidget<V, U extends Unit> extends StatefulWidget {
     this.spacing = 8,
     this.onValueRangeChanged,
   })  : assert(labels.length == 2),
+        assert(valueList.length == 2),
+        assert(textList.length == 2),
+        assert(unitList == null || unitList.length == 2),
+        assert(defaultValueList == null || defaultValueList.length == 2),
+        assert(defaultUnitList == null || defaultUnitList.length == 2),
         assert(units?.length == unitSymbols?.length);
 
   final String keyPrefix;
   final String title;
   final Set<String> labels;
-  final ValueRange<V, U> range;
-  final ValueRange<String, Never> rangeText;
-  final ValueRange<V, U>? defaultRange;
+  final List<V?> valueList;
+  final List<String> textList;
+  final List<U>? unitList;
+  final List<V?>? defaultValueList;
+  final List<U?>? defaultUnitList;
   final ValueParser<V> valueParser;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
@@ -63,9 +73,11 @@ enum StateMethod { initState, didUpdateWidget }
 
 class _ValueRangeFilterWidgetState<V, U extends Unit>
     extends State<ValueRangeFilterWidget<V, U>> {
-  final List<ValueUnit<V, U>> rangeList = [];
-  final List<ValueUnit<String, Never>> rangeTextList = [];
-  final List<ValueUnit<V, U>?> defaultRangeList = [];
+  final List<V?> valueList = [];
+  final List<String> textList = [];
+  final List<U?> unitList = [];
+  final List<V?> defaultValueList = [];
+  final List<U?> defaultUnitList = [];
   final List<TextEditingController> textControllers = [];
   final List<FocusNode> textFocusNodes = [];
   final Logger logger = Logger('$appNamePascalCase.ValueRangeFilterWidget');
@@ -94,26 +106,21 @@ class _ValueRangeFilterWidgetState<V, U extends Unit>
   void initOrUpdate({
     required StateMethod method,
   }) {
-    rangeList.clear();
-    assert(widget.range.start != null);
-    rangeList.add(widget.range.start!);
-    assert(widget.range.end != null);
-    rangeList.add(widget.range.end!);
-    rangeTextList.clear();
-    assert(widget.rangeText.start != null);
-    rangeTextList.add(widget.rangeText.start!);
-    assert(widget.rangeText.end != null);
-    rangeTextList.add(widget.rangeText.end!);
-    defaultRangeList.clear();
-    defaultRangeList.add(widget.defaultRange?.start);
-    defaultRangeList.add(widget.defaultRange?.end);
+    valueList.clear();
+    valueList.addAll(widget.valueList);
+    textList.clear();
+    textList.addAll(widget.textList);
+    unitList.clear();
+    unitList.addAll(widget.unitList ?? [null, null]);
+    defaultValueList.clear();
+    defaultValueList.addAll(widget.defaultValueList ?? [null, null]);
+    defaultUnitList.clear();
+    defaultUnitList.addAll(widget.defaultUnitList ?? [null, null]);
     if (method == StateMethod.initState) {
-      textControllers
-        ..add(TextEditingController())
-        ..add(TextEditingController());
-      textFocusNodes
-        ..add(FocusNode())
-        ..add(FocusNode());
+      textControllers.add(TextEditingController());
+      textControllers.add(TextEditingController());
+      textFocusNodes.add(FocusNode());
+      textFocusNodes.add(FocusNode());
     }
   }
 
@@ -159,34 +166,35 @@ class _ValueRangeFilterWidgetState<V, U extends Unit>
   void prepareState() {
     bool propogateState = false;
     for (int i = 0; i < 2; i++) {
-      V? value = rangeList[i].value;
-      U? unit = rangeList[i].unit;
-      String text = rangeTextList[i].value ?? '';
-      final V? defaultValue = defaultRangeList[i]?.value;
-      final U? defaultUnit = defaultRangeList[i]?.unit;
+      V? value = valueList[i];
+      String text = textList[i];
+      U? unit = unitList[i];
+      final V? defaultValue = defaultValueList[i];
+      final U? defaultUnit = defaultUnitList[i];
       // Still Editing, so ignore updates
       if (!textFocusNodes[i].hasFocus) {
         if (value == null && text.isEmpty && defaultValue != null) {
           value = defaultValue;
           unit = defaultUnit;
-          rangeList[i] = ValueUnit<V, U>(value: value, unit: unit);
-          rangeTextList[i] = ValueUnit(value: defaultValue.toString());
+          valueList[i] = value;
+          textList[i] = value.toString();
+          unitList[i] = unit;
           propogateState = true;
         }
         // If in case of any mismatch between value and text, then fallback to
         // value
         if (value != widget.valueParser(text)) {
           text = value?.toString() ?? '';
-          rangeTextList[i] = ValueUnit(value: text);
+          textList[i] = text;
           propogateState = true;
         }
         if (textControllers[i].text != text) {
           textControllers[i].text = text;
         }
       }
-      if (unit == null && widget.units?.isNotEmpty != null) {
+      if (unit == null && widget.units != null && widget.units!.isNotEmpty) {
         unit = widget.units!.first;
-        rangeList[i] = rangeList[i].copyWith(unit: unit);
+        unitList[i] = unit;
         propogateState = true;
       }
     }
@@ -238,16 +246,15 @@ class _ValueRangeFilterWidgetState<V, U extends Unit>
           onTapOutside: (event) {
             if (textFocusNodes[index].hasFocus) {
               if (textControllers[index].text.isEmpty &&
-                  defaultRangeList[index]?.value != null) {
+                  defaultValueList[index] != null) {
                 setState(() {
-                  rangeList[index] = defaultRangeList[index]!;
-                  rangeTextList[index] = ValueUnit(
-                    value: defaultRangeList[index]!.value!.toString(),
-                  );
+                  valueList[index] = defaultValueList[index];
+                  textList[index] = defaultValueList[index].toString();
+                  unitList[index] = defaultUnitList[index];
                   // Required for Android, Chrome on Android
                   // Clicking on adjacent TextField, doesn't give hasFocus()
                   // value as false in prepareState()
-                  textControllers[index].text = rangeTextList[index].value!;
+                  textControllers[index].text = textList[index];
                 });
                 callOnValueRangeChanged();
               }
@@ -271,9 +278,8 @@ class _ValueRangeFilterWidgetState<V, U extends Unit>
               }
             },
             onChanged: (text) {
-              rangeTextList[index] = ValueUnit(value: text);
-              V? value = widget.valueParser(text);
-              rangeList[index] = rangeList[index].copyWith(value: value);
+              textList[index] = text;
+              valueList[index] = widget.valueParser(text);
               callOnValueRangeChanged();
             },
           ),
@@ -311,10 +317,10 @@ class _ValueRangeFilterWidgetState<V, U extends Unit>
         child: DropdownButton<U>(
           key: Key('${widget.keyPrefix}unit_dropdown_$index'),
           items: dropDownItems,
-          value: rangeList[index].unit,
+          value: unitList[index],
           onChanged: (unit) {
             assert(unit != null);
-            rangeList[index] = rangeList[index].copyWith(unit: unit);
+            unitList[index] = unit;
             callOnValueRangeChanged();
           },
         ),
@@ -324,15 +330,17 @@ class _ValueRangeFilterWidgetState<V, U extends Unit>
 
   void callOnValueRangeChanged() {
     if (widget.onValueRangeChanged != null) {
-      ValueRange<V, U> range = ValueRange(
-        start: rangeList[0],
-        end: rangeList[1],
+      List<V?> valueList = List.from(this.valueList);
+      List<String> textList = List.from(this.textList);
+      List<U>? unitList;
+      if (this.unitList[0] != null && this.unitList[1] != null) {
+        unitList = List<U>.from(this.unitList.nonNulls);
+      }
+      widget.onValueRangeChanged!(
+        valueList,
+        textList,
+        unitList,
       );
-      ValueRange<String, Never> rangeText = ValueRange(
-        start: rangeTextList[0],
-        end: rangeTextList[1],
-      );
-      widget.onValueRangeChanged!(range, rangeText);
     }
   }
 }
