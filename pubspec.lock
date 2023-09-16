@@ -101,10 +101,10 @@ packages:
     dependency: transitive
     description:
       name: build_resolvers
-      sha256: a7417cc44d9edb3f2c8760000270c99dba8c72ff66d0146772b8326565780745
+      sha256: d912852cce27c9e80a93603db721c267716894462e7033165178b91138587972
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.1"
+    version: "2.3.2"
   build_runner:
     dependency: "direct dev"
     description:
@@ -165,10 +165,10 @@ packages:
     dependency: transitive
     description:
       name: cli_util
-      sha256: "66f86e916d285c1a93d3b79587d94bd71984a66aac4ff74e524cfa7877f1395c"
+      sha256: b8db3080e59b2503ca9e7922c3df2072cf13992354d5e944074ffa836fba43b7
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.5"
+    version: "0.4.0"
   clock:
     dependency: transitive
     description:
@@ -237,10 +237,10 @@ packages:
     dependency: transitive
     description:
       name: deep_pick
-      sha256: "32bb6b8f731d5fee0e245fa3015971f1dce25717120967bc64b3f21021c9be13"
+      sha256: ba19f93cae54e5d601c0d2c11f873bf0038fc6207cc7ab23115f4a5873bb917f
       url: "https://pub.dev"
     source: hosted
-    version: "0.10.0"
+    version: "1.0.0"
   dio:
     dependency: transitive
     description:
@@ -454,10 +454,10 @@ packages:
     dependency: "direct dev"
     description:
       name: flutterfire_cli
-      sha256: a5a5c55b3920a90ee9ffc33eecbceadcca9320c73c47cbe7045237a9b5ef2357
+      sha256: "718d359e556ac7ac3cc444ff9ea974627dd6f0d8907a8b2e86448edf2e05b26e"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.0-dev.16"
+    version: "0.3.0-dev.18"
   freezed:
     dependency: "direct dev"
     description:
@@ -515,10 +515,10 @@ packages:
     dependency: "direct dev"
     description:
       name: go_router_builder
-      sha256: "89585f7cf2ddd35a3f05908c5bb54339d3f891fc5aac4f30e2864469d7ddc92b"
+      sha256: "8f828e7d8985aaa347d8699830ccef96cf6c47319dce8051bba037e0252e9fe4"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.1"
+    version: "2.3.2"
   graphs:
     dependency: transitive
     description:
@@ -936,10 +936,10 @@ packages:
     dependency: transitive
     description:
       name: sentry
-      sha256: "39c23342fc96105da449914f7774139a17a0ca8a4e70d9ad5200171f7e47d6ba"
+      sha256: "830667eadc0398fea3a3424ed1b74568e2db603a42758d0922e2f2974ce55a60"
       url: "https://pub.dev"
     source: hosted
-    version: "7.9.0"
+    version: "7.10.1"
   sentry_dart_plugin:
     dependency: "direct dev"
     description:
@@ -952,10 +952,10 @@ packages:
     dependency: "direct main"
     description:
       name: sentry_flutter
-      sha256: ff68ab31918690da004a42e20204242a3ad9ad57da7e2712da8487060ac9767f
+      sha256: "6730f41b304c6fb0fa590dacccaf73ba11082fc64b274cfe8a79776f2b95309c"
       url: "https://pub.dev"
     source: hosted
-    version: "7.9.0"
+    version: "7.10.1"
   shelf:
     dependency: transitive
     description:
