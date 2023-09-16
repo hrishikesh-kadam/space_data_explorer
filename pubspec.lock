@@ -165,10 +165,10 @@ packages:
     dependency: transitive
     description:
       name: cli_util
-      sha256: "66f86e916d285c1a93d3b79587d94bd71984a66aac4ff74e524cfa7877f1395c"
+      sha256: b8db3080e59b2503ca9e7922c3df2072cf13992354d5e944074ffa836fba43b7
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.5"
+    version: "0.4.0"
   clock:
     dependency: transitive
     description:
@@ -237,10 +237,10 @@ packages:
     dependency: transitive
     description:
       name: deep_pick
-      sha256: "32bb6b8f731d5fee0e245fa3015971f1dce25717120967bc64b3f21021c9be13"
+      sha256: ba19f93cae54e5d601c0d2c11f873bf0038fc6207cc7ab23115f4a5873bb917f
       url: "https://pub.dev"
     source: hosted
-    version: "0.10.0"
+    version: "1.0.0"
   dio:
     dependency: transitive
     description:
@@ -454,10 +454,10 @@ packages:
     dependency: "direct dev"
     description:
       name: flutterfire_cli
-      sha256: a5a5c55b3920a90ee9ffc33eecbceadcca9320c73c47cbe7045237a9b5ef2357
+      sha256: "718d359e556ac7ac3cc444ff9ea974627dd6f0d8907a8b2e86448edf2e05b26e"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.0-dev.16"
+    version: "0.3.0-dev.18"
   freezed:
     dependency: "direct dev"
     description:
