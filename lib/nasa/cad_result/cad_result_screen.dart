@@ -278,7 +278,7 @@ class CadResultScreen extends StatelessWidget {
         ),
         getItemDetail(
           label: 'Absolute Magnitude:',
-          displayValue: data.h.toString(),
+          displayValue: data.h != null ? '${data.h} H' : 'null',
         ),
         if (fields.contains('diameter'))
           getItemDetail(
