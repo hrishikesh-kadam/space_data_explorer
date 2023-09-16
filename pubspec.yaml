@@ -60,13 +60,13 @@ dev_dependencies:
   flutterfire_cli: '>=0.3.0-dev.16 <1.0.0'
   sentry_dart_plugin: ^1.5.0
 
-dependency_overrides:
-  hrk_batteries:
-    path: '../../dart/packages/hrk_batteries'
+#dependency_overrides:
+#  hrk_batteries:
+#    path: '../../dart/packages/hrk_batteries'
 #   hrk_flutter_test_batteries:
 #     path: '../packages/hrk_flutter_test_batteries'
-  hrk_nasa_apis:
-    path: '../../dart/packages/hrk_nasa_apis/hrk_nasa_apis'
+#  hrk_nasa_apis:
+#    path: '../../dart/packages/hrk_nasa_apis/hrk_nasa_apis'
 #  hrk_nasa_apis_test:
 #    path: '../../dart/packages/hrk_nasa_apis/hrk_nasa_apis_test'
 

@@ -10,6 +10,8 @@ import 'package:intl/intl.dart';
 import '../../../widgets/app_bar.dart';
 import '../../constants/dimensions.dart';
 import '../../constants/theme.dart';
+import '../../extension/distance.dart';
+import '../../extension/velocity.dart';
 import '../../globals.dart';
 import '../../helper/helper.dart';
 import '../../route/settings/bloc/settings_bloc.dart';
@@ -226,7 +228,7 @@ class CadResultScreen extends StatelessWidget {
                       .convert(
                         to: distanceUnit,
                       )
-                      .toDisplayString(),
+                      .toLocalizedString(l10n),
                 ),
                 getItemDetail(
                   label: 'Distance Min:',
@@ -234,7 +236,7 @@ class CadResultScreen extends StatelessWidget {
                       .convert(
                         to: distanceUnit,
                       )
-                      .toDisplayString(),
+                      .toLocalizedString(l10n),
                 ),
                 getItemDetail(
                   label: 'Distance Max:',
@@ -242,19 +244,37 @@ class CadResultScreen extends StatelessWidget {
                       .convert(
                         to: distanceUnit,
                       )
-                      .toDisplayString(),
+                      .toLocalizedString(l10n),
                 ),
               ],
             );
           },
         ),
-        getItemDetail(
-          label: 'Velocity Rel:',
-          displayValue: data.vRel,
-        ),
-        getItemDetail(
-          label: 'Velocity Inf:',
-          displayValue: data.vInf.toString(),
+        BlocSelector<SettingsBloc, SettingsState, VelocityUnit>(
+          selector: (state) {
+            return state.velocityUnit;
+          },
+          builder: (context, velocityUnit) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                getItemDetail(
+                  label: 'Velocity Rel:',
+                  displayValue: data.vRel
+                      .convert(to: velocityUnit)
+                      .toLocalizedString(l10n),
+                ),
+                getItemDetail(
+                  label: 'Velocity Inf:',
+                  displayValue: data.vInf != null
+                      ? data.vInf!
+                          .convert(to: velocityUnit)
+                          .toLocalizedString(l10n)
+                      : 'null',
+                ),
+              ],
+            );
+          },
         ),
         getItemDetail(
           label: 'Absolute Magnitude:',

@@ -20,6 +20,7 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
     on<SettingsSystemLocalesChanged>(_onSettingsSystemLocalesChanged);
     on<SettingsTextDirectionSelected>(_onSettingsTextDirectionSelected);
     on<SettingsDistanceUnitSelected>(_onSettingsDistanceUnitSelected);
+    on<SettingsVelocityUnitSelected>(_onSettingsVelocityUnitSelected);
   }
 
   void _onSettingsLocaleChanged(
@@ -92,6 +93,15 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   ) {
     emit(state.copyWith(
       distanceUnit: event.distanceUnit,
+    ));
+  }
+
+  void _onSettingsVelocityUnitSelected(
+    SettingsVelocityUnitSelected event,
+    Emitter<SettingsState> emit,
+  ) {
+    emit(state.copyWith(
+      velocityUnit: event.velocityUnit,
     ));
   }
 }

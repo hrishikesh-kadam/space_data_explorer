@@ -31,13 +31,16 @@ class SettingsScreen extends StatelessWidget {
   static const Key dateFormatDialogKey = Key('${keyPrefix}_date_format_dialog');
   static const Key timeFormatTileKey = Key('${keyPrefix}_time_format_tile');
   static const Key timeFormatDialogKey = Key('${keyPrefix}_time_format_dialog');
-  static const Key distanceUnitTileKey = Key('${keyPrefix}_distance_unit_tile');
-  static const Key distanceUnitDialogKey =
-      Key('${keyPrefix}_distance_unit_dialog');
   static const Key textDirectionTileKey =
       Key('${keyPrefix}_text_direction_tile');
   static const Key textDirectionDialogKey =
       Key('${keyPrefix}_text_direction_dialog');
+  static const Key distanceUnitTileKey = Key('${keyPrefix}_distance_unit_tile');
+  static const Key distanceUnitDialogKey =
+      Key('${keyPrefix}_distance_unit_dialog');
+  static const Key velocityUnitTileKey = Key('${keyPrefix}_velocity_unit_tile');
+  static const Key velocityUnitDialogKey =
+      Key('${keyPrefix}_velocity_unit_dialog');
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +91,7 @@ class SettingsScreen extends StatelessWidget {
       _getTimeFormatTile(),
       _getTextDirectionTile(),
       _getDistanceUnitTile(),
+      _getVelocityUnitTile(),
     ];
   }
 
@@ -320,11 +324,16 @@ class SettingsScreen extends StatelessWidget {
     required DistanceUnit distanceUnit,
   }) {
     return switch (distanceUnit) {
-      DistanceUnit.au => l10n.astronomicalUnit,
-      DistanceUnit.LD => l10n.lunarDistanceUnit,
-      DistanceUnit.km => l10n.kilometersUnit,
-      DistanceUnit.mi => l10n.milesUnit,
-      DistanceUnit.Re => l10n.earthRadiusEquatorialUnit,
+      DistanceUnit.au =>
+        '${l10n.auDistanceUnitLabel} (${l10n.auDistanceUnitSymbol})',
+      DistanceUnit.LD =>
+        '${l10n.lunarDistanceUnitLabel} (${l10n.lunarDistanceUnitSymbol})',
+      DistanceUnit.km =>
+        '${l10n.kmDistanceUnitLabel} (${l10n.kmDistanceUnitSymbol})',
+      DistanceUnit.mi =>
+        '${l10n.miDistanceUnitLabel} (${l10n.miDistanceUnitSymbol})',
+      DistanceUnit.Re =>
+        '${l10n.reDistanceUnitLabel} (${l10n.reDistanceUnitSymbol})',
       _ => throw ArgumentError.value(distanceUnit),
     };
   }
@@ -367,6 +376,68 @@ class SettingsScreen extends StatelessWidget {
           },
           afterShowDialog: () {
             _logger.finer('_getDistanceUnitTile() -> afterShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
+              isAnyDialogShown: false,
+            ));
+          },
+        );
+      },
+    );
+  }
+
+  static String getVelocityUnitValueTitle({
+    required AppLocalizations l10n,
+    required VelocityUnit velocityUnit,
+  }) {
+    return switch (velocityUnit) {
+      VelocityUnit.kmps =>
+        '${l10n.kmpsVelocityUnitLabel} (${l10n.kmpsVelocityUnitSymbol})',
+      VelocityUnit.miph =>
+        '${l10n.miphVelocityUnitLabel} (${l10n.miphVelocityUnitSymbol})',
+      VelocityUnit.aupd =>
+        '${l10n.aupdVelocityUnitLabel} (${l10n.aupdVelocityUnitSymbol})',
+      _ => throw ArgumentError.value(velocityUnit),
+    };
+  }
+
+  Widget _getVelocityUnitTile() {
+    final Set<VelocityUnit> values = VelocityUnit.all.toSet();
+    final Set<String> valueTitles = values
+        .map((e) => getVelocityUnitValueTitle(l10n: l10n, velocityUnit: e))
+        .toSet();
+    return BlocSelector<SettingsBloc, SettingsState, VelocityUnit>(
+      selector: (state) => state.velocityUnit,
+      builder: (context, velocityUnit) {
+        final settingsBloc = context.read<SettingsBloc>();
+        return RadioSettingsTile<VelocityUnit>(
+          key: velocityUnitTileKey,
+          dialogKey: velocityUnitDialogKey,
+          title: l10n.velocityUnit,
+          subTitle: getVelocityUnitValueTitle(
+            l10n: l10n,
+            velocityUnit: velocityUnit,
+          ),
+          values: values,
+          valueTitles: valueTitles,
+          groupValue: velocityUnit,
+          onChanged: (selectedVelocityUnitPattern) {
+            if (selectedVelocityUnitPattern != null) {
+              _logger.fine(
+                  '_getVelocityUnitTile() -> selectedVelocityUnitPattern -> $selectedVelocityUnitPattern');
+              settingsBloc.add(SettingsVelocityUnitSelected(
+                velocityUnit: selectedVelocityUnitPattern,
+              ));
+            }
+            Navigator.pop(context);
+          },
+          beforeShowDialog: () {
+            _logger.finer('_getVelocityUnitTile() -> beforeShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
+              isAnyDialogShown: true,
+            ));
+          },
+          afterShowDialog: () {
+            _logger.finer('_getVelocityUnitTile() -> afterShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: false,
             ));
