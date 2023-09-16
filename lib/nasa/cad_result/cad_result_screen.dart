@@ -281,14 +281,33 @@ class CadResultScreen extends StatelessWidget {
           displayValue: data.h != null ? '${data.h} H' : 'null',
         ),
         if (fields.contains('diameter'))
-          getItemDetail(
-            label: 'Diameter:',
-            displayValue: data.diameter.toString(),
-          ),
-        if (fields.contains('diameter_sigma'))
-          getItemDetail(
-            label: 'Diameter Sigma:',
-            displayValue: data.diameterSigma.toString(),
+          BlocSelector<SettingsBloc, SettingsState, DistanceUnit>(
+            selector: (state) {
+              return state.diameterUnit;
+            },
+            builder: (context, diameterUnit) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  getItemDetail(
+                    label: 'Diameter:',
+                    displayValue: data.diameter != null
+                        ? data.diameter!
+                            .convert(to: diameterUnit)
+                            .toLocalizedString(l10n)
+                        : 'null',
+                  ),
+                  getItemDetail(
+                    label: 'Diameter Sigma:',
+                    displayValue: data.diameterSigma != null
+                        ? data.diameterSigma!
+                            .convert(to: diameterUnit)
+                            .toLocalizedString(l10n)
+                        : 'null',
+                  ),
+                ],
+              );
+            },
           ),
       ],
     );

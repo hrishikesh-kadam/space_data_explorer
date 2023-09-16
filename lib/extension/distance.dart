@@ -6,11 +6,13 @@ extension DistanceUnitExt on DistanceUnit {
     AppLocalizations l10n,
   ) {
     return switch (this) {
-      DistanceUnit.au => l10n.auDistanceUnitSymbol,
-      DistanceUnit.LD => l10n.lunarDistanceUnitSymbol,
+      DistanceUnit.ft => l10n.ftDistanceUnitSymbol,
+      DistanceUnit.m => l10n.mDistanceUnitSymbol,
       DistanceUnit.km => l10n.kmDistanceUnitSymbol,
       DistanceUnit.mi => l10n.miDistanceUnitSymbol,
       DistanceUnit.Re => l10n.reDistanceUnitSymbol,
+      DistanceUnit.LD => l10n.lunarDistanceUnitSymbol,
+      DistanceUnit.au => l10n.auDistanceUnitSymbol,
       _ => symbol,
     };
   }

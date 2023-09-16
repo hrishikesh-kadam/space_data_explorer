@@ -41,6 +41,9 @@ class SettingsScreen extends StatelessWidget {
   static const Key velocityUnitTileKey = Key('${keyPrefix}_velocity_unit_tile');
   static const Key velocityUnitDialogKey =
       Key('${keyPrefix}_velocity_unit_dialog');
+  static const Key diameterUnitTileKey = Key('${keyPrefix}_diameter_unit_tile');
+  static const Key diameterUnitDialogKey =
+      Key('${keyPrefix}_diameter_unit_dialog');
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +95,7 @@ class SettingsScreen extends StatelessWidget {
       _getTextDirectionTile(),
       _getDistanceUnitTile(),
       _getVelocityUnitTile(),
+      _getDiameterUnitTile(),
     ];
   }
 
@@ -339,7 +343,13 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _getDistanceUnitTile() {
-    final Set<DistanceUnit> values = DistanceUnit.all.toSet();
+    final Set<DistanceUnit> values = {
+      DistanceUnit.au,
+      DistanceUnit.LD,
+      DistanceUnit.km,
+      DistanceUnit.mi,
+      DistanceUnit.Re,
+    };
     final Set<String> valueTitles = values
         .map((e) => getDistanceUnitValueTitle(l10n: l10n, distanceUnit: e))
         .toSet();
@@ -358,12 +368,12 @@ class SettingsScreen extends StatelessWidget {
           values: values,
           valueTitles: valueTitles,
           groupValue: distanceUnit,
-          onChanged: (selectedDistanceUnitPattern) {
-            if (selectedDistanceUnitPattern != null) {
+          onChanged: (selectedDistanceUnit) {
+            if (selectedDistanceUnit != null) {
               _logger.fine(
-                  '_getDistanceUnitTile() -> selectedDistanceUnitPattern -> $selectedDistanceUnitPattern');
+                  '_getDistanceUnitTile() -> selectedDistanceUnit -> $selectedDistanceUnit');
               settingsBloc.add(SettingsDistanceUnitSelected(
-                distanceUnit: selectedDistanceUnitPattern,
+                distanceUnit: selectedDistanceUnit,
               ));
             }
             Navigator.pop(context);
@@ -401,7 +411,11 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _getVelocityUnitTile() {
-    final Set<VelocityUnit> values = VelocityUnit.all.toSet();
+    final Set<VelocityUnit> values = {
+      VelocityUnit.kmps,
+      VelocityUnit.miph,
+      VelocityUnit.aupd,
+    };
     final Set<String> valueTitles = values
         .map((e) => getVelocityUnitValueTitle(l10n: l10n, velocityUnit: e))
         .toSet();
@@ -420,12 +434,12 @@ class SettingsScreen extends StatelessWidget {
           values: values,
           valueTitles: valueTitles,
           groupValue: velocityUnit,
-          onChanged: (selectedVelocityUnitPattern) {
-            if (selectedVelocityUnitPattern != null) {
+          onChanged: (selectedVelocityUnit) {
+            if (selectedVelocityUnit != null) {
               _logger.fine(
-                  '_getVelocityUnitTile() -> selectedVelocityUnitPattern -> $selectedVelocityUnitPattern');
+                  '_getVelocityUnitTile() -> selectedVelocityUnit -> $selectedVelocityUnit');
               settingsBloc.add(SettingsVelocityUnitSelected(
-                velocityUnit: selectedVelocityUnitPattern,
+                velocityUnit: selectedVelocityUnit,
               ));
             }
             Navigator.pop(context);
@@ -438,6 +452,75 @@ class SettingsScreen extends StatelessWidget {
           },
           afterShowDialog: () {
             _logger.finer('_getVelocityUnitTile() -> afterShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
+              isAnyDialogShown: false,
+            ));
+          },
+        );
+      },
+    );
+  }
+
+  static String getDiameterUnitValueTitle({
+    required AppLocalizations l10n,
+    required DistanceUnit diameterUnit,
+  }) {
+    return switch (diameterUnit) {
+      DistanceUnit.km =>
+        '${l10n.kmDistanceUnitLabel} (${l10n.kmDistanceUnitSymbol})',
+      DistanceUnit.m =>
+        '${l10n.mDistanceUnitLabel} (${l10n.mDistanceUnitSymbol})',
+      DistanceUnit.mi =>
+        '${l10n.miDistanceUnitLabel} (${l10n.miDistanceUnitSymbol})',
+      DistanceUnit.ft =>
+        '${l10n.ftDistanceUnitLabel} (${l10n.ftDistanceUnitSymbol})',
+      _ => throw ArgumentError.value(diameterUnit),
+    };
+  }
+
+  Widget _getDiameterUnitTile() {
+    final Set<DistanceUnit> values = {
+      DistanceUnit.km,
+      DistanceUnit.m,
+      DistanceUnit.mi,
+      DistanceUnit.ft,
+    };
+    final Set<String> valueTitles = values
+        .map((e) => getDiameterUnitValueTitle(l10n: l10n, diameterUnit: e))
+        .toSet();
+    return BlocSelector<SettingsBloc, SettingsState, DistanceUnit>(
+      selector: (state) => state.diameterUnit,
+      builder: (context, diameterUnit) {
+        final settingsBloc = context.read<SettingsBloc>();
+        return RadioSettingsTile<DistanceUnit>(
+          key: diameterUnitTileKey,
+          dialogKey: diameterUnitDialogKey,
+          title: l10n.diameterUnit,
+          subTitle: getDiameterUnitValueTitle(
+            l10n: l10n,
+            diameterUnit: diameterUnit,
+          ),
+          values: values,
+          valueTitles: valueTitles,
+          groupValue: diameterUnit,
+          onChanged: (selectedDiameterUnit) {
+            if (selectedDiameterUnit != null) {
+              _logger.fine(
+                  '_getDiameterUnitTile() -> selectedDiameterUnit -> $selectedDiameterUnit');
+              settingsBloc.add(SettingsDiameterUnitSelected(
+                diameterUnit: selectedDiameterUnit,
+              ));
+            }
+            Navigator.pop(context);
+          },
+          beforeShowDialog: () {
+            _logger.finer('_getDiameterUnitTile() -> beforeShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
+              isAnyDialogShown: true,
+            ));
+          },
+          afterShowDialog: () {
+            _logger.finer('_getDiameterUnitTile() -> afterShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: false,
             ));

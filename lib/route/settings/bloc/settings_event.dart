@@ -51,3 +51,9 @@ class SettingsVelocityUnitSelected extends SettingsEvent {
 
   final VelocityUnit velocityUnit;
 }
+
+class SettingsDiameterUnitSelected extends SettingsEvent {
+  const SettingsDiameterUnitSelected({required this.diameterUnit});
+
+  final DistanceUnit diameterUnit;
+}

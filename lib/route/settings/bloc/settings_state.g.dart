@@ -28,6 +28,9 @@ _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
       velocityUnit: json['velocityUnit'] == null
           ? VelocityUnit.kmps
           : VelocityUnit.fromJson(json['velocityUnit'] as Map<String, dynamic>),
+      diameterUnit: json['diameterUnit'] == null
+          ? DistanceUnit.km
+          : DistanceUnit.fromJson(json['diameterUnit'] as Map<String, dynamic>),
       textDirection:
           $enumDecodeNullable(_$TextDirectionEnumMap, json['textDirection']),
       isAnyDialogShown: json['isAnyDialogShown'] as bool?,
@@ -51,6 +54,7 @@ Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) {
       _$TimeFormatPatternEnumMap[instance.timeFormatPattern]!;
   val['distanceUnit'] = instance.distanceUnit.toJson();
   val['velocityUnit'] = instance.velocityUnit.toJson();
+  val['diameterUnit'] = instance.diameterUnit.toJson();
   writeNotNull('textDirection', _$TextDirectionEnumMap[instance.textDirection]);
   writeNotNull('isAnyDialogShown', instance.isAnyDialogShown);
   return val;

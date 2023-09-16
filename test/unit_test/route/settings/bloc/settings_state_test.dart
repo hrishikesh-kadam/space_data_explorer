@@ -14,6 +14,7 @@ void main() {
       'timeFormatPattern': 'jm',
       'distanceUnit': {'symbol': 'au'},
       'velocityUnit': {'symbol': 'km/s'},
+      'diameterUnit': {'symbol': 'km'},
     };
     late JsonMap json;
     const localeListJsonConverter = LocaleListJsonConverter();

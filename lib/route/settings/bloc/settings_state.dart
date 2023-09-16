@@ -21,6 +21,7 @@ class SettingsState with _$SettingsState {
     @Default(TimeFormatPattern.jm) TimeFormatPattern timeFormatPattern,
     @Default(DistanceUnit.au) DistanceUnit distanceUnit,
     @Default(VelocityUnit.kmps) VelocityUnit velocityUnit,
+    @Default(DistanceUnit.km) DistanceUnit diameterUnit,
     TextDirection? textDirection,
     bool? isAnyDialogShown,
   }) = _SettingsState;

@@ -28,6 +28,7 @@ mixin _$SettingsState {
   TimeFormatPattern get timeFormatPattern => throw _privateConstructorUsedError;
   DistanceUnit get distanceUnit => throw _privateConstructorUsedError;
   VelocityUnit get velocityUnit => throw _privateConstructorUsedError;
+  DistanceUnit get diameterUnit => throw _privateConstructorUsedError;
   TextDirection? get textDirection => throw _privateConstructorUsedError;
   bool? get isAnyDialogShown => throw _privateConstructorUsedError;
 
@@ -50,6 +51,7 @@ abstract class $SettingsStateCopyWith<$Res> {
       TimeFormatPattern timeFormatPattern,
       DistanceUnit distanceUnit,
       VelocityUnit velocityUnit,
+      DistanceUnit diameterUnit,
       TextDirection? textDirection,
       bool? isAnyDialogShown});
 }
@@ -73,6 +75,7 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
     Object? timeFormatPattern = null,
     Object? distanceUnit = null,
     Object? velocityUnit = null,
+    Object? diameterUnit = null,
     Object? textDirection = freezed,
     Object? isAnyDialogShown = freezed,
   }) {
@@ -101,6 +104,10 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
           ? _value.velocityUnit
           : velocityUnit // ignore: cast_nullable_to_non_nullable
               as VelocityUnit,
+      diameterUnit: null == diameterUnit
+          ? _value.diameterUnit
+          : diameterUnit // ignore: cast_nullable_to_non_nullable
+              as DistanceUnit,
       textDirection: freezed == textDirection
           ? _value.textDirection
           : textDirection // ignore: cast_nullable_to_non_nullable
@@ -128,6 +135,7 @@ abstract class _$$_SettingsStateCopyWith<$Res>
       TimeFormatPattern timeFormatPattern,
       DistanceUnit distanceUnit,
       VelocityUnit velocityUnit,
+      DistanceUnit diameterUnit,
       TextDirection? textDirection,
       bool? isAnyDialogShown});
 }
@@ -149,6 +157,7 @@ class __$$_SettingsStateCopyWithImpl<$Res>
     Object? timeFormatPattern = null,
     Object? distanceUnit = null,
     Object? velocityUnit = null,
+    Object? diameterUnit = null,
     Object? textDirection = freezed,
     Object? isAnyDialogShown = freezed,
   }) {
@@ -177,6 +186,10 @@ class __$$_SettingsStateCopyWithImpl<$Res>
           ? _value.velocityUnit
           : velocityUnit // ignore: cast_nullable_to_non_nullable
               as VelocityUnit,
+      diameterUnit: null == diameterUnit
+          ? _value.diameterUnit
+          : diameterUnit // ignore: cast_nullable_to_non_nullable
+              as DistanceUnit,
       textDirection: freezed == textDirection
           ? _value.textDirection
           : textDirection // ignore: cast_nullable_to_non_nullable
@@ -200,6 +213,7 @@ class _$_SettingsState implements _SettingsState {
       this.timeFormatPattern = TimeFormatPattern.jm,
       this.distanceUnit = DistanceUnit.au,
       this.velocityUnit = VelocityUnit.kmps,
+      this.diameterUnit = DistanceUnit.km,
       this.textDirection,
       this.isAnyDialogShown})
       : _systemLocales = systemLocales;
@@ -234,13 +248,16 @@ class _$_SettingsState implements _SettingsState {
   @JsonKey()
   final VelocityUnit velocityUnit;
   @override
+  @JsonKey()
+  final DistanceUnit diameterUnit;
+  @override
   final TextDirection? textDirection;
   @override
   final bool? isAnyDialogShown;
 
   @override
   String toString() {
-    return 'SettingsState(locale: $locale, systemLocales: $systemLocales, dateFormatPattern: $dateFormatPattern, timeFormatPattern: $timeFormatPattern, distanceUnit: $distanceUnit, velocityUnit: $velocityUnit, textDirection: $textDirection, isAnyDialogShown: $isAnyDialogShown)';
+    return 'SettingsState(locale: $locale, systemLocales: $systemLocales, dateFormatPattern: $dateFormatPattern, timeFormatPattern: $timeFormatPattern, distanceUnit: $distanceUnit, velocityUnit: $velocityUnit, diameterUnit: $diameterUnit, textDirection: $textDirection, isAnyDialogShown: $isAnyDialogShown)';
   }
 
   @override
@@ -259,6 +276,8 @@ class _$_SettingsState implements _SettingsState {
                 other.distanceUnit == distanceUnit) &&
             (identical(other.velocityUnit, velocityUnit) ||
                 other.velocityUnit == velocityUnit) &&
+            (identical(other.diameterUnit, diameterUnit) ||
+                other.diameterUnit == diameterUnit) &&
             (identical(other.textDirection, textDirection) ||
                 other.textDirection == textDirection) &&
             (identical(other.isAnyDialogShown, isAnyDialogShown) ||
@@ -275,6 +294,7 @@ class _$_SettingsState implements _SettingsState {
       timeFormatPattern,
       distanceUnit,
       velocityUnit,
+      diameterUnit,
       textDirection,
       isAnyDialogShown);
 
@@ -300,6 +320,7 @@ abstract class _SettingsState implements SettingsState {
       final TimeFormatPattern timeFormatPattern,
       final DistanceUnit distanceUnit,
       final VelocityUnit velocityUnit,
+      final DistanceUnit diameterUnit,
       final TextDirection? textDirection,
       final bool? isAnyDialogShown}) = _$_SettingsState;
 
@@ -320,6 +341,8 @@ abstract class _SettingsState implements SettingsState {
   DistanceUnit get distanceUnit;
   @override
   VelocityUnit get velocityUnit;
+  @override
+  DistanceUnit get diameterUnit;
   @override
   TextDirection? get textDirection;
   @override
