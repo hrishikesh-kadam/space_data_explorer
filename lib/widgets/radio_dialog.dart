@@ -21,13 +21,17 @@ class RadioDialog<T> extends StatelessWidget {
     return AlertDialog(
       title: Text(title),
       content: SizedBox(
-        // TODO(hrishikesh-kadam): Fix width
-        width: double.minPositive,
+        // 360−(40*2)−(24*2) = 232
+        // Screen width - (AlertDialog Padding * 2) - (contentPadding * 2)
+        // Gets only 232 on 360 wide screen, but if screen has more width then
+        // let this be as wide as 320.
+        width: 320,
         child: ListView.builder(
           shrinkWrap: true,
           itemCount: values.length,
           itemBuilder: (context, index) {
             return RadioListTile<T>(
+              contentPadding: const EdgeInsets.all(0),
               key: Key(valueTitles.elementAt(index)),
               value: values.elementAt(index),
               title: Text(valueTitles.elementAt(index)),
