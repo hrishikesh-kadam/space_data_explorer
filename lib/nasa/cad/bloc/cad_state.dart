@@ -19,6 +19,7 @@ class CadState with _$CadState {
     @Default(NetworkState.initial) NetworkState networkState,
     @Default(false) bool disableInputs,
     SbdbCadBody? sbdbCadBody,
+    Object? error,
   }) = _CadState;
 
   static CadState getInitial() {

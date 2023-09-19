@@ -41,6 +41,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     emit(state.copyWith(
       networkState: NetworkState.preparing,
       disableInputs: true,
+      error: null,
     ));
     SbdbCadQueryParameters queryParameters = const SbdbCadQueryParameters();
     if (state.dateRange != null) {
@@ -87,7 +88,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
         networkState: NetworkState.success,
         sbdbCadBody: response.data,
       ));
-    } on Exception catch (error, stackTrace) {
+    } catch (error, stackTrace) {
       _logger.reportError(
         '_onCadRequested failure',
         error: error,
@@ -97,6 +98,7 @@ class CadBloc extends Bloc<CadEvent, CadState> {
       emit(state.copyWith(
         networkState: NetworkState.failure,
         disableInputs: false,
+        error: error,
       ));
     }
   }

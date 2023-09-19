@@ -7,6 +7,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:intl/intl.dart';
+import 'package:recase/recase.dart';
 
 import '../../constants/dimensions.dart';
 import '../../constants/theme.dart';
@@ -97,6 +98,7 @@ class CadScreen extends StatelessWidget {
     CloseApproachBody.saturn,
     CloseApproachBody.uranus,
     CloseApproachBody.neptune,
+    CloseApproachBody.pluto,
   };
   static const String dataOutputKeyPrefix = '${keyPrefix}data_output_';
   static const Key dataOutputKey =
@@ -114,17 +116,7 @@ class CadScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<CadBloc>(
       create: (_) => cadBloc ?? routeExtraMap?['$CadBloc'] ?? CadBloc(),
-      child: BlocListener<CadBloc, CadState>(
-        listenWhen: (previous, current) {
-          return previous.networkState != current.networkState &&
-              current.networkState == NetworkState.success;
-        },
-        listener: (context, state) {
-          JsonMap routeExtraMap = getRouteExtraMap();
-          routeExtraMap['$SbdbCadBody'] = state.sbdbCadBody!;
-          CadResultRoute($extra: routeExtraMap).go(context);
-          context.read<CadBloc>().add(const CadResultOpened());
-        },
+      child: _getCadBlocListener(
         child: Builder(
           builder: (context) {
             return getDirectionality(
@@ -136,6 +128,46 @@ class CadScreen extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  Widget _getCadBlocListener({required Widget child}) {
+    return BlocListener<CadBloc, CadState>(
+      listenWhen: (previous, current) {
+        return previous.networkState != current.networkState &&
+            (current.networkState == NetworkState.success ||
+                current.networkState == NetworkState.failure);
+      },
+      listener: (context, state) {
+        if (state.networkState == NetworkState.success) {
+          JsonMap routeExtraMap = getRouteExtraMap();
+          routeExtraMap['$SbdbCadBody'] = state.sbdbCadBody!;
+          CadResultRoute($extra: routeExtraMap).go(context);
+          context.read<CadBloc>().add(const CadResultOpened());
+        } else if (state.networkState == NetworkState.failure) {
+          String errorString = '';
+          if (state.error is DioException) {
+            final dioException = state.error as DioException;
+            if (dioException.type == DioExceptionType.badResponse) {
+              final statusCode = dioException.response?.statusCode;
+              errorString = 'Something wen\'t wrong.';
+              errorString += '\nStatus code: $statusCode';
+              if (dioException.response?.data is JsonMap) {
+                errorString +=
+                    '\n${jsonEncoderPretty.convert(dioException.response!.data)}';
+              }
+            } else {
+              errorString = dioException.type.name.sentenceCase;
+            }
+          }
+          if (errorString.isEmpty) {
+            errorString = 'Something wen\'t wrong.';
+          }
+          final snackBar = SnackBar(content: Text(errorString));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+      },
+      child: child,
     );
   }
 
@@ -421,6 +453,7 @@ class CadScreen extends StatelessWidget {
       l10n.saturn,
       l10n.uranus,
       l10n.neptune,
+      l10n.pluto,
     };
     final Set<String> keys = closeApproachBodySet.map((e) => e.name).toSet();
     return BlocBuilder<CadBloc, CadState>(

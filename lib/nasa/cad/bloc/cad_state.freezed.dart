@@ -28,6 +28,7 @@ mixin _$CadState {
   NetworkState get networkState => throw _privateConstructorUsedError;
   bool get disableInputs => throw _privateConstructorUsedError;
   SbdbCadBody? get sbdbCadBody => throw _privateConstructorUsedError;
+  Object? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CadStateCopyWith<CadState> get copyWith =>
@@ -48,7 +49,8 @@ abstract class $CadStateCopyWith<$Res> {
       Set<DataOutput> dataOutputSet,
       NetworkState networkState,
       bool disableInputs,
-      SbdbCadBody? sbdbCadBody});
+      SbdbCadBody? sbdbCadBody,
+      Object? error});
 
   $DistanceRangeStateCopyWith<$Res> get distanceRangeState;
   $SmallBodyFilterStateCopyWith<$Res> get smallBodyFilterState;
@@ -78,6 +80,7 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
     Object? networkState = null,
     Object? disableInputs = null,
     Object? sbdbCadBody = freezed,
+    Object? error = freezed,
   }) {
     return _then(_value.copyWith(
       dateRange: freezed == dateRange
@@ -116,6 +119,7 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
           ? _value.sbdbCadBody
           : sbdbCadBody // ignore: cast_nullable_to_non_nullable
               as SbdbCadBody?,
+      error: freezed == error ? _value.error : error,
     ) as $Val);
   }
 
@@ -175,7 +179,8 @@ abstract class _$$_CadStateCopyWith<$Res> implements $CadStateCopyWith<$Res> {
       Set<DataOutput> dataOutputSet,
       NetworkState networkState,
       bool disableInputs,
-      SbdbCadBody? sbdbCadBody});
+      SbdbCadBody? sbdbCadBody,
+      Object? error});
 
   @override
   $DistanceRangeStateCopyWith<$Res> get distanceRangeState;
@@ -207,6 +212,7 @@ class __$$_CadStateCopyWithImpl<$Res>
     Object? networkState = null,
     Object? disableInputs = null,
     Object? sbdbCadBody = freezed,
+    Object? error = freezed,
   }) {
     return _then(_$_CadState(
       dateRange: freezed == dateRange
@@ -245,6 +251,7 @@ class __$$_CadStateCopyWithImpl<$Res>
           ? _value.sbdbCadBody
           : sbdbCadBody // ignore: cast_nullable_to_non_nullable
               as SbdbCadBody?,
+      error: freezed == error ? _value.error : error,
     ));
   }
 }
@@ -261,7 +268,8 @@ class _$_CadState implements _CadState {
       final Set<DataOutput> dataOutputSet = const {},
       this.networkState = NetworkState.initial,
       this.disableInputs = false,
-      this.sbdbCadBody})
+      this.sbdbCadBody,
+      this.error})
       : _dataOutputSet = dataOutputSet;
 
   @override
@@ -295,10 +303,12 @@ class _$_CadState implements _CadState {
   final bool disableInputs;
   @override
   final SbdbCadBody? sbdbCadBody;
+  @override
+  final Object? error;
 
   @override
   String toString() {
-    return 'CadState(dateRange: $dateRange, distanceRangeState: $distanceRangeState, smallBodyFilterState: $smallBodyFilterState, smallBodySelectorState: $smallBodySelectorState, closeApproachBody: $closeApproachBody, dataOutputSet: $dataOutputSet, networkState: $networkState, disableInputs: $disableInputs, sbdbCadBody: $sbdbCadBody)';
+    return 'CadState(dateRange: $dateRange, distanceRangeState: $distanceRangeState, smallBodyFilterState: $smallBodyFilterState, smallBodySelectorState: $smallBodySelectorState, closeApproachBody: $closeApproachBody, dataOutputSet: $dataOutputSet, networkState: $networkState, disableInputs: $disableInputs, sbdbCadBody: $sbdbCadBody, error: $error)';
   }
 
   @override
@@ -323,7 +333,8 @@ class _$_CadState implements _CadState {
             (identical(other.disableInputs, disableInputs) ||
                 other.disableInputs == disableInputs) &&
             (identical(other.sbdbCadBody, sbdbCadBody) ||
-                other.sbdbCadBody == sbdbCadBody));
+                other.sbdbCadBody == sbdbCadBody) &&
+            const DeepCollectionEquality().equals(other.error, error));
   }
 
   @override
@@ -337,7 +348,8 @@ class _$_CadState implements _CadState {
       const DeepCollectionEquality().hash(_dataOutputSet),
       networkState,
       disableInputs,
-      sbdbCadBody);
+      sbdbCadBody,
+      const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
@@ -356,7 +368,8 @@ abstract class _CadState implements CadState {
       final Set<DataOutput> dataOutputSet,
       final NetworkState networkState,
       final bool disableInputs,
-      final SbdbCadBody? sbdbCadBody}) = _$_CadState;
+      final SbdbCadBody? sbdbCadBody,
+      final Object? error}) = _$_CadState;
 
   @override
   DateTimeRange? get dateRange;
@@ -376,6 +389,8 @@ abstract class _CadState implements CadState {
   bool get disableInputs;
   @override
   SbdbCadBody? get sbdbCadBody;
+  @override
+  Object? get error;
   @override
   @JsonKey(ignore: true)
   _$$_CadStateCopyWith<_$_CadState> get copyWith =>

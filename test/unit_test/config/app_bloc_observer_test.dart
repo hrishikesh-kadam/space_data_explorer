@@ -12,7 +12,7 @@ void main() {
     setUpAll(() {
       configureHrkLogging();
       configureBloc();
-      AppBlocObserver.log.level = Level.OFF;
+      AppBlocObserver.logger.level = Level.OFF;
     });
 
     test('onError', () {
