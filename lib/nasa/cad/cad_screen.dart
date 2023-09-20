@@ -9,6 +9,7 @@ import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:intl/intl.dart';
 import 'package:recase/recase.dart';
 
+import '../../config/config.dart';
 import '../../constants/dimensions.dart';
 import '../../constants/theme.dart';
 import '../../globals.dart';
@@ -87,7 +88,7 @@ class CadScreen extends StatelessWidget {
       '${keyPrefix}close_approach_body_';
   static const Key closeApproachBodySelectorKey = Key(
       '$closeApproachBodySelectorKeyPrefix${ChoiceChipQueryWidget.defaultKey}');
-  static const Set<CloseApproachBody> closeApproachBodySet = {
+  static final Set<CloseApproachBody> closeApproachBodySet = {
     CloseApproachBody.earth,
     CloseApproachBody.moon,
     CloseApproachBody.all,
@@ -98,7 +99,7 @@ class CadScreen extends StatelessWidget {
     CloseApproachBody.saturn,
     CloseApproachBody.uranus,
     CloseApproachBody.neptune,
-    CloseApproachBody.pluto,
+    if (!prodRelease) CloseApproachBody.pluto,
   };
   static const String dataOutputKeyPrefix = '${keyPrefix}data_output_';
   static const Key dataOutputKey =
@@ -453,7 +454,7 @@ class CadScreen extends StatelessWidget {
       l10n.saturn,
       l10n.uranus,
       l10n.neptune,
-      l10n.pluto,
+      if (!prodRelease) l10n.pluto,
     };
     final Set<String> keys = closeApproachBodySet.map((e) => e.name).toSet();
     return BlocBuilder<CadBloc, CadState>(

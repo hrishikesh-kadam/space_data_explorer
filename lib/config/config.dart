@@ -107,3 +107,5 @@ enum FlavorEnv {
 final FlavorEnv flavorEnv = FlavorEnv.fromString(
   const String.fromEnvironment('FLAVOR_ENV'),
 );
+
+final bool prodRelease = kReleaseMode && flavorEnv == FlavorEnv.prod;
