@@ -5,6 +5,7 @@ import 'package:hrk_logging/hrk_logging.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../config/firebase/firebase.dart';
+import '../globals.dart';
 
 extension ReportLogger on Logger {
   void reportError(
@@ -15,7 +16,7 @@ extension ReportLogger on Logger {
     bool fatal = false,
   }) {
     log(HrkLevel.ERROR, message, error, stackTrace);
-    if (crashlyticsSupported) {
+    if (crashlyticsSupported && !flutterTest) {
       FirebaseCrashlytics.instance.recordError(
         error,
         stackTrace,

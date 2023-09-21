@@ -72,7 +72,10 @@ Future<void> verifyQueryParameters(
   expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
   expect(find.byType(CadResultScreen), findsOneWidget);
   final sbdbCadApi = CadScreen.cadBloc!.sbdbCadApi;
-  verify(sbdbCadApi.get(queryParameters: queryParameters.toJson())).called(1);
+  verify(sbdbCadApi.get(
+    queryParameters: queryParameters.toJson(),
+    cancelToken: anyNamed('cancelToken'),
+  )).called(1);
   clearInteractions(sbdbCadApi);
   await tapBackButton(tester);
 }

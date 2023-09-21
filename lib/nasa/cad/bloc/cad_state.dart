@@ -17,6 +17,7 @@ class CadState with _$CadState {
     CloseApproachBody closeApproachBody,
     @Default({}) Set<DataOutput> dataOutputSet,
     @Default(NetworkState.initial) NetworkState networkState,
+    CancelToken? cancelToken,
     @Default(false) bool disableInputs,
     SbdbCadBody? sbdbCadBody,
     Object? error,

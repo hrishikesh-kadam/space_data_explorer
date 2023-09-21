@@ -33,6 +33,17 @@ class CadBloc extends Bloc<CadEvent, CadState> {
   final _logger = Logger('$appNamePascalCase.CadBloc');
   @visibleForTesting
   late final SbdbCadApi sbdbCadApi;
+  final String dioRequestCancelled = 'Dio Request Cancelled';
+
+  @override
+  Future<void> close() async {
+    _logger.fine('close');
+    if (state.cancelToken != null) {
+      _logger.fine('close -> cancelToken.cancel()');
+      state.cancelToken!.cancel(dioRequestCancelled);
+    }
+    super.close();
+  }
 
   Future<void> _onCadRequested(
     CadRequested event,
@@ -77,26 +88,39 @@ class CadBloc extends Bloc<CadEvent, CadState> {
       );
     }
     queryParameters = queryParameters.copyWithDataOutput(state.dataOutputSet);
-    emit(state.copyWith(networkState: NetworkState.sending));
+    final CancelToken cancelToken = CancelToken();
+    emit(state.copyWith(
+      networkState: NetworkState.sending,
+      cancelToken: cancelToken,
+    ));
     try {
       Response<SbdbCadBody> response = await sbdbCadApi.get(
         queryParameters: queryParameters.toJson(),
+        cancelToken: cancelToken,
       );
       // await Future.delayed(const Duration(seconds: 5));
       _logger.fine('_onCadRequested success');
       emit(state.copyWith(
         networkState: NetworkState.success,
+        cancelToken: null,
         sbdbCadBody: response.data,
       ));
     } catch (error, stackTrace) {
-      _logger.reportError(
-        '_onCadRequested failure',
-        error: error,
-        stackTrace: stackTrace,
-        information: [queryParameters],
-      );
+      bool? skipReportError;
+      if (error is DioException && error.error == dioRequestCancelled) {
+        skipReportError = true;
+      }
+      if (skipReportError != true) {
+        _logger.reportError(
+          '_onCadRequested failure',
+          error: error,
+          stackTrace: stackTrace,
+          information: [queryParameters],
+        );
+      }
       emit(state.copyWith(
         networkState: NetworkState.failure,
+        cancelToken: null,
         disableInputs: false,
         error: error,
       ));

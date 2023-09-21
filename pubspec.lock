@@ -507,18 +507,18 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "5668e6d3dbcb2d0dfa25f7567554b88c57e1e3f3c440b672b24d4a9477017d5b"
+      sha256: e1a30a66d734f9e498b1b6522d6a75ded28242bad2359a9158df38a1c30bcf1f
       url: "https://pub.dev"
     source: hosted
-    version: "10.1.2"
+    version: "10.2.0"
   go_router_builder:
     dependency: "direct dev"
     description:
       name: go_router_builder
-      sha256: "8f828e7d8985aaa347d8699830ccef96cf6c47319dce8051bba037e0252e9fe4"
+      sha256: b004ed761578fd1326054ff9c97daaf7b94f109b24cad843ca8bd349a810f947
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.2"
+    version: "2.3.3"
   graphs:
     dependency: transitive
     description:
@@ -571,18 +571,18 @@ packages:
     dependency: "direct main"
     description:
       name: hrk_nasa_apis
-      sha256: "681f883d2d0df341a1f8e43e0495b2a1701b1185392ecc04fb8944ca4e60c8e0"
+      sha256: ed14d4128d514ce5c011c10568270191f0af1b8219bf6aa11502da71ff2a577a
       url: "https://pub.dev"
     source: hosted
-    version: "0.17.0"
+    version: "0.18.1"
   hrk_nasa_apis_test:
     dependency: "direct main"
     description:
       name: hrk_nasa_apis_test
-      sha256: df2c6f0f38a08a01a353d7c2ade04f06f2f74ebfe568e8d6003cebf063ecf925
+      sha256: "5691fad9663963384179ee8e24b172f91eb9488a463fed7ae0526d2de78dc33f"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.0"
+    version: "0.3.1"
   hrk_settings_list:
     dependency: "direct main"
     description:

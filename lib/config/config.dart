@@ -45,6 +45,10 @@ Future<void> configurePostBinding() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadPubspec();
   await configureHydratedBloc();
+  await configureFirebaseProducts();
+}
+
+Future<void> configureFirebaseProducts() async {
   if (firebaseSupported) {
     await configureFirebase();
   }
