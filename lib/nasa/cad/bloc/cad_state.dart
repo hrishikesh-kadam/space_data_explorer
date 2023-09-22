@@ -41,6 +41,8 @@ class DistanceRangeState with _$DistanceRangeState {
   static const Distance? distMinDefault = null;
   // ignore: unnecessary_nullable_for_final_variable_declarations
   static const Distance? distMaxDefault = SbdbCadQueryParameters.distMaxDefault;
+  // coverage:ignore-start
+  // See test/unit_test/nasa/cad/bloc/cad_state_test.dart
   static final List<double?> valueListDefault = [
     distMinDefault?.value,
     distMaxDefault?.value,
@@ -53,6 +55,7 @@ class DistanceRangeState with _$DistanceRangeState {
     distMinDefault?.unit ?? SbdbCadQueryParameters.distUnitDefault,
     distMaxDefault?.unit ?? SbdbCadQueryParameters.distUnitDefault,
   ];
+  // coverage:ignore-end
   static DistanceRangeState getInitial() {
     return const DistanceRangeState().copyWith(
       valueList: valueListDefault,
