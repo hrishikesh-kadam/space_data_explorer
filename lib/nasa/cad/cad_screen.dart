@@ -165,7 +165,9 @@ class CadScreen extends StatelessWidget {
             errorString = 'Something wen\'t wrong.';
           }
           final snackBar = SnackBar(content: Text(errorString));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          ScaffoldMessenger.of(context)
+            ..clearSnackBars()
+            ..showSnackBar(snackBar);
         }
       },
       child: child,
