@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:hrk_logging/hrk_logging.dart';
-import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import '../globals.dart';
 import '../helper/helper.dart';
 import 'query_grid_container.dart';
 
 typedef ValueParser<V> = V? Function(String text);
-typedef ValueRangeChanged<V, U extends Unit> = void Function(
+typedef ValueRangeChanged<V, U> = void Function(
   List<V?> valueList,
   List<String> textList,
   List<U>? unitList,
 );
 
-class ValueRangeFilterWidget<V, U extends Unit> extends StatefulWidget {
+class ValueRangeFilterWidget<V, U> extends StatefulWidget {
   const ValueRangeFilterWidget({
     super.key,
     this.keyPrefix = '',
@@ -71,7 +70,7 @@ class ValueRangeFilterWidget<V, U extends Unit> extends StatefulWidget {
 
 enum StateMethod { initState, didUpdateWidget }
 
-class _ValueRangeFilterWidgetState<V, U extends Unit>
+class _ValueRangeFilterWidgetState<V, U>
     extends State<ValueRangeFilterWidget<V, U>> {
   final List<V?> valueList = [];
   final List<String> textList = [];
@@ -335,7 +334,7 @@ class _ValueRangeFilterWidgetState<V, U extends Unit>
       List<String> textList = List.from(this.textList);
       List<U>? unitList;
       if (this.unitList[0] != null && this.unitList[1] != null) {
-        unitList = List<U>.from(this.unitList.nonNulls);
+        unitList = List.from(this.unitList);
       }
       widget.onValueRangeChanged!(
         valueList,
