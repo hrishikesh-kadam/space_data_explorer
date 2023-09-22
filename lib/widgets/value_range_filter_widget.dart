@@ -19,7 +19,7 @@ class ValueRangeFilterWidget<V, U extends Unit> extends StatefulWidget {
   const ValueRangeFilterWidget({
     super.key,
     this.keyPrefix = '',
-    required this.title,
+    this.title,
     required this.labels,
     required this.valueList,
     required this.textList,
@@ -45,7 +45,7 @@ class ValueRangeFilterWidget<V, U extends Unit> extends StatefulWidget {
         assert(units?.length == unitSymbols?.length);
 
   final String keyPrefix;
-  final String title;
+  final String? title;
   final Set<String> labels;
   final List<V?> valueList;
   final List<String> textList;
@@ -142,12 +142,13 @@ class _ValueRangeFilterWidgetState<V, U extends Unit>
     );
     return Column(
       children: [
-        Text(
-          widget.title,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        SizedBox(height: widget.spacing),
+        if (widget.title != null)
+          Text(
+            widget.title!,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+        if (widget.title != null) SizedBox(height: widget.spacing),
         getLabelValueUnitWrap(
           context: context,
           index: 0,

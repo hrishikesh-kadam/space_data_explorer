@@ -9,7 +9,7 @@ class ChoiceChipQueryWidget<T> extends StatelessWidget {
     super.key,
     this.keyPrefix = '',
     this.enabled = true,
-    required this.title,
+    this.title,
     required this.values,
     required this.labels,
     this.keys,
@@ -22,7 +22,7 @@ class ChoiceChipQueryWidget<T> extends StatelessWidget {
 
   final String keyPrefix;
   final bool enabled;
-  final String title;
+  final String? title;
   final Set<T> values;
   final Set<String> labels;
   final Set<String>? keys;
@@ -44,12 +44,13 @@ class ChoiceChipQueryWidget<T> extends StatelessWidget {
   }) {
     return Column(
       children: [
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        SizedBox(height: spacing),
+        if (title != null)
+          Text(
+            title!,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+        if (title != null) SizedBox(height: spacing),
         _getChoiceChips(context)
       ],
     );

@@ -18,7 +18,7 @@ class DateFilterWidget extends StatelessWidget {
   DateFilterWidget({
     super.key,
     this.keyPrefix = '',
-    required this.title,
+    this.title,
     required this.startTitle,
     required this.endTitle,
     required this.dateRange,
@@ -35,7 +35,7 @@ class DateFilterWidget extends StatelessWidget {
   });
 
   final String keyPrefix;
-  final String title;
+  final String? title;
   final String startTitle;
   final String endTitle;
   final DateTimeRange? dateRange;
@@ -83,12 +83,13 @@ class DateFilterWidget extends StatelessWidget {
         : null;
     return Column(
       children: [
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        SizedBox(height: spacing),
+        if (title != null)
+          Text(
+            title!,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+        if (title != null) SizedBox(height: spacing),
         getLabelDateWrap(
           context: context,
           filter: DateFilter.start,

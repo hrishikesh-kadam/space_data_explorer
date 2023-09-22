@@ -18,7 +18,7 @@ class ChoiceChipInputWidget<T> extends StatefulWidget {
   const ChoiceChipInputWidget({
     super.key,
     this.keyPrefix = '',
-    required this.title,
+    this.title,
     required this.values,
     required this.labels,
     this.keys,
@@ -40,7 +40,7 @@ class ChoiceChipInputWidget<T> extends StatefulWidget {
             inputFormattersList.length == values.length);
 
   final String keyPrefix;
-  final String title;
+  final String? title;
   final Set<T> values;
   final Set<String> labels;
   final Set<String>? keys;
@@ -139,13 +139,14 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
     return QueryItemContainer(
       child: Column(
         children: [
-          Text(
-            key: Key('${widget.keyPrefix}${ChoiceChipInputWidget.titleKey}'),
-            widget.title,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          SizedBox(height: widget.spacing),
+          if (widget.title != null)
+            Text(
+              key: Key('${widget.keyPrefix}${ChoiceChipInputWidget.titleKey}'),
+              widget.title!,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+          if (widget.title != null) SizedBox(height: widget.spacing),
           getChoiceChips(context: context),
           const SizedBox(height: Dimensions.cadQueryItemPadding),
           getTextField(context: context),
