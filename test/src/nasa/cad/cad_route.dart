@@ -22,6 +22,7 @@ final queryGridItemFinder = find.descendant(
   of: queryGridFinder,
   matching: find.byType(QueryItemContainer),
 );
+final snackBarFinder = find.byKey(CadScreen.snackBarKey);
 
 Future<void> pumpCadRouteAsInitialLocation(
   WidgetTester tester, {
@@ -40,11 +41,15 @@ Future<void> pumpCadRouteAsNormalLink(
   await tapCadButton(tester);
 }
 
-CadBloc getCadBloc({CadState? initialState}) {
+CadBloc getCadBloc({
+  SbdbCadApi? sbdbCadApi,
+  CadState? initialState,
+}) {
   return CadBloc(
-    sbdbCadApi: getMockedSbdbCadApi(
-      getResponse: getMockedResponseSbdbCadBody('200/0'),
-    ),
+    sbdbCadApi: sbdbCadApi ??
+        SbdbCadApiExt.getAnswers(
+          response: SbdbCadApiExt.getResponseSbdbCadBody('200/0'),
+        ),
     initialState: initialState,
   );
 }

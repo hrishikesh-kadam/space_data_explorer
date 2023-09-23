@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:recase/recase.dart';
 
 import '../../config/config.dart';
+import '../../constants/constants.dart';
 import '../../constants/dimensions.dart';
 import '../../constants/theme.dart';
 import '../../globals.dart';
@@ -109,6 +110,7 @@ class CadScreen extends StatelessWidget {
     DataOutput.diameter,
     DataOutput.fullname,
   };
+  static const Key snackBarKey = Key('${keyPrefix}snack_bar');
   // To inject during deep-link, see pumpCadRouteAsInitialLocation()
   @visibleForTesting
   static CadBloc? cadBloc;
@@ -146,13 +148,12 @@ class CadScreen extends StatelessWidget {
           CadResultRoute($extra: routeExtraMap).go(context);
           context.read<CadBloc>().add(const CadResultOpened());
         } else if (state.networkState == NetworkState.failure) {
-          String errorString = '';
+          String errorString = somethingWentWrong;
           if (state.error is DioException) {
             final dioException = state.error as DioException;
             if (dioException.type == DioExceptionType.badResponse) {
-              final statusCode = dioException.response?.statusCode;
-              errorString = 'Something wen\'t wrong.';
-              errorString += '\nStatus code: $statusCode';
+              final statusCodeInt = dioException.response?.statusCode;
+              errorString += '\n$statusCode: $statusCodeInt';
               if (dioException.response?.data is JsonMap) {
                 errorString +=
                     '\n${jsonEncoderPretty.convert(dioException.response!.data)}';
@@ -161,10 +162,10 @@ class CadScreen extends StatelessWidget {
               errorString = dioException.type.name.sentenceCase;
             }
           }
-          if (errorString.isEmpty) {
-            errorString = 'Something wen\'t wrong.';
-          }
-          final snackBar = SnackBar(content: Text(errorString));
+          final snackBar = SnackBar(
+            key: snackBarKey,
+            content: Text(errorString),
+          );
           ScaffoldMessenger.of(context)
             ..clearSnackBars()
             ..showSnackBar(snackBar);
