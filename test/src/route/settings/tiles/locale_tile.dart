@@ -4,12 +4,30 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
+import 'package:space_data_explorer/widgets/radio_dialog.dart';
 import '../../../extension/common_finders.dart';
-import '../../../globals.dart';
 
 final localeTileFinder = find.byKey(SettingsScreen.localeTileKey);
-final localeDialogFinder = find.byKey(SettingsScreen.localeDialogKey);
-final localeListViewFinder = find.byKey(Key('${l10n.language}_listview'));
+final localeDialogFinder = find.byKey(const Key(
+  '${SettingsScreen.localeTileKeyPrefix}'
+  '${RadioDialog.keySuffixDefault}',
+));
+const localeDialogKeyPrefix = '${SettingsScreen.localeTileKeyPrefix}'
+    '${RadioDialog.keyPrefixDefault}';
+final localeListViewFinder = find.byKey(const Key(
+  '$localeDialogKeyPrefix'
+  '${RadioDialog.listViewKeySuffix}',
+));
+
+Finder getLocaleFinder({
+  required AppLocalizations l10n,
+  required Locale? locale,
+}) {
+  return find.byKey(Key(
+    '$localeDialogKeyPrefix'
+    '${SettingsScreen.getLocaleValueTitle(l10n: l10n, locale: locale)}',
+  ));
+}
 
 Future<void> tapLocaleTile(WidgetTester tester) async {
   await tester.tap(localeTileFinder);
@@ -21,9 +39,7 @@ Future<void> chooseLocale(
   required AppLocalizations l10n,
   required Locale? locale,
 }) async {
-  final localeFinder = find.byKey(Key(
-    SettingsScreen.getLocaleValueTitle(l10n: l10n, locale: locale),
-  ));
+  final localeFinder = getLocaleFinder(l10n: l10n, locale: locale);
   await tester.dragUntilVisible(
     localeFinder,
     localeListViewFinder,

@@ -24,34 +24,34 @@ class SettingsScreen extends StatelessWidget {
 
   final AppLocalizations l10n;
   final _logger = Logger('$appNamePascalCase.SettingsScreen');
-  static const String keyPrefix = 'settings_screen';
-  static const Key localeTileKey = Key('${keyPrefix}_locale_tile');
-  static const Key localeDialogKey = Key('${keyPrefix}_locale_dialog');
+  static const String keyPrefix = 'settings_screen_';
+  static const String localeTileKeyPrefix = '${keyPrefix}locale_tile_';
+  static const Key localeTileKey = Key('${localeTileKeyPrefix}key');
   static final Set<Locale?> locales = {
     null,
     ...LocaleExt.getSupportedLocales(),
   };
-  static const Key dateFormatTileKey = Key('${keyPrefix}_date_format_tile');
-  static const Key dateFormatDialogKey = Key('${keyPrefix}_date_format_dialog');
+  static const String dateFormatTileKeyPrefix = '${keyPrefix}date_format_tile_';
+  static const Key dateFormatTileKey = Key('${dateFormatTileKeyPrefix}key');
   static final Set<DateFormatPattern> dateFormatPatterns =
       DateFormatPattern.values.toSet();
-  static const Key timeFormatTileKey = Key('${keyPrefix}_time_format_tile');
-  static const Key timeFormatDialogKey = Key('${keyPrefix}_time_format_dialog');
+  static const String timeFormatTileKeyPrefix = '${keyPrefix}time_format_tile_';
+  static const Key timeFormatTileKey = Key('${timeFormatTileKeyPrefix}key');
   static final Set<TimeFormatPattern> timeFormatPatterns =
       TimeFormatPattern.values.toSet();
+  static const String textDirectionTileKeyPrefix =
+      '${keyPrefix}text_direction_tile_';
   static const Key textDirectionTileKey =
-      Key('${keyPrefix}_text_direction_tile');
-  static const Key textDirectionDialogKey =
-      Key('${keyPrefix}_text_direction_dialog');
-  static const Key distanceUnitTileKey = Key('${keyPrefix}_distance_unit_tile');
-  static const Key distanceUnitDialogKey =
-      Key('${keyPrefix}_distance_unit_dialog');
-  static const Key velocityUnitTileKey = Key('${keyPrefix}_velocity_unit_tile');
-  static const Key velocityUnitDialogKey =
-      Key('${keyPrefix}_velocity_unit_dialog');
-  static const Key diameterUnitTileKey = Key('${keyPrefix}_diameter_unit_tile');
-  static const Key diameterUnitDialogKey =
-      Key('${keyPrefix}_diameter_unit_dialog');
+      Key('${textDirectionTileKeyPrefix}key');
+  static const String distanceUnitTileKeyPrefix =
+      '${keyPrefix}distance_unit_tile_';
+  static const Key distanceUnitTileKey = Key('${distanceUnitTileKeyPrefix}key');
+  static const String velocityUnitTileKeyPrefix =
+      '${keyPrefix}velocity_unit_tile_';
+  static const Key velocityUnitTileKey = Key('${velocityUnitTileKeyPrefix}key');
+  static const String diameterUnitTileKeyPrefix =
+      '${keyPrefix}diameter_unit_tile_';
+  static const Key diameterUnitTileKey = Key('${diameterUnitTileKeyPrefix}key');
 
   @override
   Widget build(BuildContext context) {
@@ -126,8 +126,8 @@ class SettingsScreen extends StatelessWidget {
       builder: (context, locale) {
         final settingsBloc = context.read<SettingsBloc>();
         return RadioSettingsTile<Locale?>(
+          keyPrefix: localeTileKeyPrefix,
           key: localeTileKey,
-          dialogKey: localeDialogKey,
           title: l10n.language,
           subTitle: getLocaleValueTitle(l10n: l10n, locale: locale),
           values: values,
@@ -177,8 +177,8 @@ class SettingsScreen extends StatelessWidget {
       builder: (context, dateFormatPattern) {
         final settingsBloc = context.read<SettingsBloc>();
         return RadioSettingsTile<DateFormatPattern>(
+          keyPrefix: dateFormatTileKeyPrefix,
           key: dateFormatTileKey,
-          dialogKey: dateFormatDialogKey,
           title: l10n.dateFormat,
           subTitle: getDateFormatValueTitle(
             l10n: l10n,
@@ -235,8 +235,8 @@ class SettingsScreen extends StatelessWidget {
       builder: (context, timeFormatPattern) {
         final settingsBloc = context.read<SettingsBloc>();
         return RadioSettingsTile<TimeFormatPattern>(
+          keyPrefix: timeFormatTileKeyPrefix,
           key: timeFormatTileKey,
-          dialogKey: timeFormatDialogKey,
           title: l10n.timeFormat,
           subTitle: getTimeFormatValueTitle(
             l10n: l10n,
@@ -297,8 +297,8 @@ class SettingsScreen extends StatelessWidget {
       builder: (context, textDirection) {
         final settingsBloc = context.read<SettingsBloc>();
         return RadioSettingsTile<TextDirection?>(
+          keyPrefix: textDirectionTileKeyPrefix,
           key: textDirectionTileKey,
-          dialogKey: textDirectionDialogKey,
           title: l10n.textDirection,
           subTitle: getTextDirectionValueTitle(
             l10n: l10n,
@@ -366,8 +366,8 @@ class SettingsScreen extends StatelessWidget {
       builder: (context, distanceUnit) {
         final settingsBloc = context.read<SettingsBloc>();
         return RadioSettingsTile<DistanceUnit>(
+          keyPrefix: distanceUnitTileKeyPrefix,
           key: distanceUnitTileKey,
-          dialogKey: distanceUnitDialogKey,
           title: l10n.distanceUnit,
           subTitle: getDistanceUnitValueTitle(
             l10n: l10n,
@@ -432,8 +432,8 @@ class SettingsScreen extends StatelessWidget {
       builder: (context, velocityUnit) {
         final settingsBloc = context.read<SettingsBloc>();
         return RadioSettingsTile<VelocityUnit>(
+          keyPrefix: velocityUnitTileKeyPrefix,
           key: velocityUnitTileKey,
-          dialogKey: velocityUnitDialogKey,
           title: l10n.velocityUnit,
           subTitle: getVelocityUnitValueTitle(
             l10n: l10n,
@@ -501,8 +501,8 @@ class SettingsScreen extends StatelessWidget {
       builder: (context, diameterUnit) {
         final settingsBloc = context.read<SettingsBloc>();
         return RadioSettingsTile<DistanceUnit>(
+          keyPrefix: diameterUnitTileKeyPrefix,
           key: diameterUnitTileKey,
-          dialogKey: diameterUnitDialogKey,
           title: l10n.diameterUnit,
           subTitle: getDiameterUnitValueTitle(
             l10n: l10n,

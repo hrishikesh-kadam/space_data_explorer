@@ -4,8 +4,8 @@ import 'radio_dialog.dart';
 
 class RadioSettingsTile<T> extends StatelessWidget {
   const RadioSettingsTile({
+    this.keyPrefix = '',
     super.key,
-    this.dialogKey,
     required this.title,
     this.subTitle,
     required this.values,
@@ -16,7 +16,7 @@ class RadioSettingsTile<T> extends StatelessWidget {
     this.afterShowDialog,
   });
 
-  final Key? dialogKey;
+  final String keyPrefix;
   final String title;
   final String? subTitle;
   final Set<T> values;
@@ -25,6 +25,9 @@ class RadioSettingsTile<T> extends StatelessWidget {
   final ValueChanged<T?>? onChanged;
   final VoidCallback? beforeShowDialog;
   final VoidCallback? afterShowDialog;
+
+  static const String keyPrefixDefault = 'radio_settings_tile_';
+  static const String keySuffixDefault = '${keyPrefixDefault}key';
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +40,12 @@ class RadioSettingsTile<T> extends StatelessWidget {
           context: context,
           builder: (context) {
             return RadioDialog<T>(
-              key: dialogKey,
+              keyPrefix: keyPrefix.isNotEmpty
+                  ? '$keyPrefix${RadioDialog.keyPrefixDefault}'
+                  : '',
+              key: keyPrefix.isNotEmpty
+                  ? Key('$keyPrefix${RadioDialog.keySuffixDefault}')
+                  : null,
               title: title,
               values: values,
               valueTitles: valueTitles,

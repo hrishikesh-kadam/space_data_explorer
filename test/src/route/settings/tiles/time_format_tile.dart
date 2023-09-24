@@ -5,12 +5,33 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import 'package:space_data_explorer/route/settings/time_format_pattern.dart';
+import 'package:space_data_explorer/widgets/radio_dialog.dart';
 import '../../../extension/common_finders.dart';
-import '../../../globals.dart';
 
 final timeFormatTileFinder = find.byKey(SettingsScreen.timeFormatTileKey);
-final timeFormatDialogFinder = find.byKey(SettingsScreen.timeFormatDialogKey);
-final timeFormatListViewFinder = find.byKey(Key('${l10n.timeFormat}_listview'));
+final timeFormatDialogFinder = find.byKey(const Key(
+  '${SettingsScreen.timeFormatTileKeyPrefix}'
+  '${RadioDialog.keySuffixDefault}',
+));
+const timeFormatDialogKeyPrefix = '${SettingsScreen.timeFormatTileKeyPrefix}'
+    '${RadioDialog.keyPrefixDefault}';
+final timeFormatListViewFinder = find.byKey(const Key(
+  '$timeFormatDialogKeyPrefix'
+  '${RadioDialog.listViewKeySuffix}',
+));
+
+Finder getTimeFormatPatternFinder({
+  required AppLocalizations l10n,
+  required TimeFormatPattern timeFormatPattern,
+}) {
+  return find.byKey(Key(
+    '$timeFormatDialogKeyPrefix'
+    '${SettingsScreen.getTimeFormatValueTitle(
+      l10n: l10n,
+      timeFormatPattern: timeFormatPattern,
+    )}',
+  ));
+}
 
 Future<void> tapTimeFormatTile(WidgetTester tester) async {
   await tester.tap(timeFormatTileFinder);
@@ -22,12 +43,10 @@ Future<void> chooseTimeFormat(
   required AppLocalizations l10n,
   required TimeFormatPattern timeFormatPattern,
 }) async {
-  final timeFormatPatternFinder = find.byKey(Key(
-    SettingsScreen.getTimeFormatValueTitle(
-      l10n: l10n,
-      timeFormatPattern: timeFormatPattern,
-    ),
-  ));
+  final timeFormatPatternFinder = getTimeFormatPatternFinder(
+    l10n: l10n,
+    timeFormatPattern: timeFormatPattern,
+  );
   await tester.dragUntilVisible(
     timeFormatPatternFinder,
     timeFormatListViewFinder,

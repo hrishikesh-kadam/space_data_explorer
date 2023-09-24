@@ -5,12 +5,33 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
+import 'package:space_data_explorer/widgets/radio_dialog.dart';
 import '../../../extension/common_finders.dart';
-import '../../../globals.dart';
 
 final dateFormatTileFinder = find.byKey(SettingsScreen.dateFormatTileKey);
-final dateFormatDialogFinder = find.byKey(SettingsScreen.dateFormatDialogKey);
-final dateFormatListViewFinder = find.byKey(Key('${l10n.dateFormat}_listview'));
+final dateFormatDialogFinder = find.byKey(const Key(
+  '${SettingsScreen.dateFormatTileKeyPrefix}'
+  '${RadioDialog.keySuffixDefault}',
+));
+const dateFormatDialogKeyPrefix = '${SettingsScreen.dateFormatTileKeyPrefix}'
+    '${RadioDialog.keyPrefixDefault}';
+final dateFormatListViewFinder = find.byKey(const Key(
+  '$dateFormatDialogKeyPrefix'
+  '${RadioDialog.listViewKeySuffix}',
+));
+
+Finder getDateFormatPatternFinder({
+  required AppLocalizations l10n,
+  required DateFormatPattern dateFormatPattern,
+}) {
+  return find.byKey(Key(
+    '$dateFormatDialogKeyPrefix'
+    '${SettingsScreen.getDateFormatValueTitle(
+      l10n: l10n,
+      dateFormatPattern: dateFormatPattern,
+    )}',
+  ));
+}
 
 Future<void> tapDateFormatTile(WidgetTester tester) async {
   await tester.tap(dateFormatTileFinder);
@@ -22,12 +43,10 @@ Future<void> chooseDateFormat(
   required AppLocalizations l10n,
   required DateFormatPattern dateFormatPattern,
 }) async {
-  final dateFormatPatternFinder = find.byKey(Key(
-    SettingsScreen.getDateFormatValueTitle(
-      l10n: l10n,
-      dateFormatPattern: dateFormatPattern,
-    ),
-  ));
+  final dateFormatPatternFinder = getDateFormatPatternFinder(
+    l10n: l10n,
+    dateFormatPattern: dateFormatPattern,
+  );
   await tester.dragUntilVisible(
     dateFormatPatternFinder,
     dateFormatListViewFinder,

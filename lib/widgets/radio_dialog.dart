@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class RadioDialog<T> extends StatelessWidget {
   const RadioDialog({
+    this.keyPrefix = '',
     super.key,
     required this.title,
     required this.values,
@@ -10,11 +11,16 @@ class RadioDialog<T> extends StatelessWidget {
     this.onChanged,
   });
 
+  final String keyPrefix;
   final String title;
   final Set<T> values;
   final Set<String> valueTitles;
   final T? groupValue;
   final ValueChanged<T?>? onChanged;
+
+  static const String keyPrefixDefault = 'radio_dialog_';
+  static const String keySuffixDefault = '${keyPrefixDefault}key';
+  static const String listViewKeySuffix = 'list_view';
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +33,15 @@ class RadioDialog<T> extends StatelessWidget {
         // let this be as wide as 320.
         width: 320,
         child: ListView.builder(
-          // TODO(hrishikesh-kadam): implement keyPrefix
-          key: Key('${title}_listview'),
+          key: keyPrefix.isEmpty ? null : Key('$keyPrefix$listViewKeySuffix'),
           shrinkWrap: true,
           itemCount: values.length,
           itemBuilder: (context, index) {
             return RadioListTile<T>(
               contentPadding: const EdgeInsets.all(0),
-              key: Key(valueTitles.elementAt(index)),
+              key: keyPrefix.isNotEmpty
+                  ? Key('$keyPrefix${valueTitles.elementAt(index)}')
+                  : null,
               value: values.elementAt(index),
               title: Text(valueTitles.elementAt(index)),
               groupValue: groupValue,
