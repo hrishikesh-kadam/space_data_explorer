@@ -9,72 +9,72 @@ import 'package:space_data_explorer/widgets/radio_dialog.dart';
 import '../../../extension/common_finders.dart';
 import '../settings_route.dart';
 
-final distanceUnitTileFinder = find.byKey(SettingsScreen.distanceUnitTileKey);
-final distanceUnitDialogFinder = find.byKey(const Key(
-  '${SettingsScreen.distanceUnitTileKeyPrefix}'
+final diameterUnitTileFinder = find.byKey(SettingsScreen.diameterUnitTileKey);
+final diameterUnitDialogFinder = find.byKey(const Key(
+  '${SettingsScreen.diameterUnitTileKeyPrefix}'
   '${RadioDialog.keySuffixDefault}',
 ));
-const distanceUnitDialogKeyPrefix =
-    '${SettingsScreen.distanceUnitTileKeyPrefix}'
+const diameterUnitDialogKeyPrefix =
+    '${SettingsScreen.diameterUnitTileKeyPrefix}'
     '${RadioDialog.keyPrefixDefault}';
-final distanceUnitListViewFinder = find.byKey(const Key(
-  '$distanceUnitDialogKeyPrefix'
+final diameterUnitListViewFinder = find.byKey(const Key(
+  '$diameterUnitDialogKeyPrefix'
   '${RadioDialog.listViewKeySuffix}',
 ));
 
-Finder getDistanceUnitFinder({
+Finder getDiameterUnitFinder({
   required AppLocalizations l10n,
-  required DistanceUnit distanceUnit,
+  required DistanceUnit diameterUnit,
 }) {
   return find.byKey(Key(
-    '$distanceUnitDialogKeyPrefix'
-    '${SettingsScreen.getDistanceUnitValueTitle(
+    '$diameterUnitDialogKeyPrefix'
+    '${SettingsScreen.getDiameterUnitValueTitle(
       l10n: l10n,
-      distanceUnit: distanceUnit,
+      diameterUnit: diameterUnit,
     )}',
   ));
 }
 
-Future<void> tapDistanceUnitTile(WidgetTester tester) async {
+Future<void> tapDiameterUnitTile(WidgetTester tester) async {
   await tester.dragUntilVisible(
-    distanceUnitTileFinder,
+    diameterUnitTileFinder,
     settingsListViewFinder,
     const Offset(0, -200),
   );
   await tester.pumpAndSettle();
-  await tester.tap(distanceUnitTileFinder);
+  await tester.tap(diameterUnitTileFinder);
   await tester.pumpAndSettle();
 }
 
-Future<void> chooseDistanceUnit(
+Future<void> chooseDiameterUnit(
   WidgetTester tester, {
   required AppLocalizations l10n,
-  required DistanceUnit distanceUnit,
+  required DistanceUnit diameterUnit,
 }) async {
-  final distanceUnitFinder = getDistanceUnitFinder(
+  final diameterUnitFinder = getDiameterUnitFinder(
     l10n: l10n,
-    distanceUnit: distanceUnit,
+    diameterUnit: diameterUnit,
   );
   await tester.dragUntilVisible(
-    distanceUnitFinder,
-    distanceUnitListViewFinder,
+    diameterUnitFinder,
+    diameterUnitListViewFinder,
     const Offset(0, -200),
   );
   await tester.pumpAndSettle();
-  await tester.tap(distanceUnitFinder);
+  await tester.tap(diameterUnitFinder);
   await tester.pumpAndSettle();
 }
 
-Future<void> verifyDistanceUnitTileSubtitle(
+Future<void> verifyDiameterUnitTileSubtitle(
   WidgetTester tester, {
   required AppLocalizations l10n,
-  required DistanceUnit distanceUnit,
+  required DistanceUnit diameterUnit,
 }) async {
   final subTitleFinder = find.descendantText(
-    of: distanceUnitTileFinder,
-    text: SettingsScreen.getDistanceUnitValueTitle(
+    of: diameterUnitTileFinder,
+    text: SettingsScreen.getDiameterUnitValueTitle(
       l10n: l10n,
-      distanceUnit: distanceUnit,
+      diameterUnit: diameterUnit,
     ),
   );
   expect(subTitleFinder, findsOneWidget);

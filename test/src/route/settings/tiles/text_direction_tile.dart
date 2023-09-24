@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import 'package:space_data_explorer/widgets/radio_dialog.dart';
 import '../../../extension/common_finders.dart';
+import '../settings_route.dart';
 
 final textDirectionTileFinder = find.byKey(SettingsScreen.textDirectionTileKey);
 final textDirectionDialogFinder = find.byKey(const Key(
@@ -34,6 +35,12 @@ Finder getTextDirectionFinder({
 }
 
 Future<void> tapTextDirectionTile(WidgetTester tester) async {
+  await tester.dragUntilVisible(
+    textDirectionTileFinder,
+    settingsListViewFinder,
+    const Offset(0, -200),
+  );
+  await tester.pumpAndSettle();
   await tester.tap(textDirectionTileFinder);
   await tester.pumpAndSettle();
 }

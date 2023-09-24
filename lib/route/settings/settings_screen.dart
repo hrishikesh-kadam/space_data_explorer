@@ -25,6 +25,7 @@ class SettingsScreen extends StatelessWidget {
   final AppLocalizations l10n;
   final _logger = Logger('$appNamePascalCase.SettingsScreen');
   static const String keyPrefix = 'settings_screen_';
+  static const Key listViewKey = Key('${keyPrefix}list_view');
   static const String localeTileKeyPrefix = '${keyPrefix}locale_tile_';
   static const Key localeTileKey = Key('${localeTileKeyPrefix}key');
   static final Set<Locale?> locales = {
@@ -64,6 +65,12 @@ class SettingsScreen extends StatelessWidget {
   static const String diameterUnitTileKeyPrefix =
       '${keyPrefix}diameter_unit_tile_';
   static const Key diameterUnitTileKey = Key('${diameterUnitTileKeyPrefix}key');
+  static final Set<DistanceUnit> diameterUnits = {
+    DistanceUnit.km,
+    DistanceUnit.m,
+    DistanceUnit.mi,
+    DistanceUnit.ft,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +102,7 @@ class SettingsScreen extends StatelessWidget {
       builder: (context) {
         final settingsTiles = _getSettingsTiles();
         return ListView.separated(
+          key: listViewKey,
           itemCount: settingsTiles.length,
           itemBuilder: (context, index) {
             return settingsTiles[index];
@@ -491,12 +499,7 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _getDiameterUnitTile() {
-    final Set<DistanceUnit> values = {
-      DistanceUnit.km,
-      DistanceUnit.m,
-      DistanceUnit.mi,
-      DistanceUnit.ft,
-    };
+    final Set<DistanceUnit> values = diameterUnits;
     final Set<String> valueTitles = values
         .map((e) => getDiameterUnitValueTitle(l10n: l10n, diameterUnit: e))
         .toSet();

@@ -7,6 +7,7 @@ import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import 'package:space_data_explorer/widgets/radio_dialog.dart';
 import '../../../extension/common_finders.dart';
+import '../settings_route.dart';
 
 final dateFormatTileFinder = find.byKey(SettingsScreen.dateFormatTileKey);
 final dateFormatDialogFinder = find.byKey(const Key(
@@ -34,6 +35,12 @@ Finder getDateFormatPatternFinder({
 }
 
 Future<void> tapDateFormatTile(WidgetTester tester) async {
+  await tester.dragUntilVisible(
+    dateFormatTileFinder,
+    settingsListViewFinder,
+    const Offset(0, -200),
+  );
+  await tester.pumpAndSettle();
   await tester.tap(dateFormatTileFinder);
   await tester.pumpAndSettle();
 }
