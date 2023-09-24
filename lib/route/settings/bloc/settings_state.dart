@@ -15,16 +15,24 @@ class SettingsState with _$SettingsState {
   // ignore: invalid_annotation_target
   @JsonSerializable(explicitToJson: true)
   const factory SettingsState({
-    @LocaleJsonConverter() Locale? locale,
+    @Default(SettingsState.localeDefault) @LocaleJsonConverter() Locale? locale,
     @LocaleListJsonConverter() List<Locale>? systemLocales,
-    @Default(DateFormatPattern.yMd) DateFormatPattern dateFormatPattern,
-    @Default(TimeFormatPattern.jm) TimeFormatPattern timeFormatPattern,
+    @Default(SettingsState.dateFormatPatternDefault)
+    DateFormatPattern dateFormatPattern,
+    @Default(SettingsState.timeFormatPatternDefault)
+    TimeFormatPattern timeFormatPattern,
     @Default(DistanceUnit.au) DistanceUnit distanceUnit,
     @Default(VelocityUnit.kmps) VelocityUnit velocityUnit,
     @Default(DistanceUnit.km) DistanceUnit diameterUnit,
     TextDirection? textDirection,
     bool? isAnyDialogShown,
   }) = _SettingsState;
+
+  static const Locale? localeDefault = null;
+  static const DateFormatPattern dateFormatPatternDefault =
+      DateFormatPattern.yMd;
+  static const TimeFormatPattern timeFormatPatternDefault =
+      TimeFormatPattern.jm;
 
   factory SettingsState.fromJson(Map<String, dynamic> json) =>
       _$SettingsStateFromJson(json);

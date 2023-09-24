@@ -8,6 +8,7 @@ import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
 import 'package:space_data_explorer/route/home/home_screen.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
+import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
 import 'package:space_data_explorer/route/settings/locale.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import '../../../../src/config/hydrated_bloc.dart';
@@ -17,49 +18,30 @@ import '../../../../src/route/settings/tiles/locale_tile.dart';
 
 void main() {
   group('$SettingsScreen $Locale Tile Widget Test', () {
-    testWidgets('Basic', (tester) async {
+    testWidgets('No interaction', (tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
       expect(localeTileFinder, findsOneWidget);
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
-      expect(settingsBloc.state.locale, null);
+      expect(settingsBloc.state.locale, SettingsState.localeDefault);
     });
 
-    testWidgets('Choose ${LocaleExt.en}', (tester) async {
-      const locale = LocaleExt.en;
+    testWidgets('Choose each', (tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
-      await tapLocaleTile(tester);
-      expect(localeDialogFinder, findsOneWidget);
-      await chooseLocale(tester, l10n: l10n, locale: locale);
-      expect(localeDialogFinder, findsNothing);
-      await verifyLocaleTileSubtitle(tester, l10n: l10n, locale: locale);
-    });
-
-    testWidgets('Choose ${LocaleExt.hi}', (tester) async {
-      const locale = LocaleExt.hi;
-      await pumpSettingsRouteAsNormalLink(tester);
-      await tapLocaleTile(tester);
-      await chooseLocale(tester, l10n: l10n, locale: locale);
-      await verifyLocaleTileSubtitle(tester, l10n: l10n, locale: locale);
-    });
-
-    testWidgets('Choose ${LocaleExt.mr}', (tester) async {
-      const locale = LocaleExt.mr;
-      await pumpSettingsRouteAsNormalLink(tester);
-      await tapLocaleTile(tester);
-      await chooseLocale(tester, l10n: l10n, locale: locale);
-      await verifyLocaleTileSubtitle(tester, l10n: l10n, locale: locale);
-    });
-
-    testWidgets('Choose ${l10n.system}', (tester) async {
-      const locale = null;
-      await pumpSettingsRouteAsNormalLink(tester);
-      await tapLocaleTile(tester);
-      await chooseLocale(tester, l10n: l10n, locale: locale);
-      await verifyLocaleTileSubtitle(tester, l10n: l10n, locale: locale);
+      for (final locale in SettingsScreen.locales) {
+        await tapLocaleTile(tester);
+        expect(localeDialogFinder, findsOneWidget);
+        await chooseLocale(tester, l10n: l10n, locale: locale);
+        expect(localeDialogFinder, findsNothing);
+        await verifyLocaleTileSubtitle(tester, l10n: l10n, locale: locale);
+        final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
+        expect(settingsBloc.state.locale, locale);
+      }
     });
 
     testWidgets('System Locale Changed', (tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
+      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
+      final locale = settingsBloc.state.locale;
       await tapLocaleTile(tester);
       final platformLocales = tester.platformDispatcher.locales;
       final changedPlatformLocales = List.of(platformLocales, growable: true);
@@ -68,6 +50,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(localeDialogFinder, findsNothing);
       expect(find.byType(SettingsScreen), findsOneWidget);
+      expect(settingsBloc.state.locale, locale);
     });
 
     testWidgets('Tap and dismiss without choosing any value', (tester) async {
@@ -90,9 +73,12 @@ void main() {
       await tapLocaleTile(tester);
       await chooseLocale(tester, l10n: l10n, locale: locale);
       await verifyLocaleTileSubtitle(tester, l10n: l10n, locale: locale);
+      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
+      expect(settingsBloc.state.locale, locale);
       await tapBackButton(tester);
       await tapSettingsButton(tester);
       await verifyLocaleTileSubtitle(tester, l10n: l10n, locale: locale);
+      expect(settingsBloc.state.locale, locale);
     });
 
     testWidgets('With Hydration, Choose ${LocaleExt.en}, exit app, enter again',
@@ -107,6 +93,8 @@ void main() {
       await tapLocaleTile(tester);
       await chooseLocale(tester, l10n: l10n, locale: locale);
       await verifyLocaleTileSubtitle(tester, l10n: l10n, locale: locale);
+      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
+      expect(settingsBloc.state.locale, locale);
       await tapBackButton(tester);
       await simulateAndroidBackButton(tester);
       expect(find.byType(HomeScreen), findsOneWidget);
@@ -114,6 +102,7 @@ void main() {
       await tester.pump();
       await pumpSettingsRouteAsNormalLink(tester, navigatorKey: GlobalKey());
       await verifyLocaleTileSubtitle(tester, l10n: l10n, locale: locale);
+      expect(settingsBloc.state.locale, locale);
       await tearDownHydratedBloc(storageDirectory);
     }, skip: true);
   });

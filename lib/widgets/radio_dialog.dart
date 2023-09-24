@@ -27,6 +27,8 @@ class RadioDialog<T> extends StatelessWidget {
         // let this be as wide as 320.
         width: 320,
         child: ListView.builder(
+          // TODO(hrishikesh-kadam): implement keyPrefix
+          key: Key('${title}_listview'),
           shrinkWrap: true,
           itemCount: values.length,
           itemBuilder: (context, index) {

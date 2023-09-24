@@ -27,10 +27,18 @@ class SettingsScreen extends StatelessWidget {
   static const String keyPrefix = 'settings_screen';
   static const Key localeTileKey = Key('${keyPrefix}_locale_tile');
   static const Key localeDialogKey = Key('${keyPrefix}_locale_dialog');
+  static final Set<Locale?> locales = {
+    null,
+    ...LocaleExt.getSupportedLocales(),
+  };
   static const Key dateFormatTileKey = Key('${keyPrefix}_date_format_tile');
   static const Key dateFormatDialogKey = Key('${keyPrefix}_date_format_dialog');
+  static final Set<DateFormatPattern> dateFormatPatterns =
+      DateFormatPattern.values.toSet();
   static const Key timeFormatTileKey = Key('${keyPrefix}_time_format_tile');
   static const Key timeFormatDialogKey = Key('${keyPrefix}_time_format_dialog');
+  static final Set<TimeFormatPattern> timeFormatPatterns =
+      TimeFormatPattern.values.toSet();
   static const Key textDirectionTileKey =
       Key('${keyPrefix}_text_direction_tile');
   static const Key textDirectionDialogKey =
@@ -110,7 +118,7 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _getLocaleTile() {
-    final Set<Locale?> values = {null, ...LocaleExt.getSupportedLocales()};
+    final Set<Locale?> values = locales;
     final Set<String> valueTitles =
         values.map((e) => getLocaleValueTitle(l10n: l10n, locale: e)).toSet();
     return BlocSelector<SettingsBloc, SettingsState, Locale?>(
@@ -160,7 +168,7 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _getDateFormatTile() {
-    final Set<DateFormatPattern> values = DateFormatPattern.values.toSet();
+    final Set<DateFormatPattern> values = dateFormatPatterns;
     final Set<String> valueTitles = values
         .map((e) => getDateFormatValueTitle(l10n: l10n, dateFormatPattern: e))
         .toSet();
@@ -218,7 +226,7 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _getTimeFormatTile() {
-    final Set<TimeFormatPattern> values = TimeFormatPattern.values.toSet();
+    final Set<TimeFormatPattern> values = timeFormatPatterns;
     final Set<String> valueTitles = values
         .map((e) => getTimeFormatValueTitle(l10n: l10n, timeFormatPattern: e))
         .toSet();

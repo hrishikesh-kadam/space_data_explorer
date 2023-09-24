@@ -12,16 +12,18 @@ part of 'settings_state.dart';
 
 _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
     _$_SettingsState(
-      locale: const LocaleJsonConverter()
-          .fromJson(json['locale'] as Map<String, dynamic>?),
+      locale: json['locale'] == null
+          ? SettingsState.localeDefault
+          : const LocaleJsonConverter()
+              .fromJson(json['locale'] as Map<String, dynamic>?),
       systemLocales: const LocaleListJsonConverter()
           .fromJson(json['systemLocales'] as List?),
       dateFormatPattern: $enumDecodeNullable(
               _$DateFormatPatternEnumMap, json['dateFormatPattern']) ??
-          DateFormatPattern.yMd,
+          SettingsState.dateFormatPatternDefault,
       timeFormatPattern: $enumDecodeNullable(
               _$TimeFormatPatternEnumMap, json['timeFormatPattern']) ??
-          TimeFormatPattern.jm,
+          SettingsState.timeFormatPatternDefault,
       distanceUnit: json['distanceUnit'] == null
           ? DistanceUnit.au
           : DistanceUnit.fromJson(json['distanceUnit'] as Map<String, dynamic>),

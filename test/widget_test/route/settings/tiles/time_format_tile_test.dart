@@ -4,83 +4,83 @@ import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
 import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
-import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
 import 'package:space_data_explorer/route/settings/locale.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
+import 'package:space_data_explorer/route/settings/time_format_pattern.dart';
 import '../../../../src/globals.dart';
 import '../../../../src/route/settings/settings_route.dart';
-import '../../../../src/route/settings/tiles/date_format_tile.dart';
+import '../../../../src/route/settings/tiles/time_format_tile.dart';
 
 void main() {
-  group('$SettingsScreen ${l10n.dateFormat} Tile Widget Test', () {
+  group('$SettingsScreen ${l10n.timeFormat} Tile Widget Test', () {
     testWidgets('No interaction', (tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
-      expect(dateFormatTileFinder, findsOneWidget);
+      expect(timeFormatTileFinder, findsOneWidget);
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
-      expect(settingsBloc.state.dateFormatPattern,
-          SettingsState.dateFormatPatternDefault);
+      expect(settingsBloc.state.timeFormatPattern,
+          SettingsState.timeFormatPatternDefault);
     });
 
     testWidgets('Choose each', (tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
-      for (final dateFormatPattern in SettingsScreen.dateFormatPatterns) {
-        await tapDateFormatTile(tester);
-        expect(dateFormatDialogFinder, findsOneWidget);
-        await chooseDateFormat(tester,
-            l10n: l10n, dateFormatPattern: dateFormatPattern);
-        expect(dateFormatDialogFinder, findsNothing);
-        await verifyDateFormatTileSubtitle(tester,
-            l10n: l10n, dateFormatPattern: dateFormatPattern);
+      for (final timeFormatPattern in SettingsScreen.timeFormatPatterns) {
+        await tapTimeFormatTile(tester);
+        expect(timeFormatDialogFinder, findsOneWidget);
+        await chooseTimeFormat(tester,
+            l10n: l10n, timeFormatPattern: timeFormatPattern);
+        expect(timeFormatDialogFinder, findsNothing);
+        await verifyTimeFormatTileSubtitle(tester,
+            l10n: l10n, timeFormatPattern: timeFormatPattern);
         final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
-        expect(settingsBloc.state.dateFormatPattern, dateFormatPattern);
+        expect(settingsBloc.state.timeFormatPattern, timeFormatPattern);
       }
     });
 
     testWidgets('System Locale Changed', (tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
-      final dateFormatPattern = settingsBloc.state.dateFormatPattern;
-      await tapDateFormatTile(tester);
+      final timeFormatPattern = settingsBloc.state.timeFormatPattern;
+      await tapTimeFormatTile(tester);
       final platformLocales = tester.platformDispatcher.locales;
       final changedPlatformLocales = List.of(platformLocales, growable: true);
       changedPlatformLocales.add(LocaleExt.hi);
       tester.platformDispatcher.localesTestValue = changedPlatformLocales;
       await tester.pumpAndSettle();
-      expect(dateFormatDialogFinder, findsNothing);
+      expect(timeFormatDialogFinder, findsNothing);
       expect(find.byType(SettingsScreen), findsOneWidget);
-      expect(settingsBloc.state.dateFormatPattern, dateFormatPattern);
+      expect(settingsBloc.state.timeFormatPattern, timeFormatPattern);
     });
 
     testWidgets('Tap and dismiss without choosing any value', (tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
       expect(settingsBloc.state.isAnyDialogShown, null);
-      await tapDateFormatTile(tester);
+      await tapTimeFormatTile(tester);
       expect(settingsBloc.state.isAnyDialogShown, true);
       await tester.tapAt(Offset.zero);
       await tester.pumpAndSettle();
-      expect(dateFormatDialogFinder, findsNothing);
+      expect(timeFormatDialogFinder, findsNothing);
       expect(find.byType(SettingsScreen), findsOneWidget);
       expect(settingsBloc.state.isAnyDialogShown, false);
     });
 
     testWidgets(
-        'Choose ${DateFormatPattern.ddMMyyyySlash}, exit screen, enter again',
+        'Choose ${TimeFormatPattern.twelveHourClock}, exit screen, enter again',
         (tester) async {
-      const dateFormatPattern = DateFormatPattern.ddMMyyyySlash;
+      const timeFormatPattern = TimeFormatPattern.twelveHourClock;
       await pumpSettingsRouteAsNormalLink(tester);
-      await tapDateFormatTile(tester);
-      await chooseDateFormat(tester,
-          l10n: l10n, dateFormatPattern: dateFormatPattern);
-      await verifyDateFormatTileSubtitle(tester,
-          l10n: l10n, dateFormatPattern: dateFormatPattern);
+      await tapTimeFormatTile(tester);
+      await chooseTimeFormat(tester,
+          l10n: l10n, timeFormatPattern: timeFormatPattern);
+      await verifyTimeFormatTileSubtitle(tester,
+          l10n: l10n, timeFormatPattern: timeFormatPattern);
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
-      expect(settingsBloc.state.dateFormatPattern, dateFormatPattern);
+      expect(settingsBloc.state.timeFormatPattern, timeFormatPattern);
       await tapBackButton(tester);
       await tapSettingsButton(tester);
-      await verifyDateFormatTileSubtitle(tester,
-          l10n: l10n, dateFormatPattern: dateFormatPattern);
-      expect(settingsBloc.state.dateFormatPattern, dateFormatPattern);
+      await verifyTimeFormatTileSubtitle(tester,
+          l10n: l10n, timeFormatPattern: timeFormatPattern);
+      expect(settingsBloc.state.timeFormatPattern, timeFormatPattern);
     });
   });
 }

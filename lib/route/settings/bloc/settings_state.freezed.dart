@@ -207,10 +207,10 @@ class __$$_SettingsStateCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$_SettingsState implements _SettingsState {
   const _$_SettingsState(
-      {@LocaleJsonConverter() this.locale,
+      {@LocaleJsonConverter() this.locale = SettingsState.localeDefault,
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
-      this.dateFormatPattern = DateFormatPattern.yMd,
-      this.timeFormatPattern = TimeFormatPattern.jm,
+      this.dateFormatPattern = SettingsState.dateFormatPatternDefault,
+      this.timeFormatPattern = SettingsState.timeFormatPatternDefault,
       this.distanceUnit = DistanceUnit.au,
       this.velocityUnit = VelocityUnit.kmps,
       this.diameterUnit = DistanceUnit.km,
@@ -222,6 +222,7 @@ class _$_SettingsState implements _SettingsState {
       _$$_SettingsStateFromJson(json);
 
   @override
+  @JsonKey()
   @LocaleJsonConverter()
   final Locale? locale;
   final List<Locale>? _systemLocales;
