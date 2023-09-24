@@ -28,13 +28,13 @@ _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
           $enumDecodeNullable(_$TextDirectionEnumMap, json['textDirection']) ??
               SettingsState.textDirectionDefault,
       distanceUnit: json['distanceUnit'] == null
-          ? DistanceUnit.au
+          ? SettingsState.distanceUnitDefault
           : DistanceUnit.fromJson(json['distanceUnit'] as Map<String, dynamic>),
       velocityUnit: json['velocityUnit'] == null
-          ? VelocityUnit.kmps
+          ? SettingsState.velocityUnitDefault
           : VelocityUnit.fromJson(json['velocityUnit'] as Map<String, dynamic>),
       diameterUnit: json['diameterUnit'] == null
-          ? DistanceUnit.km
+          ? SettingsState.diameterUnitDefault
           : DistanceUnit.fromJson(json['diameterUnit'] as Map<String, dynamic>),
       isAnyDialogShown: json['isAnyDialogShown'] as bool?,
     );

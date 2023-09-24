@@ -51,6 +51,13 @@ class SettingsScreen extends StatelessWidget {
   static const String distanceUnitTileKeyPrefix =
       '${keyPrefix}distance_unit_tile_';
   static const Key distanceUnitTileKey = Key('${distanceUnitTileKeyPrefix}key');
+  static final Set<DistanceUnit> distanceUnits = {
+    DistanceUnit.au,
+    DistanceUnit.LD,
+    DistanceUnit.km,
+    DistanceUnit.mi,
+    DistanceUnit.Re,
+  };
   static const String velocityUnitTileKeyPrefix =
       '${keyPrefix}velocity_unit_tile_';
   static const Key velocityUnitTileKey = Key('${velocityUnitTileKeyPrefix}key');
@@ -354,13 +361,7 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _getDistanceUnitTile() {
-    final Set<DistanceUnit> values = {
-      DistanceUnit.au,
-      DistanceUnit.LD,
-      DistanceUnit.km,
-      DistanceUnit.mi,
-      DistanceUnit.Re,
-    };
+    final Set<DistanceUnit> values = distanceUnits;
     final Set<String> valueTitles = values
         .map((e) => getDistanceUnitValueTitle(l10n: l10n, distanceUnit: e))
         .toSet();

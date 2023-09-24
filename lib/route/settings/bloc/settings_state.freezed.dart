@@ -212,9 +212,9 @@ class _$_SettingsState implements _SettingsState {
       this.dateFormatPattern = SettingsState.dateFormatPatternDefault,
       this.timeFormatPattern = SettingsState.timeFormatPatternDefault,
       this.textDirection = SettingsState.textDirectionDefault,
-      this.distanceUnit = DistanceUnit.au,
-      this.velocityUnit = VelocityUnit.kmps,
-      this.diameterUnit = DistanceUnit.km,
+      this.distanceUnit = SettingsState.distanceUnitDefault,
+      this.velocityUnit = SettingsState.velocityUnitDefault,
+      this.diameterUnit = SettingsState.diameterUnitDefault,
       this.isAnyDialogShown})
       : _systemLocales = systemLocales;
 

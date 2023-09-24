@@ -22,9 +22,9 @@ class SettingsState with _$SettingsState {
     @Default(SettingsState.timeFormatPatternDefault)
     TimeFormatPattern timeFormatPattern,
     @Default(SettingsState.textDirectionDefault) TextDirection? textDirection,
-    @Default(DistanceUnit.au) DistanceUnit distanceUnit,
-    @Default(VelocityUnit.kmps) VelocityUnit velocityUnit,
-    @Default(DistanceUnit.km) DistanceUnit diameterUnit,
+    @Default(SettingsState.distanceUnitDefault) DistanceUnit distanceUnit,
+    @Default(SettingsState.velocityUnitDefault) VelocityUnit velocityUnit,
+    @Default(SettingsState.diameterUnitDefault) DistanceUnit diameterUnit,
     bool? isAnyDialogShown,
   }) = _SettingsState;
 
@@ -34,6 +34,9 @@ class SettingsState with _$SettingsState {
   static const TimeFormatPattern timeFormatPatternDefault =
       TimeFormatPattern.jm;
   static const TextDirection? textDirectionDefault = null;
+  static const DistanceUnit distanceUnitDefault = DistanceUnit.au;
+  static const VelocityUnit velocityUnitDefault = VelocityUnit.kmps;
+  static const DistanceUnit diameterUnitDefault = DistanceUnit.km;
 
   factory SettingsState.fromJson(Map<String, dynamic> json) =>
       _$SettingsStateFromJson(json);
