@@ -43,6 +43,11 @@ class SettingsScreen extends StatelessWidget {
       '${keyPrefix}text_direction_tile_';
   static const Key textDirectionTileKey =
       Key('${textDirectionTileKeyPrefix}key');
+  static final Set<TextDirection?> textDirections = {
+    null,
+    TextDirection.ltr,
+    TextDirection.rtl,
+  };
   static const String distanceUnitTileKeyPrefix =
       '${keyPrefix}distance_unit_tile_';
   static const Key distanceUnitTileKey = Key('${distanceUnitTileKeyPrefix}key');
@@ -134,7 +139,8 @@ class SettingsScreen extends StatelessWidget {
           valueTitles: valueTitles,
           groupValue: locale,
           onChanged: (selectedLocale) {
-            _logger.fine('selectedLocale -> $selectedLocale');
+            _logger
+                .fine('_getLocaleTile() -> selectedLocale -> $selectedLocale');
             settingsBloc.add(SettingsLocaleSelected(
               locale: selectedLocale,
             ));
@@ -190,7 +196,7 @@ class SettingsScreen extends StatelessWidget {
           onChanged: (selectedDateFormatPattern) {
             if (selectedDateFormatPattern != null) {
               _logger.fine(
-                  'getDateFormatTile() -> selectedDateFormatPattern -> $selectedDateFormatPattern');
+                  '_getDateFormatTile() -> selectedDateFormatPattern -> $selectedDateFormatPattern');
               settingsBloc.add(SettingsDateFormatSelected(
                 dateFormatPattern: selectedDateFormatPattern,
               ));
@@ -198,13 +204,13 @@ class SettingsScreen extends StatelessWidget {
             Navigator.pop(context);
           },
           beforeShowDialog: () {
-            _logger.finer('getDateFormatTile() -> beforeShowDialog');
+            _logger.finer('_getDateFormatTile() -> beforeShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: true,
             ));
           },
           afterShowDialog: () {
-            _logger.finer('getDateFormatTile() -> afterShowDialog');
+            _logger.finer('_getDateFormatTile() -> afterShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: false,
             ));
@@ -277,18 +283,14 @@ class SettingsScreen extends StatelessWidget {
     required TextDirection? textDirection,
   }) {
     return switch (textDirection) {
-      null => l10n.system,
+      null => l10n.languageDefault,
       TextDirection.ltr => l10n.leftToRight,
       TextDirection.rtl => l10n.rightToLeft,
     };
   }
 
   Widget _getTextDirectionTile() {
-    final Set<TextDirection?> values = {
-      null,
-      TextDirection.ltr,
-      TextDirection.rtl,
-    };
+    final Set<TextDirection?> values = textDirections;
     final Set<String> valueTitles = values
         .map((e) => getTextDirectionValueTitle(l10n: l10n, textDirection: e))
         .toSet();
@@ -308,20 +310,21 @@ class SettingsScreen extends StatelessWidget {
           valueTitles: valueTitles,
           groupValue: textDirection,
           onChanged: (selectedTextDirection) {
-            _logger.fine('selectedTextDirection -> $selectedTextDirection');
+            _logger.fine(
+                '_getTextDirectionTile() -> selectedTextDirection -> $selectedTextDirection');
             settingsBloc.add(SettingsTextDirectionSelected(
               textDirection: selectedTextDirection,
             ));
             Navigator.pop(context);
           },
           beforeShowDialog: () {
-            _logger.finer('getTextDirectionTile() -> beforeShowDialog');
+            _logger.finer('_getTextDirectionTile() -> beforeShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: true,
             ));
           },
           afterShowDialog: () {
-            _logger.finer('getTextDirectionTile() -> afterShowDialog');
+            _logger.finer('_getTextDirectionTile() -> afterShowDialog');
             settingsBloc.add(const SettingsDialogEvent(
               isAnyDialogShown: false,
             ));

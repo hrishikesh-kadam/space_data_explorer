@@ -26,10 +26,10 @@ mixin _$SettingsState {
   List<Locale>? get systemLocales => throw _privateConstructorUsedError;
   DateFormatPattern get dateFormatPattern => throw _privateConstructorUsedError;
   TimeFormatPattern get timeFormatPattern => throw _privateConstructorUsedError;
+  TextDirection? get textDirection => throw _privateConstructorUsedError;
   DistanceUnit get distanceUnit => throw _privateConstructorUsedError;
   VelocityUnit get velocityUnit => throw _privateConstructorUsedError;
   DistanceUnit get diameterUnit => throw _privateConstructorUsedError;
-  TextDirection? get textDirection => throw _privateConstructorUsedError;
   bool? get isAnyDialogShown => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,10 +49,10 @@ abstract class $SettingsStateCopyWith<$Res> {
       @LocaleListJsonConverter() List<Locale>? systemLocales,
       DateFormatPattern dateFormatPattern,
       TimeFormatPattern timeFormatPattern,
+      TextDirection? textDirection,
       DistanceUnit distanceUnit,
       VelocityUnit velocityUnit,
       DistanceUnit diameterUnit,
-      TextDirection? textDirection,
       bool? isAnyDialogShown});
 }
 
@@ -73,10 +73,10 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
     Object? systemLocales = freezed,
     Object? dateFormatPattern = null,
     Object? timeFormatPattern = null,
+    Object? textDirection = freezed,
     Object? distanceUnit = null,
     Object? velocityUnit = null,
     Object? diameterUnit = null,
-    Object? textDirection = freezed,
     Object? isAnyDialogShown = freezed,
   }) {
     return _then(_value.copyWith(
@@ -96,6 +96,10 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
           ? _value.timeFormatPattern
           : timeFormatPattern // ignore: cast_nullable_to_non_nullable
               as TimeFormatPattern,
+      textDirection: freezed == textDirection
+          ? _value.textDirection
+          : textDirection // ignore: cast_nullable_to_non_nullable
+              as TextDirection?,
       distanceUnit: null == distanceUnit
           ? _value.distanceUnit
           : distanceUnit // ignore: cast_nullable_to_non_nullable
@@ -108,10 +112,6 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
           ? _value.diameterUnit
           : diameterUnit // ignore: cast_nullable_to_non_nullable
               as DistanceUnit,
-      textDirection: freezed == textDirection
-          ? _value.textDirection
-          : textDirection // ignore: cast_nullable_to_non_nullable
-              as TextDirection?,
       isAnyDialogShown: freezed == isAnyDialogShown
           ? _value.isAnyDialogShown
           : isAnyDialogShown // ignore: cast_nullable_to_non_nullable
@@ -133,10 +133,10 @@ abstract class _$$_SettingsStateCopyWith<$Res>
       @LocaleListJsonConverter() List<Locale>? systemLocales,
       DateFormatPattern dateFormatPattern,
       TimeFormatPattern timeFormatPattern,
+      TextDirection? textDirection,
       DistanceUnit distanceUnit,
       VelocityUnit velocityUnit,
       DistanceUnit diameterUnit,
-      TextDirection? textDirection,
       bool? isAnyDialogShown});
 }
 
@@ -155,10 +155,10 @@ class __$$_SettingsStateCopyWithImpl<$Res>
     Object? systemLocales = freezed,
     Object? dateFormatPattern = null,
     Object? timeFormatPattern = null,
+    Object? textDirection = freezed,
     Object? distanceUnit = null,
     Object? velocityUnit = null,
     Object? diameterUnit = null,
-    Object? textDirection = freezed,
     Object? isAnyDialogShown = freezed,
   }) {
     return _then(_$_SettingsState(
@@ -178,6 +178,10 @@ class __$$_SettingsStateCopyWithImpl<$Res>
           ? _value.timeFormatPattern
           : timeFormatPattern // ignore: cast_nullable_to_non_nullable
               as TimeFormatPattern,
+      textDirection: freezed == textDirection
+          ? _value.textDirection
+          : textDirection // ignore: cast_nullable_to_non_nullable
+              as TextDirection?,
       distanceUnit: null == distanceUnit
           ? _value.distanceUnit
           : distanceUnit // ignore: cast_nullable_to_non_nullable
@@ -190,10 +194,6 @@ class __$$_SettingsStateCopyWithImpl<$Res>
           ? _value.diameterUnit
           : diameterUnit // ignore: cast_nullable_to_non_nullable
               as DistanceUnit,
-      textDirection: freezed == textDirection
-          ? _value.textDirection
-          : textDirection // ignore: cast_nullable_to_non_nullable
-              as TextDirection?,
       isAnyDialogShown: freezed == isAnyDialogShown
           ? _value.isAnyDialogShown
           : isAnyDialogShown // ignore: cast_nullable_to_non_nullable
@@ -211,10 +211,10 @@ class _$_SettingsState implements _SettingsState {
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
       this.dateFormatPattern = SettingsState.dateFormatPatternDefault,
       this.timeFormatPattern = SettingsState.timeFormatPatternDefault,
+      this.textDirection = SettingsState.textDirectionDefault,
       this.distanceUnit = DistanceUnit.au,
       this.velocityUnit = VelocityUnit.kmps,
       this.diameterUnit = DistanceUnit.km,
-      this.textDirection,
       this.isAnyDialogShown})
       : _systemLocales = systemLocales;
 
@@ -244,6 +244,9 @@ class _$_SettingsState implements _SettingsState {
   final TimeFormatPattern timeFormatPattern;
   @override
   @JsonKey()
+  final TextDirection? textDirection;
+  @override
+  @JsonKey()
   final DistanceUnit distanceUnit;
   @override
   @JsonKey()
@@ -252,13 +255,11 @@ class _$_SettingsState implements _SettingsState {
   @JsonKey()
   final DistanceUnit diameterUnit;
   @override
-  final TextDirection? textDirection;
-  @override
   final bool? isAnyDialogShown;
 
   @override
   String toString() {
-    return 'SettingsState(locale: $locale, systemLocales: $systemLocales, dateFormatPattern: $dateFormatPattern, timeFormatPattern: $timeFormatPattern, distanceUnit: $distanceUnit, velocityUnit: $velocityUnit, diameterUnit: $diameterUnit, textDirection: $textDirection, isAnyDialogShown: $isAnyDialogShown)';
+    return 'SettingsState(locale: $locale, systemLocales: $systemLocales, dateFormatPattern: $dateFormatPattern, timeFormatPattern: $timeFormatPattern, textDirection: $textDirection, distanceUnit: $distanceUnit, velocityUnit: $velocityUnit, diameterUnit: $diameterUnit, isAnyDialogShown: $isAnyDialogShown)';
   }
 
   @override
@@ -273,14 +274,14 @@ class _$_SettingsState implements _SettingsState {
                 other.dateFormatPattern == dateFormatPattern) &&
             (identical(other.timeFormatPattern, timeFormatPattern) ||
                 other.timeFormatPattern == timeFormatPattern) &&
+            (identical(other.textDirection, textDirection) ||
+                other.textDirection == textDirection) &&
             (identical(other.distanceUnit, distanceUnit) ||
                 other.distanceUnit == distanceUnit) &&
             (identical(other.velocityUnit, velocityUnit) ||
                 other.velocityUnit == velocityUnit) &&
             (identical(other.diameterUnit, diameterUnit) ||
                 other.diameterUnit == diameterUnit) &&
-            (identical(other.textDirection, textDirection) ||
-                other.textDirection == textDirection) &&
             (identical(other.isAnyDialogShown, isAnyDialogShown) ||
                 other.isAnyDialogShown == isAnyDialogShown));
   }
@@ -293,10 +294,10 @@ class _$_SettingsState implements _SettingsState {
       const DeepCollectionEquality().hash(_systemLocales),
       dateFormatPattern,
       timeFormatPattern,
+      textDirection,
       distanceUnit,
       velocityUnit,
       diameterUnit,
-      textDirection,
       isAnyDialogShown);
 
   @JsonKey(ignore: true)
@@ -319,10 +320,10 @@ abstract class _SettingsState implements SettingsState {
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
       final DateFormatPattern dateFormatPattern,
       final TimeFormatPattern timeFormatPattern,
+      final TextDirection? textDirection,
       final DistanceUnit distanceUnit,
       final VelocityUnit velocityUnit,
       final DistanceUnit diameterUnit,
-      final TextDirection? textDirection,
       final bool? isAnyDialogShown}) = _$_SettingsState;
 
   factory _SettingsState.fromJson(Map<String, dynamic> json) =
@@ -339,13 +340,13 @@ abstract class _SettingsState implements SettingsState {
   @override
   TimeFormatPattern get timeFormatPattern;
   @override
+  TextDirection? get textDirection;
+  @override
   DistanceUnit get distanceUnit;
   @override
   VelocityUnit get velocityUnit;
   @override
   DistanceUnit get diameterUnit;
-  @override
-  TextDirection? get textDirection;
   @override
   bool? get isAnyDialogShown;
   @override
