@@ -62,6 +62,11 @@ class SettingsScreen extends StatelessWidget {
   static const String velocityUnitTileKeyPrefix =
       '${keyPrefix}velocity_unit_tile_';
   static const Key velocityUnitTileKey = Key('${velocityUnitTileKeyPrefix}key');
+  static final Set<VelocityUnit> velocityUnits = {
+    VelocityUnit.kmps,
+    VelocityUnit.miph,
+    VelocityUnit.aupd,
+  };
   static const String diameterUnitTileKeyPrefix =
       '${keyPrefix}diameter_unit_tile_';
   static const Key diameterUnitTileKey = Key('${diameterUnitTileKeyPrefix}key');
@@ -431,11 +436,7 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _getVelocityUnitTile() {
-    final Set<VelocityUnit> values = {
-      VelocityUnit.kmps,
-      VelocityUnit.miph,
-      VelocityUnit.aupd,
-    };
+    final Set<VelocityUnit> values = velocityUnits;
     final Set<String> valueTitles = values
         .map((e) => getVelocityUnitValueTitle(l10n: l10n, velocityUnit: e))
         .toSet();
