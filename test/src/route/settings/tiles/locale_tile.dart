@@ -3,19 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import 'package:space_data_explorer/widgets/radio_dialog.dart';
 import '../../../extension/common_finders.dart';
 import '../settings_route.dart';
 
-final localeTileFinder = find.byKey(SettingsScreen.localeTileKey);
-final localeDialogFinder = find.byKey(const Key(
+const Locale? localeDefault = SettingsState.localeDefault;
+final Locale? localeNonDefault =
+    SettingsScreen.locales.firstWhere((element) => element != localeDefault);
+final Finder localeTileFinder = find.byKey(SettingsScreen.localeTileKey);
+final Finder localeDialogFinder = find.byKey(const Key(
   '${SettingsScreen.localeTileKeyPrefix}'
   '${RadioDialog.keySuffixDefault}',
 ));
-const localeDialogKeyPrefix = '${SettingsScreen.localeTileKeyPrefix}'
+const String localeDialogKeyPrefix = '${SettingsScreen.localeTileKeyPrefix}'
     '${RadioDialog.keyPrefixDefault}';
-final localeListViewFinder = find.byKey(const Key(
+final Finder localeListViewFinder = find.byKey(const Key(
   '$localeDialogKeyPrefix'
   '${RadioDialog.listViewKeySuffix}',
 ));

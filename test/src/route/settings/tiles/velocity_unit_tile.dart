@@ -4,20 +4,25 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
+import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import 'package:space_data_explorer/widgets/radio_dialog.dart';
 import '../../../extension/common_finders.dart';
 import '../settings_route.dart';
 
-final velocityUnitTileFinder = find.byKey(SettingsScreen.velocityUnitTileKey);
-final velocityUnitDialogFinder = find.byKey(const Key(
+const VelocityUnit velocityUnitDefault = SettingsState.velocityUnitDefault;
+final VelocityUnit velocityUnitNonDefault = SettingsScreen.velocityUnits
+    .firstWhere((element) => element != velocityUnitDefault);
+final Finder velocityUnitTileFinder =
+    find.byKey(SettingsScreen.velocityUnitTileKey);
+final Finder velocityUnitDialogFinder = find.byKey(const Key(
   '${SettingsScreen.velocityUnitTileKeyPrefix}'
   '${RadioDialog.keySuffixDefault}',
 ));
-const velocityUnitDialogKeyPrefix =
+const String velocityUnitDialogKeyPrefix =
     '${SettingsScreen.velocityUnitTileKeyPrefix}'
     '${RadioDialog.keyPrefixDefault}';
-final velocityUnitListViewFinder = find.byKey(const Key(
+final Finder velocityUnitListViewFinder = find.byKey(const Key(
   '$velocityUnitDialogKeyPrefix'
   '${RadioDialog.listViewKeySuffix}',
 ));

@@ -4,20 +4,25 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
+import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import 'package:space_data_explorer/widgets/radio_dialog.dart';
 import '../../../extension/common_finders.dart';
 import '../settings_route.dart';
 
-final diameterUnitTileFinder = find.byKey(SettingsScreen.diameterUnitTileKey);
-final diameterUnitDialogFinder = find.byKey(const Key(
+const DistanceUnit diameterUnitDefault = SettingsState.diameterUnitDefault;
+final DistanceUnit diameterUnitNonDefault = SettingsScreen.diameterUnits
+    .firstWhere((element) => element != diameterUnitDefault);
+final Finder diameterUnitTileFinder =
+    find.byKey(SettingsScreen.diameterUnitTileKey);
+final Finder diameterUnitDialogFinder = find.byKey(const Key(
   '${SettingsScreen.diameterUnitTileKeyPrefix}'
   '${RadioDialog.keySuffixDefault}',
 ));
-const diameterUnitDialogKeyPrefix =
+const String diameterUnitDialogKeyPrefix =
     '${SettingsScreen.diameterUnitTileKeyPrefix}'
     '${RadioDialog.keyPrefixDefault}';
-final diameterUnitListViewFinder = find.byKey(const Key(
+final Finder diameterUnitListViewFinder = find.byKey(const Key(
   '$diameterUnitDialogKeyPrefix'
   '${RadioDialog.listViewKeySuffix}',
 ));

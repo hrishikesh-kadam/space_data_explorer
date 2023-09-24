@@ -6,7 +6,6 @@ import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
 import 'package:space_data_explorer/route/settings/locale.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
-import 'package:space_data_explorer/route/settings/time_format_pattern.dart';
 import '../../../../src/globals.dart';
 import '../../../../src/route/settings/settings_route.dart';
 import '../../../../src/route/settings/tiles/time_format_tile.dart';
@@ -64,10 +63,9 @@ void main() {
       expect(settingsBloc.state.isAnyDialogShown, false);
     });
 
-    testWidgets(
-        'Choose ${TimeFormatPattern.twelveHourClock}, exit screen, enter again',
+    testWidgets('Choose $timeFormatPatternNonDefault, exit screen, enter again',
         (tester) async {
-      const timeFormatPattern = TimeFormatPattern.twelveHourClock;
+      final timeFormatPattern = timeFormatPatternNonDefault;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapTimeFormatTile(tester);
       await chooseTimeFormat(tester,

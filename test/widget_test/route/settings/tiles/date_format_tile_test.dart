@@ -4,7 +4,6 @@ import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
 import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
 import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
-import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
 import 'package:space_data_explorer/route/settings/locale.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import '../../../../src/globals.dart';
@@ -64,10 +63,9 @@ void main() {
       expect(settingsBloc.state.isAnyDialogShown, false);
     });
 
-    testWidgets(
-        'Choose ${DateFormatPattern.ddMMyyyySlash}, exit screen, enter again',
+    testWidgets('Choose $dateFormatPatternNonDefault, exit screen, enter again',
         (tester) async {
-      const dateFormatPattern = DateFormatPattern.ddMMyyyySlash;
+      final dateFormatPattern = dateFormatPatternNonDefault;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapDateFormatTile(tester);
       await chooseDateFormat(tester,

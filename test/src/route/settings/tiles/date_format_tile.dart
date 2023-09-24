@@ -3,20 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
 import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import 'package:space_data_explorer/widgets/radio_dialog.dart';
 import '../../../extension/common_finders.dart';
 import '../settings_route.dart';
 
-final dateFormatTileFinder = find.byKey(SettingsScreen.dateFormatTileKey);
-final dateFormatDialogFinder = find.byKey(const Key(
+const DateFormatPattern dateFormatPatternDefault =
+    SettingsState.dateFormatPatternDefault;
+final DateFormatPattern dateFormatPatternNonDefault = SettingsScreen
+    .dateFormatPatterns
+    .firstWhere((element) => element != dateFormatPatternDefault);
+final Finder dateFormatTileFinder =
+    find.byKey(SettingsScreen.dateFormatTileKey);
+final Finder dateFormatDialogFinder = find.byKey(const Key(
   '${SettingsScreen.dateFormatTileKeyPrefix}'
   '${RadioDialog.keySuffixDefault}',
 ));
-const dateFormatDialogKeyPrefix = '${SettingsScreen.dateFormatTileKeyPrefix}'
+const String dateFormatDialogKeyPrefix =
+    '${SettingsScreen.dateFormatTileKeyPrefix}'
     '${RadioDialog.keyPrefixDefault}';
-final dateFormatListViewFinder = find.byKey(const Key(
+final Finder dateFormatListViewFinder = find.byKey(const Key(
   '$dateFormatDialogKeyPrefix'
   '${RadioDialog.listViewKeySuffix}',
 ));

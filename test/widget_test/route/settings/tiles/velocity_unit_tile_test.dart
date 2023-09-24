@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hrk_batteries/hrk_batteries.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
 import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
@@ -64,9 +63,9 @@ void main() {
       expect(settingsBloc.state.isAnyDialogShown, false);
     });
 
-    testWidgets('Choose ${VelocityUnit.miph}, exit screen, enter again',
+    testWidgets('Choose $velocityUnitNonDefault, exit screen, enter again',
         (tester) async {
-      const velocityUnit = VelocityUnit.miph;
+      final velocityUnit = velocityUnitNonDefault;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapVelocityUnitTile(tester);
       await chooseVelocityUnit(tester, l10n: l10n, velocityUnit: velocityUnit);

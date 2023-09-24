@@ -65,9 +65,9 @@ void main() {
       expect(settingsBloc.state.isAnyDialogShown, false);
     });
 
-    testWidgets('Choose ${TextDirection.ltr}, exit screen, enter again',
+    testWidgets('Choose $textDirectionNonDefault, exit screen, enter again',
         (tester) async {
-      const textDirection = TextDirection.ltr;
+      final textDirection = textDirectionNonDefault;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapTextDirectionTile(tester);
       await chooseTextDirection(tester,

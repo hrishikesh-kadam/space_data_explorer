@@ -66,9 +66,9 @@ void main() {
       expect(settingsBloc.state.isAnyDialogShown, false);
     });
 
-    testWidgets('Choose ${LocaleExt.en}, exit screen, enter again',
+    testWidgets('Choose $localeNonDefault, exit screen, enter again',
         (tester) async {
-      const locale = LocaleExt.en;
+      final locale = localeNonDefault;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapLocaleTile(tester);
       await chooseLocale(tester, l10n: l10n, locale: locale);
@@ -81,14 +81,15 @@ void main() {
       expect(settingsBloc.state.locale, locale);
     });
 
-    testWidgets('With Hydration, Choose ${LocaleExt.en}, exit app, enter again',
+    testWidgets(
+        'With Hydration, Choose $localeNonDefault, exit app, enter again',
         (tester) async {
       final storageDirectory = Directory(
         'build/test/widget_test/route/settings/tiles/storage',
       );
       // Stucks in setUpHydratedBloc()
       await setUpHydratedBloc(storageDirectory);
-      const locale = LocaleExt.en;
+      final locale = localeNonDefault;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapLocaleTile(tester);
       await chooseLocale(tester, l10n: l10n, locale: locale);

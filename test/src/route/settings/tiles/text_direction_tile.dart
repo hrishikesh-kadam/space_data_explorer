@@ -3,20 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import 'package:space_data_explorer/widgets/radio_dialog.dart';
 import '../../../extension/common_finders.dart';
 import '../settings_route.dart';
 
-final textDirectionTileFinder = find.byKey(SettingsScreen.textDirectionTileKey);
-final textDirectionDialogFinder = find.byKey(const Key(
+const TextDirection? textDirectionDefault = SettingsState.textDirectionDefault;
+final TextDirection? textDirectionNonDefault = SettingsScreen.textDirections
+    .firstWhere((element) => element != textDirectionDefault);
+final Finder textDirectionTileFinder =
+    find.byKey(SettingsScreen.textDirectionTileKey);
+final Finder textDirectionDialogFinder = find.byKey(const Key(
   '${SettingsScreen.textDirectionTileKeyPrefix}'
   '${RadioDialog.keySuffixDefault}',
 ));
-const textDirectionDialogKeyPrefix =
+const String textDirectionDialogKeyPrefix =
     '${SettingsScreen.textDirectionTileKeyPrefix}'
     '${RadioDialog.keyPrefixDefault}';
-final textDirectionListViewFinder = find.byKey(const Key(
+final Finder textDirectionListViewFinder = find.byKey(const Key(
   '$textDirectionDialogKeyPrefix'
   '${RadioDialog.listViewKeySuffix}',
 ));

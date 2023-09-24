@@ -3,20 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import 'package:space_data_explorer/route/settings/time_format_pattern.dart';
 import 'package:space_data_explorer/widgets/radio_dialog.dart';
 import '../../../extension/common_finders.dart';
 import '../settings_route.dart';
 
-final timeFormatTileFinder = find.byKey(SettingsScreen.timeFormatTileKey);
-final timeFormatDialogFinder = find.byKey(const Key(
+const TimeFormatPattern timeFormatPatternDefault =
+    SettingsState.timeFormatPatternDefault;
+final TimeFormatPattern timeFormatPatternNonDefault = SettingsScreen
+    .timeFormatPatterns
+    .firstWhere((element) => element != timeFormatPatternDefault);
+final Finder timeFormatTileFinder =
+    find.byKey(SettingsScreen.timeFormatTileKey);
+final Finder timeFormatDialogFinder = find.byKey(const Key(
   '${SettingsScreen.timeFormatTileKeyPrefix}'
   '${RadioDialog.keySuffixDefault}',
 ));
-const timeFormatDialogKeyPrefix = '${SettingsScreen.timeFormatTileKeyPrefix}'
+const String timeFormatDialogKeyPrefix =
+    '${SettingsScreen.timeFormatTileKeyPrefix}'
     '${RadioDialog.keyPrefixDefault}';
-final timeFormatListViewFinder = find.byKey(const Key(
+final Finder timeFormatListViewFinder = find.byKey(const Key(
   '$timeFormatDialogKeyPrefix'
   '${RadioDialog.listViewKeySuffix}',
 ));
