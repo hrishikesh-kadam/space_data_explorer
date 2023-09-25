@@ -40,6 +40,7 @@ class CadResultScreen extends StatelessWidget {
   static const Key customScrollViewKey = Key('${keyPrefix}scroll_view_key');
   static const Key zeroCountTextKey = Key('${keyPrefix}zero_count_text_key');
   static const Key gridKey = Key('${keyPrefix}grid_key');
+  static const String gridItemKeyPrefix = '${keyPrefix}grid_item_';
   @visibleForTesting
   static CadResultBloc? cadResultBloc;
 
@@ -159,6 +160,7 @@ class CadResultScreen extends StatelessWidget {
             context: context,
             sbdbCadBody: sbdbCadBody,
             data: sbdbCadBody.data![index],
+            index: index,
           );
         },
       ),
@@ -169,9 +171,11 @@ class CadResultScreen extends StatelessWidget {
     required BuildContext context,
     required SbdbCadBody sbdbCadBody,
     required SbdbCadData data,
+    required int index,
   }) {
     return getItemContainer(
       context: context,
+      index: index,
       child: getItemBody(
         context: context,
         sbdbCadBody: sbdbCadBody,
@@ -183,8 +187,10 @@ class CadResultScreen extends StatelessWidget {
   Widget getItemContainer({
     required BuildContext context,
     required Widget child,
+    required int index,
   }) {
     return Container(
+      key: Key('$gridItemKeyPrefix$index'),
       width: Dimensions.cadQueryItemWidth,
       decoration: BoxDecoration(
         border: Border.all(

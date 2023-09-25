@@ -1,12 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
+import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
+import 'package:hrk_nasa_apis_test/hrk_nasa_apis_test.dart';
 
 import 'package:space_data_explorer/constants/dimensions.dart';
-import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
-import '../../../src/nasa/cad/cad_route.dart';
+import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
+import '../../../src/nasa/cad_result/cad_result_route.dart';
 
 void main() {
-  group('$CadScreen Painting Test', () {
+  group('$CadResultScreen Painting Test', () {
     group('Masonry', () {
       const double fitsThreeItems = 3 * Dimensions.cadQueryItemExtent +
           2 * Dimensions.pagePaddingHorizontal;
@@ -14,64 +16,95 @@ void main() {
           2 * Dimensions.pagePaddingHorizontal;
       const double fitsOneItem =
           Dimensions.cadQueryItemExtent + 2 * Dimensions.pagePaddingHorizontal;
+      const double fitsThreeItemsVertically = 1200;
+      final JsonMap $extra = {
+        '$SbdbCadBody': SbdbCadBodyExt.getSample('200/1'),
+      };
 
       testWidgets('Screen width ${fitsThreeItems + 1}',
           (WidgetTester tester) async {
-        tester.view.setLogicalSize(width: fitsThreeItems + 1);
-        await pumpCadRouteAsInitialLocation(tester);
+        tester.view.setLogicalSize(
+          width: fitsThreeItems + 1,
+          height: fitsThreeItemsVertically,
+        );
+        await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
         _expectCrossAxisCount(tester, count: 2);
       });
 
       testWidgets('Screen width $fitsThreeItems', (WidgetTester tester) async {
-        tester.view.setLogicalSize(width: fitsThreeItems);
-        await pumpCadRouteAsInitialLocation(tester);
+        tester.view.setLogicalSize(
+          width: fitsThreeItems,
+          height: fitsThreeItemsVertically,
+        );
+        await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
         _expectCrossAxisCount(tester, count: 2);
       });
 
       testWidgets('Screen width ${fitsThreeItems - 1}',
           (WidgetTester tester) async {
-        tester.view.setLogicalSize(width: fitsThreeItems - 1);
-        await pumpCadRouteAsInitialLocation(tester);
+        tester.view.setLogicalSize(
+          width: fitsThreeItems - 1,
+          height: fitsThreeItemsVertically,
+        );
+        await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
         _expectCrossAxisCount(tester, count: 2);
       });
 
       testWidgets('Screen width ${fitsTwoItems + 1}',
           (WidgetTester tester) async {
-        tester.view.setLogicalSize(width: fitsTwoItems + 1);
-        await pumpCadRouteAsInitialLocation(tester);
+        tester.view.setLogicalSize(
+          width: fitsTwoItems + 1,
+          height: fitsThreeItemsVertically,
+        );
+        await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
         _expectCrossAxisCount(tester, count: 2);
       });
 
       testWidgets('Screen width $fitsTwoItems', (WidgetTester tester) async {
-        tester.view.setLogicalSize(width: fitsTwoItems);
-        await pumpCadRouteAsInitialLocation(tester);
+        tester.view.setLogicalSize(
+          width: fitsTwoItems,
+          height: fitsThreeItemsVertically,
+        );
+        await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
         _expectCrossAxisCount(tester, count: 2);
       });
 
       testWidgets('Screen width ${fitsTwoItems - 1}',
           (WidgetTester tester) async {
-        tester.view.setLogicalSize(width: fitsTwoItems - 1);
-        await pumpCadRouteAsInitialLocation(tester);
+        tester.view.setLogicalSize(
+          width: fitsTwoItems - 1,
+          height: fitsThreeItemsVertically,
+        );
+        await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
         _expectCrossAxisCount(tester, count: 1);
       });
 
       testWidgets('Screen width ${fitsOneItem + 1}',
           (WidgetTester tester) async {
-        tester.view.setLogicalSize(width: fitsOneItem + 1);
-        await pumpCadRouteAsInitialLocation(tester);
+        tester.view.setLogicalSize(
+          width: fitsOneItem + 1,
+          height: fitsThreeItemsVertically,
+        );
+        await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
         _expectCrossAxisCount(tester, count: 1);
       });
 
       testWidgets('Screen width $fitsOneItem', (WidgetTester tester) async {
-        tester.view.setLogicalSize(width: fitsOneItem);
-        await pumpCadRouteAsInitialLocation(tester);
+        tester.view.setLogicalSize(
+          width: fitsOneItem,
+          height: fitsThreeItemsVertically,
+        );
+        await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
         _expectCrossAxisCount(tester, count: 1);
       });
 
       testWidgets('Screen width ${fitsOneItem - 1}',
           (WidgetTester tester) async {
-        tester.view.setLogicalSize(width: fitsOneItem - 1);
-        await pumpCadRouteAsInitialLocation(tester);
+        tester.view.setLogicalSize(
+          width: fitsOneItem - 1,
+          height: fitsThreeItemsVertically,
+        );
+        await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
         _expectCrossAxisCount(tester, count: 1);
       });
     });
@@ -82,7 +115,7 @@ void _expectCrossAxisCount(
   WidgetTester tester, {
   required int count,
 }) {
-  final gridItems = tester.widgetList(queryGridItemFinder).toList();
+  final gridItems = tester.widgetList(resultGridItemFinder).toList();
   final firstItemRect = tester.getRect(find.byWidget(gridItems[0]));
   final secondItemRect = tester.getRect(find.byWidget(gridItems[1]));
   final thirdItemRect = tester.getRect(find.byWidget(gridItems[2]));
