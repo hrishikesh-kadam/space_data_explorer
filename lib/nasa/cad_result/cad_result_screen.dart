@@ -39,7 +39,7 @@ class CadResultScreen extends StatelessWidget {
   static const String keyPrefix = 'cad_result_screen_';
   static const Key customScrollViewKey = Key('${keyPrefix}scroll_view_key');
   static const Key zeroCountTextKey = Key('${keyPrefix}zero_count_text_key');
-  static const Key resultGridKey = Key('${keyPrefix}result_grid_key');
+  static const Key gridKey = Key('${keyPrefix}grid_key');
   @visibleForTesting
   static CadResultBloc? cadResultBloc;
 
@@ -151,7 +151,7 @@ class CadResultScreen extends StatelessWidget {
         horizontal: gridParameters.$1,
       ),
       sliver: SliverMasonryGrid.count(
-        key: resultGridKey,
+        key: gridKey,
         crossAxisCount: gridParameters.$2,
         childCount: sbdbCadBody.count,
         itemBuilder: (context, index) {

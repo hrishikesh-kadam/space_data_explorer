@@ -26,10 +26,13 @@ class CadResultRoute extends GoRouteData {
   static const String routeName = 'result';
   static const String path = '${CadRoute.path}/$routeName';
   static const String displayName = 'SBDB Close-Approach Data Result';
+  @visibleForTesting
+  static JsonMap? $extraTest;
 
   @override
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
     _logger.debug('redirect');
+    stubExtraForTesting();
     if ($extra != null) {
       final JsonMap extra = $extra!;
       if (extra.containsKey('$SbdbCadBody')) {
@@ -48,6 +51,7 @@ class CadResultRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
+    stubExtraForTesting();
     final locale = Localizations.localeOf(context).toString();
     // final zeroDigit = NumberFormat(null, locale).symbols.ZERO_DIGIT;
     final zeroDigit = DateFormat(null, locale).dateSymbols.ZERODIGIT ?? '0';
@@ -63,6 +67,13 @@ class CadResultRoute extends GoRouteData {
         name: CadResultRoute.displayName,
       ),
     );
+  }
+
+  @visibleForTesting
+  void stubExtraForTesting() {
+    if (flutterTest && $extraTest != null) {
+      $extra = $extraTest;
+    }
   }
 
   // void mockSampleResponse() {

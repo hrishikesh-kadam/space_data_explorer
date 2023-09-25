@@ -1,28 +1,30 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:hrk_nasa_apis_test/hrk_nasa_apis_test.dart';
 
-import 'package:space_data_explorer/nasa/cad/bloc/cad_bloc.dart';
-import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
-import '../../../src/nasa/cad/cad_route.dart';
+import '../../../src/nasa/cad_result/cad_result_route.dart';
 
 void main() {
   group('$CadResultScreen Widget Test', () {
     testWidgets('200/0', (WidgetTester tester) async {
-      await pumpCadRouteAsInitialLocation(tester);
-      await tapSearchButton(tester);
-      expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
+      final JsonMap $extra = {
+        '$SbdbCadBody': SbdbCadBodyExt.getSample('200/0'),
+      };
+      await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
       expect(find.byType(CadResultScreen), findsOneWidget);
+      expect(zeroCountTextFinder, findsOneWidget);
+      expect(resultGridFinder, findsNothing);
     });
 
     testWidgets('200/1', (WidgetTester tester) async {
-      final response = SbdbCadApiExt.getResponseSbdbCadBody('200/1');
-      final sbdbCadApi = SbdbCadApiExt.getAnswers(response: response);
-      final cadBloc = CadBloc(sbdbCadApi: sbdbCadApi);
-      await pumpCadRouteAsInitialLocation(tester, cadBloc: cadBloc);
-      await tapSearchButton(tester);
-      expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
+      final JsonMap $extra = {
+        '$SbdbCadBody': SbdbCadBodyExt.getSample('200/1'),
+      };
+      await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
       expect(find.byType(CadResultScreen), findsOneWidget);
+      expect(resultGridFinder, findsOneWidget);
+      expect(zeroCountTextFinder, findsNothing);
     });
   });
 }
