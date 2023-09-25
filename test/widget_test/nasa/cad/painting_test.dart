@@ -4,7 +4,7 @@ import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:space_data_explorer/constants/dimensions.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/widgets/query_grid_container.dart';
-import '../../../../../src/nasa/cad/cad_route.dart';
+import '../../../src/nasa/cad/cad_route.dart';
 
 void main() {
   group('$CadRoute Filter Painting Test', () {
