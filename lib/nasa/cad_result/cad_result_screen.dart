@@ -38,6 +38,7 @@ class CadResultScreen extends StatelessWidget {
   final _logger = Logger('$appNamePascalCase.CadResultScreen');
   static const String keyPrefix = 'cad_result_screen_';
   static const Key customScrollViewKey = Key('${keyPrefix}scroll_view_key');
+  static const Key zeroCountTextKey = Key('${keyPrefix}zero_count_text_key');
   static const Key resultGridKey = Key('${keyPrefix}result_grid_key');
   @visibleForTesting
   static CadResultBloc? cadResultBloc;
@@ -64,29 +65,70 @@ class CadResultScreen extends StatelessWidget {
   }
 
   Widget _getBody({required BuildContext context}) {
-    return CustomScrollView(
-      key: customScrollViewKey,
-      controller: ScrollController(),
-      slivers: [
-        getSliverAppBar(
-          context: context,
-          title: const Text(CadResultRoute.displayName),
-          floating: true,
-          snap: true,
-        ),
-        ..._getSliverBody(context: context)
-      ],
+    return BlocSelector<CadResultBloc, CadResultState, SbdbCadBody>(
+      selector: (state) {
+        return state.sbdbCadBody;
+      },
+      builder: (context, sbdbCadBody) {
+        return CustomScrollView(
+          key: customScrollViewKey,
+          controller: ScrollController(),
+          slivers: [
+            getSliverAppBar(
+              context: context,
+              title: const Text(CadResultRoute.displayName),
+              floating: true,
+              snap: true,
+            ),
+            ..._getSliverBody(context: context, sbdbCadBody: sbdbCadBody),
+          ],
+        );
+      },
     );
   }
 
-  List<Widget> _getSliverBody({required BuildContext context}) {
+  List<Widget> _getSliverBody({
+    required BuildContext context,
+    required SbdbCadBody sbdbCadBody,
+  }) {
+    if (sbdbCadBody.count <= 0) {
+      return [_getZeroCountContent(context: context)];
+    } else {
+      return _getGridContent(context: context, sbdbCadBody: sbdbCadBody);
+    }
+  }
+
+  Widget _getZeroCountContent({required BuildContext context}) {
+    return SliverFillRemaining(
+      hasScrollBody: false,
+      child: Padding(
+        padding: const EdgeInsets.all(Dimensions.pagePadding),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              l10n.cadResultScreenZeroCount,
+              key: zeroCountTextKey,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _getGridContent({
+    required BuildContext context,
+    required SbdbCadBody sbdbCadBody,
+  }) {
     return [
       const SliverPadding(
         padding: EdgeInsets.only(
           bottom: Dimensions.pagePaddingVertical,
         ),
       ),
-      _getGrid(context: context),
+      _getGrid(context: context, sbdbCadBody: sbdbCadBody),
       const SliverPadding(
         padding: EdgeInsets.only(
           bottom: Dimensions.pagePaddingVertical,
@@ -95,33 +137,31 @@ class CadResultScreen extends StatelessWidget {
     ];
   }
 
-  Widget _getGrid({required BuildContext context}) {
+  Widget _getGrid({
+    required BuildContext context,
+    required SbdbCadBody sbdbCadBody,
+  }) {
     final gridParameters = getSliverMasonryGridParameters(
       context: context,
       itemExtent: Dimensions.cadQueryItemExtent,
       pagePaddingHorizontal: Dimensions.pagePaddingHorizontal,
     );
-    return BlocSelector<CadResultBloc, CadResultState, SbdbCadBody>(
-      selector: (state) => state.sbdbCadBody,
-      builder: (context, sbdbCadBody) {
-        return SliverPadding(
-          padding: EdgeInsets.symmetric(
-            horizontal: gridParameters.$1,
-          ),
-          sliver: SliverMasonryGrid.count(
-            key: resultGridKey,
-            crossAxisCount: gridParameters.$2,
-            childCount: sbdbCadBody.count,
-            itemBuilder: (context, index) {
-              return getItemWidget(
-                context: context,
-                sbdbCadBody: sbdbCadBody,
-                data: sbdbCadBody.data![index],
-              );
-            },
-          ),
-        );
-      },
+    return SliverPadding(
+      padding: EdgeInsets.symmetric(
+        horizontal: gridParameters.$1,
+      ),
+      sliver: SliverMasonryGrid.count(
+        key: resultGridKey,
+        crossAxisCount: gridParameters.$2,
+        childCount: sbdbCadBody.count,
+        itemBuilder: (context, index) {
+          return getItemWidget(
+            context: context,
+            sbdbCadBody: sbdbCadBody,
+            data: sbdbCadBody.data![index],
+          );
+        },
+      ),
     );
   }
 

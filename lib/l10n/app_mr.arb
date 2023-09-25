@@ -47,11 +47,11 @@
   "ftDistanceUnitLabel": "फूट",
   "mDistanceUnitSymbol": "m",
   "ftDistanceUnitSymbol": "ft",
-  "smallBodyFilter": "लहान वस्तू निवड",
+  "smallBodyFilter": "लहान ग्रह निवड",
   "comet": "धूमकेतू",
   "neaComet": "NEA आणि धूमकेतू",
-  "smallBodySelector": "लहान वस्तू ओळख",
-  "closeApproachBodySelector": "वस्तूच्या जवळ येणारा निवड",
+  "smallBodySelector": "लहान ग्रह ओळख",
+  "closeApproachBodySelector": "ग्रहाच्या जवळ येणारा निवड",
   "earth": "पृथ्वी",
   "moon": "चंद्र",
   "all": "सर्व",
@@ -67,5 +67,6 @@
   "totalOnly": "फक्त एकूण",
   "diameter": "व्यास",
   "fullname": "पूर्ण नाव",
-  "distFilter": "अंतर निवड"
+  "distFilter": "अंतर निवड",
+  "cadResultScreenZeroCount": "निवडलेल्या पॅरामीटर्ससाठी कोणतेही ग्रह आढळले नाहीत"
 }

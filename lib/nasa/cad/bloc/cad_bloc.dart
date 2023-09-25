@@ -20,6 +20,10 @@ class CadBloc extends Bloc<CadEvent, CadState> {
     CadState? initialState,
   }) : super(initialState ?? CadState.getInitial()) {
     this.sbdbCadApi = sbdbCadApi ?? SbdbCadApi();
+    // this.sbdbCadApi = SbdbCadApiExt.getAnswers(
+    //   response: SbdbCadApiExt.getResponseSbdbCadBody('200/1'),
+    //   delay: const Duration(seconds: 2),
+    // );
     on<CadRequested>(_onCadRequested);
     on<CadResultOpened>(_onCadResultOpened);
     on<CadDateRangeSelected>(_onCadDateRangeSelected);
@@ -98,7 +102,6 @@ class CadBloc extends Bloc<CadEvent, CadState> {
         queryParameters: queryParameters.toJson(),
         cancelToken: cancelToken,
       );
-      // await Future.delayed(const Duration(seconds: 5));
       _logger.fine('_onCadRequested success');
       emit(state.copyWith(
         networkState: NetworkState.success,

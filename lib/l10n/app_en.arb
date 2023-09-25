@@ -67,5 +67,6 @@
   "totalOnly": "Total Only",
   "diameter": "Diameter",
   "fullname": "Fullname",
-  "distFilter": "Distance Filter"
+  "distFilter": "Distance Filter",
+  "cadResultScreenZeroCount": "No bodies found for the chosen parameters"
 }

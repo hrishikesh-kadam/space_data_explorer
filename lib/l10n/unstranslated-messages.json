@@ -60,7 +60,8 @@
     "totalOnly",
     "diameter",
     "fullname",
-    "distFilter"
+    "distFilter",
+    "cadResultScreenZeroCount"
   ],
 
   "he": [
@@ -124,6 +125,7 @@
     "totalOnly",
     "diameter",
     "fullname",
-    "distFilter"
+    "distFilter",
+    "cadResultScreenZeroCount"
   ]
 }

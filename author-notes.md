@@ -3,6 +3,7 @@
 ## TODOs
 
 - Add LICENSE
+- Add zero count image placeholder
 
 ## Future Tasks
 

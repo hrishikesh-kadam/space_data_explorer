@@ -67,5 +67,6 @@
   "totalOnly": "केवल कुल",
   "diameter": "व्यास",
   "fullname": "पूरा नाम",
-  "distFilter": "दूरी चयन"
+  "distFilter": "दूरी चयन",
+  "cadResultScreenZeroCount": "चुने गए मापदंडों के लिए कोई निकाय नहीं मिला"
 }
