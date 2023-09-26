@@ -1,7 +1,7 @@
 # space_data_explorer
 
-[![ci-schedule](https://github.com/hrishikesh-kadam/space_data_explorer/actions/workflows/ci-schedule.yml/badge.svg)](https://github.com/hrishikesh-kadam/space_data_explorer/actions/workflows/ci-schedule.yml)
-[![codecov](https://codecov.io/gh/hrishikesh-kadam/space_data_explorer/branch/dev/graph/badge.svg)](https://codecov.io/gh/hrishikesh-kadam/space_data_explorer)
+[![ci-schedule][ci-badge]][ci-link]
+[![codecov][codecov-badge]][codecov-link]
 
 An app to explore space data from various sources.
 
@@ -36,5 +36,9 @@ Not all packages are required to run the project.
 Refer [`./tool/ci.sh`] script to start building this project.
 
 
+[ci-badge]: https://github.com/hrishikesh-kadam/space_data_explorer/actions/workflows/ci-schedule.yml/badge.svg
+[ci-link]: https://github.com/hrishikesh-kadam/space_data_explorer/actions/workflows/ci-schedule.yml
+[codecov-badge]: https://codecov.io/gh/hrishikesh-kadam/space_data_explorer/branch/dev/graph/badge.svg
+[codecov-link]: https://codecov.io/gh/hrishikesh-kadam/space_data_explorer
 [`./tool/prerequisite.sh`]: ./tool/prerequisite.sh
 [`./tool/ci.sh`]: ./tool/ci.sh
