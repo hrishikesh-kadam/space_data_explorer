@@ -2,8 +2,11 @@
 
 ## TODOs
 
-- Add LICENSE
+- Add 404 page
+- Localize page, app bar titles
 - Add zero count image placeholder
+- Add About
+- Add LICENSE
 
 ## Future Tasks
 
