@@ -335,9 +335,7 @@ class CadResultScreen extends StatelessWidget {
                 getItemDetail(
                   label: '${l10n.distance}:',
                   displayValue: data.dist
-                      .convert(
-                        to: distanceUnit,
-                      )
+                      .convert(to: distanceUnit)
                       .toLocalizedString(l10n),
                   keyPrefix: distKeyPrefix,
                   index: index,
@@ -345,9 +343,7 @@ class CadResultScreen extends StatelessWidget {
                 getItemDetail(
                   label: '${l10n.distanceMin}:',
                   displayValue: data.distMin
-                      .convert(
-                        to: distanceUnit,
-                      )
+                      .convert(to: distanceUnit)
                       .toLocalizedString(l10n),
                   keyPrefix: distMinKeyPrefix,
                   index: index,
@@ -355,9 +351,7 @@ class CadResultScreen extends StatelessWidget {
                 getItemDetail(
                   label: '${l10n.distanceMax}:',
                   displayValue: data.distMax
-                      .convert(
-                        to: distanceUnit,
-                      )
+                      .convert(to: distanceUnit)
                       .toLocalizedString(l10n),
                   keyPrefix: distMaxKeyPrefix,
                   index: index,
