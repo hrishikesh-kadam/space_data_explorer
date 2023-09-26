@@ -12,7 +12,7 @@ final totalTextFinder = find.byKey(CadResultScreen.totalTextKey);
 final resultGridFinder = find.byKey(CadResultScreen.gridKey);
 final resultGridItemFinder = find.descendant(
   of: resultGridFinder,
-  matching: find.byKeyStartsWith(CadResultScreen.gridItemKeyPrefix),
+  matching: find.byKeyStartsWith(CadResultScreen.gridItemContainerKeyPrefix),
 );
 
 final desLabelFinder =

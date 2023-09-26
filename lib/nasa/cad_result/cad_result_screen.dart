@@ -42,6 +42,8 @@ class CadResultScreen extends StatelessWidget {
   static const Key totalTextKey = Key('${keyPrefix}total_text_key');
   static const Key gridKey = Key('${keyPrefix}grid_key');
   static const String gridItemKeyPrefix = '${keyPrefix}grid_item_';
+  static const String gridItemContainerKeyPrefix =
+      '${keyPrefix}grid_item_container_';
   static const String desKeyPrefix = '${gridItemKeyPrefix}des_';
   static const String orbitIdKeyPrefix = '${gridItemKeyPrefix}orbit_id_';
   static const String jdKeyPrefix = '${gridItemKeyPrefix}jd_';
@@ -234,7 +236,7 @@ class CadResultScreen extends StatelessWidget {
     required int index,
   }) {
     return Container(
-      key: Key('$gridItemKeyPrefix$index'),
+      key: Key('$gridItemContainerKeyPrefix$index'),
       width: Dimensions.cadQueryItemWidth,
       decoration: BoxDecoration(
         border: Border.all(
