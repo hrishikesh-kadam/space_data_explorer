@@ -111,7 +111,7 @@ class CadResultScreen extends StatelessWidget {
     required BuildContext context,
     required SbdbCadBody sbdbCadBody,
   }) {
-    if (sbdbCadBody.total != null && sbdbCadBody.total! >= 0) {
+    if (sbdbCadBody.total != null && sbdbCadBody.total! > 0) {
       return [_getTotalOnlyContent(context: context, sbdbCadBody: sbdbCadBody)];
     } else if (sbdbCadBody.count <= 0) {
       return [_getZeroCountContent(context: context)];

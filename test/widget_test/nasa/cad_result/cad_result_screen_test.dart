@@ -40,6 +40,17 @@ void main() {
       expect(resultGridFinder, findsNothing);
     });
 
+    testWidgets('200/total-only-zero', (WidgetTester tester) async {
+      final JsonMap $extra = {
+        '$SbdbCadBody': SbdbCadBodyExt.getSample('200/total-only-zero'),
+      };
+      await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
+      expect(find.byType(CadResultScreen), findsOneWidget);
+      expect(zeroCountTextFinder, findsOneWidget);
+      expect(resultGridFinder, findsNothing);
+      expect(totalTextFinder, findsNothing);
+    });
+
     testWidgets('200/body', (WidgetTester tester) async {
       final JsonMap $extra = {
         '$SbdbCadBody': SbdbCadBodyExt.getSample('200/body'),
