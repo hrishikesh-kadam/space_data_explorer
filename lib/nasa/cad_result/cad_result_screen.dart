@@ -318,7 +318,7 @@ class CadResultScreen extends StatelessWidget {
         if (fields.contains('body'))
           getItemDetail(
             label: '${l10n.closeApproachBody}:',
-            displayValue: data.body!,
+            displayValue: data.body ?? Labels.na,
             keyPrefix: bodyKeyPrefix,
             index: index,
           ),
@@ -386,7 +386,7 @@ class CadResultScreen extends StatelessWidget {
                       ? data.vInf!
                           .convert(to: velocityUnit)
                           .toLocalizedString(l10n)
-                      : 'null',
+                      : Labels.na,
                   keyPrefix: vInfKeyPrefix,
                   index: index,
                 ),
@@ -396,7 +396,7 @@ class CadResultScreen extends StatelessWidget {
         ),
         getItemDetail(
           label: '${l10n.absoulteMagnitude}:',
-          displayValue: data.h != null ? '${data.h} H' : 'null',
+          displayValue: data.h != null ? '${data.h} H' : Labels.na,
           keyPrefix: hKeyPrefix,
           index: index,
         ),
@@ -415,7 +415,7 @@ class CadResultScreen extends StatelessWidget {
                         ? data.diameter!
                             .convert(to: diameterUnit)
                             .toLocalizedString(l10n)
-                        : 'null',
+                        : Labels.na,
                     keyPrefix: diameterKeyPrefix,
                     index: index,
                   ),
@@ -425,7 +425,7 @@ class CadResultScreen extends StatelessWidget {
                         ? data.diameterSigma!
                             .convert(to: diameterUnit)
                             .toLocalizedString(l10n)
-                        : 'null',
+                        : Labels.na,
                     keyPrefix: diameterSigmaKeyPrefix,
                     index: index,
                   ),
