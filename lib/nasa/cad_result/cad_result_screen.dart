@@ -41,6 +41,22 @@ class CadResultScreen extends StatelessWidget {
   static const Key zeroCountTextKey = Key('${keyPrefix}zero_count_text_key');
   static const Key gridKey = Key('${keyPrefix}grid_key');
   static const String gridItemKeyPrefix = '${keyPrefix}grid_item_';
+  static const String desKeyPrefix = '${gridItemKeyPrefix}des_';
+  static const String orbitIdKeyPrefix = '${gridItemKeyPrefix}orbit_id_';
+  static const String jdKeyPrefix = '${gridItemKeyPrefix}jd_';
+  static const String cdKeyPrefix = '${gridItemKeyPrefix}cd_';
+  static const String distKeyPrefix = '${gridItemKeyPrefix}dist_';
+  static const String distMinKeyPrefix = '${gridItemKeyPrefix}dist_min_';
+  static const String distMaxKeyPrefix = '${gridItemKeyPrefix}dist_max_';
+  static const String vRelKeyPrefix = '${gridItemKeyPrefix}v_rel_';
+  static const String vInfKeyPrefix = '${gridItemKeyPrefix}v_inf_';
+  static const String tSigmaFKeyPrefix = '${gridItemKeyPrefix}t_sigma_f_';
+  static const String bodyKeyPrefix = '${gridItemKeyPrefix}body_';
+  static const String hKeyPrefix = '${gridItemKeyPrefix}h_';
+  static const String diameterKeyPrefix = '${gridItemKeyPrefix}diameter_';
+  static const String diameterSigmaKeyPrefix =
+      '${gridItemKeyPrefix}diameter_sigma_';
+  static const String fullnameKeyPrefix = '${gridItemKeyPrefix}fullname_';
   @visibleForTesting
   static CadResultBloc? cadResultBloc;
 
@@ -180,6 +196,7 @@ class CadResultScreen extends StatelessWidget {
         context: context,
         sbdbCadBody: sbdbCadBody,
         data: data,
+        index: index,
       ),
     );
   }
@@ -212,6 +229,7 @@ class CadResultScreen extends StatelessWidget {
     required BuildContext context,
     required SbdbCadBody sbdbCadBody,
     required SbdbCadData data,
+    required int index,
   }) {
     final fields = List<String>.from(sbdbCadBody.rawBody!['fields']);
     return Column(
@@ -220,19 +238,27 @@ class CadResultScreen extends StatelessWidget {
         getItemDetail(
           label: 'Designation:',
           displayValue: data.des,
+          keyPrefix: desKeyPrefix,
+          index: index,
         ),
         if (fields.contains('fullname'))
           getItemDetail(
             label: 'Fullname:',
             displayValue: data.fullname.toString().trim(),
+            keyPrefix: fullnameKeyPrefix,
+            index: index,
           ),
         getItemDetail(
           label: 'Orbit ID:',
           displayValue: data.orbitId,
+          keyPrefix: orbitIdKeyPrefix,
+          index: index,
         ),
         getItemDetail(
           label: 'Julian Date:',
           displayValue: '${data.jd} TDB',
+          keyPrefix: jdKeyPrefix,
+          index: index,
         ),
         BlocBuilder<SettingsBloc, SettingsState>(
           buildWhen: (previous, current) {
@@ -248,17 +274,23 @@ class CadResultScreen extends StatelessWidget {
                 dateFormatPattern: settingsState.dateFormatPattern,
                 timeFormatPattern: settingsState.timeFormatPattern,
               ),
+              keyPrefix: cdKeyPrefix,
+              index: index,
             );
           },
         ),
         getItemDetail(
           label: 'Time Sigma:',
           displayValue: data.tSigmaF,
+          keyPrefix: tSigmaFKeyPrefix,
+          index: index,
         ),
-        if (data.body != null)
+        if (fields.contains('body'))
           getItemDetail(
             label: 'Close-Approach Body:',
             displayValue: data.body!,
+            keyPrefix: bodyKeyPrefix,
+            index: index,
           ),
         BlocSelector<SettingsBloc, SettingsState, DistanceUnit>(
           selector: (state) {
@@ -275,6 +307,8 @@ class CadResultScreen extends StatelessWidget {
                         to: distanceUnit,
                       )
                       .toLocalizedString(l10n),
+                  keyPrefix: distKeyPrefix,
+                  index: index,
                 ),
                 getItemDetail(
                   label: 'Distance Min:',
@@ -283,6 +317,8 @@ class CadResultScreen extends StatelessWidget {
                         to: distanceUnit,
                       )
                       .toLocalizedString(l10n),
+                  keyPrefix: distMinKeyPrefix,
+                  index: index,
                 ),
                 getItemDetail(
                   label: 'Distance Max:',
@@ -291,6 +327,8 @@ class CadResultScreen extends StatelessWidget {
                         to: distanceUnit,
                       )
                       .toLocalizedString(l10n),
+                  keyPrefix: distMaxKeyPrefix,
+                  index: index,
                 ),
               ],
             );
@@ -309,6 +347,8 @@ class CadResultScreen extends StatelessWidget {
                   displayValue: data.vRel
                       .convert(to: velocityUnit)
                       .toLocalizedString(l10n),
+                  keyPrefix: vRelKeyPrefix,
+                  index: index,
                 ),
                 getItemDetail(
                   label: 'Velocity Inf:',
@@ -317,6 +357,8 @@ class CadResultScreen extends StatelessWidget {
                           .convert(to: velocityUnit)
                           .toLocalizedString(l10n)
                       : 'null',
+                  keyPrefix: vInfKeyPrefix,
+                  index: index,
                 ),
               ],
             );
@@ -325,6 +367,8 @@ class CadResultScreen extends StatelessWidget {
         getItemDetail(
           label: 'Absolute Magnitude:',
           displayValue: data.h != null ? '${data.h} H' : 'null',
+          keyPrefix: hKeyPrefix,
+          index: index,
         ),
         if (fields.contains('diameter'))
           BlocSelector<SettingsBloc, SettingsState, DistanceUnit>(
@@ -342,6 +386,8 @@ class CadResultScreen extends StatelessWidget {
                             .convert(to: diameterUnit)
                             .toLocalizedString(l10n)
                         : 'null',
+                    keyPrefix: diameterKeyPrefix,
+                    index: index,
                   ),
                   getItemDetail(
                     label: 'Diameter Sigma:',
@@ -350,6 +396,8 @@ class CadResultScreen extends StatelessWidget {
                             .convert(to: diameterUnit)
                             .toLocalizedString(l10n)
                         : 'null',
+                    keyPrefix: diameterSigmaKeyPrefix,
+                    index: index,
                   ),
                 ],
               );
@@ -378,9 +426,16 @@ class CadResultScreen extends StatelessWidget {
   Widget getItemDetail({
     required String label,
     required String displayValue,
+    String keyPrefix = '',
+    required int index,
   }) {
     return LayoutBuilder(
       builder: (context, constraints) {
+        final Key? labelTextKey =
+            keyPrefix.isNotEmpty ? Key('${keyPrefix}label_$index') : null;
+        final Key? displayValueTextKey = keyPrefix.isNotEmpty
+            ? Key('${keyPrefix}display_value_$index')
+            : null;
         final style = Theme.of(context).textTheme.bodyMedium;
         final labelWidth = getTextPainterLaidout(
           context: context,
@@ -407,10 +462,12 @@ class CadResultScreen extends StatelessWidget {
             children: [
               Text(
                 label,
+                key: labelTextKey,
                 style: style,
               ),
               Text(
                 displayValue,
+                key: displayValueTextKey,
                 style: style,
               ),
             ],
@@ -423,6 +480,7 @@ class CadResultScreen extends StatelessWidget {
                 width: constrainWidth,
                 child: Text(
                   label,
+                  key: labelTextKey,
                   style: style,
                   textAlign: TextAlign.start,
                 ),
@@ -431,6 +489,7 @@ class CadResultScreen extends StatelessWidget {
                 width: constrainWidth,
                 child: Text(
                   displayValue,
+                  key: displayValueTextKey,
                   style: style,
                   textAlign: TextAlign.end,
                 ),
