@@ -9,10 +9,10 @@ import '../../../../../src/nasa/cad/query/date_filter.dart';
 
 void main() {
   group('$CadRoute $DateFilterWidget Painting Test', () {
-    testWidgets('Doesn\'t Overflow ${Dimensions.galaxyFoldPortraitWidth}',
+    testWidgets('Doesn\'t Overflow ${TestDimensions.galaxyFoldPortraitWidth}',
         (WidgetTester tester) async {
       disableOverflowError();
-      tester.view.setLogicalSize(width: Dimensions.galaxyFoldPortraitWidth);
+      tester.view.setLogicalSize(width: TestDimensions.galaxyFoldPortraitWidth);
       await pumpCadRouteAsInitialLocation(tester);
       await selectDateRange(tester);
       tester.expectNoOverflow(of: dateFilterWidgetFinder);

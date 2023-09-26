@@ -13,12 +13,12 @@ void main() {
   group(
       '$CadRoute ${ValueRangeFilterWidget<double, DistanceUnit>} Painting Test',
       () {
-    testWidgets('Doesn\'t Overflow ${Dimensions.galaxyFoldPortraitWidth}',
+    testWidgets('Doesn\'t Overflow ${TestDimensions.galaxyFoldPortraitWidth}',
         (tester) async {
       disableOverflowError();
       tester.view.setLogicalSize(
-        width: Dimensions.galaxyFoldPortraitWidth,
-        height: Dimensions.galaxyFoldPortraitHeight,
+        width: TestDimensions.galaxyFoldPortraitWidth,
+        height: TestDimensions.galaxyFoldPortraitHeight,
       );
       await pumpCadRouteAsInitialLocation(tester);
       tester.expectNoOverflow(of: distFilterWidgetFinder);

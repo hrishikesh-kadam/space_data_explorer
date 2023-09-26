@@ -11,10 +11,10 @@ import '../../../../../src/nasa/cad/query/small_body_selector.dart';
 void main() {
   group('$CadRoute ${ChoiceChipInputWidget<SmallBodySelector>} Painting Test',
       () {
-    testWidgets('Doesn\'t Overflow ${Dimensions.galaxyFoldPortraitWidth}',
+    testWidgets('Doesn\'t Overflow ${TestDimensions.galaxyFoldPortraitWidth}',
         (WidgetTester tester) async {
       disableOverflowError();
-      tester.view.setLogicalSize(width: Dimensions.galaxyFoldPortraitWidth);
+      tester.view.setLogicalSize(width: TestDimensions.galaxyFoldPortraitWidth);
       await pumpCadRouteAsInitialLocation(tester);
       await tester.dragUntilVisible(
         smallBodySelectorWidgetFinder,

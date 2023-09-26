@@ -5,10 +5,23 @@ import 'package:hrk_nasa_apis_test/hrk_nasa_apis_test.dart';
 
 import 'package:space_data_explorer/constants/dimensions.dart';
 import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
+import '../../../constants/dimensions.dart';
 import '../../../src/nasa/cad_result/cad_result_route.dart';
 
 void main() {
   group('$CadResultScreen Painting Test', () {
+    final JsonMap $extra = {
+      '$SbdbCadBody': SbdbCadBodyExt.getSample('200/1'),
+    };
+
+    testWidgets('Doesn\'t Overflow ${TestDimensions.galaxyFoldPortraitWidth}',
+        (WidgetTester tester) async {
+      disableOverflowError();
+      tester.view.setLogicalSize(width: TestDimensions.galaxyFoldPortraitWidth);
+      await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
+      tester.expectNoOverflow(of: getResultGridItemFinder(0));
+    });
+
     group('Masonry', () {
       const double fitsThreeItems = 3 * Dimensions.cadQueryItemExtent +
           2 * Dimensions.pagePaddingHorizontal;
@@ -17,9 +30,6 @@ void main() {
       const double fitsOneItem =
           Dimensions.cadQueryItemExtent + 2 * Dimensions.pagePaddingHorizontal;
       const double fitsThreeItemsVertically = 1200;
-      final JsonMap $extra = {
-        '$SbdbCadBody': SbdbCadBodyExt.getSample('200/1'),
-      };
 
       testWidgets('Screen width ${fitsThreeItems + 1}',
           (WidgetTester tester) async {
@@ -115,7 +125,7 @@ void _expectCrossAxisCount(
   WidgetTester tester, {
   required int count,
 }) {
-  final gridItems = tester.widgetList(resultGridItemFinder).toList();
+  final gridItems = tester.widgetList(resultGridItemsFinder).toList();
   final firstItemRect = tester.getRect(find.byWidget(gridItems[0]));
   final secondItemRect = tester.getRect(find.byWidget(gridItems[1]));
   final thirdItemRect = tester.getRect(find.byWidget(gridItems[2]));

@@ -129,8 +129,8 @@ void main() {
 
     testWidgets('Re-entering viewport', (tester) async {
       tester.view.setLogicalSize(
-        width: Dimensions.galaxyFoldPortraitWidth,
-        height: Dimensions.galaxyFoldPortraitHeight,
+        width: TestDimensions.galaxyFoldPortraitWidth,
+        height: TestDimensions.galaxyFoldPortraitHeight,
       );
       await pumpCadRouteAsInitialLocation(tester);
       DistanceFilter filter = DistanceFilter.min;

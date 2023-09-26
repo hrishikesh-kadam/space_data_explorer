@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_batteries/hrk_batteries.dart';
 
@@ -10,10 +12,14 @@ import '../cad/cad_route.dart';
 final zeroCountTextFinder = find.byKey(CadResultScreen.zeroCountTextKey);
 final totalTextFinder = find.byKey(CadResultScreen.totalTextKey);
 final resultGridFinder = find.byKey(CadResultScreen.gridKey);
-final resultGridItemFinder = find.descendant(
-  of: resultGridFinder,
-  matching: find.byKeyStartsWith(CadResultScreen.gridItemContainerKeyPrefix),
-);
+final resultGridItemsFinder =
+    find.byKeyStartsWith(CadResultScreen.gridItemContainerKeyPrefix);
+
+Finder getResultGridItemFinder(int index) {
+  return find.byKey(Key(
+    '${CadResultScreen.gridItemContainerKeyPrefix}$index',
+  ));
+}
 
 final desLabelFinder =
     find.byKeyStartsWith('${CadResultScreen.desKeyPrefix}label_');
