@@ -318,7 +318,9 @@ class CadResultScreen extends StatelessWidget {
         if (fields.contains('body'))
           getItemDetail(
             label: '${l10n.closeApproachBody}:',
-            displayValue: data.body ?? Labels.na,
+            displayValue: data.body != null
+                ? getLocalizedBody(body: data.body!, l10n: l10n)
+                : Labels.na,
             keyPrefix: bodyKeyPrefix,
             index: index,
           ),
@@ -437,22 +439,6 @@ class CadResultScreen extends StatelessWidget {
     );
   }
 
-  String formatCloseApproachDateTime({
-    required BuildContext context,
-    required DateTime cd,
-    required DateFormatPattern dateFormatPattern,
-    required TimeFormatPattern timeFormatPattern,
-  }) {
-    final locale = Localizations.localeOf(context).toString();
-    final dateFormat = DateFormat(dateFormatPattern.pattern, locale);
-    final dateTimeStringBuffer = StringBuffer(dateFormat.format(cd));
-    dateTimeStringBuffer.write(' ');
-    final timeFormat = DateFormat(timeFormatPattern.pattern, locale);
-    dateTimeStringBuffer.write(timeFormat.format(cd));
-    dateTimeStringBuffer.write(' ${Labels.tdb}');
-    return dateTimeStringBuffer.toString();
-  }
-
   Widget getItemDetail({
     required String label,
     required String displayValue,
@@ -529,5 +515,40 @@ class CadResultScreen extends StatelessWidget {
         }
       },
     );
+  }
+
+  String formatCloseApproachDateTime({
+    required BuildContext context,
+    required DateTime cd,
+    required DateFormatPattern dateFormatPattern,
+    required TimeFormatPattern timeFormatPattern,
+  }) {
+    final locale = Localizations.localeOf(context).toString();
+    final dateFormat = DateFormat(dateFormatPattern.pattern, locale);
+    final dateTimeStringBuffer = StringBuffer(dateFormat.format(cd));
+    dateTimeStringBuffer.write(' ');
+    final timeFormat = DateFormat(timeFormatPattern.pattern, locale);
+    dateTimeStringBuffer.write(timeFormat.format(cd));
+    dateTimeStringBuffer.write(' ${Labels.tdb}');
+    return dateTimeStringBuffer.toString();
+  }
+
+  static String getLocalizedBody({
+    required String body,
+    required AppLocalizations l10n,
+  }) {
+    return switch (body) {
+      'Earth' => l10n.earth,
+      'Moon' => l10n.moon,
+      'Mercury' => l10n.mercury,
+      'Venus' => l10n.venus,
+      'Mars' => l10n.mars,
+      'Jupiter' => l10n.jupiter,
+      'Saturn' => l10n.saturn,
+      'Uranus' => l10n.uranus,
+      'Neptune' => l10n.neptune,
+      'Pluto' => l10n.pluto,
+      _ => body
+    };
   }
 }
