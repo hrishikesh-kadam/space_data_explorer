@@ -6,7 +6,7 @@ import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:hrk_nasa_apis_test/hrk_nasa_apis_test.dart';
 import 'package:recase/recase.dart';
 
-import 'package:space_data_explorer/constants/constants.dart';
+import 'package:space_data_explorer/constants/labels.dart';
 import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
@@ -30,8 +30,11 @@ void main() {
       expect(find.byType(SnackBar), findsOneWidget);
       final Text snackBarContent =
           tester.widget<SnackBar>(snackBarFinder).content as Text;
-      expect(snackBarContent.data, contains(somethingWentWrong));
-      expect(snackBarContent.data, contains('$statusCode: $statusCodeInt'));
+      expect(snackBarContent.data, contains(Labels.somethingWentWrong));
+      expect(
+        snackBarContent.data,
+        contains('${Labels.statusCode}: $statusCodeInt'),
+      );
     });
 
     testWidgets('${DioExceptionType.connectionError}', (tester) async {
@@ -67,7 +70,7 @@ void main() {
       expect(find.byType(SnackBar), findsOneWidget);
       final Text snackBarContent =
           tester.widget<SnackBar>(snackBarFinder).content as Text;
-      expect(snackBarContent.data, somethingWentWrong);
+      expect(snackBarContent.data, Labels.somethingWentWrong);
     });
 
     testWidgets('${DioExceptionType.cancel}', (tester) async {

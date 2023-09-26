@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 
 import '../../../widgets/app_bar.dart';
 import '../../constants/dimensions.dart';
+import '../../constants/labels.dart';
 import '../../constants/theme.dart';
 import '../../extension/distance.dart';
 import '../../extension/velocity.dart';
@@ -265,27 +266,27 @@ class CadResultScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         getItemDetail(
-          label: 'Designation:',
+          label: '${l10n.designation}:',
           displayValue: data.des,
           keyPrefix: desKeyPrefix,
           index: index,
         ),
         if (fields.contains('fullname'))
           getItemDetail(
-            label: 'Fullname:',
+            label: '${l10n.fullname}:',
             displayValue: data.fullname.toString().trim(),
             keyPrefix: fullnameKeyPrefix,
             index: index,
           ),
         getItemDetail(
-          label: 'Orbit ID:',
+          label: '${l10n.orbitId}:',
           displayValue: data.orbitId,
           keyPrefix: orbitIdKeyPrefix,
           index: index,
         ),
         getItemDetail(
-          label: 'Julian Date:',
-          displayValue: '${data.jd} TDB',
+          label: '${l10n.julianDate}:',
+          displayValue: '${data.jd} ${Labels.tdb}',
           keyPrefix: jdKeyPrefix,
           index: index,
         ),
@@ -296,7 +297,7 @@ class CadResultScreen extends StatelessWidget {
           },
           builder: (context, settingsState) {
             return getItemDetail(
-              label: 'Date/Time:',
+              label: '${l10n.dateSlashTime}:',
               displayValue: formatCloseApproachDateTime(
                 context: context,
                 cd: data.cd,
@@ -309,14 +310,14 @@ class CadResultScreen extends StatelessWidget {
           },
         ),
         getItemDetail(
-          label: 'Time Sigma:',
+          label: '${l10n.timeSigma}:',
           displayValue: data.tSigmaF,
           keyPrefix: tSigmaFKeyPrefix,
           index: index,
         ),
         if (fields.contains('body'))
           getItemDetail(
-            label: 'Close-Approach Body:',
+            label: '${l10n.closeApproachBody}:',
             displayValue: data.body!,
             keyPrefix: bodyKeyPrefix,
             index: index,
@@ -330,7 +331,7 @@ class CadResultScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 getItemDetail(
-                  label: 'Distance:',
+                  label: '${l10n.distance}:',
                   displayValue: data.dist
                       .convert(
                         to: distanceUnit,
@@ -340,7 +341,7 @@ class CadResultScreen extends StatelessWidget {
                   index: index,
                 ),
                 getItemDetail(
-                  label: 'Distance Min:',
+                  label: '${l10n.distanceMin}:',
                   displayValue: data.distMin
                       .convert(
                         to: distanceUnit,
@@ -350,7 +351,7 @@ class CadResultScreen extends StatelessWidget {
                   index: index,
                 ),
                 getItemDetail(
-                  label: 'Distance Max:',
+                  label: '${l10n.distanceMax}:',
                   displayValue: data.distMax
                       .convert(
                         to: distanceUnit,
@@ -372,7 +373,7 @@ class CadResultScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 getItemDetail(
-                  label: 'Velocity Rel:',
+                  label: '${l10n.velocityRel}:',
                   displayValue: data.vRel
                       .convert(to: velocityUnit)
                       .toLocalizedString(l10n),
@@ -380,7 +381,7 @@ class CadResultScreen extends StatelessWidget {
                   index: index,
                 ),
                 getItemDetail(
-                  label: 'Velocity Inf:',
+                  label: '${l10n.velocityInf}:',
                   displayValue: data.vInf != null
                       ? data.vInf!
                           .convert(to: velocityUnit)
@@ -394,7 +395,7 @@ class CadResultScreen extends StatelessWidget {
           },
         ),
         getItemDetail(
-          label: 'Absolute Magnitude:',
+          label: '${l10n.absoulteMagnitude}:',
           displayValue: data.h != null ? '${data.h} H' : 'null',
           keyPrefix: hKeyPrefix,
           index: index,
@@ -409,7 +410,7 @@ class CadResultScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   getItemDetail(
-                    label: 'Diameter:',
+                    label: '${l10n.diameter}:',
                     displayValue: data.diameter != null
                         ? data.diameter!
                             .convert(to: diameterUnit)
@@ -419,7 +420,7 @@ class CadResultScreen extends StatelessWidget {
                     index: index,
                   ),
                   getItemDetail(
-                    label: 'Diameter Sigma:',
+                    label: '${l10n.diameterSigma}:',
                     displayValue: data.diameterSigma != null
                         ? data.diameterSigma!
                             .convert(to: diameterUnit)
@@ -448,7 +449,7 @@ class CadResultScreen extends StatelessWidget {
     dateTimeStringBuffer.write(' ');
     final timeFormat = DateFormat(timeFormatPattern.pattern, locale);
     dateTimeStringBuffer.write(timeFormat.format(cd));
-    dateTimeStringBuffer.write(' TDB');
+    dateTimeStringBuffer.write(' ${Labels.tdb}');
     return dateTimeStringBuffer.toString();
   }
 

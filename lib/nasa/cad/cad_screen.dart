@@ -10,8 +10,8 @@ import 'package:intl/intl.dart';
 import 'package:recase/recase.dart';
 
 import '../../config/config.dart';
-import '../../constants/constants.dart';
 import '../../constants/dimensions.dart';
+import '../../constants/labels.dart';
 import '../../constants/theme.dart';
 import '../../globals.dart';
 import '../../helper/helper.dart';
@@ -148,12 +148,12 @@ class CadScreen extends StatelessWidget {
           CadResultRoute($extra: routeExtraMap).go(context);
           context.read<CadBloc>().add(const CadResultOpened());
         } else if (state.networkState == NetworkState.failure) {
-          String errorString = somethingWentWrong;
+          String errorString = Labels.somethingWentWrong;
           if (state.error is DioException) {
             final dioException = state.error as DioException;
             if (dioException.type == DioExceptionType.badResponse) {
               final statusCodeInt = dioException.response?.statusCode;
-              errorString += '\n$statusCode: $statusCodeInt';
+              errorString += '\n${Labels.statusCode}: $statusCodeInt';
               if (dioException.response?.data is JsonMap) {
                 errorString +=
                     '\n${jsonEncoderPretty.convert(dioException.response!.data)}';
@@ -398,8 +398,10 @@ class CadScreen extends StatelessWidget {
   }
 
   Widget _getSmallBodySelectorWidget({required BuildContext context}) {
-    final Set<String> labels =
-        smallBodySelectors.map((e) => e.displayName).toSet();
+    final Set<String> labels = {
+      SmallBodySelector.spkId.displayName,
+      l10n.designation,
+    };
     final Set<String> keys = smallBodySelectors.map((e) => e.name).toSet();
     final List<List<TextInputFormatter>?> inputFormattersList = [
       [FilteringTextInputFormatter.digitsOnly],
