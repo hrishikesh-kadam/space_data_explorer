@@ -8,6 +8,7 @@ import '../../space_data_explorer_app.dart';
 import '../cad/cad_route.dart';
 
 final zeroCountTextFinder = find.byKey(CadResultScreen.zeroCountTextKey);
+final totalTextFinder = find.byKey(CadResultScreen.totalTextKey);
 final resultGridFinder = find.byKey(CadResultScreen.gridKey);
 final resultGridItemFinder = find.descendant(
   of: resultGridFinder,

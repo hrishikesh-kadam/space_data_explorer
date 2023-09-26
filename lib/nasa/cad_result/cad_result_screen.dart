@@ -39,6 +39,7 @@ class CadResultScreen extends StatelessWidget {
   static const String keyPrefix = 'cad_result_screen_';
   static const Key customScrollViewKey = Key('${keyPrefix}scroll_view_key');
   static const Key zeroCountTextKey = Key('${keyPrefix}zero_count_text_key');
+  static const Key totalTextKey = Key('${keyPrefix}total_text_key');
   static const Key gridKey = Key('${keyPrefix}grid_key');
   static const String gridItemKeyPrefix = '${keyPrefix}grid_item_';
   static const String desKeyPrefix = '${gridItemKeyPrefix}des_';
@@ -108,7 +109,9 @@ class CadResultScreen extends StatelessWidget {
     required BuildContext context,
     required SbdbCadBody sbdbCadBody,
   }) {
-    if (sbdbCadBody.count <= 0) {
+    if (sbdbCadBody.total != null && sbdbCadBody.total! >= 0) {
+      return [_getTotalOnlyContent(context: context, sbdbCadBody: sbdbCadBody)];
+    } else if (sbdbCadBody.count <= 0) {
       return [_getZeroCountContent(context: context)];
     } else {
       return _getGridContent(context: context, sbdbCadBody: sbdbCadBody);
@@ -126,6 +129,30 @@ class CadResultScreen extends StatelessWidget {
             Text(
               l10n.cadResultScreenZeroCount,
               key: zeroCountTextKey,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _getTotalOnlyContent({
+    required BuildContext context,
+    required SbdbCadBody sbdbCadBody,
+  }) {
+    return SliverFillRemaining(
+      hasScrollBody: false,
+      child: Padding(
+        padding: const EdgeInsets.all(Dimensions.pagePadding),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '${l10n.total} = '
+              '${sbdbCadBody.total.toString().localizeDigits(toZeroDigit: zeroDigit)}',
+              key: totalTextKey,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
