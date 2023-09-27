@@ -13,15 +13,16 @@ import 'bloc/settings_bloc.dart';
 import 'bloc/settings_state.dart';
 import 'date_format_pattern.dart';
 import 'locale.dart';
-import 'settings_route.dart';
 import 'time_format_pattern.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({
     super.key,
+    required this.title,
     required this.l10n,
   });
 
+  final String title;
   final AppLocalizations l10n;
   final _logger = Logger('$appNamePascalCase.SettingsScreen');
   static const String keyPrefix = 'settings_screen_';
@@ -94,7 +95,7 @@ class SettingsScreen extends StatelessWidget {
         child: Scaffold(
           appBar: getAppBar(
             context: context,
-            title: const Text(SettingsRoute.displayName),
+            title: Text(title),
           ),
           body: _getBody(),
         ),

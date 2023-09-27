@@ -7,10 +7,10 @@ import '../constants/theme.dart';
 class DeferredPlaceholderWidget extends StatelessWidget {
   const DeferredPlaceholderWidget({
     super.key,
-    required this.name,
+    required this.title,
   });
 
-  final String name;
+  final String title;
   static const double indicatorHeight =
       Dimensions.linearProgressIndicatorHeight;
 
@@ -20,7 +20,7 @@ class DeferredPlaceholderWidget extends StatelessWidget {
       appBar: AppBar(
         leading: getAppBarBackButton(context: context),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(name),
+        title: Text(title),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(indicatorHeight),
           child: LinearProgressIndicator(

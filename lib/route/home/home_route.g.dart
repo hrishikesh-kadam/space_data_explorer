@@ -16,7 +16,7 @@ List<RouteBase> get $appRoutes => [
 
 RouteBase get $homeRoute => GoRouteData.$route(
       path: '/',
-      name: 'Home Page',
+      name: 'Space Data Explorer',
       factory: $HomeRouteExtension._fromState,
       routes: [
         GoRouteData.$route(
@@ -40,7 +40,7 @@ RouteBase get $homeRoute => GoRouteData.$route(
         ),
         GoRouteData.$route(
           path: 'settings',
-          name: 'Settings Page',
+          name: 'Settings',
           factory: $SettingsRouteExtension._fromState,
         ),
       ],

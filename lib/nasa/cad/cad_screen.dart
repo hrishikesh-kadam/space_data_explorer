@@ -29,15 +29,16 @@ import '../../widgets/value_range_filter_widget.dart';
 import '../cad_result/cad_result_route.dart';
 import 'bloc/cad_bloc.dart';
 import 'bloc/cad_state.dart';
-import 'cad_route.dart';
 
 class CadScreen extends StatelessWidget {
   CadScreen({
     super.key,
+    required this.title,
     required this.l10n,
     this.routeExtraMap,
   });
 
+  final String title;
   final AppLocalizations l10n;
   final JsonMap? routeExtraMap;
   // ignore: unused_field
@@ -182,7 +183,7 @@ class CadScreen extends StatelessWidget {
       slivers: [
         getSliverAppBar(
           context: context,
-          title: const Text(CadRoute.displayName),
+          title: Text(title),
           floating: true,
           snap: true,
         ),

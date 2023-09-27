@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../constants/labels.dart';
 import '../../nasa/cad/cad_route.dart';
 import '../../nasa/cad_result/cad_result_route.dart';
 import '../../nasa/route/nasa_route.dart';
@@ -41,8 +43,14 @@ class HomeRoute extends GoRouteData {
 
   static const String path = '/';
   static const String routeName = path;
-  static const String displayName = 'Home Page';
+  static const String displayName = Labels.spaceDataExplorer;
 
   @override
-  Widget build(BuildContext context, GoRouterState state) => const HomeScreen();
+  Widget build(BuildContext context, GoRouterState state) {
+    final l10n = AppLocalizations.of(context);
+    return HomeScreen(
+      title: l10n.spaceDataExplorer,
+      l10n: l10n,
+    );
+  }
 }

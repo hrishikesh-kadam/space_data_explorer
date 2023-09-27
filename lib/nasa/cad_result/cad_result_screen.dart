@@ -22,16 +22,17 @@ import '../../route/settings/time_format_pattern.dart';
 import '../../widgets/directionality_widget.dart';
 import 'bloc/cad_result_bloc.dart';
 import 'bloc/cad_result_state.dart';
-import 'cad_result_route.dart';
 
 class CadResultScreen extends StatelessWidget {
   CadResultScreen({
     super.key,
+    required this.title,
     required this.l10n,
     required this.routeExtraMap,
     required this.zeroDigit,
   });
 
+  final String title;
   final AppLocalizations l10n;
   final JsonMap routeExtraMap;
   final String zeroDigit;
@@ -97,7 +98,7 @@ class CadResultScreen extends StatelessWidget {
           slivers: [
             getSliverAppBar(
               context: context,
-              title: const Text(CadResultRoute.displayName),
+              title: Text(title),
               floating: true,
               snap: true,
             ),

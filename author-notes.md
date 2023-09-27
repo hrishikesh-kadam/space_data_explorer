@@ -2,11 +2,12 @@
 
 ## TODOs
 
+- Fix keys
 - Add 404 page
-- Localize page, app bar titles
 - Add zero count image placeholder
 - Add About
 - Add LICENSE
+- Add selection, copy functionality
 
 ## Future Tasks
 

@@ -1,5 +1,6 @@
 {
   "ar": [
+    "spaceDataExplorer",
     "search",
     "minimum",
     "maximum",
@@ -7,6 +8,7 @@
     "plusSomeDays",
     "dateFilter",
     "selectDateRange",
+    "settings",
     "language",
     "dateFormat",
     "julianDate",
@@ -56,6 +58,8 @@
     "neaComet",
     "smallBodySelector",
     "designation",
+    "cadRouteName",
+    "cadResultRouteName",
     "closeApproachBodySelector",
     "closeApproachBody",
     "earth",
@@ -79,6 +83,7 @@
   ],
 
   "he": [
+    "spaceDataExplorer",
     "search",
     "minimum",
     "maximum",
@@ -86,6 +91,7 @@
     "plusSomeDays",
     "dateFilter",
     "selectDateRange",
+    "settings",
     "language",
     "dateFormat",
     "julianDate",
@@ -135,6 +141,8 @@
     "neaComet",
     "smallBodySelector",
     "designation",
+    "cadRouteName",
+    "cadResultRouteName",
     "closeApproachBodySelector",
     "closeApproachBody",
     "earth",

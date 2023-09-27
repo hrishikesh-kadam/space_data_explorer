@@ -1,4 +1,5 @@
 {
+  "spaceDataExplorer": "स्पेस डेटा एक्सप्लोरर",
   "search": "खोजें",
   "minimum": "न्यूनतम",
   "maximum": "अधिकतम",
@@ -14,6 +15,7 @@
   },
   "dateFilter": "दिनांक चयन",
   "selectDateRange": "दिनांक चुनें",
+  "settings": "सेटिंग्स",
   "language": "भाषा",
   "dateFormat": "दिनांक प्रारूप",
   "julianDate": "जूलियन दिनांक",
@@ -63,6 +65,8 @@
   "neaComet": "NEA और धूमकेतू",
   "smallBodySelector": "छोटे पिंड पहचान",
   "designation": "डेसिगनेशन",
+  "cadRouteName": "SBDB क्लोज-अप्रोच डेटा",
+  "cadResultRouteName": "SBDB क्लोज-अप्रोच डेटा परिणाम",
   "closeApproachBodySelector": "पिंड के निकट चयन",
   "closeApproachBody": "पिंड के निकट",
   "earth": "पृथ्वी",

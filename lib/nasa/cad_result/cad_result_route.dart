@@ -9,6 +9,7 @@ import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:intl/intl.dart';
 
 import '../../../deferred_loading/deferred_loading.dart';
+import '../../constants/labels.dart';
 import '../../globals.dart';
 import '../cad/cad_route.dart';
 import 'cad_result_screen.dart' deferred as cad_result_screen;
@@ -25,7 +26,7 @@ class CadResultRoute extends GoRouteData {
 
   static const String routeName = 'result';
   static const String path = '${CadRoute.path}/$routeName';
-  static const String displayName = 'SBDB Close-Approach Data Result';
+  static const String displayName = Labels.sbdbCloseApproachDataResult;
   @visibleForTesting
   static JsonMap? $extraTest;
 
@@ -52,19 +53,21 @@ class CadResultRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     stubExtraForTesting();
+    final l10n = AppLocalizations.of(context);
+    final title = l10n.cadResultRouteName;
     final locale = Localizations.localeOf(context).toString();
     // final zeroDigit = NumberFormat(null, locale).symbols.ZERO_DIGIT;
     final zeroDigit = DateFormat(null, locale).dateSymbols.ZERODIGIT ?? '0';
-
     return DeferredWidget(
       cad_result_screen.loadLibrary,
       () => cad_result_screen.CadResultScreen(
-        l10n: AppLocalizations.of(context),
+        title: title,
+        l10n: l10n,
         routeExtraMap: $extra!,
         zeroDigit: zeroDigit,
       ),
-      placeholder: const DeferredPlaceholderWidget(
-        name: CadResultRoute.displayName,
+      placeholder: DeferredPlaceholderWidget(
+        title: title,
       ),
     );
   }

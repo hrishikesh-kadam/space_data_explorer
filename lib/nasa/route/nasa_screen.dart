@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 
 import '../../globals.dart';
@@ -7,14 +8,19 @@ import '../../route/home/home_route.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/directionality_widget.dart';
 import '../cad/cad_route.dart';
-import 'nasa_route.dart';
 
 class NasaScreen extends StatelessWidget {
-  NasaScreen({super.key});
+  NasaScreen({
+    super.key,
+    required this.title,
+    required this.l10n,
+  });
 
-  static const Key cadButtonKey = Key('nasa_screen_cad_button');
+  final String title;
+  final AppLocalizations l10n;
   // ignore: unused_field
   final _logger = Logger('$appNamePascalCase.NasaScreen');
+  static const Key cadButtonKey = Key('nasa_screen_cad_button');
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,7 @@ class NasaScreen extends StatelessWidget {
       child: Scaffold(
         appBar: getAppBar(
           context: context,
-          title: const Text(NasaRoute.displayName),
+          title: Text(title),
         ),
         body: TextButton(
           key: cadButtonKey,

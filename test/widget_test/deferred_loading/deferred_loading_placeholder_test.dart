@@ -10,7 +10,7 @@ void main() {
     const String title = 'Loading... Please Wait!';
     await tester.pumpWidget(const MaterialApp(
       home: DeferredPlaceholderWidget(
-        name: title,
+        title: title,
       ),
     ));
     expect(find.byType(AppBar), findsOneWidget);
