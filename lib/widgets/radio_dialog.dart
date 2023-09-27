@@ -20,7 +20,7 @@ class RadioDialog<T> extends StatelessWidget {
 
   static const String keyPrefixDefault = 'radio_dialog_';
   static const String keySuffixDefault = '${keyPrefixDefault}key';
-  static const String listViewKeySuffix = 'list_view';
+  static const String listViewKeySuffix = 'list_view_key';
 
   @override
   Widget build(BuildContext context) {

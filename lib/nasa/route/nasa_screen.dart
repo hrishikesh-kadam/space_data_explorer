@@ -20,7 +20,8 @@ class NasaScreen extends StatelessWidget {
   final AppLocalizations l10n;
   // ignore: unused_field
   final _logger = Logger('$appNamePascalCase.NasaScreen');
-  static const Key cadButtonKey = Key('nasa_screen_cad_button');
+  static const String keyPrefix = 'nasa_screen_';
+  static const Key cadButtonKey = Key('${keyPrefix}cad_button_key');
 
   @override
   Widget build(BuildContext context) {

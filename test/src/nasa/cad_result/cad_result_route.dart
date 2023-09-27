@@ -17,7 +17,7 @@ final resultGridItemsFinder =
 
 Finder getResultGridItemFinder(int index) {
   return find.byKey(Key(
-    '${CadResultScreen.gridItemContainerKeyPrefix}$index',
+    '${CadResultScreen.gridItemContainerKeyPrefix}${index}_key',
   ));
 }
 

@@ -6,6 +6,7 @@ import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
+import 'package:space_data_explorer/widgets/value_range_filter_widget.dart';
 import '../cad_route.dart';
 
 enum DistanceFilter { min, max }
@@ -58,21 +59,24 @@ double getNonDefaultValue(DistanceFilter filter) {
 Finder getTextFieldFinder(DistanceFilter filter) {
   return find.byKey(Key(
     '${CadScreen.distFilterKeyPrefix}'
-    'text_field_${filter.index}',
+    '${ValueRangeFilterWidget.valueTextFieldKeyPrefix}'
+    '${filter.index}_key',
   ));
 }
 
 Finder getUnitDropdownFinder(DistanceFilter filter) {
   return find.byKey(Key(
     '${CadScreen.distFilterKeyPrefix}'
-    'unit_dropdown_${filter.index}',
+    '${ValueRangeFilterWidget.unitDropdownKeyPrefix}'
+    '${filter.index}_key',
   ));
 }
 
 Finder getUnitTextFinder(DistanceFilter filter) {
   return find.byKey(Key(
     '${CadScreen.distFilterKeyPrefix}'
-    'unit_text_${filter.index}',
+    '${ValueRangeFilterWidget.unitTextKeyPrefix}'
+    '${filter.index}_key',
   ));
 }
 
@@ -91,7 +95,8 @@ Finder getUnitDropdownItemFinder(
   final finder = find.byKey(
     Key(
       '${CadScreen.distFilterKeyPrefix}'
-      'unit_dropdown_item_${filter.index}_${unit.symbol}',
+      '${ValueRangeFilterWidget.unitDropdownItemKeyPrefix}'
+      '${filter.index}_${unit.symbol}_key',
     ),
   );
   return finder.last;

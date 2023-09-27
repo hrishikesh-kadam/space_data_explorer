@@ -238,7 +238,7 @@ class CadResultScreen extends StatelessWidget {
     required int index,
   }) {
     return Container(
-      key: Key('$gridItemContainerKeyPrefix$index'),
+      key: Key('$gridItemContainerKeyPrefix${index}_key'),
       width: Dimensions.cadQueryItemWidth,
       decoration: BoxDecoration(
         border: Border.all(
@@ -443,9 +443,9 @@ class CadResultScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final Key? labelTextKey =
-            keyPrefix.isNotEmpty ? Key('${keyPrefix}label_$index') : null;
+            keyPrefix.isNotEmpty ? Key('${keyPrefix}label_${index}_key') : null;
         final Key? displayValueTextKey = keyPrefix.isNotEmpty
-            ? Key('${keyPrefix}display_value_$index')
+            ? Key('${keyPrefix}display_value_${index}_key')
             : null;
         final style = Theme.of(context).textTheme.bodyMedium;
         final labelWidth = getTextPainterLaidout(

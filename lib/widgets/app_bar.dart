@@ -7,7 +7,7 @@ import '../globals.dart';
 import '../route/home/home_route.dart' hide $SettingsRouteExtension;
 import '../route/settings/settings_route.dart';
 
-const Key settingsButtonKey = Key('settings_button');
+const Key settingsButtonKey = Key('settings_button_key');
 
 AppBar getAppBar({
   Key? key,

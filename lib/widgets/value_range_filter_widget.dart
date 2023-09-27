@@ -62,6 +62,10 @@ class ValueRangeFilterWidget<V, U> extends StatefulWidget {
   final double spacing;
   final ValueRangeChanged<V, U>? onValueRangeChanged;
   static const String defaultKey = 'value_range_filter_widget_key';
+  static const String valueTextFieldKeyPrefix = 'text_field_';
+  static const String unitTextKeyPrefix = 'unit_text_';
+  static const String unitDropdownItemKeyPrefix = 'unit_dropdown_item_';
+  static const String unitDropdownKeyPrefix = 'unit_dropdown_';
 
   @override
   State<ValueRangeFilterWidget<V, U>> createState() =>
@@ -261,7 +265,11 @@ class _ValueRangeFilterWidgetState<V, U>
             }
           },
           child: TextField(
-            key: Key('${widget.keyPrefix}text_field_$index'),
+            key: Key(
+              '${widget.keyPrefix}'
+              '${ValueRangeFilterWidget.valueTextFieldKeyPrefix}'
+              '${index}_key',
+            ),
             controller: textControllers[index],
             focusNode: textFocusNodes[index],
             keyboardType: widget.keyboardType,
@@ -293,7 +301,11 @@ class _ValueRangeFilterWidgetState<V, U>
   }) {
     if (widget.units!.length < 2) {
       return Text(
-        key: Key('${widget.keyPrefix}unit_text_$index'),
+        key: Key(
+          '${widget.keyPrefix}'
+          '${ValueRangeFilterWidget.unitTextKeyPrefix}'
+          '${index}_key',
+        ),
         widget.unitSymbols!.first,
         style: Theme.of(context).textTheme.bodyMedium,
       );
@@ -303,7 +315,8 @@ class _ValueRangeFilterWidgetState<V, U>
         dropDownItems.add(DropdownMenuItem(
           key: Key(
             '${widget.keyPrefix}'
-            'unit_dropdown_item_${index}_${widget.unitSymbols!.elementAt(j)}',
+            '${ValueRangeFilterWidget.unitDropdownItemKeyPrefix}'
+            '${index}_${widget.unitSymbols!.elementAt(j)}_key',
           ),
           value: widget.units!.elementAt(j),
           child: Text(
@@ -315,7 +328,11 @@ class _ValueRangeFilterWidgetState<V, U>
       return AbsorbPointer(
         absorbing: widget.disableInputs,
         child: DropdownButton<U>(
-          key: Key('${widget.keyPrefix}unit_dropdown_$index'),
+          key: Key(
+            '${widget.keyPrefix}'
+            '${ValueRangeFilterWidget.unitDropdownKeyPrefix}'
+            '${index}_key',
+          ),
           items: dropDownItems,
           value: unitList[index],
           onChanged: (unit) {

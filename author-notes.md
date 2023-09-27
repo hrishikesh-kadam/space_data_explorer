@@ -2,7 +2,7 @@
 
 ## TODOs
 
-- Fix keys
+- Fix app bar titles truncation
 - Add 404 page
 - Add zero count image placeholder
 - Add About

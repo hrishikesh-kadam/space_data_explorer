@@ -17,7 +17,8 @@ class HomeScreen extends StatelessWidget {
 
   final String title;
   final AppLocalizations l10n;
-  static const Key nasaButtonKey = Key('home_screen_nasa_button');
+  static const String keyPrefix = 'home_screen_';
+  static const Key nasaButtonKey = Key('${keyPrefix}nasa_button_key');
 
   @override
   Widget build(BuildContext context) {

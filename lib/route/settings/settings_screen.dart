@@ -26,7 +26,7 @@ class SettingsScreen extends StatelessWidget {
   final AppLocalizations l10n;
   final _logger = Logger('$appNamePascalCase.SettingsScreen');
   static const String keyPrefix = 'settings_screen_';
-  static const Key listViewKey = Key('${keyPrefix}list_view');
+  static const Key listViewKey = Key('${keyPrefix}list_view_key');
   static const String localeTileKeyPrefix = '${keyPrefix}locale_tile_';
   static const Key localeTileKey = Key('${localeTileKeyPrefix}key');
   static final Set<Locale?> locales = {
