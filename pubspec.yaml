@@ -46,7 +46,7 @@ dev_dependencies:
     sdk: flutter
   mockito: ^5.4.2
   hrk_analysis: '>=0.1.0 <1.0.0'
-  hrk_flutter_test_batteries: '>=0.7.0 <1.0.0'
+  hrk_flutter_test_batteries: ^0.7.1
   hrk_nasa_apis_test: '>=0.5.1 <1.0.0'
   path: ^1.8.3
   import_sorter:
