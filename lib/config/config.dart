@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:go_router/go_router.dart';
+import 'package:hrk_batteries/hrk_batteries.dart' hide kReleaseMode;
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -13,6 +15,10 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../constants/constants.dart';
 import '../coverage_ignored.dart';
+import '../extension/go_router.dart';
+import '../globals.dart';
+import '../helper/helper.dart';
+import '../route/home/home_route.dart';
 import 'app_bloc_observer.dart';
 import 'firebase/firebase.dart';
 
@@ -63,7 +69,42 @@ Future<void> configureFirebaseProducts() async {
 BackButton getAppBarBackButton({
   required BuildContext context,
 }) {
-  return platform.getAppBarBackButton(context: context);
+  return BackButton(
+    onPressed: () {
+      late final Object? extraObject;
+      try {
+        // throws expected AssertionError for errorBuilder widgets
+        extraObject = GoRouterState.of(context).extra;
+      } catch (_) {
+        extraObject = null;
+      }
+      Level logLevel = flutterTest ? Level.FINER : Level.SHOUT;
+      if (extraObject == null) {
+        GoRouter.of(context).topOrHomeRoute();
+      } else if (extraObject is JsonMap) {
+        JsonMap extraMap = extraObject;
+        if (extraMap.containsKey(isNormalLink)) {
+          GoRouter.of(context).popOrHomeRoute();
+        } else {
+          logger.log(
+              logLevel, 'getAppBarBackButton -> Unusual navigation observed');
+          logger.log(logLevel, 'extra doesn\'t contains isNormalLink key');
+          final routeMatchList = getListOfRouteMatch(context);
+          logger.log(
+              logLevel, 'routeMatchList.length = ${routeMatchList.length}');
+          GoRouter.of(context).go(HomeRoute.path);
+        }
+      } else {
+        logger.log(
+            logLevel, 'getAppBarBackButton -> Unusual navigation observed');
+        logger.log(logLevel, 'extra is not a JsonMap');
+        final routeMatchList = getListOfRouteMatch(context);
+        logger.log(
+            logLevel, 'routeMatchList.length = ${routeMatchList.length}');
+        GoRouter.of(context).go(HomeRoute.path);
+      }
+    },
+  );
 }
 
 void configureUrlStrategy() {

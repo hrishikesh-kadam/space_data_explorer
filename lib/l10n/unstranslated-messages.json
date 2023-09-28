@@ -79,7 +79,9 @@
     "fullname",
     "cadResultScreenZeroCount",
     "orbitId",
-    "absoulteMagnitude"
+    "absoulteMagnitude",
+    "pageNotFound",
+    "requestedPageNotFound"
   ],
 
   "he": [
@@ -162,6 +164,8 @@
     "fullname",
     "cadResultScreenZeroCount",
     "orbitId",
-    "absoulteMagnitude"
+    "absoulteMagnitude",
+    "pageNotFound",
+    "requestedPageNotFound"
   ]
 }

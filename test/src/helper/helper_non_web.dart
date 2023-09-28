@@ -9,6 +9,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:space_data_explorer/globals.dart';
 import '../globals.dart';
 
+void historyBack() {
+  throw UnimplementedError('Not required for non-Web Platforms');
+}
+
 void historyForward() {
   throw UnimplementedError('Not required for non-Web Platforms');
 }

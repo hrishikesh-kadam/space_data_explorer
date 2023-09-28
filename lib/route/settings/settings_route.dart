@@ -5,14 +5,13 @@ import 'package:go_router/go_router.dart';
 
 import '../../constants/labels.dart';
 import '../../deferred_loading/deferred_loading.dart';
-import '../home/home_route.dart';
 import 'settings_screen.dart' deferred as settings_screen;
 
 class SettingsRoute extends GoRouteData {
   const SettingsRoute();
 
   static const String routeName = 'settings';
-  static const String path = '${HomeRoute.path}$routeName';
+  static const String path = '/$routeName';
   static const String displayName = Labels.settings;
 
   @override

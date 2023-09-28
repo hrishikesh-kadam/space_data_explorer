@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hrk_batteries/hrk_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 
+import '../extension/go_router.dart';
 import '../globals.dart';
 import '../route/home/home_route.dart';
 
@@ -29,14 +30,13 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
       if (fullPath == HomeRoute.path) {
         return _goRouterDelegate.popRoute();
       } else {
-        while (_goRouter.canPop()) {
-          _goRouter.pop();
-        }
+        _goRouter.topOrHomeRoute();
       }
     } else if (extraObject is JsonMap) {
       JsonMap extraMap = extraObject;
       if (extraMap.containsKey(isNormalLink)) {
-        return _goRouterDelegate.popRoute();
+        _goRouter.popOrHomeRoute();
+        return true;
       } else {
         _logger.log(logLevel, 'Unusual navigation observed');
         _logger.log(logLevel, 'extra doesn\'t contains isNormalLink key');

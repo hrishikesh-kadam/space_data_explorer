@@ -86,5 +86,7 @@
   "fullname": "पूर्ण नाव",
   "cadResultScreenZeroCount": "निवडलेल्या पॅरामीटर्ससाठी कोणतेही ग्रह आढळले नाहीत",
   "orbitId": "परिक्रमा ID",
-  "absoulteMagnitude": "निरपेक्ष विशालता"
+  "absoulteMagnitude": "निरपेक्ष विशालता",
+  "pageNotFound": "पान सापडले नाही",
+  "requestedPageNotFound": "विनंती केलेले पान सापडले नाही"
 }

@@ -6,6 +6,7 @@ class Labels {
   static const String sbdbCloseApproachDataResult =
       'SBDB Close-Approach Data Result';
   static const String settings = 'Settings';
+  static const String pageNotFound = 'Page Not Found';
   static const String somethingWentWrong = 'Something went wrong';
   static const String statusCode = 'Status code';
   static const String tdb = 'TDB';

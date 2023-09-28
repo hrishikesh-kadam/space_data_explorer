@@ -86,5 +86,7 @@
   "fullname": "पूरा नाम",
   "cadResultScreenZeroCount": "चुने गए मापदंडों के लिए कोई निकाय नहीं मिला",
   "orbitId": "परिक्रमा ID",
-  "absoulteMagnitude": "निरपेक्ष परिमाण"
+  "absoulteMagnitude": "निरपेक्ष परिमाण",
+  "pageNotFound": "पन्ना नहीं मिला",
+  "requestedPageNotFound": "अनुरोधित पन्ना नहीं मिला"
 }

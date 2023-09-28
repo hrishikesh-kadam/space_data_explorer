@@ -14,5 +14,5 @@ popd &> /dev/null
 
 adb shell am start -a android.intent.action.VIEW \
   -c android.intent.category.BROWSABLE \
-  -d "$APP_URL/#/nasa/cad" \
+  -d "$APP_URL/nasa/cad" \
   "$APPLICATION_ID"

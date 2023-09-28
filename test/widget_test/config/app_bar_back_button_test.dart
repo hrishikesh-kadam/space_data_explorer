@@ -11,11 +11,13 @@ import 'package:space_data_explorer/nasa/route/nasa_route.dart';
 import 'package:space_data_explorer/nasa/route/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_route.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
+import 'package:space_data_explorer/route/page_not_found/page_not_found_route.dart';
+import 'package:space_data_explorer/route/page_not_found/page_not_found_screen.dart';
 import '../../src/config/config.dart';
 import '../../src/globals.dart';
-import '../../src/helper/helper.dart';
 import '../../src/nasa/cad/cad_route.dart';
 import '../../src/nasa/route/nasa_route.dart';
+import '../../src/route/page_not_found/page_not_found_route.dart';
 import '../../src/space_data_explorer_app.dart';
 
 // ignore: directives_ordering
@@ -31,88 +33,112 @@ void main() {
 bool skipExtraNotMapTests = true;
 
 void appBarBackButtonTest() {
-  // TODO(hrishikesh-kadam): Test stucks even after passing all tests.
-  // Skipping deep-link tests for Web Integration Test.
-  // File an issue someday.
-  bool skipDeepLinkTests = kIsWeb;
-
   group('getAppBarBackButtonTest() $testType Test', () {
     setUpAll(() async {
       await configureApp();
     });
 
-    setUp(() {
-      if (kIsWeb) {
-        resetNavigationHistoryState();
-      }
+    testWidgets('DeferredLoading workaround', (WidgetTester tester) async {
+      await pumpCadRouteAsInitialLocation(tester);
+      await goNonExistingPath(tester);
     });
 
-    testWidgets('3 routes down and 2 routes up', (tester) async {
+    testWidgets('2 routes forward, 1 route back', (tester) async {
       await pumpCadRouteAsNormalLink(tester);
-      expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(CadScreen), findsOneWidget);
+      expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       await tapBackButton(tester);
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsOneWidget);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
-      if (kIsWeb) {
-        expectHistoryLengthAndSerialCount(3, 1);
-      }
       await tapBackButton(tester);
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
-      if (kIsWeb) {
-        expectHistoryLengthAndSerialCount(3, 0);
-      }
     });
 
-    testWidgets('2 routes down and 1 route up', (tester) async {
+    testWidgets('1 route forward, 1 route back', (tester) async {
       await pumpNasaRouteAsNormalLink(tester);
-      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NasaScreen), findsOneWidget);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       await tapBackButton(tester);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
-      if (kIsWeb) {
-        expectHistoryLengthAndSerialCount(2, 0);
-      }
     });
 
-    testWidgets('deep-link to 3rd level and press back',
-        skip: skipDeepLinkTests, (tester) async {
+    testWidgets('1 route forward, go non-existing-path, press back',
+        (tester) async {
+      await pumpNasaRouteAsNormalLink(tester);
+      expect(find.byType(NasaScreen), findsOneWidget);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
+      await goNonExistingPath(tester);
+      expect(find.byType(PageNotFoundScreen), findsOneWidget);
+      expect(find.byType(NasaScreen, skipOffstage: false), findsNothing);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsNothing);
+      await tapBackButton(tester);
+      expect(find.byType(PageNotFoundScreen), findsNothing);
+      expect(find.byType(HomeScreen), findsOneWidget);
+      expect(find.byType(NasaScreen), findsNothing);
+    });
+
+    testWidgets('2 routes forward, go non-existing-path, press back',
+        (tester) async {
+      await pumpCadRouteAsNormalLink(tester);
+      expect(find.byType(CadScreen), findsOneWidget);
+      expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
+      await goNonExistingPath(tester);
+      expect(find.byType(PageNotFoundScreen), findsOneWidget);
+      expect(find.byType(CadScreen, skipOffstage: false), findsNothing);
+      expect(find.byType(NasaScreen, skipOffstage: false), findsNothing);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsNothing);
+      await tapBackButton(tester);
+      expect(find.byType(PageNotFoundScreen), findsNothing);
+      expect(find.byType(CadScreen, skipOffstage: false), findsNothing);
+      expect(find.byType(CadScreen, skipOffstage: false), findsNothing);
+      expect(find.byType(NasaScreen, skipOffstage: false), findsNothing);
+      expect(find.byType(HomeScreen), findsOneWidget);
+    });
+
+    testWidgets('deep-link to 3rd level route, press back', (tester) async {
       tester.platformDispatcher.defaultRouteNameTestValue = CadRoute.path;
       await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
-      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
-      expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(CadScreen), findsOneWidget);
+      expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       await tapBackButton(tester);
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
-      if (kIsWeb) {
-        expectHistoryLengthAndSerialCount(2, 1);
-      }
     });
 
-    testWidgets('deep-link to 2nd level and press back',
-        skip: skipDeepLinkTests, (tester) async {
+    testWidgets('deep-link to 2nd level route, press back', (tester) async {
       tester.platformDispatcher.defaultRouteNameTestValue = NasaRoute.path;
       await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
-      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NasaScreen), findsOneWidget);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       await tapBackButton(tester);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
-      if (kIsWeb) {
-        expectHistoryLengthAndSerialCount(2, 1);
-      }
+    });
+
+    testWidgets('deep-link to non-existing-page, press back', (tester) async {
+      tester.platformDispatcher.defaultRouteNameTestValue =
+          PageNotFoundRoute.nonExistingPath;
+      await pumpApp(tester);
+      tester.platformDispatcher.clearDefaultRouteNameTestValue();
+      expect(find.byType(PageNotFoundScreen), findsOneWidget);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsNothing);
+      await tapBackButton(tester);
+      expect(find.byType(PageNotFoundScreen), findsNothing);
+      expect(find.byType(HomeScreen), findsOneWidget);
     });
 
     testWidgets(
-        '3 routes down and 1 route up but extra without the isNormalLink key',
+        '2 routes forward, 1 route back but extra without the isNormalLink key',
         (tester) async {
       await pumpApp(tester);
       expect(find.byType(HomeScreen), findsOneWidget);
@@ -125,18 +151,13 @@ void appBarBackButtonTest() {
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
-      // In case of web this would be normal navigation because
-      // there is no check for extra
-      if (kIsWeb) {
-        expectHistoryLengthAndSerialCount(2, 0);
-      }
     });
 
-    testWidgets('3 routes down and 1 route up but when extra is not a Map',
+    testWidgets('2 routes forward, 1 route back but when extra is not a Map',
         skip: skipExtraNotMapTests, (tester) async {
       await pumpApp(tester);
       expect(find.byType(HomeScreen), findsOneWidget);
-      GoRouter.of(navigatorKey.currentContext!).go(CadRoute.path, extra: []);
+      navigatorKey.currentContext!.go(CadRoute.path, extra: []);
       await tester.pumpAndSettle();
       expect(find.byType(CadScreen), findsOneWidget);
       expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
@@ -145,18 +166,13 @@ void appBarBackButtonTest() {
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
-      // In case of web this would be normal navigation because
-      // there is no check for extra
-      if (kIsWeb) {
-        expectHistoryLengthAndSerialCount(2, 0);
-      }
     });
 
-    testWidgets('2 routes down and 1 route up but when extra is not a Map',
+    testWidgets('1 route forward, 1 route back but when extra is not a Map',
         (tester) async {
       await pumpApp(tester);
       expect(find.byType(HomeScreen), findsOneWidget);
-      GoRouter.of(navigatorKey.currentContext!).go(NasaRoute.path, extra: []);
+      navigatorKey.currentContext!.go(NasaRoute.path, extra: []);
       await tester.pumpAndSettle();
       expect(find.byType(NasaScreen), findsOneWidget);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
@@ -171,7 +187,8 @@ void appBarBackButtonTest() {
       expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(CadScreen), findsOneWidget);
       await tapSearchButton(tester);
-      await tapBackButton(tester);
+      platform.historyBack();
+      await tester.pumpAndSettle();
       platform.historyForward();
       await tester.pumpAndSettle();
       expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);

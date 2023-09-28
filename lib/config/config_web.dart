@@ -1,13 +1,8 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 
-import 'dart:html' as html;
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_web_plugins/url_strategy.dart';
-import 'package:go_router/go_router.dart';
-
-import '../globals.dart';
 
 /// Notes -
 /// 1. When HashUrlStrategy is set, deep-link creates problems, because
@@ -25,39 +20,4 @@ void configureUrlStrategy() {
   if (urlStrategy?.runtimeType != urlStrategyToSet.runtimeType) {
     setUrlStrategy(urlStrategyToSet);
   }
-}
-
-BackButton getAppBarBackButton({
-  required BuildContext context,
-}) {
-  return BackButton(
-    onPressed: () {
-      final html.History history = html.window.history;
-      logger.finer('getAppBarBackButton -> history.length = ${history.length}');
-      if (history.length <= 1) {
-        while (GoRouter.of(context).canPop()) {
-          GoRouter.of(context).pop();
-        }
-      } else {
-        Map? state = history.state;
-        if (state == null) {
-          while (GoRouter.of(context).canPop()) {
-            GoRouter.of(context).pop();
-          }
-        } else if (state.containsKey('serialCount')) {
-          final int serialCount = state['serialCount'];
-          logger.finer('getAppBarBackButton -> serialCount = $serialCount');
-          if (serialCount <= 0) {
-            while (GoRouter.of(context).canPop()) {
-              GoRouter.of(context).pop();
-            }
-          } else {
-            history.back();
-          }
-        } else {
-          history.back();
-        }
-      }
-    },
-  );
 }

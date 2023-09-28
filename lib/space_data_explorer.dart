@@ -7,8 +7,10 @@ import 'package:hrk_logging/hrk_logging.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'config/app_back_button_dispatcher.dart';
+import 'extension/go_router.dart';
 import 'globals.dart';
 import 'route/home/home_route.dart';
+import 'route/page_not_found/page_not_found_route.dart';
 import 'route/settings/bloc/settings_bloc.dart';
 import 'route/settings/bloc/settings_state.dart';
 import 'route/settings/locale.dart';
@@ -25,7 +27,9 @@ class SpaceDataExplorerApp extends StatelessWidget {
       initialLocation: initialLocation,
       routes: [
         $homeRoute,
+        $pageNotFoundRoute,
       ],
+      onException: GoRouterExt.onException,
       observers: [SentryNavigatorObserver()],
     );
   }

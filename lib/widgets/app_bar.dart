@@ -52,7 +52,11 @@ SliverAppBar getSliverAppBar({
 Widget? getLeadingWidget({
   required BuildContext context,
 }) {
-  String location = GoRouterState.of(context).matchedLocation;
+  String? location;
+  try {
+    // throws expected AssertionError for errorBuilder Widgets
+    location = GoRouterState.of(context).matchedLocation;
+  } catch (_) {}
   switch (location) {
     // Routes which doesn't need leading BackButton
     case HomeRoute.routeName:
@@ -63,9 +67,14 @@ Widget? getLeadingWidget({
 }
 
 List<Widget> getDefaultAppBarActions({required BuildContext context}) {
-  String location = GoRouterState.of(context).matchedLocation;
+  String? location;
+  try {
+    // throws expected AssertionError for errorBuilder Widgets
+    location = GoRouterState.of(context).matchedLocation;
+  } catch (_) {}
   return <Widget>[
-    if (location != SettingsRoute.path) getSettingsAction(context: context)
+    if (location != null && location != SettingsRoute.path)
+      getSettingsAction(context: context)
   ];
 }
 

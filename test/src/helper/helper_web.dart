@@ -8,6 +8,10 @@ import 'package:integration_test/integration_test.dart';
 
 import '../globals.dart';
 
+void historyBack() {
+  html.window.history.back();
+}
+
 void historyForward() {
   html.window.history.forward();
 }
@@ -16,16 +20,20 @@ void resetNavigationHistoryState() {
   final html.History history = html.window.history;
   Map? state = history.state;
   if (state != null) {
-    history.go(-(history.length - 1));
+    // Not working
+    // history.go(-(history.length - 1));
+    for (int i = history.length; i >= 1; i--) {
+      history.back();
+    }
   }
   // history.replaceState(null, '', null);
 }
 
 void logNavigationHistoryState() {
   final html.History history = html.window.history;
-  testLogger.fine('history.length = ${history.length}');
+  printLogger.debug('history.length = ${history.length}');
   Map? state = history.state;
-  testLogger.fine('history.state = $state');
+  printLogger.debug('history.state = $state');
 }
 
 bool expectHistoryLengthAndSerialCount(
@@ -48,9 +56,11 @@ bool expectHistoryLengthAndSerialCount(
   bool serialCountNotEqual = false;
   if (historyLengthNotEqual = history.length != historyLength) {
     printLogger.error('history.length != historyLength');
+    printLogger.error('${history.length} != $historyLength');
   }
   if (serialCountNotEqual = state['serialCount'] != serialCount) {
     printLogger.error('state[\'serialCount\'] != serialCount');
+    printLogger.error('${state['serialCount']} != $serialCount');
   }
   if (historyLengthNotEqual || serialCountNotEqual) {
     return false;

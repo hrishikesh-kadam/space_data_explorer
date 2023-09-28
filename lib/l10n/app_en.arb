@@ -86,5 +86,7 @@
   "fullname": "Fullname",
   "cadResultScreenZeroCount": "No bodies found for the chosen parameters",
   "orbitId": "Orbit ID",
-  "absoulteMagnitude": "Absolute Magnitude"
+  "absoulteMagnitude": "Absolute Magnitude",
+  "pageNotFound": "Page Not Found",
+  "requestedPageNotFound": "Requested page not found"
 }
