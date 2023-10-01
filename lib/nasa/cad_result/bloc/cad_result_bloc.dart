@@ -1,6 +1,7 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
-import 'package:meta/meta.dart';
 
 import 'cad_result_state.dart';
 

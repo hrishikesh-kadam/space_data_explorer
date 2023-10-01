@@ -15,7 +15,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
-  meta: ^1.9.1
   pubspec_parse: ^1.2.3
   cupertino_icons: ^1.0.2
   hrk_batteries: '>=0.9.0 <1.0.0'
@@ -27,7 +26,7 @@ dependencies:
   recase: ^4.1.0
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
-  go_router: ^10.1.2
+  go_router: ^11.1.2
   flutter_bloc: ^8.1.3
   hydrated_bloc: ^9.1.2
   equatable: ^2.0.5

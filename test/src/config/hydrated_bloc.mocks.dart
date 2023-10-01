@@ -31,6 +31,7 @@ class MockStorage extends _i1.Mock implements _i2.Storage {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i3.Future<void> write(
     String? key,
@@ -47,6 +48,7 @@ class MockStorage extends _i1.Mock implements _i2.Storage {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> delete(String? key) => (super.noSuchMethod(
         Invocation.method(
@@ -56,6 +58,7 @@ class MockStorage extends _i1.Mock implements _i2.Storage {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> clear() => (super.noSuchMethod(
         Invocation.method(
@@ -65,6 +68,7 @@ class MockStorage extends _i1.Mock implements _i2.Storage {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> close() => (super.noSuchMethod(
         Invocation.method(

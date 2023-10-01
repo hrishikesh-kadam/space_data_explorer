@@ -1,6 +1,7 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:meta/meta.dart';
 
 import '../extension/logger.dart';
 import '../globals.dart';
