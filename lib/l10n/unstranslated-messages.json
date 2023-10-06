@@ -81,7 +81,12 @@
     "orbitId",
     "absoulteMagnitude",
     "pageNotFound",
-    "requestedPageNotFound"
+    "requestedPageNotFound",
+    "version",
+    "author",
+    "authorNameAka",
+    "source",
+    "webApp"
   ],
 
   "he": [
@@ -166,6 +171,11 @@
     "orbitId",
     "absoulteMagnitude",
     "pageNotFound",
-    "requestedPageNotFound"
+    "requestedPageNotFound",
+    "version",
+    "author",
+    "authorNameAka",
+    "source",
+    "webApp"
   ]
 }

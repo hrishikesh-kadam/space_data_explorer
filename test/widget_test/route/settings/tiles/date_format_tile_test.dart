@@ -75,7 +75,7 @@ void main() {
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
       expect(settingsBloc.state.dateFormatPattern, dateFormatPattern);
       await tapBackButton(tester);
-      await tapSettingsButton(tester);
+      await tapSettingsAction(tester);
       await verifyDateFormatTileSubtitle(tester,
           l10n: l10n, dateFormatPattern: dateFormatPattern);
       expect(settingsBloc.state.dateFormatPattern, dateFormatPattern);

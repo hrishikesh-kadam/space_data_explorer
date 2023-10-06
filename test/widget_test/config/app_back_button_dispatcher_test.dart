@@ -47,6 +47,7 @@ void appBackButtonDispatcherTest() {
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
+      await verifySystemNavigatorPop(tester);
     });
 
     testWidgets('1 route forward, 1 route back', (tester) async {
@@ -56,6 +57,7 @@ void appBackButtonDispatcherTest() {
       await simulateAndroidBackButton(tester);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
+      await verifySystemNavigatorPop(tester);
     });
 
     testWidgets('1 route forward, go non-existing-path, press back',
@@ -71,6 +73,7 @@ void appBackButtonDispatcherTest() {
       expect(find.byType(PageNotFoundScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
       expect(find.byType(NasaScreen), findsNothing);
+      await verifySystemNavigatorPop(tester);
     });
 
     testWidgets('2 routes forward, go non-existing-path, press back',
@@ -90,6 +93,7 @@ void appBackButtonDispatcherTest() {
       expect(find.byType(CadScreen, skipOffstage: false), findsNothing);
       expect(find.byType(NasaScreen, skipOffstage: false), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
+      await verifySystemNavigatorPop(tester);
     });
 
     testWidgets('deep-link to 3rd level route, press back', (tester) async {
@@ -103,6 +107,7 @@ void appBackButtonDispatcherTest() {
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
+      await verifySystemNavigatorPop(tester);
     });
 
     testWidgets('deep-link to 2nd level route, press back', (tester) async {
@@ -114,6 +119,7 @@ void appBackButtonDispatcherTest() {
       await simulateAndroidBackButton(tester);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
+      await verifySystemNavigatorPop(tester);
     });
 
     testWidgets('deep-link to non-existing-page, press back', (tester) async {
@@ -126,6 +132,7 @@ void appBackButtonDispatcherTest() {
       await simulateAndroidBackButton(tester);
       expect(find.byType(PageNotFoundScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
+      await verifySystemNavigatorPop(tester);
     });
 
     testWidgets(
@@ -142,6 +149,7 @@ void appBackButtonDispatcherTest() {
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
+      await verifySystemNavigatorPop(tester);
     });
 
     testWidgets('2 routes forward, 1 route back but when extra is not a Map',
@@ -157,6 +165,7 @@ void appBackButtonDispatcherTest() {
       expect(find.byType(CadScreen), findsNothing);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
+      await verifySystemNavigatorPop(tester);
     });
 
     testWidgets('1 route forward, 1 route back but when extra is not a Map',
@@ -170,6 +179,7 @@ void appBackButtonDispatcherTest() {
       await simulateAndroidBackButton(tester);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
+      await verifySystemNavigatorPop(tester);
     });
 
     testWidgets('Pump app and press back', (tester) async {

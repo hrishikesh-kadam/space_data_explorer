@@ -76,7 +76,7 @@ void main() {
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
       expect(settingsBloc.state.locale, locale);
       await tapBackButton(tester);
-      await tapSettingsButton(tester);
+      await tapSettingsAction(tester);
       await verifyLocaleTileSubtitle(tester, l10n: l10n, locale: locale);
       expect(settingsBloc.state.locale, locale);
     });

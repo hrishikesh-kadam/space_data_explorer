@@ -7,6 +7,8 @@ import '../../constants/labels.dart';
 import '../../nasa/cad/cad_route.dart';
 import '../../nasa/cad_result/cad_result_route.dart';
 import '../../nasa/route/nasa_route.dart';
+import '../about/about_route.dart';
+import '../about/license/license_route.dart';
 import '../settings/settings_route.dart';
 import 'home_screen.dart';
 
@@ -35,6 +37,16 @@ part 'home_route.g.dart';
     TypedGoRoute<SettingsRoute>(
       path: SettingsRoute.routeName,
       name: SettingsRoute.displayName,
+    ),
+    TypedGoRoute<AboutRoute>(
+      path: AboutRoute.routeName,
+      name: AboutRoute.displayName,
+      routes: [
+        TypedGoRoute<LicenseRoute>(
+          path: LicenseRoute.routeName,
+          name: LicenseRoute.displayName,
+        )
+      ],
     ),
   ],
 )

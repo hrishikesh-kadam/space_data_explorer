@@ -224,7 +224,10 @@ class CadScreen extends StatelessWidget {
             child: Center(
               child: OutlinedButtonExtended(
                 key: searchButtonKey,
-                label: Text(l10n.search),
+                label: Text(
+                  l10n.search,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
                 networkState: state,
                 onPressed: () async {
                   // throw Exception();

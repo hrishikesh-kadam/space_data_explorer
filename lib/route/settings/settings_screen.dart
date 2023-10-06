@@ -103,7 +103,7 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Builder _getBody() {
+  Widget _getBody() {
     return Builder(
       builder: (context) {
         final settingsTiles = _getSettingsTiles();

@@ -74,7 +74,7 @@ void main() {
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
       expect(settingsBloc.state.velocityUnit, velocityUnit);
       await tapBackButton(tester);
-      await tapSettingsButton(tester);
+      await tapSettingsAction(tester);
       await verifyVelocityUnitTileSubtitle(tester,
           l10n: l10n, velocityUnit: velocityUnit);
       expect(settingsBloc.state.velocityUnit, velocityUnit);

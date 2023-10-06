@@ -77,7 +77,7 @@ void main() {
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
       expect(settingsBloc.state.textDirection, textDirection);
       await tapBackButton(tester);
-      await tapSettingsButton(tester);
+      await tapSettingsAction(tester);
       await verifyTextDirectionTileSubtitle(tester,
           l10n: l10n, textDirection: textDirection);
       expect(settingsBloc.state.textDirection, textDirection);

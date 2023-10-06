@@ -7,4 +7,6 @@ lib/coverage_ignored.dart:1
 lib/deferred_loading/deferred_widget.dart:3
 lib/extension/logger.dart:1
 lib/nasa/cad/bloc/cad_state.dart:44
+lib/route/about/license/license_route.dart:1
+lib/route/about/license/license_screen.dart:1
 lib/widgets/outlined_button_extended.dart:34

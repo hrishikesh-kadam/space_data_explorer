@@ -74,7 +74,7 @@ void main() {
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
       expect(settingsBloc.state.diameterUnit, diameterUnit);
       await tapBackButton(tester);
-      await tapSettingsButton(tester);
+      await tapSettingsAction(tester);
       await verifyDiameterUnitTileSubtitle(tester,
           l10n: l10n, diameterUnit: diameterUnit);
       expect(settingsBloc.state.diameterUnit, diameterUnit);

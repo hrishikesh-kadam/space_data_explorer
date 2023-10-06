@@ -8,7 +8,7 @@ import 'package:space_data_explorer/widgets/app_bar.dart';
 import '../../space_data_explorer_app.dart';
 import '../home/home_route.dart';
 
-final settingsButtonFinder = find.byKey(settingsButtonKey);
+final settingsActionFinder = find.byKey(settingsActionKey);
 final settingsListViewFinder = find.byKey(SettingsScreen.listViewKey);
 
 Future<void> pumpSettingsRouteAsInitialLocation(WidgetTester tester) async {
@@ -20,10 +20,10 @@ Future<void> pumpSettingsRouteAsNormalLink(
   GlobalKey<NavigatorState>? navigatorKey,
 }) async {
   await pumpHomeRoute(tester, navigatorKey: navigatorKey);
-  await tapSettingsButton(tester);
+  await tapSettingsAction(tester);
 }
 
-Future<void> tapSettingsButton(WidgetTester tester) async {
-  await tester.tap(settingsButtonFinder);
+Future<void> tapSettingsAction(WidgetTester tester) async {
+  await tester.tap(settingsActionFinder);
   await tester.pumpAndSettle();
 }

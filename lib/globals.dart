@@ -7,7 +7,7 @@ import 'package:recase/recase.dart';
 import 'constants/constants.dart';
 import 'coverage_ignored.dart';
 
-final String appNamePascalCase = appName.pascalCase;
+final String appNamePascalCase = Constants.appName.pascalCase;
 
 final bool flutterTest = isFlutterTest();
 

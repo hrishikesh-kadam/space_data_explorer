@@ -88,5 +88,10 @@
   "orbitId": "परिक्रमा ID",
   "absoulteMagnitude": "निरपेक्ष विशालता",
   "pageNotFound": "पान सापडले नाही",
-  "requestedPageNotFound": "विनंती केलेले पान सापडले नाही"
+  "requestedPageNotFound": "विनंती केलेले पान सापडले नाही",
+  "version": "व्हर्जन",
+  "author": "लेखक",
+  "authorNameAka": "हृषीकेश रवींद्र कदम उर्फ HRK",
+  "source": "स्रोत",
+  "webApp": "वेब ऍप"
 }

@@ -88,5 +88,10 @@
   "orbitId": "Orbit ID",
   "absoulteMagnitude": "Absolute Magnitude",
   "pageNotFound": "Page Not Found",
-  "requestedPageNotFound": "Requested page not found"
+  "requestedPageNotFound": "Requested page not found",
+  "version": "Version",
+  "author": "Author",
+  "authorNameAka": "Hrishikesh Ravindra Kadam aka HRK",
+  "source": "Source",
+  "webApp": "Web App"
 }

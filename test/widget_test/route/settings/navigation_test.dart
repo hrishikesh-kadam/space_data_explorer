@@ -14,7 +14,7 @@ void main() {
     testWidgets('Navigate $NasaRoute to $SettingsRoute to $NasaRoute',
         (WidgetTester tester) async {
       await pumpNasaRouteAsInitialLocation(tester);
-      await tapSettingsButton(tester);
+      await tapSettingsAction(tester);
       expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(SettingsScreen), findsOneWidget);
       await tapBackButton(tester);
@@ -25,14 +25,14 @@ void main() {
     testWidgets('Basic', (WidgetTester tester) async {
       await pumpSettingsRouteAsInitialLocation(tester);
       expect(find.byType(SettingsScreen), findsOneWidget);
-      expect(settingsButtonFinder, findsNothing);
+      expect(settingsActionFinder, findsNothing);
     });
 
     testWidgets('Navigate back', (WidgetTester tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(SettingsScreen), findsOneWidget);
-      expect(settingsButtonFinder, findsNothing);
+      expect(settingsActionFinder, findsNothing);
       await tapBackButton(tester);
       expect(find.byType(SettingsScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);

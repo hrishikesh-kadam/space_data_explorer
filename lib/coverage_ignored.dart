@@ -6,7 +6,7 @@ import 'package:recase/recase.dart';
 
 import 'constants/constants.dart';
 
-final String appNameKebabCase = appName.paramCase;
+final String appNameKebabCase = Constants.appName.paramCase;
 
 // https://github.com/MisterJimson/flutter_keyboard_visibility
 bool isKeyboardVisibilitySupported() {

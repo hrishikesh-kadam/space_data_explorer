@@ -37,6 +37,7 @@ dependencies:
   firebase_crashlytics: ^3.3.5
   firebase_analytics: ^10.4.5
   sentry_flutter: ^7.9.0
+  url_launcher: ^6.1.14
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +75,7 @@ flutter:
   generate: true
   assets:
     - pubspec.yaml
+    - assets/app-icons/app-icon.png
 
 import_sorter:
   comments: false

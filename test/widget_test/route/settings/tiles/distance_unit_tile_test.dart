@@ -74,7 +74,7 @@ void main() {
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
       expect(settingsBloc.state.distanceUnit, distanceUnit);
       await tapBackButton(tester);
-      await tapSettingsButton(tester);
+      await tapSettingsAction(tester);
       await verifyDistanceUnitTileSubtitle(tester,
           l10n: l10n, distanceUnit: distanceUnit);
       expect(settingsBloc.state.distanceUnit, distanceUnit);

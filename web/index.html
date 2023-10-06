@@ -52,7 +52,9 @@
         },
         onEntrypointLoaded: function(engineInitializer) {
           loading.textContent = "Initializing engine...";
-          engineInitializer.initializeEngine().then(function(appRunner) {
+          engineInitializer.initializeEngine({
+            useColorEmoji: true,
+          }).then(function(appRunner) {
             loading.textContent = "Running app...";
             appRunner.runApp();
           });

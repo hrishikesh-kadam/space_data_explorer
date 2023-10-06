@@ -19,7 +19,7 @@ void main() {
     testWidgets('DeferredLoading workaround', (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       await tapSearchButton(tester);
-      await tapSettingsButton(tester);
+      await tapSettingsAction(tester);
     });
 
     testWidgets('No interation', (WidgetTester tester) async {
@@ -67,7 +67,7 @@ void main() {
       await selectDateRange(tester);
       String minDateBeforeString = tester.widget<Text>(minDateFinder).data!;
       String maxDateBeforeString = tester.widget<Text>(maxDateFinder).data!;
-      await tapSettingsButton(tester);
+      await tapSettingsAction(tester);
       await tapDateFormatTile(tester);
       await chooseDateFormat(tester,
           l10n: l10n, dateFormatPattern: DateFormatPattern.ddMMyyyySlash);

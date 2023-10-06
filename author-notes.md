@@ -2,12 +2,22 @@
 
 ## TODOs
 
-- Fix app bar titles truncation
-- Add 404 page
-- Add zero count image placeholder
-- Add About
-- Add LICENSE
+- Add LICENSE to repo
+- Replace all links with Link widgets
+- About Page
+  - Rate App for Android and iOS
+  - App info link for Android
 - Add selection, copy functionality
+- Add Privacy Policy Page, and link it to About Page
+- Fix ./tool/android/run.sh script
+- Reduce gradlew build lints
+- Fix app bar titles truncation
+- Add zero count image placeholder
+- Resolution-aware app icon image
+
+## Theme TODOs
+
+- Fix Text style
 
 ## Future Tasks
 
@@ -55,6 +65,7 @@
 - [Android - Adaptive icons][]
 - [Android - Create app icons with Image Asset Studio][]
 - [Android - Add multi-density vector graphics][]
+- [assets/app-icons/app-icon.png] is 192x192 version of [android/app/src/main/ic_launcher-playstore.png]
 
 ## README Notes
 
@@ -71,4 +82,6 @@
 [Android - Adaptive icons]: https://developer.android.com/develop/ui/views/launch/icon_design_adaptive
 [Android - Create app icons with Image Asset Studio]: https://developer.android.com/studio/write/image-asset-studio
 [Android - Add multi-density vector graphics]: https://developer.android.com/studio/write/vector-asset-studio
+[assets/app-icons/app-icon.png]: assets/app-icons/app-icon.png
+[android/app/src/main/ic_launcher-playstore.png]: android/app/src/main/ic_launcher-playstore.png
 [How to write effective Flutter and Dart tests | Flutter Forward]: https://www.youtube.com/watch?v=bHLrSliaL1Q&list=PLjxrf2q8roU3LvrdR8Hv_phLrTj0xmjnD&index=25

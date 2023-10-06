@@ -63,6 +63,9 @@ class SpaceDataExplorerApp extends StatelessWidget {
       routeInformationParser: _goRouter.routeInformationParser,
       routerDelegate: _goRouter.routerDelegate,
       backButtonDispatcher: AppBackButtonDispatcher(goRouter: _goRouter),
+      // onGenerateTitle: (context) {
+      //   return AppLocalizations.of(context).spaceDataExplorer;
+      // },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,

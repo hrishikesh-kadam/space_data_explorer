@@ -75,7 +75,7 @@ void main() {
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
       expect(settingsBloc.state.timeFormatPattern, timeFormatPattern);
       await tapBackButton(tester);
-      await tapSettingsButton(tester);
+      await tapSettingsAction(tester);
       await verifyTimeFormatTileSubtitle(tester,
           l10n: l10n, timeFormatPattern: timeFormatPattern);
       expect(settingsBloc.state.timeFormatPattern, timeFormatPattern);

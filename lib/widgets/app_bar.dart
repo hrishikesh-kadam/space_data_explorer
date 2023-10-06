@@ -4,10 +4,14 @@ import 'package:go_router/go_router.dart';
 
 import '../config/config.dart';
 import '../globals.dart';
+import '../route/about/about_route.dart';
+import '../route/about/license/license_route.dart';
 import '../route/home/home_route.dart' hide $SettingsRouteExtension;
+import '../route/page_not_found/page_not_found_route.dart';
 import '../route/settings/settings_route.dart';
 
-const Key settingsButtonKey = Key('settings_button_key');
+const Key settingsActionKey = Key('settings_action_key');
+const Key aboutActionKey = Key('about_action_key');
 
 AppBar getAppBar({
   Key? key,
@@ -73,17 +77,35 @@ List<Widget> getDefaultAppBarActions({required BuildContext context}) {
     location = GoRouterState.of(context).matchedLocation;
   } catch (_) {}
   return <Widget>[
-    if (location != null && location != SettingsRoute.path)
-      getSettingsAction(context: context)
+    if (location != null && location == HomeRoute.path)
+      getAboutAction(context: context),
+    if (location != null &&
+        ![
+          SettingsRoute.path,
+          PageNotFoundRoute.path,
+          AboutRoute.path,
+          LicenseRoute.path,
+        ].contains(location))
+      getSettingsAction(context: context),
   ];
 }
 
 Widget getSettingsAction({required BuildContext context}) {
   return IconButton(
-    key: settingsButtonKey,
+    key: settingsActionKey,
     icon: const Icon(Icons.settings),
     onPressed: () {
       GoRouter.of(context).push(SettingsRoute.path, extra: getRouteExtraMap());
+    },
+  );
+}
+
+Widget getAboutAction({required BuildContext context}) {
+  return IconButton(
+    key: aboutActionKey,
+    icon: const Icon(Icons.info),
+    onPressed: () {
+      GoRouter.of(context).go(AboutRoute.path, extra: getRouteExtraMap());
     },
   );
 }

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:go_router/go_router.dart';
-import 'package:hrk_batteries/hrk_batteries.dart' hide kReleaseMode;
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -22,6 +21,8 @@ import '../route/home/home_route.dart';
 import 'app_bloc_observer.dart';
 import 'firebase/firebase.dart';
 
+import 'package:hrk_batteries/hrk_batteries.dart'
+    hide kReleaseMode, kProfileMode;
 import 'config_non_web.dart' if (dart.library.html) 'config_web.dart'
     as platform;
 
@@ -38,7 +39,7 @@ Future<void> configureApp({
           : '';
       options.tracesSampleRate = 1.0;
       options.environment = flavorEnv.name;
-      options.release = '$appNameKebabCase@$version';
+      options.release = '$appNameKebabCase@${Constants.version}';
     },
     appRunner: () async {
       await configurePostBinding();
@@ -127,8 +128,8 @@ Pubspec? pubspec;
 Future<void> loadPubspec() async {
   if (pubspec == null) {
     pubspec = Pubspec.parse(await rootBundle.loadString('pubspec.yaml'));
-    assert(appName == pubspec!.name);
-    assert(version == pubspec!.version.toString());
+    assert(Constants.appName == pubspec!.name);
+    assert(Constants.version == pubspec!.version.toString());
   }
 }
 
@@ -153,4 +154,43 @@ final FlavorEnv flavorEnv = FlavorEnv.fromString(
   const String.fromEnvironment('FLAVOR_ENV'),
 );
 
-final bool prodRelease = kReleaseMode && flavorEnv == FlavorEnv.prod;
+final bool prodRelease = flavorEnv == FlavorEnv.prod && kReleaseMode;
+
+String getPreReleaseVersion() {
+  if (prodRelease) {
+    return '';
+  } else {
+    return '${flavorEnv.name}-${getBuildMode()}';
+  }
+}
+
+// LABEL: eligible-hrk_batteries
+String getBuildMode() {
+  if (kReleaseMode) {
+    return 'release';
+  } else if (kProfileMode) {
+    return 'profile';
+  } else {
+    return 'debug';
+  }
+}
+
+String getCompleteVersion() {
+  final String version = pubspec!.version.toString();
+  final String preReleaseVersion = getPreReleaseVersion();
+  final String completeVersion =
+      preReleaseVersion.isEmpty ? version : '$version-$preReleaseVersion';
+  return completeVersion;
+}
+
+Uri getWebAppUri() {
+  final envSuffix = switch (flavorEnv) {
+    FlavorEnv.dev || FlavorEnv.stag => '-${flavorEnv.name}',
+    _ => '',
+  };
+  final domain = '$appNameKebabCase$envSuffix';
+  const tld = 'web.app';
+  return Uri.https('$domain.$tld');
+}
+
+final Uri webAppUri = getWebAppUri();

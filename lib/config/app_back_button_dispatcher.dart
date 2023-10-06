@@ -25,13 +25,13 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
     final Object? extraObject = _goRouterDelegate.currentConfiguration.extra;
     _logger.finer('didPopRoute() -> extraObject = $extraObject');
     Level logLevel = flutterTest ? Level.FINER : Level.SHOUT;
+    final String fullPath = _goRouterDelegate.currentConfiguration.fullPath;
+    if (fullPath == HomeRoute.path) {
+      return _goRouterDelegate.popRoute();
+    }
     if (extraObject == null) {
-      final String fullPath = _goRouterDelegate.currentConfiguration.fullPath;
-      if (fullPath == HomeRoute.path) {
-        return _goRouterDelegate.popRoute();
-      } else {
-        _goRouter.topOrHomeRoute();
-      }
+      _goRouter.topOrHomeRoute();
+      return true;
     } else if (extraObject is JsonMap) {
       JsonMap extraMap = extraObject;
       if (extraMap.containsKey(isNormalLink)) {
@@ -45,6 +45,7 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
         _logger.log(
             logLevel, 'routeMatchList.length = ${routeMatchList.length}');
         _goRouter.go(HomeRoute.path);
+        return true;
       }
     } else {
       _logger.log(logLevel, 'Unusual navigation observed');
@@ -53,7 +54,7 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
           _goRouter.routerDelegate.currentConfiguration.matches;
       _logger.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
       _goRouter.go(HomeRoute.path);
+      return true;
     }
-    return true;
   }
 }
