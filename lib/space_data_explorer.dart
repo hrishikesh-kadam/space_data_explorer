@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
+import 'bloc/app_bloc.dart';
 import 'config/app_back_button_dispatcher.dart';
 import 'extension/go_router.dart';
 import 'globals.dart';
@@ -15,7 +16,7 @@ import 'route/settings/bloc/settings_bloc.dart';
 import 'route/settings/bloc/settings_state.dart';
 import 'route/settings/locale.dart';
 
-class SpaceDataExplorerApp extends StatelessWidget {
+class SpaceDataExplorerApp extends StatefulWidget {
   SpaceDataExplorerApp({
     super.key,
     GlobalKey<NavigatorState>? navigatorKey,
@@ -36,12 +37,35 @@ class SpaceDataExplorerApp extends StatelessWidget {
 
   late final GoRouter _goRouter;
   final bool _debugShowCheckedModeBanner;
+
+  @override
+  State<SpaceDataExplorerApp> createState() => _SpaceDataExplorerAppState();
+}
+
+class _SpaceDataExplorerAppState extends State<SpaceDataExplorerApp> {
   final _logger = Logger('$appNamePascalCase.App');
+  late final AppBloc appBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    appBloc = AppBloc();
+    WidgetsBinding.instance.addObserver(appBloc);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(appBloc);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<SettingsBloc>(
-      create: (_) => SettingsBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AppBloc>(create: (_) => appBloc),
+        BlocProvider<SettingsBloc>(create: (_) => SettingsBloc()),
+      ],
       child: BlocSelector<SettingsBloc, SettingsState, Locale?>(
         selector: (state) => state.locale,
         builder: (context, locale) {
@@ -59,10 +83,10 @@ class SpaceDataExplorerApp extends StatelessWidget {
     Locale? locale,
   }) {
     return MaterialApp.router(
-      routeInformationProvider: _goRouter.routeInformationProvider,
-      routeInformationParser: _goRouter.routeInformationParser,
-      routerDelegate: _goRouter.routerDelegate,
-      backButtonDispatcher: AppBackButtonDispatcher(goRouter: _goRouter),
+      routeInformationProvider: widget._goRouter.routeInformationProvider,
+      routeInformationParser: widget._goRouter.routeInformationParser,
+      routerDelegate: widget._goRouter.routerDelegate,
+      backButtonDispatcher: AppBackButtonDispatcher(goRouter: widget._goRouter),
       // onGenerateTitle: (context) {
       //   return AppLocalizations.of(context).spaceDataExplorer;
       // },
@@ -80,7 +104,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
         );
       },
       supportedLocales: LocaleExt.getSupportedLocales(),
-      debugShowCheckedModeBanner: _debugShowCheckedModeBanner,
+      debugShowCheckedModeBanner: widget._debugShowCheckedModeBanner,
     );
   }
 
