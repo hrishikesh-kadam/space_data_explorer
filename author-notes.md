@@ -2,7 +2,6 @@
 
 ## TODOs
 
-- Add LICENSE to repo
 - Replace all links with Link widgets
 - About Page
   - Rate App for Android and iOS
