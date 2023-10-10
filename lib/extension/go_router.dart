@@ -38,7 +38,6 @@ extension GoRouterExt on GoRouter {
     _logger.reportError('onException -> ${state.uri}');
     late final JsonMap extra;
     if (state.extra != null) {
-      // TODO(hrishikesh-kadam): Try to edit GoRouter package, to get extra
       extra = state.extra as JsonMap;
     } else {
       extra = {};
