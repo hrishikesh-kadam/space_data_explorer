@@ -54,7 +54,7 @@ dev_dependencies:
       url: https://github.com/fluttercommunity/import_sorter.git
       ref: f350497a11b1285c695595049e95a420068e7a9f
   build_runner: ^2.4.6
-  freezed: ^2.4.1
+  freezed: ^2.4.5
   json_serializable: ^6.7.1
   go_router_builder: ^2.3.1
   flutterfire_cli: '>=0.3.0-dev.16 <1.0.0'
