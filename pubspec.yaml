@@ -62,13 +62,15 @@ dev_dependencies:
 
 # dependency_overrides:
 #   hrk_batteries:
-#    path: '../../dart/packages/hrk_batteries'
+#     path: '../../dart/packages/hrk_batteries'
 #   hrk_flutter_test_batteries:
-#     path: '../packages/hrk_flutter_test_batteries'
+#      path: '../packages/hrk_flutter_test_batteries'
 #   hrk_nasa_apis:
-#     path: '../../dart/packages/hrk_nasa_apis/hrk_nasa_apis'
+#      path: '../../dart/packages/hrk_nasa_apis/hrk_nasa_apis'
 #   hrk_nasa_apis_test:
-#    path: '../../dart/packages/hrk_nasa_apis/hrk_nasa_apis_test'
+#     path: '../../dart/packages/hrk_nasa_apis/hrk_nasa_apis_test'
+#   go_router:
+#     path: '../flutter-packages/packages/go_router'
 
 flutter:
   uses-material-design: true
