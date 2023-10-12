@@ -121,11 +121,11 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
 }
 
 /// @nodoc
-abstract class _$$_SettingsStateCopyWith<$Res>
+abstract class _$$SettingsStateImplCopyWith<$Res>
     implements $SettingsStateCopyWith<$Res> {
-  factory _$$_SettingsStateCopyWith(
-          _$_SettingsState value, $Res Function(_$_SettingsState) then) =
-      __$$_SettingsStateCopyWithImpl<$Res>;
+  factory _$$SettingsStateImplCopyWith(
+          _$SettingsStateImpl value, $Res Function(_$SettingsStateImpl) then) =
+      __$$SettingsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -141,11 +141,11 @@ abstract class _$$_SettingsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SettingsStateCopyWithImpl<$Res>
-    extends _$SettingsStateCopyWithImpl<$Res, _$_SettingsState>
-    implements _$$_SettingsStateCopyWith<$Res> {
-  __$$_SettingsStateCopyWithImpl(
-      _$_SettingsState _value, $Res Function(_$_SettingsState) _then)
+class __$$SettingsStateImplCopyWithImpl<$Res>
+    extends _$SettingsStateCopyWithImpl<$Res, _$SettingsStateImpl>
+    implements _$$SettingsStateImplCopyWith<$Res> {
+  __$$SettingsStateImplCopyWithImpl(
+      _$SettingsStateImpl _value, $Res Function(_$SettingsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -161,7 +161,7 @@ class __$$_SettingsStateCopyWithImpl<$Res>
     Object? diameterUnit = null,
     Object? isAnyDialogShown = freezed,
   }) {
-    return _then(_$_SettingsState(
+    return _then(_$SettingsStateImpl(
       locale: freezed == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -205,8 +205,8 @@ class __$$_SettingsStateCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$_SettingsState implements _SettingsState {
-  const _$_SettingsState(
+class _$SettingsStateImpl implements _SettingsState {
+  const _$SettingsStateImpl(
       {@LocaleJsonConverter() this.locale = SettingsState.localeDefault,
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
       this.dateFormatPattern = SettingsState.dateFormatPatternDefault,
@@ -218,8 +218,8 @@ class _$_SettingsState implements _SettingsState {
       this.isAnyDialogShown})
       : _systemLocales = systemLocales;
 
-  factory _$_SettingsState.fromJson(Map<String, dynamic> json) =>
-      _$$_SettingsStateFromJson(json);
+  factory _$SettingsStateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SettingsStateImplFromJson(json);
 
   @override
   @JsonKey()
@@ -266,7 +266,7 @@ class _$_SettingsState implements _SettingsState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SettingsState &&
+            other is _$SettingsStateImpl &&
             (identical(other.locale, locale) || other.locale == locale) &&
             const DeepCollectionEquality()
                 .equals(other._systemLocales, _systemLocales) &&
@@ -303,12 +303,12 @@ class _$_SettingsState implements _SettingsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SettingsStateCopyWith<_$_SettingsState> get copyWith =>
-      __$$_SettingsStateCopyWithImpl<_$_SettingsState>(this, _$identity);
+  _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith =>
+      __$$SettingsStateImplCopyWithImpl<_$SettingsStateImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SettingsStateToJson(
+    return _$$SettingsStateImplToJson(
       this,
     );
   }
@@ -324,10 +324,10 @@ abstract class _SettingsState implements SettingsState {
       final DistanceUnit distanceUnit,
       final VelocityUnit velocityUnit,
       final DistanceUnit diameterUnit,
-      final bool? isAnyDialogShown}) = _$_SettingsState;
+      final bool? isAnyDialogShown}) = _$SettingsStateImpl;
 
   factory _SettingsState.fromJson(Map<String, dynamic> json) =
-      _$_SettingsState.fromJson;
+      _$SettingsStateImpl.fromJson;
 
   @override
   @LocaleJsonConverter()
@@ -351,6 +351,6 @@ abstract class _SettingsState implements SettingsState {
   bool? get isAnyDialogShown;
   @override
   @JsonKey(ignore: true)
-  _$$_SettingsStateCopyWith<_$_SettingsState> get copyWith =>
+  _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

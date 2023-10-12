@@ -10,8 +10,8 @@ part of 'settings_state.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
-    _$_SettingsState(
+_$SettingsStateImpl _$$SettingsStateImplFromJson(Map<String, dynamic> json) =>
+    _$SettingsStateImpl(
       locale: json['locale'] == null
           ? SettingsState.localeDefault
           : const LocaleJsonConverter()
@@ -39,7 +39,7 @@ _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
       isAnyDialogShown: json['isAnyDialogShown'] as bool?,
     );
 
-Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) {
+Map<String, dynamic> _$$SettingsStateImplToJson(_$SettingsStateImpl instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

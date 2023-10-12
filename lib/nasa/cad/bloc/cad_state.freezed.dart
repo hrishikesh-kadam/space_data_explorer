@@ -171,10 +171,11 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
 }
 
 /// @nodoc
-abstract class _$$_CadStateCopyWith<$Res> implements $CadStateCopyWith<$Res> {
-  factory _$$_CadStateCopyWith(
-          _$_CadState value, $Res Function(_$_CadState) then) =
-      __$$_CadStateCopyWithImpl<$Res>;
+abstract class _$$CadStateImplCopyWith<$Res>
+    implements $CadStateCopyWith<$Res> {
+  factory _$$CadStateImplCopyWith(
+          _$CadStateImpl value, $Res Function(_$CadStateImpl) then) =
+      __$$CadStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -201,11 +202,11 @@ abstract class _$$_CadStateCopyWith<$Res> implements $CadStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_CadStateCopyWithImpl<$Res>
-    extends _$CadStateCopyWithImpl<$Res, _$_CadState>
-    implements _$$_CadStateCopyWith<$Res> {
-  __$$_CadStateCopyWithImpl(
-      _$_CadState _value, $Res Function(_$_CadState) _then)
+class __$$CadStateImplCopyWithImpl<$Res>
+    extends _$CadStateCopyWithImpl<$Res, _$CadStateImpl>
+    implements _$$CadStateImplCopyWith<$Res> {
+  __$$CadStateImplCopyWithImpl(
+      _$CadStateImpl _value, $Res Function(_$CadStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -223,7 +224,7 @@ class __$$_CadStateCopyWithImpl<$Res>
     Object? sbdbCadBody = freezed,
     Object? error = freezed,
   }) {
-    return _then(_$_CadState(
+    return _then(_$CadStateImpl(
       dateRange: freezed == dateRange
           ? _value.dateRange
           : dateRange // ignore: cast_nullable_to_non_nullable
@@ -271,8 +272,8 @@ class __$$_CadStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CadState implements _CadState {
-  const _$_CadState(
+class _$CadStateImpl implements _CadState {
+  const _$CadStateImpl(
       {this.dateRange,
       this.distanceRangeState = const DistanceRangeState(),
       this.smallBodyFilterState = const SmallBodyFilterState(),
@@ -331,7 +332,7 @@ class _$_CadState implements _CadState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CadState &&
+            other is _$CadStateImpl &&
             (identical(other.dateRange, dateRange) ||
                 other.dateRange == dateRange) &&
             (identical(other.distanceRangeState, distanceRangeState) ||
@@ -373,8 +374,8 @@ class _$_CadState implements _CadState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CadStateCopyWith<_$_CadState> get copyWith =>
-      __$$_CadStateCopyWithImpl<_$_CadState>(this, _$identity);
+  _$$CadStateImplCopyWith<_$CadStateImpl> get copyWith =>
+      __$$CadStateImplCopyWithImpl<_$CadStateImpl>(this, _$identity);
 }
 
 abstract class _CadState implements CadState {
@@ -389,7 +390,7 @@ abstract class _CadState implements CadState {
       final CancelToken? cancelToken,
       final bool disableInputs,
       final SbdbCadBody? sbdbCadBody,
-      final Object? error}) = _$_CadState;
+      final Object? error}) = _$CadStateImpl;
 
   @override
   DateTimeRange? get dateRange;
@@ -415,7 +416,7 @@ abstract class _CadState implements CadState {
   Object? get error;
   @override
   @JsonKey(ignore: true)
-  _$$_CadStateCopyWith<_$_CadState> get copyWith =>
+  _$$CadStateImplCopyWith<_$CadStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -477,11 +478,11 @@ class _$DistanceRangeStateCopyWithImpl<$Res, $Val extends DistanceRangeState>
 }
 
 /// @nodoc
-abstract class _$$_DistanceRangeStateCopyWith<$Res>
+abstract class _$$DistanceRangeStateImplCopyWith<$Res>
     implements $DistanceRangeStateCopyWith<$Res> {
-  factory _$$_DistanceRangeStateCopyWith(_$_DistanceRangeState value,
-          $Res Function(_$_DistanceRangeState) then) =
-      __$$_DistanceRangeStateCopyWithImpl<$Res>;
+  factory _$$DistanceRangeStateImplCopyWith(_$DistanceRangeStateImpl value,
+          $Res Function(_$DistanceRangeStateImpl) then) =
+      __$$DistanceRangeStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -491,11 +492,11 @@ abstract class _$$_DistanceRangeStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DistanceRangeStateCopyWithImpl<$Res>
-    extends _$DistanceRangeStateCopyWithImpl<$Res, _$_DistanceRangeState>
-    implements _$$_DistanceRangeStateCopyWith<$Res> {
-  __$$_DistanceRangeStateCopyWithImpl(
-      _$_DistanceRangeState _value, $Res Function(_$_DistanceRangeState) _then)
+class __$$DistanceRangeStateImplCopyWithImpl<$Res>
+    extends _$DistanceRangeStateCopyWithImpl<$Res, _$DistanceRangeStateImpl>
+    implements _$$DistanceRangeStateImplCopyWith<$Res> {
+  __$$DistanceRangeStateImplCopyWithImpl(_$DistanceRangeStateImpl _value,
+      $Res Function(_$DistanceRangeStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -505,7 +506,7 @@ class __$$_DistanceRangeStateCopyWithImpl<$Res>
     Object? textList = null,
     Object? unitList = null,
   }) {
-    return _then(_$_DistanceRangeState(
+    return _then(_$DistanceRangeStateImpl(
       valueList: null == valueList
           ? _value._valueList
           : valueList // ignore: cast_nullable_to_non_nullable
@@ -524,8 +525,8 @@ class __$$_DistanceRangeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DistanceRangeState implements _DistanceRangeState {
-  const _$_DistanceRangeState(
+class _$DistanceRangeStateImpl implements _DistanceRangeState {
+  const _$DistanceRangeStateImpl(
       {final List<double?> valueList = const [],
       final List<String> textList = const [],
       final List<DistanceUnit> unitList = const []})
@@ -569,7 +570,7 @@ class _$_DistanceRangeState implements _DistanceRangeState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DistanceRangeState &&
+            other is _$DistanceRangeStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._valueList, _valueList) &&
             const DeepCollectionEquality().equals(other._textList, _textList) &&
@@ -586,8 +587,8 @@ class _$_DistanceRangeState implements _DistanceRangeState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DistanceRangeStateCopyWith<_$_DistanceRangeState> get copyWith =>
-      __$$_DistanceRangeStateCopyWithImpl<_$_DistanceRangeState>(
+  _$$DistanceRangeStateImplCopyWith<_$DistanceRangeStateImpl> get copyWith =>
+      __$$DistanceRangeStateImplCopyWithImpl<_$DistanceRangeStateImpl>(
           this, _$identity);
 }
 
@@ -595,7 +596,7 @@ abstract class _DistanceRangeState implements DistanceRangeState {
   const factory _DistanceRangeState(
       {final List<double?> valueList,
       final List<String> textList,
-      final List<DistanceUnit> unitList}) = _$_DistanceRangeState;
+      final List<DistanceUnit> unitList}) = _$DistanceRangeStateImpl;
 
   @override
   List<double?> get valueList;
@@ -605,7 +606,7 @@ abstract class _DistanceRangeState implements DistanceRangeState {
   List<DistanceUnit> get unitList;
   @override
   @JsonKey(ignore: true)
-  _$$_DistanceRangeStateCopyWith<_$_DistanceRangeState> get copyWith =>
+  _$$DistanceRangeStateImplCopyWith<_$DistanceRangeStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -659,22 +660,22 @@ class _$SmallBodyFilterStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SmallBodyFilterStateCopyWith<$Res>
+abstract class _$$SmallBodyFilterStateImplCopyWith<$Res>
     implements $SmallBodyFilterStateCopyWith<$Res> {
-  factory _$$_SmallBodyFilterStateCopyWith(_$_SmallBodyFilterState value,
-          $Res Function(_$_SmallBodyFilterState) then) =
-      __$$_SmallBodyFilterStateCopyWithImpl<$Res>;
+  factory _$$SmallBodyFilterStateImplCopyWith(_$SmallBodyFilterStateImpl value,
+          $Res Function(_$SmallBodyFilterStateImpl) then) =
+      __$$SmallBodyFilterStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool enabled, SmallBodyFilter smallBodyFilter});
 }
 
 /// @nodoc
-class __$$_SmallBodyFilterStateCopyWithImpl<$Res>
-    extends _$SmallBodyFilterStateCopyWithImpl<$Res, _$_SmallBodyFilterState>
-    implements _$$_SmallBodyFilterStateCopyWith<$Res> {
-  __$$_SmallBodyFilterStateCopyWithImpl(_$_SmallBodyFilterState _value,
-      $Res Function(_$_SmallBodyFilterState) _then)
+class __$$SmallBodyFilterStateImplCopyWithImpl<$Res>
+    extends _$SmallBodyFilterStateCopyWithImpl<$Res, _$SmallBodyFilterStateImpl>
+    implements _$$SmallBodyFilterStateImplCopyWith<$Res> {
+  __$$SmallBodyFilterStateImplCopyWithImpl(_$SmallBodyFilterStateImpl _value,
+      $Res Function(_$SmallBodyFilterStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -683,7 +684,7 @@ class __$$_SmallBodyFilterStateCopyWithImpl<$Res>
     Object? enabled = null,
     Object? smallBodyFilter = null,
   }) {
-    return _then(_$_SmallBodyFilterState(
+    return _then(_$SmallBodyFilterStateImpl(
       enabled: null == enabled
           ? _value.enabled
           : enabled // ignore: cast_nullable_to_non_nullable
@@ -698,8 +699,8 @@ class __$$_SmallBodyFilterStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SmallBodyFilterState implements _SmallBodyFilterState {
-  const _$_SmallBodyFilterState(
+class _$SmallBodyFilterStateImpl implements _SmallBodyFilterState {
+  const _$SmallBodyFilterStateImpl(
       {this.enabled = true,
       this.smallBodyFilter = SbdbCadQueryParameters.smallBodyFilterDefault});
 
@@ -719,7 +720,7 @@ class _$_SmallBodyFilterState implements _SmallBodyFilterState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SmallBodyFilterState &&
+            other is _$SmallBodyFilterStateImpl &&
             (identical(other.enabled, enabled) || other.enabled == enabled) &&
             (identical(other.smallBodyFilter, smallBodyFilter) ||
                 other.smallBodyFilter == smallBodyFilter));
@@ -731,15 +732,16 @@ class _$_SmallBodyFilterState implements _SmallBodyFilterState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SmallBodyFilterStateCopyWith<_$_SmallBodyFilterState> get copyWith =>
-      __$$_SmallBodyFilterStateCopyWithImpl<_$_SmallBodyFilterState>(
-          this, _$identity);
+  _$$SmallBodyFilterStateImplCopyWith<_$SmallBodyFilterStateImpl>
+      get copyWith =>
+          __$$SmallBodyFilterStateImplCopyWithImpl<_$SmallBodyFilterStateImpl>(
+              this, _$identity);
 }
 
 abstract class _SmallBodyFilterState implements SmallBodyFilterState {
   const factory _SmallBodyFilterState(
       {final bool enabled,
-      final SmallBodyFilter smallBodyFilter}) = _$_SmallBodyFilterState;
+      final SmallBodyFilter smallBodyFilter}) = _$SmallBodyFilterStateImpl;
 
   @override
   bool get enabled;
@@ -747,8 +749,8 @@ abstract class _SmallBodyFilterState implements SmallBodyFilterState {
   SmallBodyFilter get smallBodyFilter;
   @override
   @JsonKey(ignore: true)
-  _$$_SmallBodyFilterStateCopyWith<_$_SmallBodyFilterState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SmallBodyFilterStateImplCopyWith<_$SmallBodyFilterStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -809,11 +811,12 @@ class _$SmallBodySelectorStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SmallBodySelectorStateCopyWith<$Res>
+abstract class _$$SmallBodySelectorStateImplCopyWith<$Res>
     implements $SmallBodySelectorStateCopyWith<$Res> {
-  factory _$$_SmallBodySelectorStateCopyWith(_$_SmallBodySelectorState value,
-          $Res Function(_$_SmallBodySelectorState) then) =
-      __$$_SmallBodySelectorStateCopyWithImpl<$Res>;
+  factory _$$SmallBodySelectorStateImplCopyWith(
+          _$SmallBodySelectorStateImpl value,
+          $Res Function(_$SmallBodySelectorStateImpl) then) =
+      __$$SmallBodySelectorStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -821,12 +824,13 @@ abstract class _$$_SmallBodySelectorStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SmallBodySelectorStateCopyWithImpl<$Res>
+class __$$SmallBodySelectorStateImplCopyWithImpl<$Res>
     extends _$SmallBodySelectorStateCopyWithImpl<$Res,
-        _$_SmallBodySelectorState>
-    implements _$$_SmallBodySelectorStateCopyWith<$Res> {
-  __$$_SmallBodySelectorStateCopyWithImpl(_$_SmallBodySelectorState _value,
-      $Res Function(_$_SmallBodySelectorState) _then)
+        _$SmallBodySelectorStateImpl>
+    implements _$$SmallBodySelectorStateImplCopyWith<$Res> {
+  __$$SmallBodySelectorStateImplCopyWithImpl(
+      _$SmallBodySelectorStateImpl _value,
+      $Res Function(_$SmallBodySelectorStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -836,7 +840,7 @@ class __$$_SmallBodySelectorStateCopyWithImpl<$Res>
     Object? spkId = freezed,
     Object? designation = freezed,
   }) {
-    return _then(_$_SmallBodySelectorState(
+    return _then(_$SmallBodySelectorStateImpl(
       smallBodySelector: freezed == smallBodySelector
           ? _value.smallBodySelector
           : smallBodySelector // ignore: cast_nullable_to_non_nullable
@@ -855,8 +859,8 @@ class __$$_SmallBodySelectorStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SmallBodySelectorState implements _SmallBodySelectorState {
-  const _$_SmallBodySelectorState(
+class _$SmallBodySelectorStateImpl implements _SmallBodySelectorState {
+  const _$SmallBodySelectorStateImpl(
       {this.smallBodySelector, this.spkId, this.designation});
 
   @override
@@ -875,7 +879,7 @@ class _$_SmallBodySelectorState implements _SmallBodySelectorState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SmallBodySelectorState &&
+            other is _$SmallBodySelectorStateImpl &&
             (identical(other.smallBodySelector, smallBodySelector) ||
                 other.smallBodySelector == smallBodySelector) &&
             (identical(other.spkId, spkId) || other.spkId == spkId) &&
@@ -890,16 +894,16 @@ class _$_SmallBodySelectorState implements _SmallBodySelectorState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SmallBodySelectorStateCopyWith<_$_SmallBodySelectorState> get copyWith =>
-      __$$_SmallBodySelectorStateCopyWithImpl<_$_SmallBodySelectorState>(
-          this, _$identity);
+  _$$SmallBodySelectorStateImplCopyWith<_$SmallBodySelectorStateImpl>
+      get copyWith => __$$SmallBodySelectorStateImplCopyWithImpl<
+          _$SmallBodySelectorStateImpl>(this, _$identity);
 }
 
 abstract class _SmallBodySelectorState implements SmallBodySelectorState {
   const factory _SmallBodySelectorState(
       {final SmallBodySelector? smallBodySelector,
       final int? spkId,
-      final String? designation}) = _$_SmallBodySelectorState;
+      final String? designation}) = _$SmallBodySelectorStateImpl;
 
   @override
   SmallBodySelector? get smallBodySelector;
@@ -909,6 +913,6 @@ abstract class _SmallBodySelectorState implements SmallBodySelectorState {
   String? get designation;
   @override
   @JsonKey(ignore: true)
-  _$$_SmallBodySelectorStateCopyWith<_$_SmallBodySelectorState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SmallBodySelectorStateImplCopyWith<_$SmallBodySelectorStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

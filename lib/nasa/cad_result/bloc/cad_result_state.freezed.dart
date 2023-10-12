@@ -67,11 +67,11 @@ class _$CadResultStateCopyWithImpl<$Res, $Val extends CadResultState>
 }
 
 /// @nodoc
-abstract class _$$_CadResultStateCopyWith<$Res>
+abstract class _$$CadResultStateImplCopyWith<$Res>
     implements $CadResultStateCopyWith<$Res> {
-  factory _$$_CadResultStateCopyWith(
-          _$_CadResultState value, $Res Function(_$_CadResultState) then) =
-      __$$_CadResultStateCopyWithImpl<$Res>;
+  factory _$$CadResultStateImplCopyWith(_$CadResultStateImpl value,
+          $Res Function(_$CadResultStateImpl) then) =
+      __$$CadResultStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({SbdbCadBody sbdbCadBody});
@@ -81,11 +81,11 @@ abstract class _$$_CadResultStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CadResultStateCopyWithImpl<$Res>
-    extends _$CadResultStateCopyWithImpl<$Res, _$_CadResultState>
-    implements _$$_CadResultStateCopyWith<$Res> {
-  __$$_CadResultStateCopyWithImpl(
-      _$_CadResultState _value, $Res Function(_$_CadResultState) _then)
+class __$$CadResultStateImplCopyWithImpl<$Res>
+    extends _$CadResultStateCopyWithImpl<$Res, _$CadResultStateImpl>
+    implements _$$CadResultStateImplCopyWith<$Res> {
+  __$$CadResultStateImplCopyWithImpl(
+      _$CadResultStateImpl _value, $Res Function(_$CadResultStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,7 +93,7 @@ class __$$_CadResultStateCopyWithImpl<$Res>
   $Res call({
     Object? sbdbCadBody = null,
   }) {
-    return _then(_$_CadResultState(
+    return _then(_$CadResultStateImpl(
       sbdbCadBody: null == sbdbCadBody
           ? _value.sbdbCadBody
           : sbdbCadBody // ignore: cast_nullable_to_non_nullable
@@ -104,8 +104,8 @@ class __$$_CadResultStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CadResultState implements _CadResultState {
-  _$_CadResultState({required this.sbdbCadBody});
+class _$CadResultStateImpl implements _CadResultState {
+  _$CadResultStateImpl({required this.sbdbCadBody});
 
   @override
   final SbdbCadBody sbdbCadBody;
@@ -119,7 +119,7 @@ class _$_CadResultState implements _CadResultState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CadResultState &&
+            other is _$CadResultStateImpl &&
             (identical(other.sbdbCadBody, sbdbCadBody) ||
                 other.sbdbCadBody == sbdbCadBody));
   }
@@ -130,18 +130,19 @@ class _$_CadResultState implements _CadResultState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CadResultStateCopyWith<_$_CadResultState> get copyWith =>
-      __$$_CadResultStateCopyWithImpl<_$_CadResultState>(this, _$identity);
+  _$$CadResultStateImplCopyWith<_$CadResultStateImpl> get copyWith =>
+      __$$CadResultStateImplCopyWithImpl<_$CadResultStateImpl>(
+          this, _$identity);
 }
 
 abstract class _CadResultState implements CadResultState {
   factory _CadResultState({required final SbdbCadBody sbdbCadBody}) =
-      _$_CadResultState;
+      _$CadResultStateImpl;
 
   @override
   SbdbCadBody get sbdbCadBody;
   @override
   @JsonKey(ignore: true)
-  _$$_CadResultStateCopyWith<_$_CadResultState> get copyWith =>
+  _$$CadResultStateImplCopyWith<_$CadResultStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
