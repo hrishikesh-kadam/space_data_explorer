@@ -15,6 +15,7 @@ import 'route/page_not_found/page_not_found_route.dart';
 import 'route/settings/bloc/settings_bloc.dart';
 import 'route/settings/bloc/settings_state.dart';
 import 'route/settings/locale.dart';
+import 'widgets/directionality_widget.dart';
 
 class SpaceDataExplorerApp extends StatelessWidget {
   SpaceDataExplorerApp({
@@ -47,7 +48,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
       child: BlocSelector<SettingsBloc, SettingsState, Locale?>(
         selector: (state) => state.locale,
         builder: (context, locale) {
-          return getApp(
+          return _getApp(
             context: context,
             locale: locale,
           );
@@ -56,7 +57,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
     );
   }
 
-  Widget getApp({
+  Widget _getApp({
     required BuildContext context,
     Locale? locale,
   }) {
@@ -65,6 +66,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
       routeInformationParser: _goRouter.routeInformationParser,
       routerDelegate: _goRouter.routerDelegate,
       backButtonDispatcher: AppBackButtonDispatcher(goRouter: _goRouter),
+      builder: _builder,
       // onGenerateTitle: (context) {
       //   return AppLocalizations.of(context).spaceDataExplorer;
       // },
@@ -75,7 +77,7 @@ class SpaceDataExplorerApp extends StatelessWidget {
       locale: locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       localeListResolutionCallback: (locales, supportedLocales) {
-        return localeListResolutionCallback(
+        return _localeListResolutionCallback(
           context: context,
           locales: locales,
           supportedLocales: supportedLocales,
@@ -86,7 +88,12 @@ class SpaceDataExplorerApp extends StatelessWidget {
     );
   }
 
-  Locale? localeListResolutionCallback({
+  Widget _builder(BuildContext context, Widget? child) {
+    assert(child != null);
+    return getDirectionality(child: child!);
+  }
+
+  Locale? _localeListResolutionCallback({
     required BuildContext context,
     List<Locale>? locales,
     required Iterable<Locale> supportedLocales,

@@ -7,7 +7,6 @@ import 'package:url_launcher/link.dart';
 import '../../globals.dart';
 import '../../nasa/route/nasa_route.dart';
 import '../../widgets/app_bar.dart';
-import '../../widgets/directionality_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -23,29 +22,27 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return getDirectionality(
-      child: Scaffold(
-        appBar: getAppBar(
-          context: context,
-          title: Text(title),
-        ),
-        body: Link(
-          uri: NasaRoute.uri,
-          builder: (context, followLink) {
-            return InkWell(
-              key: nasaButtonKey,
-              onTap: () {
-                GoRouter.of(context)
-                    .go(NasaRoute.uri.path, extra: getRouteExtraMap());
-              },
-              child: Text(
-                NasaRoute.pathSegment,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            );
-          },
-        ),
+    return Scaffold(
+      appBar: getAppBar(
+        context: context,
+        title: Text(title),
+      ),
+      body: Link(
+        uri: NasaRoute.uri,
+        builder: (context, followLink) {
+          return InkWell(
+            key: nasaButtonKey,
+            onTap: () {
+              GoRouter.of(context)
+                  .go(NasaRoute.uri.path, extra: getRouteExtraMap());
+            },
+            child: Text(
+              NasaRoute.pathSegment,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          );
+        },
       ),
     );
   }

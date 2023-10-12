@@ -9,7 +9,6 @@ import '../../config/config.dart';
 import '../../constants/constants.dart';
 import '../../globals.dart';
 import '../../widgets/app_bar.dart';
-import '../../widgets/directionality_widget.dart';
 
 class AboutScreen extends StatelessWidget {
   AboutScreen({
@@ -32,15 +31,13 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return getDirectionality(
-      child: Scaffold(
-        key: scaffoldKey,
-        appBar: getAppBar(
-          context: context,
-          title: Text(title),
-        ),
-        body: _getBody(context: context),
+    return Scaffold(
+      key: scaffoldKey,
+      appBar: getAppBar(
+        context: context,
+        title: Text(title),
       ),
+      body: _getBody(context: context),
     );
   }
 

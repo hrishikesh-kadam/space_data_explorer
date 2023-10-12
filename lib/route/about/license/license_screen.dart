@@ -8,7 +8,6 @@ import 'package:hrk_logging/hrk_logging.dart';
 import '../../../config/config.dart';
 import '../../../globals.dart';
 import '../../../widgets/app_bar.dart';
-import '../../../widgets/directionality_widget.dart';
 
 class LicenseScreen extends StatelessWidget {
   LicenseScreen({
@@ -25,16 +24,14 @@ class LicenseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return getDirectionality(
-      child: Scaffold(
-        appBar: getAppBar(
-          context: context,
-          title: Text(title),
-        ),
-        body: LicensePage(
-          applicationName: l10n.spaceDataExplorer,
-          applicationVersion: getCompleteVersion(),
-        ),
+    return Scaffold(
+      appBar: getAppBar(
+        context: context,
+        title: Text(title),
+      ),
+      body: LicensePage(
+        applicationName: l10n.spaceDataExplorer,
+        applicationVersion: getCompleteVersion(),
       ),
     );
   }

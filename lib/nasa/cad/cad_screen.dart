@@ -22,7 +22,6 @@ import '../../widgets/app_bar.dart';
 import '../../widgets/choice_chip_input_widget.dart';
 import '../../widgets/choice_chip_query_widget.dart';
 import '../../widgets/date_filter_widget.dart';
-import '../../widgets/directionality_widget.dart';
 import '../../widgets/filter_chip_query_widget.dart';
 import '../../widgets/outlined_button_extended.dart';
 import '../../widgets/value_range_filter_widget.dart';
@@ -123,11 +122,9 @@ class CadScreen extends StatelessWidget {
       child: _getCadBlocListener(
         child: Builder(
           builder: (context) {
-            return getDirectionality(
-              child: Scaffold(
-                backgroundColor: AppTheme.pageBackgroundColor,
-                body: _getBody(context: context),
-              ),
+            return Scaffold(
+              backgroundColor: AppTheme.pageBackgroundColor,
+              body: _getBody(context: context),
             );
           },
         ),

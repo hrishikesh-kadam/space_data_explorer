@@ -19,7 +19,6 @@ import '../../route/settings/bloc/settings_bloc.dart';
 import '../../route/settings/bloc/settings_state.dart';
 import '../../route/settings/date_format_pattern.dart';
 import '../../route/settings/time_format_pattern.dart';
-import '../../widgets/directionality_widget.dart';
 import 'bloc/cad_result_bloc.dart';
 import 'bloc/cad_result_state.dart';
 
@@ -77,11 +76,9 @@ class CadResultScreen extends StatelessWidget {
           );
         }
       },
-      child: getDirectionality(
-        child: Scaffold(
-          backgroundColor: AppTheme.pageBackgroundColor,
-          body: _getBody(context: context),
-        ),
+      child: Scaffold(
+        backgroundColor: AppTheme.pageBackgroundColor,
+        body: _getBody(context: context),
       ),
     );
   }

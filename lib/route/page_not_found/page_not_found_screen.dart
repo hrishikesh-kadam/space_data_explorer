@@ -6,7 +6,6 @@ import 'package:hrk_batteries/hrk_batteries.dart';
 
 import '../../constants/dimensions.dart';
 import '../../widgets/app_bar.dart';
-import '../../widgets/directionality_widget.dart';
 
 class PageNotFoundScreen extends StatelessWidget {
   const PageNotFoundScreen({
@@ -23,25 +22,23 @@ class PageNotFoundScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return getDirectionality(
-      child: Scaffold(
-        appBar: getAppBar(
-          context: context,
-          title: Text(title),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(Dimensions.pagePadding),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  _getBodyTextMessage(),
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                )
-              ],
-            ),
+    return Scaffold(
+      appBar: getAppBar(
+        context: context,
+        title: Text(title),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(Dimensions.pagePadding),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                _getBodyTextMessage(),
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyLarge,
+              )
+            ],
           ),
         ),
       ),

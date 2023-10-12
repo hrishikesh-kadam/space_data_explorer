@@ -7,7 +7,6 @@ import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import '../../globals.dart';
 import '../../widgets/app_bar.dart';
-import '../../widgets/directionality_widget.dart';
 import '../../widgets/radio_settings_tile.dart';
 import 'bloc/settings_bloc.dart';
 import 'bloc/settings_state.dart';
@@ -91,14 +90,12 @@ class SettingsScreen extends StatelessWidget {
           Navigator.pop(context);
         }
       },
-      child: getDirectionality(
-        child: Scaffold(
-          appBar: getAppBar(
-            context: context,
-            title: Text(title),
-          ),
-          body: _getBody(),
+      child: Scaffold(
+        appBar: getAppBar(
+          context: context,
+          title: Text(title),
         ),
+        body: _getBody(),
       ),
     );
   }
