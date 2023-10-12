@@ -86,7 +86,8 @@
     "author",
     "authorNameAka",
     "source",
-    "webApp"
+    "webApp",
+    "copiedToClipboard"
   ],
 
   "he": [
@@ -176,6 +177,7 @@
     "author",
     "authorNameAka",
     "source",
-    "webApp"
+    "webApp",
+    "copiedToClipboard"
   ]
 }

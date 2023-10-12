@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hrk_batteries/hrk_batteries.dart';
@@ -141,4 +143,15 @@ TextPainter getTextPainterLaidout({
   }
   // logger.debug('horizontalPadding = $horizontalPadding');
   return (horizontalPadding, crossAxisCount);
+}
+
+void copyToClipboard({
+  required BuildContext context,
+  required String text,
+}) {
+  Clipboard.setData(ClipboardData(text: text));
+  final snackBar = SnackBar(
+    content: Text(AppLocalizations.of(context).copiedToClipboard),
+  );
+  ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }

@@ -90,7 +90,9 @@ class SpaceDataExplorerApp extends StatelessWidget {
 
   Widget _builder(BuildContext context, Widget? child) {
     assert(child != null);
-    return getDirectionality(child: child!);
+    return getDirectionality(
+      child: child!,
+    );
   }
 
   Locale? _localeListResolutionCallback({

@@ -220,11 +220,13 @@ class CadResultScreen extends StatelessWidget {
     return getItemContainer(
       context: context,
       index: index,
-      child: getItemBody(
-        context: context,
-        sbdbCadBody: sbdbCadBody,
-        data: data,
-        index: index,
+      child: SelectionArea(
+        child: getItemBody(
+          context: context,
+          sbdbCadBody: sbdbCadBody,
+          data: data,
+          index: index,
+        ),
       ),
     );
   }

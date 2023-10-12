@@ -8,6 +8,7 @@ import 'package:url_launcher/link.dart';
 import '../../config/config.dart';
 import '../../constants/constants.dart';
 import '../../globals.dart';
+import '../../helper/helper.dart';
 import '../../widgets/app_bar.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -31,13 +32,15 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      appBar: getAppBar(
-        context: context,
-        title: Text(title),
+    return SelectionArea(
+      child: Scaffold(
+        key: scaffoldKey,
+        appBar: getAppBar(
+          context: context,
+          title: Text(title),
+        ),
+        body: _getBody(context: context),
       ),
-      body: _getBody(context: context),
     );
   }
 
@@ -209,24 +212,21 @@ class AboutScreen extends StatelessWidget {
           style: Theme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),
-        Link(
-          uri: webAppUri,
-          target: LinkTarget.blank,
-          builder: (context, followLink) {
-            return InkWell(
-              key: webAppUriKey,
-              onTap: followLink,
-              child: Text(
-                webAppUri.toString(),
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Colors.blue,
-                      decoration: TextDecoration.underline,
-                      decorationColor: Colors.blue,
-                    ),
-              ),
-            );
-          },
+        InkWell(
+          key: webAppUriKey,
+          onTap: () => copyToClipboard(
+            context: context,
+            text: webAppUri.toString(),
+          ),
+          child: Text(
+            webAppUri.toString(),
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                  decorationColor: Colors.blue,
+                ),
+          ),
         ),
       ],
     );

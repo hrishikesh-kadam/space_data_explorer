@@ -5,7 +5,6 @@
 - About Page
   - Rate App for Android and iOS
   - App info link for Android
-- Add selection, copy functionality
 - Add tool-tips
 - Add Privacy Policy Page, and link it to About Page
 - Fix ./tool/android/run.sh script
