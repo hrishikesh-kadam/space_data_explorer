@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/link.dart';
 
 import '../../globals.dart';
 import '../../nasa/route/nasa_route.dart';
@@ -28,11 +29,21 @@ class HomeScreen extends StatelessWidget {
           context: context,
           title: Text(title),
         ),
-        body: TextButton(
-          key: nasaButtonKey,
-          child: const Text(NasaRoute.routeName),
-          onPressed: () async {
-            GoRouter.of(context).go(NasaRoute.path, extra: getRouteExtraMap());
+        body: Link(
+          uri: NasaRoute.uri,
+          builder: (context, followLink) {
+            return InkWell(
+              key: nasaButtonKey,
+              onTap: () {
+                GoRouter.of(context)
+                    .go(NasaRoute.uri.path, extra: getRouteExtraMap());
+              },
+              child: Text(
+                NasaRoute.pathSegment,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            );
           },
         ),
       ),

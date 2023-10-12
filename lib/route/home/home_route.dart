@@ -15,19 +15,19 @@ import 'home_screen.dart';
 part 'home_route.g.dart';
 
 @TypedGoRoute<HomeRoute>(
-  path: HomeRoute.path,
+  path: HomeRoute.pathSegment,
   name: HomeRoute.displayName,
   routes: [
     TypedGoRoute<NasaRoute>(
-      path: NasaRoute.routeName,
+      path: NasaRoute.pathSegment,
       name: NasaRoute.displayName,
       routes: [
         TypedGoRoute<CadRoute>(
-          path: CadRoute.routeName,
+          path: CadRoute.pathSegment,
           name: CadRoute.displayName,
           routes: [
             TypedGoRoute<CadResultRoute>(
-              path: CadResultRoute.routeName,
+              path: CadResultRoute.pathSegment,
               name: CadResultRoute.displayName,
             ),
           ],
@@ -35,15 +35,15 @@ part 'home_route.g.dart';
       ],
     ),
     TypedGoRoute<SettingsRoute>(
-      path: SettingsRoute.routeName,
+      path: SettingsRoute.pathSegment,
       name: SettingsRoute.displayName,
     ),
     TypedGoRoute<AboutRoute>(
-      path: AboutRoute.routeName,
+      path: AboutRoute.pathSegment,
       name: AboutRoute.displayName,
       routes: [
         TypedGoRoute<LicenseRoute>(
-          path: LicenseRoute.routeName,
+          path: LicenseRoute.pathSegment,
           name: LicenseRoute.displayName,
         )
       ],
@@ -53,8 +53,8 @@ part 'home_route.g.dart';
 class HomeRoute extends GoRouteData {
   const HomeRoute();
 
-  static const String path = '/';
-  static const String routeName = path;
+  static const String pathSegment = '/';
+  static final Uri uri = Uri(path: pathSegment);
   static const String displayName = Labels.spaceDataExplorer;
 
   @override

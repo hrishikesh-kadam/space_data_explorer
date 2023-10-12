@@ -16,8 +16,8 @@ class CadRoute extends GoRouteData {
 
   final JsonMap? $extra;
 
-  static const String routeName = 'cad';
-  static const String path = '${NasaRoute.path}/$routeName';
+  static const String pathSegment = 'cad';
+  static final Uri uri = Uri(path: '${NasaRoute.uri.path}/$pathSegment');
   static const String displayName = Labels.sbdbCloseApproachData;
 
   @override

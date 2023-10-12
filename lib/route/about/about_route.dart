@@ -10,8 +10,8 @@ import 'about_screen.dart' deferred as about_screen;
 class AboutRoute extends GoRouteData {
   const AboutRoute();
 
-  static const String routeName = 'about';
-  static const String path = '/$routeName';
+  static const String pathSegment = 'about';
+  static final Uri uri = Uri(path: '/$pathSegment');
   static const String displayName = Labels.about;
 
   @override

@@ -93,7 +93,7 @@ BackButton getAppBarBackButton({
           final routeMatchList = getListOfRouteMatch(context);
           logger.log(
               logLevel, 'routeMatchList.length = ${routeMatchList.length}');
-          GoRouter.of(context).go(HomeRoute.path);
+          GoRouter.of(context).go(HomeRoute.uri.path);
         }
       } else {
         logger.log(
@@ -102,7 +102,7 @@ BackButton getAppBarBackButton({
         final routeMatchList = getListOfRouteMatch(context);
         logger.log(
             logLevel, 'routeMatchList.length = ${routeMatchList.length}');
-        GoRouter.of(context).go(HomeRoute.path);
+        GoRouter.of(context).go(HomeRoute.uri.path);
       }
     },
   );

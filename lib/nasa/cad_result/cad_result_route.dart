@@ -24,8 +24,8 @@ class CadResultRoute extends GoRouteData {
   JsonMap? $extra;
   final _logger = Logger('$appNamePascalCase.CadResultRoute');
 
-  static const String routeName = 'result';
-  static const String path = '${CadRoute.path}/$routeName';
+  static const String pathSegment = 'result';
+  static final Uri uri = Uri(path: '${CadRoute.uri.path}/$pathSegment');
   static const String displayName = Labels.sbdbCloseApproachDataResult;
   @visibleForTesting
   static JsonMap? $extraTest;
@@ -47,7 +47,7 @@ class CadResultRoute extends GoRouteData {
         }
       }
     }
-    return CadRoute.path;
+    return CadRoute.uri.path;
   }
 
   @override

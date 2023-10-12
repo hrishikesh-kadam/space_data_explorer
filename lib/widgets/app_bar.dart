@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/link.dart';
 
 import '../config/config.dart';
 import '../globals.dart';
@@ -63,7 +64,7 @@ Widget? getLeadingWidget({
   } catch (_) {}
   switch (location) {
     // Routes which doesn't need leading BackButton
-    case HomeRoute.routeName:
+    case HomeRoute.pathSegment:
       return null;
     default:
       return getAppBarBackButton(context: context);
@@ -77,14 +78,14 @@ List<Widget> getDefaultAppBarActions({required BuildContext context}) {
     location = GoRouterState.of(context).matchedLocation;
   } catch (_) {}
   return <Widget>[
-    if (location != null && location == HomeRoute.path)
+    if (location != null && location == HomeRoute.uri.path)
       getAboutAction(context: context),
     if (location != null &&
         ![
-          SettingsRoute.path,
-          PageNotFoundRoute.path,
-          AboutRoute.path,
-          LicenseRoute.path,
+          SettingsRoute.uri.path,
+          PageNotFoundRoute.uri.path,
+          AboutRoute.uri.path,
+          LicenseRoute.uri.path,
         ].contains(location))
       getSettingsAction(context: context),
   ];
@@ -95,17 +96,26 @@ Widget getSettingsAction({required BuildContext context}) {
     key: settingsActionKey,
     icon: const Icon(Icons.settings),
     onPressed: () {
-      GoRouter.of(context).push(SettingsRoute.path, extra: getRouteExtraMap());
+      GoRouter.of(context).push(
+        SettingsRoute.uri.path,
+        extra: getRouteExtraMap(),
+      );
     },
   );
 }
 
 Widget getAboutAction({required BuildContext context}) {
-  return IconButton(
-    key: aboutActionKey,
-    icon: const Icon(Icons.info),
-    onPressed: () {
-      GoRouter.of(context).go(AboutRoute.path, extra: getRouteExtraMap());
+  return Link(
+    uri: AboutRoute.uri,
+    builder: (context, followLink) {
+      return IconButton(
+        key: aboutActionKey,
+        icon: const Icon(Icons.info),
+        onPressed: () {
+          GoRouter.of(context)
+              .go(AboutRoute.uri.path, extra: getRouteExtraMap());
+        },
+      );
     },
   );
 }

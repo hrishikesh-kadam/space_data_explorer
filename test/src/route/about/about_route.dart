@@ -18,7 +18,7 @@ final webAppUriFinder = find.byKey(AboutScreen.webAppUriKey);
 final lastItemFinder = licenseButtonFinder;
 
 Future<void> pumpAboutRouteAsInitialLocation(WidgetTester tester) async {
-  await pumpApp(tester, initialLocation: AboutRoute.path);
+  await pumpApp(tester, initialLocation: AboutRoute.uri.path);
 }
 
 Future<void> pumpAboutRouteAsNormalLink(

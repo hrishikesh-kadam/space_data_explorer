@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hrk_logging/hrk_logging.dart';
+import 'package:url_launcher/link.dart';
 
 import '../../config/config.dart';
 import '../../globals.dart';
@@ -38,20 +39,29 @@ class NasaScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            TextButton(
-              key: cadButtonKey,
-              child: const Text(CadRoute.routeName),
-              onPressed: () async {
-                CadRoute($extra: getRouteExtraMap()).go(context);
+            Link(
+              uri: CadRoute.uri,
+              builder: (context, followLink) {
+                return InkWell(
+                  key: cadButtonKey,
+                  onTap: () {
+                    CadRoute($extra: getRouteExtraMap()).go(context);
+                  },
+                  child: Text(
+                    CadRoute.pathSegment,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                );
               },
             ),
             if (!prodRelease)
               TextButton(
                 key: nonExistingPathButtonKey,
-                child: const Text(PageNotFoundRoute.nonExistingPath),
+                child: Text(PageNotFoundRoute.nonExistingUri.path),
                 onPressed: () async {
                   context.go(
-                    PageNotFoundRoute.nonExistingPath,
+                    PageNotFoundRoute.nonExistingUri.path,
                     extra: getRouteExtraMap(),
                   );
                 },

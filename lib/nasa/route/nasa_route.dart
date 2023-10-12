@@ -10,8 +10,8 @@ import 'nasa_screen.dart' deferred as nasa_screen;
 class NasaRoute extends GoRouteData {
   const NasaRoute();
 
-  static const String routeName = 'nasa';
-  static const String path = '/$routeName';
+  static const String pathSegment = 'nasa';
+  static final Uri uri = Uri(path: '/$pathSegment');
   static const String displayName = Labels.nasa;
 
   @override

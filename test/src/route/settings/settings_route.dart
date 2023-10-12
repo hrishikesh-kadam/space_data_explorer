@@ -12,7 +12,7 @@ final settingsActionFinder = find.byKey(settingsActionKey);
 final settingsListViewFinder = find.byKey(SettingsScreen.listViewKey);
 
 Future<void> pumpSettingsRouteAsInitialLocation(WidgetTester tester) async {
-  await pumpApp(tester, initialLocation: SettingsRoute.path);
+  await pumpApp(tester, initialLocation: SettingsRoute.uri.path);
 }
 
 Future<void> pumpSettingsRouteAsNormalLink(

@@ -13,7 +13,8 @@ import 'page_not_found_screen.dart' deferred as page_not_found_screen;
 part 'page_not_found_route.g.dart';
 
 @TypedGoRoute<PageNotFoundRoute>(
-  path: PageNotFoundRoute.path,
+  // path: PageNotFoundRoute.uri.path,
+  path: '/${PageNotFoundRoute.pathSegment}',
   name: PageNotFoundRoute.displayName,
 )
 class PageNotFoundRoute extends GoRouteData {
@@ -22,10 +23,10 @@ class PageNotFoundRoute extends GoRouteData {
   });
 
   final JsonMap? $extra;
-  static const String routeName = 'page-not-found';
-  static const String path = '/$routeName';
+  static const String pathSegment = 'page-not-found';
+  static final Uri uri = Uri(path: '/$pathSegment');
   static const String displayName = Labels.pageNotFound;
-  static const String nonExistingPath = '/non-existing-path';
+  static final Uri nonExistingUri = Uri(path: '/non-existing-path');
 
   @override
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) {

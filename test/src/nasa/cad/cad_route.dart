@@ -29,7 +29,7 @@ Future<void> pumpCadRouteAsInitialLocation(
   CadBloc? cadBloc,
 }) async {
   CadScreen.cadBloc = cadBloc ?? getCadBloc();
-  await pumpApp(tester, initialLocation: CadRoute.path);
+  await pumpApp(tester, initialLocation: CadRoute.uri.path);
 }
 
 Future<void> pumpCadRouteAsNormalLink(

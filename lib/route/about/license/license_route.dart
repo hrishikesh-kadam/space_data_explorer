@@ -13,8 +13,8 @@ import 'license_screen.dart' deferred as license_screen;
 class LicenseRoute extends GoRouteData {
   const LicenseRoute();
 
-  static const String routeName = 'license';
-  static const String path = '${AboutRoute.path}/$routeName';
+  static const String pathSegment = 'license';
+  static final Uri uri = Uri(path: '${AboutRoute.uri.path}/$pathSegment');
   static const String displayName = Labels.license;
 
   @override

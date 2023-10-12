@@ -10,7 +10,7 @@ final nonExistingPathButtonFinder =
     find.byKey(NasaScreen.nonExistingPathButtonKey);
 
 Future<void> pumpNasaRouteAsInitialLocation(WidgetTester tester) async {
-  await pumpApp(tester, initialLocation: NasaRoute.path);
+  await pumpApp(tester, initialLocation: NasaRoute.uri.path);
 }
 
 Future<void> pumpNasaRouteAsNormalLink(WidgetTester tester) async {

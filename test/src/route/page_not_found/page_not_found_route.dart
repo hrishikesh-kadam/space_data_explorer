@@ -9,7 +9,7 @@ Future<void> goNonExistingPath(
   WidgetTester tester,
 ) async {
   navigatorKey.currentContext!.go(
-    PageNotFoundRoute.nonExistingPath,
+    PageNotFoundRoute.nonExistingUri.path,
     extra: getRouteExtraMap(),
   );
   await tester.pumpAndSettle();
@@ -19,7 +19,7 @@ Future<void> pushNonExistingPath(
   WidgetTester tester,
 ) async {
   navigatorKey.currentContext!.push(
-    PageNotFoundRoute.nonExistingPath,
+    PageNotFoundRoute.nonExistingUri.path,
     extra: getRouteExtraMap(),
   );
   await tester.pumpAndSettle();

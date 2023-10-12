@@ -10,8 +10,8 @@ import 'settings_screen.dart' deferred as settings_screen;
 class SettingsRoute extends GoRouteData {
   const SettingsRoute();
 
-  static const String routeName = 'settings';
-  static const String path = '/$routeName';
+  static const String pathSegment = 'settings';
+  static final Uri uri = Uri(path: '/$pathSegment');
   static const String displayName = Labels.settings;
 
   @override

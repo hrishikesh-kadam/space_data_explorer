@@ -2,8 +2,6 @@
 
 ## TODOs
 
-- Fix contri FLAVOR_ENV
-- Replace all links with Link widgets
 - About Page
   - Rate App for Android and iOS
   - App info link for Android

@@ -88,7 +88,7 @@ Future<void> pumpCadResultRouteAsInitialLocation(
   JsonMap? $extra,
 }) async {
   CadResultRoute.$extraTest = $extra;
-  await pumpApp(tester, initialLocation: CadResultRoute.path);
+  await pumpApp(tester, initialLocation: CadResultRoute.uri.path);
 }
 
 Future<void> pumpCadResultRouteAsNormalLink(WidgetTester tester) async {

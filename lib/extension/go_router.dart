@@ -16,7 +16,7 @@ extension GoRouterExt on GoRouter {
     if (canPop()) {
       pop();
     } else {
-      go(HomeRoute.path);
+      go(HomeRoute.uri.path);
     }
   }
 
@@ -26,7 +26,7 @@ extension GoRouterExt on GoRouter {
         pop();
       } while (canPop());
     } else {
-      go(HomeRoute.path);
+      go(HomeRoute.uri.path);
     }
   }
 
@@ -43,6 +43,6 @@ extension GoRouterExt on GoRouter {
       extra = {};
     }
     extra['$GoRouterState'] = state;
-    router.go(PageNotFoundRoute.path, extra: extra);
+    router.go(PageNotFoundRoute.uri.path, extra: extra);
   }
 }

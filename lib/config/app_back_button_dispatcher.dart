@@ -26,7 +26,7 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
     _logger.finer('didPopRoute() -> extraObject = $extraObject');
     Level logLevel = flutterTest ? Level.FINER : Level.SHOUT;
     final String fullPath = _goRouterDelegate.currentConfiguration.fullPath;
-    if (fullPath == HomeRoute.path) {
+    if (fullPath == HomeRoute.uri.path) {
       return _goRouterDelegate.popRoute();
     }
     if (extraObject == null) {
@@ -44,7 +44,7 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
             _goRouter.routerDelegate.currentConfiguration.matches;
         _logger.log(
             logLevel, 'routeMatchList.length = ${routeMatchList.length}');
-        _goRouter.go(HomeRoute.path);
+        _goRouter.go(HomeRoute.uri.path);
         return true;
       }
     } else {
@@ -53,7 +53,7 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
       final List routeMatchList =
           _goRouter.routerDelegate.currentConfiguration.matches;
       _logger.log(logLevel, 'routeMatchList.length = ${routeMatchList.length}');
-      _goRouter.go(HomeRoute.path);
+      _goRouter.go(HomeRoute.uri.path);
       return true;
     }
   }

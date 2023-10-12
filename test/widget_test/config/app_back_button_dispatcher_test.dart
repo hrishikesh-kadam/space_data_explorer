@@ -97,7 +97,7 @@ void appBackButtonDispatcherTest() {
     });
 
     testWidgets('deep-link to 3rd level route, press back', (tester) async {
-      tester.platformDispatcher.defaultRouteNameTestValue = CadRoute.path;
+      tester.platformDispatcher.defaultRouteNameTestValue = CadRoute.uri.path;
       await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(CadScreen), findsOneWidget);
@@ -111,7 +111,7 @@ void appBackButtonDispatcherTest() {
     });
 
     testWidgets('deep-link to 2nd level route, press back', (tester) async {
-      tester.platformDispatcher.defaultRouteNameTestValue = NasaRoute.path;
+      tester.platformDispatcher.defaultRouteNameTestValue = NasaRoute.uri.path;
       await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(NasaScreen), findsOneWidget);
@@ -124,7 +124,7 @@ void appBackButtonDispatcherTest() {
 
     testWidgets('deep-link to non-existing-page, press back', (tester) async {
       tester.platformDispatcher.defaultRouteNameTestValue =
-          PageNotFoundRoute.nonExistingPath;
+          PageNotFoundRoute.nonExistingUri.path;
       await pumpApp(tester);
       tester.platformDispatcher.clearDefaultRouteNameTestValue();
       expect(find.byType(PageNotFoundScreen), findsOneWidget);
@@ -156,7 +156,7 @@ void appBackButtonDispatcherTest() {
         skip: skipExtraNotMapTests, (tester) async {
       await pumpApp(tester);
       expect(find.byType(HomeScreen), findsOneWidget);
-      navigatorKey.currentContext!.go(CadRoute.path, extra: []);
+      navigatorKey.currentContext!.go(CadRoute.uri.path, extra: []);
       await tester.pumpAndSettle();
       expect(find.byType(CadScreen), findsOneWidget);
       expect(find.byType(NasaScreen, skipOffstage: false), findsOneWidget);
@@ -172,7 +172,7 @@ void appBackButtonDispatcherTest() {
         (tester) async {
       await pumpApp(tester);
       expect(find.byType(HomeScreen), findsOneWidget);
-      navigatorKey.currentContext!.go(NasaRoute.path, extra: []);
+      navigatorKey.currentContext!.go(NasaRoute.uri.path, extra: []);
       await tester.pumpAndSettle();
       expect(find.byType(NasaScreen), findsOneWidget);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
