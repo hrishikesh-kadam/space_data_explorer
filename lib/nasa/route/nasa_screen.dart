@@ -33,7 +33,10 @@ class NasaScreen extends StatelessWidget {
     return Scaffold(
       appBar: getAppBar(
         context: context,
-        title: Text(title),
+        title: Tooltip(
+          message: title,
+          child: Text(title),
+        ),
       ),
       body: Column(
         children: [

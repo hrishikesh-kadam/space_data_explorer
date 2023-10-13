@@ -93,7 +93,10 @@ class SettingsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: getAppBar(
           context: context,
-          title: Text(title),
+          title: Tooltip(
+            message: title,
+            child: Text(title),
+          ),
         ),
         body: _getBody(),
       ),

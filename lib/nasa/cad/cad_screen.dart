@@ -180,7 +180,10 @@ class CadScreen extends StatelessWidget {
       slivers: [
         getSliverAppBar(
           context: context,
-          title: Text(title),
+          title: Tooltip(
+            message: title,
+            child: Text(title),
+          ),
           floating: true,
           snap: true,
         ),

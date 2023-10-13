@@ -25,7 +25,10 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: getAppBar(
         context: context,
-        title: Text(title),
+        title: Tooltip(
+          message: title,
+          child: Text(title),
+        ),
       ),
       body: Link(
         uri: NasaRoute.uri,

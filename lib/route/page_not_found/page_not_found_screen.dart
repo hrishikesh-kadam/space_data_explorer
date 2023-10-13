@@ -25,7 +25,10 @@ class PageNotFoundScreen extends StatelessWidget {
     return Scaffold(
       appBar: getAppBar(
         context: context,
-        title: Text(title),
+        title: Tooltip(
+          message: title,
+          child: Text(title),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(Dimensions.pagePadding),

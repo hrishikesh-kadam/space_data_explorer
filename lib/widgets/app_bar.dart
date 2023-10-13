@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/link.dart';
 
@@ -94,6 +95,7 @@ List<Widget> getDefaultAppBarActions({required BuildContext context}) {
 Widget getSettingsAction({required BuildContext context}) {
   return IconButton(
     key: settingsActionKey,
+    tooltip: AppLocalizations.of(context).settings,
     icon: const Icon(Icons.settings),
     onPressed: () {
       GoRouter.of(context).push(
@@ -110,6 +112,7 @@ Widget getAboutAction({required BuildContext context}) {
     builder: (context, followLink) {
       return IconButton(
         key: aboutActionKey,
+        tooltip: AppLocalizations.of(context).about,
         icon: const Icon(Icons.info),
         onPressed: () {
           GoRouter.of(context)

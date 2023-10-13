@@ -5,11 +5,10 @@
 - About Page
   - Rate App for Android and iOS
   - App info link for Android
-- Add tool-tips
 - Add Privacy Policy Page, and link it to About Page
 - Fix ./tool/android/run.sh script
 - Reduce gradlew build lints
-- Fix app bar titles truncation
+- Wrap actions of AppBar
 - Add zero count image placeholder
 - Resolution-aware app icon image
 

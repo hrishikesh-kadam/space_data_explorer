@@ -27,7 +27,10 @@ class LicenseScreen extends StatelessWidget {
     return Scaffold(
       appBar: getAppBar(
         context: context,
-        title: Text(title),
+        title: Tooltip(
+          message: title,
+          child: Text(title),
+        ),
       ),
       body: LicensePage(
         applicationName: l10n.spaceDataExplorer,

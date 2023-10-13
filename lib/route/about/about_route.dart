@@ -16,14 +16,15 @@ class AboutRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    const title = displayName;
+    final l10n = AppLocalizations.of(context);
+    final title = l10n.about;
     return DeferredWidget(
       about_screen.loadLibrary,
       () => about_screen.AboutScreen(
         title: title,
-        l10n: AppLocalizations.of(context),
+        l10n: l10n,
       ),
-      placeholder: const DeferredPlaceholderWidget(
+      placeholder: DeferredPlaceholderWidget(
         title: title,
       ),
     );

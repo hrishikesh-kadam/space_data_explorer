@@ -37,7 +37,10 @@ class AboutScreen extends StatelessWidget {
         key: scaffoldKey,
         appBar: getAppBar(
           context: context,
-          title: Text(title),
+          title: Tooltip(
+            message: title,
+            child: Text(title),
+          ),
         ),
         body: _getBody(context: context),
       ),
