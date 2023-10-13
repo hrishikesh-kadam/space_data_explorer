@@ -154,6 +154,7 @@ class SettingsScreen extends StatelessWidget {
         return RadioSettingsTile<Locale?>(
           keyPrefix: localeTileKeyPrefix,
           key: localeTileKey,
+          leading: const Icon(Icons.language),
           title: l10n.language,
           subTitle: getLocaleValueTitle(l10n: l10n, locale: locale),
           values: values,
@@ -206,6 +207,7 @@ class SettingsScreen extends StatelessWidget {
         return RadioSettingsTile<DateFormatPattern>(
           keyPrefix: dateFormatTileKeyPrefix,
           key: dateFormatTileKey,
+          leading: const Icon(Icons.calendar_month),
           title: l10n.dateFormat,
           subTitle: getDateFormatValueTitle(
             l10n: l10n,
@@ -264,6 +266,7 @@ class SettingsScreen extends StatelessWidget {
         return RadioSettingsTile<TimeFormatPattern>(
           keyPrefix: timeFormatTileKeyPrefix,
           key: timeFormatTileKey,
+          leading: const Icon(Icons.schedule),
           title: l10n.timeFormat,
           subTitle: getTimeFormatValueTitle(
             l10n: l10n,
@@ -322,6 +325,7 @@ class SettingsScreen extends StatelessWidget {
         return RadioSettingsTile<TextDirection?>(
           keyPrefix: textDirectionTileKeyPrefix,
           key: textDirectionTileKey,
+          leading: const Icon(Icons.format_textdirection_l_to_r),
           title: l10n.textDirection,
           subTitle: getTextDirectionValueTitle(
             l10n: l10n,
@@ -386,6 +390,7 @@ class SettingsScreen extends StatelessWidget {
         return RadioSettingsTile<DistanceUnit>(
           keyPrefix: distanceUnitTileKeyPrefix,
           key: distanceUnitTileKey,
+          leading: const Icon(Icons.straighten),
           title: l10n.distanceUnit,
           subTitle: getDistanceUnitValueTitle(
             l10n: l10n,
@@ -448,6 +453,7 @@ class SettingsScreen extends StatelessWidget {
         return RadioSettingsTile<VelocityUnit>(
           keyPrefix: velocityUnitTileKeyPrefix,
           key: velocityUnitTileKey,
+          leading: const Icon(Icons.speed),
           title: l10n.velocityUnit,
           subTitle: getVelocityUnitValueTitle(
             l10n: l10n,
@@ -512,6 +518,7 @@ class SettingsScreen extends StatelessWidget {
         return RadioSettingsTile<DistanceUnit>(
           keyPrefix: diameterUnitTileKeyPrefix,
           key: diameterUnitTileKey,
+          leading: const Icon(Icons.hide_source),
           title: l10n.diameterUnit,
           subTitle: getDiameterUnitValueTitle(
             l10n: l10n,

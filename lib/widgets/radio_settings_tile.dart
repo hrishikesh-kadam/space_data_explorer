@@ -6,6 +6,7 @@ class RadioSettingsTile<T> extends StatelessWidget {
   const RadioSettingsTile({
     this.keyPrefix = '',
     super.key,
+    this.leading,
     required this.title,
     this.subTitle,
     required this.values,
@@ -17,6 +18,7 @@ class RadioSettingsTile<T> extends StatelessWidget {
   });
 
   final String keyPrefix;
+  final Widget? leading;
   final String title;
   final String? subTitle;
   final Set<T> values;
@@ -32,6 +34,7 @@ class RadioSettingsTile<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      leading: leading,
       title: Text(title),
       subtitle: subTitle != null ? Text(subTitle!) : null,
       onTap: () async {
@@ -46,6 +49,7 @@ class RadioSettingsTile<T> extends StatelessWidget {
               key: keyPrefix.isNotEmpty
                   ? Key('$keyPrefix${RadioDialog.keySuffixDefault}')
                   : null,
+              icon: leading,
               title: title,
               values: values,
               valueTitles: valueTitles,

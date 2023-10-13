@@ -4,6 +4,7 @@ class RadioDialog<T> extends StatelessWidget {
   const RadioDialog({
     this.keyPrefix = '',
     super.key,
+    this.icon,
     required this.title,
     required this.values,
     required this.valueTitles,
@@ -12,6 +13,7 @@ class RadioDialog<T> extends StatelessWidget {
   });
 
   final String keyPrefix;
+  final Widget? icon;
   final String title;
   final Set<T> values;
   final Set<String> valueTitles;
@@ -25,6 +27,7 @@ class RadioDialog<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      icon: icon,
       title: Text(title),
       content: SizedBox(
         // 360−(40*2)−(24*2) = 232
