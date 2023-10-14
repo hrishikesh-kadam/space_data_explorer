@@ -11,12 +11,12 @@ fi
 FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
 AVD_NAMES=(
-  "Pixel_6_API_34"
+  "Pixel_7_Pro_API_34"
   # "Nexus_7_API_34"
   # "Nexus_10_API_34"
 )
 DEVICE_NAMES=(
-  "pixel_6"
+  "pixel_7_pro"
   # "Nexus 7 2013"
   # "Nexus 10"
 )

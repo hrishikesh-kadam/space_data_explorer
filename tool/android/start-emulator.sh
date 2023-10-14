@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# $1 AVD_NAME like Pixel_6_API_34
+# $1 AVD_NAME like Pixel_7_Pro_API_34
 # $2 SYSTEM_IMAGE_PACKAGE_PATH like "system-images;android-34;google_apis;x86_64"
-# $3 DEVICE_NAME like pixel_6
+# $3 DEVICE_NAME like pixel_7_pro
 
 set -e -o pipefail
 
@@ -14,9 +14,9 @@ else
   SYSTEM_IMAGE_ARCH="x86_64"
 fi
 
-AVD_NAME=${1:-"Pixel_6_API_34"}
+AVD_NAME=${1:-"Pixel_7_Pro_API_34"}
 SYSTEM_IMAGE_PACKAGE_PATH=${2:-"system-images;android-34;google_apis;$SYSTEM_IMAGE_ARCH"}
-DEVICE_NAME=${3:-"pixel_6"}
+DEVICE_NAME=${3:-"pixel_7_pro"}
 
 if [[ $(uname -s) =~ ^"MINGW" ]]; then
   SdkManager="sdkmanager.bat"
@@ -35,7 +35,8 @@ if [[ -z $AVD_PID ]]; then
     fi
     $AvdManager create avd --name "$AVD_NAME" \
       --package "$SYSTEM_IMAGE_PACKAGE_PATH" \
-      --device "$DEVICE_NAME"
+      --device "$DEVICE_NAME" \
+      --skin "$DEVICE_NAME"
   fi
   emulator "@$AVD_NAME" &
 else
