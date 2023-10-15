@@ -187,7 +187,7 @@ class CadScreen extends StatelessWidget {
           floating: true,
           snap: true,
         ),
-        ..._getSliverBody(context: context)
+        ..._getSliverBody(context: context),
       ],
     );
   }
@@ -242,7 +242,7 @@ class CadScreen extends StatelessWidget {
   }
 
   Widget _getQueryGrid({required BuildContext context}) {
-    List<Widget> queryWidgetList = [
+    final List<Widget> queryWidgetList = [
       _getDateFilterWidget(context: context),
       _getDistFilterWidget(context: context),
       _getSmallBodyFilterWidget(context: context),

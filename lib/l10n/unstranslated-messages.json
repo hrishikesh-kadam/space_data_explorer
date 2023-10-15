@@ -88,7 +88,8 @@
     "authorNameAka",
     "source",
     "webApp",
-    "copiedToClipboard"
+    "copiedToClipboard",
+    "notYetImplemented"
   ],
 
   "he": [
@@ -180,6 +181,7 @@
     "authorNameAka",
     "source",
     "webApp",
-    "copiedToClipboard"
+    "copiedToClipboard",
+    "notYetImplemented"
   ]
 }

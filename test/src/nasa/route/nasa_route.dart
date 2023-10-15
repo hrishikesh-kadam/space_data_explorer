@@ -15,7 +15,7 @@ Future<void> pumpNasaRouteAsInitialLocation(WidgetTester tester) async {
 
 Future<void> pumpNasaRouteAsNormalLink(WidgetTester tester) async {
   await pumpHomeRoute(tester);
-  await tapNasaButton(tester);
+  await tapNasaItem(tester);
 }
 
 Future<void> tapCadButton(WidgetTester tester) async {

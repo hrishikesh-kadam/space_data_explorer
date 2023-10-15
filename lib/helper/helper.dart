@@ -153,5 +153,7 @@ void copyToClipboard({
   final snackBar = SnackBar(
     content: Text(AppLocalizations.of(context).copiedToClipboard),
   );
-  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  ScaffoldMessenger.of(context)
+    ..clearSnackBars()
+    ..showSnackBar(snackBar);
 }

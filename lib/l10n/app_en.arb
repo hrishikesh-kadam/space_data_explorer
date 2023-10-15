@@ -95,5 +95,6 @@
   "authorNameAka": "Hrishikesh Ravindra Kadam aka HRK",
   "source": "Source",
   "webApp": "Web App",
-  "copiedToClipboard": "Copied to clipboard."
+  "copiedToClipboard": "Copied to clipboard",
+  "notYetImplemented": "Not yet implemented"
 }

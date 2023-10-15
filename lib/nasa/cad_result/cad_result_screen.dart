@@ -245,15 +245,15 @@ class CadResultScreen extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           width: 1,
-          color: AppTheme.queryContainerBorderColor,
+          color: AppTheme.containerBorderColor,
         ),
         borderRadius: const BorderRadius.all(Radius.circular(
-          Dimensions.cadQueryItemRadius,
+          Dimensions.containerRadius,
         )),
-        color: AppTheme.queryContainerColor,
+        color: AppTheme.containerColor,
       ),
-      padding: const EdgeInsets.all(Dimensions.cadQueryItemPadding),
-      margin: const EdgeInsets.all(Dimensions.cadQueryItemMargin),
+      padding: const EdgeInsets.all(Dimensions.bodyItemPadding),
+      margin: const EdgeInsets.all(Dimensions.bodyItemMargin),
       child: child,
     );
   }

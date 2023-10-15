@@ -36,3 +36,21 @@ Future<void> tap(
   await tester.tap(finder, warnIfMissed: warnIfMissed);
   await tester.pumpAndSettle();
 }
+
+void expectCrossAxisCount(
+  WidgetTester tester, {
+  required int count,
+  required Finder itemFinder,
+}) {
+  final gridItems = tester.widgetList(itemFinder).toList();
+  final firstItemRect = tester.getRect(find.byWidget(gridItems[0]));
+  final secondItemRect = tester.getRect(find.byWidget(gridItems[1]));
+  final thirdItemRect = tester.getRect(find.byWidget(gridItems[2]));
+  if (count == 2) {
+    expect(firstItemRect.top == secondItemRect.top, true);
+    expect(secondItemRect.top < thirdItemRect.top, true);
+  } else if (count == 1) {
+    expect(firstItemRect.top < secondItemRect.top, true);
+    expect(secondItemRect.top < thirdItemRect.top, true);
+  }
+}

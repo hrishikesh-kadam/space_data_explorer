@@ -8,7 +8,7 @@ import 'package:space_data_explorer/route/home/home_screen.dart';
 import '../../../src/route/home/home_route.dart';
 
 void main() {
-  group('$HomeRoute Widget Test', () {
+  group('$HomeRoute Navigation Test', () {
     testWidgets('Basic', (WidgetTester tester) async {
       await pumpHomeRoute(tester);
       expect(find.byType(HomeScreen), findsOneWidget);
@@ -17,7 +17,7 @@ void main() {
     testWidgets('Navigate to and from $NasaRoute', (WidgetTester tester) async {
       await pumpHomeRoute(tester);
       expect(find.byType(HomeScreen), findsOneWidget);
-      await tapNasaButton(tester);
+      await tapNasaItem(tester);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(NasaScreen), findsOneWidget);
       await tapBackButton(tester);

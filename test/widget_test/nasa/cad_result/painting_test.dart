@@ -6,6 +6,7 @@ import 'package:hrk_nasa_apis_test/hrk_nasa_apis_test.dart';
 import 'package:space_data_explorer/constants/dimensions.dart';
 import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
 import '../../../constants/dimensions.dart';
+import '../../../src/helper/helper.dart';
 import '../../../src/nasa/cad_result/cad_result_route.dart';
 
 void main() {
@@ -38,7 +39,11 @@ void main() {
           height: fitsThreeItemsVertically,
         );
         await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
-        _expectCrossAxisCount(tester, count: 2);
+        expectCrossAxisCount(
+          tester,
+          count: 2,
+          itemFinder: resultGridItemsFinder,
+        );
       });
 
       testWidgets('Screen width $fitsThreeItems', (WidgetTester tester) async {
@@ -47,7 +52,11 @@ void main() {
           height: fitsThreeItemsVertically,
         );
         await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
-        _expectCrossAxisCount(tester, count: 2);
+        expectCrossAxisCount(
+          tester,
+          count: 2,
+          itemFinder: resultGridItemsFinder,
+        );
       });
 
       testWidgets('Screen width ${fitsThreeItems - 1}',
@@ -57,7 +66,11 @@ void main() {
           height: fitsThreeItemsVertically,
         );
         await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
-        _expectCrossAxisCount(tester, count: 2);
+        expectCrossAxisCount(
+          tester,
+          count: 2,
+          itemFinder: resultGridItemsFinder,
+        );
       });
 
       testWidgets('Screen width ${fitsTwoItems + 1}',
@@ -67,7 +80,11 @@ void main() {
           height: fitsThreeItemsVertically,
         );
         await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
-        _expectCrossAxisCount(tester, count: 2);
+        expectCrossAxisCount(
+          tester,
+          count: 2,
+          itemFinder: resultGridItemsFinder,
+        );
       });
 
       testWidgets('Screen width $fitsTwoItems', (WidgetTester tester) async {
@@ -76,7 +93,11 @@ void main() {
           height: fitsThreeItemsVertically,
         );
         await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
-        _expectCrossAxisCount(tester, count: 2);
+        expectCrossAxisCount(
+          tester,
+          count: 2,
+          itemFinder: resultGridItemsFinder,
+        );
       });
 
       testWidgets('Screen width ${fitsTwoItems - 1}',
@@ -86,7 +107,11 @@ void main() {
           height: fitsThreeItemsVertically,
         );
         await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
-        _expectCrossAxisCount(tester, count: 1);
+        expectCrossAxisCount(
+          tester,
+          count: 1,
+          itemFinder: resultGridItemsFinder,
+        );
       });
 
       testWidgets('Screen width ${fitsOneItem + 1}',
@@ -96,7 +121,11 @@ void main() {
           height: fitsThreeItemsVertically,
         );
         await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
-        _expectCrossAxisCount(tester, count: 1);
+        expectCrossAxisCount(
+          tester,
+          count: 1,
+          itemFinder: resultGridItemsFinder,
+        );
       });
 
       testWidgets('Screen width $fitsOneItem', (WidgetTester tester) async {
@@ -105,7 +134,11 @@ void main() {
           height: fitsThreeItemsVertically,
         );
         await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
-        _expectCrossAxisCount(tester, count: 1);
+        expectCrossAxisCount(
+          tester,
+          count: 1,
+          itemFinder: resultGridItemsFinder,
+        );
       });
 
       testWidgets('Screen width ${fitsOneItem - 1}',
@@ -115,25 +148,12 @@ void main() {
           height: fitsThreeItemsVertically,
         );
         await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
-        _expectCrossAxisCount(tester, count: 1);
+        expectCrossAxisCount(
+          tester,
+          count: 1,
+          itemFinder: resultGridItemsFinder,
+        );
       });
     });
   });
-}
-
-void _expectCrossAxisCount(
-  WidgetTester tester, {
-  required int count,
-}) {
-  final gridItems = tester.widgetList(resultGridItemsFinder).toList();
-  final firstItemRect = tester.getRect(find.byWidget(gridItems[0]));
-  final secondItemRect = tester.getRect(find.byWidget(gridItems[1]));
-  final thirdItemRect = tester.getRect(find.byWidget(gridItems[2]));
-  if (count == 2) {
-    expect(firstItemRect.top == secondItemRect.top, true);
-    expect(secondItemRect.top < thirdItemRect.top, true);
-  } else if (count == 1) {
-    expect(firstItemRect.top < secondItemRect.top, true);
-    expect(secondItemRect.top < thirdItemRect.top, true);
-  }
 }

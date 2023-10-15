@@ -2,6 +2,19 @@
 class Labels {
   static const String spaceDataExplorer = 'Space Data Explorer';
   static const String nasa = 'NASA';
+  static const String nasaLogo = 'NASA Logo';
+  static const String isro = 'ISRO';
+  static const String isroLogo = 'ISRO Logo';
+  static const String esa = 'ESA';
+  static const String esaLogo = 'ESA Logo';
+  static const String isa = 'ISA';
+  static const String isaLogo = 'ISA Logo';
+  static const String kari = 'KARI';
+  static const String kariLogo = 'KARI Logo';
+  static const String spacex = 'SpaceX';
+  static const String spacexLogo = 'SpaceX Logo';
+  static const String jaxa = 'JAXA';
+  static const String jaxaLogo = 'JAXA Logo';
   static const String sbdbCloseApproachData = 'SBDB Close-Approach Data';
   static const String sbdbCloseApproachDataResult =
       'SBDB Close-Approach Data Result';

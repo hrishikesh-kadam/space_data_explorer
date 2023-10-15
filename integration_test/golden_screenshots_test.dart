@@ -17,7 +17,7 @@ void main() {
     );
     await testScreenshot('1$imageNameSuffix.png', tester, binding);
 
-    await tapNasaButton(tester);
+    await tapNasaItem(tester);
     await testScreenshot('2$imageNameSuffix.png', tester, binding);
 
     await tapCadButton(tester);

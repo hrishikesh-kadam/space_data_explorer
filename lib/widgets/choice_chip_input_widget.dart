@@ -148,7 +148,7 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
             ),
           if (widget.title != null) SizedBox(height: widget.spacing),
           getChoiceChips(context: context),
-          const SizedBox(height: Dimensions.cadQueryItemPadding),
+          const SizedBox(height: Dimensions.bodyItemPadding),
           getTextField(context: context),
         ],
       ),
