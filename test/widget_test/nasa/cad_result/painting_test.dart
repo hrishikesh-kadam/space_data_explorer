@@ -24,12 +24,12 @@ void main() {
     });
 
     group('Masonry', () {
-      const double fitsThreeItems = 3 * Dimensions.cadQueryItemExtent +
+      const double fitsThreeItems = 3 * Dimensions.cadQueryItemBoxWidth +
           2 * Dimensions.pagePaddingHorizontal;
-      const double fitsTwoItems = 2 * Dimensions.cadQueryItemExtent +
+      const double fitsTwoItems = 2 * Dimensions.cadQueryItemBoxWidth +
           2 * Dimensions.pagePaddingHorizontal;
-      const double fitsOneItem =
-          Dimensions.cadQueryItemExtent + 2 * Dimensions.pagePaddingHorizontal;
+      const double fitsOneItem = Dimensions.cadQueryItemBoxWidth +
+          2 * Dimensions.pagePaddingHorizontal;
       const double fitsThreeItemsVertically = 1200;
 
       testWidgets('Screen width ${fitsThreeItems + 1}',

@@ -9,12 +9,12 @@ import '../../../src/nasa/cad/cad_route.dart';
 void main() {
   group('$CadScreen Painting Test', () {
     group('Masonry', () {
-      const double fitsThreeItems = 3 * Dimensions.cadQueryItemExtent +
+      const double fitsThreeItems = 3 * Dimensions.cadQueryItemBoxWidth +
           2 * Dimensions.pagePaddingHorizontal;
-      const double fitsTwoItems = 2 * Dimensions.cadQueryItemExtent +
+      const double fitsTwoItems = 2 * Dimensions.cadQueryItemBoxWidth +
           2 * Dimensions.pagePaddingHorizontal;
-      const double fitsOneItem =
-          Dimensions.cadQueryItemExtent + 2 * Dimensions.pagePaddingHorizontal;
+      const double fitsOneItem = Dimensions.cadQueryItemBoxWidth +
+          2 * Dimensions.pagePaddingHorizontal;
 
       testWidgets('Screen width ${fitsThreeItems + 1}',
           (WidgetTester tester) async {

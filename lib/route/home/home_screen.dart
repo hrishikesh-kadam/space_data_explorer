@@ -83,7 +83,7 @@ class HomeScreen extends StatelessWidget {
     final List<Widget> orgItems = _getOrgItems(context: context);
     final gridParameters = getSliverMasonryGridParameters(
       context: context,
-      itemExtent: Dimensions.orgItemExtent,
+      itemBoxWidth: Dimensions.orgItemBoxWidth,
       pagePaddingHorizontal: Dimensions.pagePaddingHorizontal,
     );
     return SliverPadding(

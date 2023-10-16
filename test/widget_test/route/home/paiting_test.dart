@@ -10,11 +10,11 @@ void main() {
   group('$HomeScreen Painting Test', () {
     group('Masonry', () {
       const double fitsThreeItems =
-          3 * Dimensions.orgItemExtent + 2 * Dimensions.pagePaddingHorizontal;
+          3 * Dimensions.orgItemBoxWidth + 2 * Dimensions.pagePaddingHorizontal;
       const double fitsTwoItems =
-          2 * Dimensions.orgItemExtent + 2 * Dimensions.pagePaddingHorizontal;
+          2 * Dimensions.orgItemBoxWidth + 2 * Dimensions.pagePaddingHorizontal;
       const double fitsOneItem =
-          Dimensions.orgItemExtent + 2 * Dimensions.pagePaddingHorizontal;
+          Dimensions.orgItemBoxWidth + 2 * Dimensions.pagePaddingHorizontal;
 
       testWidgets('Screen width ${fitsThreeItems + 1}',
           (WidgetTester tester) async {

@@ -10,8 +10,7 @@ class Dimensions {
   static const double bodyItemMargin = 8;
   static const double bodyItemPadding = 16;
 
-  // TODO(hrishikesh-kadam): Remove margin from item extent
-  static const double cadQueryItemExtent =
+  static const double cadQueryItemBoxWidth =
       cadQueryItemWidth + 2 * bodyItemMargin;
   static const double containerRadius = 10;
   static const double cadQueryItemSpacing = 8;
@@ -19,5 +18,5 @@ class Dimensions {
 
   static const double orgImageSize = 144;
   static const double orgItemWidth = orgImageSize + 2 * bodyItemPadding;
-  static const double orgItemExtent = orgItemWidth + 2 * bodyItemMargin;
+  static const double orgItemBoxWidth = orgItemWidth + 2 * bodyItemMargin;
 }

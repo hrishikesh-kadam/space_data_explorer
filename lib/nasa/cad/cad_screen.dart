@@ -252,7 +252,7 @@ class CadScreen extends StatelessWidget {
     ];
     final gridParameters = getSliverMasonryGridParameters(
       context: context,
-      itemExtent: Dimensions.cadQueryItemExtent,
+      itemBoxWidth: Dimensions.cadQueryItemBoxWidth,
       pagePaddingHorizontal: Dimensions.pagePaddingHorizontal,
     );
     return SliverPadding(
