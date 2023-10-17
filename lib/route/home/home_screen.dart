@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/link.dart';
 
+import '../../constants/assets.dart';
 import '../../constants/dimensions.dart';
 import '../../constants/labels.dart';
 import '../../constants/theme.dart';
@@ -13,6 +13,7 @@ import '../../globals.dart';
 import '../../helper/helper.dart';
 import '../../nasa/route/nasa_route.dart';
 import '../../widgets/app_bar.dart';
+import '../../widgets/image_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -67,13 +68,13 @@ class HomeScreen extends StatelessWidget {
     return [
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pagePaddingVertical,
+          bottom: Dimensions.pageMarginVerticalHalf,
         ),
       ),
       _getSourceGridView(context: context),
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pagePaddingVertical,
+          bottom: Dimensions.pageMarginVerticalHalf,
         ),
       )
     ];
@@ -84,7 +85,7 @@ class HomeScreen extends StatelessWidget {
     final gridParameters = getSliverMasonryGridParameters(
       context: context,
       itemBoxWidth: Dimensions.orgItemBoxWidth,
-      pagePaddingHorizontal: Dimensions.pagePaddingHorizontal,
+      pageMarginHorizontal: Dimensions.pageMarginHorizontalHalf,
     );
     return SliverPadding(
       padding: EdgeInsets.symmetric(
@@ -109,58 +110,51 @@ class HomeScreen extends StatelessWidget {
         context: context,
         key: nasaItemKey,
         name: Labels.nasa,
-        iconAssetPath: 'assets/nasa/nasa-logo.svg',
-        // Source: https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg
-        iconSemanticsLabel: Labels.nasaLogo,
+        imageAssetName: NasaAssets.logo,
+        imageSemanticLabel: Labels.nasaLogo,
         uri: NasaRoute.uri,
       ),
       _getOrgItem(
         context: context,
         key: isroItemKey,
         name: Labels.isro,
-        iconAssetPath: 'assets/isro/isro-logo.svg',
-        // Source: https://upload.wikimedia.org/wikipedia/commons/b/bd/Indian_Space_Research_Organisation_Logo.svg
-        iconSemanticsLabel: Labels.isroLogo,
+        imageAssetName: IsroAssets.logo,
+        imageSemanticLabel: Labels.isroLogo,
       ),
       _getOrgItem(
         context: context,
         key: esaItemKey,
         name: Labels.esa,
-        iconAssetPath: 'assets/esa/esa-logo.svg',
-        // Source: https://upload.wikimedia.org/wikipedia/commons/b/bd/European_Space_Agency_logo.svg
-        iconSemanticsLabel: Labels.esaLogo,
+        imageAssetName: EsaAssets.logo,
+        imageSemanticLabel: Labels.esaLogo,
       ),
       _getOrgItem(
         context: context,
         key: isaItemKey,
         name: Labels.isa,
-        // Source: https://upload.wikimedia.org/wikipedia/en/a/a8/Israel_Space_Agency_logo.png
-        iconAssetPath: 'assets/isa/isa-logo.png',
-        iconSemanticsLabel: Labels.isaLogo,
+        imageAssetName: IsaAssets.logo,
+        imageSemanticLabel: Labels.isaLogo,
       ),
       _getOrgItem(
         context: context,
         key: kariItemKey,
         name: Labels.kari,
-        // Source: https://upload.wikimedia.org/wikipedia/en/2/2e/KARI_seal.png
-        iconAssetPath: 'assets/kari/kari-logo.png',
-        iconSemanticsLabel: Labels.kariLogo,
+        imageAssetName: KariAssets.logo,
+        imageSemanticLabel: Labels.kariLogo,
       ),
       _getOrgItem(
         context: context,
         key: spacexItemKey,
         name: Labels.spacex,
-        // Source: Copied the svg tag contents from spacex.com
-        iconAssetPath: 'assets/spacex/spacex-logo.svg',
-        iconSemanticsLabel: Labels.spacexLogo,
+        imageAssetName: SpacexAssets.logo,
+        imageSemanticLabel: Labels.spacexLogo,
       ),
       _getOrgItem(
         context: context,
         key: jaxaItemKey,
         name: Labels.jaxa,
-        iconAssetPath: 'assets/jaxa/jaxa-logo.svg',
-        // Source: https://upload.wikimedia.org/wikipedia/commons/8/85/Jaxa_logo.svg
-        iconSemanticsLabel: Labels.jaxaLogo,
+        imageAssetName: JaxaAssets.logo,
+        imageSemanticLabel: Labels.jaxaLogo,
       ),
     ];
   }
@@ -169,8 +163,8 @@ class HomeScreen extends StatelessWidget {
     required BuildContext context,
     Key? key,
     required String name,
-    required String iconAssetPath,
-    required String iconSemanticsLabel,
+    required String imageAssetName,
+    required String imageSemanticLabel,
     Uri? uri,
   }) {
     const borderRadius = BorderRadius.all(Radius.circular(
@@ -202,21 +196,13 @@ class HomeScreen extends StatelessWidget {
               borderRadius: borderRadius,
               child: Column(
                 children: [
-                  if (iconAssetPath.endsWith('svg'))
-                    SvgPicture.asset(
-                      iconAssetPath,
-                      semanticsLabel: iconSemanticsLabel,
-                      width: Dimensions.orgImageSize,
-                      // height: imageSize,
-                    ),
-                  if (!iconAssetPath.endsWith('svg'))
-                    Image.asset(
-                      iconAssetPath,
-                      semanticLabel: iconSemanticsLabel,
-                      width: Dimensions.orgImageSize,
-                      // height: imageSize,
-                    ),
-                  const SizedBox(height: 8),
+                  getImageWidget(
+                    assetName: imageAssetName,
+                    semanticLabel: imageSemanticLabel,
+                    width: Dimensions.orgImageSize,
+                    // height: Dimensions.orgImageSize,
+                  ),
+                  const SizedBox(height: Dimensions.bodyItemSpacer),
                   Text(
                     name,
                     style: Theme.of(context).textTheme.bodyMedium,

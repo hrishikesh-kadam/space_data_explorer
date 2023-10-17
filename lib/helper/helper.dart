@@ -118,21 +118,21 @@ TextPainter getTextPainterLaidout({
 (double, int) getSliverMasonryGridParameters({
   required BuildContext context,
   required double itemBoxWidth,
-  double pagePaddingHorizontal = 0,
+  double pageMarginHorizontal = 0,
 }) {
   final double deviceWidth = MediaQuery.sizeOf(context).width;
   final double whiteSpaceWhenTwo =
-      deviceWidth - 2 * itemBoxWidth - 2 * pagePaddingHorizontal;
+      deviceWidth - 2 * itemBoxWidth - 2 * pageMarginHorizontal;
   // logger.debug('deviceWidth = $deviceWidth');
   // logger.debug('whiteSpaceWhenTwo = $whiteSpaceWhenTwo');
   int crossAxisCount;
-  double horizontalPadding = pagePaddingHorizontal;
+  double horizontalPadding = pageMarginHorizontal;
   if (whiteSpaceWhenTwo >= 0) {
     crossAxisCount = 2;
     horizontalPadding += whiteSpaceWhenTwo / 2;
   } else {
     final double whiteSpaceWhenOne =
-        deviceWidth - itemBoxWidth - 2 * pagePaddingHorizontal;
+        deviceWidth - itemBoxWidth - 2 * pageMarginHorizontal;
     // logger.debug('whiteSpaceWhenOne = $whiteSpaceWhenOne');
     if (whiteSpaceWhenOne >= 0) {
       crossAxisCount = 1;

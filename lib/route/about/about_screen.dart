@@ -7,9 +7,11 @@ import 'package:url_launcher/link.dart';
 
 import '../../config/config.dart';
 import '../../constants/constants.dart';
+import '../../constants/dimensions.dart';
 import '../../globals.dart';
 import '../../helper/helper.dart';
 import '../../widgets/app_bar.dart';
+import '../../widgets/link_wrap.dart';
 
 class AboutScreen extends StatelessWidget {
   AboutScreen({
@@ -56,7 +58,7 @@ class AboutScreen extends StatelessWidget {
         return scrollableContents[index];
       },
       separatorBuilder: (context, index) {
-        return const SizedBox(height: 8);
+        return const SizedBox(height: Dimensions.bodyItemSpacer);
       },
       padding: const EdgeInsets.symmetric(
         vertical: 16,
@@ -73,7 +75,12 @@ class AboutScreen extends StatelessWidget {
       _getAuthor(context: context),
       _getLinktreeText(context: context),
       _getMadeWithLoveText(context: context),
-      _getSource(context: context),
+      getLinkWrap(
+        context: context,
+        text: l10n.source,
+        uri: Constants.sourceRepoUri,
+        uriKey: sourceUriKey,
+      ),
       if (!kIsWeb) _getWebApp(context: context),
       _getLicenseButton(context: context),
     ];
@@ -171,38 +178,6 @@ class AboutScreen extends StatelessWidget {
         style: Theme.of(context).textTheme.bodyMedium,
         textAlign: TextAlign.center,
       ),
-    );
-  }
-
-  Widget _getSource({required BuildContext context}) {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      children: [
-        Text(
-          '${l10n.source}: ',
-          style: Theme.of(context).textTheme.bodyMedium,
-          textAlign: TextAlign.center,
-        ),
-        Link(
-          uri: Constants.sourceRepoUri,
-          target: LinkTarget.blank,
-          builder: (context, followLink) {
-            return InkWell(
-              key: sourceUriKey,
-              onTap: followLink,
-              child: Text(
-                Constants.sourceRepoUri.toString(),
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Colors.blue,
-                      decoration: TextDecoration.underline,
-                      decorationColor: Colors.blue,
-                    ),
-              ),
-            );
-          },
-        ),
-      ],
     );
   }
 

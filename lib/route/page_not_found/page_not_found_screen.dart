@@ -31,7 +31,7 @@ class PageNotFoundScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(Dimensions.pagePadding),
+        padding: const EdgeInsets.all(Dimensions.pageMargin),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

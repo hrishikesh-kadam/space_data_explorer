@@ -9,12 +9,12 @@ import '../../../src/route/home/home_route.dart';
 void main() {
   group('$HomeScreen Painting Test', () {
     group('Masonry', () {
-      const double fitsThreeItems =
-          3 * Dimensions.orgItemBoxWidth + 2 * Dimensions.pagePaddingHorizontal;
-      const double fitsTwoItems =
-          2 * Dimensions.orgItemBoxWidth + 2 * Dimensions.pagePaddingHorizontal;
+      const double fitsThreeItems = 3 * Dimensions.orgItemBoxWidth +
+          2 * Dimensions.pageMarginHorizontalHalf;
+      const double fitsTwoItems = 2 * Dimensions.orgItemBoxWidth +
+          2 * Dimensions.pageMarginHorizontalHalf;
       const double fitsOneItem =
-          Dimensions.orgItemBoxWidth + 2 * Dimensions.pagePaddingHorizontal;
+          Dimensions.orgItemBoxWidth + 2 * Dimensions.pageMarginHorizontalHalf;
 
       testWidgets('Screen width ${fitsThreeItems + 1}',
           (WidgetTester tester) async {

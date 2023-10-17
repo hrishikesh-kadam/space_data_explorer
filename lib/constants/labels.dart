@@ -2,6 +2,8 @@
 class Labels {
   static const String spaceDataExplorer = 'Space Data Explorer';
   static const String nasa = 'NASA';
+  static const String nasaFullForm =
+      'National Aeronautics and Space Administration';
   static const String nasaLogo = 'NASA Logo';
   static const String isro = 'ISRO';
   static const String isroLogo = 'ISRO Logo';
@@ -15,6 +17,9 @@ class Labels {
   static const String spacexLogo = 'SpaceX Logo';
   static const String jaxa = 'JAXA';
   static const String jaxaLogo = 'JAXA Logo';
+  static const String ssd = 'SSD';
+  static const String cneos = 'CNEOS';
+  static const String ssdCneos = '$ssd/$cneos';
   static const String sbdbCloseApproachData = 'SBDB Close-Approach Data';
   static const String sbdbCloseApproachDataResult =
       'SBDB Close-Approach Data Result';

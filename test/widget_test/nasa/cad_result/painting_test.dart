@@ -25,11 +25,11 @@ void main() {
 
     group('Masonry', () {
       const double fitsThreeItems = 3 * Dimensions.cadQueryItemBoxWidth +
-          2 * Dimensions.pagePaddingHorizontal;
+          2 * Dimensions.pageMarginHorizontalHalf;
       const double fitsTwoItems = 2 * Dimensions.cadQueryItemBoxWidth +
-          2 * Dimensions.pagePaddingHorizontal;
+          2 * Dimensions.pageMarginHorizontalHalf;
       const double fitsOneItem = Dimensions.cadQueryItemBoxWidth +
-          2 * Dimensions.pagePaddingHorizontal;
+          2 * Dimensions.pageMarginHorizontalHalf;
       const double fitsThreeItemsVertically = 1200;
 
       testWidgets('Screen width ${fitsThreeItems + 1}',

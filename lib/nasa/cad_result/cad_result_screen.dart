@@ -126,7 +126,7 @@ class CadResultScreen extends StatelessWidget {
     return SliverFillRemaining(
       hasScrollBody: false,
       child: Padding(
-        padding: const EdgeInsets.all(Dimensions.pagePadding),
+        padding: const EdgeInsets.all(Dimensions.pageMargin),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -149,7 +149,7 @@ class CadResultScreen extends StatelessWidget {
     return SliverFillRemaining(
       hasScrollBody: false,
       child: Padding(
-        padding: const EdgeInsets.all(Dimensions.pagePadding),
+        padding: const EdgeInsets.all(Dimensions.pageMargin),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -173,13 +173,13 @@ class CadResultScreen extends StatelessWidget {
     return [
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pagePaddingVertical,
+          bottom: Dimensions.pageMarginVerticalHalf,
         ),
       ),
       _getGrid(context: context, sbdbCadBody: sbdbCadBody),
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pagePaddingVertical,
+          bottom: Dimensions.pageMarginVerticalHalf,
         ),
       )
     ];
@@ -192,7 +192,7 @@ class CadResultScreen extends StatelessWidget {
     final gridParameters = getSliverMasonryGridParameters(
       context: context,
       itemBoxWidth: Dimensions.cadQueryItemBoxWidth,
-      pagePaddingHorizontal: Dimensions.pagePaddingHorizontal,
+      pageMarginHorizontal: Dimensions.pageMarginHorizontalHalf,
     );
     return SliverPadding(
       padding: EdgeInsets.symmetric(

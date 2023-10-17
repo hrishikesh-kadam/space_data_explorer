@@ -196,14 +196,14 @@ class CadScreen extends StatelessWidget {
     return [
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pagePaddingVertical,
+          bottom: Dimensions.pageMarginVerticalHalf,
         ),
       ),
       _getSearchButton(context: context),
       _getQueryGrid(context: context),
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pagePaddingVertical,
+          bottom: Dimensions.pageMarginVerticalHalf,
         ),
       )
     ];
@@ -217,8 +217,8 @@ class CadScreen extends StatelessWidget {
       builder: (context, state) {
         return SliverPadding(
           padding: const EdgeInsets.symmetric(
-            horizontal: Dimensions.pagePaddingHorizontal,
-            vertical: Dimensions.pagePaddingVertical,
+            horizontal: Dimensions.pageMarginHorizontal,
+            vertical: Dimensions.pageMarginVerticalHalf,
           ),
           sliver: SliverToBoxAdapter(
             child: Center(
@@ -226,6 +226,7 @@ class CadScreen extends StatelessWidget {
                 key: searchButtonKey,
                 label: Text(
                   l10n.search,
+                  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 networkState: state,
@@ -253,7 +254,7 @@ class CadScreen extends StatelessWidget {
     final gridParameters = getSliverMasonryGridParameters(
       context: context,
       itemBoxWidth: Dimensions.cadQueryItemBoxWidth,
-      pagePaddingHorizontal: Dimensions.pagePaddingHorizontal,
+      pageMarginHorizontal: Dimensions.pageMarginHorizontalHalf,
     );
     return SliverPadding(
       padding: EdgeInsets.symmetric(
