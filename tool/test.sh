@@ -9,10 +9,24 @@ flutter test test/unit_test --coverage \
 lcov --list coverage/unit_test_lcov.info \
   | grep -v ".*|.*100%.*|.*|"
 
+if (( $(git status -s pubspec.yaml | wc -l) > 0 )); then
+  PUBSPEC_MODIFIED=true
+  git stash push -m "pubspec.yaml at $(date +"%d/%m/%Y %r")" pubspec.yaml
+  git stash apply 0
+fi
+
+yq -i '.flutter.assets += [ "assets/fonts/Roboto/" ]' pubspec.yaml
+yq -i '.flutter.assets += [ "assets/fonts/MaterialIcons/" ]' pubspec.yaml
+
 flutter test test/widget_test --coverage \
   --coverage-path coverage/widget_test_lcov.info
 lcov --list coverage/widget_test_lcov.info \
   | grep -v ".*|.*100%.*|.*|"
+
+git restore pubspec.yaml
+if [[ $PUBSPEC_MODIFIED == true ]]; then
+  git stash apply 0
+fi
 
 if [[ -s coverage/unit_test_lcov.info ]]; then
   lcov --add-tracefile coverage/unit_test_lcov.info \
