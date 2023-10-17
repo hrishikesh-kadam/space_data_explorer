@@ -23,6 +23,7 @@ import '../../widgets/choice_chip_input_widget.dart';
 import '../../widgets/choice_chip_query_widget.dart';
 import '../../widgets/date_filter_widget.dart';
 import '../../widgets/filter_chip_query_widget.dart';
+import '../../widgets/link_wrap.dart';
 import '../../widgets/outlined_button_extended.dart';
 import '../../widgets/value_range_filter_widget.dart';
 import '../cad_result/cad_result_route.dart';
@@ -199,6 +200,7 @@ class CadScreen extends StatelessWidget {
           bottom: Dimensions.pageMarginVerticalHalf,
         ),
       ),
+      _getHeader(context: context),
       _getSearchButton(context: context),
       _getQueryGrid(context: context),
       const SliverPadding(
@@ -207,6 +209,26 @@ class CadScreen extends StatelessWidget {
         ),
       )
     ];
+  }
+
+  Widget _getHeader({required BuildContext context}) {
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: Dimensions.pageMarginHorizontal,
+        vertical: Dimensions.pageMarginVerticalHalf,
+      ),
+      sliver: SliverToBoxAdapter(
+        child: Column(
+          children: [
+            getLinkWrap(
+              context: context,
+              text: l10n.source,
+              uri: SbdbCadApi.docUrl,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _getSearchButton({required BuildContext context}) {

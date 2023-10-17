@@ -55,6 +55,7 @@ jobs:
       - uses: hrishikesh-kadam/setup-flutter@v1
         with:
           ref: ${{ inputs.ref }}
+          setFlutterRootPath: 'true'
 
       - uses: actions/setup-java@v3
         with:

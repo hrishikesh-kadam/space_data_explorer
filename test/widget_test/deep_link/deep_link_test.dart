@@ -16,13 +16,13 @@ void main() {
       await tapSettingsAction(tester);
     });
 
-    testWidgets('Https Uri with no path', (tester) async {
+    testWidgets('Https URL with no path', (tester) async {
       const String deepLink = 'https://domain.com';
       await pumpApp(tester, initialLocation: deepLink);
       expect(find.byType(HomeScreen), findsOneWidget);
     });
 
-    testWidgets('Https Uri with no path, trailing slash', (tester) async {
+    testWidgets('Https URL with no path, trailing slash', (tester) async {
       const String deepLink = 'https://domain.com/';
       await pumpApp(tester, initialLocation: deepLink);
       expect(find.byType(HomeScreen), findsOneWidget);

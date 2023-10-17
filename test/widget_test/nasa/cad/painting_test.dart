@@ -58,20 +58,20 @@ void main() {
 
       testWidgets('Screen width ${fitsOneItem + 1}',
           (WidgetTester tester) async {
-        tester.view.setLogicalSize(width: fitsOneItem + 1);
+        tester.view.setLogicalSize(width: fitsOneItem + 1, height: 800);
         await pumpCadRouteAsInitialLocation(tester);
         expectCrossAxisCount(tester, count: 1, itemFinder: queryGridItemFinder);
       });
 
       testWidgets('Screen width $fitsOneItem', (WidgetTester tester) async {
-        tester.view.setLogicalSize(width: fitsOneItem);
+        tester.view.setLogicalSize(width: fitsOneItem, height: 800);
         await pumpCadRouteAsInitialLocation(tester);
         expectCrossAxisCount(tester, count: 1, itemFinder: queryGridItemFinder);
       });
 
       testWidgets('Screen width ${fitsOneItem - 1}',
           (WidgetTester tester) async {
-        tester.view.setLogicalSize(width: fitsOneItem - 1);
+        tester.view.setLogicalSize(width: fitsOneItem - 1, height: 800);
         await pumpCadRouteAsInitialLocation(tester);
         expectCrossAxisCount(tester, count: 1, itemFinder: queryGridItemFinder);
       });

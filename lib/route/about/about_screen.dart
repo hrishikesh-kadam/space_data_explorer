@@ -78,7 +78,7 @@ class AboutScreen extends StatelessWidget {
       getLinkWrap(
         context: context,
         text: l10n.source,
-        uri: Constants.sourceRepoUri,
+        uri: Constants.sourceRepoUrl,
         uriKey: sourceUriKey,
       ),
       if (!kIsWeb) _getWebApp(context: context),
@@ -150,14 +150,14 @@ class AboutScreen extends StatelessWidget {
   Widget _getLinktreeText({required BuildContext context}) {
     return Center(
       child: Link(
-        uri: Constants.linktreeUri,
+        uri: Constants.linktreeUrl,
         target: LinkTarget.blank,
         builder: (context, followLink) {
           return InkWell(
             key: linktreeUriKey,
             onTap: followLink,
             child: Text(
-              Constants.linktreeUri.toString(),
+              Constants.linktreeUrl.toString(),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: Colors.blue,
@@ -194,10 +194,10 @@ class AboutScreen extends StatelessWidget {
           key: webAppUriKey,
           onTap: () => copyToClipboard(
             context: context,
-            text: webAppUri.toString(),
+            text: webAppUrl.toString(),
           ),
           child: Text(
-            webAppUri.toString(),
+            webAppUrl.toString(),
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: Colors.blue,

@@ -133,6 +133,7 @@ void main() {
         height: TestDimensions.galaxyFoldPortraitHeight,
       );
       await pumpCadRouteAsInitialLocation(tester);
+      await ensureFilterWidgetVisible(tester);
       DistanceFilter filter = DistanceFilter.min;
       await tester.enterText(
         getTextFieldFinder(filter),

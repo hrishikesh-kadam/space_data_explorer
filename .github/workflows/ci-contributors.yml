@@ -43,6 +43,7 @@ jobs:
       - uses: hrishikesh-kadam/setup-flutter@v1
         with:
           ref: ${{ matrix.ref }}
+          setFlutterRootPath: 'true'
 
       - uses: actions/setup-java@v3
         with:

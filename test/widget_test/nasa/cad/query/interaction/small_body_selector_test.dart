@@ -263,6 +263,7 @@ void main() {
         'select ${SmallBodySelector.designation.name}', (tester) async {
       SmallBodySelector smallBodySelector = SmallBodySelector.spkId;
       await pumpCadRouteAsInitialLocation(tester);
+      await ensureSelectorWidgetVisible(tester);
       await tapSmallBodySelector(tester, smallBodySelector);
       await tester.tap(textFieldFinder);
       await tester.enterText(textFieldFinder, spkId.toString());

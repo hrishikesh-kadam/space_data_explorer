@@ -64,6 +64,11 @@ Future<void> scrollToTop(WidgetTester tester) async {
       .widget<CustomScrollView>(customScrollViewFinder)
       .controller!
       .offset;
+  // Edge case: If the view is already at top, the following drag() call opens
+  // the DateRangePicker
+  if (offset == 0) {
+    return;
+  }
   await tester.drag(customScrollViewFinder, Offset(0, offset));
   await tester.pumpAndSettle();
 }

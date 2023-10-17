@@ -183,7 +183,7 @@ String getCompleteVersion() {
   return completeVersion;
 }
 
-Uri getWebAppUri() {
+Uri getWebAppUrl() {
   final envSuffix = switch (flavorEnv) {
     FlavorEnv.dev || FlavorEnv.stag => '-${flavorEnv.name}',
     _ => '',
@@ -193,4 +193,4 @@ Uri getWebAppUri() {
   return Uri.https('$domain.$tld');
 }
 
-final Uri webAppUri = getWebAppUri();
+final Uri webAppUrl = getWebAppUrl();

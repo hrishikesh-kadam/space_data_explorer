@@ -78,6 +78,8 @@ flutter:
   generate: true
   assets:
     - pubspec.yaml
+    - assets/fonts/Roboto/
+    - assets/fonts/MaterialIcons/
     - assets/app-icons/app-icon.png
     - assets/nasa/
     - assets/isro/

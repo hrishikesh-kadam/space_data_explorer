@@ -6,6 +6,7 @@ import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/widgets/choice_chip_input_widget.dart';
+import '../cad_route.dart';
 
 final smallBodySelectorWidgetFinder =
     find.byKey(CadScreen.smallBodySelectorKey);
@@ -31,6 +32,15 @@ final textFieldFinder = find.byKey(const Key(
 ));
 const String designation = '2023 HK';
 const int spkId = 54354503;
+
+Future<void> ensureSelectorWidgetVisible(WidgetTester tester) async {
+  await tester.dragUntilVisible(
+    smallBodySelectorWidgetFinder,
+    customScrollViewFinder,
+    const Offset(0, -200),
+  );
+  await tester.pumpAndSettle();
+}
 
 Future<void> tapSmallBodySelector(
   WidgetTester tester,

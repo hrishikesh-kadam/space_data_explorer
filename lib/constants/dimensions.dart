@@ -13,6 +13,8 @@ class Dimensions {
 
   static const double containerRadius = 10;
 
+  // avgMobileWidth - (2*pageMarginHorizontalHalf) - (2*bodyItemMargin)
+  // 360 - (2*8) - (2*8)
   static const double cadQueryItemWidth = 328;
   static const double cadQueryItemBoxWidth =
       cadQueryItemWidth + 2 * bodyItemMargin;

@@ -21,6 +21,7 @@ void main() {
         height: TestDimensions.galaxyFoldPortraitHeight,
       );
       await pumpCadRouteAsInitialLocation(tester);
+      await ensureFilterWidgetVisible(tester);
       tester.expectNoOverflow(of: distFilterWidgetFinder);
       for (final filter in DistanceFilter.values) {
         for (final unit in CadScreen.distFilterUnits) {

@@ -26,6 +26,9 @@ ROLE=${1//--}
 : "${ROLE:=member}"
 
 check_command_on_path flutter
+if ! export -p | grep "declare -x FLUTTER_ROOT=" &> /dev/null; then
+  log_error_with_exit "FLUTTER_ROOT exported variable not found" 1
+fi
 
 if [[ $(uname -s) =~ ^"Darwin" ]]; then
   check_command_on_path brew
