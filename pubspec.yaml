@@ -86,6 +86,8 @@ flutter:
     - assets/kari/
     - assets/spacex/
     - assets/jaxa/
+    # - assets/fonts/Roboto/
+    # - assets/fonts/MaterialIcons/
 
 import_sorter:
   comments: false
