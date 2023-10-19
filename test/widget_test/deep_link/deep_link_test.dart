@@ -6,7 +6,7 @@ import '../../src/route/settings/settings_route.dart';
 import '../../src/space_data_explorer_app.dart';
 
 void main() {
-  /// For rest of the Dee-link Tests, see:
+  /// For rest of the Deep-link Tests, see:
   /// - test/widget_test/config/app_bar_back_button_test.dart
   /// - test/widget_test/config/app_back_button_dispatcher_test.dart
   group('Deep-link Tests',
