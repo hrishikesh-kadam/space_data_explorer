@@ -118,62 +118,49 @@ class NasaScreen extends StatelessWidget {
       ),
       sliver: SliverToBoxAdapter(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               '${Labels.ssdCneos}:',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: Dimensions.bodyItemSpacer),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: Dimensions.bodyItemPadding * 2,
-                top: Dimensions.bodyItemSpacer,
-                bottom: Dimensions.bodyItemSpacer,
-              ),
-              child: Link(
-                uri: CadRoute.uri,
+            const SizedBox(height: Dimensions.bodyItemPadding),
+            Link(
+              uri: CadRoute.uri,
+              builder: (context, followLink) {
+                return OutlinedButton(
+                  key: cadButtonKey,
+                  child: Text(
+                    Labels.sbdbCloseApproachData,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  onPressed: () {
+                    CadRoute($extra: getRouteExtraMap()).go(context);
+                  },
+                );
+              },
+            ),
+            if (!prodRelease)
+              const SizedBox(height: Dimensions.bodyItemPadding),
+            if (!prodRelease)
+              Link(
+                uri: PageNotFoundRoute.nonExistingUri,
                 builder: (context, followLink) {
                   return OutlinedButton(
-                    key: cadButtonKey,
+                    key: nonExistingPathButtonKey,
                     child: Text(
-                      Labels.sbdbCloseApproachData,
+                      PageNotFoundRoute.nonExistingUri.path,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     onPressed: () {
-                      CadRoute($extra: getRouteExtraMap()).go(context);
+                      context.go(
+                        PageNotFoundRoute.nonExistingUri.path,
+                        extra: getRouteExtraMap(),
+                      );
                     },
                   );
                 },
-              ),
-            ),
-            if (!prodRelease)
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: Dimensions.bodyItemPadding * 2,
-                  top: Dimensions.bodyItemSpacer,
-                  bottom: Dimensions.bodyItemSpacer,
-                ),
-                child: Link(
-                  uri: PageNotFoundRoute.nonExistingUri,
-                  builder: (context, followLink) {
-                    return OutlinedButton(
-                      key: nonExistingPathButtonKey,
-                      child: Text(
-                        PageNotFoundRoute.nonExistingUri.path,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      onPressed: () {
-                        context.go(
-                          PageNotFoundRoute.nonExistingUri.path,
-                          extra: getRouteExtraMap(),
-                        );
-                      },
-                    );
-                  },
-                ),
               ),
           ],
         ),
