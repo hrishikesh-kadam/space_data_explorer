@@ -1,7 +1,6 @@
 # 0.6.0
 
-- Add CadResultScreen body implementation
-- Add TextDirection to Settings
+- Before working on Themes
 
 # 0.5.0
 

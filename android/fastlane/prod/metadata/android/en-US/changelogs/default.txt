@@ -1,3 +1,7 @@
+# 0.6.0
+
+- Before working on Themes
+
 # 0.5.0
 
 - Before moving to CadScreenResult implementation
