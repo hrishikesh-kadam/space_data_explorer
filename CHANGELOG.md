@@ -2,6 +2,10 @@
 
 - 
 
+# 0.7.0
+
+- Fix screenshot scripts
+
 # 0.6.0
 
 - Before working on Themes
