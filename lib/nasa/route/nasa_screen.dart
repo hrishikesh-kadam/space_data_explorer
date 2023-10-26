@@ -140,9 +140,9 @@ class NasaScreen extends StatelessWidget {
                 );
               },
             ),
-            if (flavorEnv == FlavorEnv.dev)
+            if (flavorEnv == FlavorEnv.dev || flavorEnv == FlavorEnv.unflavored)
               const SizedBox(height: Dimensions.bodyItemPadding),
-            if (flavorEnv == FlavorEnv.dev)
+            if (flavorEnv == FlavorEnv.dev || flavorEnv == FlavorEnv.unflavored)
               Link(
                 uri: PageNotFoundRoute.nonExistingUri,
                 builder: (context, followLink) {
