@@ -7,14 +7,19 @@ source ./tool/constants.sh
 FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
 AVD_NAMES=(
-  "Pixel_7_Pro_API_34"
+  "Pixel_7_API_34"
   "Nexus_7_API_34"
   "Nexus_10_API_34"
 )
 DEVICE_NAMES=(
-  "pixel_7_pro"
+  "pixel_7"
   "Nexus 7 2013"
   "Nexus 10"
+)
+SKIN_NAMES=(
+  "pixel_7"
+  "nexus_7_2013"
+  "nexus_10"
 )
 IMAGE_NAME_SUFFIXES=(
   "_en-US"
@@ -43,11 +48,14 @@ SCREENSHOTS=(
   "1"
   "2"
   "3"
+  "4"
+  "5"
 )
 
 for i in {0..2}; do
 
-  ./tool/android/start-emulator.sh "${AVD_NAMES[i]}" "" "${DEVICE_NAMES[i]}"
+  ./tool/android/start-emulator.sh \
+    "${AVD_NAMES[i]}" "" "${DEVICE_NAMES[i]}" "${SKIN_NAMES[i]}"
 
   # flutter test \
   #   --flavor "$FLAVOR_ENV" \

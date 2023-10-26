@@ -38,6 +38,7 @@ Future<void> testScreenshot(
   IntegrationTestWidgetsFlutterBinding binding,
 ) async {
   if (Platform.isAndroid && !isSurfaceRendered) {
+    // TODO(hrishikesh-kadam): revertFlutterImage() https://github.com/flutter/flutter/issues/92381
     await binding.convertFlutterSurfaceToImage();
     isSurfaceRendered = true;
     const updateGoldens = bool.fromEnvironment('UPDATE_GOLDENS');
