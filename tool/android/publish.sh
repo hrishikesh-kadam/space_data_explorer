@@ -39,14 +39,11 @@ TRACK=$(./tool/android/get-track-from-flavor-env.sh "$FLAVOR_ENV")
 
 pushd android &> /dev/null
 
-# https://github.com/fastlane/fastlane/issues/21507
 bundle exec fastlane upload_to_play_store \
   --package_name "$APPLICATION_ID" \
   --version-name "$VERSION_CODE ($VERSION_NAME)" \
   --track "$TRACK" \
   --metadata_path "./fastlane/$FLAVOR_ENV/metadata/android" \
-  --skip_upload_images true \
-  --skip_upload_screenshots true \
   --aab ".$BUNDLE_FILE"
 
 popd &> /dev/null
