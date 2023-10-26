@@ -176,6 +176,9 @@ String getBuildMode() {
 }
 
 String getCompleteVersion() {
+  if (const bool.fromEnvironment('SCREENSHOT_TEST')) {
+    return 'x.x.x';
+  }
   final String version = pubspec!.version.toString();
   final String preReleaseVersion = getPreReleaseVersion();
   final String completeVersion =

@@ -101,7 +101,7 @@ class CadScreen extends StatelessWidget {
     CloseApproachBody.saturn,
     CloseApproachBody.uranus,
     CloseApproachBody.neptune,
-    if (!prodRelease) CloseApproachBody.pluto,
+    if (flavorEnv == FlavorEnv.dev) CloseApproachBody.pluto,
   };
   static const String dataOutputKeyPrefix = '${keyPrefix}data_output_';
   static const Key dataOutputKey =
@@ -486,7 +486,7 @@ class CadScreen extends StatelessWidget {
       l10n.saturn,
       l10n.uranus,
       l10n.neptune,
-      if (!prodRelease) l10n.pluto,
+      if (flavorEnv == FlavorEnv.dev) l10n.pluto,
     };
     final Set<String> keys = closeApproachBodySet.map((e) => e.name).toSet();
     return BlocBuilder<CadBloc, CadState>(

@@ -37,6 +37,7 @@ GOLDEN_DIRECTORIES=(
 # https://github.com/flutter/flutter/issues/100292#issuecomment-1076927900
 FLAVOR_ENV_ARG=$(printf "FLAVOR_ENV=%s" "$FLAVOR_ENV" | base64)
 FLUTTER_TEST_ARG=$(printf "FLUTTER_TEST=true" | base64)
+SCREENSHOT_TEST_ARG=$(printf "SCREENSHOT_TEST=true" | base64)
 UPDATE_GOLDENS_ARG=$(printf "UPDATE_GOLDENS=true" | base64)
 CONNECTED_ANDROID_TEST=":app:connected${FLAVOR_ENV@u}DebugAndroidTest"
 
@@ -61,6 +62,7 @@ for i in {0..2}; do
   #   --flavor "$FLAVOR_ENV" \
   #   --dart-define="FLAVOR_ENV=$FLAVOR_ENV" \
   #   --dart-define="FLUTTER_TEST=true" \
+  #   --dart-define="SCREENSHOT_TEST=true" \
   #   --dart-define="UPDATE_GOLDENS=true" \
   #   --dart-define="IMAGE_NAME_SUFFIX=${IMAGE_NAME_SUFFIXES[i]}" \
   #   integration_test/golden_screenshots_test.dart
@@ -70,7 +72,7 @@ for i in {0..2}; do
   IMAGE_NAME_SUFFIX_ARG=$(printf "IMAGE_NAME_SUFFIX=%s" "${IMAGE_NAME_SUFFIXES[i]}" | base64)
 
   ./gradlew "$CONNECTED_ANDROID_TEST" \
-    -Pdart-defines="$FLAVOR_ENV_ARG,$FLUTTER_TEST_ARG,$UPDATE_GOLDENS_ARG,$IMAGE_NAME_SUFFIX_ARG" \
+    -Pdart-defines="$FLAVOR_ENV_ARG,$FLUTTER_TEST_ARG,$SCREENSHOT_TEST_ARG,$UPDATE_GOLDENS_ARG,$IMAGE_NAME_SUFFIX_ARG" \
     -Ptarget="$(pwd)/../integration_test/golden_screenshots_test.dart"
 
   popd &> /dev/null

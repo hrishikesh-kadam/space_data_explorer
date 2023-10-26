@@ -52,6 +52,7 @@ for i in {0..0}; do
     --flavor "$FLAVOR_ENV" \
     --dart-define="FLAVOR_ENV=$FLAVOR_ENV" \
     --dart-define="FLUTTER_TEST=true" \
+    --dart-define="SCREENSHOT_TEST=true" \
     --dart-define="IMAGE_NAME_SUFFIX=${IMAGE_NAME_SUFFIXES[i]}" \
     --dart-define="GOLDEN_DIRECTORY=${GOLDEN_DIRECTORIES[i]}" \
     integration_test/golden_screenshots_test.dart
