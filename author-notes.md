@@ -56,11 +56,11 @@
 
 ## Icons Notes
 
-- [Android - Adding a launcher icon][]
-- [Maskable icon][]
-- [Android - Adaptive icons][]
-- [Android - Create app icons with Image Asset Studio][]
-- [Android - Add multi-density vector graphics][]
+- [Android - Adding a launcher icon]
+- [Maskable icon]
+- [Android - Adaptive icons]
+- [Android - Create app icons with Image Asset Studio]
+- [Android - Add multi-density vector graphics]
 - [assets/app-icons/app-icon.png] is 192x192 version of [android/app/src/main/ic_launcher-playstore.png]
 
 ## README Notes
@@ -69,7 +69,18 @@
 
 ## Test Notes
 
-- [How to write effective Flutter and Dart tests | Flutter Forward][]
+- [How to write effective Flutter and Dart tests | Flutter Forward]
+
+## Theme Notes
+
+- [Use themes to share colors and font styles]
+- [Material 3 demo]
+- [Theme (Flutter Hallowidget of the Week)]
+- [MaterialStateProperties | Decoding Flutter]
+- [ThemeExtensions | Decoding Flutter]
+- [Deep Dive Into Flutter Theming | FlutterVikings 2022]
+- [material_color_utilities]
+- [dynamic_color]
 
 
 [`flutter.groovy`]: https://github.com/flutter/flutter/blob/stable/packages/flutter_tools/gradle/src/main/groovy/flutter.groovy
@@ -81,3 +92,11 @@
 [assets/app-icons/app-icon.png]: assets/app-icons/app-icon.png
 [android/app/src/main/ic_launcher-playstore.png]: android/app/src/main/ic_launcher-playstore.png
 [How to write effective Flutter and Dart tests | Flutter Forward]: https://www.youtube.com/watch?v=bHLrSliaL1Q&list=PLjxrf2q8roU3LvrdR8Hv_phLrTj0xmjnD&index=25
+[Use themes to share colors and font styles]: https://docs.flutter.dev/cookbook/design/themes
+[Material 3 demo]: https://flutter.github.io/samples/web/material_3_demo/
+[Theme (Flutter Hallowidget of the Week)]: https://www.youtube.com/watch?v=oTvQDJOBXmM
+[MaterialStateProperties | Decoding Flutter]: https://www.youtube.com/watch?v=CylXr3AF3uU
+[ThemeExtensions | Decoding Flutter]: https://www.youtube.com/watch?v=8-szcYzFVao
+[Deep Dive Into Flutter Theming | FlutterVikings 2022]: https://www.youtube.com/watch?v=V5S8wyUAeto
+[material_color_utilities]: https://pub.dev/packages/material_color_utilities
+[dynamic_color]: https://pub.dev/packages/dynamic_color
