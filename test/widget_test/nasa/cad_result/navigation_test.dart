@@ -11,6 +11,7 @@ import 'package:space_data_explorer/route/home/home_route.dart';
 import '../../../src/globals.dart';
 import '../../../src/nasa/cad/cad_route.dart';
 import '../../../src/nasa/cad_result/cad_result_route.dart';
+import '../../../src/space_data_explorer_app.dart';
 
 void main() {
   group('$CadResultRoute Widget Test', () {
@@ -23,7 +24,7 @@ void main() {
       expect(find.byType(CadScreen), findsOneWidget);
     });
 
-    testWidgets('Basic', (WidgetTester tester) async {
+    testWidgets('As initialLocation', (WidgetTester tester) async {
       await pumpCadResultRouteAsInitialLocation(tester);
       expect(find.byType(CadScreen), findsOneWidget);
     });
@@ -36,6 +37,14 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(CadResultScreen), findsOneWidget);
       expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
+    });
+
+    testWidgets('Deep-link', (tester) async {
+      tester.platformDispatcher.defaultRouteNameTestValue =
+          CadResultRoute.uri.path;
+      await pumpApp(tester);
+      tester.platformDispatcher.clearDefaultRouteNameTestValue();
+      expect(find.byType(CadScreen), findsOneWidget);
     });
   });
 }

@@ -8,6 +8,7 @@ import 'package:space_data_explorer/route/about/about_screen.dart';
 import 'package:space_data_explorer/route/home/home_route.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
 import '../../../src/route/about/about_route.dart';
+import '../../../src/space_data_explorer_app.dart';
 
 void main() {
   group('$AboutRoute Navigation Test', () {
@@ -36,6 +37,14 @@ void main() {
       await tapBackButton(tester);
       expect(find.byType(LicensePage), findsNothing);
       expect(find.byType(AboutScreen), findsOneWidget);
+    });
+
+    testWidgets('Deep-link', (tester) async {
+      tester.platformDispatcher.defaultRouteNameTestValue = AboutRoute.uri.path;
+      await pumpApp(tester);
+      tester.platformDispatcher.clearDefaultRouteNameTestValue();
+      expect(find.byType(AboutScreen), findsOneWidget);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
     });
   });
 }

@@ -7,6 +7,7 @@ import 'package:space_data_explorer/nasa/route/nasa_route.dart';
 import 'package:space_data_explorer/nasa/route/nasa_screen.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
 import '../../../src/nasa/route/nasa_route.dart';
+import '../../../src/space_data_explorer_app.dart';
 
 void main() {
   group('$NasaRoute Widget Test', () {
@@ -21,7 +22,7 @@ void main() {
       expect(find.byType(NasaScreen), findsOneWidget);
     });
 
-    testWidgets('Basic', (WidgetTester tester) async {
+    testWidgets('As initialLocation', (WidgetTester tester) async {
       await pumpNasaRouteAsInitialLocation(tester);
       expect(find.byType(NasaScreen), findsOneWidget);
     });
@@ -33,6 +34,14 @@ void main() {
       await tapBackButton(tester);
       expect(find.byType(NasaScreen), findsNothing);
       expect(find.byType(HomeScreen), findsOneWidget);
+    });
+
+    testWidgets('Deep-link', (tester) async {
+      tester.platformDispatcher.defaultRouteNameTestValue = NasaRoute.uri.path;
+      await pumpApp(tester);
+      tester.platformDispatcher.clearDefaultRouteNameTestValue();
+      expect(find.byType(NasaScreen), findsOneWidget);
+      expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
     });
   });
 }
