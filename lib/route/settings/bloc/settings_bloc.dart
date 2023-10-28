@@ -12,7 +12,7 @@ import 'settings_state.dart';
 part 'settings_event.dart';
 
 class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
-  SettingsBloc() : super(const SettingsState()) {
+  SettingsBloc() : super(SettingsState.getInitial()) {
     on<SettingsThemeSelected>(_onSettingsThemeSelected);
     on<SettingsLocaleSelected>(_onSettingsLocaleChanged);
     on<SettingsDateFormatSelected>(_onSettingsDateFormatSelected);

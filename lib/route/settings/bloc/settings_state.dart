@@ -16,9 +16,7 @@ class SettingsState with _$SettingsState {
   // ignore: invalid_annotation_target
   @JsonSerializable(explicitToJson: true)
   const factory SettingsState({
-    @Default(SettingsState.themeDataDefault)
-    @ThemeDataJsonConverter()
-    ThemeData? themeData,
+    @ThemeDataJsonConverter() ThemeData? themeData,
     @Default(SettingsState.localeDefault) @LocaleJsonConverter() Locale? locale,
     @LocaleListJsonConverter() List<Locale>? systemLocales,
     @Default(SettingsState.dateFormatPatternDefault)
@@ -32,7 +30,13 @@ class SettingsState with _$SettingsState {
     bool? isAnyDialogShown,
   }) = _SettingsState;
 
-  static const ThemeData? themeDataDefault = null;
+  static SettingsState getInitial() {
+    return const SettingsState().copyWith(
+      themeData: themeDataDefault,
+    );
+  }
+
+  static final ThemeData themeDataDefault = ThemeDataExt.defaultBright;
   static const Locale? localeDefault = null;
   static const DateFormatPattern dateFormatPatternDefault =
       DateFormatPattern.yMd;

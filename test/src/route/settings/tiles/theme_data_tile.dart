@@ -9,7 +9,7 @@ import 'package:space_data_explorer/widgets/radio_dialog.dart';
 import '../../../extension/common_finders.dart';
 import '../settings_route.dart';
 
-const ThemeData? themeDataDefault = SettingsState.themeDataDefault;
+final ThemeData themeDataDefault = SettingsState.themeDataDefault;
 final ThemeData? themeDataNonDefault = SettingsScreen.themeDatas
     .toList()
     .reversed

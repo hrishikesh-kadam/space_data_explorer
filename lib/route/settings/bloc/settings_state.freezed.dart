@@ -221,8 +221,7 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$SettingsStateImpl implements _SettingsState {
   const _$SettingsStateImpl(
-      {@ThemeDataJsonConverter()
-      this.themeData = SettingsState.themeDataDefault,
+      {@ThemeDataJsonConverter() this.themeData,
       @LocaleJsonConverter() this.locale = SettingsState.localeDefault,
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
       this.dateFormatPattern = SettingsState.dateFormatPatternDefault,
@@ -238,7 +237,6 @@ class _$SettingsStateImpl implements _SettingsState {
       _$$SettingsStateImplFromJson(json);
 
   @override
-  @JsonKey()
   @ThemeDataJsonConverter()
   final ThemeData? themeData;
   @override
