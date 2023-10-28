@@ -16,6 +16,7 @@ void main() {
   group('$SettingsScreen $TextDirection Tile Widget Test', () {
     testWidgets('No interaction', (tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
+      await ensureTileVisible(tester, textDirectionTileFinder);
       expect(textDirectionTileFinder, findsOneWidget);
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
       expect(
@@ -78,6 +79,7 @@ void main() {
       expect(settingsBloc.state.textDirection, textDirection);
       await tapBackButton(tester);
       await tapSettingsAction(tester);
+      await ensureTileVisible(tester, textDirectionTileFinder);
       await verifyTextDirectionTileSubtitle(tester,
           l10n: l10n, textDirection: textDirection);
       expect(settingsBloc.state.textDirection, textDirection);

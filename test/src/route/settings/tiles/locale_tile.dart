@@ -10,8 +10,10 @@ import '../../../extension/common_finders.dart';
 import '../settings_route.dart';
 
 const Locale? localeDefault = SettingsState.localeDefault;
-final Locale? localeNonDefault =
-    SettingsScreen.locales.firstWhere((element) => element != localeDefault);
+final Locale? localeNonDefault = SettingsScreen.locales
+    .toList()
+    .reversed
+    .firstWhere((element) => element != localeDefault);
 final Finder localeTileFinder = find.byKey(SettingsScreen.localeTileKey);
 final Finder localeDialogFinder = find.byKey(const Key(
   '${SettingsScreen.localeTileKeyPrefix}'
@@ -35,12 +37,7 @@ Finder getLocaleFinder({
 }
 
 Future<void> tapLocaleTile(WidgetTester tester) async {
-  await tester.dragUntilVisible(
-    localeTileFinder,
-    settingsListViewFinder,
-    const Offset(0, -200),
-  );
-  await tester.pumpAndSettle();
+  await ensureTileVisible(tester, localeTileFinder);
   await tester.tap(localeTileFinder);
   await tester.pumpAndSettle();
 }

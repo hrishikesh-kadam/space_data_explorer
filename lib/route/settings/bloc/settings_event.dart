@@ -4,6 +4,12 @@ sealed class SettingsEvent {
   const SettingsEvent();
 }
 
+class SettingsThemeSelected extends SettingsEvent {
+  const SettingsThemeSelected({required this.themeData});
+
+  final ThemeData? themeData;
+}
+
 class SettingsLocaleSelected extends SettingsEvent {
   const SettingsLocaleSelected({required this.locale});
 

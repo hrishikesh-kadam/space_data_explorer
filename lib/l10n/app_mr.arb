@@ -96,5 +96,9 @@
   "source": "स्रोत",
   "webApp": "वेब ऍप",
   "copiedToClipboard": "क्लिपबोर्डवर कॉपी केले",
-  "notYetImplemented": "अद्याप काम सुरू नाही"
+  "notYetImplemented": "अद्याप काम सुरू नाही",
+  "theme": "थीम",
+  "defaultBright": "डीफॉल्ट तेजस्वी",
+  "defaultDark": "डीफॉल्ट गडद",
+  "space": "अवकाश"
 }

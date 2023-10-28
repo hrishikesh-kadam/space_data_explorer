@@ -15,6 +15,7 @@ import 'route/page_not_found/page_not_found_route.dart';
 import 'route/settings/bloc/settings_bloc.dart';
 import 'route/settings/bloc/settings_state.dart';
 import 'route/settings/locale.dart';
+import 'route/settings/theme_data.dart';
 import 'widgets/directionality_widget.dart';
 
 class SpaceDataExplorerApp extends StatelessWidget {
@@ -45,12 +46,24 @@ class SpaceDataExplorerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<SettingsBloc>(
       create: (_) => SettingsBloc(),
-      child: BlocSelector<SettingsBloc, SettingsState, Locale?>(
-        selector: (state) => state.locale,
-        builder: (context, locale) {
-          return _getApp(
-            context: context,
-            locale: locale,
+      child: BlocSelector<SettingsBloc, SettingsState, ThemeData?>(
+        selector: (state) => state.themeData,
+        builder: (context, themeData) {
+          ThemeData? darkThemeData;
+          if (themeData == null) {
+            themeData = ThemeDataExt.defaultBright;
+            darkThemeData = ThemeDataExt.defaultDark;
+          }
+          return BlocSelector<SettingsBloc, SettingsState, Locale?>(
+            selector: (state) => state.locale,
+            builder: (context, locale) {
+              return _getApp(
+                context: context,
+                themeData: themeData,
+                darkThemeData: darkThemeData,
+                locale: locale,
+              );
+            },
           );
         },
       ),
@@ -59,6 +72,8 @@ class SpaceDataExplorerApp extends StatelessWidget {
 
   Widget _getApp({
     required BuildContext context,
+    ThemeData? themeData,
+    ThemeData? darkThemeData,
     Locale? locale,
   }) {
     return MaterialApp.router(
@@ -70,10 +85,8 @@ class SpaceDataExplorerApp extends StatelessWidget {
       // onGenerateTitle: (context) {
       //   return AppLocalizations.of(context).spaceDataExplorer;
       // },
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: themeData,
+      darkTheme: darkThemeData,
       locale: locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       localeListResolutionCallback: (locales, supportedLocales) {

@@ -14,6 +14,7 @@ void main() {
   group('$SettingsScreen ${l10n.timeFormat} Tile Widget Test', () {
     testWidgets('No interaction', (tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
+      await ensureTileVisible(tester, timeFormatTileFinder);
       expect(timeFormatTileFinder, findsOneWidget);
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
       expect(settingsBloc.state.timeFormatPattern,
@@ -76,6 +77,7 @@ void main() {
       expect(settingsBloc.state.timeFormatPattern, timeFormatPattern);
       await tapBackButton(tester);
       await tapSettingsAction(tester);
+      await ensureTileVisible(tester, timeFormatTileFinder);
       await verifyTimeFormatTileSubtitle(tester,
           l10n: l10n, timeFormatPattern: timeFormatPattern);
       expect(settingsBloc.state.timeFormatPattern, timeFormatPattern);

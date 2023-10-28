@@ -41,12 +41,7 @@ Finder getVelocityUnitFinder({
 }
 
 Future<void> tapVelocityUnitTile(WidgetTester tester) async {
-  await tester.dragUntilVisible(
-    velocityUnitTileFinder,
-    settingsListViewFinder,
-    const Offset(0, -200),
-  );
-  await tester.pumpAndSettle();
+  await ensureTileVisible(tester, velocityUnitTileFinder);
   await tester.tap(velocityUnitTileFinder);
   await tester.pumpAndSettle();
 }

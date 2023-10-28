@@ -14,6 +14,8 @@ const DateFormatPattern dateFormatPatternDefault =
     SettingsState.dateFormatPatternDefault;
 final DateFormatPattern dateFormatPatternNonDefault = SettingsScreen
     .dateFormatPatterns
+    .toList()
+    .reversed
     .firstWhere((element) => element != dateFormatPatternDefault);
 final Finder dateFormatTileFinder =
     find.byKey(SettingsScreen.dateFormatTileKey);
@@ -43,12 +45,7 @@ Finder getDateFormatPatternFinder({
 }
 
 Future<void> tapDateFormatTile(WidgetTester tester) async {
-  await tester.dragUntilVisible(
-    dateFormatTileFinder,
-    settingsListViewFinder,
-    const Offset(0, -200),
-  );
-  await tester.pumpAndSettle();
+  await ensureTileVisible(tester, dateFormatTileFinder);
   await tester.tap(dateFormatTileFinder);
   await tester.pumpAndSettle();
 }

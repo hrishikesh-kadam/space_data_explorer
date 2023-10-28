@@ -96,5 +96,9 @@
   "source": "Source",
   "webApp": "Web App",
   "copiedToClipboard": "Copied to clipboard",
-  "notYetImplemented": "Not yet implemented"
+  "notYetImplemented": "Not yet implemented",
+  "theme": "Theme",
+  "defaultBright": "Default Bright",
+  "defaultDark": "Default Dark",
+  "space": "Space"
 }

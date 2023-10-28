@@ -14,6 +14,7 @@ void main() {
   group('$SettingsScreen ${l10n.distanceUnit} Tile Widget Test', () {
     testWidgets('No interaction', (tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
+      await ensureTileVisible(tester, distanceUnitTileFinder);
       expect(distanceUnitTileFinder, findsOneWidget);
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
       expect(
@@ -75,6 +76,7 @@ void main() {
       expect(settingsBloc.state.distanceUnit, distanceUnit);
       await tapBackButton(tester);
       await tapSettingsAction(tester);
+      await ensureTileVisible(tester, distanceUnitTileFinder);
       await verifyDistanceUnitTileSubtitle(tester,
           l10n: l10n, distanceUnit: distanceUnit);
       expect(settingsBloc.state.distanceUnit, distanceUnit);

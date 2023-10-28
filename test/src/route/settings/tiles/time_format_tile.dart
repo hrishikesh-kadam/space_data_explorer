@@ -14,6 +14,8 @@ const TimeFormatPattern timeFormatPatternDefault =
     SettingsState.timeFormatPatternDefault;
 final TimeFormatPattern timeFormatPatternNonDefault = SettingsScreen
     .timeFormatPatterns
+    .toList()
+    .reversed
     .firstWhere((element) => element != timeFormatPatternDefault);
 final Finder timeFormatTileFinder =
     find.byKey(SettingsScreen.timeFormatTileKey);
@@ -43,12 +45,7 @@ Finder getTimeFormatPatternFinder({
 }
 
 Future<void> tapTimeFormatTile(WidgetTester tester) async {
-  await tester.dragUntilVisible(
-    timeFormatTileFinder,
-    settingsListViewFinder,
-    const Offset(0, -200),
-  );
-  await tester.pumpAndSettle();
+  await ensureTileVisible(tester, timeFormatTileFinder);
   await tester.tap(timeFormatTileFinder);
   await tester.pumpAndSettle();
 }

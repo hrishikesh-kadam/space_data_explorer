@@ -20,6 +20,7 @@ void main() {
   group('$SettingsScreen $Locale Tile Widget Test', () {
     testWidgets('No interaction', (tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
+      await ensureTileVisible(tester, localeTileFinder);
       expect(localeTileFinder, findsOneWidget);
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
       expect(settingsBloc.state.locale, SettingsState.localeDefault);
@@ -77,6 +78,7 @@ void main() {
       expect(settingsBloc.state.locale, locale);
       await tapBackButton(tester);
       await tapSettingsAction(tester);
+      await ensureTileVisible(tester, localeTileFinder);
       await verifyLocaleTileSubtitle(tester, l10n: l10n, locale: locale);
       expect(settingsBloc.state.locale, locale);
     });

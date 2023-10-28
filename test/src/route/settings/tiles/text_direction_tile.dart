@@ -11,6 +11,8 @@ import '../settings_route.dart';
 
 const TextDirection? textDirectionDefault = SettingsState.textDirectionDefault;
 final TextDirection? textDirectionNonDefault = SettingsScreen.textDirections
+    .toList()
+    .reversed
     .firstWhere((element) => element != textDirectionDefault);
 final Finder textDirectionTileFinder =
     find.byKey(SettingsScreen.textDirectionTileKey);
@@ -40,12 +42,7 @@ Finder getTextDirectionFinder({
 }
 
 Future<void> tapTextDirectionTile(WidgetTester tester) async {
-  await tester.dragUntilVisible(
-    textDirectionTileFinder,
-    settingsListViewFinder,
-    const Offset(0, -200),
-  );
-  await tester.pumpAndSettle();
+  await ensureTileVisible(tester, textDirectionTileFinder);
   await tester.tap(textDirectionTileFinder);
   await tester.pumpAndSettle();
 }

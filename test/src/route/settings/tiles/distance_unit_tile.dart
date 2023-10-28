@@ -41,12 +41,7 @@ Finder getDistanceUnitFinder({
 }
 
 Future<void> tapDistanceUnitTile(WidgetTester tester) async {
-  await tester.dragUntilVisible(
-    distanceUnitTileFinder,
-    settingsListViewFinder,
-    const Offset(0, -200),
-  );
-  await tester.pumpAndSettle();
+  await ensureTileVisible(tester, distanceUnitTileFinder);
   await tester.tap(distanceUnitTileFinder);
   await tester.pumpAndSettle();
 }

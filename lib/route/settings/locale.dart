@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 extension LocaleExt on Locale {
+  static const Locale? systemPreferred = null;
   static const Locale en = Locale('en');
   static const Locale hi = Locale('hi');
   static const Locale mr = Locale('mr');

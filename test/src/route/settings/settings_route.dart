@@ -27,3 +27,12 @@ Future<void> tapSettingsAction(WidgetTester tester) async {
   await tester.tap(settingsActionFinder);
   await tester.pumpAndSettle();
 }
+
+Future<void> ensureTileVisible(WidgetTester tester, Finder tileFinder) async {
+  await tester.dragUntilVisible(
+    tileFinder,
+    settingsListViewFinder,
+    const Offset(0, -200),
+  );
+  await tester.pumpAndSettle();
+}

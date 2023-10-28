@@ -12,6 +12,10 @@ part of 'settings_state.dart';
 
 _$SettingsStateImpl _$$SettingsStateImplFromJson(Map<String, dynamic> json) =>
     _$SettingsStateImpl(
+      themeData: json['themeData'] == null
+          ? SettingsState.themeDataDefault
+          : const ThemeDataJsonConverter()
+              .fromJson(json['themeData'] as String?),
       locale: json['locale'] == null
           ? SettingsState.localeDefault
           : const LocaleJsonConverter()
@@ -48,6 +52,8 @@ Map<String, dynamic> _$$SettingsStateImplToJson(_$SettingsStateImpl instance) {
     }
   }
 
+  writeNotNull(
+      'themeData', const ThemeDataJsonConverter().toJson(instance.themeData));
   writeNotNull('locale', const LocaleJsonConverter().toJson(instance.locale));
   writeNotNull('systemLocales',
       const LocaleListJsonConverter().toJson(instance.systemLocales));

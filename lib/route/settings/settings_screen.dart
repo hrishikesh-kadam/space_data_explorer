@@ -12,6 +12,7 @@ import 'bloc/settings_bloc.dart';
 import 'bloc/settings_state.dart';
 import 'date_format_pattern.dart';
 import 'locale.dart';
+import 'theme_data.dart';
 import 'time_format_pattern.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -26,10 +27,18 @@ class SettingsScreen extends StatelessWidget {
   final _logger = Logger('$appNamePascalCase.SettingsScreen');
   static const String keyPrefix = 'settings_screen_';
   static const Key listViewKey = Key('${keyPrefix}list_view_key');
+  static const String themeDataTileKeyPrefix = '${keyPrefix}theme_data_tile_';
+  static const Key themeDataTileKey = Key('${themeDataTileKeyPrefix}key');
+  static final Set<ThemeData?> themeDatas = {
+    ThemeDataExt.systemThemeModePreferred,
+    ThemeDataExt.defaultBright,
+    ThemeDataExt.defaultDark,
+    ThemeDataExt.space,
+  };
   static const String localeTileKeyPrefix = '${keyPrefix}locale_tile_';
   static const Key localeTileKey = Key('${localeTileKeyPrefix}key');
   static final Set<Locale?> locales = {
-    null,
+    LocaleExt.systemPreferred,
     ...LocaleExt.getSupportedLocales(),
   };
   static const String dateFormatTileKeyPrefix = '${keyPrefix}date_format_tile_';
@@ -123,6 +132,7 @@ class SettingsScreen extends StatelessWidget {
 
   List<Widget> _getSettingsTiles() {
     return [
+      _getThemeDataTile(),
       _getLocaleTile(),
       _getDateFormatTile(),
       _getTimeFormatTile(),
@@ -131,6 +141,74 @@ class SettingsScreen extends StatelessWidget {
       _getVelocityUnitTile(),
       _getDiameterUnitTile(),
     ];
+  }
+
+  static String getThemeDataValueTitle({
+    required AppLocalizations l10n,
+    required ThemeData? themeData,
+  }) {
+    if (themeData == null) {
+      return l10n.system;
+    } else if (themeData == ThemeDataExt.defaultBright) {
+      return l10n.defaultBright;
+    } else if (themeData == ThemeDataExt.defaultDark) {
+      return l10n.defaultDark;
+    } else if (themeData == ThemeDataExt.space) {
+      return l10n.space;
+    } else {
+      throw ArgumentError.value(themeData, 'themeData', 'Invalid argument');
+    }
+  }
+
+  Widget _getThemeDataTile() {
+    final Set<ThemeData?> values = themeDatas;
+    final Set<String> valueTitles = values
+        .map((e) => getThemeDataValueTitle(l10n: l10n, themeData: e))
+        .toSet();
+    return BlocSelector<SettingsBloc, SettingsState, ThemeData?>(
+      selector: (state) => state.themeData,
+      builder: (context, themeData) {
+        final settingsBloc = context.read<SettingsBloc>();
+        return RadioSettingsTile<ThemeData?>(
+          keyPrefix: themeDataTileKeyPrefix,
+          key: themeDataTileKey,
+          leading: Theme.of(context).brightness == Brightness.light
+              ? const Icon(Icons.dark_mode)
+              : const Icon(Icons.light_mode),
+          title: l10n.theme,
+          subTitle: getThemeDataValueTitle(
+            l10n: l10n,
+            themeData: themeData,
+          ),
+          values: values,
+          valueTitles: valueTitles,
+          groupValue: themeData,
+          onChanged: (selectedThemeData) {
+            final String themeTitle = getThemeDataValueTitle(
+              l10n: l10n,
+              themeData: selectedThemeData,
+            );
+            _logger.fine('_getThemeDataTile() -> themeTitle -> $themeTitle');
+            settingsBloc.add(SettingsThemeSelected(
+              themeData: selectedThemeData,
+            ));
+            Navigator.pop(context);
+          },
+          beforeShowDialog: () {
+            _logger.finer('_getThemeDataTile() -> beforeShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
+              isAnyDialogShown: true,
+            ));
+          },
+          afterShowDialog: () {
+            _logger.finer('_getThemeDataTile() -> afterShowDialog');
+            settingsBloc.add(const SettingsDialogEvent(
+              isAnyDialogShown: false,
+            ));
+          },
+        );
+      },
+    );
   }
 
   static String getLocaleValueTitle({

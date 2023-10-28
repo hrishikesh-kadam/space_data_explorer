@@ -13,6 +13,7 @@ part 'settings_event.dart';
 
 class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   SettingsBloc() : super(const SettingsState()) {
+    on<SettingsThemeSelected>(_onSettingsThemeSelected);
     on<SettingsLocaleSelected>(_onSettingsLocaleChanged);
     on<SettingsDateFormatSelected>(_onSettingsDateFormatSelected);
     on<SettingsTimeFormatSelected>(_onSettingsTimeFormatSelected);
@@ -22,6 +23,16 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
     on<SettingsDistanceUnitSelected>(_onSettingsDistanceUnitSelected);
     on<SettingsVelocityUnitSelected>(_onSettingsVelocityUnitSelected);
     on<SettingsDiameterUnitSelected>(_onSettingsDiameterUnitSelected);
+  }
+
+  void _onSettingsThemeSelected(
+    SettingsThemeSelected event,
+    Emitter<SettingsState> emit,
+  ) {
+    emit(state.copyWith(
+      themeData: event.themeData,
+      isAnyDialogShown: false,
+    ));
   }
 
   void _onSettingsLocaleChanged(

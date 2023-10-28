@@ -14,6 +14,7 @@ void main() {
   group('$SettingsScreen ${l10n.velocityUnit} Tile Widget Test', () {
     testWidgets('No interaction', (tester) async {
       await pumpSettingsRouteAsNormalLink(tester);
+      await ensureTileVisible(tester, velocityUnitTileFinder);
       expect(velocityUnitTileFinder, findsOneWidget);
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
       expect(
@@ -75,6 +76,7 @@ void main() {
       expect(settingsBloc.state.velocityUnit, velocityUnit);
       await tapBackButton(tester);
       await tapSettingsAction(tester);
+      await ensureTileVisible(tester, velocityUnitTileFinder);
       await verifyVelocityUnitTileSubtitle(tester,
           l10n: l10n, velocityUnit: velocityUnit);
       expect(settingsBloc.state.velocityUnit, velocityUnit);
