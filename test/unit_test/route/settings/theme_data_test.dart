@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import 'package:space_data_explorer/route/settings/theme_data.dart';
 import '../../../src/globals.dart';
 
@@ -21,17 +20,9 @@ void main() {
       expect(roundTripString, themeName);
     }
 
-    test('#{SettingsScreen.themeDatas}', () {
-      final List<String?> themeNames = [
-        ThemeDataExt.systemThemeModePreferredName,
-        ThemeDataExt.defaultBrightName,
-        ThemeDataExt.defaultDarkName,
-        ThemeDataExt.spaceName,
-      ];
-      expect(SettingsScreen.themeDatas.length, themeNames.length);
-      for (final (i, themeData) in SettingsScreen.themeDatas.indexed) {
-        final String? themeName = themeNames[i];
-        testConverter(themeData, themeName);
+    test('#{ThemeDataExt.themeDatas}', () {
+      for (final ThemeData? themeData in ThemeDataExt.themeDatas) {
+        testConverter(themeData, themeData?.name);
       }
     });
 
@@ -43,15 +34,17 @@ void main() {
     });
   });
 
-  group('getThemeDataValueTitle()', () {
-    test('throwsArgumentError', () {
-      expect(
-        () => SettingsScreen.getThemeDataValueTitle(
-          l10n: l10n,
-          themeData: ThemeData.light(),
-        ),
-        throwsArgumentError,
-      );
+  group('ThemeDataExt Unit Test', () {
+    group('getThemeDataDisplayName()', () {
+      test('throwsArgumentError', () {
+        expect(
+          () => ThemeDataExt.getDisplayName(
+            l10n: l10n,
+            themeData: ThemeData.light(),
+          ),
+          throwsArgumentError,
+        );
+      });
     });
   });
 }

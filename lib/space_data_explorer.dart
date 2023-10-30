@@ -50,9 +50,9 @@ class SpaceDataExplorerApp extends StatelessWidget {
         selector: (state) => state.themeData,
         builder: (context, themeData) {
           ThemeData? darkThemeData;
-          if (themeData == null) {
-            themeData = ThemeDataExt.defaultBright;
-            darkThemeData = ThemeDataExt.defaultDark;
+          if (themeData == ThemeDataExt.system) {
+            themeData = ThemeDataExt.light;
+            darkThemeData = ThemeDataExt.dark;
           }
           return BlocSelector<SettingsBloc, SettingsState, Locale?>(
             selector: (state) => state.locale,

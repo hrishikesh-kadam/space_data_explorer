@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../config/config.dart';
-import '../constants/dimensions.dart';
-import '../constants/theme.dart';
+import '../widgets/app_bar.dart';
 
 class DeferredPlaceholderWidget extends StatelessWidget {
   const DeferredPlaceholderWidget({
@@ -11,24 +10,23 @@ class DeferredPlaceholderWidget extends StatelessWidget {
   });
 
   final String title;
-  static const double indicatorHeight =
-      Dimensions.linearProgressIndicatorHeight;
+  static const double indicatorHeight = 6;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: getAppBar(
+        context: context,
         leading: getAppBarBackButton(context: context),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(title),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(indicatorHeight),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(indicatorHeight),
           child: LinearProgressIndicator(
             value: null,
-            color: AppTheme.progressIndicatorColor,
             minHeight: indicatorHeight,
           ),
         ),
+        deferedLoadingPlaceholder: true,
       ),
     );
   }

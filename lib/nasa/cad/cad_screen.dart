@@ -12,7 +12,6 @@ import 'package:recase/recase.dart';
 import '../../config/config.dart';
 import '../../constants/dimensions.dart';
 import '../../constants/labels.dart';
-import '../../constants/theme.dart';
 import '../../globals.dart';
 import '../../helper/helper.dart';
 import '../../route/home/home_route.dart';
@@ -124,8 +123,8 @@ class CadScreen extends StatelessWidget {
         child: Builder(
           builder: (context) {
             return Scaffold(
-              backgroundColor: AppTheme.pageBackgroundColor,
               body: _getBody(context: context),
+              backgroundColor: Theme.of(context).colorScheme.surface,
             );
           },
         ),

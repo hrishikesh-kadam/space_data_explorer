@@ -5,11 +5,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
+import 'package:space_data_explorer/route/settings/theme_data.dart';
 import 'package:space_data_explorer/widgets/radio_dialog.dart';
 import '../../../extension/common_finders.dart';
 import '../settings_route.dart';
 
-final ThemeData themeDataDefault = SettingsState.themeDataDefault;
+const ThemeData? themeDataDefault = SettingsState.themeDataDefault;
 final ThemeData? themeDataNonDefault = SettingsScreen.themeDatas
     .toList()
     .reversed
@@ -33,7 +34,10 @@ Finder getThemeDataFinder({
 }) {
   return find.byKey(Key(
     '$themeDataDialogKeyPrefix'
-    '${SettingsScreen.getThemeDataValueTitle(l10n: l10n, themeData: themeData)}',
+    '${ThemeDataExt.getDisplayName(
+      l10n: l10n,
+      themeData: themeData,
+    )}',
   ));
 }
 
@@ -66,7 +70,7 @@ Future<void> verifyThemeDataTileSubtitle(
 }) async {
   final subTitleFinder = find.descendantText(
     of: themeDataTileFinder,
-    text: SettingsScreen.getThemeDataValueTitle(
+    text: ThemeDataExt.getDisplayName(
       l10n: l10n,
       themeData: themeData,
     ),

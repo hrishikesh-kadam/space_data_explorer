@@ -29,12 +29,7 @@ class SettingsScreen extends StatelessWidget {
   static const Key listViewKey = Key('${keyPrefix}list_view_key');
   static const String themeDataTileKeyPrefix = '${keyPrefix}theme_data_tile_';
   static const Key themeDataTileKey = Key('${themeDataTileKeyPrefix}key');
-  static final Set<ThemeData?> themeDatas = {
-    ThemeDataExt.systemThemeModePreferred,
-    ThemeDataExt.defaultBright,
-    ThemeDataExt.defaultDark,
-    ThemeDataExt.space,
-  };
+  static final Set<ThemeData?> themeDatas = ThemeDataExt.themeDatas;
   static const String localeTileKeyPrefix = '${keyPrefix}locale_tile_';
   static const Key localeTileKey = Key('${localeTileKeyPrefix}key');
   static final Set<Locale?> locales = {
@@ -108,6 +103,7 @@ class SettingsScreen extends StatelessWidget {
           ),
         ),
         body: _getBody(),
+        backgroundColor: Theme.of(context).colorScheme.surface,
       ),
     );
   }
@@ -143,27 +139,13 @@ class SettingsScreen extends StatelessWidget {
     ];
   }
 
-  static String getThemeDataValueTitle({
-    required AppLocalizations l10n,
-    required ThemeData? themeData,
-  }) {
-    if (themeData == null) {
-      return l10n.system;
-    } else if (themeData == ThemeDataExt.defaultBright) {
-      return l10n.defaultBright;
-    } else if (themeData == ThemeDataExt.defaultDark) {
-      return l10n.defaultDark;
-    } else if (themeData == ThemeDataExt.space) {
-      return l10n.space;
-    } else {
-      throw ArgumentError.value(themeData, 'themeData', 'Invalid argument');
-    }
-  }
-
   Widget _getThemeDataTile() {
     final Set<ThemeData?> values = themeDatas;
     final Set<String> valueTitles = values
-        .map((e) => getThemeDataValueTitle(l10n: l10n, themeData: e))
+        .map((themeData) => ThemeDataExt.getDisplayName(
+              l10n: l10n,
+              themeData: themeData,
+            ))
         .toSet();
     return BlocSelector<SettingsBloc, SettingsState, ThemeData?>(
       selector: (state) => state.themeData,
@@ -173,10 +155,10 @@ class SettingsScreen extends StatelessWidget {
           keyPrefix: themeDataTileKeyPrefix,
           key: themeDataTileKey,
           leading: Theme.of(context).brightness == Brightness.light
-              ? const Icon(Icons.dark_mode)
+              ? const Icon(Icons.dark_mode_outlined)
               : const Icon(Icons.light_mode),
           title: l10n.theme,
-          subTitle: getThemeDataValueTitle(
+          subTitle: ThemeDataExt.getDisplayName(
             l10n: l10n,
             themeData: themeData,
           ),
@@ -184,7 +166,7 @@ class SettingsScreen extends StatelessWidget {
           valueTitles: valueTitles,
           groupValue: themeData,
           onChanged: (selectedThemeData) {
-            final String themeTitle = getThemeDataValueTitle(
+            final String themeTitle = ThemeDataExt.getDisplayName(
               l10n: l10n,
               themeData: selectedThemeData,
             );

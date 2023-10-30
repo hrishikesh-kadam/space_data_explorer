@@ -98,7 +98,7 @@
   "copiedToClipboard": "क्लिपबोर्डवर कॉपी केले",
   "notYetImplemented": "अद्याप काम सुरू नाही",
   "theme": "थीम",
-  "defaultBright": "डीफॉल्ट तेजस्वी",
-  "defaultDark": "डीफॉल्ट गडद",
+  "light": "प्रकाश",
+  "dark": "गडद",
   "space": "अवकाश"
 }

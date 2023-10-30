@@ -40,21 +40,20 @@ void main() {
       tester.platformDispatcher.platformBrightnessTestValue = Brightness.light;
       await pumpSettingsRouteAsNormalLink(tester);
       await tapThemeDataTile(tester);
-      await chooseThemeData(tester,
-          l10n: l10n, themeData: ThemeDataExt.systemThemeModePreferred);
+      await chooseThemeData(tester, l10n: l10n, themeData: ThemeDataExt.system);
       ThemeData currentThemeMode =
           Theme.of(tester.element(find.byType(SettingsScreen)));
       // TODO(hrishikesh-kadam): Feature request for String name in ThemeData
       expect(
         currentThemeMode.colorScheme,
-        ThemeDataExt.defaultBright.colorScheme,
+        ThemeDataExt.light.colorScheme,
       );
       tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
       await tester.pumpAndSettle();
       currentThemeMode = Theme.of(navigatorKey.currentContext!);
       expect(
         currentThemeMode.colorScheme,
-        ThemeDataExt.defaultDark.colorScheme,
+        ThemeDataExt.dark.colorScheme,
       );
       tester.platformDispatcher.clearPlatformBrightnessTestValue();
     });

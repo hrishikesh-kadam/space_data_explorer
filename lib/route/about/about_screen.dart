@@ -45,6 +45,7 @@ class AboutScreen extends StatelessWidget {
           ),
         ),
         body: _getBody(context: context),
+        backgroundColor: Theme.of(context).colorScheme.surface,
       ),
     );
   }

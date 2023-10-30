@@ -36,6 +36,7 @@ class LicenseScreen extends StatelessWidget {
         applicationName: l10n.spaceDataExplorer,
         applicationVersion: getCompleteVersion(),
       ),
+      backgroundColor: Theme.of(context).colorScheme.surface,
     );
   }
 }

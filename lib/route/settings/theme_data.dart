@@ -1,30 +1,111 @@
+// ignore_for_file: directives_ordering
+
 import 'package:flutter/material.dart';
 
+import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../constants/colors.dart';
+import 'name_theme_extension.dart';
+
 extension ThemeDataExt on ThemeData {
-  static const ThemeData? systemThemeModePreferred = null;
-  static const String? systemThemeModePreferredName = null;
+  static Set<ThemeData?> themeDatas = {
+    system,
+    light,
+    dark,
+    space,
+    flexThemeDataLight,
+    flexThemeDataDark,
+    themeDataLight,
+    themeDataDark,
+  };
 
-  static const String defaultBrightName = 'defaultBright';
-  static final ThemeData defaultBright = ThemeData(
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.red,
-    ),
-    useMaterial3: true,
+  String? get name {
+    return extension<NameThemeExtension>()?.name;
+  }
+
+  String? get displayName {
+    return extension<NameThemeExtension>()?.displayName;
+  }
+
+  static String getDisplayName({
+    required AppLocalizations l10n,
+    required ThemeData? themeData,
+  }) {
+    if (themeData == system) {
+      return l10n.system;
+    } else if (themeData == light) {
+      return l10n.light;
+    } else if (themeData == dark) {
+      return l10n.dark;
+    } else if (themeData == space) {
+      return l10n.space;
+    } else if (themeData!.displayName != null) {
+      return themeData.displayName!;
+    }
+    throw ArgumentError.value(themeData, 'themeData', 'Invalid argument');
+  }
+
+  static const ThemeData? system = null;
+
+  static final ThemeData light = flexThemeDataLight.copyWith(
+    extensions: [
+      const NameThemeExtension(name: 'light'),
+    ],
   );
 
-  static const String defaultDarkName = 'defaultDark';
-  static final ThemeData defaultDark = ThemeData(
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.green,
-      brightness: Brightness.dark,
-    ),
-    useMaterial3: true,
-    brightness: Brightness.dark,
+  static final ThemeData dark = flexThemeDataDark.copyWith(
+    extensions: [
+      const NameThemeExtension(name: 'dark'),
+    ],
   );
 
-  static const String spaceName = 'space';
+  static final ThemeData flexThemeDataLight = FlexThemeData.light(
+    colors: FlexSchemeColor.from(
+      primary: ColorsExt.flutterBlue,
+    ),
+    useMaterial3: true,
+    keyColors: const FlexKeyColors(),
+    tones: const FlexTones.light().copyWith(
+      backgroundTone: 98,
+      surfaceTone: 98,
+      surfaceVariantTone: 94,
+    ),
+    // subThemesData: const FlexSubThemesData(
+    //   appBarBackgroundSchemeColor: SchemeColor.inversePrimary,
+    // ),
+    extensions: [
+      const NameThemeExtension(
+        name: 'flexThemeDataLight',
+        displayName: 'FlexThemeData Light',
+      ),
+    ],
+  );
+
+  static final ThemeData flexThemeDataDark = FlexThemeData.dark(
+    colors: FlexSchemeColor.from(
+      primary: ColorsExt.flutterBlue,
+    ),
+    useMaterial3: true,
+    keyColors: const FlexKeyColors(),
+    tones: const FlexTones.dark().copyWith(
+      backgroundTone: 15,
+      surfaceTone: 15,
+      surfaceVariantTone:
+          24, // Surface Container Hightest 22 + 2, because Surface Bright is 24
+    ),
+    // subThemesData: const FlexSubThemesData(
+    //   appBarBackgroundSchemeColor: SchemeColor.inversePrimary,
+    // ),
+    extensions: [
+      const NameThemeExtension(
+        name: 'flexThemeDataDark',
+        displayName: 'FlexThemeData Dark',
+      ),
+    ],
+  );
+
   static final ThemeData space = ThemeData(
     colorScheme: ColorScheme.fromSeed(
       seedColor: Colors.blue,
@@ -32,6 +113,37 @@ extension ThemeDataExt on ThemeData {
     ),
     useMaterial3: true,
     brightness: Brightness.dark,
+    extensions: const [
+      NameThemeExtension(name: 'space'),
+    ],
+  );
+
+  static final ThemeData themeDataLight = ThemeData(
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: ColorsExt.flutterBlue,
+    ),
+    useMaterial3: true,
+    extensions: const [
+      NameThemeExtension(
+        name: 'themeDataLight',
+        displayName: 'ThemeData Light',
+      ),
+    ],
+  );
+
+  static final ThemeData themeDataDark = ThemeData(
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: ColorsExt.flutterBlue,
+      brightness: Brightness.dark,
+    ),
+    useMaterial3: true,
+    brightness: Brightness.dark,
+    extensions: const [
+      NameThemeExtension(
+        name: 'themeDataDark',
+        displayName: 'ThemeData Dark',
+      ),
+    ],
   );
 }
 
@@ -39,32 +151,26 @@ class ThemeDataJsonConverter implements JsonConverter<ThemeData?, String?> {
   const ThemeDataJsonConverter();
 
   @override
-  ThemeData? fromJson(String? themeName) {
-    if (themeName == ThemeDataExt.systemThemeModePreferredName) {
-      return ThemeDataExt.systemThemeModePreferred;
-    } else if (themeName == ThemeDataExt.defaultBrightName) {
-      return ThemeDataExt.defaultBright;
-    } else if (themeName == ThemeDataExt.defaultDarkName) {
-      return ThemeDataExt.defaultDark;
-    } else if (themeName == ThemeDataExt.spaceName) {
-      return ThemeDataExt.space;
-    } else {
-      throw ArgumentError.value(themeName, 'string', 'Not serialized');
+  ThemeData? fromJson(String? name) {
+    if (name == null) {
+      return null;
     }
+    for (final ThemeData themeData in ThemeDataExt.themeDatas.nonNulls) {
+      if (name == themeData.name) {
+        return themeData;
+      }
+    }
+    throw ArgumentError.value(name, 'name', 'Not serialized');
   }
 
   @override
   String? toJson(ThemeData? themeData) {
-    if (themeData == ThemeDataExt.systemThemeModePreferred) {
-      return ThemeDataExt.systemThemeModePreferredName;
-    } else if (themeData == ThemeDataExt.defaultBright) {
-      return ThemeDataExt.defaultBrightName;
-    } else if (themeData == ThemeDataExt.defaultDark) {
-      return ThemeDataExt.defaultDarkName;
-    } else if (themeData == ThemeDataExt.space) {
-      return ThemeDataExt.spaceName;
-    } else {
-      throw ArgumentError.value(themeData, 'object', 'Not serialized');
+    if (themeData == null) {
+      return null;
     }
+    if (themeData.name != null) {
+      return themeData.name;
+    }
+    throw ArgumentError.value(themeData, 'themeData', 'Not serialized');
   }
 }

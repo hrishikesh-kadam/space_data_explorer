@@ -1,6 +1,4 @@
 class Dimensions {
-  static const double linearProgressIndicatorHeight = 6;
-
   static const double pageMargin = 16;
   static const double pageMarginHorizontal = 16;
   static const double pageMarginVertical = 16;

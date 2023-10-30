@@ -21,15 +21,21 @@ AppBar getAppBar({
   Widget? leading,
   Widget? title,
   List<Widget>? actions,
+  PreferredSizeWidget? bottom,
+  bool deferedLoadingPlaceholder = false,
 }) {
   leading ??= getLeadingWidget(context: context);
-  actions ??= getDefaultAppBarActions(context: context);
+  actions ??= getDefaultAppBarActions(
+    context: context,
+    deferedLoadingPlaceholder: deferedLoadingPlaceholder,
+  );
   return AppBar(
     key: key,
     leading: leading,
     title: title,
     actions: actions,
-    backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+    bottom: bottom,
+    // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
   );
 }
 
@@ -39,17 +45,23 @@ SliverAppBar getSliverAppBar({
   Widget? leading,
   Widget? title,
   List<Widget>? actions,
+  PreferredSizeWidget? bottom,
   bool floating = false,
   bool snap = false,
+  bool deferedLoadingPlaceholder = false,
 }) {
   leading ??= getLeadingWidget(context: context);
-  actions ??= getDefaultAppBarActions(context: context);
+  actions ??= getDefaultAppBarActions(
+    context: context,
+    deferedLoadingPlaceholder: deferedLoadingPlaceholder,
+  );
   return SliverAppBar(
     key: key,
     leading: leading,
     title: title,
     actions: actions,
-    backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+    bottom: bottom,
+    // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
     floating: floating,
     snap: snap,
   );
@@ -72,7 +84,10 @@ Widget? getLeadingWidget({
   }
 }
 
-List<Widget> getDefaultAppBarActions({required BuildContext context}) {
+List<Widget> getDefaultAppBarActions({
+  required BuildContext context,
+  bool deferedLoadingPlaceholder = false,
+}) {
   String? location;
   try {
     // throws expected AssertionError for errorBuilder Widgets
@@ -87,7 +102,8 @@ List<Widget> getDefaultAppBarActions({required BuildContext context}) {
           PageNotFoundRoute.uri.path,
           AboutRoute.uri.path,
           LicenseRoute.uri.path,
-        ].contains(location))
+        ].contains(location) &&
+        deferedLoadingPlaceholder == false)
       getSettingsAction(context: context),
   ];
 }

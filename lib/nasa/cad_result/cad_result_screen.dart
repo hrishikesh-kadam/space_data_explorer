@@ -10,7 +10,6 @@ import 'package:intl/intl.dart';
 import '../../../widgets/app_bar.dart';
 import '../../constants/dimensions.dart';
 import '../../constants/labels.dart';
-import '../../constants/theme.dart';
 import '../../extension/distance.dart';
 import '../../extension/velocity.dart';
 import '../../globals.dart';
@@ -77,8 +76,8 @@ class CadResultScreen extends StatelessWidget {
         }
       },
       child: Scaffold(
-        backgroundColor: AppTheme.pageBackgroundColor,
         body: _getBody(context: context),
+        backgroundColor: Theme.of(context).colorScheme.surface,
       ),
     );
   }
@@ -245,12 +244,12 @@ class CadResultScreen extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           width: 1,
-          color: AppTheme.containerBorderColor,
+          color: Theme.of(context).colorScheme.outline,
         ),
         borderRadius: const BorderRadius.all(Radius.circular(
           Dimensions.containerRadius,
         )),
-        color: AppTheme.containerColor,
+        color: Theme.of(context).colorScheme.surfaceVariant,
       ),
       padding: const EdgeInsets.all(Dimensions.bodyItemPadding),
       margin: const EdgeInsets.all(Dimensions.bodyItemMargin),

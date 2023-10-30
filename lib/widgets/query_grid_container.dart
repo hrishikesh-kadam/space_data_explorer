@@ -1,7 +1,6 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import '../constants/dimensions.dart';
-import '../constants/theme.dart';
 
 class QueryItemContainer extends StatelessWidget {
   const QueryItemContainer({
@@ -18,12 +17,12 @@ class QueryItemContainer extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           width: 1,
-          color: AppTheme.containerBorderColor,
+          color: Theme.of(context).colorScheme.outline,
         ),
         borderRadius: const BorderRadius.all(Radius.circular(
           Dimensions.containerRadius,
         )),
-        color: AppTheme.containerColor,
+        color: Theme.of(context).colorScheme.surfaceVariant,
       ),
       padding: const EdgeInsets.all(Dimensions.bodyItemPadding),
       margin: const EdgeInsets.all(Dimensions.bodyItemMargin),

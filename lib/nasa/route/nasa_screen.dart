@@ -39,6 +39,7 @@ class NasaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _getBody(context: context),
+      backgroundColor: Theme.of(context).colorScheme.surface,
     );
   }
 

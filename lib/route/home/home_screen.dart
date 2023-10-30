@@ -8,7 +8,6 @@ import 'package:url_launcher/link.dart';
 import '../../constants/assets.dart';
 import '../../constants/dimensions.dart';
 import '../../constants/labels.dart';
-import '../../constants/theme.dart';
 import '../../globals.dart';
 import '../../helper/helper.dart';
 import '../../nasa/route/nasa_route.dart';
@@ -42,6 +41,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _getBody(context: context),
+      backgroundColor: Theme.of(context).colorScheme.surface,
     );
   }
 
@@ -193,6 +193,7 @@ class HomeScreen extends StatelessWidget {
             },
             borderRadius: borderRadius,
             child: _getOrgItemContainer(
+              context: context,
               borderRadius: borderRadius,
               child: Column(
                 children: [
@@ -218,6 +219,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _getOrgItemContainer({
+    required BuildContext context,
     required BorderRadius borderRadius,
     required Widget child,
   }) {
@@ -227,10 +229,12 @@ class HomeScreen extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           width: 1,
-          color: AppTheme.containerBorderColor,
+          color: Theme.of(context).colorScheme.outline,
         ),
         borderRadius: borderRadius,
-        color: AppTheme.containerColor,
+        // TODO(hrishikesh-kadam): Change this to some surfaceContainer once
+        // they are available.
+        color: Theme.of(context).colorScheme.surfaceVariant,
       ),
       padding: const EdgeInsets.all(Dimensions.bodyItemPadding),
       child: child,

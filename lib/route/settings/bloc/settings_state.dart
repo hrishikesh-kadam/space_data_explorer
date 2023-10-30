@@ -36,7 +36,7 @@ class SettingsState with _$SettingsState {
     );
   }
 
-  static final ThemeData themeDataDefault = ThemeDataExt.defaultBright;
+  static const ThemeData? themeDataDefault = ThemeDataExt.system;
   static const Locale? localeDefault = null;
   static const DateFormatPattern dateFormatPatternDefault =
       DateFormatPattern.yMd;

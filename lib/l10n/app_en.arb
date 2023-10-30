@@ -98,7 +98,7 @@
   "copiedToClipboard": "Copied to clipboard",
   "notYetImplemented": "Not yet implemented",
   "theme": "Theme",
-  "defaultBright": "Default Bright",
-  "defaultDark": "Default Dark",
+  "light": "Light",
+  "dark": "Dark",
   "space": "Space"
 }
