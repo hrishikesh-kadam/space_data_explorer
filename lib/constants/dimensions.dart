@@ -9,7 +9,7 @@ class Dimensions {
   static const double bodyItemPadding = 16;
   static const double bodyItemSpacer = 8;
 
-  static const double containerRadius = 10;
+  static const double containerRadius = 12;
 
   // avgMobileWidth - (2×pageMarginHorizontalHalf) - (2×bodyItemMargin)
   // 360 - (2×8) - (2×8)

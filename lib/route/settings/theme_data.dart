@@ -64,13 +64,17 @@ extension ThemeDataExt on ThemeData {
   static final ThemeData flexThemeDataLight = FlexThemeData.light(
     colors: FlexSchemeColor.from(
       primary: ColorsExt.flutterBlue,
+      secondary: ColorsExt.flutterSky,
     ),
     useMaterial3: true,
-    keyColors: const FlexKeyColors(),
+    keyColors: const FlexKeyColors(
+      useSecondary: true,
+    ),
     tones: const FlexTones.light().copyWith(
+      secondaryContainerTone: 84,
       backgroundTone: 98,
       surfaceTone: 98,
-      surfaceVariantTone: 94,
+      surfaceVariantTone: 95,
     ),
     // subThemesData: const FlexSubThemesData(
     //   appBarBackgroundSchemeColor: SchemeColor.inversePrimary,
@@ -86,14 +90,16 @@ extension ThemeDataExt on ThemeData {
   static final ThemeData flexThemeDataDark = FlexThemeData.dark(
     colors: FlexSchemeColor.from(
       primary: ColorsExt.flutterBlue,
+      secondary: ColorsExt.flutterSky,
     ),
     useMaterial3: true,
-    keyColors: const FlexKeyColors(),
+    keyColors: const FlexKeyColors(
+      useSecondary: true,
+    ),
     tones: const FlexTones.dark().copyWith(
       backgroundTone: 15,
       surfaceTone: 15,
-      surfaceVariantTone:
-          24, // Surface Container Hightest 22 + 2, because Surface Bright is 24
+      surfaceVariantTone: 22,
     ),
     // subThemesData: const FlexSubThemesData(
     //   appBarBackgroundSchemeColor: SchemeColor.inversePrimary,

@@ -29,7 +29,16 @@ class SettingsScreen extends StatelessWidget {
   static const Key listViewKey = Key('${keyPrefix}list_view_key');
   static const String themeDataTileKeyPrefix = '${keyPrefix}theme_data_tile_';
   static const Key themeDataTileKey = Key('${themeDataTileKeyPrefix}key');
-  static final Set<ThemeData?> themeDatas = ThemeDataExt.themeDatas;
+  static final Set<ThemeData?> themeDatas = {
+    ThemeDataExt.system,
+    ThemeDataExt.light,
+    ThemeDataExt.dark,
+    ThemeDataExt.space,
+    if (kDebugMode) ThemeDataExt.flexThemeDataLight,
+    if (kDebugMode) ThemeDataExt.flexThemeDataDark,
+    if (kDebugMode) ThemeDataExt.themeDataLight,
+    if (kDebugMode) ThemeDataExt.themeDataDark,
+  };
   static const String localeTileKeyPrefix = '${keyPrefix}locale_tile_';
   static const Key localeTileKey = Key('${localeTileKeyPrefix}key');
   static final Set<Locale?> locales = {
