@@ -213,7 +213,7 @@ class AboutScreen extends StatelessWidget {
 
   Widget _getLicenseButton({required BuildContext context}) {
     return Center(
-      child: OutlinedButton(
+      child: FilledButton.tonal(
         key: licenseButtonKey,
         child: Text(
           MaterialLocalizations.of(context).viewLicensesButtonLabel,

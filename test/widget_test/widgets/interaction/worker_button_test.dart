@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
-import 'package:space_data_explorer/widgets/outlined_button_extended.dart';
+import 'package:space_data_explorer/widgets/worker_button.dart';
 
 void main() {
-  group('$OutlinedButtonExtended Interaction Test', () {
-    const key = Key('outlined_button_extended');
+  group('$WorkerButton Interaction Test', () {
+    const key = Key('worker_button');
     final finder = find.byKey(key);
 
     testWidgets('loading', (tester) async {
@@ -16,7 +16,7 @@ void main() {
         NetworkState.sending,
       ]) {
         await tester.pumpWidget(MaterialApp(
-          home: OutlinedButtonExtended(
+          home: WorkerButton(
             key: key,
             label: const Text(''),
             networkState: networkState,
@@ -25,6 +25,17 @@ void main() {
         expect(find.byType(CircularProgressIndicator), findsOneWidget);
         expect(finder.hitTestable().evaluate().length, 0);
       }
+    });
+
+    testWidgets('icon', (tester) async {
+      await tester.pumpWidget(const MaterialApp(
+        home: WorkerButton(
+          key: key,
+          icon: CircularProgressIndicator(),
+          label: Text(''),
+          networkState: NetworkState.sending,
+        ),
+      ));
     });
   });
 }

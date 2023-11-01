@@ -71,13 +71,14 @@ extension ThemeDataExt on ThemeData {
       useSecondary: true,
     ),
     tones: const FlexTones.light().copyWith(
+      primaryTone: 50,
       secondaryContainerTone: 84,
       backgroundTone: 98,
       surfaceTone: 98,
       surfaceVariantTone: 95,
     ),
     // subThemesData: const FlexSubThemesData(
-    //   appBarBackgroundSchemeColor: SchemeColor.inversePrimary,
+    //   // appBarBackgroundSchemeColor: SchemeColor.inversePrimary,
     // ),
     extensions: [
       const NameThemeExtension(
@@ -97,12 +98,13 @@ extension ThemeDataExt on ThemeData {
       useSecondary: true,
     ),
     tones: const FlexTones.dark().copyWith(
+      primaryTone: 70,
       backgroundTone: 15,
       surfaceTone: 15,
       surfaceVariantTone: 22,
     ),
     // subThemesData: const FlexSubThemesData(
-    //   appBarBackgroundSchemeColor: SchemeColor.inversePrimary,
+    //   // appBarBackgroundSchemeColor: SchemeColor.inversePrimary,
     // ),
     extensions: [
       const NameThemeExtension(
@@ -112,15 +114,15 @@ extension ThemeDataExt on ThemeData {
     ],
   );
 
-  static final ThemeData space = ThemeData(
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.blue,
-      brightness: Brightness.dark,
+  // WIP
+  static final ThemeData space = flexThemeDataDark.copyWith(
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        backgroundColor: Colors.transparent,
+      ),
     ),
-    useMaterial3: true,
-    brightness: Brightness.dark,
-    extensions: const [
-      NameThemeExtension(name: 'space'),
+    extensions: [
+      const NameThemeExtension(name: 'space'),
     ],
   );
 

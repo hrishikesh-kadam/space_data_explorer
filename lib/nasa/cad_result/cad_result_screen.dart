@@ -154,7 +154,9 @@ class CadResultScreen extends StatelessWidget {
           children: [
             Text(
               '${l10n.total} = '
-              '${sbdbCadBody.total.toString().localizeDigits(toZeroDigit: zeroDigit)}',
+              '${sbdbCadBody.total.toString().localizeDigits(
+                    toZeroDigit: zeroDigit,
+                  )}',
               key: totalTextKey,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge,

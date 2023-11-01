@@ -69,6 +69,7 @@ class DateFilterWidget extends StatelessWidget {
   Widget getBody({
     required BuildContext context,
   }) {
+    final ThemeData themeData = Theme.of(context);
     List<String> formattedDateStringList = getFormattedDateStringList();
     double? largestTextWidth = startEndAlign
         ? getLargestTextWidth(
@@ -78,7 +79,7 @@ class DateFilterWidget extends StatelessWidget {
               endTitle,
               ...formattedDateStringList.toSet(),
             },
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: themeData.textTheme.bodyMedium,
           )
         : null;
     return Column(
@@ -87,7 +88,7 @@ class DateFilterWidget extends StatelessWidget {
           Text(
             title!,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleMedium,
+            style: themeData.textTheme.titleMedium,
           ),
         if (title != null) SizedBox(height: spacing),
         getLabelDateWrap(
@@ -106,14 +107,14 @@ class DateFilterWidget extends StatelessWidget {
         SizedBox(height: spacing),
         AbsorbPointer(
           absorbing: disableInputs,
-          child: OutlinedButton(
+          child: FilledButton.tonal(
             key: Key('$keyPrefix$selectButtonKey'),
             onPressed: () {
               dateRangePickerOnPressed(context: context);
             },
             child: Text(
               selectButtonTitle,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: themeData.textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
           ),

@@ -33,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
     ThemeDataExt.system,
     ThemeDataExt.light,
     ThemeDataExt.dark,
-    ThemeDataExt.space,
+    if (kDebugMode) ThemeDataExt.space,
     if (kDebugMode) ThemeDataExt.flexThemeDataLight,
     if (kDebugMode) ThemeDataExt.flexThemeDataDark,
     if (kDebugMode) ThemeDataExt.themeDataLight,
@@ -160,12 +160,19 @@ class SettingsScreen extends StatelessWidget {
       selector: (state) => state.themeData,
       builder: (context, themeData) {
         final settingsBloc = context.read<SettingsBloc>();
+        final ThemeData savedThemeData = Theme.of(context);
         return RadioSettingsTile<ThemeData?>(
           keyPrefix: themeDataTileKeyPrefix,
           key: themeDataTileKey,
-          leading: Theme.of(context).brightness == Brightness.light
-              ? const Icon(Icons.dark_mode_outlined)
-              : const Icon(Icons.light_mode),
+          leading: savedThemeData.brightness == Brightness.light
+              ? Icon(
+                  Icons.dark_mode_outlined,
+                  color: savedThemeData.colorScheme.primary,
+                )
+              : Icon(
+                  Icons.light_mode,
+                  color: savedThemeData.colorScheme.primary,
+                ),
           title: l10n.theme,
           subTitle: ThemeDataExt.getDisplayName(
             l10n: l10n,
@@ -220,10 +227,14 @@ class SettingsScreen extends StatelessWidget {
       selector: (state) => state.locale,
       builder: (context, locale) {
         final settingsBloc = context.read<SettingsBloc>();
+        final ThemeData themeData = Theme.of(context);
         return RadioSettingsTile<Locale?>(
           keyPrefix: localeTileKeyPrefix,
           key: localeTileKey,
-          leading: const Icon(Icons.language),
+          leading: Icon(
+            Icons.language,
+            color: themeData.colorScheme.primary,
+          ),
           title: l10n.language,
           subTitle: getLocaleValueTitle(l10n: l10n, locale: locale),
           values: values,
@@ -273,10 +284,14 @@ class SettingsScreen extends StatelessWidget {
       selector: (state) => state.dateFormatPattern,
       builder: (context, dateFormatPattern) {
         final settingsBloc = context.read<SettingsBloc>();
+        final ThemeData themeData = Theme.of(context);
         return RadioSettingsTile<DateFormatPattern>(
           keyPrefix: dateFormatTileKeyPrefix,
           key: dateFormatTileKey,
-          leading: const Icon(Icons.calendar_month),
+          leading: Icon(
+            Icons.calendar_month,
+            color: themeData.colorScheme.primary,
+          ),
           title: l10n.dateFormat,
           subTitle: getDateFormatValueTitle(
             l10n: l10n,
@@ -332,10 +347,14 @@ class SettingsScreen extends StatelessWidget {
       selector: (state) => state.timeFormatPattern,
       builder: (context, timeFormatPattern) {
         final settingsBloc = context.read<SettingsBloc>();
+        final ThemeData themeData = Theme.of(context);
         return RadioSettingsTile<TimeFormatPattern>(
           keyPrefix: timeFormatTileKeyPrefix,
           key: timeFormatTileKey,
-          leading: const Icon(Icons.schedule),
+          leading: Icon(
+            Icons.schedule,
+            color: themeData.colorScheme.primary,
+          ),
           title: l10n.timeFormat,
           subTitle: getTimeFormatValueTitle(
             l10n: l10n,
@@ -391,10 +410,14 @@ class SettingsScreen extends StatelessWidget {
       selector: (state) => state.textDirection,
       builder: (context, textDirection) {
         final settingsBloc = context.read<SettingsBloc>();
+        final ThemeData themeData = Theme.of(context);
         return RadioSettingsTile<TextDirection?>(
           keyPrefix: textDirectionTileKeyPrefix,
           key: textDirectionTileKey,
-          leading: const Icon(Icons.format_textdirection_l_to_r),
+          leading: Icon(
+            Icons.format_textdirection_l_to_r,
+            color: themeData.colorScheme.primary,
+          ),
           title: l10n.textDirection,
           subTitle: getTextDirectionValueTitle(
             l10n: l10n,
@@ -456,10 +479,14 @@ class SettingsScreen extends StatelessWidget {
       selector: (state) => state.distanceUnit,
       builder: (context, distanceUnit) {
         final settingsBloc = context.read<SettingsBloc>();
+        final ThemeData themeData = Theme.of(context);
         return RadioSettingsTile<DistanceUnit>(
           keyPrefix: distanceUnitTileKeyPrefix,
           key: distanceUnitTileKey,
-          leading: const Icon(Icons.straighten),
+          leading: Icon(
+            Icons.straighten,
+            color: themeData.colorScheme.primary,
+          ),
           title: l10n.distanceUnit,
           subTitle: getDistanceUnitValueTitle(
             l10n: l10n,
@@ -519,10 +546,14 @@ class SettingsScreen extends StatelessWidget {
       selector: (state) => state.velocityUnit,
       builder: (context, velocityUnit) {
         final settingsBloc = context.read<SettingsBloc>();
+        final ThemeData themeData = Theme.of(context);
         return RadioSettingsTile<VelocityUnit>(
           keyPrefix: velocityUnitTileKeyPrefix,
           key: velocityUnitTileKey,
-          leading: const Icon(Icons.speed),
+          leading: Icon(
+            Icons.speed,
+            color: themeData.colorScheme.primary,
+          ),
           title: l10n.velocityUnit,
           subTitle: getVelocityUnitValueTitle(
             l10n: l10n,
@@ -584,10 +615,14 @@ class SettingsScreen extends StatelessWidget {
       selector: (state) => state.diameterUnit,
       builder: (context, diameterUnit) {
         final settingsBloc = context.read<SettingsBloc>();
+        final ThemeData themeData = Theme.of(context);
         return RadioSettingsTile<DistanceUnit>(
           keyPrefix: diameterUnitTileKeyPrefix,
           key: diameterUnitTileKey,
-          leading: const Icon(Icons.hide_source),
+          leading: Icon(
+            Icons.hide_source,
+            color: themeData.colorScheme.primary,
+          ),
           title: l10n.diameterUnit,
           subTitle: getDiameterUnitValueTitle(
             l10n: l10n,

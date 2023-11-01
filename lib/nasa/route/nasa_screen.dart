@@ -128,7 +128,7 @@ class NasaScreen extends StatelessWidget {
             Link(
               uri: CadRoute.uri,
               builder: (context, followLink) {
-                return OutlinedButton(
+                return FilledButton.tonal(
                   key: cadButtonKey,
                   child: Text(
                     Labels.sbdbCloseApproachData,
@@ -147,7 +147,7 @@ class NasaScreen extends StatelessWidget {
               Link(
                 uri: PageNotFoundRoute.nonExistingUri,
                 builder: (context, followLink) {
-                  return OutlinedButton(
+                  return FilledButton.tonal(
                     key: nonExistingPathButtonKey,
                     child: Text(
                       PageNotFoundRoute.nonExistingUri.path,

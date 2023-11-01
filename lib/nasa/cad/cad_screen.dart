@@ -23,8 +23,8 @@ import '../../widgets/choice_chip_query_widget.dart';
 import '../../widgets/date_filter_widget.dart';
 import '../../widgets/filter_chip_query_widget.dart';
 import '../../widgets/link_wrap.dart';
-import '../../widgets/outlined_button_extended.dart';
 import '../../widgets/value_range_filter_widget.dart';
+import '../../widgets/worker_button.dart';
 import '../cad_result/cad_result_route.dart';
 import 'bloc/cad_bloc.dart';
 import 'bloc/cad_state.dart';
@@ -243,12 +243,12 @@ class CadScreen extends StatelessWidget {
           ),
           sliver: SliverToBoxAdapter(
             child: Center(
-              child: OutlinedButtonExtended(
+              child: WorkerButton(
                 key: searchButtonKey,
                 label: Text(
                   l10n.search,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: Theme.of(context).primaryTextTheme.bodyMedium,
                 ),
                 networkState: state,
                 onPressed: () async {
