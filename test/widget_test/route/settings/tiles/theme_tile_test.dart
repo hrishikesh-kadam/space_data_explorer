@@ -43,18 +43,11 @@ void main() {
       await chooseThemeData(tester, l10n: l10n, themeData: ThemeDataExt.system);
       ThemeData currentThemeMode =
           Theme.of(tester.element(find.byType(SettingsScreen)));
-      // TODO(hrishikesh-kadam): Feature request for String name in ThemeData
-      expect(
-        currentThemeMode.colorScheme,
-        ThemeDataExt.light.colorScheme,
-      );
+      expect(currentThemeMode.name, ThemeDataExt.light.name);
       tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
       await tester.pumpAndSettle();
       currentThemeMode = Theme.of(navigatorKey.currentContext!);
-      expect(
-        currentThemeMode.colorScheme,
-        ThemeDataExt.dark.colorScheme,
-      );
+      expect(currentThemeMode.name, ThemeDataExt.dark.name);
       tester.platformDispatcher.clearPlatformBrightnessTestValue();
     });
 
