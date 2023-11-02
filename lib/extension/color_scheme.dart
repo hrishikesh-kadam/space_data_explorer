@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:material_color_utilities/material_color_utilities.dart';
 
+// LABEL: eligible-hrk_flutter_batteries
 extension ColorSchemeExt on ColorScheme {
   Color get surfaceContainerHighest {
     final Hct surfaceHct = Hct.fromInt(surface.value);
