@@ -2,6 +2,8 @@
 
 ## TODOs
 
+- Dismiss previous Snackbars everywhere if no longer valid
+- Web initial load background
 - About Page
   - Rate App for Android and iOS
   - App info link for Android

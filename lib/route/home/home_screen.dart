@@ -175,9 +175,21 @@ class HomeScreen extends StatelessWidget {
       child: Link(
         uri: uri,
         builder: (context, followLink) {
-          return InkWell(
-            key: key,
-            onTap: () {
+          return _getInkWellContainer(
+            width: Dimensions.orgItemWidth,
+            inkWellKey: key,
+            containerDecoration: BoxDecoration(
+              border: Border.all(
+                width: 1,
+                color: Theme.of(context).colorScheme.outline,
+              ),
+              borderRadius: borderRadius,
+              // TODO(hrishikesh-kadam): Change this to some surfaceContainer
+              // once they are available.
+              color: Theme.of(context).colorScheme.surfaceVariant,
+            ),
+            inkWellBorderRadius: borderRadius,
+            inkWellOnTap: () {
               if (uri != null) {
                 GoRouter.of(context).go(uri.path, extra: getRouteExtraMap());
               } else {
@@ -191,26 +203,11 @@ class HomeScreen extends StatelessWidget {
                   ..showSnackBar(snackBar);
               }
             },
-            borderRadius: borderRadius,
-            child: _getOrgItemContainer(
+            child: _getOrgItemBody(
               context: context,
-              borderRadius: borderRadius,
-              child: Column(
-                children: [
-                  getImageWidget(
-                    assetName: imageAssetName,
-                    semanticLabel: imageSemanticLabel,
-                    width: Dimensions.orgImageSize,
-                    // height: Dimensions.orgImageSize,
-                  ),
-                  const SizedBox(height: Dimensions.bodyItemSpacer),
-                  Text(
-                    name,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
+              name: name,
+              imageAssetName: imageAssetName,
+              imageSemanticLabel: imageSemanticLabel,
             ),
           );
         },
@@ -218,26 +215,55 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _getOrgItemContainer({
-    required BuildContext context,
-    required BorderRadius borderRadius,
-    required Widget child,
+  Widget _getInkWellContainer({
+    double? width,
+    Key? inkWellKey,
+    BoxDecoration? containerDecoration,
+    BorderRadius? inkWellBorderRadius,
+    GestureTapCallback? inkWellOnTap,
+    Widget? child,
   }) {
     return Container(
       key: orgItemContainerKey,
       width: Dimensions.orgItemWidth,
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 1,
-          color: Theme.of(context).colorScheme.outline,
+      decoration: containerDecoration,
+      // https://api.flutter.dev/flutter/material/InkWell-class.html#the-ink-splashes-arent-visible
+      child: Material(
+        type: MaterialType.transparency,
+        child: InkWell(
+          key: inkWellKey,
+          onTap: inkWellOnTap,
+          borderRadius: inkWellBorderRadius,
+          child: child,
         ),
-        borderRadius: borderRadius,
-        // TODO(hrishikesh-kadam): Change this to some surfaceContainer once
-        // they are available.
-        color: Theme.of(context).colorScheme.surfaceVariant,
       ),
+    );
+  }
+
+  Widget _getOrgItemBody({
+    required BuildContext context,
+    required String name,
+    required String imageAssetName,
+    required String imageSemanticLabel,
+  }) {
+    return Padding(
       padding: const EdgeInsets.all(Dimensions.bodyItemPadding),
-      child: child,
+      child: Column(
+        children: [
+          getImageWidget(
+            assetName: imageAssetName,
+            semanticLabel: imageSemanticLabel,
+            width: Dimensions.orgImageSize,
+            // height: Dimensions.orgImageSize,
+          ),
+          const SizedBox(height: Dimensions.bodyItemSpacer),
+          Text(
+            name,
+            style: Theme.of(context).textTheme.bodyMedium,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     );
   }
 }
