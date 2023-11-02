@@ -8,6 +8,7 @@ import 'package:url_launcher/link.dart';
 import '../../constants/assets.dart';
 import '../../constants/dimensions.dart';
 import '../../constants/labels.dart';
+import '../../extension/color_scheme.dart';
 import '../../globals.dart';
 import '../../helper/helper.dart';
 import '../../nasa/route/nasa_route.dart';
@@ -184,9 +185,7 @@ class HomeScreen extends StatelessWidget {
                 color: Theme.of(context).colorScheme.outline,
               ),
               borderRadius: borderRadius,
-              // TODO(hrishikesh-kadam): Change this to some surfaceContainer
-              // once they are available.
-              color: Theme.of(context).colorScheme.surfaceVariant,
+              color: Theme.of(context).colorScheme.surfaceContainerHighest,
             ),
             inkWellBorderRadius: borderRadius,
             inkWellOnTap: () {
@@ -205,9 +204,10 @@ class HomeScreen extends StatelessWidget {
             },
             child: _getOrgItemBody(
               context: context,
-              name: name,
               imageAssetName: imageAssetName,
               imageSemanticLabel: imageSemanticLabel,
+              imageBorderRadius: borderRadius,
+              name: name,
             ),
           );
         },
@@ -242,28 +242,40 @@ class HomeScreen extends StatelessWidget {
 
   Widget _getOrgItemBody({
     required BuildContext context,
-    required String name,
     required String imageAssetName,
     required String imageSemanticLabel,
+    required BorderRadius imageBorderRadius,
+    required String name,
   }) {
-    return Padding(
-      padding: const EdgeInsets.all(Dimensions.bodyItemPadding),
-      child: Column(
-        children: [
-          getImageWidget(
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: imageBorderRadius,
+            color: Theme.of(context).colorScheme.surfaceFixed,
+          ),
+          padding: const EdgeInsets.all(
+            Dimensions.bodyItemPadding,
+          ),
+          child: getImageWidget(
             assetName: imageAssetName,
             semanticLabel: imageSemanticLabel,
             width: Dimensions.orgImageSize,
             // height: Dimensions.orgImageSize,
           ),
-          const SizedBox(height: Dimensions.bodyItemSpacer),
-          Text(
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Dimensions.bodyItemPadding,
+            vertical: Dimensions.bodyItemPadding / 2,
+          ),
+          child: Text(
             name,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

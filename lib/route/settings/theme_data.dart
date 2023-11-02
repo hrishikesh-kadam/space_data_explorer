@@ -75,6 +75,8 @@ extension ThemeDataExt on ThemeData {
       secondaryContainerTone: 84,
       backgroundTone: 98,
       surfaceTone: 98,
+      // TODO(hrishikesh-kadam): Change this to some surfaceContainer
+      // once they are available.
       surfaceVariantTone: 95,
     ),
     // subThemesData: const FlexSubThemesData(
@@ -101,6 +103,8 @@ extension ThemeDataExt on ThemeData {
       primaryTone: 70,
       backgroundTone: 15,
       surfaceTone: 15,
+      // TODO(hrishikesh-kadam): Change this to some surfaceContainer
+      // once they are available.
       surfaceVariantTone: 22,
     ),
     // subThemesData: const FlexSubThemesData(

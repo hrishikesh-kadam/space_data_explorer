@@ -251,6 +251,8 @@ class CadResultScreen extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(
           Dimensions.containerRadius,
         )),
+        // TODO(hrishikesh-kadam): Change this to some surfaceContainer
+        // once they are available.
         color: Theme.of(context).colorScheme.surfaceVariant,
       ),
       padding: const EdgeInsets.all(Dimensions.bodyItemPadding),
