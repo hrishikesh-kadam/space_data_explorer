@@ -140,6 +140,8 @@ class CadScreen extends StatelessWidget {
                 current.networkState == NetworkState.failure);
       },
       listener: (context, state) {
+        final scaffoldMessengerState = ScaffoldMessenger.of(context)
+          ..clearSnackBars();
         if (state.networkState == NetworkState.success) {
           JsonMap routeExtraMap = getRouteExtraMap();
           routeExtraMap['$SbdbCadBody'] = state.sbdbCadBody!;
@@ -160,13 +162,18 @@ class CadScreen extends StatelessWidget {
               errorString = dioException.type.name.sentenceCase;
             }
           }
+          final themeData = Theme.of(context);
           final snackBar = SnackBar(
             key: snackBarKey,
-            content: Text(errorString),
+            backgroundColor: themeData.colorScheme.errorContainer,
+            content: Text(
+              errorString,
+              style: themeData.textTheme.bodyMedium?.copyWith(
+                color: themeData.colorScheme.onErrorContainer,
+              ),
+            ),
           );
-          ScaffoldMessenger.of(context)
-            ..clearSnackBars()
-            ..showSnackBar(snackBar);
+          scaffoldMessengerState.showSnackBar(snackBar);
         }
       },
       child: child,

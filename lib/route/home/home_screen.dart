@@ -189,6 +189,8 @@ class HomeScreen extends StatelessWidget {
             ),
             inkWellBorderRadius: borderRadius,
             inkWellOnTap: () {
+              final scaffoldMessengerState = ScaffoldMessenger.of(context)
+                ..clearSnackBars();
               if (uri != null) {
                 GoRouter.of(context).go(uri.path, extra: getRouteExtraMap());
               } else {
@@ -197,9 +199,7 @@ class HomeScreen extends StatelessWidget {
                     AppLocalizations.of(context).notYetImplemented,
                   ),
                 );
-                ScaffoldMessenger.of(context)
-                  ..clearSnackBars()
-                  ..showSnackBar(snackBar);
+                scaffoldMessengerState.showSnackBar(snackBar);
               }
             },
             child: _getOrgItemBody(
