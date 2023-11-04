@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="flutter_navy">#042B59</color>
-    <color name="ic_launcher_background">@color/flutter_navy</color>
+    <color name="flutter_blue">#0553B1</color>
+    <color name="flutter_sky">#027DFD</color>
+    <color name="ic_launcher_background">@color/flutter_blue</color>
     <color name="ic_launcher_foreground">#FFFFFF</color>
 </resources>

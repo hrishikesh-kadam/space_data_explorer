@@ -10,6 +10,8 @@
 - Wrap actions of AppBar
 - Add zero count image placeholder
 - Resolution-aware app icon image
+- Add scroll to top and bottom for list views
+- React to RTL from Android Developer settings
 
 ## Theme TODOs
 
@@ -62,6 +64,34 @@
 - [Android - Create app icons with Image Asset Studio]
 - [Android - Add multi-density vector graphics]
 - [assets/app-icons/app-icon.png] is 192x192 version of [android/app/src/main/ic_launcher-playstore.png]
+
+### Steps taken to generate icons
+
+#### Android
+
+1. In Android Studio, right click drawable folder, select new Image Asset.
+2. In Foreground layer, select appropriate Clip art, resize to 90%.
+3. In Background layer, select appropriate Color.
+4. In Options, choose No for Round Icon.
+5. After asset generation, place ic_launcher_foreground.xml in 
+   drawable-anydpi-v26 instead of drawable folder.
+6. Move the colors from ic_background_foreground.xml to colors.xml.
+7. Convert the ic_launcher_foreground.xml to svg format.
+8. Format the xml and svg files.
+
+#### Web
+
+1. `cp ./android/app/src/main/ic_launcher-playstore.png ./web/icons/Icon-512.png`
+2. `convert -resize 192x192 ./android/app/src/main/ic_launcher-playstore.png ./web/icons/Icon-192.png`
+3. `convert -resize 16x16 ./android/app/src/main/ic_launcher-playstore.png ./web/favicon.png`
+4. Open https://maskable.app/editor, select appropriate color in Background layer.
+5. Upload Forground svg file.
+6. Choose Padding 35%, Color strength 100%.
+7. Export required file sizes.
+
+#### Flutter
+
+1. `convert -resize 192x192 ./android/app/src/main/ic_launcher-playstore.png ./assets/app-icons/app-icon.png`
 
 ## README Notes
 
