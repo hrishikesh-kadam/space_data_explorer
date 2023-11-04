@@ -53,7 +53,7 @@ SCREENSHOTS=(
   "5"
 )
 
-for i in {0..2}; do
+for i in "${!AVD_NAMES[@]}"; do
 
   ./tool/android/start-emulator.sh \
     "${AVD_NAMES[i]}" "" "${DEVICE_NAMES[i]}" "${SKIN_NAMES[i]}"

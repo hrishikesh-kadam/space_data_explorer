@@ -36,7 +36,7 @@ GOLDEN_DIRECTORIES=(
   # "android/fastlane/$FLAVOR_ENV/metadata/android/en-US/images/tenInchScreenshots"
 )
 
-for i in {0..0}; do
+for i in "${!AVD_NAMES[@]}"; do
 
   ./tool/android/start-emulator.sh \
     "${AVD_NAMES[i]}" "" "${DEVICE_NAMES[i]}" "${SKIN_NAMES[i]}"

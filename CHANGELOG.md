@@ -1,6 +1,6 @@
-# Unreleased
+# 0.8.0
 
-- 
+- Light and Dark themes
 
 # 0.7.0
 
