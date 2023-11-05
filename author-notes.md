@@ -13,10 +13,6 @@
 - Add scroll to top and bottom for list views
 - React to RTL from Android Developer settings
 
-## Theme TODOs
-
-- Fix Text style
-
 ## Future Tasks
 
 ### iOS
