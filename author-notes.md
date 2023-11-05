@@ -74,6 +74,14 @@
 6. Move the colors from ic_background_foreground.xml to colors.xml.
 7. Convert the ic_launcher_foreground.xml to svg format.
 8. Format the xml and svg files.
+9. ```
+   cp ./android/app/src/main/ic_launcher-playstore.png \
+    ./android/fastlane/prod/metadata/android/en-US/images/icon.png
+   cp ./android/app/src/main/ic_launcher-playstore.png \
+    ./android/fastlane/stag/metadata/android/en-US/images/icon.png
+   cp ./android/app/src/main/ic_launcher-playstore.png \
+    ./android/fastlane/dev/metadata/android/en-US/images/icon.png
+   ```
 
 #### Web
 
