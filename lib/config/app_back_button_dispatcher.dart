@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
@@ -21,7 +22,11 @@ class AppBackButtonDispatcher extends RootBackButtonDispatcher {
 
   @override
   Future<bool> didPopRoute() async {
-    _logger.log(isAndroid ? Level.FINEST : Level.WARNING, 'didPopRoute()');
+    _logger.log(
+        !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+            ? Level.FINEST
+            : Level.WARNING,
+        'didPopRoute()');
     final Object? extraObject = _goRouterDelegate.currentConfiguration.extra;
     _logger.finer('didPopRoute() -> extraObject = $extraObject');
     Level logLevel = flutterTest ? Level.FINER : Level.SHOUT;

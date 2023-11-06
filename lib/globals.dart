@@ -10,6 +10,7 @@ import 'coverage_ignored.dart';
 final String appNamePascalCase = Constants.appName.pascalCase;
 
 final bool flutterTest = isFlutterTest();
+final bool flutterIntegrationTest = isFlutterIntegrationTest();
 
 final logger = Logger(appNamePascalCase);
 

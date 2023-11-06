@@ -100,7 +100,7 @@ class NasaScreen extends StatelessWidget {
               width: Dimensions.orgImageSize,
             ),
             const SizedBox(height: Dimensions.bodyItemSpacer),
-            getLinkWrap(
+            getLabelLinkInkWellWrap(
               context: context,
               text: l10n.source,
               uri: NasaApis.docUrl,

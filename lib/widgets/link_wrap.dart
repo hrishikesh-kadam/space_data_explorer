@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:url_launcher/link.dart';
 
-Widget getLinkWrap({
+Widget getLabelLinkInkWellWrap({
   required BuildContext context,
   required String text,
   required Uri uri,
-  Key? uriKey,
+  Key? inkWellKey,
 }) {
   return Wrap(
     alignment: WrapAlignment.center,
@@ -21,7 +21,7 @@ Widget getLinkWrap({
         target: LinkTarget.blank,
         builder: (context, followLink) {
           return InkWell(
-            key: uriKey,
+            key: inkWellKey,
             onTap: followLink,
             child: Text(
               uri.toString(),

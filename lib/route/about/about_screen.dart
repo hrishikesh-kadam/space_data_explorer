@@ -11,6 +11,7 @@ import '../../constants/dimensions.dart';
 import '../../globals.dart';
 import '../../helper/helper.dart';
 import '../../widgets/app_bar.dart';
+import '../../widgets/image_network_widget.dart';
 import '../../widgets/link_wrap.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -30,6 +31,8 @@ class AboutScreen extends StatelessWidget {
   static const Key licenseButtonKey = Key('${keyPrefix}license_button_key');
   static const Key linktreeUriKey = Key('${keyPrefix}linktree_key');
   static const Key sourceUriKey = Key('${keyPrefix}source_key');
+  static const Key googlePlayBadgeKey =
+      Key('${keyPrefix}google_play_badge_key');
   static const Key webAppUriKey = Key('${keyPrefix}web_app_key');
 
   @override
@@ -76,12 +79,14 @@ class AboutScreen extends StatelessWidget {
       _getAuthor(context: context),
       _getLinktreeText(context: context),
       _getMadeWithLoveText(context: context),
-      getLinkWrap(
+      getLabelLinkInkWellWrap(
         context: context,
         text: l10n.source,
         uri: Constants.sourceRepoUrl,
-        uriKey: sourceUriKey,
+        inkWellKey: sourceUriKey,
       ),
+      if (kIsWeb || defaultTargetPlatform != TargetPlatform.android)
+        _getGooglePlayBadge(context: context),
       if (!kIsWeb) _getWebApp(context: context),
       _getLicenseButton(context: context),
     ];
@@ -178,6 +183,25 @@ class AboutScreen extends StatelessWidget {
         'Made with 💙 using Flutter',
         style: Theme.of(context).textTheme.bodyMedium,
         textAlign: TextAlign.center,
+      ),
+    );
+  }
+
+  Widget _getGooglePlayBadge({required BuildContext context}) {
+    return Center(
+      child: Link(
+        uri: Constants.googlePlayUrl,
+        target: LinkTarget.blank,
+        builder: (context, followLink) {
+          return InkWell(
+            key: googlePlayBadgeKey,
+            onTap: followLink,
+            child: getImageNetworkWidget(
+              Constants.googlePlayBadgeUrl.toString(),
+              height: 72,
+            ),
+          );
+        },
       ),
     );
   }

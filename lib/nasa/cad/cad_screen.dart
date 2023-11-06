@@ -226,7 +226,7 @@ class CadScreen extends StatelessWidget {
       sliver: SliverToBoxAdapter(
         child: Column(
           children: [
-            getLinkWrap(
+            getLabelLinkInkWellWrap(
               context: context,
               text: l10n.source,
               uri: SbdbCadApi.docUrl,
