@@ -9,5 +9,6 @@ lib/extension/logger.dart:1
 lib/nasa/cad/bloc/cad_state.dart:44
 lib/route/about/license/license_route.dart:1
 lib/route/about/license/license_screen.dart:1
-lib/widgets/image_network_widget.dart:17
+lib/widgets/image_network_widget.dart:1
+lib/widgets/image_network_widget.dart:19
 lib/widgets/worker_button.dart:41

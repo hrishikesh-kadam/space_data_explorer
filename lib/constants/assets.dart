@@ -1,3 +1,8 @@
+class AppAssets {
+  // Source: https://play.google.com/intl/en_us/badges/#!#badge-generator
+  static const String googlePlayBadge = 'assets/google_play_badge.png';
+}
+
 class NasaAssets {
   // Source: https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg
   static const String logo = 'assets/nasa/nasa-logo.svg';

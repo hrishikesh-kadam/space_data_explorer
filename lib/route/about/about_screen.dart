@@ -6,12 +6,14 @@ import 'package:hrk_logging/hrk_logging.dart';
 import 'package:url_launcher/link.dart';
 
 import '../../config/config.dart';
+import '../../constants/assets.dart';
 import '../../constants/constants.dart';
 import '../../constants/dimensions.dart';
+import '../../constants/labels.dart';
 import '../../globals.dart';
 import '../../helper/helper.dart';
 import '../../widgets/app_bar.dart';
-import '../../widgets/image_network_widget.dart';
+import '../../widgets/image_widget.dart';
 import '../../widgets/link_wrap.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -196,8 +198,9 @@ class AboutScreen extends StatelessWidget {
           return InkWell(
             key: googlePlayBadgeKey,
             onTap: followLink,
-            child: getImageNetworkWidget(
-              Constants.googlePlayBadgeUrl.toString(),
+            child: getImageWidget(
+              assetName: AppAssets.googlePlayBadge,
+              semanticLabel: Labels.googlePlayBadge,
               height: 72,
             ),
           );
