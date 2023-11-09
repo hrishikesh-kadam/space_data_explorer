@@ -52,7 +52,7 @@ Future<void> configurePostBinding() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadPubspec();
   await configureHydratedBloc();
-  await configureFirebaseProducts();
+  // await configureFirebaseProducts();
 }
 
 Future<void> configureFirebaseProducts() async {

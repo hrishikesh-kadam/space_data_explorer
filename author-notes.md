@@ -17,11 +17,18 @@
 
 ### iOS
 
+- Fix log colors
 - Add flavors
+- Update .vscode/launch.json
 - Add Universal Links
 - i18n - https://docs.flutter.dev/accessibility-and-localization/internationalization#localizing-for-ios-updating-the-ios-app-bundle
 - Firebase - Crashlytics
 - Sentry
+- LaunchImage
+- Check if Product Name can be referred as Bundle Display Name using variable.  
+  Context: 
+  1. https://docs.flutter.dev/deployment/flavors#using-flavors-in-ios
+  2. https://youtu.be/iE2bpP56QKc?si=5a7-oylr5aohjNGP&t=152
 
 ## Code shrinking / Tree-shaking / Resource shrinking / Obfuscation / Optimization
 
@@ -74,28 +81,48 @@
 6. Move the colors from ic_background_foreground.xml to colors.xml.
 7. Convert the ic_launcher_foreground.xml to svg format.
 8. Format the xml and svg files.
-9. ```
+9. ```bash
    cp ./android/app/src/main/ic_launcher-playstore.png \
-    ./android/fastlane/prod/metadata/android/en-US/images/icon.png
+     ./android/fastlane/prod/metadata/android/en-US/images/icon.png
    cp ./android/app/src/main/ic_launcher-playstore.png \
-    ./android/fastlane/stag/metadata/android/en-US/images/icon.png
+     ./android/fastlane/stag/metadata/android/en-US/images/icon.png
    cp ./android/app/src/main/ic_launcher-playstore.png \
-    ./android/fastlane/dev/metadata/android/en-US/images/icon.png
+     ./android/fastlane/dev/metadata/android/en-US/images/icon.png
    ```
 
 #### Web
 
-1. `cp ./android/app/src/main/ic_launcher-playstore.png ./web/icons/Icon-512.png`
-2. `convert -resize 192x192 ./android/app/src/main/ic_launcher-playstore.png ./web/icons/Icon-192.png`
-3. `convert -resize 16x16 ./android/app/src/main/ic_launcher-playstore.png ./web/favicon.png`
-4. Open https://maskable.app/editor, select appropriate color in Background layer.
-5. Upload Forground svg file.
-6. Choose Padding 35%, Color strength 100%.
-7. Export required file sizes.
+1. ```bash
+   cp ./android/app/src/main/ic_launcher-playstore.png ./web/icons/Icon-512.png
+   convert -resize 192x192 \
+     ./android/app/src/main/ic_launcher-playstore.png \
+     ./web/icons/Icon-192.png
+   convert -resize 16x16 \
+     ./android/app/src/main/ic_launcher-playstore.png \
+     ./web/favicon.png
+   ```
+2. Open https://maskable.app/editor, select appropriate color in Background layer.
+3. Upload Forground svg file.
+4. Choose Padding 35%, Color strength 100%.
+5. Export required file sizes.
+
+#### iOS
+
+1. ```bash
+   convert -resize 1024x1024 \
+     ./android/app/src/main/ic_launcher-playstore.png \
+     ./ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png
+   ```
+2. Open Assets.xcassets in Xcode, delete old AppIcon, create New iOS App Icon, 
+   select above image.
 
 #### Flutter
 
-1. `convert -resize 192x192 ./android/app/src/main/ic_launcher-playstore.png ./assets/app-icons/app-icon.png`
+1. ```bash
+   convert -resize 192x192 \
+     ./android/app/src/main/ic_launcher-playstore.png \
+     ./assets/app-icons/app-icon.png
+   ```
 
 ## README Notes
 
