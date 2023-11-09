@@ -2,6 +2,7 @@
 
 ## TODOs
 
+- Android add com.google.android.gms.permission.AD_ID permission
 - About Page
   - Rate App for Android and iOS
   - App info link for Android
@@ -25,10 +26,7 @@
 - Firebase - Crashlytics
 - Sentry
 - LaunchImage
-- Check if Product Name can be referred as Bundle Display Name using variable.  
-  Context: 
-  1. https://docs.flutter.dev/deployment/flavors#using-flavors-in-ios
-  2. https://youtu.be/iE2bpP56QKc?si=5a7-oylr5aohjNGP&t=152
+- Rename the Targets
 
 ## Code shrinking / Tree-shaking / Resource shrinking / Obfuscation / Optimization
 
