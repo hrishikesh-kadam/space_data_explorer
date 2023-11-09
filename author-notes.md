@@ -141,6 +141,10 @@
 - [material_color_utilities]
 - [dynamic_color]
 
+## Commit Notes
+
+- Delete default iOS Build Configurations https://github.com/hrishikesh-kadam/space_data_explorer/commit/9de799e
+
 
 [`flutter.groovy`]: https://github.com/flutter/flutter/blob/stable/packages/flutter_tools/gradle/src/main/groovy/flutter.groovy
 [Android - Adding a launcher icon]: https://docs.flutter.dev/deployment/android#adding-a-launcher-icon
