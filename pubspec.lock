@@ -13,10 +13,10 @@ packages:
     dependency: transitive
     description:
       name: _flutterfire_internals
-      sha256: "5dadadeecceac19d6a63c9d2e037bb8df58ddd4aedb94e8a056af2f39ee50f9d"
+      sha256: "8942974ee5dc932427704ede5e0db8b5f2b8f22172964544b56e6bd37f6c3634"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.11"
+    version: "1.3.12"
   analyzer:
     dependency: transitive
     description:
@@ -93,10 +93,10 @@ packages:
     dependency: transitive
     description:
       name: build_daemon
-      sha256: "5f02d73eb2ba16483e693f80bee4f088563a820e47d1027d4cdfe62b5bb43e65"
+      sha256: "0343061a33da9c5810b2d6cee51945127d8f4c060b7fbdd9d54917f0a3feaaa1"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.0"
+    version: "4.0.1"
   build_resolvers:
     dependency: transitive
     description:
@@ -285,34 +285,34 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_analytics
-      sha256: fb8c29d97d29aed258d2fd98ba0ffc04ccca2c7b830b149187679524757f5d9d
+      sha256: "624f234b0cb27c4d1c983d03489570471d85d5720159512c8e080cb6917a0a2b"
       url: "https://pub.dev"
     source: hosted
-    version: "10.6.3"
+    version: "10.7.0"
   firebase_analytics_platform_interface:
     dependency: transitive
     description:
       name: firebase_analytics_platform_interface
-      sha256: "85fe94377732a168896a705410441b721a49c0703679c24e3edca0c680a45bb7"
+      sha256: "7e6cae535f3f2ab19ddb183ed48010f852baa20999a473b764c3db4e73d3fa0b"
       url: "https://pub.dev"
     source: hosted
-    version: "3.7.5"
+    version: "3.8.0"
   firebase_analytics_web:
     dependency: transitive
     description:
       name: firebase_analytics_web
-      sha256: "99a39a97e4760011ca0f2135c68a40f65dc9b260a0c27db2fdcb1258052c588b"
+      sha256: ff080e7793ab71f73fb4cb5223922638024144c1deecb3ec71c81e69f64409df
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.5+5"
+    version: "0.5.5+7"
   firebase_core:
     dependency: "direct main"
     description:
       name: firebase_core
-      sha256: "7706f4ade6cc2698c70074083bc262586a185047f6bfdd53938dcc35d35cbb9e"
+      sha256: "45f3f9babfc6f56fb94c3cd11584cf3c9672868228373b699b94427010e01dc3"
       url: "https://pub.dev"
     source: hosted
-    version: "2.21.0"
+    version: "2.22.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
@@ -333,18 +333,18 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_crashlytics
-      sha256: c1f6b7a75df5f83af187b396d763de0e7673fcb358093e04be68e82e6d80d41a
+      sha256: "0d09f0e17b4174d850fd26a5036d51bb1b3e09c36a35ffcdc9dfa99fdbd6e9bb"
       url: "https://pub.dev"
     source: hosted
-    version: "3.4.3"
+    version: "3.4.4"
   firebase_crashlytics_platform_interface:
     dependency: transitive
     description:
       name: firebase_crashlytics_platform_interface
-      sha256: "08f0a3a99a12a31a47a08ccb268efe163c2f0d89fec74eb5b8a86b219611175c"
+      sha256: "7ebb08dc5d53da3ca4122f2e84837dbfb1c3e6cc15731d5998893a5d41037a97"
       url: "https://pub.dev"
     source: hosted
-    version: "3.6.11"
+    version: "3.6.12"
   fixnum:
     dependency: transitive
     description:
@@ -439,10 +439,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_lints
-      sha256: ad76540d21c066228ee3f9d1dad64a9f7e46530e8bb7c85011a88bc1fd874bc5
+      sha256: e2a421b7e59244faef694ba7b30562e489c2b489866e505074eb005cd7060db7
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "3.0.1"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -531,10 +531,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: e156bc1b2088eb5ece9351bccd48c3e1719a4858eacbd44e59162e98a68205d1
+      sha256: c247a4f76071c3b97bb5ae8912968870d5565644801c5e09f3bc961b4d874895
       url: "https://pub.dev"
     source: hosted
-    version: "12.0.1"
+    version: "12.1.1"
   go_router_builder:
     dependency: "direct dev"
     description:
@@ -912,10 +912,10 @@ packages:
     dependency: transitive
     description:
       name: provider
-      sha256: cdbe7530b12ecd9eb455bdaa2fcb8d4dad22e80b8afb4798b41479d5ce26847f
+      sha256: "9a96a0a19b594dbc5bf0f1f27d2bc67d5f95957359b461cd9feb44ed6ae75096"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.5"
+    version: "6.1.1"
   pub_semver:
     dependency: transitive
     description:
@@ -968,26 +968,26 @@ packages:
     dependency: transitive
     description:
       name: sentry
-      sha256: "9cfd325611ab54b57d5e26957466823f05bea9d6cfcc8d48f11817b8bcedf0d1"
+      sha256: "3b23469bde29a08cabc8199016633d95dc083a78fb1912917912c4bb15c2d705"
       url: "https://pub.dev"
     source: hosted
-    version: "7.12.0"
+    version: "7.13.0"
   sentry_dart_plugin:
     dependency: "direct dev"
     description:
       name: sentry_dart_plugin
-      sha256: "80f3c22b2e930823c1835a3a4c87468e908ebc555807d367d7e818267548cae3"
+      sha256: fb46695c054b23ba631b16227c3e602ce31d1d5ccade9583d5184a7a74f7a2be
       url: "https://pub.dev"
     source: hosted
-    version: "1.6.2"
+    version: "1.6.3"
   sentry_flutter:
     dependency: "direct main"
     description:
       name: sentry_flutter
-      sha256: "0cd7d622cb63c94fd1b2f87ab508e158b950bd281e2a80f327ebf73bb217eaf3"
+      sha256: "4607831f6b718c9ac1a92b9c174212a5b965a921877d28188eb60c199f0f4a02"
       url: "https://pub.dev"
     source: hosted
-    version: "7.12.0"
+    version: "7.13.0"
   shelf:
     dependency: transitive
     description:
@@ -1213,10 +1213,10 @@ packages:
     dependency: transitive
     description:
       name: uuid
-      sha256: b715b8d3858b6fa9f68f87d20d98830283628014750c2b09b6f516c1da4af2a7
+      sha256: df5a4d8f22ee4ccd77f8839ac7cb274ebc11ef9adcce8b92be14b797fe889921
       url: "https://pub.dev"
     source: hosted
-    version: "4.1.0"
+    version: "4.2.1"
   vector_graphics:
     dependency: transitive
     description:
@@ -1293,10 +1293,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: "350a11abd2d1d97e0cc7a28a81b781c08002aa2864d9e3f192ca0ffa18b06ed3"
+      sha256: "7c99c0e1e2fa190b48d25c81ca5e42036d5cac81430ef249027d97b0935c553f"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.9"
+    version: "5.1.0"
   xdg_directories:
     dependency: transitive
     description:

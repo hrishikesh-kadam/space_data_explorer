@@ -10,14 +10,14 @@ FIREBASE_PROJECTS=(
   "$APP_NAME_KEBAB_CASE"
 )
 OPTIONS_DART_FILES=(
-  "lib/firebase/options/dev.dart"
-  "lib/firebase/options/stag.dart"
-  "lib/firebase/options/prod.dart"
+  "lib/config/firebase/options/dev.dart"
+  "lib/config/firebase/options/stag.dart"
+  "lib/config/firebase/options/prod.dart"
 )
 PLATFORMS=(
-  "android,web"
-  "android,web"
-  "android,web"
+  "android,ios,web"
+  "android,ios,web"
+  "android,ios,web"
 )
 ANDROID_APP_IDS=(
   "$ANDROID_APP_ID.dev.release"
@@ -29,6 +29,21 @@ ANDROID_OUT_FILES=(
   "/android/app/src/stag/google-services.json"
   "/android/app/src/prod/google-services.json"
 )
+APPLE_BUNDLE_IDS=(
+  "$APPLE_BUNDLE_ID.dev.release"
+  "$APPLE_BUNDLE_ID.stag.release"
+  "$APPLE_BUNDLE_ID"
+)
+IOS_BUILD_CONFIGS=(
+  "Release-dev"
+  "Release-stag"
+  "Release-prod"
+)
+IOS_OUT_FILES=(
+  "/ios/Runner/dev/GoogleService-Info.plist"
+  "/ios/Runner/stag/GoogleService-Info.plist"
+  "/ios/Runner/prod/GoogleService-Info.plist"
+)
 
 for ((i=0; i < ${#FIREBASE_PROJECTS[@]}; i++)); do
   dart run flutterfire_cli:flutterfire configure \
@@ -37,5 +52,8 @@ for ((i=0; i < ${#FIREBASE_PROJECTS[@]}; i++)); do
     --yes \
     --platforms="${PLATFORMS[i]}" \
     --android-package-name="${ANDROID_APP_IDS[i]}" \
-    --android-out="${ANDROID_OUT_FILES[i]}"
+    --android-out="${ANDROID_OUT_FILES[i]}" \
+    --ios-bundle-id="${APPLE_BUNDLE_IDS[i]}" \
+    --ios-build-config="${IOS_BUILD_CONFIGS[i]}" \
+    --ios-out="${IOS_OUT_FILES[i]}"
 done

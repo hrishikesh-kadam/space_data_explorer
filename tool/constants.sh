@@ -14,6 +14,7 @@ APP_NAME_KEBAB_CASE="space-data-explorer"
 VERSION="$(yq .version pubspec.yaml)"
 
 ANDROID_APP_ID="dev.hrishikesh_kadam.flutter.$APP_NAME_SNAKE_CASE"
+APPLE_BUNDLE_ID="dev.hrishikesh-kadam.flutter.$APP_NAME_KEBAB_CASE"
 
 BUNDLETOOL_PATH="$ANDROID_HOME/bundletool-all.jar"
 BUNDLETOOL="java -jar $BUNDLETOOL_PATH"

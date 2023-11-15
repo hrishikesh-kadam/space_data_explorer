@@ -27,6 +27,7 @@
 - Sentry
 - LaunchImage
 - Rename the Targets
+- Add App Store IDs later to Firebase Apps and run ./tool/firebase/configure.sh
 
 ## Code shrinking / Tree-shaking / Resource shrinking / Obfuscation / Optimization
 

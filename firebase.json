@@ -18,7 +18,26 @@
   "flutter": {
     "platforms": {
       "ios": {
-        "buildConfigurations": {},
+        "buildConfigurations": {
+          "Release-dev": {
+            "projectId": "space-data-explorer-dev",
+            "appId": "1:1030109759765:ios:e4de2f56a91f87ce6b811c",
+            "uploadDebugSymbols": true,
+            "fileOutput": "ios/Runner/dev/GoogleService-Info.plist"
+          },
+          "Release-stag": {
+            "projectId": "space-data-explorer-stag",
+            "appId": "1:705512446254:ios:675b1529efcce073b382bf",
+            "uploadDebugSymbols": true,
+            "fileOutput": "ios/Runner/stag/GoogleService-Info.plist"
+          },
+          "Release-prod": {
+            "projectId": "space-data-explorer",
+            "appId": "1:684786045615:ios:ea013b0c24801f7e8cba5a",
+            "uploadDebugSymbols": true,
+            "fileOutput": "ios/Runner/prod/GoogleService-Info.plist"
+          }
+        },
         "targets": {},
         "default": {}
       },
@@ -26,6 +45,51 @@
         "buildConfigurations": {},
         "targets": {},
         "default": {}
+      },
+      "android": {
+        "buildConfigurations": {
+          "src/dev": {
+            "projectId": "space-data-explorer-dev",
+            "appId": "1:1030109759765:android:b8aad4005ccb67a06b811c",
+            "fileOutput": "android/app/src/dev/google-services.json"
+          },
+          "src/stag": {
+            "projectId": "space-data-explorer-stag",
+            "appId": "1:705512446254:android:b08675d542e54a78b382bf",
+            "fileOutput": "android/app/src/stag/google-services.json"
+          },
+          "src/prod": {
+            "projectId": "space-data-explorer",
+            "appId": "1:684786045615:android:eb67f5103c2bdbdb8cba5a",
+            "fileOutput": "android/app/src/prod/google-services.json"
+          }
+        }
+      },
+      "dart": {
+        "lib/config/firebase/options/dev.dart": {
+          "projectId": "space-data-explorer-dev",
+          "configurations": {
+            "android": "1:1030109759765:android:b8aad4005ccb67a06b811c",
+            "ios": "1:1030109759765:ios:e4de2f56a91f87ce6b811c",
+            "web": "1:1030109759765:web:8c3a343b4a1c6ea46b811c"
+          }
+        },
+        "lib/config/firebase/options/stag.dart": {
+          "projectId": "space-data-explorer-stag",
+          "configurations": {
+            "android": "1:705512446254:android:b08675d542e54a78b382bf",
+            "ios": "1:705512446254:ios:675b1529efcce073b382bf",
+            "web": "1:705512446254:web:72aad84a856b7beeb382bf"
+          }
+        },
+        "lib/config/firebase/options/prod.dart": {
+          "projectId": "space-data-explorer",
+          "configurations": {
+            "android": "1:684786045615:android:eb67f5103c2bdbdb8cba5a",
+            "ios": "1:684786045615:ios:ea013b0c24801f7e8cba5a",
+            "web": "1:684786045615:web:aede488f170c59978cba5a"
+          }
+        }
       }
     }
   }
