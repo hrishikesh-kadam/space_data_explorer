@@ -23,19 +23,19 @@
             "projectId": "space-data-explorer-dev",
             "appId": "1:1030109759765:ios:e4de2f56a91f87ce6b811c",
             "uploadDebugSymbols": true,
-            "fileOutput": "ios/Runner/dev/GoogleService-Info.plist"
+            "fileOutput": "ios/config/dev/GoogleService-Info.plist"
           },
           "Release-stag": {
             "projectId": "space-data-explorer-stag",
             "appId": "1:705512446254:ios:675b1529efcce073b382bf",
             "uploadDebugSymbols": true,
-            "fileOutput": "ios/Runner/stag/GoogleService-Info.plist"
+            "fileOutput": "ios/config/stag/GoogleService-Info.plist"
           },
           "Release-prod": {
             "projectId": "space-data-explorer",
             "appId": "1:684786045615:ios:ea013b0c24801f7e8cba5a",
             "uploadDebugSymbols": true,
-            "fileOutput": "ios/Runner/prod/GoogleService-Info.plist"
+            "fileOutput": "ios/config/prod/GoogleService-Info.plist"
           }
         },
         "targets": {},

@@ -40,9 +40,9 @@ IOS_BUILD_CONFIGS=(
   "Release-prod"
 )
 IOS_OUT_FILES=(
-  "/ios/Runner/dev/GoogleService-Info.plist"
-  "/ios/Runner/stag/GoogleService-Info.plist"
-  "/ios/Runner/prod/GoogleService-Info.plist"
+  "/ios/config/dev/GoogleService-Info.plist"
+  "/ios/config/stag/GoogleService-Info.plist"
+  "/ios/config/prod/GoogleService-Info.plist"
 )
 
 for ((i=0; i < ${#FIREBASE_PROJECTS[@]}; i++)); do
