@@ -57,3 +57,9 @@ for ((i=0; i < ${#FIREBASE_PROJECTS[@]}; i++)); do
     --ios-build-config="${IOS_BUILD_CONFIGS[i]}" \
     --ios-out="${IOS_OUT_FILES[i]}"
 done
+
+# jq . file.json | sponge file.json
+# Check if sponge is available on Git Bash for Windows
+cp firebase.json firebase.json.tmp && \
+  jq . firebase.json.tmp > firebase.json && \
+  rm firebase.json.tmp

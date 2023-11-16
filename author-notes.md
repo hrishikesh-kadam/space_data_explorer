@@ -19,15 +19,13 @@
 ### iOS
 
 - Fix log colors
-- Add flavors
 - Update .vscode/launch.json
 - Add Universal Links
 - i18n - https://docs.flutter.dev/accessibility-and-localization/internationalization#localizing-for-ios-updating-the-ios-app-bundle
 - Firebase - Crashlytics
 - Sentry
 - LaunchImage
-- Rename the Targets
-- Add App Store IDs later to Firebase Apps and run ./tool/firebase/configure.sh
+- Check if Target should be renamed
 
 ## Code shrinking / Tree-shaking / Resource shrinking / Obfuscation / Optimization
 
