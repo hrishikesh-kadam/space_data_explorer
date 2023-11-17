@@ -7,6 +7,20 @@ if [[ $LOGS_ENV_SOURCED != "true" ]]; then
 fi
 
 flutter create . --org "dev.hrishikesh_kadam.flutter"
+rm ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png
+rm ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png
+rm ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png
+rm ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png
+rm ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png
+rm ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png
+rm ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png
+rm ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png
+rm ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png
+rm ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png
+rm ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png
+rm ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png
+rm ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png
+rm ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png
 
 # For Golden File Test
 # Keep checking for any better solution for updating icons
