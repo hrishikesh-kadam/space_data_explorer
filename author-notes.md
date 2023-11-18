@@ -2,6 +2,8 @@
 
 ## TODOs
 
+- [Android] Append flavor build to Display Name
+- Add pod for macos in prerequisite
 - Android add com.google.android.gms.permission.AD_ID permission
 - About Page
   - Rate App for Android and iOS
