@@ -2,6 +2,9 @@
 
 ## TODOs
 
+- Enable flutter beta in GitHub Actions Workflow  
+  Blocked on flutterfire_cli file dependency  
+  Check by upgrading it from ^6.1.2 to 7.0.0
 - [Android] Append flavor build to Display Name
 - Add pod for macos in prerequisite
 - Android add com.google.android.gms.permission.AD_ID permission
