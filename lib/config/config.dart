@@ -15,6 +15,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import '../constants/constants.dart';
 import '../coverage_ignored.dart';
 import '../extension/go_router.dart';
+import '../extension/pubspec.dart';
 import '../globals.dart';
 import '../helper/helper.dart';
 import '../route/home/home_route.dart';
@@ -129,7 +130,7 @@ Future<void> loadPubspec() async {
   if (pubspec == null) {
     pubspec = Pubspec.parse(await rootBundle.loadString('pubspec.yaml'));
     assert(Constants.appName == pubspec!.name);
-    assert(Constants.version == pubspec!.version.toString());
+    assert(Constants.version == pubspec!.getVersionMajorMinorPatch());
   }
 }
 
