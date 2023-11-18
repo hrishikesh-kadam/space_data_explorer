@@ -16,10 +16,15 @@ jobs:
     name: CI for Contributors on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
     if: github.triggering_actor != 'dependabot[bot]'
     runs-on: ${{ matrix.runner }}
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
         runner: [ ubuntu-latest ]
-        ref: [ stable, beta ]
+        ref: [ stable ]
+        experimental: [ false ]
+        include: 
+          - ref: beta
+            experimental: true
 
     steps:
       - run: git config --global core.autocrlf false

@@ -32,10 +32,15 @@ jobs:
     needs: check-allow-cicd
     if: needs.check-allow-cicd.outputs.ALLOW_CICD == 'true'
     runs-on: ${{ matrix.runner }}
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
         runner: [ ubuntu-latest ]
-        ref: [ stable, beta ]
+        ref: [ stable ]
+        experimental: [ false ]
+        include: 
+          - ref: beta
+            experimental: true
 
     steps:
       - run: git config --global core.autocrlf false
