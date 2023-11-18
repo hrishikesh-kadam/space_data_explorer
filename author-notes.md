@@ -29,6 +29,10 @@
 - LaunchImage
 - Check if Target should be renamed
 
+#### Blockers
+
+- Need an iOS device to create Development Profile
+
 ## Code shrinking / Tree-shaking / Resource shrinking / Obfuscation / Optimization
 
 ### Android
