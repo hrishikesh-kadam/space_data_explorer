@@ -1,0 +1,101 @@
+name: cicd-ios
+
+on:
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  check-allow-cicd-ios:
+    name: Check if CICD iOS job is to be allowed
+    runs-on: ubuntu-latest
+    outputs:
+      ALLOW_CICD: ${{ steps.check.outputs.ALLOW_CICD }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: check
+        run: ./tool/github/check-allow-cicd.sh
+
+  cicd-ios:
+    name: CICD iOS on ${{ matrix.runner }} using Flutter ${{ matrix.ref }}
+    needs: check-allow-cicd-ios
+    if: needs.check-allow-cicd-ios.outputs.ALLOW_CICD == 'true'
+    runs-on: ${{ matrix.runner }}
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      matrix:
+        runner: [ macos-latest ]
+        ref: [ stable ]
+        experimental: [ false ]
+
+    steps:
+      - run: git config --global core.autocrlf false
+        if: runner.os == 'Windows'
+
+      # - run: echo '${{ toJSON(github) }}'
+
+      - id: get-checkout-ref
+        run: |
+          if [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then
+            CHECKOUT_REF="$(jq -r .pull_request.head.ref "$GITHUB_EVENT_PATH")"
+          else
+            CHECKOUT_REF="$GITHUB_REF_NAME"
+          fi
+          echo "CHECKOUT_REF=$CHECKOUT_REF" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.get-checkout-ref.outputs.CHECKOUT_REF }}
+          fetch-depth: '10'
+      - uses: actions/checkout@v4
+        with:
+          repository: 'hrishikesh-kadam/space_data_explorer_secrets'
+          path: 'secrets'
+          token: ${{ secrets.SECRETS_REPO_TOKEN }}
+      - run: git submodule update --init --recursive
+
+      - uses: hrishikesh-kadam/setup-flutter@v1
+        with:
+          ref: ${{ matrix.ref }}
+          setFlutterRootPath: 'true'
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Setup Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+          working-directory: android
+
+      - run: ./tool/prerequisite.sh
+
+      # https://github.com/actions/cache/blob/main/examples.md#java---gradle
+      - name: Cache Gradle
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ matrix.runner }}-flutter-${{ matrix.ref }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+
+      - run: ./tool/ios/ci.sh
+
+      - uses: codecov/codecov-action@v3
+        with:
+          files: coverage/lcov.info
+          name: cicd-${{ matrix.runner }}-${{ matrix.ref }}
+
+      # - run: ./tool/cd.sh
+      #   if: matrix.ref == 'stable'
+
+      - run: ./tool/android/stop-gradle.sh
