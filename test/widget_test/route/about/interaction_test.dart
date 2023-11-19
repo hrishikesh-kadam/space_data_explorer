@@ -14,10 +14,10 @@ void main() {
       await tapWebAppUri(tester);
     });
 
-    // TODO(hrishikesh-kadam): not hit test on the specified widget
     testWidgets('Tap all links, iOS', (tester) async {
       await pumpAboutRouteAsInitialLocation(tester);
-      await tapGooglePlayBadge(tester);
-    }, variant: TargetPlatformVariant.only(TargetPlatform.iOS), skip: true);
+      // TODO(hrishikesh-kadam): not hit test on the specified widget
+      // await tapGooglePlayBadge(tester);
+    }, variant: TargetPlatformVariant.only(TargetPlatform.iOS));
   });
 }

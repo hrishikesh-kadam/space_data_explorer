@@ -23,6 +23,7 @@
 
 ### iOS
 
+- Delete Runner scheme
 - Fix log colors
 - Update .vscode/launch.json
 - Add Universal Links
