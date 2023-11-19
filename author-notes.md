@@ -2,6 +2,7 @@
 
 ## TODOs
 
+- Write a script ./tool/android/download-metadata.sh
 - Enable flutter beta in GitHub Actions Workflow  
   Blocked on flutterfire_cli file dependency  
   Check by upgrading it from ^6.1.2 to 7.0.0
@@ -17,6 +18,7 @@
 - Resolution-aware app icon image
 - Add scroll to top and bottom for list views
 - React to RTL from Android Developer settings
+- Try to write rotate-keys.sh script for ios
 
 ## Future Tasks
 

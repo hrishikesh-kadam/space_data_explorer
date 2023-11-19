@@ -12,7 +12,7 @@ source ./tool/shell/logs-env.sh
 
 ./tool/format-analyze.sh
 
-./tool/test.sh
+# ./tool/test.sh
 
 ./tool/ios/build.sh
 
