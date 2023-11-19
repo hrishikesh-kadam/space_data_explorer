@@ -227,3 +227,10 @@ if [[ $ROLE == "member" ]]; then
   fi
   popd &> /dev/null
 fi
+
+if [[ $(uname -s) =~ ^"Darwin" ]]; then
+  if [[ ! -x $(command -v pod) ]]; then
+    brew install cocoapods
+    pod --version
+  fi
+fi
