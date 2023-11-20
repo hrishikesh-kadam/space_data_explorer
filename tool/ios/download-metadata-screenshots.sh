@@ -20,12 +20,12 @@ FLAVOR_ENV=(
 
 for i in "${!APP_IDENTIFIERS[@]}"; do
 
-  bundle exec fastlane deliver download_metadata \
+  bundle exec fastlane upload_to_app_store download_metadata \
     --app_identifier "${APP_IDENTIFIERS[i]}" \
     --metadata_path "./fastlane/${FLAVOR_ENV[i]}/metadata" \
     --force
 
-  bundle exec fastlane deliver download_screenshots \
+  bundle exec fastlane upload_to_app_store download_screenshots \
     --app_identifier "${APP_IDENTIFIERS[i]}" \
     --screenshots_path "./fastlane/${FLAVOR_ENV[i]}/screenshots" \
     --force
