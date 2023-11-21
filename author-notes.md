@@ -3,9 +3,6 @@
 ## TODOs
 
 - Write a script ./tool/android/download-metadata.sh
-- Enable flutter beta in GitHub Actions Workflow  
-  Blocked on flutterfire_cli file dependency  
-  Check by upgrading it from ^6.1.2 to 7.0.0
 - [Android] Append flavor build to Display Name
 - Android add com.google.android.gms.permission.AD_ID permission
 - About Page

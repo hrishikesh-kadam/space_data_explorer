@@ -46,7 +46,7 @@ IOS_OUT_FILES=(
 )
 
 for ((i=0; i < ${#FIREBASE_PROJECTS[@]}; i++)); do
-  dart run flutterfire_cli:flutterfire configure \
+  flutterfire configure \
     --project="${FIREBASE_PROJECTS[i]}" \
     --out="${OPTIONS_DART_FILES[i]}" \
     --yes \

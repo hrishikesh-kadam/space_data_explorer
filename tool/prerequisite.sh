@@ -205,6 +205,10 @@ if [[ $ROLE == "contributor" || $ROLE == "member" ]]; then
     printf "firebase "
     firebase --version
   fi
+  # if [[ ! -x $(command -v flutterfire) ]]; then
+  #   dart pub global activate flutterfire_cli ^0.3.0-dev.18
+  #   CI=true flutterfire --version
+  # fi
   if [[ ! -x $(command -v sentry-cli) ]]; then
     npm install -g @sentry/cli
     sentry-cli --version
