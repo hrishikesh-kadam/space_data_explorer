@@ -38,7 +38,7 @@ jobs:
         include:
           - runner: ubuntu-latest
             ref: beta
-            experimental: true
+            experimental: false
 
     steps:
       - run: git config --global core.autocrlf false
