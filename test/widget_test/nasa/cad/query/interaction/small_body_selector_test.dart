@@ -141,6 +141,8 @@ void main() {
       await pumpCadRouteAsInitialLocation(tester);
       await tapSmallBodySelector(tester, smallBodySelector);
       await tester.tap(textFieldFinder);
+      // Required from flutter 3.17.0-0.0.pre beta
+      await tester.pumpAndSettle();
       await tester.tap(titleFinder);
       expect(
         tester.widget<TextField>(textFieldFinder).focusNode!.hasFocus,
