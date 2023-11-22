@@ -38,8 +38,9 @@ jobs:
         runner: [ ubuntu-latest ]
         ref: [ stable ]
         experimental: [ false ]
-        include: 
-          - ref: beta
+        include:
+          - runner: ubuntu-latest
+            ref: beta
             experimental: false
 
     steps:
