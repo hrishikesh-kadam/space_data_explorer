@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
@@ -32,6 +34,19 @@ void main() {
       expect(state.distanceRangeState.valueList, valueListDefault);
       expect(state.distanceRangeState.textList, textListDefault);
       expect(state.distanceRangeState.unitList, unitListDefault);
+    });
+
+    testWidgets('Tap textfield, tap outside', (tester) async {
+      const filter = DistanceFilter.max;
+      await pumpCadRouteAsInitialLocation(tester);
+      final textFieldFinder = getTextFieldFinder(filter);
+      await tester.tap(textFieldFinder);
+      await tester.pumpAndSettle();
+      await tester.tap(titleFinder);
+      expect(
+        tester.widget<TextField>(textFieldFinder).focusNode!.hasFocus,
+        false,
+      );
     });
 
     testWidgets('For max, select non-default unit, empty value, tap outside',

@@ -62,6 +62,7 @@ class ValueRangeFilterWidget<V, U> extends StatefulWidget {
   final double spacing;
   final ValueRangeChanged<V, U>? onValueRangeChanged;
   static const String defaultKey = 'value_range_filter_widget_key';
+  static const String titleKey = 'title_key';
   static const String valueTextFieldKeyPrefix = 'text_field_';
   static const String unitTextKeyPrefix = 'unit_text_';
   static const String unitDropdownItemKeyPrefix = 'unit_dropdown_item_';
@@ -147,6 +148,7 @@ class _ValueRangeFilterWidgetState<V, U>
       children: [
         if (widget.title != null)
           Text(
+            key: Key('${widget.keyPrefix}${ValueRangeFilterWidget.titleKey}'),
             widget.title!,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleMedium,

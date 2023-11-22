@@ -12,6 +12,10 @@ import '../cad_route.dart';
 enum DistanceFilter { min, max }
 
 final Finder distFilterWidgetFinder = find.byKey(CadScreen.distFilterKey);
+final Finder titleFinder = find.byKey(const Key(
+  '${CadScreen.distFilterKeyPrefix}'
+  '${ValueRangeFilterWidget.titleKey}',
+));
 
 const DistanceUnit defaultUnit = SbdbCadQueryParameters.distUnitDefault;
 final DistanceUnit nonDefaultUnit = CadScreen.distFilterUnits.firstWhere(
