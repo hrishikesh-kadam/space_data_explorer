@@ -420,7 +420,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
 			buildSettings = {
+				APP_NAME_KEBAB_CASE = "space-data-explorer";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
+				BUNDLE_ID_SUFFIX = .dev.debug;
+				BUNDLE_NAME_SUFFIX = "-dev-debug";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
 				DEVELOPMENT_TEAM = Q798GS4Z62;
@@ -435,8 +439,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}.dev.debug";
-				PRODUCT_NAME = "Space Data Explorer Dev Debug";
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
+				PRODUCT_NAME = "${PRODUCT_NAME_BASE}${PRODUCT_NAME_SUFFIX}";
+				PRODUCT_NAME_BASE = "Space Data Explorer";
+				PRODUCT_NAME_SUFFIX = " Dev Debug";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -503,7 +509,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
+				APP_NAME_KEBAB_CASE = "space-data-explorer";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
+				BUNDLE_ID_SUFFIX = .dev.release;
+				BUNDLE_NAME_SUFFIX = "-dev-release";
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -521,8 +531,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}.dev.release";
-				PRODUCT_NAME = "Space Data Explorer Dev Release";
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
+				PRODUCT_NAME = "${PRODUCT_NAME_BASE}${PRODUCT_NAME_SUFFIX}";
+				PRODUCT_NAME_BASE = "Space Data Explorer";
+				PRODUCT_NAME_SUFFIX = " Dev Release";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Space Data Explorer Dev Release Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -588,7 +600,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
+				APP_NAME_KEBAB_CASE = "space-data-explorer";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
+				BUNDLE_ID_SUFFIX = .dev.profile;
+				BUNDLE_NAME_SUFFIX = "-dev-profile";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
 				DEVELOPMENT_TEAM = Q798GS4Z62;
@@ -603,8 +619,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}.dev.profile";
-				PRODUCT_NAME = "Space Data Explorer Dev Profile";
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
+				PRODUCT_NAME = "${PRODUCT_NAME_BASE}${PRODUCT_NAME_SUFFIX}";
+				PRODUCT_NAME_BASE = "Space Data Explorer";
+				PRODUCT_NAME_SUFFIX = " Dev Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -673,7 +691,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
 			buildSettings = {
+				APP_NAME_KEBAB_CASE = "space-data-explorer";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
+				BUNDLE_ID_SUFFIX = .stag.debug;
+				BUNDLE_NAME_SUFFIX = "-stag-debug";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
 				DEVELOPMENT_TEAM = Q798GS4Z62;
@@ -687,8 +709,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}.stag.debug";
-				PRODUCT_NAME = "Space Data Explorer Stag Debug";
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
+				PRODUCT_NAME = "${PRODUCT_NAME_BASE}${PRODUCT_NAME_SUFFIX}";
+				PRODUCT_NAME_BASE = "Space Data Explorer";
+				PRODUCT_NAME_SUFFIX = " Stag Debug";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -758,7 +782,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
 			buildSettings = {
+				APP_NAME_KEBAB_CASE = "space-data-explorer";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
+				BUNDLE_ID_SUFFIX = .prod.debug;
+				BUNDLE_NAME_SUFFIX = "-prod-debug";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
 				DEVELOPMENT_TEAM = Q798GS4Z62;
@@ -773,8 +801,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}.prod.debug";
-				PRODUCT_NAME = "Space Data Explorer Prod Debug";
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
+				PRODUCT_NAME = "${PRODUCT_NAME_BASE}${PRODUCT_NAME_SUFFIX}";
+				PRODUCT_NAME_BASE = "Space Data Explorer";
+				PRODUCT_NAME_SUFFIX = " Prod Debug";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -841,7 +871,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
+				APP_NAME_KEBAB_CASE = "space-data-explorer";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
+				BUNDLE_ID_SUFFIX = .stag.release;
+				BUNDLE_NAME_SUFFIX = "-stag-release";
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
@@ -857,8 +891,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}.stag.release";
-				PRODUCT_NAME = "Space Data Explorer Stag Release";
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
+				PRODUCT_NAME = "${PRODUCT_NAME_BASE}${PRODUCT_NAME_SUFFIX}";
+				PRODUCT_NAME_BASE = "Space Data Explorer";
+				PRODUCT_NAME_SUFFIX = " Stag Release";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Space Data Explorer Stag Release Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -925,7 +961,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
+				APP_NAME_KEBAB_CASE = "space-data-explorer";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
+				BUNDLE_ID_SUFFIX = "";
+				BUNDLE_NAME_SUFFIX = "-prod-release";
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -942,8 +982,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}";
-				PRODUCT_NAME = "Space Data Explorer";
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
+				PRODUCT_NAME = "${PRODUCT_NAME_BASE}${PRODUCT_NAME_SUFFIX}";
+				PRODUCT_NAME_BASE = "Space Data Explorer";
+				PRODUCT_NAME_SUFFIX = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Space Data Explorer Prod Release Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1009,7 +1051,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
+				APP_NAME_KEBAB_CASE = "space-data-explorer";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
+				BUNDLE_ID_SUFFIX = .stag.profile;
+				BUNDLE_NAME_SUFFIX = "-stag-profile";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
 				DEVELOPMENT_TEAM = Q798GS4Z62;
@@ -1023,8 +1069,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}.stag.profile";
-				PRODUCT_NAME = "Space Data Explorer Stag Profile";
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
+				PRODUCT_NAME = "${PRODUCT_NAME_BASE}${PRODUCT_NAME_SUFFIX}";
+				PRODUCT_NAME_BASE = "Space Data Explorer";
+				PRODUCT_NAME_SUFFIX = " Stag Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1088,7 +1136,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
+				APP_NAME_KEBAB_CASE = "space-data-explorer";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
+				BUNDLE_ID_SUFFIX = .prod.profile;
+				BUNDLE_NAME_SUFFIX = "-prod-profile";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
 				DEVELOPMENT_TEAM = Q798GS4Z62;
@@ -1102,8 +1154,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}.prod.profile";
-				PRODUCT_NAME = "Space Data Explorer Prod Profile";
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
+				PRODUCT_NAME = "${PRODUCT_NAME_BASE}${PRODUCT_NAME_SUFFIX}";
+				PRODUCT_NAME_BASE = "Space Data Explorer";
+				PRODUCT_NAME_SUFFIX = " Prod Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
