@@ -2,8 +2,7 @@
 
 set -e -o pipefail
 
-# FLAVOR_ENV=$(./tool/get-flavor-env.sh)
-FLAVOR_ENV="prod"
+FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
 flutter build ipa \
   --flavor "$FLAVOR_ENV" \
