@@ -2,8 +2,12 @@
 
 set -e -o pipefail
 
-source ./secrets/ios/source.sh
 source ./tool/constants.sh
+
+API_KEY_PATH_ARG=()
+if [[ -s ./secrets/.git ]]; then
+  API_KEY_PATH_ARG=(--api_key_path "../secrets/ios/app-store-connect/fastlane-key.json")
+fi
 
 pushd ios &> /dev/null
 
@@ -21,11 +25,13 @@ FLAVOR_ENV=(
 for i in "${!APP_IDENTIFIERS[@]}"; do
 
   bundle exec fastlane upload_to_app_store download_metadata \
+    "${API_KEY_PATH_ARG[@]}" \
     --app_identifier "${APP_IDENTIFIERS[i]}" \
     --metadata_path "./fastlane/${FLAVOR_ENV[i]}/metadata" \
     --force
 
   # bundle exec fastlane upload_to_app_store download_screenshots \
+  #   "${API_KEY_PATH_ARG[@]}" \
   #   --app_identifier "${APP_IDENTIFIERS[i]}" \
   #   --screenshots_path "./fastlane/${FLAVOR_ENV[i]}/screenshots" \
   #   --force
