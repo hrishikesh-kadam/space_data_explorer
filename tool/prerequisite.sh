@@ -230,6 +230,19 @@ if [[ $ROLE == "member" ]]; then
     fi
   fi
   popd &> /dev/null
+
+  if [[ $(uname -s) =~ ^"Darwin" ]]; then
+    pushd ios &> /dev/null
+    BUNDLE_CHECK_OUTPUT=$(bundle check) || true
+    if [[ $BUNDLE_CHECK_OUTPUT != "The Gemfile's dependencies are satisfied" ]]; then
+      bundle install
+    else
+      if [[ $GITHUB_ACTIONS == "true" ]]; then
+        echo "$BUNDLE_CHECK_OUTPUT"
+      fi
+    fi
+    popd &> /dev/null
+  fi
 fi
 
 if [[ $(uname -s) =~ ^"Darwin" ]]; then
