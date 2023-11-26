@@ -8,6 +8,7 @@ if shopt -qo pipefail; then PARENT_PIPEFAIL=true; else PARENT_PIPEFAIL=false; fi
 
 set -e -o pipefail
 
+APP_NAME="Space Data Explorer"
 APP_NAME_SNAKE_CASE="$(yq .name pubspec.yaml)"
 APP_NAME_KEBAB_CASE="space-data-explorer"
 
