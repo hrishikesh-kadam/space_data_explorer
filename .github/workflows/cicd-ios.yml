@@ -61,6 +61,11 @@ jobs:
           ref: ${{ matrix.ref }}
           setFlutterRootPath: 'true'
 
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
       - uses: actions/setup-python@v4
         with:
           python-version: '3.x'
