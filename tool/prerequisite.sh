@@ -246,7 +246,11 @@ if [[ $ROLE == "member" ]]; then
 fi
 
 if [[ $(uname -s) =~ ^"Darwin" ]]; then
-  if [[ ! -x $(command -v pod) ]]; then
+  # https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md#package-management
+  # Shows CocoaPods 1.14.2, but is actually 1.12.1 
+  if [[ $GITHUB_ACTIONS == "true" ]]; then
+    gem install cocoapods
+  elif [[ ! -x $(command -v pod) ]]; then
     brew install cocoapods
     pod --version
   fi
