@@ -16,4 +16,4 @@ source ./tool/shell/logs-env.sh
 
 ./tool/ios/build.sh
 
-git status -s
+git diff
