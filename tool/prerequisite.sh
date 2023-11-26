@@ -249,7 +249,9 @@ if [[ $(uname -s) =~ ^"Darwin" ]]; then
   # https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md#package-management
   # Shows CocoaPods 1.14.2, but is actually 1.12.1 
   if [[ $GITHUB_ACTIONS == "true" ]]; then
+    pod --version
     gem install cocoapods
+    pod --version
   elif [[ ! -x $(command -v pod) ]]; then
     brew install cocoapods
     pod --version
