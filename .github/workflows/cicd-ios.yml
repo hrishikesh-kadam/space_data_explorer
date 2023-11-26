@@ -61,11 +61,6 @@ jobs:
           ref: ${{ matrix.ref }}
           setFlutterRootPath: 'true'
 
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
       - uses: actions/setup-python@v4
         with:
           python-version: '3.x'
@@ -75,18 +70,9 @@ jobs:
         with:
           ruby-version: '3.2'
           bundler-cache: true
-          working-directory: android
+          working-directory: ios
 
       - run: ./tool/prerequisite.sh
-
-      # https://github.com/actions/cache/blob/main/examples.md#java---gradle
-      - name: Cache Gradle
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: gradle-${{ matrix.runner }}-flutter-${{ matrix.ref }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
 
       - run: ./tool/ios/ci.sh
 
@@ -97,5 +83,3 @@ jobs:
 
       # - run: ./tool/cd.sh
       #   if: matrix.ref == 'stable'
-
-      - run: ./tool/android/stop-gradle.sh
