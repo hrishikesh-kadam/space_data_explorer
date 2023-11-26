@@ -63,6 +63,7 @@ jobs:
         with:
           ref: ${{ matrix.ref }}
           setFlutterRootPath: 'true'
+          addPubCacheBinToPath: 'true'
 
       - uses: actions/setup-java@v3
         with:

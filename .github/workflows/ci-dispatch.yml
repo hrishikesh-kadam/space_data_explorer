@@ -56,6 +56,7 @@ jobs:
         with:
           ref: ${{ inputs.ref }}
           setFlutterRootPath: 'true'
+          addPubCacheBinToPath: 'true'
 
       - uses: actions/setup-java@v3
         with:
