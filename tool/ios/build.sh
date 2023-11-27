@@ -24,6 +24,7 @@ if [[ -s ./secrets/.git ]]; then
 fi
 
 flutter build ipa \
+  --verbose \
   --flavor "$FLAVOR_ENV" \
   --dart-define="FLAVOR_ENV=$FLAVOR_ENV" \
   --build-number "$INCREMENTED_BUILD_NUMBER" \
