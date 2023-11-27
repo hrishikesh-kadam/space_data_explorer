@@ -2,6 +2,7 @@
 
 ## TODOs
 
+- Cross-check Play Store's Data Safety and App Store's App Privacy sections
 - Write a script ./tool/android/download-metadata.sh
 - [Android] Append flavor build to Display Name
 - Android add com.google.android.gms.permission.AD_ID permission
