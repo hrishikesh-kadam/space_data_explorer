@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
+# $1 FLAVOR_ENV dev, stag, prod.
+
 set -e -o pipefail
 
-source ./tool/constants.sh
+FLAVOR_ENV=${1:?"Missing argument \$1 FLAVOR_ENV"}
 
-FLAVOR_ENV=$(./tool/get-flavor-env.sh)
+source ./tool/constants.sh
 
 if [[ $FLAVOR_ENV == "prod" ]]; then
   echo "$APPLE_BUNDLE_ID"

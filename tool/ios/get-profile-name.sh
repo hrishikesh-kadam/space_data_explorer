@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
+# $1 FLAVOR_ENV dev, stag, prod.
+
 set -e -o pipefail
 
 source ./tool/constants.sh
 
-FLAVOR_ENV=$(./tool/get-flavor-env.sh)
+FLAVOR_ENV=${1:?"Missing argument \$1 FLAVOR_ENV"}
 
 if [[ $FLAVOR_ENV == "prod" ]]; then
   echo "$APP_NAME Prod Release Profile"

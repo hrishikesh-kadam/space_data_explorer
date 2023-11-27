@@ -13,6 +13,7 @@ APP_NAME_SNAKE_CASE="$(yq .name pubspec.yaml)"
 APP_NAME_KEBAB_CASE="space-data-explorer"
 
 VERSION="$(yq .version pubspec.yaml)"
+VERSION_MAJOR_MINOR_PATCH=${VERSION%+*}
 
 ANDROID_APP_ID="dev.hrishikesh_kadam.flutter.$APP_NAME_SNAKE_CASE"
 APPLE_BUNDLE_ID="dev.hrishikesh-kadam.flutter.$APP_NAME_KEBAB_CASE"
@@ -22,7 +23,7 @@ BUNDLETOOL="java -jar $BUNDLETOOL_PATH"
 
 export SENTRY_ORG="hrishikesh-kadam"
 export SENTRY_PROJECT="$APP_NAME_KEBAB_CASE"
-export SENTRY_RELEASE="$APP_NAME_KEBAB_CASE@$VERSION"
+export SENTRY_RELEASE="$APP_NAME_KEBAB_CASE@$VERSION_MAJOR_MINOR_PATCH"
 
 if [ $PARENT_ERREXIT = "true" ]; then set -e; else set +e; fi
 if [ $PARENT_PIPEFAIL = "true" ]; then set -o pipefail; else set +o pipefail; fi

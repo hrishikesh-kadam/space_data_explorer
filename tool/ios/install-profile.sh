@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
+# $1 FLAVOR_ENV dev, stag, prod.
+
 set -e -o pipefail
 
-PROFILE_NAME="$(./tool/ios/get-profile-name.sh)"
+FLAVOR_ENV=${1:?"Missing argument \$1 FLAVOR_ENV"}
+
+PROFILE_NAME="$(./tool/ios/get-profile-name.sh "$FLAVOR_ENV")"
 
 API_KEY_PATH_ARG=()
 if [[ -s ./secrets/.git ]]; then
@@ -10,7 +14,7 @@ if [[ -s ./secrets/.git ]]; then
   API_KEY_PATH_ARG=(--api_key_path "../secrets/ios/app-store-connect/fastlane-key.json")
 fi
 
-APP_IDENTIFIER="$(./tool/ios/get-app-identifier.sh)"
+APP_IDENTIFIER="$(./tool/ios/get-app-identifier.sh "$FLAVOR_ENV")"
 
 pushd ios &> /dev/null
 
