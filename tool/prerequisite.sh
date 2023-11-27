@@ -185,6 +185,10 @@ if [[ ! -s "$ANDROID_HOME/bundletool-all.jar" ]]; then
   ./tool/android/install-bundletool.sh
 fi
 
+if [[ $(uname -s) =~ ^"Darwin" ]]; then
+  ./tool/ios/xcode-select.sh
+fi
+
 check_command_on_path node
 check_command_on_path npm
 NPM_CONFIG_PREFIX="$(npm config get prefix)"
