@@ -11,6 +11,7 @@ on:
         options:
           - 'macos-latest'
           - 'macos-13'
+          - 'macos-13-xlarge'
       ref:
         description: 'Flutter channel, version or git reference'
         required: true
