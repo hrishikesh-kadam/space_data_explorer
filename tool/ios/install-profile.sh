@@ -22,7 +22,8 @@ APP_IDENTIFIER="$(./tool/ios/get-app-identifier.sh "$FLAVOR_ENV")"
 
 pushd ios &> /dev/null
 
-if bundle exec fastlane run get_provisioning_profile manage \
+# Deliberately avoiding run keyword here, not working if present
+if bundle exec fastlane get_provisioning_profile manage \
   | grep "$PROFILE_NAME" &> /dev/null; then
   echo "$PROFILE_NAME already installed locally"
 else

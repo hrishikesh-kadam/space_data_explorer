@@ -2,21 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>generateAppStoreInformation</key>
-	<false/>
-	<key>manageAppVersionAndBuildNumber</key>
-	<true/>
 	<key>method</key>
 	<string>app-store</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>dev.hrishikesh-kadam.flutter.space-data-explorer.stag.release</key>
+		<string>Space Data Explorer Stag Release Profile</string>
+	</dict>
+	<key>signingCertificate</key>
+	<string>Apple Distribution</string>
 	<key>signingStyle</key>
-	<string>automatic</string>
-	<key>stripSwiftSymbols</key>
-	<true/>
+	<string>manual</string>
 	<key>teamID</key>
 	<string>Q798GS4Z62</string>
-	<key>testFlightInternalTestingOnly</key>
-	<false/>
-	<key>uploadSymbols</key>
-	<true/>
 </dict>
 </plist>
