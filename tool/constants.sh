@@ -8,9 +8,12 @@ if shopt -qo pipefail; then PARENT_PIPEFAIL=true; else PARENT_PIPEFAIL=false; fi
 
 set -e -o pipefail
 
-APP_NAME="Space Data Explorer"
 APP_NAME_SNAKE_CASE="$(yq .name pubspec.yaml)"
-APP_NAME_KEBAB_CASE="space-data-explorer"
+APP_NAME_KEBAB_CASE="${APP_NAME_SNAKE_CASE//_/-}"
+# shellcheck disable=SC2206
+APP_NAME_ARRAY=(${APP_NAME_SNAKE_CASE//_/ })
+APP_NAME=${APP_NAME_ARRAY[*]@u}
+unset APP_NAME_ARRAY
 
 VERSION="$(yq .version pubspec.yaml)"
 VERSION_MAJOR_MINOR_PATCH=${VERSION%+*}

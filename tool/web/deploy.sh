@@ -23,7 +23,7 @@ else
   UPLOAD_SOURCEMAPS="true"
 fi
 
-_firebase use $FIREBASE_PROJECT_ID
+_firebase use "$FIREBASE_PROJECT_ID"
 if [[ $FIREBASE_CHANNEL_ID == "live" ]]; then
   _firebase deploy --only hosting
 else

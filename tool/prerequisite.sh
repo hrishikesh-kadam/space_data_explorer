@@ -25,6 +25,15 @@ check_directory_on_path() {
 ROLE=${1//--}
 : "${ROLE:=member}"
 
+if (( BASH_VERSINFO[0] < 5 )); then
+  if [[ $(uname -s) =~ ^"Darwin" ]]; then
+    brew install bash
+  else
+    log_error_with_exit "Please install Bash with version atleast 5" 1
+  fi
+  bash --version
+fi
+
 check_command_on_path flutter
 if ! export -p | grep "declare -x FLUTTER_ROOT=" &> /dev/null; then
   log_error_with_exit "FLUTTER_ROOT exported variable not found" 1

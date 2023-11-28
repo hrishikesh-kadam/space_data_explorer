@@ -6,7 +6,7 @@ on:
       runner:
         description: 'Runner OS'
         required: true
-        default: 'macos-latest'
+        default: 'macos-13'
         type: choice
         options:
           - 'macos-latest'
@@ -100,5 +100,5 @@ jobs:
           files: coverage/lcov.info
           name: cicd-${{ inputs.runner }}-${{ inputs.ref }}
 
-      # - run: ./tool/cd.sh
-      #   if: inputs.ref == 'stable'
+      - run: ./tool/ios/deploy.sh
+        if: inputs.ref == 'stable'
