@@ -11,7 +11,11 @@ PROFILE_NAME="$(./tool/ios/get-profile-name.sh "$FLAVOR_ENV")"
 API_KEY_PATH_ARG=()
 if [[ -s ./secrets/.git ]]; then
   ./secrets/ios/private-keys/import.sh
-  API_KEY_PATH_ARG=(--api_key_path "../secrets/ios/app-store-connect/fastlane-key.json")
+  if [[ $GITHUB_ACTIONS == "true" ]]; then
+    API_KEY_PATH_ARG=(--api_key_path "../secrets/ios/app-store-connect/non-interactive.json")
+  else
+    API_KEY_PATH_ARG=(--api_key_path "../secrets/ios/app-store-connect/interactive.json")
+  fi
 fi
 
 APP_IDENTIFIER="$(./tool/ios/get-app-identifier.sh "$FLAVOR_ENV")"
