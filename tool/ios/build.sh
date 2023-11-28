@@ -29,6 +29,7 @@ if [[ $GITHUB_ACTIONS == "true" ]]; then
 
   if [[ -s ./secrets/.git ]]; then
     ./tool/ios/install-profile.sh "$FLAVOR_ENV"
+    ls -al ~/Library/MobileDevice/Provisioning\ Profiles
     xcodebuild -exportArchive \
       -archivePath "./build/ios/archive/$APP_NAME ${FLAVOR_ENV@u} Release.xcarchive" \
       -exportPath "./build/ios/ipa" \
