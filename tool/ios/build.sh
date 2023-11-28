@@ -6,6 +6,8 @@ if [[ $LOGS_ENV_SOURCED != "true" ]]; then
   source ./tool/shell/logs-env.sh
 fi
 
+source ./tool/constants.sh
+
 FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
 if [[ -s ./secrets/.git ]]; then
@@ -26,6 +28,7 @@ if [[ $GITHUB_ACTIONS == "true" ]]; then
     --no-codesign
 
   if [[ -s ./secrets/.git ]]; then
+    ./tool/ios/install-profile.sh "$FLAVOR_ENV"
     xcodebuild -exportArchive \
       -archivePath "./build/ios/archive/$APP_NAME ${FLAVOR_ENV@u} Release.xcarchive" \
       -exportPath "./build/ios/ipa" \
