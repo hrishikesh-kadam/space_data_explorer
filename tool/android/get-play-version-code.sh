@@ -16,6 +16,7 @@ TRACK=$(./tool/android/get-track-from-flavor-env.sh "$FLAVOR_ENV")
 
 pushd android &> /dev/null
 PLAY_VERSION_CODE=$(
+  # Deliberately avoiding run keyword here, not working if present
   bundle exec fastlane get_play_version_code \
     package_name:"$APPLICATION_ID" \
     track:"$TRACK" \

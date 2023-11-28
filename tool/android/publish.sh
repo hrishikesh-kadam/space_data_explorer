@@ -38,14 +38,12 @@ TRACK=$(./tool/android/get-track-from-flavor-env.sh "$FLAVOR_ENV")
   "$FLAVOR_ENV" "$VERSION_CODE" "$VERSION_NAME"
 
 pushd android &> /dev/null
-
-bundle exec fastlane upload_to_play_store \
-  --package_name "$APPLICATION_ID" \
-  --version-name "$VERSION_CODE ($VERSION_NAME)" \
-  --track "$TRACK" \
-  --metadata_path "./fastlane/$FLAVOR_ENV/metadata/android" \
-  --aab ".$BUNDLE_FILE"
-
+bundle exec fastlane run upload_to_play_store \
+  package_name:"$APPLICATION_ID" \
+  version_name:"$VERSION_CODE ($VERSION_NAME)" \
+  track:"$TRACK" \
+  metadata_path:"./fastlane/$FLAVOR_ENV/metadata/android" \
+  aab:".$BUNDLE_FILE"
 popd &> /dev/null
 
 FIREBASE_APP_ID=$( \
