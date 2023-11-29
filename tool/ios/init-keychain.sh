@@ -2,6 +2,7 @@
 
 # References:
 #   - https://docs.github.com/en/actions/deployment/deploying-xcode-applications/installing-an-apple-certificate-on-macos-runners-for-xcode-development
+#   - https://github.com/Apple-Actions/import-codesign-certs/blob/master/src/security.ts
 
 set -e -o pipefail
 
@@ -15,4 +16,6 @@ fi
 security create-keychain -p "$MAC_KEYCHAIN_PASSWORD" "$MAC_KEYCHAIN_PATH"
 security set-keychain-settings -lut 21600 "$MAC_KEYCHAIN_PATH"
 security unlock-keychain -p "$MAC_KEYCHAIN_PASSWORD" "$MAC_KEYCHAIN_PATH"
-security list-keychains -d user -s "$MAC_KEYCHAIN_PATH"
+# shellcheck disable=SC2046
+security list-keychains -d user \
+  -s $(security list-keychains -d user | tr -d \") "$MAC_KEYCHAIN_PATH"

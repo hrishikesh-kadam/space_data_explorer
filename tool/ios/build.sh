@@ -20,7 +20,7 @@ else
 fi
 
 # https://github.com/hrishikesh-kadam/space_data_explorer/issues/98
-if [[ $GITHUB_ACTIONS == "true" ]]; then
+if [[ $GITHUB_ACTIONS != "true" ]]; then
   flutter build ipa \
     --flavor "$FLAVOR_ENV" \
     --dart-define="FLAVOR_ENV=$FLAVOR_ENV" \

@@ -1,18 +1,26 @@
 #!/usr/bin/env bash
 
+# References:
+#   - https://docs.github.com/en/actions/deployment/deploying-xcode-applications/installing-an-apple-certificate-on-macos-runners-for-xcode-development
+#   - https://github.com/Apple-Actions/import-codesign-certs/blob/master/src/security.ts
+
 set -e -o pipefail
 
 # shellcheck disable=SC1091
 source ./secrets/ios/source.sh
 
 if [[ $CI == "true" ]]; then
-  security import "$APPLE_DIST_KEY_PATH" \
-    -P "$APPLE_DIST_KEY_PASSWORD" \
-    -A \
-    -t cert \
+  security import "$APPLE_DIST_IDENTITY_PATH" \
+    -k "$MAC_KEYCHAIN_PATH" \
     -f pkcs12 \
-    -k "$MAC_KEYCHAIN_PATH"
+    -P "$APPLE_DIST_IDENTITY_PASSWORD" \
+    -T /usr/bin/codesign
+  security set-key-partition-list \
+    -S apple-tool:,apple: \
+    -k "$MAC_KEYCHAIN_PASSWORD" \
+    "$MAC_KEYCHAIN_PATH"
 else
-  security import "$APPLE_DIST_KEY_PATH" \
-    -P "$APPLE_DIST_KEY_PASSWORD"
+  security import "$APPLE_DIST_IDENTITY_PATH" \
+    -P "$APPLE_DIST_IDENTITY_PASSWORD"
 fi
+security find-identity -v -p codesigning
