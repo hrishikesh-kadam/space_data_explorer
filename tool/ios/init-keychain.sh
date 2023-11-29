@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# References:
+#   - https://docs.github.com/en/actions/deployment/deploying-xcode-applications/installing-an-apple-certificate-on-macos-runners-for-xcode-development
+
 set -e -o pipefail
 
 # shellcheck disable=SC1091
