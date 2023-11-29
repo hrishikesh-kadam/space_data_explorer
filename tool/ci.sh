@@ -18,4 +18,8 @@ source ./tool/shell/logs-env.sh
 
 ./tool/android/build.sh
 
+if [[ $(uname -s) =~ ^"Darwin" ]]; then
+  ./tool/ios/build.sh
+fi
+
 git status -s
