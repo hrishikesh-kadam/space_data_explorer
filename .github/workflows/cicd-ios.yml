@@ -91,7 +91,7 @@ jobs:
           bundler-cache: true
           working-directory: ios
 
-      - run: ./tool/prerequisite.sh
+      - run: ./tool/prerequisite.sh --member
 
       - run: ./tool/ios/ci.sh
 

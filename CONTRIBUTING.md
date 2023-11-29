@@ -29,7 +29,7 @@ Not all packages are required to run the project.
 3. Members  
    For active members of this project.
    ```console
-   ./tool/prerequisite.sh
+   ./tool/prerequisite.sh --member
    ```
 
 

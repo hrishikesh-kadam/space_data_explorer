@@ -19,31 +19,14 @@ else
   INCREMENTED_BUILD_NUMBER=1
 fi
 
-# https://github.com/hrishikesh-kadam/space_data_explorer/issues/98
-if [[ $GITHUB_ACTIONS != "true" ]]; then
-  flutter build ipa \
-    --flavor "$FLAVOR_ENV" \
-    --dart-define="FLAVOR_ENV=$FLAVOR_ENV" \
-    --build-number "$INCREMENTED_BUILD_NUMBER" \
-    --no-codesign
-
-  if [[ -s ./secrets/.git ]]; then
-    ./tool/ios/install-profile.sh "$FLAVOR_ENV"
-    xcodebuild -exportArchive \
-      -archivePath "./build/ios/archive/$APP_NAME ${FLAVOR_ENV@u} Release.xcarchive" \
-      -exportPath "./build/ios/ipa" \
-      -exportOptionsPlist "./ios/config/$FLAVOR_ENV/ExportOptions.plist"
-  fi
-else
-  EXPORT_ARG=(--no-codesign)
-  if [[ -s ./secrets/.git ]]; then
-    ./tool/ios/install-profile.sh "$FLAVOR_ENV"
-    EXPORT_ARG=(--export-options-plist="./ios/config/$FLAVOR_ENV/ExportOptions.plist")
-  fi
-
-  flutter build ipa \
-    --flavor "$FLAVOR_ENV" \
-    --dart-define="FLAVOR_ENV=$FLAVOR_ENV" \
-    --build-number "$INCREMENTED_BUILD_NUMBER" \
-    "${EXPORT_ARG[@]}"
+EXPORT_ARG=(--no-codesign)
+if [[ -s ./secrets/.git ]]; then
+  ./tool/ios/install-profile.sh "$FLAVOR_ENV"
+  EXPORT_ARG=(--export-options-plist="./ios/config/$FLAVOR_ENV/ExportOptions.plist")
 fi
+
+flutter build ipa \
+  --flavor "$FLAVOR_ENV" \
+  --dart-define="FLAVOR_ENV=$FLAVOR_ENV" \
+  --build-number "$INCREMENTED_BUILD_NUMBER" \
+  "${EXPORT_ARG[@]}"

@@ -9,18 +9,15 @@ set -e -o pipefail
 # shellcheck disable=SC1091
 source ./secrets/ios/source.sh
 
-if [[ $CI == "true" ]]; then
-  security import "$APPLE_DIST_IDENTITY_PATH" \
-    -k "$MAC_KEYCHAIN_PATH" \
-    -f pkcs12 \
-    -P "$APPLE_DIST_IDENTITY_PASSWORD" \
-    -T /usr/bin/codesign
-  security set-key-partition-list \
-    -S apple-tool:,apple: \
-    -k "$MAC_KEYCHAIN_PASSWORD" \
-    "$MAC_KEYCHAIN_PATH"
-else
-  security import "$APPLE_DIST_IDENTITY_PATH" \
-    -P "$APPLE_DIST_IDENTITY_PASSWORD"
-fi
+security import "$APPLE_DIST_IDENTITY_PATH" \
+  -k "$MAC_KEYCHAIN_PATH" \
+  -f pkcs12 \
+  -P "$APPLE_DIST_IDENTITY_PASSWORD" \
+  -T /usr/bin/codesign
+
+security set-key-partition-list \
+  -S apple-tool:,apple: \
+  -k "$MAC_KEYCHAIN_PASSWORD" \
+  "$MAC_KEYCHAIN_PATH"
+
 security find-identity -v -p codesigning

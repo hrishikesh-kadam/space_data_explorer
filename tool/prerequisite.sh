@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# $1 ROLE (--minimal / --contributor / --member), defaults to --member
+# $1 ROLE (--minimal / --contributor / --member)
 
 set -e -o pipefail
 
@@ -22,8 +22,9 @@ check_directory_on_path() {
   fi
 }
 
+ROLE=${1:?"Missing argument \$1 ROLE (--minimal / --contributor / --member)"}
 ROLE=${1//--}
-: "${ROLE:=member}"
+: "${ROLE:=minimal}"
 
 if (( BASH_VERSINFO[0] < 5 )); then
   if [[ $(uname -s) =~ ^"Darwin" ]]; then
@@ -260,6 +261,9 @@ if [[ $ROLE == "member" ]]; then
 fi
 
 if [[ $(uname -s) =~ ^"Darwin" ]]; then
+  if [[ $ROLE == "member" ]]; then
+    ./tool/ios/init-keychain.sh
+  fi
   # https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md#package-management
   # Shows CocoaPods 1.14.2, but is actually 1.12.1 
   if [[ $GITHUB_ACTIONS == "true" ]]; then

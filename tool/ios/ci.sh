@@ -14,10 +14,6 @@ source ./tool/shell/logs-env.sh
 
 # ./tool/test.sh
 
-./tool/ios/pre.sh
-
 ./tool/ios/build.sh
-
-./tool/ios/post.sh
 
 git status -s

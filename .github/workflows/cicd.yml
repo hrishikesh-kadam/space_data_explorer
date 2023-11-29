@@ -91,7 +91,7 @@ jobs:
           bundler-cache: true
           working-directory: android
 
-      - run: ./tool/prerequisite.sh
+      - run: ./tool/prerequisite.sh --member
 
       # https://github.com/actions/cache/blob/main/examples.md#java---gradle
       - name: Cache Gradle

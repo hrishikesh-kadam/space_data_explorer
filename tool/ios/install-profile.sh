@@ -25,7 +25,7 @@ pushd ios &> /dev/null
 # Deliberately avoiding run keyword here, not working if present
 if bundle exec fastlane get_provisioning_profile manage \
   | grep "$PROFILE_NAME" &> /dev/null; then
-  echo "$PROFILE_NAME already installed locally"
+  echo "$PROFILE_NAME already present."
 else
   bundle exec fastlane run get_provisioning_profile \
     "${API_KEY_PATH_ARG[@]}" \
