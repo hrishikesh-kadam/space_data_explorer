@@ -95,10 +95,5 @@ jobs:
 
       - run: ./tool/ios/ci.sh
 
-      - uses: codecov/codecov-action@v3
-        with:
-          files: coverage/lcov.info
-          name: cicd-${{ inputs.runner }}-${{ inputs.ref }}
-
       - run: ./tool/ios/deploy.sh
         if: inputs.ref == 'stable'
