@@ -227,7 +227,7 @@ fi
 
 if [[ ! -x $(command -v flutterfire) ]]; then
   dart pub global activate flutterfire_cli ^0.3.0-dev.18
-  CI=true flutterfire --version
+  CI=true dart pub global run flutterfire_cli:flutterfire --version
 fi
 
 if [[ $ROLE == "member" ]]; then
