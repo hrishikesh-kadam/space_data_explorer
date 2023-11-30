@@ -35,6 +35,8 @@ Runner/GeneratedPluginRegistrant.*
 
 fastlane/Preview.html
 fastlane/download/
+fastlane/dev/metadata/en-US/release_notes.txt
+fastlane/stag/metadata/en-US/release_notes.txt
 # GitHub Action ruby/setup-ruby installs gems in PWD
 # https://github.com/ruby/setup-ruby#bundle-config
 .bundle/

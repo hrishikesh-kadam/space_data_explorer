@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
+# Arguments:
+#   $1 FLAVOR_ENV dev / stag / prod.
+
 set -e -o pipefail
 
-FLAVOR_ENV=$(./tool/get-flavor-env.sh)
+FLAVOR_ENV=${1:-$(./tool/get-flavor-env.sh)}
 
 ./tool/ios/upload-metadata-screenshots.sh "$FLAVOR_ENV"
 

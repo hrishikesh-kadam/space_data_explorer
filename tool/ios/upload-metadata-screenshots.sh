@@ -25,8 +25,9 @@ fi
 
 APP_IDENTIFIER="$(./tool/ios/get-app-identifier.sh "$FLAVOR_ENV")"
 
-pushd ios &> /dev/null
+./tool/android/generate-changelog.sh "$FLAVOR_ENV"
 
+pushd ios &> /dev/null
 bundle exec fastlane run upload_to_app_store \
   "${API_KEY_PATH_ARG[@]}" \
   app_identifier:"$APP_IDENTIFIER" \
@@ -37,5 +38,4 @@ bundle exec fastlane run upload_to_app_store \
   automatic_release:true \
   run_precheck_before_submit:false \
   force:true
-
 popd &> /dev/null
