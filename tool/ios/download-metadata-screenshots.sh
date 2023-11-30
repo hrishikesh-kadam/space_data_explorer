@@ -30,6 +30,7 @@ if [[ $FLAVOR_ENV == "prod" ]]; then
   USE_LIVE_VERSION_ARG=(--use_live_version true)
 fi
 
+# Deliberately avoiding run keyword here, not working if present
 bundle exec fastlane upload_to_app_store download_metadata \
   "${API_KEY_PATH_ARG[@]}" \
   --app_identifier "$APP_IDENTIFIER" \
