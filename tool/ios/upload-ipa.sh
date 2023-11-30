@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Arguments:
+#   $1 FLAVOR_ENV dev / stag / prod.
+
 set -e -o pipefail
 
 if [[ $LOGS_ENV_SOURCED != "true" ]]; then
