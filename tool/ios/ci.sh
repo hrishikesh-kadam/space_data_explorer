@@ -14,6 +14,7 @@ source ./tool/shell/logs-env.sh
 
 # ./tool/test.sh
 
-./tool/ios/build.sh
+FLAVOR_ENV=$(./tool/get-flavor-env.sh)
+./tool/ios/build.sh "$FLAVOR_ENV"
 
 git diff

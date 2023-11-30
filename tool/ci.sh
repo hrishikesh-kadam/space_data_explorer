@@ -19,7 +19,8 @@ source ./tool/shell/logs-env.sh
 ./tool/android/build.sh
 
 if [[ $(uname -s) =~ ^"Darwin" ]]; then
-  ./tool/ios/build.sh
+  FLAVOR_ENV=$(./tool/get-flavor-env.sh)
+  ./tool/ios/build.sh "$FLAVOR_ENV"
 fi
 
 git status -s

@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 
+# Arguments:
+#   $1 FLAVOR_ENV dev / stag / prod.
+
 set -e -o pipefail
+
+FLAVOR_ENV=${1:?"Missing argument \$1 FLAVOR_ENV dev / stag / prod."}
 
 if [[ $LOGS_ENV_SOURCED != "true" ]]; then
   source ./tool/shell/logs-env.sh
 fi
-
 source ./tool/constants.sh
-
-FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
 if [[ -s ./secrets/.git ]]; then
   TESTFLIGHT_BUILD_NUMBER=$(./tool/ios/get-latest-testflight-build-number.sh "$FLAVOR_ENV")
