@@ -24,31 +24,20 @@ if [[ -s ./secrets/.git ]]; then
 fi
 
 APP_IDENTIFIER="$(./tool/ios/get-app-identifier.sh "$FLAVOR_ENV")"
+IPA_FILE="./build/ios/ipa/$APP_NAME_KEBAB_CASE-$FLAVOR_ENV-release.ipa"
+./tool/ios/generate-changelog.sh "$FLAVOR_ENV"
 
 pushd ios &> /dev/null
 bundle exec fastlane run upload_to_app_store \
   "${API_KEY_PATH_ARG[@]}" \
   app_identifier:"$APP_IDENTIFIER" \
   app_version:"$VERSION_MAJOR_MINOR_PATCH" \
+  ipa:".$IPA_FILE" \
+  metadata_path:"./fastlane/$FLAVOR_ENV/metadata" \
+  screenshots_path:"./fastlane/$FLAVOR_ENV/screenshots" \
+  overwrite_screenshots:true \
   submit_for_review:true \
   automatic_release:true \
-  skip_metadata:true \
-  skip_screenshots:true \
-  skip_binary_upload:true \
   precheck_include_in_app_purchases:false \
   force:true
 popd &> /dev/null
-
-# [!] Use of Advertising Identifier (IDFA) is required to submit
-# Add information to the :submission_information option...
-#   Docs: http://docs.fastlane.tools/actions/deliver/#compliance-and-idfa-settings
-#   Example: submission_information: { add_id_info_uses_idfa: false }
-#   Example: submission_information: {
-#     add_id_info_uses_idfa: true,
-#     add_id_info_serves_ads: false,
-#     add_id_info_tracks_install: true,
-#     add_id_info_tracks_action: true,
-#     add_id_info_limits_tracking: true
-#   }
-#   Example CLI:
-#     --submission_information "{\"add_id_info_uses_idfa\": false}"
