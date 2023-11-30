@@ -13,7 +13,7 @@ security import "$APPLE_DIST_IDENTITY_PATH" \
   -k "$MAC_KEYCHAIN_PATH" \
   -f pkcs12 \
   -P "$APPLE_DIST_IDENTITY_PASSWORD" \
-  -T /usr/bin/codesign
+  -A
 
 security set-key-partition-list \
   -S apple-tool:,apple: \
