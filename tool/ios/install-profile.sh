@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-# $1 FLAVOR_ENV dev, stag, prod.
+# Arguments:
+#   $1 FLAVOR_ENV dev / stag / prod.
 
 set -e -o pipefail
 
-FLAVOR_ENV=${1:?"Missing argument \$1 FLAVOR_ENV"}
+FLAVOR_ENV=${1:?"Missing argument \$1 FLAVOR_ENV dev / stag / prod."}
 
 PROFILE_NAME="$(./tool/ios/get-profile-name.sh "$FLAVOR_ENV")"
 

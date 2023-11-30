@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-# $1 FLAVOR_ENV
-# $2 VERSION_CODE
-# $3 VERSION_NAME
+# Arguments:
+#   $1 FLAVOR_ENV dev / stag / prod.
+#   $2 VERSION_CODE Optional
+#   $3 VERSION_NAME Optional
 
 set -e -o pipefail
 
@@ -11,7 +12,7 @@ if [[ $LOGS_ENV_SOURCED != "true" ]]; then
 fi
 PRINT_WARNING_LOG=1
 
-FLAVOR_ENV=$1
+FLAVOR_ENV=${1:?"Missing argument \$1 FLAVOR_ENV dev / stag / prod."}
 VERSION_CODE=$2
 VERSION_NAME=$3
 

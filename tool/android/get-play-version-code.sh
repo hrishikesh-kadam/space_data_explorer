@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-# $1 FLAVOR_ENV dev, stag, prod.
+# Arguments:
+#   $1 FLAVOR_ENV dev / stag / prod.
 
 set -e -o pipefail
 
-FLAVOR_ENV=$1
+FLAVOR_ENV=${1:?"Missing argument \$1 FLAVOR_ENV dev / stag / prod."}
 
 pushd android &> /dev/null
 APPLICATION_ID=$(./gradlew \
