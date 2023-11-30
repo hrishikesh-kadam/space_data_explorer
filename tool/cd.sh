@@ -5,7 +5,7 @@ set -e -o pipefail
 source ./tool/shell/logs-env.sh
 
 if [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then
-  log_error_with_exit "./tool/cd.sh script is not supposed to be trigerred from Pull Request" 1
+  log_error_with_exit "./tool/cd.sh script is not supposed to be trigerred from Pull Request"
 fi
 
 ./tool/web/deploy.sh

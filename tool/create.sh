@@ -32,7 +32,7 @@ cp "$FLUTTER_ROOT/bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf" 
   "assets/fonts/MaterialIcons"
 
 # if ! jq -e '. == {}' lib/l10n/unstranslated-messages.json &> /dev/null; then
-#   log_error_with_exit "Unstranslated messages found" 1
+#   log_error_with_exit "Unstranslated messages found"
 # fi
 
 dart run build_runner build --delete-conflicting-outputs

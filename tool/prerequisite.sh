@@ -8,7 +8,7 @@ source ./tool/shell/logs-env.sh
 
 check_command_on_path() {
   if [[ ! -x $(command -v "$1") ]]; then
-    log_error_with_exit "$1 command not accessible from PATH" 1
+    log_error_with_exit "$1 command not accessible from PATH"
   fi
 }
 
@@ -18,7 +18,7 @@ check_directory_on_path() {
     directory=$(cygpath "$directory")
   fi
   if [[ ! $PATH =~ $directory ]]; then
-    log_error_with_exit "$1 directory not found on PATH" 1
+    log_error_with_exit "$1 directory not found on PATH"
   fi
 }
 
@@ -30,14 +30,14 @@ if (( BASH_VERSINFO[0] < 5 )); then
   if [[ $(uname -s) =~ ^"Darwin" ]]; then
     brew install bash
   else
-    log_error_with_exit "Please install Bash with version atleast 5" 1
+    log_error_with_exit "Please install Bash with version atleast 5"
   fi
   bash --version
 fi
 
 check_command_on_path flutter
 if ! export -p | grep "declare -x FLUTTER_ROOT=" &> /dev/null; then
-  log_error_with_exit "FLUTTER_ROOT exported variable not found" 1
+  log_error_with_exit "FLUTTER_ROOT exported variable not found"
 fi
 
 if [[ $(uname -s) =~ ^"Darwin" ]]; then
@@ -45,7 +45,7 @@ if [[ $(uname -s) =~ ^"Darwin" ]]; then
 elif [[ $(uname -s) =~ ^"MINGW" ]]; then
   check_command_on_path pwsh
   if ! pwsh -NoProfile ./tool/shell/is-admin.ps1; then
-    log_error_with_exit "Please run this script from Elevated Session" 1
+    log_error_with_exit "Please run this script from Elevated Session"
   fi
   if [[ ! $GITHUB_ACTIONS ]]; then
     # winget is not yet available in GitHub Actions
@@ -58,7 +58,7 @@ elif [[ $(uname -s) =~ ^"MINGW" ]]; then
         PATH="$WINGET_LINKS_PATH_NIX:$PATH"
       else
         # Deliberately avoiding to set PATH by setx command
-        log_error_with_exit "$WINGET_LINKS_PATH_NIX directory not found on PATH" 1
+        log_error_with_exit "$WINGET_LINKS_PATH_NIX directory not found on PATH"
       fi
     fi
   fi
@@ -117,7 +117,7 @@ if [[ ! -x $(command -v pipx) ]]; then
     pipx --version
     pipx ensurepath
   elif [[ $(uname -s) =~ ^"MINGW" ]]; then
-    log_error_with_exit "pipx command not accessible from PATH" 1
+    log_error_with_exit "pipx command not accessible from PATH"
   fi
 fi
 
@@ -141,7 +141,7 @@ if [[ ! -x $(command -v lcov) ]]; then
         PATH="$LCOV_ROOT_NIX:$PATH"
       else
         # Deliberately avoiding to set PATH by setx command
-        log_error_with_exit "$LCOV_ROOT_NIX directory not found on PATH" 1
+        log_error_with_exit "$LCOV_ROOT_NIX directory not found on PATH"
       fi
     fi
   fi
@@ -188,7 +188,7 @@ if [[ ! -x $(command -v yq) ]]; then
 fi
 
 if ! export -p | grep "declare -x ANDROID_HOME=" &> /dev/null; then
-  log_error_with_exit "ANDROID_HOME exported variable not found" 1
+  log_error_with_exit "ANDROID_HOME exported variable not found"
 fi
 
 if [[ ! -s "$ANDROID_HOME/bundletool-all.jar" ]]; then

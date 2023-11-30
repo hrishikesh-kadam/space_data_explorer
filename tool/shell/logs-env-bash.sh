@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # This shell script is meant to be sourced.
-# set-logs-env.sh is a POSIX script.
+# logs-env-posix.sh is a POSIX script.
 # POSIX doesn't have `export -f` feature.
 
 if [ -z ${-%*e*} ]; then PARENT_ERREXIT=true; else PARENT_ERREXIT=false; fi

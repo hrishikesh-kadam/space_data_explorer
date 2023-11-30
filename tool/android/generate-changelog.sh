@@ -10,9 +10,9 @@ set -e -o pipefail
 if [[ $LOGS_ENV_SOURCED != "true" ]]; then
   source ./tool/shell/logs-env.sh
 fi
-PRINT_WARNING_LOG=1
 
-FLAVOR_ENV=${1:?"Missing argument \$1 FLAVOR_ENV dev / stag / prod."}
+FLAVOR_ENV=${1:?\
+$(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
 VERSION_CODE=$2
 VERSION_NAME=$3
 

@@ -5,7 +5,12 @@
 
 set -e -o pipefail
 
-FLAVOR_ENV=${1:?"Missing argument \$1 FLAVOR_ENV dev / stag / prod."}
+if [[ $LOGS_ENV_SOURCED != "true" ]]; then
+  source ./tool/shell/logs-env.sh
+fi
+
+FLAVOR_ENV=${1:?\
+$(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
 
 pushd android &> /dev/null
 APPLICATION_ID=$(./gradlew \
