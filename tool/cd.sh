@@ -19,4 +19,4 @@ if [[ $(uname -s) =~ ^"Darwin" ]]; then
   ./tool/ios/deploy.sh
 fi
 
-git status -s
+git diff

@@ -31,6 +31,7 @@ TESTFLIGHT_BUILD_NUMBER=$(
   "${API_KEY_PATH_ARG[@]}" \
   app_identifier:"$APP_IDENTIFIER" \
   version:"$VERSION_MAJOR_MINOR_PATCH" \
+  initial_build_number:0 \
   | grep --only-matching --extended-regexp "Result: [0-9]+" \
   | cut -d ' ' -f2
 )

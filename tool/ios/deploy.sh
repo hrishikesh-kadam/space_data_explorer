@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Arguments:
-#   $1 FLAVOR_ENV dev / stag / prod.
+#   $1 FLAVOR_ENV dev / stag / prod. Defaults to ./tool/get-flavor-env.sh
 
 set -e -o pipefail
 
