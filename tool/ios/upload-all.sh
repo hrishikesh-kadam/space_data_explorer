@@ -26,6 +26,7 @@ fi
 APP_IDENTIFIER="$(./tool/ios/get-app-identifier.sh "$FLAVOR_ENV")"
 IPA_FILE="./build/ios/ipa/$APP_NAME_KEBAB_CASE-$FLAVOR_ENV-release.ipa"
 ./tool/ios/generate-changelog.sh "$FLAVOR_ENV"
+SUBMISSION_INFORMATION=$(< "./ios/fastlane/$FLAVOR_ENV/submission-information.json")
 
 pushd ios &> /dev/null
 bundle exec fastlane run upload_to_app_store \
@@ -39,5 +40,6 @@ bundle exec fastlane run upload_to_app_store \
   submit_for_review:true \
   automatic_release:true \
   precheck_include_in_app_purchases:false \
+  submission_information:"$SUBMISSION_INFORMATION" \
   force:true
 popd &> /dev/null
