@@ -24,10 +24,15 @@ if [[ -s ./secrets/.git ]]; then
 fi
 
 IPA_FILE="./build/ios/ipa/$APP_NAME_KEBAB_CASE-$FLAVOR_ENV-release.ipa"
+./tool/ios/generate-changelog.sh "$FLAVOR_ENV"
+CHANGELOG_FILE="./ios/fastlane/$FLAVOR_ENV/metadata/en-US/release_notes.txt"
+CHANGELOG_FILE_CONTENTS=$(< "$CHANGELOG_FILE")
 
 pushd ios &> /dev/null
+# Changelog / 'What to Test' is not working
 bundle exec fastlane run upload_to_testflight \
   "${API_KEY_PATH_ARG[@]}" \
-  skip_waiting_for_build_processing:"true" \
-  ipa:".$IPA_FILE"
+  ipa:".$IPA_FILE" \
+  changelog:"$CHANGELOG_FILE_CONTENTS" \
+  skip_waiting_for_build_processing:true
 popd &> /dev/null
