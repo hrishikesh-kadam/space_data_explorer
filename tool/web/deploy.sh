@@ -1,22 +1,25 @@
 #!/usr/bin/env bash
 
+# Arguments:
+#   $1 FLAVOR_ENV dev / stag / prod.
+
 set -e -o pipefail
 
 if [[ $LOGS_ENV_SOURCED != "true" ]]; then
   source ./tool/shell/logs-env.sh
 fi
 
+FLAVOR_ENV=${1:?\
+$(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
+
 source ./tool/constants.sh
-source ./tool/firebase/source.sh
+source ./tool/firebase/source.sh "$FLAVOR_ENV"
 
 if [[ $GITHUB_EVENT_NAME == "pull_request" ]]; then
   FIREBASE_CHANNEL_ID="pr-$(jq -r .number "$GITHUB_EVENT_PATH")"
   UPLOAD_SOURCEMAPS="false"
 elif [[ ! -s ./secrets/.git ]]; then
-  FIREBASE_CHANNEL_ID="$BRANCH"
-  UPLOAD_SOURCEMAPS="false"
-elif [[ $BRANCH != "dev" && $BRANCH != "stag" && $BRANCH != "prod" ]]; then
-  FIREBASE_CHANNEL_ID="$BRANCH"
+  FIREBASE_CHANNEL_ID="$(git rev-parse --abbrev-ref HEAD)"
   UPLOAD_SOURCEMAPS="false"
 else
   FIREBASE_CHANNEL_ID="live"

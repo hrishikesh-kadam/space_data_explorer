@@ -13,7 +13,7 @@ FLAVOR_ENV=${1:?\
 $(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
 
 source ./tool/constants.sh
-source ./tool/firebase/source.sh
+source ./tool/firebase/source.sh "$FLAVOR_ENV"
 # shellcheck disable=SC1091
 source ./secrets/sentry/source.sh
 

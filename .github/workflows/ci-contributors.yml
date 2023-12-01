@@ -79,7 +79,7 @@ jobs:
           files: coverage/lcov.info
           name: ci-contributors-${{ matrix.runner }}-${{ matrix.ref }}
 
-      - run: ./tool/web/deploy.sh
+      - run: ./tool/web/deploy.sh "$(./tool/get-flavor-env.sh)"
         if: matrix.ref == 'stable'
         env:
           FIREBASE_CONTRI_KEY: ${{ secrets.FIREBASE_CONTRI_KEY }}
