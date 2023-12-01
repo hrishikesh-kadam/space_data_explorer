@@ -1,5 +1,5 @@
 name: space_data_explorer
-version: 0.9.3+1
+version: 0.9.4+1
 
 description: An app to explore space data from various sources.
 publish_to: none
