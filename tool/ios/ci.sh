@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 
+# Arguments:
+#   $1 FLAVOR_ENV dev / stag / prod.
+
 set -e -o pipefail
+
+if [[ $LOGS_ENV_SOURCED != "true" ]]; then
+  source ./tool/shell/logs-env.sh
+fi
+
+FLAVOR_ENV=${1:?\
+$(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
 
 source ./tool/shell/logs-env.sh
 
@@ -12,8 +22,8 @@ source ./tool/shell/logs-env.sh
 
 ./tool/format-analyze.sh
 
-# ./tool/test.sh
+# ./tool/test.sh "$FLAVOR_ENV"
 
-./tool/ios/build.sh
+./tool/ios/build.sh "$FLAVOR_ENV"
 
 git diff

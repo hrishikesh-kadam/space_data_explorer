@@ -78,7 +78,7 @@ jobs:
             ~/.gradle/wrapper
           key: gradle-${{ inputs.runner }}-flutter-${{ inputs.ref }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
 
-      - run: ./tool/ci.sh
+      - run: ./tool/ci.sh "$(./tool/get-flavor-env.sh)"
 
       - uses: codecov/codecov-action@v3
         with:

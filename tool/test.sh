@@ -1,10 +1,21 @@
 #!/usr/bin/env bash
 
-set -ex -o pipefail
+# Arguments:
+#   $1 FLAVOR_ENV dev / stag / prod.
+
+set -e -o pipefail
+
+if [[ $LOGS_ENV_SOURCED != "true" ]]; then
+  source ./tool/shell/logs-env.sh
+fi
+
+FLAVOR_ENV=${1:?\
+$(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
 
 rm -rf coverage
 
-flutter test test/unit_test --coverage \
+flutter test test/unit_test \
+  --coverage \
   --coverage-path coverage/unit_test_lcov.info
 lcov --list coverage/unit_test_lcov.info \
   | grep -v ".*|.*100%.*|.*|"
@@ -18,7 +29,8 @@ fi
 yq -i '.flutter.assets += [ "assets/fonts/Roboto/" ]' pubspec.yaml
 yq -i '.flutter.assets += [ "assets/fonts/MaterialIcons/" ]' pubspec.yaml
 
-flutter test test/widget_test --coverage \
+flutter test test/widget_test \
+  --coverage \
   --coverage-path coverage/widget_test_lcov.info
 lcov --list coverage/widget_test_lcov.info \
   | grep -v ".*|.*100%.*|.*|"
@@ -40,8 +52,8 @@ lcov --list coverage/lcov.info \
 
 ./tool/coverage/check-coverage-ignored.sh
 
-./tool/web/integration-test.sh
+./tool/web/integration-test.sh "$FLAVOR_ENV"
 
 # if [[ ! $GITHUB_ACTIONS ]]; then
-#   ./tool/android/test-golden-screenshots.sh
+#   ./tool/android/test-golden-screenshots.sh "$FLAVOR_ENV"
 # fi

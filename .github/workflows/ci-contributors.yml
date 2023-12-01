@@ -19,11 +19,11 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
-        runner: [ ubuntu-latest ]
+        runner: [ macos-13 ]
         ref: [ stable ]
         experimental: [ false ]
         include:
-          - runner: ubuntu-latest
+          - runner: macos-13
             ref: beta
             experimental: false
 
@@ -72,7 +72,7 @@ jobs:
             ~/.gradle/wrapper
           key: gradle-${{ matrix.runner }}-flutter-${{ matrix.ref }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
 
-      - run: ./tool/ci.sh
+      - run: ./tool/ci.sh "$(./tool/get-flavor-env.sh)"
 
       - uses: codecov/codecov-action@v3
         with:

@@ -93,7 +93,7 @@ jobs:
 
       - run: ./tool/prerequisite.sh --member
 
-      - run: ./tool/ios/ci.sh
+      - run: ./tool/ios/ci.sh "$(./tool/get-flavor-env.sh)"
 
-      - run: ./tool/ios/deploy.sh
+      - run: ./tool/ios/deploy.sh "$(./tool/get-flavor-env.sh)"
         if: inputs.ref == 'stable'

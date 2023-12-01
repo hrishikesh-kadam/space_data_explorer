@@ -102,14 +102,14 @@ jobs:
             ~/.gradle/wrapper
           key: gradle-${{ matrix.runner }}-flutter-${{ matrix.ref }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
 
-      - run: ./tool/ci.sh
+      - run: ./tool/ci.sh "$(./tool/get-flavor-env.sh)"
 
       - uses: codecov/codecov-action@v3
         with:
           files: coverage/lcov.info
           name: cicd-${{ matrix.runner }}-${{ matrix.ref }}
 
-      - run: ./tool/cd.sh
+      - run: ./tool/cd.sh "$(./tool/get-flavor-env.sh)"
         if: matrix.ref == 'stable'
 
       - run: ./tool/android/stop-gradle.sh

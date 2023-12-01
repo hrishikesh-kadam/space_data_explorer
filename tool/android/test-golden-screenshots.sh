@@ -1,14 +1,22 @@
 #!/usr/bin/env bash
 
+# Arguments:
+#   $1 FLAVOR_ENV dev / stag / prod.
+
 set -e -o pipefail
+
+if [[ $LOGS_ENV_SOURCED != "true" ]]; then
+  source ./tool/shell/logs-env.sh
+fi
+
+FLAVOR_ENV=${1:?\
+$(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
 
 if (( $(git status -s pubspec.yaml | wc -l) > 0 )); then
   PUBSPEC_MODIFIED=true
   git stash push -m "pubspec.yaml at $(date +"%d/%m/%Y %r")" pubspec.yaml
   git stash apply 0
 fi
-
-FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
 AVD_NAMES=(
   "Pixel_7_API_34"

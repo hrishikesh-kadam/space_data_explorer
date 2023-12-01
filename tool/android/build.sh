@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
 
+# Arguments:
+#   $1 FLAVOR_ENV dev / stag / prod.
+
 set -e -o pipefail
 
 if [[ $LOGS_ENV_SOURCED != "true" ]]; then
   source ./tool/shell/logs-env.sh
 fi
 
-source ./tool/constants.sh
+FLAVOR_ENV=${1:?\
+$(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
 
-FLAVOR_ENV=$(./tool/get-flavor-env.sh)
+source ./tool/constants.sh
 
 if [[ -s ./secrets/.git ]]; then
   PLAY_VERSION_CODE=$(./tool/android/get-play-version-code.sh "$FLAVOR_ENV")

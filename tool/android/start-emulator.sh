@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-# $1 AVD_NAME like Pixel_7_API_34 or Nexus_7_API_34
-# $2 SYSTEM_IMAGE_PACKAGE_PATH like "system-images;android-34;google_apis;x86_64"
-# $3 DEVICE_NAME like pixel_7 or Nexus 7 2013
-# $4 SKIN_NAME like pixel_7 or nexus_7_2013
+# Arguments:
+#   $1 AVD_NAME like Pixel_7_API_34 or Nexus_7_API_34
+#   $2 SYSTEM_IMAGE_PACKAGE_PATH like "system-images;android-34;google_apis;x86_64"
+#   $3 DEVICE_NAME like pixel_7 or Nexus 7 2013
+#   $4 SKIN_NAME like pixel_7 or nexus_7_2013
 
 set -e -o pipefail
 

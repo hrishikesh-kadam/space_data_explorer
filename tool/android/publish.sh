@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
 
+# Arguments:
+#   $1 FLAVOR_ENV dev / stag / prod.
+
 set -e -o pipefail
 
 if [[ $LOGS_ENV_SOURCED != "true" ]]; then
   source ./tool/shell/logs-env.sh
 fi
 
+FLAVOR_ENV=${1:?\
+$(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
+
 source ./tool/constants.sh
 source ./tool/firebase/source.sh
 # shellcheck disable=SC1091
 source ./secrets/sentry/source.sh
-
-FLAVOR_ENV=$(./tool/get-flavor-env.sh)
 
 BUNDLE_FILE="./build/app/outputs/bundle/${FLAVOR_ENV}Release/app-${FLAVOR_ENV}-release.aab"
 
