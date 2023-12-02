@@ -49,7 +49,24 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>FlutterDeepLinkingEnabled</key>
-	<true/>
+	<!-- lib/route/settings/locale.dart -->
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>hi</string>
+		<string>mr</string>
+		<string>he</string>
+		<string>ar</string>
+		<string>en_AU</string>
+		<string>en_CA</string>
+		<string>en_GB</string>
+		<string>en_IE</string>
+		<string>en_IN</string>
+		<string>en_MY</string>
+		<string>en_NZ</string>
+		<string>en_SG</string>
+		<string>en_US</string>
+		<string>en_ZA</string>
+	</array>
 </dict>
 </plist>

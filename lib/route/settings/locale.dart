@@ -20,6 +20,8 @@ extension LocaleExt on Locale {
   static const Locale enUs = Locale('en', 'US');
   static const Locale enZa = Locale('en', 'ZA');
 
+  // Keep this in sync with ios/Runner/Info.plist
+  // https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#localizing-for-ios-updating-the-ios-app-bundle
   static Set<Locale> getSupportedLocales() {
     return {
       en,
