@@ -17,5 +17,5 @@ flutter build web \
   --source-maps
 
 mkdir -p ./build/web/.well-known
-cp "assets/digital-asset-links/$FLAVOR_ENV/assetlinks.json" \
+cp -r "assets/$FLAVOR_ENV/.well-known/" \
   "build/web/.well-known/"

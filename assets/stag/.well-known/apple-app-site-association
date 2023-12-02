@@ -1,0 +1,19 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": [
+          "Q798GS4Z62.dev.hrishikesh-kadam.flutter.space-data-explorer.stag.release",
+          "Q798GS4Z62.dev.hrishikesh-kadam.flutter.space-data-explorer.stag.profile",
+          "Q798GS4Z62.dev.hrishikesh-kadam.flutter.space-data-explorer.stag.debug"
+        ],
+        "components": [
+          {
+            "/": "*"
+          }
+        ]
+      }
+    ]
+  }
+}

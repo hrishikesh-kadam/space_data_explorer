@@ -31,6 +31,9 @@
 
 /* Begin PBXFileReference section */
 		09FCD747317C505C76E61D15 /* Pods-Runner.profile-dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-dev.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-dev.xcconfig"; sourceTree = "<group>"; };
+		0D0DC6FB2B1B6D6B009EFC15 /* dev.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = dev.entitlements; sourceTree = "<group>"; };
+		0D0DC6FC2B1B6DA1009EFC15 /* stag.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = stag.entitlements; sourceTree = "<group>"; };
+		0D0DC6FD2B1B6DA1009EFC15 /* prod.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = prod.entitlements; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		310DD0F0E37C1D202C084E1D /* Pods-Runner.release-prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-prod.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-prod.xcconfig"; sourceTree = "<group>"; };
@@ -130,6 +133,9 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				0D0DC6FD2B1B6DA1009EFC15 /* prod.entitlements */,
+				0D0DC6FC2B1B6DA1009EFC15 /* stag.entitlements */,
+				0D0DC6FB2B1B6D6B009EFC15 /* dev.entitlements */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -426,6 +432,7 @@
 				BUNDLE_ID_SUFFIX = .dev.debug;
 				BUNDLE_NAME_SUFFIX = "-dev-debug";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/dev.entitlements;
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
 				DEVELOPMENT_TEAM = Q798GS4Z62;
 				ENABLE_BITCODE = NO;
@@ -447,6 +454,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				WEB_DOMAIN = $APP_NAME_KEBAB_CASE;
 			};
 			name = "Debug-dev";
 		};
@@ -515,6 +523,7 @@
 				BUNDLE_ID_SUFFIX = .dev.release;
 				BUNDLE_NAME_SUFFIX = "-dev-release";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/dev.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
@@ -540,6 +549,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				WEB_DOMAIN = $APP_NAME_KEBAB_CASE;
 			};
 			name = "Release-dev";
 		};
@@ -606,6 +616,7 @@
 				BUNDLE_ID_SUFFIX = .dev.profile;
 				BUNDLE_NAME_SUFFIX = "-dev-profile";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/dev.entitlements;
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
 				DEVELOPMENT_TEAM = Q798GS4Z62;
 				ENABLE_BITCODE = NO;
@@ -626,6 +637,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				WEB_DOMAIN = $APP_NAME_KEBAB_CASE;
 			};
 			name = "Profile-dev";
 		};
@@ -697,6 +709,7 @@
 				BUNDLE_ID_SUFFIX = .stag.debug;
 				BUNDLE_NAME_SUFFIX = "-stag-debug";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/stag.entitlements;
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
 				DEVELOPMENT_TEAM = Q798GS4Z62;
 				ENABLE_BITCODE = NO;
@@ -717,6 +730,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				WEB_DOMAIN = $APP_NAME_KEBAB_CASE;
 			};
 			name = "Debug-stag";
 		};
@@ -788,6 +802,7 @@
 				BUNDLE_ID_SUFFIX = .prod.debug;
 				BUNDLE_NAME_SUFFIX = "-prod-debug";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/prod.entitlements;
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
 				DEVELOPMENT_TEAM = Q798GS4Z62;
 				ENABLE_BITCODE = NO;
@@ -809,6 +824,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				WEB_DOMAIN = $APP_NAME_KEBAB_CASE;
 			};
 			name = "Debug-prod";
 		};
@@ -877,6 +893,7 @@
 				BUNDLE_ID_SUFFIX = .stag.release;
 				BUNDLE_NAME_SUFFIX = "-stag-release";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/stag.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
 				DEVELOPMENT_TEAM = Q798GS4Z62;
@@ -899,6 +916,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				WEB_DOMAIN = $APP_NAME_KEBAB_CASE;
 			};
 			name = "Release-stag";
 		};
@@ -967,6 +985,7 @@
 				BUNDLE_ID_SUFFIX = "";
 				BUNDLE_NAME_SUFFIX = "-prod-release";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/prod.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
@@ -991,6 +1010,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				WEB_DOMAIN = $APP_NAME_KEBAB_CASE;
 			};
 			name = "Release-prod";
 		};
@@ -1057,6 +1077,7 @@
 				BUNDLE_ID_SUFFIX = .stag.profile;
 				BUNDLE_NAME_SUFFIX = "-stag-profile";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/stag.entitlements;
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
 				DEVELOPMENT_TEAM = Q798GS4Z62;
 				ENABLE_BITCODE = NO;
@@ -1076,6 +1097,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				WEB_DOMAIN = $APP_NAME_KEBAB_CASE;
 			};
 			name = "Profile-stag";
 		};
@@ -1142,6 +1164,7 @@
 				BUNDLE_ID_SUFFIX = .prod.profile;
 				BUNDLE_NAME_SUFFIX = "-prod-profile";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/prod.entitlements;
 				CURRENT_PROJECT_VERSION = "${FLUTTER_BUILD_NUMBER}";
 				DEVELOPMENT_TEAM = Q798GS4Z62;
 				ENABLE_BITCODE = NO;
@@ -1161,6 +1184,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				WEB_DOMAIN = $APP_NAME_KEBAB_CASE;
 			};
 			name = "Profile-prod";
 		};
