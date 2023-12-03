@@ -34,3 +34,14 @@ flutter build ipa \
   --dart-define="FLAVOR_ENV=$FLAVOR_ENV" \
   --build-number "$INCREMENTED_BUILD_NUMBER" \
   "${EXPORT_ARG[@]}"
+  # --split-debug-info \
+  # --obfuscate
+
+# TODO(hrishikesh-kadam): Check this once again some other day.
+# Stack traces seen on the Crashlytics web portal are obfuscated when above 
+# flags are used.
+# Tested on Flutter v3.16.2 stable.
+# References:
+# 1. https://docs.flutter.dev/deployment/obfuscate
+# 2. https://github.com/flutter/flutter/issues/124715
+# 3. https://github.com/dart-lang/sdk/commit/ecf19681223ca9c5daf8ba4f4d3a0d9b91efd956
