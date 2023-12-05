@@ -161,6 +161,7 @@
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				6C5E13395AF85AB9FA79EE02 /* [CP] Embed Pods Frameworks */,
+				0D0A27B42B1FC79200FB05EA /* Copy GoogleService-Info.plist */,
 				7AB4037EA09766C335A21EF2 /* FlutterFire: "flutterfire bundle-service-file" */,
 				9A7E2EC39BBB2EB5CC1B45F3 /* FlutterFire: "flutterfire upload-crashlytics-symbols" */,
 				0DD0BC432B1E83A000AD0EEC /* Store Build Phases Variables */,
@@ -222,6 +223,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0D0A27B42B1FC79200FB05EA /* Copy GoogleService-Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy GoogleService-Info.plist";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "../tool/ios/copy-google-service-info-plist.sh\n";
+		};
 		0DD0BC432B1E83A000AD0EEC /* Store Build Phases Variables */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
