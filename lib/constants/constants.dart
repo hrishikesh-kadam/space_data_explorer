@@ -2,7 +2,7 @@ import 'package:recase/recase.dart';
 
 class Constants {
   static const String appName = 'space_data_explorer';
-  static const String version = '0.9.5';
+  static const String version = '0.9.6';
   static const String authorUsername = 'hrishikesh-kadam';
   static const String androidAppId = 'dev.hrishikesh_kadam.flutter.$appName';
   static final Uri linktreeUrl = Uri.https(

@@ -26,7 +26,6 @@
 - Delete Runner scheme
 - Fix log colors
 - Update .vscode/launch.json
-- Sentry
 - Firebase / Analytics
 - LaunchImage
 - Check if Target should be renamed

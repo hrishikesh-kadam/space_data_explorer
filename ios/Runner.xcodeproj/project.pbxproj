@@ -163,6 +163,7 @@
 				6C5E13395AF85AB9FA79EE02 /* [CP] Embed Pods Frameworks */,
 				7AB4037EA09766C335A21EF2 /* FlutterFire: "flutterfire bundle-service-file" */,
 				9A7E2EC39BBB2EB5CC1B45F3 /* FlutterFire: "flutterfire upload-crashlytics-symbols" */,
+				0DD0BC432B1E83A000AD0EEC /* Store Build Phases Variables */,
 			);
 			buildRules = (
 			);
@@ -221,6 +222,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0DD0BC432B1E83A000AD0EEC /* Store Build Phases Variables */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Store Build Phases Variables";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "../tool/ios/store-build-phases-variables.sh\n";
+		};
 		3B06AD1E1E4923F5004D2608 /* Thin Binary */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -325,7 +344,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "\n#!/bin/bash\nPATH=${PATH}:$FLUTTER_ROOT/bin:$HOME/.pub-cache/bin\nflutterfire upload-crashlytics-symbols --upload-symbols-script-path=$PODS_ROOT/FirebaseCrashlytics/upload-symbols --debug-symbols-path=${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME} --info-plist-path=${SRCROOT}/${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH} --platform=ios --apple-project-path=${SRCROOT} --build-configuration=${CONFIGURATION}\n";
+			shellScript = "exit\n#!/bin/bash\nPATH=${PATH}:$FLUTTER_ROOT/bin:$HOME/.pub-cache/bin\nflutterfire upload-crashlytics-symbols --upload-symbols-script-path=$PODS_ROOT/FirebaseCrashlytics/upload-symbols --debug-symbols-path=${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME} --info-plist-path=${SRCROOT}/${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH} --platform=ios --apple-project-path=${SRCROOT} --build-configuration=${CONFIGURATION}\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

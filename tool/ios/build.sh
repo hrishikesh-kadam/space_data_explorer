@@ -37,11 +37,16 @@ flutter build ipa \
   # --split-debug-info \
   # --obfuscate
 
-# TODO(hrishikesh-kadam): Check this once again some other day.
-# Stack traces seen on the Crashlytics web portal are obfuscated when above 
-# flags are used.
-# Tested on Flutter v3.16.2 stable.
+# TODO(hrishikesh-kadam): Stack traces obfuscated.
+# - Stack traces on the Crashlytics, Sentry portal are obfuscated when the above
+#   flags are used.
+# - Specifying path to --split-debug-info and passing the same to upload scripts
+#   also doesn't work.
+#   Infact script doesn't even upload the app.ios-arm64.symbols file.
+#   Crashlytics portal don't even allow to upload the file.
+#   Couldn't find any way to upload to the Sentry portal.
+# - Tested on Flutter v3.16.2 stable.
 # References:
-# 1. https://docs.flutter.dev/deployment/obfuscate
-# 2. https://github.com/flutter/flutter/issues/124715
-# 3. https://github.com/dart-lang/sdk/commit/ecf19681223ca9c5daf8ba4f4d3a0d9b91efd956
+# - https://docs.flutter.dev/deployment/obfuscate
+# - https://github.com/flutter/flutter/issues/124715
+# - https://github.com/dart-lang/sdk/commit/ecf19681223ca9c5daf8ba4f4d3a0d9b91efd956
