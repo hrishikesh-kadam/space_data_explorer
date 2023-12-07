@@ -16,13 +16,28 @@
 default_platform(:android)
 
 platform :android do
-
-  lane :get_play_version_code do |options|
-    play_version_code = google_play_track_version_codes(
-      package_name: options[:package_name],
-      track: options[:track]
-    )[0]
-    puts "PLAY_VERSION_CODE=#{play_version_code}"
+  lane :get_play_version_code_max do |options|
+    ENV["SUPPLY_PACKAGE_NAME"] = options[:package_name]
+    productionVersionCodes = google_play_track_version_codes(
+      track: 'production',
+    ) rescue []
+    betaVersionCodes = google_play_track_version_codes(
+      track: 'beta',
+    ) rescue []
+    alphaVersionCodes = google_play_track_version_codes(
+      track: 'alpha',
+    ) rescue []
+    internalVersionCodes = google_play_track_version_codes(
+      track: 'internal',
+    ) rescue []
+    playVersionCodeMax = Set.new(
+      productionVersionCodes +
+      betaVersionCodes +
+      alphaVersionCodes  +
+      internalVersionCodes
+    ).max
+    playVersionCodeMax ||= 0
+    UI.success "PLAY_VERSION_CODE_MAX=#{playVersionCodeMax}"
+    playVersionCodeMax
   end
-
 end

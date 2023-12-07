@@ -15,9 +15,9 @@ $(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
 source ./tool/constants.sh
 
 if [[ -s ./secrets/.git ]]; then
-  PLAY_VERSION_CODE=$(./tool/android/get-play-version-code.sh "$FLAVOR_ENV")
-  log_info "PLAY_VERSION_CODE=$PLAY_VERSION_CODE"
-  INCREMENTED_VERSION_CODE=$(( PLAY_VERSION_CODE+1 ))
+  PLAY_VERSION_CODE_MAX=$(./tool/android/get-play-version-code-max.sh "$FLAVOR_ENV")
+  log_info "PLAY_VERSION_CODE_MAX=$PLAY_VERSION_CODE_MAX"
+  INCREMENTED_VERSION_CODE=$(( PLAY_VERSION_CODE_MAX+1 ))
   log_info "INCREMENTED_VERSION_CODE=$INCREMENTED_VERSION_CODE"
 else
   INCREMENTED_VERSION_CODE=1
