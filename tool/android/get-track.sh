@@ -13,7 +13,7 @@ FLAVOR_ENV=${1:?\
 $(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
 
 if [[ $FLAVOR_ENV == "dev" || $FLAVOR_ENV == "stag" ]]; then
-  TRACK="internal"
+  TRACK="alpha"
 elif [[ $FLAVOR_ENV == "prod" ]]; then
   TRACK="production"
 else
