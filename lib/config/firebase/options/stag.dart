@@ -61,7 +61,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDLwKETC_GEWBDDbSnpUMxCUcegawO9hYM',
-    appId: '1:705512446254:android:b08675d542e54a78b382bf',
+    appId: '1:705512446254:android:c81e2bc51ccc2010b382bf',
     messagingSenderId: '705512446254',
     projectId: 'space-data-explorer-stag',
     storageBucket: 'space-data-explorer-stag.appspot.com',
@@ -69,11 +69,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDQpxH6gmSb2c-Ap63lrtsEspHc_TVJ1Dk',
-    appId: '1:705512446254:ios:675b1529efcce073b382bf',
+    appId: '1:705512446254:ios:dab87a53736e4ce7b382bf',
     messagingSenderId: '705512446254',
     projectId: 'space-data-explorer-stag',
     storageBucket: 'space-data-explorer-stag.appspot.com',
-    iosBundleId:
-        'dev.hrishikesh-kadam.flutter.space-data-explorer.stag.release',
+    iosBundleId: 'dev.hrishikesh-kadam.flutter.space-data-explorer.stag',
   );
 }

@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>dev.hrishikesh-kadam.flutter.space-data-explorer.dev.release</string>
+	<string>dev.hrishikesh-kadam.flutter.space-data-explorer.dev</string>
 	<key>PROJECT_ID</key>
 	<string>space-data-explorer-dev</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1030109759765:ios:e4de2f56a91f87ce6b811c</string>
+	<string>1:1030109759765:ios:ae1cbbb17367775b6b811c</string>
 </dict>
 </plist>

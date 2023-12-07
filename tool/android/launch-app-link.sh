@@ -13,12 +13,7 @@ FLAVOR_ENV=${1:?\
 $(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
 
 APP_URL=$(./tool/constants/app-url.sh "$FLAVOR_ENV")
-
-pushd android &> /dev/null
-APPLICATION_ID=$(./gradlew \
-  -q :app:getApplicationId \
-  -PvariantName="${FLAVOR_ENV}Debug")
-popd &> /dev/null
+APPLICATION_ID=$(./tool/android/get-application-id.sh "$FLAVOR_ENV")
 
 adb shell am start -a android.intent.action.VIEW \
   -c android.intent.category.BROWSABLE \

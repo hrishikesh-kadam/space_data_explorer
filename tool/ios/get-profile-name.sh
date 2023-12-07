@@ -15,9 +15,9 @@ FLAVOR_ENV=${1:?\
 $(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
 
 if [[ $FLAVOR_ENV == "prod" ]]; then
-  echo "$APP_NAME Prod Release Profile"
+  echo "$APP_NAME Prod Profile"
 elif [[ $FLAVOR_ENV == "stag" ]]; then
-  echo "$APP_NAME Stag Release Profile"
+  echo "$APP_NAME Stag Profile"
 else
-  echo "$APP_NAME Dev Release Profile"
+  echo "$APP_NAME Dev Profile"
 fi

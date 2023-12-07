@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1030109759765:android:b8aad4005ccb67a06b811c",
+        "mobilesdk_app_id": "1:1030109759765:android:851590128c8b32c76b811c",
         "android_client_info": {
-          "package_name": "dev.hrishikesh_kadam.flutter.space_data_explorer.dev.release"
+          "package_name": "dev.hrishikesh_kadam.flutter.space_data_explorer.dev"
         }
       },
       "oauth_client": [

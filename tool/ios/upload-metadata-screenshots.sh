@@ -23,14 +23,14 @@ if [[ -s ./secrets/.git ]]; then
   fi
 fi
 
-APP_IDENTIFIER="$(./tool/ios/get-app-identifier.sh "$FLAVOR_ENV")"
+BUNDLE_ID="$(./tool/ios/get-bundle-id.sh "$FLAVOR_ENV")"
 
 ./tool/android/generate-changelog.sh "$FLAVOR_ENV"
 
 pushd ios &> /dev/null
 bundle exec fastlane run upload_to_app_store \
   "${API_KEY_PATH_ARG[@]}" \
-  app_identifier:"$APP_IDENTIFIER" \
+  app_identifier:"$BUNDLE_ID" \
   app_version:"$VERSION_MAJOR_MINOR_PATCH" \
   metadata_path:"./fastlane/$FLAVOR_ENV/metadata" \
   screenshots_path:"./fastlane/$FLAVOR_ENV/screenshots" \

@@ -18,8 +18,8 @@ unset APP_NAME_ARRAY
 VERSION="$(yq .version pubspec.yaml)"
 VERSION_MAJOR_MINOR_PATCH=${VERSION%+*}
 
-ANDROID_APP_ID="dev.hrishikesh_kadam.flutter.$APP_NAME_SNAKE_CASE"
-APPLE_BUNDLE_ID="dev.hrishikesh-kadam.flutter.$APP_NAME_KEBAB_CASE"
+ANDROID_APP_ID_BASE="dev.hrishikesh_kadam.flutter.$APP_NAME_SNAKE_CASE"
+APPLE_BUNDLE_ID_BASE="dev.hrishikesh-kadam.flutter.$APP_NAME_KEBAB_CASE"
 
 BUNDLETOOL_PATH="$ANDROID_HOME/bundletool-all.jar"
 BUNDLETOOL="java -jar $BUNDLETOOL_PATH"

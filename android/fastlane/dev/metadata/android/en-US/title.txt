@@ -1,1 +1,1 @@
-Space Data Explorer - dev
+Space Data Explorer Dev

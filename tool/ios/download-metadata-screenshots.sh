@@ -21,7 +21,7 @@ if [[ -s ./secrets/.git ]]; then
   fi
 fi
 
-APP_IDENTIFIER="$(./tool/ios/get-app-identifier.sh "$FLAVOR_ENV")"
+BUNDLE_ID="$(./tool/ios/get-bundle-id.sh "$FLAVOR_ENV")"
 
 pushd ios &> /dev/null
 
@@ -33,14 +33,14 @@ fi
 # Deliberately avoiding run keyword here, not working if present
 bundle exec fastlane upload_to_app_store download_metadata \
   "${API_KEY_PATH_ARG[@]}" \
-  --app_identifier "$APP_IDENTIFIER" \
+  --app_identifier "$BUNDLE_ID" \
   --metadata_path "./fastlane/$FLAVOR_ENV/metadata" \
   "${USE_LIVE_VERSION_ARG[@]}" \
   --force true
 
 bundle exec fastlane upload_to_app_store download_screenshots \
   "${API_KEY_PATH_ARG[@]}" \
-  --app_identifier "$APP_IDENTIFIER" \
+  --app_identifier "$BUNDLE_ID" \
   --screenshots_path "./fastlane/$FLAVOR_ENV/screenshots" \
   "${USE_LIVE_VERSION_ARG[@]}" \
   --force true

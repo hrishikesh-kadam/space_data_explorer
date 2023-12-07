@@ -49,7 +49,7 @@ SCREENSHOT_TEST_ARG=$(printf "SCREENSHOT_TEST=true" | base64)
 UPDATE_GOLDENS_ARG=$(printf "UPDATE_GOLDENS=true" | base64)
 CONNECTED_ANDROID_TEST=":app:connected${FLAVOR_ENV@u}DebugAndroidTest"
 
-APP_PACKAGE="$ANDROID_APP_ID.$FLAVOR_ENV.debug"
+APPLICATION_ID=$(./tool/android/get-application-id.sh "$FLAVOR_ENV")
 SCREENSHOT_DIR="app_flutter/screenshots"
 REMOTE_DIR="/data/user/0/$APP_PACKAGE/$SCREENSHOT_DIR"
 ACCESSIBLE_DIR="/storage/emulated/0/Download/$APP_NAME_KEBAB_CASE/screenshots"
@@ -93,7 +93,7 @@ for i in "${!AVD_NAMES[@]}"; do
     adb shell <<- EOF
 		rm -rf $ACCESSIBLE_DIR
 		mkdir -p $ACCESSIBLE_DIR
-		run-as "$ANDROID_APP_ID.$FLAVOR_ENV.debug"
+		run-as "$APPLICATION_ID"
 		cp "./$SCREENSHOT_DIR/*" $ACCESSIBLE_DIR
 		exit
 		exit

@@ -23,13 +23,13 @@ if [[ -s ./secrets/.git ]]; then
   fi
 fi
 
-APP_IDENTIFIER="$(./tool/ios/get-app-identifier.sh "$FLAVOR_ENV")"
+BUNDLE_ID="$(./tool/ios/get-bundle-id.sh "$FLAVOR_ENV")"
 
 pushd ios &> /dev/null
 TESTFLIGHT_BUILD_NUMBER=$(
   bundle exec fastlane run latest_testflight_build_number \
   "${API_KEY_PATH_ARG[@]}" \
-  app_identifier:"$APP_IDENTIFIER" \
+  app_identifier:"$BUNDLE_ID" \
   version:"$VERSION_MAJOR_MINOR_PATCH" \
   initial_build_number:0 \
   | grep --only-matching --extended-regexp "Result: [0-9]+" \

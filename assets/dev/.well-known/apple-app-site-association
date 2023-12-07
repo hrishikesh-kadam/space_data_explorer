@@ -4,9 +4,7 @@
     "details": [
       {
         "appIDs": [
-          "Q798GS4Z62.dev.hrishikesh-kadam.flutter.space-data-explorer.dev.release",
-          "Q798GS4Z62.dev.hrishikesh-kadam.flutter.space-data-explorer.dev.profile",
-          "Q798GS4Z62.dev.hrishikesh-kadam.flutter.space-data-explorer.dev.debug"
+          "Q798GS4Z62.dev.hrishikesh-kadam.flutter.space-data-explorer.dev"
         ],
         "components": [
           {

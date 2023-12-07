@@ -12,13 +12,8 @@ fi
 FLAVOR_ENV=${1:?\
 $(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
 
-pushd android &> /dev/null
-APPLICATION_ID=$(./gradlew \
-  -q :app:getApplicationId \
-  -PvariantName="${FLAVOR_ENV}Release")
-popd &> /dev/null
-
-TRACK=$(./tool/android/get-track-from-flavor-env.sh "$FLAVOR_ENV")
+APPLICATION_ID=$(./tool/android/get-application-id.sh "$FLAVOR_ENV")
+TRACK=$(./tool/android/get-track.sh "$FLAVOR_ENV")
 
 pushd android &> /dev/null
 PLAY_VERSION_CODE=$(

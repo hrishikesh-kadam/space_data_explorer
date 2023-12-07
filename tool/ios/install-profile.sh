@@ -24,7 +24,7 @@ if [[ -s ./secrets/.git ]]; then
   fi
 fi
 
-APP_IDENTIFIER="$(./tool/ios/get-app-identifier.sh "$FLAVOR_ENV")"
+BUNDLE_ID="$(./tool/ios/get-bundle-id.sh "$FLAVOR_ENV")"
 
 pushd ios &> /dev/null
 
@@ -37,7 +37,7 @@ else
     "${API_KEY_PATH_ARG[@]}" \
     readonly:"true" \
     provisioning_name:"$PROFILE_NAME" \
-    app_identifier:"$APP_IDENTIFIER" \
+    app_identifier:"$BUNDLE_ID" \
     output_path:"./fastlane/download"
 fi
 

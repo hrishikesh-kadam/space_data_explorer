@@ -21,13 +21,13 @@
         "buildConfigurations": {
           "Release-dev": {
             "projectId": "space-data-explorer-dev",
-            "appId": "1:1030109759765:ios:e4de2f56a91f87ce6b811c",
+            "appId": "1:1030109759765:ios:ae1cbbb17367775b6b811c",
             "uploadDebugSymbols": true,
             "fileOutput": "ios/config/dev/GoogleService-Info.plist"
           },
           "Release-stag": {
             "projectId": "space-data-explorer-stag",
-            "appId": "1:705512446254:ios:675b1529efcce073b382bf",
+            "appId": "1:705512446254:ios:dab87a53736e4ce7b382bf",
             "uploadDebugSymbols": true,
             "fileOutput": "ios/config/stag/GoogleService-Info.plist"
           },
@@ -50,12 +50,12 @@
         "buildConfigurations": {
           "src/dev": {
             "projectId": "space-data-explorer-dev",
-            "appId": "1:1030109759765:android:b8aad4005ccb67a06b811c",
+            "appId": "1:1030109759765:android:851590128c8b32c76b811c",
             "fileOutput": "android/app/src/dev/google-services.json"
           },
           "src/stag": {
             "projectId": "space-data-explorer-stag",
-            "appId": "1:705512446254:android:b08675d542e54a78b382bf",
+            "appId": "1:705512446254:android:c81e2bc51ccc2010b382bf",
             "fileOutput": "android/app/src/stag/google-services.json"
           },
           "src/prod": {
@@ -69,16 +69,16 @@
         "lib/config/firebase/options/dev.dart": {
           "projectId": "space-data-explorer-dev",
           "configurations": {
-            "android": "1:1030109759765:android:b8aad4005ccb67a06b811c",
-            "ios": "1:1030109759765:ios:e4de2f56a91f87ce6b811c",
+            "android": "1:1030109759765:android:851590128c8b32c76b811c",
+            "ios": "1:1030109759765:ios:ae1cbbb17367775b6b811c",
             "web": "1:1030109759765:web:8c3a343b4a1c6ea46b811c"
           }
         },
         "lib/config/firebase/options/stag.dart": {
           "projectId": "space-data-explorer-stag",
           "configurations": {
-            "android": "1:705512446254:android:b08675d542e54a78b382bf",
-            "ios": "1:705512446254:ios:675b1529efcce073b382bf",
+            "android": "1:705512446254:android:c81e2bc51ccc2010b382bf",
+            "ios": "1:705512446254:ios:dab87a53736e4ce7b382bf",
             "web": "1:705512446254:web:72aad84a856b7beeb382bf"
           }
         },

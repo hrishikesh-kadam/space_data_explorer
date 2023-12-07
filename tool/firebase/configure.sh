@@ -20,9 +20,9 @@ PLATFORMS=(
   "android,ios,web"
 )
 ANDROID_APP_IDS=(
-  "$ANDROID_APP_ID.dev.release"
-  "$ANDROID_APP_ID.stag.release"
-  "$ANDROID_APP_ID"
+  "$ANDROID_APP_ID_BASE.dev"
+  "$ANDROID_APP_ID_BASE.stag"
+  "$ANDROID_APP_ID_BASE"
 )
 ANDROID_OUT_FILES=(
   "/android/app/src/dev/google-services.json"
@@ -30,9 +30,9 @@ ANDROID_OUT_FILES=(
   "/android/app/src/prod/google-services.json"
 )
 APPLE_BUNDLE_IDS=(
-  "$APPLE_BUNDLE_ID.dev.release"
-  "$APPLE_BUNDLE_ID.stag.release"
-  "$APPLE_BUNDLE_ID"
+  "$APPLE_BUNDLE_ID_BASE.dev"
+  "$APPLE_BUNDLE_ID_BASE.stag"
+  "$APPLE_BUNDLE_ID_BASE"
 )
 IOS_BUILD_CONFIGS=(
   "Release-dev"

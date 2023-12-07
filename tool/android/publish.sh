@@ -27,13 +27,10 @@ VERSION_NAME=$( \
     --xpath /manifest/@android:versionName
 )
 
-pushd android &> /dev/null
-APPLICATION_ID=$(./gradlew \
-  -q :app:getApplicationId \
-  -PvariantName="${FLAVOR_ENV}Release")
-popd &> /dev/null
-
-TRACK=$(./tool/android/get-track-from-flavor-env.sh "$FLAVOR_ENV")
+APPLICATION_ID=$(./tool/android/get-application-id.sh "$FLAVOR_ENV")
+TRACK=$(./tool/android/get-track.sh "$FLAVOR_ENV")
+# TODO(hrishikesh-kadam): Remove this once dev and stag review is completed
+RELEASE_STATUS=$(./tool/android/get-release-status.sh "$FLAVOR_ENV")
 
 ./tool/android/generate-changelog.sh \
   "$FLAVOR_ENV" "$VERSION_CODE" "$VERSION_NAME"
@@ -43,6 +40,7 @@ bundle exec fastlane run upload_to_play_store \
   package_name:"$APPLICATION_ID" \
   version_name:"$VERSION_CODE ($VERSION_NAME)" \
   track:"$TRACK" \
+  release_status:"$RELEASE_STATUS" \
   metadata_path:"./fastlane/$FLAVOR_ENV/metadata/android" \
   aab:".$BUNDLE_FILE"
 popd &> /dev/null

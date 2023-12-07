@@ -23,7 +23,7 @@ if [[ -s ./secrets/.git ]]; then
   fi
 fi
 
-APP_IDENTIFIER="$(./tool/ios/get-app-identifier.sh "$FLAVOR_ENV")"
+BUNDLE_ID="$(./tool/ios/get-bundle-id.sh "$FLAVOR_ENV")"
 IPA_FILE="./build/ios/ipa/$APP_NAME_KEBAB_CASE-$FLAVOR_ENV-release.ipa"
 ./tool/ios/generate-changelog.sh "$FLAVOR_ENV"
 SUBMISSION_INFORMATION=$(< "./ios/fastlane/$FLAVOR_ENV/submission-information.json")
@@ -31,7 +31,7 @@ SUBMISSION_INFORMATION=$(< "./ios/fastlane/$FLAVOR_ENV/submission-information.js
 pushd ios &> /dev/null
 bundle exec fastlane run upload_to_app_store \
   "${API_KEY_PATH_ARG[@]}" \
-  app_identifier:"$APP_IDENTIFIER" \
+  app_identifier:"$BUNDLE_ID" \
   app_version:"$VERSION_MAJOR_MINOR_PATCH" \
   ipa:".$IPA_FILE" \
   metadata_path:"./fastlane/$FLAVOR_ENV/metadata" \
