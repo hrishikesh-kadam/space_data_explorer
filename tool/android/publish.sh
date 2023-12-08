@@ -29,7 +29,6 @@ VERSION_NAME=$( \
 
 APPLICATION_ID=$(./tool/android/get-application-id.sh "$FLAVOR_ENV")
 TRACK=$(./tool/android/get-track.sh "$FLAVOR_ENV")
-# TODO(hrishikesh-kadam): Remove this once dev and stag review is completed
 RELEASE_STATUS=$(./tool/android/get-release-status.sh "$FLAVOR_ENV")
 
 ./tool/android/generate-changelog.sh \
