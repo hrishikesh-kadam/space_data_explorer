@@ -1,6 +1,9 @@
+// ignore_for_file: directives_ordering
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -33,7 +36,12 @@ class SpaceDataExplorerApp extends StatelessWidget {
         $pageNotFoundRoute,
       ],
       onException: GoRouterExt.onException,
-      observers: [SentryNavigatorObserver()],
+      observers: [
+        FirebaseAnalyticsObserver(
+          analytics: FirebaseAnalytics.instance,
+        ),
+        SentryNavigatorObserver(),
+      ],
       debugLogDiagnostics: kDebugMode,
     );
   }

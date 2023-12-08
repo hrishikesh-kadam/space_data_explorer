@@ -30,6 +30,6 @@ class Labels {
   static const String tdb = 'TDB';
   static const String na = 'NA';
   static const String about = 'About';
-  static const String license = 'Licenses';
+  static const String licenses = 'Licenses';
   static const String googlePlayBadge = 'Get it on Google Play';
 }

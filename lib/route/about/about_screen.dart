@@ -1,10 +1,14 @@
+// ignore_for_file: directives_ordering
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:url_launcher/link.dart';
 
+import '../../analytics/analytics.dart';
 import '../../config/config.dart';
 import '../../constants/assets.dart';
 import '../../constants/constants.dart';
@@ -163,7 +167,10 @@ class AboutScreen extends StatelessWidget {
         builder: (context, followLink) {
           return InkWell(
             key: linktreeUriKey,
-            onTap: followLink,
+            onTap: () {
+              Analytics.logSelectExternalUrl(uri: Constants.linktreeUrl);
+              followLink!();
+            },
             child: Text(
               Constants.linktreeUrl.toString(),
               textAlign: TextAlign.center,
@@ -197,7 +204,10 @@ class AboutScreen extends StatelessWidget {
         builder: (context, followLink) {
           return InkWell(
             key: googlePlayBadgeKey,
-            onTap: followLink,
+            onTap: () {
+              Analytics.logSelectExternalUrl(uri: Constants.googlePlayUrl);
+              followLink!();
+            },
             child: getImageWidget(
               assetName: AppAssets.googlePlayBadge,
               semanticLabel: Labels.googlePlayBadge,
@@ -210,6 +220,7 @@ class AboutScreen extends StatelessWidget {
   }
 
   Widget _getWebApp({required BuildContext context}) {
+    final Uri url = webAppUrl;
     return Wrap(
       alignment: WrapAlignment.center,
       children: [
@@ -220,12 +231,15 @@ class AboutScreen extends StatelessWidget {
         ),
         InkWell(
           key: webAppUriKey,
-          onTap: () => copyToClipboard(
-            context: context,
-            text: webAppUrl.toString(),
-          ),
+          onTap: () {
+            Analytics.logSelectExternalUrl(uri: url);
+            copyToClipboard(
+              context: context,
+              text: url.toString(),
+            );
+          },
           child: Text(
-            webAppUrl.toString(),
+            url.toString(),
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: Colors.blue,
@@ -248,6 +262,10 @@ class AboutScreen extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         onPressed: () {
+          FirebaseAnalytics.instance.logScreenView(
+            screenName: Labels.licenses,
+            screenClass: 'LicensePage',
+          );
           // context.go(
           //   LicenseRoute.path,
           //   extra: getRouteExtraMap(),

@@ -1,3 +1,15 @@
+# 0.11.0
+
+- Start with Firebase Analytics
+
+# 0.10.0
+
+- Finalize variants
+
+# 0.9.x
+
+- Start with iOS 
+
 # 0.8.0
 
 - Light and Dark themes

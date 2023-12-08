@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:url_launcher/link.dart';
 
+import '../analytics/analytics.dart';
+
 Widget getLabelLinkInkWellWrap({
   required BuildContext context,
   required String text,
@@ -22,7 +24,10 @@ Widget getLabelLinkInkWellWrap({
         builder: (context, followLink) {
           return InkWell(
             key: inkWellKey,
-            onTap: followLink,
+            onTap: () {
+              Analytics.logSelectExternalUrl(uri: uri);
+              followLink!();
+            },
             child: Text(
               uri.toString(),
               textAlign: TextAlign.center,

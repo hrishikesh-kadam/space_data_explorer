@@ -15,7 +15,7 @@ class LicenseRoute extends GoRouteData {
 
   static const String pathSegment = 'license';
   static final Uri uri = Uri(path: '${AboutRoute.uri.path}/$pathSegment');
-  static const String displayName = Labels.license;
+  static const String displayName = Labels.licenses;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
