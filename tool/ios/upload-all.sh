@@ -38,6 +38,7 @@ bundle exec fastlane run upload_to_app_store \
   screenshots_path:"./fastlane/$FLAVOR_ENV/screenshots" \
   overwrite_screenshots:true \
   submit_for_review:true \
+  reject_if_possible:true \
   automatic_release:true \
   precheck_include_in_app_purchases:false \
   submission_information:"$SUBMISSION_INFORMATION" \
