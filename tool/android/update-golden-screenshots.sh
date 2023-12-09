@@ -51,7 +51,7 @@ CONNECTED_ANDROID_TEST=":app:connected${FLAVOR_ENV@u}DebugAndroidTest"
 
 APPLICATION_ID=$(./tool/android/get-application-id.sh "$FLAVOR_ENV")
 SCREENSHOT_DIR="app_flutter/screenshots"
-REMOTE_DIR="/data/user/0/$APP_PACKAGE/$SCREENSHOT_DIR"
+REMOTE_DIR="/data/user/0/$APPLICATION_ID/$SCREENSHOT_DIR"
 ACCESSIBLE_DIR="/storage/emulated/0/Download/$APP_NAME_KEBAB_CASE/screenshots"
 SCREENSHOTS=(
   "1"

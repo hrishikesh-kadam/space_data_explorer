@@ -17,11 +17,11 @@ if [[ $(uname -s) =~ ^"MINGW" ]]; then
   output_lines=$(echo "$output" | grep --count PID)
 else
   if [[ $(uname -s) =~ ^"Darwin" ]]; then
-    PGREP_OPTIONS="-fl"
+    PGREP_OPTIONS=("-fl")
   else
-    PGREP_OPTIONS="--list-full --full"
+    PGREP_OPTIONS=("--list-full" "--full")
   fi
-  output=$(pgrep "$PGREP_OPTIONS" "emulator/qemu.*$AVD_NAME") || true
+  output=$(pgrep "${PGREP_OPTIONS[@]}" "emulator/qemu.*$AVD_NAME") || true
   if [[ -z $output ]]; then
     exit 0
   fi
