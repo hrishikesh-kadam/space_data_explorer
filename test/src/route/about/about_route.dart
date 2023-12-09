@@ -14,7 +14,9 @@ final actionsListViewFinder = find.byKey(AboutScreen.listViewKey);
 final licenseButtonFinder = find.byKey(AboutScreen.licenseButtonKey);
 final linktreeUriFinder = find.byKey(AboutScreen.linktreeUriKey);
 final sourceUriFinder = find.byKey(AboutScreen.sourceUriKey);
-final googlePlayBadgeFinder = find.byKey(AboutScreen.googlePlayBadgeKey);
+final googlePlayStoreBadgeFinder =
+    find.byKey(AboutScreen.googlePlayStoreBadgeKey);
+final appleAppStoreBadgeFinder = find.byKey(AboutScreen.appleAppStoreBadgeKey);
 final webAppUriFinder = find.byKey(AboutScreen.webAppUriKey);
 final lastItemFinder = licenseButtonFinder;
 
@@ -59,8 +61,13 @@ Future<void> tapSourceUri(WidgetTester tester) async {
   await tester.pumpAndSettle();
 }
 
-Future<void> tapGooglePlayBadge(WidgetTester tester) async {
-  await tester.tap(googlePlayBadgeFinder);
+Future<void> tapGooglePlayStoreBadge(WidgetTester tester) async {
+  await tester.tap(googlePlayStoreBadgeFinder);
+  await tester.pumpAndSettle();
+}
+
+Future<void> tapAppleAppStoreBadge(WidgetTester tester) async {
+  await tester.tap(appleAppStoreBadgeFinder);
   await tester.pumpAndSettle();
 }
 

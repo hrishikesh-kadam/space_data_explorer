@@ -13,13 +13,17 @@ class Constants {
     'github.com',
     '$authorUsername/$appName',
   );
-  // static final Uri googlePlayBadgeUrl = Uri.https(
+  // static final Uri googlePlayStoreBadgeUrl = Uri.https(
   //   'play.google.com',
   //   'intl/en_us/badges/static/images/badges/en_badge_web_generic.png',
   // );
-  static final Uri googlePlayUrl = Uri.https(
+  static final Uri googlePlayStoreUrl = Uri.https(
     'play.google.com',
     'store/apps/details',
     {'id': androidAppId},
+  );
+  static final Uri appleAppStoreUrl = Uri.https(
+    'apps.apple.com',
+    'us/app/space-data-explorer/id6471949704',
   );
 }

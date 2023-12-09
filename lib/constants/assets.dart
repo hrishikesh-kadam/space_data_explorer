@@ -1,6 +1,10 @@
 class AppAssets {
-  // Source: https://play.google.com/intl/en_us/badges/#!#badge-generator
-  static const String googlePlayBadge = 'assets/google_play_badge.png';
+  static const String googlePlayStoreBadge =
+      'assets/google/play-store-badge.png';
+  static const String appleAppStoreBlackBadge =
+      'assets/apple/app-store-black-badge.svg';
+  static const String appleAppStoreWhiteBadge =
+      'assets/apple/app-store-white-badge.svg';
 }
 
 class NasaAssets {

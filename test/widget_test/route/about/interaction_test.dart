@@ -18,7 +18,13 @@ void main() {
     testWidgets('Tap all links, iOS', (tester) async {
       await pumpAboutRouteAsInitialLocation(tester);
       await precacheAllImages(tester);
-      await tapGooglePlayBadge(tester);
+      await tapGooglePlayStoreBadge(tester);
     }, variant: TargetPlatformVariant.only(TargetPlatform.iOS));
+
+    testWidgets('Tap all links, Android', (tester) async {
+      await pumpAboutRouteAsInitialLocation(tester);
+      await precacheAllImages(tester);
+      await tapAppleAppStoreBadge(tester);
+    }, variant: TargetPlatformVariant.only(TargetPlatform.android));
   });
 }

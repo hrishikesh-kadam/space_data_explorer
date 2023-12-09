@@ -1,6 +1,7 @@
 # 0.11.0
 
 - Start with Firebase Analytics
+- Add Apple App Store Badge to About Screen
 
 # 0.10.0
 

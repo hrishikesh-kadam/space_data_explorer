@@ -37,8 +37,10 @@ class AboutScreen extends StatelessWidget {
   static const Key licenseButtonKey = Key('${keyPrefix}license_button_key');
   static const Key linktreeUriKey = Key('${keyPrefix}linktree_key');
   static const Key sourceUriKey = Key('${keyPrefix}source_key');
-  static const Key googlePlayBadgeKey =
-      Key('${keyPrefix}google_play_badge_key');
+  static const Key googlePlayStoreBadgeKey =
+      Key('${keyPrefix}google_play_store_badge_key');
+  static const Key appleAppStoreBadgeKey =
+      Key('${keyPrefix}apple_app_store_badge_key');
   static const Key webAppUriKey = Key('${keyPrefix}web_app_key');
 
   @override
@@ -91,8 +93,7 @@ class AboutScreen extends StatelessWidget {
         uri: Constants.sourceRepoUrl,
         inkWellKey: sourceUriKey,
       ),
-      if (kIsWeb || defaultTargetPlatform != TargetPlatform.android)
-        _getGooglePlayBadge(context: context),
+      _getMobileStoreBadges(context: context),
       if (!kIsWeb) _getWebApp(context: context),
       _getLicenseButton(context: context),
     ];
@@ -196,26 +197,63 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-  Widget _getGooglePlayBadge({required BuildContext context}) {
-    return Center(
-      child: Link(
-        uri: Constants.googlePlayUrl,
-        target: LinkTarget.blank,
-        builder: (context, followLink) {
-          return InkWell(
-            key: googlePlayBadgeKey,
-            onTap: () {
-              Analytics.logSelectExternalUrl(uri: Constants.googlePlayUrl);
-              followLink!();
-            },
-            child: getImageWidget(
-              assetName: AppAssets.googlePlayBadge,
-              semanticLabel: Labels.googlePlayBadge,
-              height: 72,
-            ),
-          );
-        },
-      ),
+  Widget _getGooglePlayStoreBadge({required BuildContext context}) {
+    return Link(
+      uri: Constants.googlePlayStoreUrl,
+      target: LinkTarget.blank,
+      builder: (context, followLink) {
+        return InkWell(
+          key: googlePlayStoreBadgeKey,
+          onTap: () {
+            Analytics.logSelectExternalUrl(uri: Constants.googlePlayStoreUrl);
+            followLink!();
+          },
+          child: getImageWidget(
+            assetName: AppAssets.googlePlayStoreBadge,
+            semanticLabel: Labels.googlePlayStoreBadge,
+            height: 72,
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _getAppleAppStoreBadge({required BuildContext context}) {
+    return Link(
+      uri: Constants.appleAppStoreUrl,
+      target: LinkTarget.blank,
+      builder: (context, followLink) {
+        return InkWell(
+          key: appleAppStoreBadgeKey,
+          onTap: () {
+            Analytics.logSelectExternalUrl(uri: Constants.appleAppStoreUrl);
+            followLink!();
+          },
+          child: getImageWidget(
+            assetName: Theme.of(context).brightness == Brightness.dark
+                ? AppAssets.appleAppStoreBlackBadge
+                : AppAssets.appleAppStoreWhiteBadge,
+            semanticLabel: Labels.appleAppStoreBadge,
+            height: 48,
+          ),
+        );
+      },
+    );
+  }
+
+  Wrap _getMobileStoreBadges({required BuildContext context}) {
+    return Wrap(
+      alignment: WrapAlignment.center,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        if (kIsWeb || defaultTargetPlatform != TargetPlatform.android)
+          _getGooglePlayStoreBadge(context: context),
+        if (kIsWeb || defaultTargetPlatform != TargetPlatform.iOS)
+          Padding(
+            padding: const EdgeInsets.only(top: 12, bottom: 12),
+            child: _getAppleAppStoreBadge(context: context),
+          ),
+      ],
     );
   }
 

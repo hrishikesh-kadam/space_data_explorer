@@ -31,5 +31,6 @@ class Labels {
   static const String na = 'NA';
   static const String about = 'About';
   static const String licenses = 'Licenses';
-  static const String googlePlayBadge = 'Get it on Google Play';
+  static const String googlePlayStoreBadge = 'Get it on Google Play';
+  static const String appleAppStoreBadge = 'Download on the App Store';
 }

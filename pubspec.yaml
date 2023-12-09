@@ -89,7 +89,8 @@ flutter:
     - assets/kari/
     - assets/spacex/
     - assets/jaxa/
-    - assets/
+    - assets/google/
+    - assets/apple/
     # - assets/fonts/Roboto/
     # - assets/fonts/MaterialIcons/
 
