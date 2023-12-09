@@ -27,7 +27,7 @@
 - Delete Runner scheme
 - Fix log colors
 - Update .vscode/launch.json
-- LaunchImage
+- Rework on LaunchImage for better understanding
 - Check if Target should be renamed
 
 #### Blockers
