@@ -230,9 +230,10 @@ class AboutScreen extends StatelessWidget {
             followLink!();
           },
           child: getImageWidget(
-            assetName: Theme.of(context).brightness == Brightness.dark
-                ? AppAssets.appleAppStoreBlackBadge
-                : AppAssets.appleAppStoreWhiteBadge,
+            // assetName: Theme.of(context).brightness == Brightness.dark
+            //     ? AppAssets.appleAppStoreBlackBadge
+            //     : AppAssets.appleAppStoreWhiteBadge,
+            assetName: AppAssets.appleAppStoreBlackBadge,
             semanticLabel: Labels.appleAppStoreBadge,
             height: 48,
           ),

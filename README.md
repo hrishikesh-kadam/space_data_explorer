@@ -4,14 +4,15 @@
 [![codecov][codecov-badge]][codecov-link]
 
 <a href='https://play.google.com/store/apps/details?id=dev.hrishikesh_kadam.flutter.space_data_explorer'>
-  <img alt='Get it on Google Play' src='assets/google/play-store-badge.png' height='72' style='margin: 0px 0px 0px -12px;'/>
+  <img alt='Get it on Google Play' src='assets/google/play-store-badge.png' height='72'/>
 </a>
-<a href='https://apps.apple.com/us/app/space-data-explorer/id6471949704'>
+
+&nbsp;&nbsp;<a href='https://apps.apple.com/us/app/space-data-explorer/id6471949704'>
   <picture>
     <source media='(prefers-color-scheme: dark)' srcset='assets/apple/app-store-black-badge.svg'/>
-    <img alt='Download on the App Store' src='assets/apple/app-store-white-badge.svg' height='48' style='margin: 0px 0px 12px 0px;'/>
+    <img alt='Download on the App Store' src='assets/apple/app-store-black-badge.svg' height='48'/>
   </picture>
-</a>  
+</a>
 
 Web - https://space-data-explorer.web.app  
 
