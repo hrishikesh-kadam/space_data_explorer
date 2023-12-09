@@ -27,7 +27,6 @@
 - Delete Runner scheme
 - Fix log colors
 - Update .vscode/launch.json
-- Firebase / Analytics
 - LaunchImage
 - Check if Target should be renamed
 
@@ -57,12 +56,14 @@
 
 - ✅ Dart Debug Symbol Files (Android, iOS stack still obfuscated)
 - ⬜ R8, ProGuard, and DexGuard Mapping Files
+- ✅ dSYM
 
 ### Sentry
 
-- ✅ Dart Debug Symbol Files, Source (Android)
+- ✅ Dart Debug Symbol Files, Source (Android, iOS stack still obfuscated)
 - ⬜ R8, ProGuard, and DexGuard Mapping Files
 - ✅ Web Source Maps
+- ✅ dSYM
 
 ## Icons Notes
 
