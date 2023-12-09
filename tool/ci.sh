@@ -32,4 +32,4 @@ if [[ $(uname -s) =~ ^"Darwin" ]]; then
   ./tool/ios/build.sh "$FLAVOR_ENV"
 fi
 
-git diff
+git --no-pager diff

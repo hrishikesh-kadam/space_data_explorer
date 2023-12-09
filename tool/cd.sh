@@ -27,4 +27,4 @@ if [[ $(uname -s) =~ ^"Darwin" ]]; then
   ./tool/ios/deploy.sh "$FLAVOR_ENV"
 fi
 
-git diff
+git --no-pager diff

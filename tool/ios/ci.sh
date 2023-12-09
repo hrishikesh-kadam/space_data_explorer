@@ -26,4 +26,4 @@ source ./tool/shell/logs-env.sh
 
 ./tool/ios/build.sh "$FLAVOR_ENV"
 
-git diff
+git --no-pager diff
