@@ -60,6 +60,8 @@ dev_dependencies:
   freezed: ^2.4.1
   json_serializable: ^6.7.1
   go_router_builder: ^2.3.1
+  firebase_core_platform_interface: ^5.0.0
+  firebase_analytics_platform_interface: ^3.8.4
   sentry_dart_plugin: ^1.5.0
 
 # dependency_overrides:
@@ -96,8 +98,6 @@ import_sorter:
   ignored_files:
     - '.*\.mocks\.dart'
     - test[/\\]src[/\\]config[/\\]hydrated_bloc\.dart
-    - test[/\\]src[/\\]config[/\\]dio_response\.dart
-    - test[/\\]src[/\\]nasa[/\\]cad[/\\]sbdb_cad_api\.dart
 
 # sentry:
 #   upload_source_maps: true

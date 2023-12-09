@@ -31,11 +31,11 @@ bool isFirebaseSupported() {
 }
 
 Future<void> configureFirebase() async {
-  final FirebaseOptions options = switch (flavorEnv) {
+  final FirebaseOptions? options = switch (flavorEnv) {
     FlavorEnv.dev => firebase_dev.DefaultFirebaseOptions.currentPlatform,
     FlavorEnv.stag => firebase_stag.DefaultFirebaseOptions.currentPlatform,
     FlavorEnv.prod => firebase_prod.DefaultFirebaseOptions.currentPlatform,
-    _ => throw ArgumentError.value(flavorEnv),
+    FlavorEnv.unflavored => null,
   };
   await Firebase.initializeApp(
     options: options,
@@ -58,7 +58,7 @@ bool isFirebaseAnalyticsSupported() {
   }
 }
 
-void configureFirebaseAnalytics() async {
+void configureFirebaseAnalytics() {
   if (!kReleaseMode) {
     FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(false);
   }
