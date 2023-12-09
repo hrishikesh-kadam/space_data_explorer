@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -53,4 +55,19 @@ void expectCrossAxisCount(
     expect(firstItemRect.top < secondItemRect.top, true);
     expect(secondItemRect.top < thirdItemRect.top, true);
   }
+}
+
+// LABEL: eligible-hrk_flutter_test_batteries
+// Source: https://github.com/flutter/flutter/issues/38997#issuecomment-555687558
+Future<void> precacheAllImages(
+  WidgetTester tester,
+) async {
+  await tester.runAsync(() async {
+    for (Element element in find.byType(Image).evaluate()) {
+      final Image widget = element.widget as Image;
+      final ImageProvider image = widget.image;
+      await precacheImage(image, element);
+    }
+  });
+  await tester.pumpAndSettle();
 }

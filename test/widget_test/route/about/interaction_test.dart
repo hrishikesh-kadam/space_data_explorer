@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:space_data_explorer/route/about/about_route.dart';
+import '../../../src/helper/helper.dart';
 import '../../../src/route/about/about_route.dart';
 
 void main() {
@@ -16,8 +17,8 @@ void main() {
 
     testWidgets('Tap all links, iOS', (tester) async {
       await pumpAboutRouteAsInitialLocation(tester);
-      // TODO(hrishikesh-kadam): not hit test on the specified widget
-      // await tapGooglePlayBadge(tester);
+      await precacheAllImages(tester);
+      await tapGooglePlayBadge(tester);
     }, variant: TargetPlatformVariant.only(TargetPlatform.iOS));
   });
 }
