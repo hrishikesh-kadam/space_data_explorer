@@ -23,11 +23,10 @@
 
 ### iOS
 
-- Cleanup Podfile later
-- Delete Runner scheme
-- Fix log colors
 - Update .vscode/launch.json
+- Delete Runner scheme
 - Rework on LaunchImage for better understanding
+- Fix log colors
 - Check if Target should be renamed
 
 #### Blockers
