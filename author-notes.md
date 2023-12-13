@@ -21,6 +21,11 @@
 
 ## Future Tasks
 
+### Android
+
+- Check Impeller
+- Predictive Back
+
 ### iOS
 
 - Update .vscode/launch.json
