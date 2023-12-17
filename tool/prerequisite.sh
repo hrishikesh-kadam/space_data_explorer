@@ -22,7 +22,8 @@ check_directory_on_path() {
   fi
 }
 
-ROLE=${1:?"Missing argument \$1 ROLE (--minimal / --contributor / --member)"}
+ROLE=${1:?\
+$(print_in_red "Missing argument \$1 ROLE (--minimal / --contributor / --member)")}
 ROLE=${1//--}
 : "${ROLE:=minimal}"
 
