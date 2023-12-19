@@ -45,6 +45,7 @@ Following are the release related files:
 - [`lib/constants/constants.dart`]
 - [`CHANGELOG.md`]
 - [`android/fastlane/prod/metadata/android/en-US/changelogs/default.txt`]
+- [`ios/fastlane/prod/metadata/en-US/release_notes.txt`]
 
 
 [`.github/workflows/ci-contributors.yml`]: .github/workflows/ci-contributors.yml
@@ -54,3 +55,4 @@ Following are the release related files:
 [`lib/constants/constants.dart`]: lib/constants/constants.dart
 [`CHANGELOG.md`]: CHANGELOG.md
 [`android/fastlane/prod/metadata/android/en-US/changelogs/default.txt`]: android/fastlane/prod/metadata/android/en-US/changelogs/default.txt
+[`ios/fastlane/prod/metadata/en-US/release_notes.txt`]: ios/fastlane/prod/metadata/en-US/release_notes.txt

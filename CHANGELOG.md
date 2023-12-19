@@ -1,3 +1,7 @@
+# 1.0.0
+
+- Fix Settings toggle
+
 # 0.11.0
 
 - Start with Firebase Analytics
