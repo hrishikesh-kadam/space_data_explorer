@@ -42,7 +42,8 @@ void main() {
     });
 
     // TODO(hrishikesh-kadam): pumpAndSettle timed out
-    // Last working in 3.13.9, Breaking after upgrading to 3.16
+    // Breaking ^go_router-12.1.1
+    // https://github.com/flutter/packages/pull/5718
     testWidgets('Https URL with no path, trailing slash', (tester) async {
       tester.platformDispatcher.defaultRouteNameTestValue =
           'https://domain.com/';
