@@ -329,7 +329,7 @@ class _$CadStateImpl implements _CadState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CadStateImpl &&
@@ -567,7 +567,7 @@ class _$DistanceRangeStateImpl implements _DistanceRangeState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DistanceRangeStateImpl &&
@@ -717,7 +717,7 @@ class _$SmallBodyFilterStateImpl implements _SmallBodyFilterState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SmallBodyFilterStateImpl &&
@@ -876,7 +876,7 @@ class _$SmallBodySelectorStateImpl implements _SmallBodySelectorState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SmallBodySelectorStateImpl &&
