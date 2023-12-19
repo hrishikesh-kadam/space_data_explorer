@@ -84,5 +84,20 @@ void main() {
           l10n: l10n, textDirection: textDirection);
       expect(settingsBloc.state.textDirection, textDirection);
     });
+
+    testWidgets('Choose $textDirectionNonDefault twice', (tester) async {
+      final textDirection = textDirectionNonDefault;
+      await pumpSettingsRouteAsNormalLink(tester);
+      await tapTextDirectionTile(tester);
+      await chooseTextDirection(tester,
+          l10n: l10n, textDirection: textDirection);
+      await tapTextDirectionTile(tester);
+      await chooseTextDirection(tester,
+          l10n: l10n, textDirection: textDirection);
+      await verifyTextDirectionTileSubtitle(tester,
+          l10n: l10n, textDirection: textDirection);
+      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
+      expect(settingsBloc.state.textDirection, textDirection);
+    });
   });
 }

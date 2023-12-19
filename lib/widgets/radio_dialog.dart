@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+typedef RadioListTileSelected<T> = void Function(T value, int index);
+
 class RadioDialog<T> extends StatelessWidget {
   const RadioDialog({
     this.keyPrefix = '',
@@ -9,7 +11,7 @@ class RadioDialog<T> extends StatelessWidget {
     required this.values,
     required this.valueTitles,
     this.groupValue,
-    this.onChanged,
+    this.onSelected,
   });
 
   final String keyPrefix;
@@ -18,7 +20,7 @@ class RadioDialog<T> extends StatelessWidget {
   final Set<T> values;
   final Set<String> valueTitles;
   final T? groupValue;
-  final ValueChanged<T?>? onChanged;
+  final RadioListTileSelected<T?>? onSelected;
 
   static const String keyPrefixDefault = 'radio_dialog_';
   static const String keySuffixDefault = '${keyPrefixDefault}key';
@@ -48,7 +50,11 @@ class RadioDialog<T> extends StatelessWidget {
               value: values.elementAt(index),
               title: Text(valueTitles.elementAt(index)),
               groupValue: groupValue,
-              onChanged: onChanged,
+              onChanged: (value) {
+                if (onSelected != null) {
+                  onSelected!(value, index);
+                }
+              },
               toggleable: true,
             );
           },

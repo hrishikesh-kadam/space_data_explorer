@@ -81,5 +81,18 @@ void main() {
           l10n: l10n, velocityUnit: velocityUnit);
       expect(settingsBloc.state.velocityUnit, velocityUnit);
     });
+
+    testWidgets('Choose $velocityUnitNonDefault twice', (tester) async {
+      final velocityUnit = velocityUnitNonDefault;
+      await pumpSettingsRouteAsNormalLink(tester);
+      await tapVelocityUnitTile(tester);
+      await chooseVelocityUnit(tester, l10n: l10n, velocityUnit: velocityUnit);
+      await tapVelocityUnitTile(tester);
+      await chooseVelocityUnit(tester, l10n: l10n, velocityUnit: velocityUnit);
+      await verifyVelocityUnitTileSubtitle(tester,
+          l10n: l10n, velocityUnit: velocityUnit);
+      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
+      expect(settingsBloc.state.velocityUnit, velocityUnit);
+    });
   });
 }

@@ -12,7 +12,7 @@ class RadioSettingsTile<T> extends StatelessWidget {
     required this.values,
     required this.valueTitles,
     this.groupValue,
-    this.onChanged,
+    this.onSelected,
     this.beforeShowDialog,
     this.afterShowDialog,
   });
@@ -24,7 +24,7 @@ class RadioSettingsTile<T> extends StatelessWidget {
   final Set<T> values;
   final Set<String> valueTitles;
   final T? groupValue;
-  final ValueChanged<T?>? onChanged;
+  final RadioListTileSelected<T?>? onSelected;
   final VoidCallback? beforeShowDialog;
   final VoidCallback? afterShowDialog;
 
@@ -54,7 +54,7 @@ class RadioSettingsTile<T> extends StatelessWidget {
               values: values,
               valueTitles: valueTitles,
               groupValue: groupValue,
-              onChanged: onChanged,
+              onSelected: onSelected,
             );
           },
         );

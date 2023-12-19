@@ -81,5 +81,18 @@ void main() {
           l10n: l10n, distanceUnit: distanceUnit);
       expect(settingsBloc.state.distanceUnit, distanceUnit);
     });
+
+    testWidgets('Choose $distanceUnitNonDefault twice', (tester) async {
+      final distanceUnit = distanceUnitNonDefault;
+      await pumpSettingsRouteAsNormalLink(tester);
+      await tapDistanceUnitTile(tester);
+      await chooseDistanceUnit(tester, l10n: l10n, distanceUnit: distanceUnit);
+      await tapDistanceUnitTile(tester);
+      await chooseDistanceUnit(tester, l10n: l10n, distanceUnit: distanceUnit);
+      await verifyDistanceUnitTileSubtitle(tester,
+          l10n: l10n, distanceUnit: distanceUnit);
+      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
+      expect(settingsBloc.state.distanceUnit, distanceUnit);
+    });
   });
 }

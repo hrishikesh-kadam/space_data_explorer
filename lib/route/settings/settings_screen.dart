@@ -181,7 +181,8 @@ class SettingsScreen extends StatelessWidget {
           values: values,
           valueTitles: valueTitles,
           groupValue: themeData,
-          onChanged: (selectedThemeData) {
+          onSelected: (_, index) {
+            final ThemeData? selectedThemeData = values.elementAt(index);
             final String themeTitle = ThemeDataExt.getDisplayName(
               l10n: l10n,
               themeData: selectedThemeData,
@@ -240,7 +241,8 @@ class SettingsScreen extends StatelessWidget {
           values: values,
           valueTitles: valueTitles,
           groupValue: locale,
-          onChanged: (selectedLocale) {
+          onSelected: (_, index) {
+            final Locale? selectedLocale = locales.elementAt(index);
             _logger
                 .fine('_getLocaleTile() -> selectedLocale -> $selectedLocale');
             settingsBloc.add(SettingsLocaleSelected(
@@ -300,7 +302,7 @@ class SettingsScreen extends StatelessWidget {
           values: values,
           valueTitles: valueTitles,
           groupValue: dateFormatPattern,
-          onChanged: (selectedDateFormatPattern) {
+          onSelected: (selectedDateFormatPattern, _) {
             if (selectedDateFormatPattern != null) {
               _logger.fine(
                   '_getDateFormatTile() -> selectedDateFormatPattern -> $selectedDateFormatPattern');
@@ -363,7 +365,7 @@ class SettingsScreen extends StatelessWidget {
           values: values,
           valueTitles: valueTitles,
           groupValue: timeFormatPattern,
-          onChanged: (selectedTimeFormatPattern) {
+          onSelected: (selectedTimeFormatPattern, _) {
             if (selectedTimeFormatPattern != null) {
               _logger.fine(
                   '_getTimeFormatTile() -> selectedTimeFormatPattern -> $selectedTimeFormatPattern');
@@ -426,7 +428,9 @@ class SettingsScreen extends StatelessWidget {
           values: values,
           valueTitles: valueTitles,
           groupValue: textDirection,
-          onChanged: (selectedTextDirection) {
+          onSelected: (_, index) {
+            final TextDirection? selectedTextDirection =
+                textDirections.elementAt(index);
             _logger.fine(
                 '_getTextDirectionTile() -> selectedTextDirection -> $selectedTextDirection');
             settingsBloc.add(SettingsTextDirectionSelected(
@@ -495,7 +499,7 @@ class SettingsScreen extends StatelessWidget {
           values: values,
           valueTitles: valueTitles,
           groupValue: distanceUnit,
-          onChanged: (selectedDistanceUnit) {
+          onSelected: (selectedDistanceUnit, _) {
             if (selectedDistanceUnit != null) {
               _logger.fine(
                   '_getDistanceUnitTile() -> selectedDistanceUnit -> $selectedDistanceUnit');
@@ -562,7 +566,7 @@ class SettingsScreen extends StatelessWidget {
           values: values,
           valueTitles: valueTitles,
           groupValue: velocityUnit,
-          onChanged: (selectedVelocityUnit) {
+          onSelected: (selectedVelocityUnit, _) {
             if (selectedVelocityUnit != null) {
               _logger.fine(
                   '_getVelocityUnitTile() -> selectedVelocityUnit -> $selectedVelocityUnit');
@@ -631,7 +635,7 @@ class SettingsScreen extends StatelessWidget {
           values: values,
           valueTitles: valueTitles,
           groupValue: diameterUnit,
-          onChanged: (selectedDiameterUnit) {
+          onSelected: (selectedDiameterUnit, _) {
             if (selectedDiameterUnit != null) {
               _logger.fine(
                   '_getDiameterUnitTile() -> selectedDiameterUnit -> $selectedDiameterUnit');

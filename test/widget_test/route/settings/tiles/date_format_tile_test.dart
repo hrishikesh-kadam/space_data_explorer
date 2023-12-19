@@ -82,5 +82,20 @@ void main() {
           l10n: l10n, dateFormatPattern: dateFormatPattern);
       expect(settingsBloc.state.dateFormatPattern, dateFormatPattern);
     });
+
+    testWidgets('Choose $dateFormatPatternNonDefault twice', (tester) async {
+      final dateFormatPattern = dateFormatPatternNonDefault;
+      await pumpSettingsRouteAsNormalLink(tester);
+      await tapDateFormatTile(tester);
+      await chooseDateFormat(tester,
+          l10n: l10n, dateFormatPattern: dateFormatPattern);
+      await tapDateFormatTile(tester);
+      await chooseDateFormat(tester,
+          l10n: l10n, dateFormatPattern: dateFormatPattern);
+      await verifyDateFormatTileSubtitle(tester,
+          l10n: l10n, dateFormatPattern: dateFormatPattern);
+      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
+      expect(settingsBloc.state.dateFormatPattern, dateFormatPattern);
+    });
   });
 }

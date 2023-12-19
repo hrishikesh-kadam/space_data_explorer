@@ -82,5 +82,20 @@ void main() {
           l10n: l10n, timeFormatPattern: timeFormatPattern);
       expect(settingsBloc.state.timeFormatPattern, timeFormatPattern);
     });
+
+    testWidgets('Choose $timeFormatPatternNonDefault twice', (tester) async {
+      final timeFormatPattern = timeFormatPatternNonDefault;
+      await pumpSettingsRouteAsNormalLink(tester);
+      await tapTimeFormatTile(tester);
+      await chooseTimeFormat(tester,
+          l10n: l10n, timeFormatPattern: timeFormatPattern);
+      await tapTimeFormatTile(tester);
+      await chooseTimeFormat(tester,
+          l10n: l10n, timeFormatPattern: timeFormatPattern);
+      await verifyTimeFormatTileSubtitle(tester,
+          l10n: l10n, timeFormatPattern: timeFormatPattern);
+      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
+      expect(settingsBloc.state.timeFormatPattern, timeFormatPattern);
+    });
   });
 }

@@ -81,5 +81,18 @@ void main() {
           l10n: l10n, themeData: themeData);
       expect(settingsBloc.state.themeData, themeData);
     });
+
+    testWidgets('Choose themeDataNonDefault twice', (tester) async {
+      final themeData = themeDataNonDefault;
+      await pumpSettingsRouteAsNormalLink(tester);
+      await tapThemeDataTile(tester);
+      await chooseThemeData(tester, l10n: l10n, themeData: themeData);
+      await tapThemeDataTile(tester);
+      await chooseThemeData(tester, l10n: l10n, themeData: themeData);
+      await verifyThemeDataTileSubtitle(tester,
+          l10n: l10n, themeData: themeData);
+      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
+      expect(settingsBloc.state.themeData, themeData);
+    });
   });
 }

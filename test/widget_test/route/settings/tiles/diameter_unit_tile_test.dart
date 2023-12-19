@@ -81,5 +81,18 @@ void main() {
           l10n: l10n, diameterUnit: diameterUnit);
       expect(settingsBloc.state.diameterUnit, diameterUnit);
     });
+
+    testWidgets('Choose $diameterUnitNonDefault twice', (tester) async {
+      final diameterUnit = diameterUnitNonDefault;
+      await pumpSettingsRouteAsNormalLink(tester);
+      await tapDiameterUnitTile(tester);
+      await chooseDiameterUnit(tester, l10n: l10n, diameterUnit: diameterUnit);
+      await tapDiameterUnitTile(tester);
+      await chooseDiameterUnit(tester, l10n: l10n, diameterUnit: diameterUnit);
+      await verifyDiameterUnitTileSubtitle(tester,
+          l10n: l10n, diameterUnit: diameterUnit);
+      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
+      expect(settingsBloc.state.diameterUnit, diameterUnit);
+    });
   });
 }

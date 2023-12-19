@@ -83,6 +83,18 @@ void main() {
       expect(settingsBloc.state.locale, locale);
     });
 
+    testWidgets('Choose $localeNonDefault twice', (tester) async {
+      final locale = localeNonDefault;
+      await pumpSettingsRouteAsNormalLink(tester);
+      await tapLocaleTile(tester);
+      await chooseLocale(tester, l10n: l10n, locale: locale);
+      await tapLocaleTile(tester);
+      await chooseLocale(tester, l10n: l10n, locale: locale);
+      await verifyLocaleTileSubtitle(tester, l10n: l10n, locale: locale);
+      final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
+      expect(settingsBloc.state.locale, locale);
+    });
+
     testWidgets(
         'With Hydration, Choose $localeNonDefault, exit app, enter again',
         (tester) async {
