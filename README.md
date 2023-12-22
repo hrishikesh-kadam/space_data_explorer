@@ -24,6 +24,20 @@ The intended purposes of this project are as follows:
 
 To contribute or run the project, please refer to [`CONTRIBUTING.md`].
 
+# Screeshots
+
+### Home Screen
+<img alt='Home Screen' src='android/fastlane/prod/metadata/android/en-US/images/phoneScreenshots/1_en-US.png' width='300px'/>
+
+### Nasa Screen
+<img alt='Nasa Screen' src='android/fastlane/prod/metadata/android/en-US/images/phoneScreenshots/2_en-US.png' width='300px'/>
+
+### SBDB Close Approach Data Screen
+<img alt='SBDB Close Approach Data Screen' src='android/fastlane/prod/metadata/android/en-US/images/phoneScreenshots/3_en-US.png' width='300px'/>
+
+### Settings Screen
+<img alt='Settings Screen' src='android/fastlane/prod/metadata/android/en-US/images/phoneScreenshots/4_en-US.png' width='300px'/>
+
 
 [ci-badge]: https://github.com/hrishikesh-kadam/space_data_explorer/actions/workflows/ci-schedule.yml/badge.svg
 [ci-link]: https://github.com/hrishikesh-kadam/space_data_explorer/actions/workflows/ci-schedule.yml
