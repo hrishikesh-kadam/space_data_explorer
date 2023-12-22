@@ -17,10 +17,10 @@
 Web - https://space-data-explorer.web.app  
 
 The intended purposes of this project are as follows:
-- An app to explore space data from various sources.
 - A portfolio project to showcase the work using Flutter SDK.
+- An app to explore space data from various sources.
 - To incorporate best engineering practices.
-- To demonstrate how team work can be done with less friction with the help of Test cases and Coverage.
+- To demonstrate how teamwork can be done with less friction with the help of Test cases and Coverage.
 
 To contribute or run the project, please refer to [`CONTRIBUTING.md`].
 
