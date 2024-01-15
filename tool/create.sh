@@ -9,6 +9,10 @@ fi
 flutter create . --org "dev.hrishikesh_kadam.flutter"
 ./tool/delete-template-created.sh
 
+if flutter --version | grep --invert-match stable; then
+  flutter pub upgrade
+fi
+
 # For Golden File Test
 # Keep checking for any better solution for updating icons
 # https://github.com/flutter/flutter/wiki/Updating-Material-Design-Fonts-&-Icons
