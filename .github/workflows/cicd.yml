@@ -104,7 +104,7 @@ jobs:
 
       - run: ./tool/ci.sh "$(./tool/get-flavor-env.sh)"
 
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4
         with:
           files: coverage/lcov.info
           name: cicd-${{ matrix.runner }}-${{ matrix.ref }}
