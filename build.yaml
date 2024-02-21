@@ -10,7 +10,7 @@ targets:
         generate_for:
           include:
             - test/**
-            - integration_test/**
+            # - integration_test/**
       # https://github.com/google/json_serializable.dart/tree/master/json_serializable#build-configuration
       # https://github.com/google/json_serializable.dart/blob/master/json_annotation/lib/src/json_serializable.dart
       json_serializable:

@@ -9,7 +9,7 @@ fi
 flutter create . --org "dev.hrishikesh_kadam.flutter"
 ./tool/delete-template-created.sh
 
-if flutter --version | grep --invert-match stable; then
+if ! flutter --version | grep "channel stable"; then
   flutter pub upgrade
 fi
 

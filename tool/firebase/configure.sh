@@ -4,6 +4,11 @@ set -e -o pipefail
 
 source ./tool/constants.sh
 
+FIREBASE_ACCOUNT="hrkadam.92@gmail.com"
+if ! firebase login:list | grep "Logged in as $FIREBASE_ACCOUNT"; then
+  firebase login:use $FIREBASE_ACCOUNT
+fi
+
 FIREBASE_PROJECTS=(
   "$APP_NAME_KEBAB_CASE-dev"
   "$APP_NAME_KEBAB_CASE-stag"
