@@ -23,7 +23,8 @@ class QueryItemContainer extends StatelessWidget {
           Dimensions.containerRadius,
         )),
         // TODO(hrishikesh-kadam): Change this to some surfaceContainer
-        // once they are available.
+        // once they are available in stable channel.
+        // ignore: deprecated_member_use
         color: Theme.of(context).colorScheme.surfaceVariant,
       ),
       padding: const EdgeInsets.all(Dimensions.bodyItemPadding),
