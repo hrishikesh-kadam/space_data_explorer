@@ -31,7 +31,9 @@ mixin _$CadState {
   SbdbCadBody? get sbdbCadBody => throw _privateConstructorUsedError;
   Object? get error => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CadState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CadStateCopyWith<CadState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -70,6 +72,8 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CadState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -130,6 +134,8 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
     ) as $Val);
   }
 
+  /// Create a copy of CadState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DistanceRangeStateCopyWith<$Res> get distanceRangeState {
@@ -139,6 +145,8 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
     });
   }
 
+  /// Create a copy of CadState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SmallBodyFilterStateCopyWith<$Res> get smallBodyFilterState {
@@ -148,6 +156,8 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
     });
   }
 
+  /// Create a copy of CadState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SmallBodySelectorStateCopyWith<$Res> get smallBodySelectorState {
@@ -157,6 +167,8 @@ class _$CadStateCopyWithImpl<$Res, $Val extends CadState>
     });
   }
 
+  /// Create a copy of CadState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SbdbCadBodyCopyWith<$Res>? get sbdbCadBody {
@@ -209,6 +221,8 @@ class __$$CadStateImplCopyWithImpl<$Res>
       _$CadStateImpl _value, $Res Function(_$CadStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CadState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -371,7 +385,9 @@ class _$CadStateImpl implements _CadState {
       sbdbCadBody,
       const DeepCollectionEquality().hash(error));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CadState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CadStateImplCopyWith<_$CadStateImpl> get copyWith =>
@@ -414,8 +430,11 @@ abstract class _CadState implements CadState {
   SbdbCadBody? get sbdbCadBody;
   @override
   Object? get error;
+
+  /// Create a copy of CadState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CadStateImplCopyWith<_$CadStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -426,7 +445,9 @@ mixin _$DistanceRangeState {
   List<String> get textList => throw _privateConstructorUsedError;
   List<DistanceUnit> get unitList => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DistanceRangeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DistanceRangeStateCopyWith<DistanceRangeState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -453,6 +474,8 @@ class _$DistanceRangeStateCopyWithImpl<$Res, $Val extends DistanceRangeState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DistanceRangeState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -499,6 +522,8 @@ class __$$DistanceRangeStateImplCopyWithImpl<$Res>
       $Res Function(_$DistanceRangeStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DistanceRangeState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -584,7 +609,9 @@ class _$DistanceRangeStateImpl implements _DistanceRangeState {
       const DeepCollectionEquality().hash(_textList),
       const DeepCollectionEquality().hash(_unitList));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DistanceRangeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DistanceRangeStateImplCopyWith<_$DistanceRangeStateImpl> get copyWith =>
@@ -604,8 +631,11 @@ abstract class _DistanceRangeState implements DistanceRangeState {
   List<String> get textList;
   @override
   List<DistanceUnit> get unitList;
+
+  /// Create a copy of DistanceRangeState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DistanceRangeStateImplCopyWith<_$DistanceRangeStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -615,7 +645,9 @@ mixin _$SmallBodyFilterState {
   bool get enabled => throw _privateConstructorUsedError;
   SmallBodyFilter get smallBodyFilter => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SmallBodyFilterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SmallBodyFilterStateCopyWith<SmallBodyFilterState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -640,6 +672,8 @@ class _$SmallBodyFilterStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SmallBodyFilterState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -678,6 +712,8 @@ class __$$SmallBodyFilterStateImplCopyWithImpl<$Res>
       $Res Function(_$SmallBodyFilterStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SmallBodyFilterState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -729,7 +765,9 @@ class _$SmallBodyFilterStateImpl implements _SmallBodyFilterState {
   @override
   int get hashCode => Object.hash(runtimeType, enabled, smallBodyFilter);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SmallBodyFilterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SmallBodyFilterStateImplCopyWith<_$SmallBodyFilterStateImpl>
@@ -747,8 +785,11 @@ abstract class _SmallBodyFilterState implements SmallBodyFilterState {
   bool get enabled;
   @override
   SmallBodyFilter get smallBodyFilter;
+
+  /// Create a copy of SmallBodyFilterState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SmallBodyFilterStateImplCopyWith<_$SmallBodyFilterStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -760,7 +801,9 @@ mixin _$SmallBodySelectorState {
   int? get spkId => throw _privateConstructorUsedError;
   String? get designation => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SmallBodySelectorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SmallBodySelectorStateCopyWith<SmallBodySelectorState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -786,6 +829,8 @@ class _$SmallBodySelectorStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SmallBodySelectorState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -833,6 +878,8 @@ class __$$SmallBodySelectorStateImplCopyWithImpl<$Res>
       $Res Function(_$SmallBodySelectorStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SmallBodySelectorState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -891,7 +938,9 @@ class _$SmallBodySelectorStateImpl implements _SmallBodySelectorState {
   int get hashCode =>
       Object.hash(runtimeType, smallBodySelector, spkId, designation);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SmallBodySelectorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SmallBodySelectorStateImplCopyWith<_$SmallBodySelectorStateImpl>
@@ -911,8 +960,11 @@ abstract class _SmallBodySelectorState implements SmallBodySelectorState {
   int? get spkId;
   @override
   String? get designation;
+
+  /// Create a copy of SmallBodySelectorState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SmallBodySelectorStateImplCopyWith<_$SmallBodySelectorStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

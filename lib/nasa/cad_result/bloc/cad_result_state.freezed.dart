@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CadResultState {
   SbdbCadBody get sbdbCadBody => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CadResultState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CadResultStateCopyWith<CadResultState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,6 +46,8 @@ class _$CadResultStateCopyWithImpl<$Res, $Val extends CadResultState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CadResultState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -57,6 +61,8 @@ class _$CadResultStateCopyWithImpl<$Res, $Val extends CadResultState>
     ) as $Val);
   }
 
+  /// Create a copy of CadResultState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SbdbCadBodyCopyWith<$Res> get sbdbCadBody {
@@ -88,6 +94,8 @@ class __$$CadResultStateImplCopyWithImpl<$Res>
       _$CadResultStateImpl _value, $Res Function(_$CadResultStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CadResultState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -127,7 +135,9 @@ class _$CadResultStateImpl implements _CadResultState {
   @override
   int get hashCode => Object.hash(runtimeType, sbdbCadBody);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CadResultState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CadResultStateImplCopyWith<_$CadResultStateImpl> get copyWith =>
@@ -141,8 +151,11 @@ abstract class _CadResultState implements CadResultState {
 
   @override
   SbdbCadBody get sbdbCadBody;
+
+  /// Create a copy of CadResultState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CadResultStateImplCopyWith<_$CadResultStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
