@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hrk_batteries/hrk_batteries.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 
 import '../../constants/labels.dart';
 import '../../deferred_loading/deferred_loading.dart';

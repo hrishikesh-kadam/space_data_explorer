@@ -43,5 +43,10 @@ void main() {
       expect(find.byType(NasaScreen), findsOneWidget);
       expect(find.byType(HomeScreen, skipOffstage: false), findsOneWidget);
     });
+
+    testWidgets('Tap all links', (tester) async {
+      await pumpNasaRouteAsInitialLocation(tester);
+      await tapSourceLink(tester);
+    });
   });
 }

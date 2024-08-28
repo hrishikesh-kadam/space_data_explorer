@@ -16,5 +16,10 @@ void main() {
       expect(find.byType(CadScreen, skipOffstage: false), findsOneWidget);
       expect(find.byType(CadResultScreen), findsOneWidget);
     });
+
+    testWidgets('Tap all links', (tester) async {
+      await pumpCadRouteAsInitialLocation(tester);
+      await tapSourceLink(tester);
+    });
   });
 }

@@ -548,6 +548,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  hrk_flutter_batteries:
+    dependency: "direct main"
+    description:
+      name: hrk_flutter_batteries
+      sha256: c8c6e7c438ae71721ffee1785ee45bc2fd12faccc1570dfea8e67e16e1c2ef94
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0-pre.2"
   hrk_flutter_test_batteries:
     dependency: "direct dev"
     description:

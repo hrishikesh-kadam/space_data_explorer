@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:url_launcher/link.dart';
 
+import '../../analytics/analytics.dart';
 import '../../config/config.dart';
 import '../../constants/assets.dart';
 import '../../constants/dimensions.dart';
@@ -15,7 +17,6 @@ import '../../route/home/home_route.dart';
 import '../../route/page_not_found/page_not_found_route.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/image_widget.dart';
-import '../../widgets/link_wrap.dart';
 import '../cad/cad_route.dart';
 
 class NasaScreen extends StatelessWidget {
@@ -31,6 +32,7 @@ class NasaScreen extends StatelessWidget {
   final _logger = Logger('$appNamePascalCase.NasaScreen');
   static const String keyPrefix = 'nasa_screen_';
   static const Key customScrollViewKey = Key('${keyPrefix}scroll_view_key');
+  static const Key sourceLinkKey = Key('${keyPrefix}source_link_key');
   static const Key cadButtonKey = Key('${keyPrefix}cad_button_key');
   static const Key nonExistingPathButtonKey =
       Key('${keyPrefix}non_existing_path_button_key');
@@ -80,6 +82,7 @@ class NasaScreen extends StatelessWidget {
   }
 
   Widget _getHeader({required BuildContext context}) {
+    final Uri docUrl = NasaApis.docUrl;
     return SliverPadding(
       padding: const EdgeInsets.symmetric(
         horizontal: Dimensions.pageMarginHorizontal,
@@ -100,10 +103,13 @@ class NasaScreen extends StatelessWidget {
               width: Dimensions.orgImageSize,
             ),
             const SizedBox(height: Dimensions.bodyItemSpacer),
-            getLabelLinkInkWellWrap(
-              context: context,
-              text: l10n.source,
-              uri: NasaApis.docUrl,
+            LabelLinkInkWellWrap(
+              label: l10n.source,
+              linkKey: sourceLinkKey,
+              uri: docUrl,
+              preFollowLink: () async {
+                Analytics.logSelectExternalUrl(uri: docUrl);
+              },
             ),
           ],
         ),

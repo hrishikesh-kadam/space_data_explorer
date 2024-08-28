@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/colors.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
+
 import '../name_theme_extension.dart';
 
 class BasicTheme {
-  static const Color seedColor = ColorsExt.flutterBlue;
+  static const Color seedColor = HrkColors.flutterBlue;
 
   static final ThemeData themeDataLight = ThemeData(
     colorScheme: ColorScheme.fromSeed(

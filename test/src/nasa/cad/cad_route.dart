@@ -16,6 +16,7 @@ import '../../space_data_explorer_app.dart';
 import '../route/nasa_route.dart';
 
 final customScrollViewFinder = find.byKey(CadScreen.customScrollViewKey);
+final sourceLinkFinder = find.byKey(CadScreen.sourceLinkKey);
 final searchButtonFinder = find.byKey(CadScreen.searchButtonKey);
 final queryGridFinder = find.byKey(CadScreen.queryGridKey);
 final queryGridItemFinder = find.descendant(
@@ -52,6 +53,11 @@ CadBloc getCadBloc({
         ),
     initialState: initialState,
   );
+}
+
+Future<void> tapSourceLink(WidgetTester tester) async {
+  await tester.tap(sourceLinkFinder);
+  await tester.pumpAndSettle();
 }
 
 Future<void> tapSearchButton(WidgetTester tester) async {

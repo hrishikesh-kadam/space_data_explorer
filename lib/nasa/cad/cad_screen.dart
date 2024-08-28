@@ -4,11 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:intl/intl.dart';
 import 'package:recase/recase.dart';
 
+import '../../analytics/analytics.dart';
 import '../../config/config.dart';
 import '../../constants/dimensions.dart';
 import '../../constants/labels.dart';
@@ -22,7 +24,6 @@ import '../../widgets/choice_chip_input_widget.dart';
 import '../../widgets/choice_chip_query_widget.dart';
 import '../../widgets/date_filter_widget.dart';
 import '../../widgets/filter_chip_query_widget.dart';
-import '../../widgets/link_wrap.dart';
 import '../../widgets/value_range_filter_widget.dart';
 import '../../widgets/worker_button.dart';
 import '../cad_result/cad_result_route.dart';
@@ -44,6 +45,7 @@ class CadScreen extends StatelessWidget {
   final _logger = Logger('$appNamePascalCase.CadScreen');
   static const String keyPrefix = 'cad_screen_';
   static const Key customScrollViewKey = Key('${keyPrefix}scroll_view_key');
+  static const Key sourceLinkKey = Key('${keyPrefix}source_link_key');
   static const Key searchButtonKey = Key('${keyPrefix}search_button_key');
   static const Key queryGridKey = Key('${keyPrefix}query_grid_key');
   static const String dateFilterKeyPrefix =
@@ -218,6 +220,7 @@ class CadScreen extends StatelessWidget {
   }
 
   Widget _getHeader({required BuildContext context}) {
+    final Uri docUrl = SbdbCadApi.docUrl;
     return SliverPadding(
       padding: const EdgeInsets.symmetric(
         horizontal: Dimensions.pageMarginHorizontal,
@@ -226,10 +229,13 @@ class CadScreen extends StatelessWidget {
       sliver: SliverToBoxAdapter(
         child: Column(
           children: [
-            getLabelLinkInkWellWrap(
-              context: context,
-              text: l10n.source,
-              uri: SbdbCadApi.docUrl,
+            LabelLinkInkWellWrap(
+              label: l10n.source,
+              linkKey: sourceLinkKey,
+              uri: docUrl,
+              preFollowLink: () async {
+                Analytics.logSelectExternalUrl(uri: docUrl);
+              },
             ),
           ],
         ),

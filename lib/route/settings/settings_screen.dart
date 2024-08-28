@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import '../../config/config.dart';
 import '../../globals.dart';
 import '../../widgets/app_bar.dart';
-import '../../widgets/radio_settings_tile.dart';
 import 'bloc/settings_bloc.dart';
 import 'bloc/settings_state.dart';
 import 'date_format_pattern.dart';

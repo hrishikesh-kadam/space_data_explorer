@@ -5,6 +5,7 @@ import 'package:space_data_explorer/nasa/route/nasa_screen.dart';
 import '../../route/home/home_route.dart';
 import '../../space_data_explorer_app.dart';
 
+final sourceLinkFinder = find.byKey(NasaScreen.sourceLinkKey);
 final cadButtonFinder = find.byKey(NasaScreen.cadButtonKey);
 final nonExistingPathButtonFinder =
     find.byKey(NasaScreen.nonExistingPathButtonKey);
@@ -16,6 +17,11 @@ Future<void> pumpNasaRouteAsInitialLocation(WidgetTester tester) async {
 Future<void> pumpNasaRouteAsNormalLink(WidgetTester tester) async {
   await pumpHomeRoute(tester);
   await tapNasaItem(tester);
+}
+
+Future<void> tapSourceLink(WidgetTester tester) async {
+  await tester.tap(sourceLinkFinder);
+  await tester.pumpAndSettle();
 }
 
 Future<void> tapCadButton(WidgetTester tester) async {

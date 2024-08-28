@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:url_launcher/link.dart';
 
@@ -18,7 +19,6 @@ import '../../globals.dart';
 import '../../helper/helper.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/image_widget.dart';
-import '../../widgets/link_wrap.dart';
 
 class AboutScreen extends StatelessWidget {
   AboutScreen({
@@ -87,12 +87,7 @@ class AboutScreen extends StatelessWidget {
       _getAuthor(context: context),
       _getLinktreeText(context: context),
       _getMadeWithLoveText(context: context),
-      getLabelLinkInkWellWrap(
-        context: context,
-        text: l10n.source,
-        uri: Constants.sourceRepoUrl,
-        inkWellKey: sourceUriKey,
-      ),
+      _getSourceRepoWidget(context: context),
       _getMobileStoreBadges(context: context),
       if (!kIsWeb) _getWebApp(context: context),
       _getLicenseButton(context: context),
@@ -161,19 +156,20 @@ class AboutScreen extends StatelessWidget {
   }
 
   Widget _getLinktreeText({required BuildContext context}) {
+    final Uri linktreeUrl = Constants.linktreeUrl;
     return Center(
       child: Link(
-        uri: Constants.linktreeUrl,
+        uri: linktreeUrl,
         target: LinkTarget.blank,
         builder: (context, followLink) {
           return InkWell(
             key: linktreeUriKey,
             onTap: () {
-              Analytics.logSelectExternalUrl(uri: Constants.linktreeUrl);
+              Analytics.logSelectExternalUrl(uri: linktreeUrl);
               followLink!();
             },
             child: Text(
-              Constants.linktreeUrl.toString(),
+              linktreeUrl.toString(),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: Colors.blue,
@@ -184,6 +180,18 @@ class AboutScreen extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  Widget _getSourceRepoWidget({required BuildContext context}) {
+    final sourceRepoUrl = Constants.sourceRepoUrl;
+    return LabelLinkInkWellWrap(
+      label: l10n.source,
+      uri: sourceRepoUrl,
+      linkKey: sourceUriKey,
+      preFollowLink: () async {
+        Analytics.logSelectExternalUrl(uri: sourceRepoUrl);
+      },
     );
   }
 
@@ -198,14 +206,15 @@ class AboutScreen extends StatelessWidget {
   }
 
   Widget _getGooglePlayStoreBadge({required BuildContext context}) {
+    final Uri googlePlayStoreUrl = Constants.googlePlayStoreUrl;
     return Link(
-      uri: Constants.googlePlayStoreUrl,
+      uri: googlePlayStoreUrl,
       target: LinkTarget.blank,
       builder: (context, followLink) {
         return InkWell(
           key: googlePlayStoreBadgeKey,
           onTap: () {
-            Analytics.logSelectExternalUrl(uri: Constants.googlePlayStoreUrl);
+            Analytics.logSelectExternalUrl(uri: googlePlayStoreUrl);
             followLink!();
           },
           child: getImageWidget(
@@ -219,14 +228,15 @@ class AboutScreen extends StatelessWidget {
   }
 
   Widget _getAppleAppStoreBadge({required BuildContext context}) {
+    final Uri appleAppStoreUrl = Constants.appleAppStoreUrl;
     return Link(
-      uri: Constants.appleAppStoreUrl,
+      uri: appleAppStoreUrl,
       target: LinkTarget.blank,
       builder: (context, followLink) {
         return InkWell(
           key: appleAppStoreBadgeKey,
           onTap: () {
-            Analytics.logSelectExternalUrl(uri: Constants.appleAppStoreUrl);
+            Analytics.logSelectExternalUrl(uri: appleAppStoreUrl);
             followLink!();
           },
           child: getImageWidget(
@@ -259,7 +269,6 @@ class AboutScreen extends StatelessWidget {
   }
 
   Widget _getWebApp({required BuildContext context}) {
-    final Uri url = webAppUrl;
     return Wrap(
       alignment: WrapAlignment.center,
       children: [
@@ -271,14 +280,14 @@ class AboutScreen extends StatelessWidget {
         InkWell(
           key: webAppUriKey,
           onTap: () {
-            Analytics.logSelectExternalUrl(uri: url);
+            Analytics.logSelectExternalUrl(uri: webAppUrl);
             copyToClipboard(
               context: context,
-              text: url.toString(),
+              text: webAppUrl.toString(),
             );
           },
           child: Text(
-            url.toString(),
+            webAppUrl.toString(),
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: Colors.blue,
