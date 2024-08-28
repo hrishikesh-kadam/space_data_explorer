@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 typedef RadioListTileSelected<T> = void Function(T value, int index);
 
+// LABEL: eligible-hrk_flutter_batteries
 class RadioDialog<T> extends StatelessWidget {
   const RadioDialog({
     this.keyPrefix = '',

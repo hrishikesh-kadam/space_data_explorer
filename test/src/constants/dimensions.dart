@@ -1,3 +1,4 @@
+// LABEL: eligible-hrk_flutter_test_batteries
 class TestDimensions {
   static const double galaxyFoldPortraitWidth = 280;
   static const double galaxyFoldPortraitHeight = 653;

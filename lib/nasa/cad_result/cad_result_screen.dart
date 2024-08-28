@@ -437,6 +437,7 @@ class CadResultScreen extends StatelessWidget {
     );
   }
 
+  // LABEL: eligible-hrk_flutter_batteries
   Widget getItemDetail({
     required String label,
     required String displayValue,

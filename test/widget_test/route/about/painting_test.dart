@@ -3,7 +3,7 @@ import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
 import 'package:space_data_explorer/route/about/about_route.dart';
 import 'package:space_data_explorer/route/about/about_screen.dart';
-import '../../../constants/dimensions.dart';
+import '../../../src/constants/dimensions.dart';
 import '../../../src/route/about/about_route.dart';
 
 void main() {

@@ -17,7 +17,6 @@ import '../coverage_ignored.dart';
 import '../extension/go_router.dart';
 import '../extension/pubspec.dart';
 import '../globals.dart';
-import '../helper/helper.dart';
 import '../route/home/home_route.dart';
 import 'app_bloc_observer.dart';
 import 'firebase/firebase.dart';
@@ -68,6 +67,7 @@ Future<void> configureFirebaseProducts() async {
   }
 }
 
+// TODO(hrishikesh-kadam): Move this to widgets/app_bar.dart
 BackButton getAppBarBackButton({
   required BuildContext context,
 }) {
@@ -91,7 +91,7 @@ BackButton getAppBarBackButton({
           logger.log(
               logLevel, 'getAppBarBackButton -> Unusual navigation observed');
           logger.log(logLevel, 'extra doesn\'t contains isNormalLink key');
-          final routeMatchList = getListOfRouteMatch(context);
+          final routeMatchList = GoRouter.of(context).getListOfRouteMatch();
           logger.log(
               logLevel, 'routeMatchList.length = ${routeMatchList.length}');
           GoRouter.of(context).go(HomeRoute.uri.path);
@@ -100,7 +100,7 @@ BackButton getAppBarBackButton({
         logger.log(
             logLevel, 'getAppBarBackButton -> Unusual navigation observed');
         logger.log(logLevel, 'extra is not a JsonMap');
-        final routeMatchList = getListOfRouteMatch(context);
+        final routeMatchList = GoRouter.of(context).getListOfRouteMatch();
         logger.log(
             logLevel, 'routeMatchList.length = ${routeMatchList.length}');
         GoRouter.of(context).go(HomeRoute.uri.path);

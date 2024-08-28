@@ -24,9 +24,9 @@ fi
 # https://github.com/flutter/flutter/wiki/Updating-Material-Design-Fonts-&-Icons
 # flutter create downloads assets of material_fonts if the directory is absent
 cp "$FLUTTER_ROOT/bin/cache/artifacts/material_fonts/Roboto-Regular.ttf" \
-  "assets/fonts/Roboto"
+  "assets/fonts/Roboto/"
 cp "$FLUTTER_ROOT/bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf" \
-  "assets/fonts/MaterialIcons"
+  "assets/fonts/MaterialIcons/"
 
 # if ! jq -e '. == {}' lib/l10n/unstranslated-messages.json &> /dev/null; then
 #   log_error_with_exit "Unstranslated messages found"

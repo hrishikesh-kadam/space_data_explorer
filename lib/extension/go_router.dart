@@ -39,6 +39,10 @@ extension GoRouterExt on GoRouter {
     }
   }
 
+  List getListOfRouteMatch() {
+    return routerDelegate.currentConfiguration.matches;
+  }
+
   static void onException(
     BuildContext context,
     GoRouterState state,

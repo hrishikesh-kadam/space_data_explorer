@@ -3,14 +3,9 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hrk_batteries/hrk_batteries.dart';
 
-List getListOfRouteMatch(BuildContext context) {
-  return GoRouter.of(context).routerDelegate.currentConfiguration.matches;
-}
-
-// LABEL: eligible-hrk_batteries
+// LABEL: eligible-hrk_flutter_batteries
 class LocaleJsonConverter implements JsonConverter<Locale?, JsonMap?> {
   const LocaleJsonConverter();
 
@@ -45,7 +40,7 @@ class LocaleJsonConverter implements JsonConverter<Locale?, JsonMap?> {
   }
 }
 
-// LABEL: eligible-hrk_batteries
+// LABEL: eligible-hrk_flutter_batteries
 class LocaleListJsonConverter
     implements JsonConverter<List<Locale>?, List<dynamic>?> {
   const LocaleListJsonConverter();

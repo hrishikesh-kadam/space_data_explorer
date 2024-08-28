@@ -5,7 +5,7 @@ import 'package:hrk_nasa_apis_test/hrk_nasa_apis_test.dart';
 
 import 'package:space_data_explorer/constants/dimensions.dart';
 import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
-import '../../../constants/dimensions.dart';
+import '../../../src/constants/dimensions.dart';
 import '../../../src/helper/helper.dart';
 import '../../../src/nasa/cad_result/cad_result_route.dart';
 

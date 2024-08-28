@@ -108,6 +108,7 @@ List<Widget> getDefaultAppBarActions({
   ];
 }
 
+// TODO(hrishikesh-kadam): Think again for eligibility
 Widget getSettingsAction({required BuildContext context}) {
   return IconButton(
     key: settingsActionKey,
@@ -122,6 +123,7 @@ Widget getSettingsAction({required BuildContext context}) {
   );
 }
 
+// TODO(hrishikesh-kadam): Think again for eligibility
 Widget getAboutAction({required BuildContext context}) {
   return Link(
     uri: AboutRoute.uri,

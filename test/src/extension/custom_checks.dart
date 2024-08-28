@@ -1,6 +1,6 @@
 import 'package:checks/context.dart';
 
-// TODO(hrishikesh-kadam): eligible-hrk_test_batteries
+// LABEL: eligible-hrk_test_batteries
 extension CustomChecks<T> on Subject<T> {
   /// Expects that the value is not equal to [other] according to [operator !=].
   void notEquals(T other) {

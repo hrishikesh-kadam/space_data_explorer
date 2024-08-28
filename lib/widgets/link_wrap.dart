@@ -4,6 +4,7 @@ import 'package:url_launcher/link.dart';
 
 import '../analytics/analytics.dart';
 
+// LABEL: eligible-hrk_flutter_batteries
 Widget getLabelLinkInkWellWrap({
   required BuildContext context,
   required String text,
@@ -26,7 +27,7 @@ Widget getLabelLinkInkWellWrap({
             key: inkWellKey,
             onTap: () {
               Analytics.logSelectExternalUrl(uri: uri);
-              followLink!();
+              followLink?.call();
             },
             child: Text(
               uri.toString(),

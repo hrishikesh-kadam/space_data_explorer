@@ -21,10 +21,12 @@ Future<void> pumpApp(
   bool debugShowCheckedModeBanner = true,
 }) async {
   await configureApp();
-  await tester.pumpWidget(SpaceDataExplorerApp(
-    navigatorKey: navigatorKey ?? globals.navigatorKey,
-    initialLocation: initialLocation,
-    debugShowCheckedModeBanner: debugShowCheckedModeBanner,
-  ));
+  await tester.pumpWidget(
+    SpaceDataExplorerApp(
+      navigatorKey: navigatorKey ?? globals.navigatorKey,
+      initialLocation: initialLocation,
+      debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+    ),
+  );
   await tester.pumpAndSettle();
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'radio_dialog.dart';
 
+// LABEL: eligible-hrk_flutter_batteries
 class RadioSettingsTile<T> extends StatelessWidget {
   const RadioSettingsTile({
     this.keyPrefix = '',

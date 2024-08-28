@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 
+// LABEL: eligible-hrk_flutter_batteries
 Widget getImageWidget({
   required String assetName,
   String? semanticLabel,
