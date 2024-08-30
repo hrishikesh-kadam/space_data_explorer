@@ -7,7 +7,6 @@ import 'package:hrk_nasa_apis_test/hrk_nasa_apis_test.dart';
 import 'package:recase/recase.dart';
 
 import 'package:space_data_explorer/constants/labels.dart';
-import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
 import '../../../src/nasa/cad/cad_route.dart';

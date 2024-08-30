@@ -82,11 +82,3 @@ class SmallBodySelectorState with _$SmallBodySelectorState {
     String? designation,
   }) = _SmallBodySelectorState;
 }
-
-enum NetworkState {
-  initial,
-  preparing,
-  sending,
-  success,
-  failure,
-}
