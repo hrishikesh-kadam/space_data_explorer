@@ -252,6 +252,8 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
+  // Examples:
+  //   - Meetup mails footer
   Wrap _getMobileStoreBadges({required BuildContext context}) {
     return Wrap(
       alignment: WrapAlignment.center,
