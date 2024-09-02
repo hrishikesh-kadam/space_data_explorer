@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 
-import '../constants/dimensions.dart';
 import '../globals.dart';
-import 'query_grid_container.dart';
 
 typedef ChoiceChipInputChanged<T> = void Function(
   T? value,
@@ -136,7 +135,7 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return QueryItemContainer(
+    return BodyItemContainer(
       child: Column(
         children: [
           if (widget.title != null)
@@ -148,7 +147,7 @@ class _ChoiceChipInputWidgetState<T> extends State<ChoiceChipInputWidget<T>> {
             ),
           if (widget.title != null) SizedBox(height: widget.spacing),
           getChoiceChips(context: context),
-          const SizedBox(height: Dimensions.bodyItemSpacer * 2),
+          const SizedBox(height: HrkDimensions.bodyItemSpacing * 2),
           getTextField(context: context),
         ],
       ),

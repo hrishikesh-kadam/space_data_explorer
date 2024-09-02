@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_batteries/hrk_batteries.dart';
 
@@ -12,76 +10,79 @@ import '../cad/cad_route.dart';
 final zeroCountTextFinder = find.byKey(CadResultScreen.zeroCountTextKey);
 final totalTextFinder = find.byKey(CadResultScreen.totalTextKey);
 final resultGridFinder = find.byKey(CadResultScreen.gridKey);
+const resultGridItemRegExp = '${CadResultScreen.gridItemKeyPrefix}'
+    '\\d+_';
+final RegExp resultGridItemContainerKeyPattern = RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.gridItemContainerKeySuffix}',
+);
 final resultGridItemsFinder =
-    find.byKeyStartsWith(CadResultScreen.gridItemContainerKeyPrefix);
+    find.byKeyContains(resultGridItemContainerKeyPattern);
 
 Finder getResultGridItemFinder(int index) {
-  return find.byKey(Key(
-    '${CadResultScreen.gridItemContainerKeyPrefix}${index}_key',
-  ));
+  return find.byKey(CadResultScreen.getGridItemContainerKey(index));
 }
 
-final desLabelFinder =
-    find.byKeyStartsWith('${CadResultScreen.desKeyPrefix}label_');
-final orbitIdLabelFinder =
-    find.byKeyStartsWith('${CadResultScreen.orbitIdKeyPrefix}label_');
-final jdLabelFinder =
-    find.byKeyStartsWith('${CadResultScreen.jdKeyPrefix}label_');
-final cdLabelFinder =
-    find.byKeyStartsWith('${CadResultScreen.cdKeyPrefix}label_');
-final distLabelFinder =
-    find.byKeyStartsWith('${CadResultScreen.distKeyPrefix}label_');
-final distMinLabelFinder =
-    find.byKeyStartsWith('${CadResultScreen.distMinKeyPrefix}label_');
-final distMaxLabelFinder =
-    find.byKeyStartsWith('${CadResultScreen.distMaxKeyPrefix}label_');
-final vRelLabelFinder =
-    find.byKeyStartsWith('${CadResultScreen.vRelKeyPrefix}label_');
-final vInfLabelFinder =
-    find.byKeyStartsWith('${CadResultScreen.vInfKeyPrefix}label_');
-final tSigmaFLabelFinder =
-    find.byKeyStartsWith('${CadResultScreen.tSigmaFKeyPrefix}label_');
-final bodyLabelFinder =
-    find.byKeyStartsWith('${CadResultScreen.bodyKeyPrefix}label_');
-final hLabelFinder =
-    find.byKeyStartsWith('${CadResultScreen.hKeyPrefix}label_');
-final diameterLabelFinder =
-    find.byKeyStartsWith('${CadResultScreen.diameterKeyPrefix}label_');
-final diameterSigmaLabelFinder =
-    find.byKeyStartsWith('${CadResultScreen.diameterSigmaKeyPrefix}label_');
-final fullnameLabelFinder =
-    find.byKeyStartsWith('${CadResultScreen.fullnameKeyPrefix}label_');
-
-final desDisplayValueFinder =
-    find.byKeyStartsWith('${CadResultScreen.desKeyPrefix}display_value_');
-final orbitIdDisplayValueFinder =
-    find.byKeyStartsWith('${CadResultScreen.orbitIdKeyPrefix}display_value_');
-final jdDisplayValueFinder =
-    find.byKeyStartsWith('${CadResultScreen.jdKeyPrefix}display_value_');
-final cdDisplayValueFinder =
-    find.byKeyStartsWith('${CadResultScreen.cdKeyPrefix}display_value_');
-final distDisplayValueFinder =
-    find.byKeyStartsWith('${CadResultScreen.distKeyPrefix}display_value_');
-final distMinDisplayValueFinder =
-    find.byKeyStartsWith('${CadResultScreen.distMinKeyPrefix}display_value_');
-final distMaxDisplayValueFinder =
-    find.byKeyStartsWith('${CadResultScreen.distMaxKeyPrefix}display_value_');
-final vRelDisplayValueFinder =
-    find.byKeyStartsWith('${CadResultScreen.vRelKeyPrefix}display_value_');
-final vInfDisplayValueFinder =
-    find.byKeyStartsWith('${CadResultScreen.vInfKeyPrefix}display_value_');
-final tSigmaFDisplayValueFinder =
-    find.byKeyStartsWith('${CadResultScreen.tSigmaFKeyPrefix}display_value_');
-final bodyDisplayValueFinder =
-    find.byKeyStartsWith('${CadResultScreen.bodyKeyPrefix}display_value_');
-final hDisplayValueFinder =
-    find.byKeyStartsWith('${CadResultScreen.hKeyPrefix}display_value_');
-final diameterDisplayValueFinder =
-    find.byKeyStartsWith('${CadResultScreen.diameterKeyPrefix}display_value_');
-final diameterSigmaDisplayValueFinder = find
-    .byKeyStartsWith('${CadResultScreen.diameterSigmaKeyPrefix}display_value_');
-final fullnameDisplayValueFinder =
-    find.byKeyStartsWith('${CadResultScreen.fullnameKeyPrefix}display_value_');
+final desFinder = find.byKeyContains(RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.desKeyPrefix}key',
+));
+final orbitIdFinder = find.byKeyContains(RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.orbitIdKeyPrefix}key',
+));
+final jdFinder = find.byKeyContains(RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.jdKeyPrefix}key',
+));
+final cdFinder = find.byKeyContains(RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.cdKeyPrefix}key',
+));
+final distFinder = find.byKeyContains(RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.distKeyPrefix}key',
+));
+final distMinFinder = find.byKeyContains(RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.distMinKeyPrefix}key',
+));
+final distMaxFinder = find.byKeyContains(RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.distMaxKeyPrefix}key',
+));
+final vRelFinder = find.byKeyContains(RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.vRelKeyPrefix}key',
+));
+final vInfFinder = find.byKeyContains(RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.vInfKeyPrefix}key',
+));
+final tSigmaFFinder = find.byKeyContains(RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.tSigmaFKeyPrefix}key',
+));
+final bodyFinder = find.byKeyContains(RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.bodyKeyPrefix}key',
+));
+final hFinder = find.byKeyContains(RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.hKeyPrefix}key',
+));
+final diameterFinder = find.byKeyContains(RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.diameterKeyPrefix}key',
+));
+final diameterSigmaFinder = find.byKeyContains(RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.diameterSigmaKeyPrefix}key',
+));
+final fullnameFinder = find.byKeyContains(RegExp(
+  '$resultGridItemRegExp'
+  '${CadResultScreen.fullnameKeyPrefix}key',
+));
 
 Future<void> pumpCadResultRouteAsInitialLocation(
   WidgetTester tester, {

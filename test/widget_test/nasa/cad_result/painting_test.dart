@@ -1,11 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:hrk_nasa_apis_test/hrk_nasa_apis_test.dart';
 
-import 'package:space_data_explorer/constants/dimensions.dart';
 import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
-import '../../../src/constants/dimensions.dart';
 import '../../../src/helper/helper.dart';
 import '../../../src/nasa/cad_result/cad_result_route.dart';
 
@@ -15,21 +14,22 @@ void main() {
       '$SbdbCadBody': SbdbCadBodyExt.getSample('200/1'),
     };
 
-    testWidgets('Doesn\'t Overflow ${TestDimensions.galaxyFoldPortraitWidth}',
+    testWidgets('Doesn\'t Overflow ${DeviceDimensions.galaxyFoldPortraitWidth}',
         (WidgetTester tester) async {
       disableOverflowError();
-      tester.view.setLogicalSize(width: TestDimensions.galaxyFoldPortraitWidth);
+      tester.view
+          .setLogicalSize(width: DeviceDimensions.galaxyFoldPortraitWidth);
       await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
       tester.expectNoOverflow(of: getResultGridItemFinder(0));
     });
 
     group('Masonry', () {
-      const double fitsThreeItems = 3 * Dimensions.cadQueryItemBoxWidth +
-          2 * Dimensions.pageMarginHorizontalHalf;
-      const double fitsTwoItems = 2 * Dimensions.cadQueryItemBoxWidth +
-          2 * Dimensions.pageMarginHorizontalHalf;
-      const double fitsOneItem = Dimensions.cadQueryItemBoxWidth +
-          2 * Dimensions.pageMarginHorizontalHalf;
+      const double fitsThreeItems = 3 * HrkDimensions.bodyItemBoxWidth +
+          2 * HrkDimensions.pageMarginHorizontalHalf;
+      const double fitsTwoItems = 2 * HrkDimensions.bodyItemBoxWidth +
+          2 * HrkDimensions.pageMarginHorizontalHalf;
+      const double fitsOneItem = HrkDimensions.bodyItemBoxWidth +
+          2 * HrkDimensions.pageMarginHorizontalHalf;
       const double fitsThreeItemsVertically = 1200;
 
       testWidgets('Screen width ${fitsThreeItems + 1}',

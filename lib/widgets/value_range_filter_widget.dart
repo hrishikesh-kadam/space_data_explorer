@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 
 import '../globals.dart';
-import '../helper/helper.dart';
-import 'query_grid_container.dart';
 
 typedef ValueParser<V> = V? Function(String text);
 typedef ValueRangeChanged<V, U> = void Function(
@@ -130,7 +129,7 @@ class _ValueRangeFilterWidgetState<V, U>
 
   @override
   Widget build(BuildContext context) {
-    return QueryItemContainer(
+    return BodyItemContainer(
       child: getBody(context: context),
     );
   }

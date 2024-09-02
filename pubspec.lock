@@ -544,18 +544,18 @@ packages:
     dependency: "direct main"
     description:
       name: hrk_batteries
-      sha256: "64b6c066488b75099b4b009524cddd2811d24298fb720212bf91e36992686554"
+      sha256: "437324250c9b157654c9bb6c374170b8fa940f0f11dd9d019833e2731689272b"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "2.0.0"
   hrk_flutter_batteries:
     dependency: "direct main"
     description:
       name: hrk_flutter_batteries
-      sha256: "85575737f64874ec3d290203bb7dfdc4cbfdd6bbc05ea453ea20e044a94db0e5"
+      sha256: "6bab87dfabffdeb540104da777b8784ba654e8d9d58e951ce6a4fa7b48897fdd"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0-pre.3"
+    version: "0.1.0-pre.4"
   hrk_flutter_test_batteries:
     dependency: "direct dev"
     description:
@@ -568,18 +568,18 @@ packages:
     dependency: "direct main"
     description:
       name: hrk_logging
-      sha256: d216a31e84f88af0837590e10b88e9e445b8fe53dabc39a0a5ce704f4f493044
+      sha256: "2e6501f4b78439bec4c367a94b14f792fd17fe1c94f18d903086c7b8a48402f5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.0"
+    version: "0.3.1"
   hrk_nasa_apis:
     dependency: "direct main"
     description:
       name: hrk_nasa_apis
-      sha256: "627d6335f4ea3baab8f8ade650d7c6b41224e76694252c1caa1fdc6cfd38b5e7"
+      sha256: "7ad76732b6b725ec6add6ff3393125ea4fae687c5a851de2545bfee886d2560d"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0"
+    version: "1.1.0"
   hrk_nasa_apis_test:
     dependency: "direct dev"
     description:
@@ -588,13 +588,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
-  hrk_settings_list:
-    dependency: "direct main"
-    description:
-      path: "packages/hrk_settings_list"
-      relative: true
-    source: path
-    version: "0.1.0-pre.1"
   http:
     dependency: transitive
     description:

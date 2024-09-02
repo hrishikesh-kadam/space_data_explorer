@@ -139,7 +139,7 @@ Source Map Upload Report
     ~/integration_test/app_bar_back_button_test.dart
     ~/integration_test/golden_screenshots_test.dart
     ~/integration_test/space_data_explorer_app_test.dart
-    ~/integration_test/test/constants/dimensions.dart
+    ~/integration_test/test/constants/HrkDimensions.dart
     ~/integration_test/test/src/config/config.dart
     ~/integration_test/test/src/config/dio_response.dart
     ~/integration_test/test/src/config/dio_response.mocks.dart
@@ -210,7 +210,7 @@ Source Map Upload Report
     ~/lib/config/config_non_web.dart
     ~/lib/config/config_web.dart
     ~/lib/constants/constants.dart
-    ~/lib/constants/dimensions.dart
+    ~/lib/constants/HrkDimensions.dart
     ~/lib/constants/theme.dart
     ~/lib/deferred_loading/deferred_loading.dart
     ~/lib/deferred_loading/deferred_loading_placeholder.dart
@@ -258,7 +258,7 @@ Source Map Upload Report
     ~/lib/widgets/radio_settings_tile.dart
     ~/lib/widgets/value_range_filter_widget.dart
     ~/packages/hrk_settings_list/lib/hrk_settings_list.dart
-    ~/test/constants/dimensions.dart
+    ~/test/constants/HrkDimensions.dart
     ~/test/src/config/config.dart
     ~/test/src/config/dio_response.dart
     ~/test/src/config/dio_response.mocks.dart

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:hrk_nasa_apis_test/hrk_nasa_apis_test.dart';
@@ -11,7 +12,6 @@ import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
-import 'package:space_data_explorer/widgets/query_grid_container.dart';
 import '../../space_data_explorer_app.dart';
 import '../route/nasa_route.dart';
 
@@ -21,7 +21,7 @@ final searchButtonFinder = find.byKey(CadScreen.searchButtonKey);
 final queryGridFinder = find.byKey(CadScreen.queryGridKey);
 final queryGridItemFinder = find.descendant(
   of: queryGridFinder,
-  matching: find.byType(QueryItemContainer),
+  matching: find.byType(BodyItemContainer),
 );
 final snackBarFinder = find.byKey(CadScreen.snackBarKey);
 

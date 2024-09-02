@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hrk_batteries/hrk_batteries.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 
-import '../../constants/dimensions.dart';
 import '../../widgets/app_bar.dart';
 
 class PageNotFoundScreen extends StatelessWidget {
@@ -31,7 +31,7 @@ class PageNotFoundScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(Dimensions.pageMargin),
+        padding: const EdgeInsets.all(HrkDimensions.pageMargin),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

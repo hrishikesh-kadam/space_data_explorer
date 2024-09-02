@@ -10,7 +10,6 @@ import 'package:url_launcher/link.dart';
 import '../../analytics/analytics.dart';
 import '../../config/config.dart';
 import '../../constants/assets.dart';
-import '../../constants/dimensions.dart';
 import '../../constants/labels.dart';
 import '../../globals.dart';
 import '../../route/home/home_route.dart';
@@ -68,14 +67,14 @@ class NasaScreen extends StatelessWidget {
     return [
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pageMarginVerticalHalf,
+          bottom: HrkDimensions.pageMarginVerticalHalf,
         ),
       ),
       _getHeader(context: context),
       _getSsdCneos(context: context),
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pageMarginVerticalHalf,
+          bottom: HrkDimensions.pageMarginVerticalHalf,
         ),
       )
     ];
@@ -85,8 +84,8 @@ class NasaScreen extends StatelessWidget {
     final Uri docUrl = NasaApis.docUrl;
     return SliverPadding(
       padding: const EdgeInsets.symmetric(
-        horizontal: Dimensions.pageMarginHorizontal,
-        vertical: Dimensions.pageMarginVerticalHalf,
+        horizontal: HrkDimensions.pageMarginHorizontal,
+        vertical: HrkDimensions.pageMarginVerticalHalf,
       ),
       sliver: SliverToBoxAdapter(
         child: Column(
@@ -96,13 +95,13 @@ class NasaScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            const SizedBox(height: Dimensions.bodyItemSpacer),
+            const SizedBox(height: HrkDimensions.bodyItemSpacing),
             getImageWidget(
               assetName: NasaAssets.logo,
               semanticLabel: Labels.nasaLogo,
-              width: Dimensions.orgImageSize,
+              width: HrkDimensions.gridItemContentSize,
             ),
-            const SizedBox(height: Dimensions.bodyItemSpacer),
+            const SizedBox(height: HrkDimensions.bodyItemSpacing),
             LabelLinkInkWellWrap(
               label: l10n.source,
               linkKey: sourceLinkKey,
@@ -121,8 +120,8 @@ class NasaScreen extends StatelessWidget {
     final themeData = Theme.of(context);
     return SliverPadding(
       padding: const EdgeInsets.symmetric(
-        horizontal: Dimensions.pageMarginHorizontal,
-        vertical: Dimensions.pageMarginVerticalHalf,
+        horizontal: HrkDimensions.pageMarginHorizontal,
+        vertical: HrkDimensions.pageMarginVerticalHalf,
       ),
       sliver: SliverToBoxAdapter(
         child: Column(
@@ -131,7 +130,7 @@ class NasaScreen extends StatelessWidget {
               '${Labels.ssdCneos}:',
               style: themeData.textTheme.titleLarge,
             ),
-            const SizedBox(height: Dimensions.bodyItemPadding),
+            const SizedBox(height: HrkDimensions.bodyItemPadding),
             Link(
               uri: CadRoute.uri,
               builder: (context, followLink) {
@@ -151,7 +150,7 @@ class NasaScreen extends StatelessWidget {
               },
             ),
             if (flavorEnv == FlavorEnv.dev || flavorEnv == FlavorEnv.unflavored)
-              const SizedBox(height: Dimensions.bodyItemPadding),
+              const SizedBox(height: HrkDimensions.bodyItemPadding),
             if (flavorEnv == FlavorEnv.dev || flavorEnv == FlavorEnv.unflavored)
               Link(
                 uri: PageNotFoundRoute.nonExistingUri,

@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
-import 'package:space_data_explorer/constants/dimensions.dart';
 import 'package:space_data_explorer/route/home/home_screen.dart';
 import '../../../src/helper/helper.dart';
 import '../../../src/route/home/home_route.dart';
@@ -9,12 +9,12 @@ import '../../../src/route/home/home_route.dart';
 void main() {
   group('$HomeScreen Painting Test', () {
     group('Masonry', () {
-      const double fitsThreeItems = 3 * Dimensions.orgItemBoxWidth +
-          2 * Dimensions.pageMarginHorizontalHalf;
-      const double fitsTwoItems = 2 * Dimensions.orgItemBoxWidth +
-          2 * Dimensions.pageMarginHorizontalHalf;
-      const double fitsOneItem =
-          Dimensions.orgItemBoxWidth + 2 * Dimensions.pageMarginHorizontalHalf;
+      const double fitsThreeItems = 3 * HrkDimensions.gridItemBoxWidth +
+          2 * HrkDimensions.pageMarginHorizontalHalf;
+      const double fitsTwoItems = 2 * HrkDimensions.gridItemBoxWidth +
+          2 * HrkDimensions.pageMarginHorizontalHalf;
+      const double fitsOneItem = HrkDimensions.gridItemBoxWidth +
+          2 * HrkDimensions.pageMarginHorizontalHalf;
 
       testWidgets('Screen width ${fitsThreeItems + 1}',
           (WidgetTester tester) async {

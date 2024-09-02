@@ -3,50 +3,6 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-// LABEL: eligible-hrk_flutter_batteries
-double getLargestTextWidth({
-  required BuildContext context,
-  required Set<String> textSet,
-  TextStyle? style,
-  TextScaler? textScaler,
-}) {
-  textScaler ??= TextScaler.linear(
-    View.of(context).platformDispatcher.textScaleFactor,
-  );
-  double largestWidth = 0;
-  for (final text in textSet) {
-    final TextPainter textPainter = getTextPainterLaidout(
-      context: context,
-      text: text,
-      style: style,
-      textScaler: textScaler,
-    );
-    if (textPainter.size.width > largestWidth) {
-      largestWidth = textPainter.size.width;
-    }
-  }
-  return largestWidth;
-}
-
-// LABEL: eligible-hrk_flutter_batteries
-TextPainter getTextPainterLaidout({
-  required BuildContext context,
-  required String text,
-  TextStyle? style,
-  TextScaler? textScaler,
-}) {
-  textScaler ??= TextScaler.linear(
-    View.of(context).platformDispatcher.textScaleFactor,
-  );
-  final TextPainter textPainter = TextPainter(
-    text: TextSpan(text: text, style: style),
-    textDirection: TextDirection.ltr,
-    textScaler: textScaler,
-  );
-  textPainter.layout();
-  return textPainter;
-}
-
 (double, int) getSliverMasonryGridParameters({
   required BuildContext context,
   required double itemBoxWidth,

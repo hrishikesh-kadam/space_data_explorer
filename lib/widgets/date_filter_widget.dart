@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:intl/intl.dart';
 
 import '../globals.dart';
-import '../helper/helper.dart';
-import 'query_grid_container.dart';
 
 typedef DateRangeSelected = void Function(DateTimeRange?);
 
@@ -61,7 +60,7 @@ class DateFilterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return QueryItemContainer(
+    return BodyItemContainer(
       child: getBody(context: context),
     );
   }

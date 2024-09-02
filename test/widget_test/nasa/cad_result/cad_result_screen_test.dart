@@ -58,8 +58,7 @@ void main() {
       await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
       expect(find.byType(CadResultScreen), findsOneWidget);
       expect(resultGridFinder, findsOneWidget);
-      expect(bodyLabelFinder, findsWidgets);
-      expect(bodyDisplayValueFinder, findsWidgets);
+      expect(bodyFinder, findsWidgets);
     });
 
     testWidgets('200/diameter', (WidgetTester tester) async {
@@ -69,8 +68,7 @@ void main() {
       await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
       expect(find.byType(CadResultScreen), findsOneWidget);
       expect(resultGridFinder, findsOneWidget);
-      expect(diameterLabelFinder, findsWidgets);
-      expect(diameterDisplayValueFinder, findsWidgets);
+      expect(diameterFinder, findsWidgets);
     });
 
     testWidgets('200/fullname', (WidgetTester tester) async {
@@ -80,8 +78,7 @@ void main() {
       await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
       expect(find.byType(CadResultScreen), findsOneWidget);
       expect(resultGridFinder, findsOneWidget);
-      expect(fullnameLabelFinder, findsWidgets);
-      expect(fullnameDisplayValueFinder, findsWidgets);
+      expect(fullnameFinder, findsWidgets);
     });
 
     testWidgets('200/all-fields', (WidgetTester tester) async {
@@ -91,12 +88,9 @@ void main() {
       await pumpCadResultRouteAsInitialLocation(tester, $extra: $extra);
       expect(find.byType(CadResultScreen), findsOneWidget);
       expect(resultGridFinder, findsOneWidget);
-      expect(bodyLabelFinder, findsWidgets);
-      expect(bodyDisplayValueFinder, findsWidgets);
-      expect(diameterLabelFinder, findsWidgets);
-      expect(diameterDisplayValueFinder, findsWidgets);
-      expect(fullnameLabelFinder, findsWidgets);
-      expect(fullnameDisplayValueFinder, findsWidgets);
+      expect(bodyFinder, findsWidgets);
+      expect(diameterFinder, findsWidgets);
+      expect(fullnameFinder, findsWidgets);
     });
   });
 }

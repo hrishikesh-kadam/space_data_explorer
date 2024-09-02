@@ -7,7 +7,6 @@ import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:url_launcher/link.dart';
 
 import '../../constants/assets.dart';
-import '../../constants/dimensions.dart';
 import '../../constants/labels.dart';
 import '../../globals.dart';
 import '../../helper/helper.dart';
@@ -69,13 +68,13 @@ class HomeScreen extends StatelessWidget {
     return [
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pageMarginVerticalHalf,
+          bottom: HrkDimensions.pageMarginVerticalHalf,
         ),
       ),
       _getSourceGridView(context: context),
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pageMarginVerticalHalf,
+          bottom: HrkDimensions.pageMarginVerticalHalf,
         ),
       )
     ];
@@ -85,8 +84,8 @@ class HomeScreen extends StatelessWidget {
     final List<Widget> orgItems = _getOrgItems(context: context);
     final gridParameters = getSliverMasonryGridParameters(
       context: context,
-      itemBoxWidth: Dimensions.orgItemBoxWidth,
-      pageMarginHorizontal: Dimensions.pageMarginHorizontalHalf,
+      itemBoxWidth: HrkDimensions.gridItemBoxWidth,
+      pageMarginHorizontal: HrkDimensions.pageMarginHorizontalHalf,
     );
     return SliverPadding(
       padding: EdgeInsets.symmetric(
@@ -169,15 +168,15 @@ class HomeScreen extends StatelessWidget {
     Uri? uri,
   }) {
     const borderRadius = BorderRadius.all(Radius.circular(
-      Dimensions.containerRadius,
+      HrkDimensions.containerRadius,
     ));
     return Padding(
-      padding: const EdgeInsets.all(Dimensions.bodyItemMargin),
+      padding: const EdgeInsets.all(HrkDimensions.bodyItemMargin),
       child: Link(
         uri: uri,
         builder: (context, followLink) {
           return _getInkWellContainer(
-            width: Dimensions.orgItemWidth,
+            width: HrkDimensions.gridItemWidth,
             inkWellKey: key,
             containerDecoration: BoxDecoration(
               border: Border.all(
@@ -225,7 +224,7 @@ class HomeScreen extends StatelessWidget {
   }) {
     return Container(
       key: orgItemContainerKey,
-      width: Dimensions.orgItemWidth,
+      width: HrkDimensions.gridItemWidth,
       decoration: containerDecoration,
       // https://api.flutter.dev/flutter/material/InkWell-class.html#the-ink-splashes-arent-visible
       child: Material(
@@ -255,19 +254,19 @@ class HomeScreen extends StatelessWidget {
             color: Theme.of(context).colorScheme.surfaceFixed,
           ),
           padding: const EdgeInsets.all(
-            Dimensions.bodyItemPadding,
+            HrkDimensions.bodyItemPadding,
           ),
           child: getImageWidget(
             assetName: imageAssetName,
             semanticLabel: imageSemanticLabel,
-            width: Dimensions.orgImageSize,
-            // height: Dimensions.orgImageSize,
+            width: HrkDimensions.gridItemContentSize,
+            // height: HrkDimensions.gridItemContentSize,
           ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: Dimensions.bodyItemPadding,
-            vertical: Dimensions.bodyItemPadding / 2,
+            horizontal: HrkDimensions.bodyItemPadding,
+            vertical: HrkDimensions.bodyItemPadding / 2,
           ),
           child: Text(
             name,

@@ -205,7 +205,7 @@ class CadScreen extends StatelessWidget {
     return [
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pageMarginVerticalHalf,
+          bottom: HrkDimensions.pageMarginVerticalHalf,
         ),
       ),
       _getHeader(context: context),
@@ -213,7 +213,7 @@ class CadScreen extends StatelessWidget {
       _getQueryGrid(context: context),
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pageMarginVerticalHalf,
+          bottom: HrkDimensions.pageMarginVerticalHalf,
         ),
       )
     ];
@@ -223,8 +223,8 @@ class CadScreen extends StatelessWidget {
     final Uri docUrl = SbdbCadApi.docUrl;
     return SliverPadding(
       padding: const EdgeInsets.symmetric(
-        horizontal: Dimensions.pageMarginHorizontal,
-        vertical: Dimensions.pageMarginVerticalHalf,
+        horizontal: HrkDimensions.pageMarginHorizontal,
+        vertical: HrkDimensions.pageMarginVerticalHalf,
       ),
       sliver: SliverToBoxAdapter(
         child: Column(
@@ -251,8 +251,8 @@ class CadScreen extends StatelessWidget {
       builder: (context, state) {
         return SliverPadding(
           padding: const EdgeInsets.symmetric(
-            horizontal: Dimensions.pageMarginHorizontal,
-            vertical: Dimensions.pageMarginVerticalHalf,
+            horizontal: HrkDimensions.pageMarginHorizontal,
+            vertical: HrkDimensions.pageMarginVerticalHalf,
           ),
           sliver: SliverToBoxAdapter(
             child: Center(
@@ -289,8 +289,8 @@ class CadScreen extends StatelessWidget {
     ];
     final gridParameters = getSliverMasonryGridParameters(
       context: context,
-      itemBoxWidth: Dimensions.cadQueryItemBoxWidth,
-      pageMarginHorizontal: Dimensions.pageMarginHorizontalHalf,
+      itemBoxWidth: HrkDimensions.bodyItemBoxWidth,
+      pageMarginHorizontal: HrkDimensions.pageMarginHorizontalHalf,
     );
     return SliverPadding(
       padding: EdgeInsets.symmetric(
@@ -340,7 +340,7 @@ class CadScreen extends StatelessWidget {
               endDateTextDefault: l10n.plusSomeDays(dateMaxDaysDefault),
               selectButtonTitle: l10n.selectDateRange,
               disableInputs: cadState.disableInputs,
-              spacing: Dimensions.cadQueryItemSpacing,
+              spacing: HrkDimensions.bodyItemSpacing,
               onDateRangeSelected: (dateRange) {
                 if (context.mounted) {
                   context.read<CadBloc>().add(CadDateRangeSelected(
@@ -389,7 +389,7 @@ class CadScreen extends StatelessWidget {
           units: distFilterUnits,
           unitSymbols: unitSymbols,
           disableInputs: state.disableInputs,
-          spacing: Dimensions.cadQueryItemSpacing,
+          spacing: HrkDimensions.bodyItemSpacing,
           onValueRangeChanged: (valueList, textList, unitList) {
             context.read<CadBloc>().add(CadDistanceEvent(
                   valueList: valueList,
@@ -427,7 +427,7 @@ class CadScreen extends StatelessWidget {
           keys: keys,
           selected: state.smallBodyFilterState.smallBodyFilter,
           disableInputs: state.disableInputs,
-          spacing: Dimensions.cadQueryItemSpacing,
+          spacing: HrkDimensions.bodyItemSpacing,
           onChipSelected: (smallBodyFilter) {
             context.read<CadBloc>().add(CadSmallBodyFilterSelected(
                   smallBodyFilter: smallBodyFilter,
@@ -471,7 +471,7 @@ class CadScreen extends StatelessWidget {
           inputFormattersList: inputFormattersList,
           textFieldWidth: Dimensions.smallBodySelectorInputWidth,
           disableInputs: state.disableInputs,
-          spacing: Dimensions.cadQueryItemSpacing,
+          spacing: HrkDimensions.bodyItemSpacing,
           onStateChanged: (value, textList) {
             int? spkId = textList[0].isNotEmpty ? int.parse(textList[0]) : null;
             String? designation = textList[1].isNotEmpty ? textList[1] : null;
@@ -518,7 +518,7 @@ class CadScreen extends StatelessWidget {
           keys: keys,
           selected: state.closeApproachBody,
           disableInputs: state.disableInputs,
-          spacing: Dimensions.cadQueryItemSpacing,
+          spacing: HrkDimensions.bodyItemSpacing,
           onChipSelected: (closeApproachBody) {
             context.read<CadBloc>().add(CadCloseApproachBodySelected(
                   closeApproachBody: closeApproachBody,
@@ -551,7 +551,7 @@ class CadScreen extends StatelessWidget {
           keys: keys,
           selected: state.dataOutputSet,
           disableInputs: state.disableInputs,
-          spacing: Dimensions.cadQueryItemSpacing,
+          spacing: HrkDimensions.bodyItemSpacing,
           onChipsSelected: (dataOutputSet) {
             context.read<CadBloc>().add(CadDataOutputEvent(
                   dataOutputSet: dataOutputSet,

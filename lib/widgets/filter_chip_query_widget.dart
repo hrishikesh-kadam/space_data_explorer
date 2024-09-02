@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'query_grid_container.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 
 typedef ChipsSelected<T> = void Function(Set<T> selected);
 
@@ -34,7 +34,7 @@ class FilterChipQueryWidget<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return QueryItemContainer(
+    return BodyItemContainer(
       child: _getBody(context: context),
     );
   }

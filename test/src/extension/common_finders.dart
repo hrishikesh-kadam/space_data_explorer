@@ -4,8 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 // LABEL: eligible-hrk_flutter_test_batteries
 extension HrkFinders on CommonFinders {
-  Finder byKeyStartsWith(
-    String keyPrefix, {
+  Finder byKeyContains(
+    Pattern pattern, {
+    int index = 0,
     String? description,
     bool skipOffstage = true,
   }) {
@@ -13,7 +14,28 @@ extension HrkFinders on CommonFinders {
       (widget) {
         if (widget.key is ValueKey<String>) {
           final key = widget.key as ValueKey<String>;
-          if (key.value.startsWith(keyPrefix)) {
+          if (key.value.contains(pattern, index)) {
+            return true;
+          }
+        }
+        return false;
+      },
+      description: description,
+      skipOffstage: skipOffstage,
+    );
+  }
+
+  Finder byKeyStartsWith(
+    Pattern pattern, {
+    int index = 0,
+    String? description,
+    bool skipOffstage = true,
+  }) {
+    return find.byWidgetPredicate(
+      (widget) {
+        if (widget.key is ValueKey<String>) {
+          final key = widget.key as ValueKey<String>;
+          if (key.value.startsWith(pattern, index)) {
             return true;
           }
         }

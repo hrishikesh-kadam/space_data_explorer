@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:intl/intl.dart';
 
 import '../../../widgets/app_bar.dart';
-import '../../constants/dimensions.dart';
 import '../../constants/labels.dart';
 import '../../extension/distance.dart';
 import '../../extension/velocity.dart';
@@ -42,24 +42,22 @@ class CadResultScreen extends StatelessWidget {
   static const Key totalTextKey = Key('${keyPrefix}total_text_key');
   static const Key gridKey = Key('${keyPrefix}grid_key');
   static const String gridItemKeyPrefix = '${keyPrefix}grid_item_';
-  static const String gridItemContainerKeyPrefix =
-      '${keyPrefix}grid_item_container_';
-  static const String desKeyPrefix = '${gridItemKeyPrefix}des_';
-  static const String orbitIdKeyPrefix = '${gridItemKeyPrefix}orbit_id_';
-  static const String jdKeyPrefix = '${gridItemKeyPrefix}jd_';
-  static const String cdKeyPrefix = '${gridItemKeyPrefix}cd_';
-  static const String distKeyPrefix = '${gridItemKeyPrefix}dist_';
-  static const String distMinKeyPrefix = '${gridItemKeyPrefix}dist_min_';
-  static const String distMaxKeyPrefix = '${gridItemKeyPrefix}dist_max_';
-  static const String vRelKeyPrefix = '${gridItemKeyPrefix}v_rel_';
-  static const String vInfKeyPrefix = '${gridItemKeyPrefix}v_inf_';
-  static const String tSigmaFKeyPrefix = '${gridItemKeyPrefix}t_sigma_f_';
-  static const String bodyKeyPrefix = '${gridItemKeyPrefix}body_';
-  static const String hKeyPrefix = '${gridItemKeyPrefix}h_';
-  static const String diameterKeyPrefix = '${gridItemKeyPrefix}diameter_';
-  static const String diameterSigmaKeyPrefix =
-      '${gridItemKeyPrefix}diameter_sigma_';
-  static const String fullnameKeyPrefix = '${gridItemKeyPrefix}fullname_';
+  static const String gridItemContainerKeySuffix = 'container_key';
+  static const String desKeyPrefix = 'des_';
+  static const String orbitIdKeyPrefix = 'orbit_id_';
+  static const String jdKeyPrefix = 'jd_';
+  static const String cdKeyPrefix = 'cd_';
+  static const String distKeyPrefix = 'dist_';
+  static const String distMinKeyPrefix = 'dist_min_';
+  static const String distMaxKeyPrefix = 'dist_max_';
+  static const String vRelKeyPrefix = 'v_rel_';
+  static const String vInfKeyPrefix = 'v_inf_';
+  static const String tSigmaFKeyPrefix = 't_sigma_f_';
+  static const String bodyKeyPrefix = 'body_';
+  static const String hKeyPrefix = 'h_';
+  static const String diameterKeyPrefix = 'diameter_';
+  static const String diameterSigmaKeyPrefix = 'diameter_sigma_';
+  static const String fullnameKeyPrefix = 'fullname_';
   @visibleForTesting
   static CadResultBloc? cadResultBloc;
 
@@ -125,7 +123,7 @@ class CadResultScreen extends StatelessWidget {
     return SliverFillRemaining(
       hasScrollBody: false,
       child: Padding(
-        padding: const EdgeInsets.all(Dimensions.pageMargin),
+        padding: const EdgeInsets.all(HrkDimensions.pageMargin),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -148,7 +146,7 @@ class CadResultScreen extends StatelessWidget {
     return SliverFillRemaining(
       hasScrollBody: false,
       child: Padding(
-        padding: const EdgeInsets.all(Dimensions.pageMargin),
+        padding: const EdgeInsets.all(HrkDimensions.pageMargin),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -174,13 +172,13 @@ class CadResultScreen extends StatelessWidget {
     return [
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pageMarginVerticalHalf,
+          bottom: HrkDimensions.pageMarginVerticalHalf,
         ),
       ),
       _getGrid(context: context, sbdbCadBody: sbdbCadBody),
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pageMarginVerticalHalf,
+          bottom: HrkDimensions.pageMarginVerticalHalf,
         ),
       )
     ];
@@ -192,8 +190,8 @@ class CadResultScreen extends StatelessWidget {
   }) {
     final gridParameters = getSliverMasonryGridParameters(
       context: context,
-      itemBoxWidth: Dimensions.cadQueryItemBoxWidth,
-      pageMarginHorizontal: Dimensions.pageMarginHorizontalHalf,
+      itemBoxWidth: HrkDimensions.bodyItemBoxWidth,
+      pageMarginHorizontal: HrkDimensions.pageMarginHorizontalHalf,
     );
     return SliverPadding(
       padding: EdgeInsets.symmetric(
@@ -215,15 +213,18 @@ class CadResultScreen extends StatelessWidget {
     );
   }
 
+  static Key getGridItemContainerKey(int index) {
+    return Key('$gridItemKeyPrefix${index}_$gridItemContainerKeySuffix');
+  }
+
   Widget getItemWidget({
     required BuildContext context,
     required SbdbCadBody sbdbCadBody,
     required SbdbCadData data,
     required int index,
   }) {
-    return getItemContainer(
-      context: context,
-      index: index,
+    return BodyItemContainer(
+      key: getGridItemContainerKey(index),
       child: SelectionArea(
         child: getItemBody(
           context: context,
@@ -235,30 +236,6 @@ class CadResultScreen extends StatelessWidget {
     );
   }
 
-  Widget getItemContainer({
-    required BuildContext context,
-    required Widget child,
-    required int index,
-  }) {
-    return Container(
-      key: Key('$gridItemContainerKeyPrefix${index}_key'),
-      width: Dimensions.cadQueryItemWidth,
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 1,
-          color: Theme.of(context).colorScheme.outline,
-        ),
-        borderRadius: const BorderRadius.all(Radius.circular(
-          Dimensions.containerRadius,
-        )),
-        color: Theme.of(context).colorScheme.surfaceContainer,
-      ),
-      padding: const EdgeInsets.all(Dimensions.bodyItemPadding),
-      margin: const EdgeInsets.all(Dimensions.bodyItemMargin),
-      child: child,
-    );
-  }
-
   Widget getItemBody({
     required BuildContext context,
     required SbdbCadBody sbdbCadBody,
@@ -266,33 +243,34 @@ class CadResultScreen extends StatelessWidget {
     required int index,
   }) {
     final fields = List<String>.from(sbdbCadBody.rawBody!['fields']);
+    final itemIndexKeyPrefix = '$gridItemKeyPrefix${index}_';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        getItemDetail(
+        LabelValueWrap(
+          key: Key('$itemIndexKeyPrefix${desKeyPrefix}key'),
+          keyPrefix: '$itemIndexKeyPrefix$desKeyPrefix',
           label: '${l10n.designation}:',
-          displayValue: data.des,
-          keyPrefix: desKeyPrefix,
-          index: index,
+          value: data.des,
         ),
         if (fields.contains('fullname'))
-          getItemDetail(
+          LabelValueWrap(
+            key: Key('$itemIndexKeyPrefix${fullnameKeyPrefix}key'),
+            keyPrefix: '$itemIndexKeyPrefix$fullnameKeyPrefix',
             label: '${l10n.fullname}:',
-            displayValue: data.fullname.toString().trim(),
-            keyPrefix: fullnameKeyPrefix,
-            index: index,
+            value: data.fullname.toString().trim(),
           ),
-        getItemDetail(
+        LabelValueWrap(
+          key: Key('$itemIndexKeyPrefix${orbitIdKeyPrefix}key'),
+          keyPrefix: '$itemIndexKeyPrefix$orbitIdKeyPrefix',
           label: '${l10n.orbitId}:',
-          displayValue: data.orbitId,
-          keyPrefix: orbitIdKeyPrefix,
-          index: index,
+          value: data.orbitId,
         ),
-        getItemDetail(
+        LabelValueWrap(
+          key: Key('$itemIndexKeyPrefix${jdKeyPrefix}key'),
+          keyPrefix: '$itemIndexKeyPrefix$jdKeyPrefix',
           label: '${l10n.julianDate}:',
-          displayValue: '${data.jd} ${Labels.tdb}',
-          keyPrefix: jdKeyPrefix,
-          index: index,
+          value: '${data.jd} ${Labels.tdb}',
         ),
         BlocBuilder<SettingsBloc, SettingsState>(
           buildWhen: (previous, current) {
@@ -300,33 +278,33 @@ class CadResultScreen extends StatelessWidget {
                 previous.timeFormatPattern != current.timeFormatPattern;
           },
           builder: (context, settingsState) {
-            return getItemDetail(
+            return LabelValueWrap(
+              key: Key('$itemIndexKeyPrefix${cdKeyPrefix}key'),
+              keyPrefix: '$itemIndexKeyPrefix$cdKeyPrefix',
               label: '${l10n.dateSlashTime}:',
-              displayValue: formatCloseApproachDateTime(
+              value: formatCloseApproachDateTime(
                 context: context,
                 cd: data.cd,
                 dateFormatPattern: settingsState.dateFormatPattern,
                 timeFormatPattern: settingsState.timeFormatPattern,
               ),
-              keyPrefix: cdKeyPrefix,
-              index: index,
             );
           },
         ),
-        getItemDetail(
+        LabelValueWrap(
+          key: Key('$itemIndexKeyPrefix${tSigmaFKeyPrefix}key'),
+          keyPrefix: '$itemIndexKeyPrefix$tSigmaFKeyPrefix',
           label: '${l10n.timeSigma}:',
-          displayValue: data.tSigmaF,
-          keyPrefix: tSigmaFKeyPrefix,
-          index: index,
+          value: data.tSigmaF,
         ),
         if (fields.contains('body'))
-          getItemDetail(
+          LabelValueWrap(
+            key: Key('$itemIndexKeyPrefix${bodyKeyPrefix}key'),
+            keyPrefix: '$itemIndexKeyPrefix$bodyKeyPrefix',
             label: '${l10n.closeApproachBody}:',
-            displayValue: data.body != null
+            value: data.body != null
                 ? getLocalizedBody(body: data.body!, l10n: l10n)
                 : Labels.na,
-            keyPrefix: bodyKeyPrefix,
-            index: index,
           ),
         BlocSelector<SettingsBloc, SettingsState, DistanceUnit>(
           selector: (state) {
@@ -336,29 +314,29 @@ class CadResultScreen extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                getItemDetail(
+                LabelValueWrap(
+                  key: Key('$itemIndexKeyPrefix${distKeyPrefix}key'),
+                  keyPrefix: '$itemIndexKeyPrefix$distKeyPrefix',
                   label: '${l10n.distance}:',
-                  displayValue: data.dist
+                  value: data.dist
                       .convert(to: distanceUnit)
                       .toLocalizedString(l10n),
-                  keyPrefix: distKeyPrefix,
-                  index: index,
                 ),
-                getItemDetail(
+                LabelValueWrap(
+                  key: Key('$itemIndexKeyPrefix${distMinKeyPrefix}key'),
+                  keyPrefix: '$itemIndexKeyPrefix$distMinKeyPrefix',
                   label: '${l10n.distanceMin}:',
-                  displayValue: data.distMin
+                  value: data.distMin
                       .convert(to: distanceUnit)
                       .toLocalizedString(l10n),
-                  keyPrefix: distMinKeyPrefix,
-                  index: index,
                 ),
-                getItemDetail(
+                LabelValueWrap(
+                  key: Key('$itemIndexKeyPrefix${distMaxKeyPrefix}key'),
+                  keyPrefix: '$itemIndexKeyPrefix$distMaxKeyPrefix',
                   label: '${l10n.distanceMax}:',
-                  displayValue: data.distMax
+                  value: data.distMax
                       .convert(to: distanceUnit)
                       .toLocalizedString(l10n),
-                  keyPrefix: distMaxKeyPrefix,
-                  index: index,
                 ),
               ],
             );
@@ -372,33 +350,33 @@ class CadResultScreen extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                getItemDetail(
+                LabelValueWrap(
+                  key: Key('$itemIndexKeyPrefix${vRelKeyPrefix}key'),
+                  keyPrefix: '$itemIndexKeyPrefix$vRelKeyPrefix',
                   label: '${l10n.velocityRel}:',
-                  displayValue: data.vRel
+                  value: data.vRel
                       .convert(to: velocityUnit)
                       .toLocalizedString(l10n),
-                  keyPrefix: vRelKeyPrefix,
-                  index: index,
                 ),
-                getItemDetail(
+                LabelValueWrap(
+                  key: Key('$itemIndexKeyPrefix${vInfKeyPrefix}key'),
+                  keyPrefix: '$itemIndexKeyPrefix$vInfKeyPrefix',
                   label: '${l10n.velocityInf}:',
-                  displayValue: data.vInf != null
+                  value: data.vInf != null
                       ? data.vInf!
                           .convert(to: velocityUnit)
                           .toLocalizedString(l10n)
                       : Labels.na,
-                  keyPrefix: vInfKeyPrefix,
-                  index: index,
                 ),
               ],
             );
           },
         ),
-        getItemDetail(
+        LabelValueWrap(
+          key: Key('$itemIndexKeyPrefix${hKeyPrefix}key'),
+          keyPrefix: '$itemIndexKeyPrefix$hKeyPrefix',
           label: '${l10n.absoulteMagnitude}:',
-          displayValue: data.h != null ? '${data.h} H' : Labels.na,
-          keyPrefix: hKeyPrefix,
-          index: index,
+          value: data.h != null ? '${data.h} H' : Labels.na,
         ),
         if (fields.contains('diameter'))
           BlocSelector<SettingsBloc, SettingsState, DistanceUnit>(
@@ -409,110 +387,31 @@ class CadResultScreen extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  getItemDetail(
+                  LabelValueWrap(
+                    key: Key('$itemIndexKeyPrefix${diameterKeyPrefix}key'),
+                    keyPrefix: '$itemIndexKeyPrefix$diameterKeyPrefix',
                     label: '${l10n.diameter}:',
-                    displayValue: data.diameter != null
+                    value: data.diameter != null
                         ? data.diameter!
                             .convert(to: diameterUnit)
                             .toLocalizedString(l10n)
                         : Labels.na,
-                    keyPrefix: diameterKeyPrefix,
-                    index: index,
                   ),
-                  getItemDetail(
+                  LabelValueWrap(
+                    key: Key('$itemIndexKeyPrefix${diameterSigmaKeyPrefix}key'),
+                    keyPrefix: '$itemIndexKeyPrefix$diameterSigmaKeyPrefix',
                     label: '${l10n.diameterSigma}:',
-                    displayValue: data.diameterSigma != null
+                    value: data.diameterSigma != null
                         ? data.diameterSigma!
                             .convert(to: diameterUnit)
                             .toLocalizedString(l10n)
                         : Labels.na,
-                    keyPrefix: diameterSigmaKeyPrefix,
-                    index: index,
                   ),
                 ],
               );
             },
           ),
       ],
-    );
-  }
-
-  // LABEL: eligible-hrk_flutter_batteries
-  Widget getItemDetail({
-    required String label,
-    required String displayValue,
-    String keyPrefix = '',
-    required int index,
-  }) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final Key? labelTextKey =
-            keyPrefix.isNotEmpty ? Key('${keyPrefix}label_${index}_key') : null;
-        final Key? displayValueTextKey = keyPrefix.isNotEmpty
-            ? Key('${keyPrefix}display_value_${index}_key')
-            : null;
-        final style = Theme.of(context).textTheme.bodyMedium;
-        final labelWidth = getTextPainterLaidout(
-          context: context,
-          text: label,
-          style: style,
-        ).width;
-        displayValue = displayValue.localizeDigits(toZeroDigit: zeroDigit);
-        final displayValueWidth = getTextPainterLaidout(
-          context: context,
-          text: displayValue,
-          style: style,
-        ).width;
-        final constrainWidth = constraints.constrainWidth();
-        // _logger.debug('constraints = $constraints');
-        // _logger.debug('constrainWidth() = $constrainWidth');
-        // _logger.debug('labelWidth = $labelWidth');
-        // _logger.debug('displayValueWidth = $displayValueWidth');
-        if (constrainWidth >=
-            labelWidth + displayValueWidth + Dimensions.cadResultItemSpacing) {
-          // _logger.debug('Will fit');
-          return Wrap(
-            alignment: WrapAlignment.spaceBetween,
-            spacing: Dimensions.cadResultItemSpacing,
-            children: [
-              Text(
-                label,
-                key: labelTextKey,
-                style: style,
-              ),
-              Text(
-                displayValue,
-                key: displayValueTextKey,
-                style: style,
-              ),
-            ],
-          );
-        } else {
-          // _logger.debug('Will not fit');
-          return Column(
-            children: [
-              SizedBox(
-                width: constrainWidth,
-                child: Text(
-                  label,
-                  key: labelTextKey,
-                  style: style,
-                  textAlign: TextAlign.start,
-                ),
-              ),
-              SizedBox(
-                width: constrainWidth,
-                child: Text(
-                  displayValue,
-                  key: displayValueTextKey,
-                  style: style,
-                  textAlign: TextAlign.end,
-                ),
-              )
-            ],
-          );
-        }
-      },
     );
   }
 
