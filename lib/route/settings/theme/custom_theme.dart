@@ -19,10 +19,13 @@ class CustomTheme {
     bool isDark = false, // not in use, has no effect
     Color? secondaryColor,
   }) {
+    // ignore: deprecated_member_use
     final Hct seedColorHct = Hct.fromInt(seedColor.value);
     final Hct? secondaryColorHct =
+        // ignore: deprecated_member_use
         secondaryColor != null ? Hct.fromInt(secondaryColor.value) : null;
     return DynamicScheme(
+      // ignore: deprecated_member_use
       sourceColorArgb: seedColor.value,
       variant: Variant.tonalSpot,
       isDark: isDark,
