@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
+import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import 'package:space_data_explorer/route/settings/bloc/settings_state.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
-import '../../../extension/common_finders.dart';
 import '../settings_route.dart';
 
 const DistanceUnit distanceUnitDefault = SettingsState.distanceUnitDefault;
