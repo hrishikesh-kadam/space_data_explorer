@@ -38,7 +38,7 @@ jobs:
         include:
           - runner: macos-latest
             ref: beta
-            experimental: false
+            experimental: true
 
     steps:
       - run: git config --global core.autocrlf false
