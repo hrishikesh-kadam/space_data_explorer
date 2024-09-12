@@ -5,6 +5,12 @@
 
 set -e -o pipefail
 
+# TODO(hrishikesh-kadam): Keep checking for the fix
+# https://github.com/flutter/flutter/issues/155019
+if [[ $GITHUB_ACTIONS == "true" && $(uname -s) =~ ^"Darwin" ]]; then
+  exit
+fi
+
 if [[ $LOGS_ENV_SOURCED != "true" ]]; then
   source ./tool/shell/logs-env.sh
 fi
