@@ -24,7 +24,10 @@ $(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
 
 ./tool/web/build.sh "$FLAVOR_ENV"
 
-./tool/android/build.sh "$FLAVOR_ENV"
+# TODO(hrishikesh-kadam): Skip building Android in beta till AGP upgrade is in stable
+if flutter --version | grep -q "channel stable"; then
+  ./tool/android/build.sh "$FLAVOR_ENV"
+fi
 
 if [[ $(uname -s) =~ ^"Darwin" ]]; then
   ./tool/ios/build.sh "$FLAVOR_ENV"
