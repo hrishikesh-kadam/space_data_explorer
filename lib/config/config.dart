@@ -16,7 +16,6 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import '../constants/constants.dart';
 import '../coverage_ignored.dart';
 import '../extension/go_router.dart';
-import '../extension/pubspec.dart';
 import '../globals.dart';
 import '../route/home/home_route.dart';
 import 'app_bloc_observer.dart';
