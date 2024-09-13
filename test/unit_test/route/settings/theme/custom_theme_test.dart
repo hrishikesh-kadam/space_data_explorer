@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:checks/checks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
+import 'package:hrk_test_batteries/hrk_test_batteries.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
 
 import 'package:space_data_explorer/route/settings/theme/custom_theme.dart';
-import '../../../../src/extension/custom_checks.dart';
 
 void main() {
   group('$CustomTheme Unit Test', () {
