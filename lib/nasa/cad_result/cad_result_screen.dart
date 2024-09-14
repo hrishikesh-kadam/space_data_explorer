@@ -242,7 +242,6 @@ class CadResultScreen extends StatelessWidget {
     required SbdbCadData data,
     required int index,
   }) {
-    final fields = List<String>.from(sbdbCadBody.rawBody!['fields']);
     final itemIndexKeyPrefix = '$gridItemKeyPrefix${index}_';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -253,7 +252,7 @@ class CadResultScreen extends StatelessWidget {
           label: '${l10n.designation}:',
           value: data.des,
         ),
-        if (fields.contains('fullname'))
+        if (sbdbCadBody.fields!.contains('fullname'))
           LabelValueWrap(
             key: Key('$itemIndexKeyPrefix${fullnameKeyPrefix}key'),
             keyPrefix: '$itemIndexKeyPrefix$fullnameKeyPrefix',
@@ -297,7 +296,7 @@ class CadResultScreen extends StatelessWidget {
           label: '${l10n.timeSigma}:',
           value: data.tSigmaF,
         ),
-        if (fields.contains('body'))
+        if (sbdbCadBody.fields!.contains('body'))
           LabelValueWrap(
             key: Key('$itemIndexKeyPrefix${bodyKeyPrefix}key'),
             keyPrefix: '$itemIndexKeyPrefix$bodyKeyPrefix',
@@ -378,7 +377,7 @@ class CadResultScreen extends StatelessWidget {
           label: '${l10n.absoulteMagnitude}:',
           value: data.h != null ? '${data.h} H' : Labels.na,
         ),
-        if (fields.contains('diameter'))
+        if (sbdbCadBody.fields!.contains('diameter'))
           BlocSelector<SettingsBloc, SettingsState, DistanceUnit>(
             selector: (state) {
               return state.diameterUnit;

@@ -584,10 +584,10 @@ packages:
     dependency: "direct main"
     description:
       name: hrk_nasa_apis
-      sha256: "7ad76732b6b725ec6add6ff3393125ea4fae687c5a851de2545bfee886d2560d"
+      sha256: "2ab042935ef5189ddf9a9cd0e931e3a37e8c5e40a253c68047abf277a64b6cac"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0"
   hrk_nasa_apis_test:
     dependency: "direct dev"
     description:
