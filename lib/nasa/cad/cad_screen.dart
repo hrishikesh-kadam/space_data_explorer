@@ -21,7 +21,6 @@ import '../../route/settings/bloc/settings_bloc.dart';
 import '../../route/settings/bloc/settings_state.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/choice_chip_input_widget.dart';
-import '../../widgets/choice_chip_query_widget.dart';
 import '../../widgets/date_filter_widget.dart';
 import '../../widgets/filter_chip_query_widget.dart';
 import '../../widgets/value_range_filter_widget.dart';
@@ -65,8 +64,7 @@ class CadScreen extends StatelessWidget {
   };
   static const String smallBodyFilterKeyPrefix =
       '${keyPrefix}small_body_filter_';
-  static const Key smallBodyFilterKey =
-      Key('$smallBodyFilterKeyPrefix${ChoiceChipQueryWidget.defaultKey}');
+  static const Key smallBodyFilterKey = Key('${smallBodyFilterKeyPrefix}key');
   static const Set<SmallBodyFilter> smallBodyFilterSet = {
     SmallBodyFilter.neo,
     SmallBodyFilter.pha,
@@ -89,8 +87,8 @@ class CadScreen extends StatelessWidget {
   ];
   static const String closeApproachBodySelectorKeyPrefix =
       '${keyPrefix}close_approach_body_';
-  static const Key closeApproachBodySelectorKey = Key(
-      '$closeApproachBodySelectorKeyPrefix${ChoiceChipQueryWidget.defaultKey}');
+  static const Key closeApproachBodySelectorKey =
+      Key('${closeApproachBodySelectorKeyPrefix}key');
   static final Set<CloseApproachBody> closeApproachBodySet = {
     CloseApproachBody.earth,
     CloseApproachBody.moon,
@@ -417,22 +415,24 @@ class CadScreen extends StatelessWidget {
             previous.disableInputs != current.disableInputs;
       },
       builder: (context, state) {
-        return ChoiceChipQueryWidget<SmallBodyFilter>(
-          key: smallBodyFilterKey,
-          keyPrefix: smallBodyFilterKeyPrefix,
-          enabled: state.smallBodyFilterState.enabled,
-          title: l10n.smallBodyFilter,
-          values: smallBodyFilterSet,
-          labels: labels,
-          keys: keys,
-          selected: state.smallBodyFilterState.smallBodyFilter,
-          disableInputs: state.disableInputs,
-          spacing: HrkDimensions.bodyItemSpacing,
-          onChipSelected: (smallBodyFilter) {
-            context.read<CadBloc>().add(CadSmallBodyFilterSelected(
-                  smallBodyFilter: smallBodyFilter,
-                ));
-          },
+        return BodyItemContainer(
+          child: ChoiceChipGroup<SmallBodyFilter>(
+            key: smallBodyFilterKey,
+            keyPrefix: smallBodyFilterKeyPrefix,
+            enabled: state.smallBodyFilterState.enabled,
+            title: l10n.smallBodyFilter,
+            values: smallBodyFilterSet,
+            labels: labels,
+            keys: keys,
+            selected: state.smallBodyFilterState.smallBodyFilter,
+            disableInputs: state.disableInputs,
+            spacing: HrkDimensions.bodyItemSpacing,
+            onChipSelected: (smallBodyFilter) {
+              context.read<CadBloc>().add(CadSmallBodyFilterSelected(
+                    smallBodyFilter: smallBodyFilter,
+                  ));
+            },
+          ),
         );
       },
     );
@@ -509,21 +509,23 @@ class CadScreen extends StatelessWidget {
             previous.disableInputs != current.disableInputs;
       },
       builder: (context, state) {
-        return ChoiceChipQueryWidget<CloseApproachBody>(
-          key: closeApproachBodySelectorKey,
-          keyPrefix: closeApproachBodySelectorKeyPrefix,
-          title: l10n.closeApproachBodySelector,
-          values: closeApproachBodySet,
-          labels: labels,
-          keys: keys,
-          selected: state.closeApproachBody,
-          disableInputs: state.disableInputs,
-          spacing: HrkDimensions.bodyItemSpacing,
-          onChipSelected: (closeApproachBody) {
-            context.read<CadBloc>().add(CadCloseApproachBodySelected(
-                  closeApproachBody: closeApproachBody,
-                ));
-          },
+        return BodyItemContainer(
+          child: ChoiceChipGroup<CloseApproachBody>(
+            key: closeApproachBodySelectorKey,
+            keyPrefix: closeApproachBodySelectorKeyPrefix,
+            title: l10n.closeApproachBodySelector,
+            values: closeApproachBodySet,
+            labels: labels,
+            keys: keys,
+            selected: state.closeApproachBody,
+            disableInputs: state.disableInputs,
+            spacing: HrkDimensions.bodyItemSpacing,
+            onChipSelected: (closeApproachBody) {
+              context.read<CadBloc>().add(CadCloseApproachBodySelected(
+                    closeApproachBody: closeApproachBody,
+                  ));
+            },
+          ),
         );
       },
     );

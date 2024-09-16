@@ -1,16 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
-import 'package:space_data_explorer/widgets/choice_chip_query_widget.dart';
 import '../../../../../src/nasa/cad/cad_route.dart';
 import '../../../../../src/nasa/cad/query/close_approach_body_selector.dart';
 
 void main() {
-  group(
-      '$CadRoute ${ChoiceChipQueryWidget<CloseApproachBody>} Interaction Test',
-      () {
+  group('$CadRoute ${ChoiceChipGroup<CloseApproachBody>} Interaction Test', () {
     testWidgets('DeferredLoading workaround', (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       await tapSearchButton(tester);
