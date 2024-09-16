@@ -22,7 +22,6 @@ import '../../route/settings/bloc/settings_state.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/choice_chip_input_widget.dart';
 import '../../widgets/date_filter_widget.dart';
-import '../../widgets/filter_chip_query_widget.dart';
 import '../../widgets/value_range_filter_widget.dart';
 import '../../widgets/worker_button.dart';
 import '../cad_result/cad_result_route.dart';
@@ -103,8 +102,7 @@ class CadScreen extends StatelessWidget {
     if (flavorEnv == FlavorEnv.dev) CloseApproachBody.pluto,
   };
   static const String dataOutputKeyPrefix = '${keyPrefix}data_output_';
-  static const Key dataOutputKey =
-      Key('$dataOutputKeyPrefix${FilterChipQueryWidget.defaultKey}');
+  static const Key dataOutputKey = Key('${dataOutputKeyPrefix}key');
   static const Set<DataOutput> dataOutputSet = {
     DataOutput.totalOnly,
     DataOutput.diameter,
@@ -544,21 +542,23 @@ class CadScreen extends StatelessWidget {
             previous.disableInputs != current.disableInputs;
       },
       builder: (context, state) {
-        return FilterChipQueryWidget<DataOutput>(
-          key: dataOutputKey,
-          keyPrefix: dataOutputKeyPrefix,
-          title: l10n.dataOutput,
-          values: dataOutputSet,
-          labels: labels,
-          keys: keys,
-          selected: state.dataOutputSet,
-          disableInputs: state.disableInputs,
-          spacing: HrkDimensions.bodyItemSpacing,
-          onChipsSelected: (dataOutputSet) {
-            context.read<CadBloc>().add(CadDataOutputEvent(
-                  dataOutputSet: dataOutputSet,
-                ));
-          },
+        return BodyItemContainer(
+          child: FilterChipGroup<DataOutput>(
+            key: dataOutputKey,
+            keyPrefix: dataOutputKeyPrefix,
+            title: l10n.dataOutput,
+            values: dataOutputSet,
+            labels: labels,
+            keys: keys,
+            selectedSet: state.dataOutputSet,
+            disableInputs: state.disableInputs,
+            spacing: HrkDimensions.bodyItemSpacing,
+            onChipsSelected: (dataOutputSet) {
+              context.read<CadBloc>().add(CadDataOutputEvent(
+                    dataOutputSet: dataOutputSet,
+                  ));
+            },
+          ),
         );
       },
     );
