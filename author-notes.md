@@ -2,6 +2,7 @@
 
 ## TODOs
 
+- Add Tooltip for all the Acronyms
 - Update Android Developer Page
 - Cross-check Play Store's Data Safety and App Store's App Privacy sections
 - Write a script ./tool/android/download-metadata.sh
