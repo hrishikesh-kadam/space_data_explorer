@@ -10,7 +10,7 @@ import '../../../../../src/nasa/cad/query/small_body_filter.dart';
 
 void main() {
   group('$CadRoute ${ChoiceChipGroup<SmallBodyFilter>} Painting Test', () {
-    testWidgets('Doesn\'t Overflow ${DeviceDimensions.galaxyFoldPortraitWidth}',
+    testWidgets('expectNoOverflow ${DeviceDimensions.galaxyFoldPortraitWidth}',
         (WidgetTester tester) async {
       disableOverflowError();
       tester.view.setLogicalSize(

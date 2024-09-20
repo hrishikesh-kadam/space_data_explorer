@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
@@ -93,6 +94,42 @@ void main() {
       await verifyLocaleTileSubtitle(tester, l10n: l10n, locale: locale);
       final settingsBloc = navigatorKey.currentContext!.read<SettingsBloc>();
       expect(settingsBloc.state.locale, locale);
+    });
+
+    testWidgets('Initial systemPreferred, Choose mr, Choose systemPreferred',
+        (tester) async {
+      mockHydratedBloc();
+      Locale? locale = LocaleExt.systemPreferred;
+      Locale resolvedLocale = LocaleExt.enUs;
+      final settingsBloc = SettingsBloc(
+        initialState: SettingsState.getInitial().copyWith(
+          locale: locale,
+        ),
+      );
+      await pumpSettingsRouteAsNormalLink(
+        tester,
+        settingsBloc: settingsBloc,
+      );
+      expect(settingsBloc.state.locale, locale);
+      expect(settingsBloc.state.resolvedLocale, resolvedLocale);
+
+      locale = LocaleExt.mr;
+      resolvedLocale = locale;
+      await tapLocaleTile(tester);
+      await chooseLocale(tester, l10n: l10n, locale: locale);
+      var currentL10n = AppLocalizations.of(navigatorKey.currentContext!);
+      await verifyLocaleTileSubtitle(tester, l10n: currentL10n, locale: locale);
+      expect(settingsBloc.state.locale, locale);
+      expect(settingsBloc.state.resolvedLocale, resolvedLocale);
+
+      locale = LocaleExt.systemPreferred;
+      resolvedLocale = LocaleExt.enUs;
+      await tapLocaleTile(tester);
+      await chooseLocale(tester, l10n: currentL10n, locale: locale);
+      currentL10n = AppLocalizations.of(navigatorKey.currentContext!);
+      await verifyLocaleTileSubtitle(tester, l10n: currentL10n, locale: locale);
+      expect(settingsBloc.state.locale, locale);
+      expect(settingsBloc.state.resolvedLocale, resolvedLocale);
     });
 
     testWidgets(

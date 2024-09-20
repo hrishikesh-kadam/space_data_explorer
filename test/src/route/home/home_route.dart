@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:space_data_explorer/route/home/home_screen.dart';
+import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
 import '../../space_data_explorer_app.dart';
 
 final orgGridFinder = find.byKey(HomeScreen.orgGridKey);
@@ -21,8 +22,13 @@ final jaxaItemFinder = find.byKey(HomeScreen.jaxaItemKey);
 Future<void> pumpHomeRoute(
   WidgetTester tester, {
   GlobalKey<NavigatorState>? navigatorKey,
+  SettingsBloc? settingsBloc,
 }) async {
-  await pumpApp(tester, navigatorKey: navigatorKey);
+  await pumpApp(
+    tester,
+    navigatorKey: navigatorKey,
+    settingsBloc: settingsBloc,
+  );
 }
 
 Future<void> tapNasaItem(WidgetTester tester) async {

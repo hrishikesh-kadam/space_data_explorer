@@ -14,7 +14,7 @@ void main() {
       '$SbdbCadBody': SbdbCadBodyExt.getSample('200/1'),
     };
 
-    testWidgets('Doesn\'t Overflow ${DeviceDimensions.galaxyFoldPortraitWidth}',
+    testWidgets('expectNoOverflow ${DeviceDimensions.galaxyFoldPortraitWidth}',
         (WidgetTester tester) async {
       disableOverflowError();
       tester.view

@@ -7,7 +7,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
-import 'package:intl/intl.dart';
 import 'package:recase/recase.dart';
 
 import '../../analytics/analytics.dart';
@@ -21,7 +20,6 @@ import '../../route/settings/bloc/settings_bloc.dart';
 import '../../route/settings/bloc/settings_state.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/choice_chip_input_widget.dart';
-import '../../widgets/date_filter_widget.dart';
 import '../../widgets/value_range_filter_widget.dart';
 import '../../widgets/worker_button.dart';
 import '../cad_result/cad_result_route.dart';
@@ -47,9 +45,8 @@ class CadScreen extends StatelessWidget {
   static const Key searchButtonKey = Key('${keyPrefix}search_button_key');
   static const Key queryGridKey = Key('${keyPrefix}query_grid_key');
   static const String dateFilterKeyPrefix =
-      '$keyPrefix${DateFilterWidget.defaultKey}_';
-  static const Key dateFilterWidgetKey =
-      Key('$keyPrefix${DateFilterWidget.defaultKey}');
+      '$keyPrefix${DateRangeWidget.defaultKeyPrefix}';
+  static const Key dateFilterWidgetKey = Key('${dateFilterKeyPrefix}key');
   static int get dateMaxDaysDefault => SbdbCadQueryParameters.dateMaxDefault
       .difference(HrkDateTime.today())
       .inDays;
@@ -316,34 +313,30 @@ class CadScreen extends StatelessWidget {
                 previous.locale != current.locale;
           },
           builder: (context, settingsState) {
-            final localeString = Localizations.localeOf(context).toString();
-            final dateFormatPattern = settingsState.dateFormatPattern;
-            final dateFormat = DateFormat(
-              dateFormatPattern.pattern,
-              localeString,
-            );
-            return DateFilterWidget(
-              key: dateFilterWidgetKey,
-              keyPrefix: dateFilterKeyPrefix,
-              title: l10n.dateFilter,
-              startTitle: '${l10n.minimum}:',
-              endTitle: '${l10n.maximum}:',
-              dateRange: cadState.dateRange,
-              firstDate: DateTime(1900, 1, 1),
-              lastDate: DateTime(2200, 12, 31),
-              dateFormat: dateFormat,
-              startDateTextDefault: l10n.nowToday,
-              endDateTextDefault: l10n.plusSomeDays(dateMaxDaysDefault),
-              selectButtonTitle: l10n.selectDateRange,
-              disableInputs: cadState.disableInputs,
-              spacing: HrkDimensions.bodyItemSpacing,
-              onDateRangeSelected: (dateRange) {
-                if (context.mounted) {
-                  context.read<CadBloc>().add(CadDateRangeSelected(
-                        dateRange: dateRange,
-                      ));
-                }
-              },
+            return BodyItemContainer(
+              child: DateRangeWidget(
+                key: dateFilterWidgetKey,
+                keyPrefix: dateFilterKeyPrefix,
+                title: l10n.dateFilter,
+                startTitle: '${l10n.minimum}:',
+                endTitle: '${l10n.maximum}:',
+                dateRange: cadState.dateRange,
+                firstDate: DateTime(1900, 1, 1),
+                lastDate: DateTime(2200, 12, 31),
+                dateFormat: settingsState.getDateFormat(),
+                startDateTextDefault: l10n.nowToday,
+                endDateTextDefault: l10n.plusSomeDays(dateMaxDaysDefault),
+                selectButtonTitle: l10n.selectDateRange,
+                disableInputs: cadState.disableInputs,
+                spacing: HrkDimensions.bodyItemSpacing,
+                onDateRangeSelected: (dateRange) {
+                  if (context.mounted) {
+                    context.read<CadBloc>().add(CadDateRangeSelected(
+                          dateRange: dateRange,
+                        ));
+                  }
+                },
+              ),
             );
           },
         );

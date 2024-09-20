@@ -12,13 +12,16 @@ import 'settings_state.dart';
 part 'settings_event.dart';
 
 class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
-  SettingsBloc() : super(SettingsState.getInitial()) {
+  SettingsBloc({
+    SettingsState? initialState,
+  }) : super(initialState ?? SettingsState.getInitial()) {
     on<SettingsThemeSelected>(_onSettingsThemeSelected);
     on<SettingsLocaleSelected>(_onSettingsLocaleChanged);
+    on<SettingsSystemLocalesChanged>(_onSettingsSystemLocalesChanged);
+    on<SettingsLocaleResolved>(_onSettingsLocaleResolved);
     on<SettingsDateFormatSelected>(_onSettingsDateFormatSelected);
     on<SettingsTimeFormatSelected>(_onSettingsTimeFormatSelected);
     on<SettingsDialogEvent>(_onSettingsDialogEvent);
-    on<SettingsSystemLocalesChanged>(_onSettingsSystemLocalesChanged);
     on<SettingsTextDirectionSelected>(_onSettingsTextDirectionSelected);
     on<SettingsDistanceUnitSelected>(_onSettingsDistanceUnitSelected);
     on<SettingsVelocityUnitSelected>(_onSettingsVelocityUnitSelected);
@@ -42,6 +45,24 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
     emit(state.copyWith(
       locale: event.locale,
       isAnyDialogShown: false,
+    ));
+  }
+
+  void _onSettingsSystemLocalesChanged(
+    SettingsSystemLocalesChanged event,
+    Emitter<SettingsState> emit,
+  ) {
+    emit(state.copyWith(
+      systemLocales: event.systemLocales,
+    ));
+  }
+
+  void _onSettingsLocaleResolved(
+    SettingsLocaleResolved event,
+    Emitter<SettingsState> emit,
+  ) {
+    emit(state.copyWith(
+      resolvedLocale: event.resolvedLocale,
     ));
   }
 
@@ -78,15 +99,6 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   ) {
     emit(state.copyWith(
       isAnyDialogShown: event.isAnyDialogShown,
-    ));
-  }
-
-  void _onSettingsSystemLocalesChanged(
-    SettingsSystemLocalesChanged event,
-    Emitter<SettingsState> emit,
-  ) {
-    emit(state.copyWith(
-      systemLocales: event.systemLocales,
     ));
   }
 

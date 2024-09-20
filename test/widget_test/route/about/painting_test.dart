@@ -8,7 +8,7 @@ import '../../../src/route/about/about_route.dart';
 
 void main() {
   group('$AboutRoute Painting Test', () {
-    testWidgets('Doesn\'t Overflow ${DeviceDimensions.galaxyFoldPortraitWidth}',
+    testWidgets('expectNoOverflow ${DeviceDimensions.galaxyFoldPortraitWidth}',
         (WidgetTester tester) async {
       disableOverflowError();
       tester.view

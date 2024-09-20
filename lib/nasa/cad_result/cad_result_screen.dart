@@ -6,7 +6,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
-import 'package:intl/intl.dart';
 
 import '../../../widgets/app_bar.dart';
 import '../../constants/labels.dart';
@@ -16,8 +15,6 @@ import '../../globals.dart';
 import '../../helper/helper.dart';
 import '../../route/settings/bloc/settings_bloc.dart';
 import '../../route/settings/bloc/settings_state.dart';
-import '../../route/settings/date_format_pattern.dart';
-import '../../route/settings/time_format_pattern.dart';
 import 'bloc/cad_result_bloc.dart';
 import 'bloc/cad_result_state.dart';
 
@@ -281,11 +278,9 @@ class CadResultScreen extends StatelessWidget {
               key: Key('$itemIndexKeyPrefix${cdKeyPrefix}key'),
               keyPrefix: '$itemIndexKeyPrefix$cdKeyPrefix',
               label: '${l10n.dateSlashTime}:',
-              value: formatCloseApproachDateTime(
-                context: context,
+              value: _formatCloseApproachDateTime(
+                settingsState: settingsState,
                 cd: data.cd,
-                dateFormatPattern: settingsState.dateFormatPattern,
-                timeFormatPattern: settingsState.timeFormatPattern,
               ),
             );
           },
@@ -414,17 +409,14 @@ class CadResultScreen extends StatelessWidget {
     );
   }
 
-  String formatCloseApproachDateTime({
-    required BuildContext context,
+  String _formatCloseApproachDateTime({
+    required SettingsState settingsState,
     required DateTime cd,
-    required DateFormatPattern dateFormatPattern,
-    required TimeFormatPattern timeFormatPattern,
   }) {
-    final locale = Localizations.localeOf(context).toString();
-    final dateFormat = DateFormat(dateFormatPattern.pattern, locale);
+    final dateFormat = settingsState.getDateFormat();
     final dateTimeStringBuffer = StringBuffer(dateFormat.format(cd));
     dateTimeStringBuffer.write(' ');
-    final timeFormat = DateFormat(timeFormatPattern.pattern, locale);
+    final timeFormat = settingsState.getTimeFormat();
     dateTimeStringBuffer.write(timeFormat.format(cd));
     dateTimeStringBuffer.write(' ${Labels.tdb}');
     return dateTimeStringBuffer.toString();

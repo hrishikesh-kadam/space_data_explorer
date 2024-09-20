@@ -20,6 +20,10 @@ _$SettingsStateImpl _$$SettingsStateImplFromJson(Map<String, dynamic> json) =>
               .fromJson(json['locale'] as Map<String, dynamic>?),
       systemLocales: const LocaleListJsonConverter()
           .fromJson(json['systemLocales'] as List?),
+      resolvedLocale: json['resolvedLocale'] == null
+          ? LocaleExt.en
+          : const LocaleJsonConverter2()
+              .fromJson(json['resolvedLocale'] as Map<String, dynamic>),
       dateFormatPattern: $enumDecodeNullable(
               _$DateFormatPatternEnumMap, json['dateFormatPattern']) ??
           SettingsState.dateFormatPatternDefault,
@@ -55,6 +59,8 @@ Map<String, dynamic> _$$SettingsStateImplToJson(_$SettingsStateImpl instance) {
   writeNotNull('locale', const LocaleJsonConverter().toJson(instance.locale));
   writeNotNull('systemLocales',
       const LocaleListJsonConverter().toJson(instance.systemLocales));
+  val['resolvedLocale'] =
+      const LocaleJsonConverter2().toJson(instance.resolvedLocale);
   val['dateFormatPattern'] =
       _$DateFormatPatternEnumMap[instance.dateFormatPattern]!;
   val['timeFormatPattern'] =

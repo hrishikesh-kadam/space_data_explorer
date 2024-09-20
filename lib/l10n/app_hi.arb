@@ -4,15 +4,7 @@
   "minimum": "न्यूनतम",
   "maximum": "अधिकतम",
   "nowToday": "आज",
-  "plusSomeDays": "{some, plural, =1{+ {some} दिन} other{+ {some} दिन}}",
-  "@plusSomeDays": {
-    "placeholders": {
-      "some": {
-        "type": "int",
-        "format": "compact"
-      }
-    }
-  },
+  "plusSomeDays": "+ {some} दिन",
   "dateFilter": "दिनांक चयन",
   "selectDateRange": "दिनांक चुनें",
   "settings": "सेटिंग्स",

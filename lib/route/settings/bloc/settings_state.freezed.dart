@@ -25,7 +25,10 @@ mixin _$SettingsState {
   @LocaleJsonConverter()
   Locale? get locale => throw _privateConstructorUsedError;
   @LocaleListJsonConverter()
-  List<Locale>? get systemLocales => throw _privateConstructorUsedError;
+  List<Locale>? get systemLocales =>
+      throw _privateConstructorUsedError; // @Default(LocaleExt.en) is used just to avoid nullability
+  @LocaleJsonConverter2()
+  Locale get resolvedLocale => throw _privateConstructorUsedError;
   DateFormatPattern get dateFormatPattern => throw _privateConstructorUsedError;
   TimeFormatPattern get timeFormatPattern => throw _privateConstructorUsedError;
   TextDirection? get textDirection => throw _privateConstructorUsedError;
@@ -54,6 +57,7 @@ abstract class $SettingsStateCopyWith<$Res> {
       {@ThemeDataJsonConverter() ThemeData? themeData,
       @LocaleJsonConverter() Locale? locale,
       @LocaleListJsonConverter() List<Locale>? systemLocales,
+      @LocaleJsonConverter2() Locale resolvedLocale,
       DateFormatPattern dateFormatPattern,
       TimeFormatPattern timeFormatPattern,
       TextDirection? textDirection,
@@ -81,6 +85,7 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
     Object? themeData = freezed,
     Object? locale = freezed,
     Object? systemLocales = freezed,
+    Object? resolvedLocale = null,
     Object? dateFormatPattern = null,
     Object? timeFormatPattern = null,
     Object? textDirection = freezed,
@@ -102,6 +107,10 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
           ? _value.systemLocales
           : systemLocales // ignore: cast_nullable_to_non_nullable
               as List<Locale>?,
+      resolvedLocale: null == resolvedLocale
+          ? _value.resolvedLocale
+          : resolvedLocale // ignore: cast_nullable_to_non_nullable
+              as Locale,
       dateFormatPattern: null == dateFormatPattern
           ? _value.dateFormatPattern
           : dateFormatPattern // ignore: cast_nullable_to_non_nullable
@@ -146,6 +155,7 @@ abstract class _$$SettingsStateImplCopyWith<$Res>
       {@ThemeDataJsonConverter() ThemeData? themeData,
       @LocaleJsonConverter() Locale? locale,
       @LocaleListJsonConverter() List<Locale>? systemLocales,
+      @LocaleJsonConverter2() Locale resolvedLocale,
       DateFormatPattern dateFormatPattern,
       TimeFormatPattern timeFormatPattern,
       TextDirection? textDirection,
@@ -171,6 +181,7 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
     Object? themeData = freezed,
     Object? locale = freezed,
     Object? systemLocales = freezed,
+    Object? resolvedLocale = null,
     Object? dateFormatPattern = null,
     Object? timeFormatPattern = null,
     Object? textDirection = freezed,
@@ -192,6 +203,10 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
           ? _value._systemLocales
           : systemLocales // ignore: cast_nullable_to_non_nullable
               as List<Locale>?,
+      resolvedLocale: null == resolvedLocale
+          ? _value.resolvedLocale
+          : resolvedLocale // ignore: cast_nullable_to_non_nullable
+              as Locale,
       dateFormatPattern: null == dateFormatPattern
           ? _value.dateFormatPattern
           : dateFormatPattern // ignore: cast_nullable_to_non_nullable
@@ -227,11 +242,12 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$SettingsStateImpl implements _SettingsState {
+class _$SettingsStateImpl extends _SettingsState {
   const _$SettingsStateImpl(
       {@ThemeDataJsonConverter() this.themeData,
       @LocaleJsonConverter() this.locale = SettingsState.localeDefault,
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
+      @LocaleJsonConverter2() this.resolvedLocale = LocaleExt.en,
       this.dateFormatPattern = SettingsState.dateFormatPatternDefault,
       this.timeFormatPattern = SettingsState.timeFormatPatternDefault,
       this.textDirection = SettingsState.textDirectionDefault,
@@ -239,7 +255,8 @@ class _$SettingsStateImpl implements _SettingsState {
       this.velocityUnit = SettingsState.velocityUnitDefault,
       this.diameterUnit = SettingsState.diameterUnitDefault,
       this.isAnyDialogShown})
-      : _systemLocales = systemLocales;
+      : _systemLocales = systemLocales,
+        super._();
 
   factory _$SettingsStateImpl.fromJson(Map<String, dynamic> json) =>
       _$$SettingsStateImplFromJson(json);
@@ -262,6 +279,11 @@ class _$SettingsStateImpl implements _SettingsState {
     return EqualUnmodifiableListView(value);
   }
 
+// @Default(LocaleExt.en) is used just to avoid nullability
+  @override
+  @JsonKey()
+  @LocaleJsonConverter2()
+  final Locale resolvedLocale;
   @override
   @JsonKey()
   final DateFormatPattern dateFormatPattern;
@@ -285,7 +307,7 @@ class _$SettingsStateImpl implements _SettingsState {
 
   @override
   String toString() {
-    return 'SettingsState(themeData: $themeData, locale: $locale, systemLocales: $systemLocales, dateFormatPattern: $dateFormatPattern, timeFormatPattern: $timeFormatPattern, textDirection: $textDirection, distanceUnit: $distanceUnit, velocityUnit: $velocityUnit, diameterUnit: $diameterUnit, isAnyDialogShown: $isAnyDialogShown)';
+    return 'SettingsState(themeData: $themeData, locale: $locale, systemLocales: $systemLocales, resolvedLocale: $resolvedLocale, dateFormatPattern: $dateFormatPattern, timeFormatPattern: $timeFormatPattern, textDirection: $textDirection, distanceUnit: $distanceUnit, velocityUnit: $velocityUnit, diameterUnit: $diameterUnit, isAnyDialogShown: $isAnyDialogShown)';
   }
 
   @override
@@ -298,6 +320,8 @@ class _$SettingsStateImpl implements _SettingsState {
             (identical(other.locale, locale) || other.locale == locale) &&
             const DeepCollectionEquality()
                 .equals(other._systemLocales, _systemLocales) &&
+            (identical(other.resolvedLocale, resolvedLocale) ||
+                other.resolvedLocale == resolvedLocale) &&
             (identical(other.dateFormatPattern, dateFormatPattern) ||
                 other.dateFormatPattern == dateFormatPattern) &&
             (identical(other.timeFormatPattern, timeFormatPattern) ||
@@ -321,6 +345,7 @@ class _$SettingsStateImpl implements _SettingsState {
       themeData,
       locale,
       const DeepCollectionEquality().hash(_systemLocales),
+      resolvedLocale,
       dateFormatPattern,
       timeFormatPattern,
       textDirection,
@@ -345,11 +370,12 @@ class _$SettingsStateImpl implements _SettingsState {
   }
 }
 
-abstract class _SettingsState implements SettingsState {
+abstract class _SettingsState extends SettingsState {
   const factory _SettingsState(
       {@ThemeDataJsonConverter() final ThemeData? themeData,
       @LocaleJsonConverter() final Locale? locale,
       @LocaleListJsonConverter() final List<Locale>? systemLocales,
+      @LocaleJsonConverter2() final Locale resolvedLocale,
       final DateFormatPattern dateFormatPattern,
       final TimeFormatPattern timeFormatPattern,
       final TextDirection? textDirection,
@@ -357,6 +383,7 @@ abstract class _SettingsState implements SettingsState {
       final VelocityUnit velocityUnit,
       final DistanceUnit diameterUnit,
       final bool? isAnyDialogShown}) = _$SettingsStateImpl;
+  const _SettingsState._() : super._();
 
   factory _SettingsState.fromJson(Map<String, dynamic> json) =
       _$SettingsStateImpl.fromJson;
@@ -369,7 +396,11 @@ abstract class _SettingsState implements SettingsState {
   Locale? get locale;
   @override
   @LocaleListJsonConverter()
-  List<Locale>? get systemLocales;
+  List<Locale>?
+      get systemLocales; // @Default(LocaleExt.en) is used just to avoid nullability
+  @override
+  @LocaleJsonConverter2()
+  Locale get resolvedLocale;
   @override
   DateFormatPattern get dateFormatPattern;
   @override

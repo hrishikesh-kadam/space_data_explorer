@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
 import 'package:space_data_explorer/route/settings/settings_route.dart';
 import 'package:space_data_explorer/route/settings/settings_screen.dart';
 import 'package:space_data_explorer/widgets/app_bar.dart';
@@ -18,8 +19,13 @@ Future<void> pumpSettingsRouteAsInitialLocation(WidgetTester tester) async {
 Future<void> pumpSettingsRouteAsNormalLink(
   WidgetTester tester, {
   GlobalKey<NavigatorState>? navigatorKey,
+  SettingsBloc? settingsBloc,
 }) async {
-  await pumpHomeRoute(tester, navigatorKey: navigatorKey);
+  await pumpHomeRoute(
+    tester,
+    navigatorKey: navigatorKey,
+    settingsBloc: settingsBloc,
+  );
   await tapSettingsAction(tester);
 }
 

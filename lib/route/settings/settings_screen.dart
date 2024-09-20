@@ -264,6 +264,15 @@ class SettingsScreen extends StatelessWidget {
             final Locale? selectedLocale = locales.elementAt(index);
             _logger
                 .fine('_getLocaleTile() -> selectedLocale -> $selectedLocale');
+            if (selectedLocale == null) {
+              final Locale resolvedLocale = basicLocaleListResolution(
+                settingsBloc.state.systemLocales,
+                LocaleExt.getSupportedLocales(),
+              );
+              settingsBloc.add(
+                SettingsLocaleResolved(resolvedLocale: resolvedLocale),
+              );
+            }
             settingsBloc.add(SettingsLocaleSelected(
               locale: selectedLocale,
             ));

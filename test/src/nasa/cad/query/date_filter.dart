@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
-import 'package:space_data_explorer/widgets/date_filter_widget.dart';
 import '../../../globals.dart';
 import '../cad_route.dart';
 
 final dateFilterWidgetFinder = find.byKey(CadScreen.dateFilterWidgetKey);
 final minDateFinder = find.byKey(const Key(
-    '${CadScreen.dateFilterKeyPrefix}${DateFilterWidget.startDateKey}'));
+  '${CadScreen.dateFilterKeyPrefix}${DateRangeWidget.startDateKey}',
+));
 final maxDateFinder = find.byKey(const Key(
-    '${CadScreen.dateFilterKeyPrefix}${DateFilterWidget.endDateKey}'));
+  '${CadScreen.dateFilterKeyPrefix}${DateRangeWidget.endDateKey}',
+));
 final selectDateRangeButtonFinder = find.byKey(const Key(
-    '${CadScreen.dateFilterKeyPrefix}${DateFilterWidget.selectButtonKey}'));
+    '${CadScreen.dateFilterKeyPrefix}${DateRangeWidget.selectButtonKey}'));
 final DateTime minDateDefault = SbdbCadQueryParameters.dateMinDefault;
 final DateTime maxDateDefault = SbdbCadQueryParameters.dateMaxDefault;
 final String minDateTextDefault = l10n.nowToday;
@@ -44,12 +46,8 @@ Future<void> selectDateRange(
   await tester.pumpAndSettle();
 }
 
-void expectDate(WidgetTester tester, String expected, Finder finder) {
+void expectDate(WidgetTester tester, Finder finder, String expected) {
   expect(tester.widget<Text>(finder).data, expected);
-}
-
-void expectDatePattern(WidgetTester tester, Pattern pattern, Finder finder) {
-  expect(tester.widget<Text>(finder).data?.contains(pattern), true);
 }
 
 Future<void> verifyDateRangeQueryParameters(

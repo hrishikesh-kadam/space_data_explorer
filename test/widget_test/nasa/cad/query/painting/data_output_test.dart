@@ -10,7 +10,7 @@ import '../../../../../src/nasa/cad/query/data_output.dart';
 
 void main() {
   group('$CadRoute ${FilterChipGroup<DataOutput>} Painting Test', () {
-    testWidgets('Doesn\'t Overflow ${DeviceDimensions.galaxyFoldPortraitWidth}',
+    testWidgets('expectNoOverflow ${DeviceDimensions.galaxyFoldPortraitWidth}',
         (WidgetTester tester) async {
       disableOverflowError();
       tester.view

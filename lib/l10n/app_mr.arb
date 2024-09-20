@@ -4,15 +4,7 @@
   "minimum": "किमान",
   "maximum": "कमाल",
   "nowToday": "आज",
-  "plusSomeDays": "{some, plural, =1{+ {some} दिवस} other{+ {some} दिवस}}",
-  "@plusSomeDays": {
-    "placeholders": {
-      "some": {
-        "type": "int",
-        "format": "compact"
-      }
-    }
-  },
+  "plusSomeDays": "+ {some} दिवस",
   "dateFilter": "तारीख निवड",
   "selectDateRange": "तारीख निवडा",
   "settings": "सेटिंग्ज",

@@ -4,14 +4,16 @@ import 'package:flutter/material.dart';
 
 import 'package:checks/checks.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 import 'package:hrk_test_batteries/hrk_test_batteries.dart';
 
 import 'package:space_data_explorer/nasa/cad/bloc/cad_bloc.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
+import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
 import 'package:space_data_explorer/route/settings/date_format_pattern.dart';
-import 'package:space_data_explorer/widgets/date_filter_widget.dart';
+import '../../../../../src/config/hydrated_bloc.dart';
 import '../../../../../src/globals.dart';
 import '../../../../../src/nasa/cad/cad_route.dart';
 import '../../../../../src/nasa/cad/query/date_filter.dart';
@@ -19,7 +21,7 @@ import '../../../../../src/route/settings/settings_route.dart';
 import '../../../../../src/route/settings/tiles/date_format_tile.dart';
 
 void main() {
-  group('$CadRoute $DateFilterWidget Interaction Test', () {
+  group('$CadRoute $DateRangeWidget Interaction Test', () {
     testWidgets('DeferredLoading workaround', (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
       await tapSearchButton(tester);
@@ -28,16 +30,19 @@ void main() {
 
     testWidgets('No interation', (WidgetTester tester) async {
       await pumpCadRouteAsInitialLocation(tester);
-      expectDate(tester, minDateTextDefault, minDateFinder);
-      expectDate(tester, maxDateTextDefault, maxDateFinder);
+      expectDate(tester, minDateFinder, minDateTextDefault);
+      expectDate(tester, maxDateFinder, maxDateTextDefault);
     });
 
     testWidgets('Tap ${l10n.selectDateRange}, select dates, tap Save',
         (WidgetTester tester) async {
-      await pumpCadRouteAsInitialLocation(tester);
+      mockHydratedBloc();
+      final SettingsBloc settingsBloc = SettingsBloc();
+      await pumpCadRouteAsInitialLocation(tester, settingsBloc: settingsBloc);
       await selectDateRange(tester);
-      expectDatePattern(tester, minDateForTest.day.toString(), minDateFinder);
-      expectDatePattern(tester, maxDateForTest.day.toString(), maxDateFinder);
+      final dateFormat = settingsBloc.state.getDateFormat();
+      expectDate(tester, minDateFinder, dateFormat.format(minDateForTest));
+      expectDate(tester, maxDateFinder, dateFormat.format(maxDateForTest));
     });
 
     testWidgets('Tap ${l10n.selectDateRange}, tap $CloseButton',
@@ -47,8 +52,8 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.byType(CloseButton));
       await tester.pumpAndSettle();
-      expectDate(tester, minDateTextDefault, minDateFinder);
-      expectDate(tester, maxDateTextDefault, maxDateFinder);
+      expectDate(tester, minDateFinder, minDateTextDefault);
+      expectDate(tester, maxDateFinder, maxDateTextDefault);
     });
 
     testWidgets(
@@ -61,9 +66,18 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.byType(CloseButton));
       await tester.pumpAndSettle();
-      expectDate(tester, minDateTextDefault, minDateFinder);
-      expectDate(tester, maxDateTextDefault, maxDateFinder);
+      expectDate(tester, minDateFinder, minDateTextDefault);
+      expectDate(tester, maxDateFinder, maxDateTextDefault);
     });
+
+    testWidgets('Tap ${l10n.selectDateRange}, tap back',
+        (WidgetTester tester) async {
+      // TODO(hrishikesh-kadam): Unable to reproduce not mounted issue
+      await pumpCadRouteAsInitialLocation(tester);
+      await tester.tap(selectDateRangeButtonFinder);
+      await tester.pumpAndSettle();
+      await simulateAndroidBackButton(tester);
+    }, skip: true);
 
     testWidgets('Reacts to $DateFormatPattern settings change',
         (WidgetTester tester) async {
@@ -94,13 +108,20 @@ void main() {
     testWidgets('CadBloc prefilled, reset', (tester) async {
       final cadBloc = getCadBloc();
       cadBloc.add(CadDateRangeSelected(dateRange: dateRangeForTest));
-      await pumpCadRouteAsInitialLocation(tester, cadBloc: cadBloc);
-      expectDatePattern(tester, minDateForTest.day.toString(), minDateFinder);
-      expectDatePattern(tester, maxDateForTest.day.toString(), maxDateFinder);
+      mockHydratedBloc();
+      final SettingsBloc settingsBloc = SettingsBloc();
+      await pumpCadRouteAsInitialLocation(
+        tester,
+        cadBloc: cadBloc,
+        settingsBloc: settingsBloc,
+      );
+      final dateFormat = settingsBloc.state.getDateFormat();
+      expectDate(tester, minDateFinder, dateFormat.format(minDateForTest));
+      expectDate(tester, maxDateFinder, dateFormat.format(maxDateForTest));
       cadBloc.add(const CadDateRangeSelected(dateRange: null));
       await tester.pumpAndSettle();
-      expectDate(tester, minDateTextDefault, minDateFinder);
-      expectDate(tester, maxDateTextDefault, maxDateFinder);
+      expectDate(tester, minDateFinder, minDateTextDefault);
+      expectDate(tester, maxDateFinder, maxDateTextDefault);
     });
 
     testWidgets('verifyQueryParameters()', (tester) async {

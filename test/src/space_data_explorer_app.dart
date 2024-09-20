@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
 import 'package:space_data_explorer/space_data_explorer.dart';
 import 'config/config.dart';
 import 'globals.dart' as globals;
@@ -18,6 +19,7 @@ Future<void> pumpApp(
   WidgetTester tester, {
   GlobalKey<NavigatorState>? navigatorKey,
   String? initialLocation,
+  SettingsBloc? settingsBloc,
   bool debugShowCheckedModeBanner = true,
 }) async {
   await configureApp();
@@ -25,6 +27,7 @@ Future<void> pumpApp(
     SpaceDataExplorerApp(
       navigatorKey: navigatorKey ?? globals.navigatorKey,
       initialLocation: initialLocation,
+      settingsBloc: settingsBloc,
       debugShowCheckedModeBanner: debugShowCheckedModeBanner,
     ),
   );

@@ -12,6 +12,7 @@ import 'package:space_data_explorer/nasa/cad/bloc/cad_state.dart';
 import 'package:space_data_explorer/nasa/cad/cad_route.dart';
 import 'package:space_data_explorer/nasa/cad/cad_screen.dart';
 import 'package:space_data_explorer/nasa/cad_result/cad_result_screen.dart';
+import 'package:space_data_explorer/route/settings/bloc/settings_bloc.dart';
 import '../../space_data_explorer_app.dart';
 import '../route/nasa_route.dart';
 
@@ -27,10 +28,17 @@ final snackBarFinder = find.byKey(CadScreen.snackBarKey);
 
 Future<void> pumpCadRouteAsInitialLocation(
   WidgetTester tester, {
+  GlobalKey<NavigatorState>? navigatorKey,
   CadBloc? cadBloc,
+  SettingsBloc? settingsBloc,
 }) async {
   CadScreen.cadBloc = cadBloc ?? getCadBloc();
-  await pumpApp(tester, initialLocation: CadRoute.uri.path);
+  await pumpApp(
+    tester,
+    navigatorKey: navigatorKey,
+    initialLocation: CadRoute.uri.path,
+    settingsBloc: settingsBloc,
+  );
 }
 
 Future<void> pumpCadRouteAsNormalLink(
@@ -65,6 +73,7 @@ Future<void> tapSearchButton(WidgetTester tester) async {
   await tester.pumpAndSettle();
 }
 
+// LABEL: eligible-hrk_flutter_test_batteries
 Future<void> scrollToTop(WidgetTester tester) async {
   final offset = tester
       .widget<CustomScrollView>(customScrollViewFinder)

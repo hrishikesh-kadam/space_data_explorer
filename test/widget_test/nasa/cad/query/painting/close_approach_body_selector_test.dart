@@ -10,7 +10,7 @@ import '../../../../../src/nasa/cad/query/close_approach_body_selector.dart';
 
 void main() {
   group('$CadRoute ${ChoiceChipGroup<CloseApproachBody>} Painting Test', () {
-    testWidgets('Doesn\'t Overflow ${DeviceDimensions.galaxyFoldPortraitWidth}',
+    testWidgets('expectNoOverflow ${DeviceDimensions.galaxyFoldPortraitWidth}',
         (WidgetTester tester) async {
       disableOverflowError();
       tester.view

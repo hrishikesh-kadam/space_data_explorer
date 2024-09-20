@@ -16,6 +16,18 @@ class SettingsLocaleSelected extends SettingsEvent {
   final Locale? locale;
 }
 
+class SettingsSystemLocalesChanged extends SettingsEvent {
+  const SettingsSystemLocalesChanged({required this.systemLocales});
+
+  final List<Locale>? systemLocales;
+}
+
+class SettingsLocaleResolved extends SettingsEvent {
+  const SettingsLocaleResolved({required this.resolvedLocale});
+
+  final Locale resolvedLocale;
+}
+
 class SettingsDateFormatSelected extends SettingsEvent {
   const SettingsDateFormatSelected({required this.dateFormatPattern});
 
@@ -32,12 +44,6 @@ class SettingsDialogEvent extends SettingsEvent {
   const SettingsDialogEvent({this.isAnyDialogShown});
 
   final bool? isAnyDialogShown;
-}
-
-class SettingsSystemLocalesChanged extends SettingsEvent {
-  const SettingsSystemLocalesChanged({required this.systemLocales});
-
-  final List<Locale>? systemLocales;
 }
 
 class SettingsTextDirectionSelected extends SettingsEvent {

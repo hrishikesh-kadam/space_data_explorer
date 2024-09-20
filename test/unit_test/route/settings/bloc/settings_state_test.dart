@@ -10,6 +10,7 @@ void main() {
   group('$SettingsState Unit Test', () {
     const SettingsState initialState = SettingsState();
     final JsonMap initialJson = {
+      'resolvedLocale': {'languageCode': 'en'},
       'dateFormatPattern': 'yMd',
       'timeFormatPattern': 'jm',
       'distanceUnit': {'symbol': 'au'},
