@@ -12,7 +12,7 @@ fi
 FLAVOR_ENV=${1:?\
 $(print_in_red "Missing argument \$1 FLAVOR_ENV dev / stag / prod.")}
 
-flutter clean
+./tool/clean.sh
 
 ./tool/ci.sh "$FLAVOR_ENV"
 
