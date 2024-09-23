@@ -467,6 +467,7 @@
 				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
 				BUNDLE_ID_SUFFIX = .dev;
 				BUNDLE_NAME_SUFFIX = "-dev-debug";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/dev.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -564,6 +565,7 @@
 				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
 				BUNDLE_ID_SUFFIX = .dev;
 				BUNDLE_NAME_SUFFIX = "-dev-release";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/dev.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -660,6 +662,7 @@
 				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
 				BUNDLE_ID_SUFFIX = .dev;
 				BUNDLE_NAME_SUFFIX = "-dev-profile";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/dev.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -759,6 +762,7 @@
 				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
 				BUNDLE_ID_SUFFIX = .stag;
 				BUNDLE_NAME_SUFFIX = "-stag-debug";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/stag.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -858,6 +862,7 @@
 				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
 				BUNDLE_ID_SUFFIX = "";
 				BUNDLE_NAME_SUFFIX = "-prod-debug";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/prod.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -955,6 +960,7 @@
 				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
 				BUNDLE_ID_SUFFIX = .stag;
 				BUNDLE_NAME_SUFFIX = "-stag-release";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/stag.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -1050,6 +1056,7 @@
 				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
 				BUNDLE_ID_SUFFIX = "";
 				BUNDLE_NAME_SUFFIX = "-prod-release";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/prod.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -1145,6 +1152,7 @@
 				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
 				BUNDLE_ID_SUFFIX = .stag;
 				BUNDLE_NAME_SUFFIX = "-stag-profile";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/stag.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -1238,6 +1246,7 @@
 				BUNDLE_ID_BASE = "dev.hrishikesh-kadam.flutter.${APP_NAME_KEBAB_CASE}";
 				BUNDLE_ID_SUFFIX = "";
 				BUNDLE_NAME_SUFFIX = "-prod-profile";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/prod.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
