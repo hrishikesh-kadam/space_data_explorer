@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../coverage_ignored.dart';
 import '../globals.dart';
 
 Widget getImageNetworkWidget(

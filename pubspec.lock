@@ -377,7 +377,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_keyboard_visibility:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: flutter_keyboard_visibility
       sha256: "98664be7be0e3ffca00de50f7f6a287ab62c763fc8c762e0a21584584a3ff4f8"
@@ -560,10 +560,10 @@ packages:
     dependency: "direct main"
     description:
       name: hrk_flutter_batteries
-      sha256: "4a4b607a62fd0a9dd5f756a7586e7441a397b5944122a1384edfd9a743f3549c"
+      sha256: "837d3e5debdd9fa64e53aefb2e28e6e0424c829fd29b657b8e10722afc9725c7"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.0"
+    version: "0.4.0"
   hrk_flutter_test_batteries:
     dependency: "direct dev"
     description:

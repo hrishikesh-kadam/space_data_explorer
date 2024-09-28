@@ -72,8 +72,6 @@ class ValueRangeFilterWidget<V, U> extends StatefulWidget {
       _ValueRangeFilterWidgetState<V, U>();
 }
 
-enum StateMethod { initState, didUpdateWidget }
-
 class _ValueRangeFilterWidgetState<V, U>
     extends State<ValueRangeFilterWidget<V, U>> {
   final List<V?> valueList = [];

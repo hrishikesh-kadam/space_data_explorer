@@ -5,12 +5,10 @@ import 'package:hrk_logging/hrk_logging.dart';
 import 'package:recase/recase.dart';
 
 import 'constants/constants.dart';
-import 'coverage_ignored.dart';
 
 final String appNamePascalCase = Constants.appName.pascalCase;
 
 final bool flutterTest = isFlutterTest();
-final bool flutterIntegrationTest = isFlutterIntegrationTest();
 
 final logger = Logger(appNamePascalCase);
 
@@ -23,8 +21,6 @@ JsonMap getRouteExtraMap() {
   extra[isNormalLink] = true;
   return extra;
 }
-
-final bool keyboardVisibilitySupported = isKeyboardVisibilitySupported();
 
 @visibleForTesting
 bool isSurfaceRendered = false;

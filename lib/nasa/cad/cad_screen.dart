@@ -19,7 +19,6 @@ import '../../route/home/home_route.dart';
 import '../../route/settings/bloc/settings_bloc.dart';
 import '../../route/settings/bloc/settings_state.dart';
 import '../../widgets/app_bar.dart';
-import '../../widgets/choice_chip_input_widget.dart';
 import '../../widgets/value_range_filter_widget.dart';
 import '../../widgets/worker_button.dart';
 import '../cad_result/cad_result_route.dart';
@@ -71,7 +70,7 @@ class CadScreen extends StatelessWidget {
   static const String smallBodySelectorKeyPrefix =
       '${keyPrefix}small_body_selector_';
   static const Key smallBodySelectorKey =
-      Key('$smallBodySelectorKeyPrefix${ChoiceChipInputWidget.defaultKey}');
+      Key('${smallBodySelectorKeyPrefix}key');
   static const Set<SmallBodySelector> smallBodySelectors = {
     SmallBodySelector.spkId,
     SmallBodySelector.designation,
@@ -351,6 +350,7 @@ class CadScreen extends StatelessWidget {
     };
     const keyboardType = TextInputType.numberWithOptions(decimal: true);
     final inputFormatters = [
+      // LABEL: eligible-hrk_flutter_batteries
       FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
     ];
     final Set<String> unitSymbols = distFilterUnits.map((e) {
@@ -461,8 +461,8 @@ class CadScreen extends StatelessWidget {
           keyboardTypes: smallBodySelectorKeyboardTypes,
           inputFormattersList: inputFormattersList,
           textFieldWidth: Dimensions.smallBodySelectorInputWidth,
-          disableInputs: state.disableInputs,
           spacing: HrkDimensions.bodyItemSpacing,
+          disableInputs: state.disableInputs,
           onStateChanged: (value, textList) {
             int? spkId = textList[0].isNotEmpty ? int.parse(textList[0]) : null;
             String? designation = textList[1].isNotEmpty ? textList[1] : null;
