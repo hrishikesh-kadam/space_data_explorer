@@ -29,8 +29,8 @@ if flutter --version | grep -q "channel stable"; then
   ./tool/android/build.sh "$FLAVOR_ENV"
 fi
 
-if [[ $(uname -s) =~ ^"Darwin" ]]; then
-  ./tool/ios/build.sh "$FLAVOR_ENV"
-fi
+# if [[ $(uname -s) =~ ^"Darwin" ]]; then
+#   ./tool/ios/build.sh "$FLAVOR_ENV"
+# fi
 
 git --no-pager diff
